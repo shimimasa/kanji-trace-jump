@@ -1,4 +1,4 @@
-import "./style.css";
+import "./styles.css";
 
 let data = null;
 let idx = 0;
