@@ -85,4 +85,34 @@ html, body {
     background: rgba(0,0,0,0.08);
   }
   button:active { transform: scale(0.98); }
+
+  /* ===== Day2: Trace Hit Areas ===== */
+.strokeHit {
+  fill: none;
+  stroke: transparent;
+  /* 指が太くても当たる判定幅 */
+  stroke-width: 42;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: stroke;
+}
+
+/* 今なぞるべき線を “少しだけ” 強調 */
+.strokeActive {
+  fill: none;
+  stroke: rgba(0,0,0,0.45);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* なぞり成功時の軽いフィードバック（任意） */
+.tracePulse {
+  animation: tracePulse 180ms ease-out 1;
+}
+
+@keyframes tracePulse {
+  from { transform: scale(1); opacity: 1; }
+  to   { transform: scale(1.01); opacity: 0.95; }
+}
   
