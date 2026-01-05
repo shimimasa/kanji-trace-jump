@@ -1,0 +1,63 @@
+{
+    "version": 1,
+    "grade": 1,
+    "mode": "stroke-order-only",
+    "items": [
+      {
+        "id": "G1_001_KI",
+        "kanji": "木",
+        "strokesCount": 4,
+        "strokes": [
+          { "index": 1, "label": "よこ" },
+          { "index": 2, "label": "たて" },
+          { "index": 3, "label": "ひだりはらい" },
+          { "index": 4, "label": "みぎはらい" }
+        ],
+        "uiHint": { "difficulty": 1 }
+      },
+      {
+        "id": "G1_002_YAMA",
+        "kanji": "山",
+        "strokesCount": 3,
+        "strokes": [
+          { "index": 1, "label": "たて（ひだり）" },
+          { "index": 2, "label": "たて（まんなか）" },
+          { "index": 3, "label": "たて（みぎ）" }
+        ],
+        "uiHint": { "difficulty": 1 }
+      },
+      {
+        "id": "G1_003_KAWA",
+        "kanji": "川",
+        "strokesCount": 3,
+        "strokes": [
+          { "index": 1, "label": "たて（ひだり）" },
+          { "index": 2, "label": "たて（まんなか）" },
+          { "index": 3, "label": "たて（みぎ）" }
+        ],
+        "uiHint": { "difficulty": 1 }
+      },
+      {
+        "id": "G1_004_KUCHI",
+        "kanji": "口",
+        "strokesCount": 3,
+        "strokes": [
+          { "index": 1, "label": "たて＋よこ（コの字）" },
+          { "index": 2, "label": "たて（みぎ）" },
+          { "index": 3, "label": "よこ（した）" }
+        ],
+        "uiHint": { "difficulty": 1 }
+      },
+      {
+        "id": "G1_005_HITO",
+        "kanji": "人",
+        "strokesCount": 2,
+        "strokes": [
+          { "index": 1, "label": "ひだりはらい" },
+          { "index": 2, "label": "みぎはらい" }
+        ],
+        "uiHint": { "difficulty": 1 }
+      }
+    ]
+  }
+  

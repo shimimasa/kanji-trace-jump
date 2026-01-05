@@ -1,0 +1,88 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    touch-action: manipulation; /* 余計なズーム抑止 */
+    font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  }
+  
+  .app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #f6fbff;
+  }
+  
+  .hud {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    font-size: 18px;
+  }
+  
+  .stage {
+    flex: 1;
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  
+  .kanji {
+    font-size: min(44vw, 320px);
+    line-height: 1;
+    opacity: 0.12;
+    user-select: none;
+  }
+  
+  .strokeRow {
+    position: absolute;
+    bottom: 110px;
+    font-size: 28px;
+    opacity: 0.9;
+    user-select: none;
+  }
+  
+  .ground {
+    position: absolute;
+    bottom: 24px;
+    left: 0;
+    right: 0;
+    height: 90px;
+  }
+  
+  .platform {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: 35px;
+    height: 14px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.08);
+  }
+  
+  .chara {
+    position: absolute;
+    left: 12%;
+    top: 0px;
+    font-size: 44px;
+    transform: translateY(18px);
+    user-select: none;
+  }
+  
+  .controls {
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    justify-content: center;
+  }
+  
+  button {
+    font-size: 20px;
+    padding: 12px 18px;
+    border-radius: 14px;
+    border: 0;
+    background: rgba(0,0,0,0.08);
+  }
+  button:active { transform: scale(0.98); }
+  
