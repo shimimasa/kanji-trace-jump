@@ -3,10 +3,10 @@ import "./style.css";
 let data = null;
 let idx = 0;
 
-// Day2: 現在なぞるべき画（1-based）
+// 今なぞるべき画（1-based）
 let strokeIndex = 1;
 
-// pointer tracking（形判定しないが、最低限の「触った」事実は取る）
+// pointer tracking
 let isTracing = false;
 let activePointerId = null;
 let activeTarget = null;
@@ -40,6 +40,15 @@ function starsText(doneCount, total) {
   return filled + empty;
 }
 
+function formatStrokeNums(count) {
+  const nums = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩"];
+  return nums.slice(0, count).join(" ");
+}
+
+function getStrokeD(s) {
+  return s?.d || s?.path || s?.svgPath || s?.svg || s?.data || "";
+}
+
 function buildAppShell() {
   const app = document.querySelector("#app");
   app.innerHTML = "";
@@ -54,7 +63,6 @@ function buildAppShell() {
 
   const info = el("div", "smallInfo");
   info.id = "smallInfo";
-  info.textContent = "";
 
   const wrap = el("div", "svgWrap");
   wrap.id = "svgWrap";
@@ -103,17 +111,14 @@ function bounceStage() {
   const wrap = document.getElementById("svgWrap");
   if (!wrap) return;
   wrap.classList.remove("tracePulse");
-  // reflow
   void wrap.offsetWidth;
   wrap.classList.add("tracePulse");
 }
 
 function onKanjiComplete() {
-  // Day2: クリア演出（最小）
   const info = document.getElementById("smallInfo");
   if (info) info.textContent += " できた！";
 
-  // ちょい派手ジャンプ
   const chara = document.getElementById("chara");
   if (chara) {
     chara.animate(
@@ -127,24 +132,6 @@ function onKanjiComplete() {
   }
 }
 
-function getStrokeD(s) {
-  // いろんなJSON形式を吸収（d / path / svgPath など）
-  return (
-    s?.d ||
-    s?.path ||
-    s?.svgPath ||
-    s?.svg ||
-    s?.data ||
-    ""
-  );
-}
-
-
-function formatStrokeNums(count) {
-  const nums = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩"];
-  return nums.slice(0, count).join(" ");
-}
-
 function renderCurrentKanji() {
   cleanupTraceState();
 
@@ -152,83 +139,49 @@ function renderCurrentKanji() {
   const info = document.getElementById("smallInfo");
   const item = data.items[idx];
 
-  // ステージ切り替え時は1画目から
   strokeIndex = 1;
 
   info.textContent = `${item.kanji}（${idx + 1} / ${data.items.length}）  ${formatStrokeNums(item.strokes.length)}`;
 
   wrap.innerHTML = "";
+
   const hasAnyPath = item.strokes.some((s) => !!getStrokeD(s));
-if (!hasAnyPath) {
-  wrap.textContent = "SVGデータが見つかりません（strokeのキー名を確認）";
-  return;
-}
-    // --- viewBoxをストロークから自動計算（座標系ズレ対策） ---
-    const tmpSvg = svgEl("svg", { viewBox: "0 0 10 10" });
-    // 一瞬DOMに入れないと getBBox が取れない環境があるのでラッパに仮挿入
-    wrap.appendChild(tmpSvg);
-  
-    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-  
-    item.strokes.forEach((s) => {
-      const d = getStrokeD(s);
- if (!d) return;
- svg.appendChild(svgEl("path", { d, class: "strokeBase" }));
-      tmpSvg.appendChild(p);
-      try {
-        const b = p.getBBox();
-        minX = Math.min(minX, b.x);
-        minY = Math.min(minY, b.y);
-        maxX = Math.max(maxX, b.x + b.width);
-        maxY = Math.max(maxY, b.y + b.height);
-      } catch (_) {
-        // getBBoxが取れない場合は後でフォールバック
-      }
-      p.remove();
-    });
-  
-    tmpSvg.remove();
-  
-    // フォールバック（BBox取れなかった場合）
-    if (!isFinite(minX) || !isFinite(minY) || !isFinite(maxX) || !isFinite(maxY)) {
-      minX = 0; minY = 0; maxX = 100; maxY = 100;
-    }
-  
-    // 余白（線の太さ分）
-    const pad = 12;
-    minX -= pad; minY -= pad; maxX += pad; maxY += pad;
-  
-    const vb = `${minX} ${minY} ${Math.max(1, maxX - minX)} ${Math.max(1, maxY - minY)}`;
-  
-    const svg = svgEl("svg", {
-      viewBox: vb,
-      "aria-label": `kanji ${item.kanji}`,
-      preserveAspectRatio: "xMidYMid meet"
-    });
-  
-
-  // 1) 見た目：薄い全ストローク
-  item.strokes.forEach((s) => {
-    svg.appendChild(svgEl("path", { d: s.d, class: "strokeBase" }));
-  });
-
-  // 2) 見た目：現在の線を濃く
-  const active = item.strokes.find((s) => s.index === strokeIndex);
-  if (active) {
-    const d = getStrokeD(active);
- if (d) svg.appendChild(svgEl("path", { d, class: "strokeActive", "data-active": "1" }));
+  if (!hasAnyPath) {
+    wrap.textContent = "SVGデータが見つかりません（jsonのstrokesに d を入れてください）";
+    return;
   }
 
-  // 3) 当たり判定：透明ストローク（各線）
-  //    ただし、イベント側で strokeIndex を見て弾く
+  const svg = svgEl("svg", {
+    viewBox: "0 0 100 100",
+    preserveAspectRatio: "xMidYMid meet",
+    "aria-label": `kanji ${item.kanji}`
+  });
+
+  // 1) 薄い全ストローク
   item.strokes.forEach((s) => {
+    const d = getStrokeD(s);
+    if (!d) return;
+    svg.appendChild(svgEl("path", { d, class: "strokeBase" }));
+  });
+
+  // 2) 今の線を濃く
+  const next = item.strokes.find((s) => s.index === strokeIndex);
+  if (next) {
+    const d = getStrokeD(next);
+    if (d) svg.appendChild(svgEl("path", { d, class: "strokeActive", "data-active": "1" }));
+  }
+
+  // 3) 当たり判定（透明）
+  item.strokes.forEach((s) => {
+    const d = getStrokeD(s);
+    if (!d) return;
+
     const hit = svgEl("path", {
-      d: getStrokeD(s),
+      d,
       class: "strokeHit",
       "data-index": String(s.index)
     });
 
-    // pointer events（タブレット向け）
     hit.addEventListener("pointerdown", (e) => handlePointerDown(e, item));
     hit.addEventListener("pointermove", (e) => handlePointerMove(e, item));
     hit.addEventListener("pointerup", (e) => handlePointerUp(e, item));
@@ -241,12 +194,33 @@ if (!hasAnyPath) {
   wrap.appendChild(svg);
 }
 
+function renderActiveOnly(item) {
+  const wrap = document.getElementById("svgWrap");
+  const svg = wrap.querySelector("svg");
+  if (!svg) return;
+
+  const oldActive = svg.querySelector('path[data-active="1"]');
+  if (oldActive) oldActive.remove();
+
+  const next = item.strokes.find((s) => s.index === strokeIndex);
+  if (!next) return;
+
+  const d = getStrokeD(next);
+  if (!d) return;
+
+  const activePath = svgEl("path", { d, class: "strokeActive", "data-active": "1" });
+
+  const firstHit = svg.querySelector(".strokeHit");
+  if (firstHit) svg.insertBefore(activePath, firstHit);
+  else svg.appendChild(activePath);
+
+  bounceStage();
+}
+
 function handlePointerDown(e, item) {
-  // 触って良いのは「今の線」だけ
   const idxTouched = Number(e.target.dataset.index);
   if (idxTouched !== strokeIndex) return;
 
-  // 2本指などを避ける：最初のpointerだけ追う
   if (activePointerId !== null) return;
 
   isTracing = true;
@@ -254,25 +228,20 @@ function handlePointerDown(e, item) {
   activeTarget = e.target;
 
   try {
-    // pointer captureでタッチが外れても追える
     activeTarget.setPointerCapture(activePointerId);
   } catch (_) {}
 
-  // “触れた”フィードバック（最小）
   bounceStage();
 }
 
 function handlePointerMove(e, _item) {
   if (!isTracing) return;
   if (e.pointerId !== activePointerId) return;
-  // Day2: 形判定なし。moveは「触ってる」維持のためだけ。
 }
 
 function handlePointerLeave(e, _item) {
   if (!isTracing) return;
   if (e.pointerId !== activePointerId) return;
-  // 指が外れても即失敗にしない（優しさ）
-  // ただし pointerup が来ない端末もあるので、ここでは何もしない。
 }
 
 function handlePointerUp(e, item) {
@@ -280,56 +249,22 @@ function handlePointerUp(e, item) {
   if (e.pointerId !== activePointerId) return;
 
   const idxTouched = Number(e.target.dataset.index);
-  // 念のため：今の線以外なら無効
   if (idxTouched !== strokeIndex) {
     cleanupTraceState();
     return;
   }
 
-  // 成功：次の線へ
   cleanupTraceState();
   pulseChara();
 
   strokeIndex += 1;
 
-  // 全部終わった？
   if (strokeIndex > item.strokes.length) {
     onKanjiComplete();
-    // Day2は自動で次へ進めない（子どもが達成感を味わう時間）
-    // ここで「つぎ」を押してもらう設計
     return;
   }
 
-  // 次の線を濃くするため再描画
   renderActiveOnly(item);
-}
-
-function renderActiveOnly(item) {
-  // 既存SVGの中で「濃い線」を差し替える（全部描き直さず軽量）
-  const wrap = document.getElementById("svgWrap");
-  const svg = wrap.querySelector("svg");
-  if (!svg) return;
-
-  // 古いactiveを削除
-  const oldActive = svg.querySelector('path[data-active="1"]');
-  if (oldActive) oldActive.remove();
-
-  // 新しいactiveを追加（見た目層の後ろ、hitの前に入れたい）
-  const next = item.strokes.find((s) => s.index === strokeIndex);
-  if (!next) return;
-
-  const activePath = svgEl("path", { d: next.d, class: "strokeActive", "data-active": "1" });
-
-  // 追加位置：strokeBase群の後、strokeHit群の前
-  // hitの最初の要素を見つけて、その手前にinsert
-  const firstHit = svg.querySelector(".strokeHit");
-  if (firstHit) {
-    svg.insertBefore(activePath, firstHit);
-  } else {
-    svg.appendChild(activePath);
-  }
-
-  bounceStage();
 }
 
 function bindControls() {
