@@ -1,291 +1,333 @@
 import "./style.css";
 
-let data = null;
+/**
+ * Day2 目標
+ * - “タップだけで成功”を禁止し、一定距離をなぞった場合のみ成功にする
+ * - iPad/スマホでスクロール等が邪魔しないように touch-action を整える（CSS側）
+ */
+
+const DATA_URL = "/kanji_g1_min5.json";
+
+// -------------------- state --------------------
+let items = [];
 let idx = 0;
 
-// 今なぞるべき画（1-based）
-let strokeIndex = 1;
+let current = null; // { kanji, strokes:[{ svg, strokeKey? }], ... }
 
-// pointer tracking
+let strokeIndex = 0;
+
 let isTracing = false;
 let activePointerId = null;
 let activeTarget = null;
 
-async function loadKanjiData() {
-  const res = await fetch("/data/kanji_g1_min5.json");
-  if (!res.ok) throw new Error("failed to load kanji data");
-  return await res.json();
-}
+let traceStartX = 0;
+let traceStartY = 0;
+let traceLastX = 0;
+let traceLastY = 0;
+let traceDist = 0;
+let traceStartT = 0;
 
-function el(tag, className, attrs = {}) {
-  const e = document.createElement(tag);
-  if (className) e.className = className;
-  Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v));
-  return e;
-}
+// 「タップだけ」で進んでしまうのを防ぐ（iPad指なぞり想定）
+const MIN_TRACE_DIST = 24; // px
+const MIN_TRACE_TIME = 120; // ms
 
-function svgEl(tag, attrs = {}) {
-  const e = document.createElementNS("http://www.w3.org/2000/svg", tag);
-  Object.entries(attrs).forEach(([k, v]) => e.setAttribute(k, v));
-  return e;
-}
+// -------------------- dom --------------------
+const app = document.querySelector("#app");
 
-function clamp(n, min, max) {
-  return Math.max(min, Math.min(max, n));
-}
-
-function starsText(doneCount, total) {
-  const filled = "★".repeat(doneCount);
-  const empty = "☆".repeat(Math.max(0, total - doneCount));
-  return filled + empty;
-}
-
-function formatStrokeNums(count) {
-  const nums = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩"];
-  return nums.slice(0, count).join(" ");
-}
-
-function getStrokeD(s) {
-  return s?.d || s?.path || s?.svgPath || s?.svg || s?.data || "";
-}
-
+// UI build
 function buildAppShell() {
-  const app = document.querySelector("#app");
-  app.innerHTML = "";
+  app.innerHTML = `
+    <div class="hud">
+      <div class="stars" id="stars">☆☆☆☆☆</div>
+      <div class="goal" id="goal">もくひょう：5もじ</div>
+    </div>
 
-  const hud = el("header", "hud");
-  hud.innerHTML = `
-    <div id="stars" class="stars">${starsText(0, 5)}</div>
-    <div class="goal">もくひょう：5もじ</div>
+    <div class="center">
+      <div class="titleRow">
+        <div class="kanjiTitle" id="kanjiTitle">—</div>
+      </div>
+
+      <div class="svgWrap" id="svgWrap"></div>
+
+      <div class="controls">
+        <button class="btn" id="prevBtn">まえ</button>
+        <button class="btn" id="nextBtn">つぎ</button>
+      </div>
+    </div>
   `;
 
-  const stage = el("section", "stage");
-
-  const info = el("div", "smallInfo");
-  info.id = "smallInfo";
-
-  const wrap = el("div", "svgWrap");
-  wrap.id = "svgWrap";
-
-  const ground = el("div", "ground");
-  ground.innerHTML = `
-    <div class="platform"></div>
-    <div id="chara" class="chara">●</div>
-  `;
-
-  const controls = el("footer", "controls");
-  controls.innerHTML = `
-    <button id="prevBtn">まえ</button>
-    <button id="nextBtn">つぎ</button>
-  `;
-
-  stage.appendChild(info);
-  stage.appendChild(wrap);
-  stage.appendChild(ground);
-
-  app.appendChild(hud);
-  app.appendChild(stage);
-  app.appendChild(controls);
+  document.querySelector("#prevBtn").addEventListener("click", () => {
+    idx = Math.max(0, idx - 1);
+    loadCurrent();
+  });
+  document.querySelector("#nextBtn").addEventListener("click", () => {
+    idx = Math.min(items.length - 1, idx + 1);
+    loadCurrent();
+  });
 }
 
-function cleanupTraceState() {
+// -------------------- load --------------------
+async function loadData() {
+  const res = await fetch(DATA_URL, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to load ${DATA_URL}: ${res.status}`);
+  const json = await res.json();
+  // 想定: [{kanji, strokes:[{svg:{viewBox,width,height,paths:[]}, strokeKey?}], ...}]
+  items = Array.isArray(json) ? json : json.items || [];
+}
+
+function updateHud() {
+  const starsEl = document.querySelector("#stars");
+  // とりあえず「進んだ数」を★として表示（最大5）
+  const done = Math.min(5, idx + 1);
+  const filled = "★★★★★".slice(0, done);
+  const empty = "☆☆☆☆☆".slice(done);
+  starsEl.textContent = filled + empty;
+}
+
+function loadCurrent() {
+  current = items[idx];
+  strokeIndex = 0;
   isTracing = false;
   activePointerId = null;
   activeTarget = null;
+  renderCurrentKanji();
+  updateHud();
 }
 
-function pulseChara() {
-  const chara = document.getElementById("chara");
-  if (!chara) return;
-  chara.animate(
-    [
-      { transform: "translateY(20px) scale(1)" },
-      { transform: "translateY(8px) scale(1.02)" },
-      { transform: "translateY(20px) scale(1)" }
-    ],
-    { duration: 280, iterations: 1 }
-  );
-}
-
-function bounceStage() {
-  const wrap = document.getElementById("svgWrap");
-  if (!wrap) return;
-  wrap.classList.remove("tracePulse");
-  void wrap.offsetWidth;
-  wrap.classList.add("tracePulse");
-}
-
-function onKanjiComplete() {
-  const info = document.getElementById("smallInfo");
-  if (info) info.textContent += " できた！";
-
-  const chara = document.getElementById("chara");
-  if (chara) {
-    chara.animate(
-      [
-        { transform: "translateY(20px) scale(1)" },
-        { transform: "translateY(-10px) scale(1.05)" },
-        { transform: "translateY(20px) scale(1)" }
-      ],
-      { duration: 420, iterations: 1 }
-    );
-  }
-}
-
+// -------------------- render --------------------
 function renderCurrentKanji() {
-  cleanupTraceState();
+  const title = document.querySelector("#kanjiTitle");
+  const wrap = document.querySelector("#svgWrap");
 
-  const wrap = document.getElementById("svgWrap");
-  const info = document.getElementById("smallInfo");
-  const item = data.items[idx];
-
-  strokeIndex = 1;
-
-  info.textContent = `${item.kanji}（${idx + 1} / ${data.items.length}）  ${formatStrokeNums(item.strokes.length)}`;
-
-  wrap.innerHTML = "";
-
-  const hasAnyPath = item.strokes.some((s) => !!getStrokeD(s));
-  if (!hasAnyPath) {
-    wrap.textContent = "SVGデータが見つかりません（jsonのstrokesに d を入れてください）";
+  if (!current) {
+    title.textContent = "データなし";
+    wrap.innerHTML = "";
     return;
   }
 
-  const svg = svgEl("svg", {
-    viewBox: "0 0 100 100",
-    preserveAspectRatio: "xMidYMid meet",
-    "aria-label": `kanji ${item.kanji}`
-  });
+  const total = current.strokes?.length || 0;
+  title.textContent = `${current.kanji} (${strokeIndex + 1}/${total})  ${circleSteps(total)}`;
 
-  // 1) 薄い全ストローク
-  item.strokes.forEach((s) => {
-    const d = getStrokeD(s);
-    if (!d) return;
-    svg.appendChild(svgEl("path", { d, class: "strokeBase" }));
-  });
+  wrap.innerHTML = "";
 
-  // 2) 今の線を濃く
-  const next = item.strokes.find((s) => s.index === strokeIndex);
-  if (next) {
-    const d = getStrokeD(next);
-    if (d) svg.appendChild(svgEl("path", { d, class: "strokeActive", "data-active": "1" }));
+  const svgData = current.strokes?.[strokeIndex]?.svg;
+  const strokeKey = current.strokes?.[strokeIndex]?.strokeKey;
+
+  if (!svgData) {
+    wrap.innerHTML = `<div class="msg">SVGデータが見つかりません</div>`;
+    return;
   }
 
-  // 3) 当たり判定（透明）
-  item.strokes.forEach((s) => {
-    const d = getStrokeD(s);
-    if (!d) return;
+  // SVG element
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  if (svgData.viewBox) svg.setAttribute("viewBox", svgData.viewBox);
+  else {
+    // fallback
+    const w = svgData.width || 100;
+    const h = svgData.height || 100;
+    svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  }
 
-    const hit = svgEl("path", {
-      d,
-      class: "strokeHit",
-      "data-index": String(s.index)
+  // まず「全ストローク薄表示（背景）」を描く（あれば）
+  const allPaths = svgData.allPaths || null;
+
+  if (Array.isArray(allPaths) && allPaths.length) {
+    allPaths.forEach((d) => {
+      const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      p.setAttribute("d", d);
+      p.classList.add("strokeBase");
+      svg.appendChild(p);
     });
+  }
 
-    hit.addEventListener("pointerdown", (e) => handlePointerDown(e, item));
-    hit.addEventListener("pointermove", (e) => handlePointerMove(e, item));
-    hit.addEventListener("pointerup", (e) => handlePointerUp(e, item));
-    hit.addEventListener("pointercancel", () => cleanupTraceState());
-    hit.addEventListener("pointerleave", (e) => handlePointerLeave(e, item));
+  // このストロークの「当たり判定」パス一覧
+  const paths = svgData.paths || [];
+  if (!Array.isArray(paths) || paths.length === 0) {
+    wrap.innerHTML = `<div class="msg">SVGデータが見つかりません（strokeのキーを確認）</div>`;
+    return;
+  }
 
+  // クリック（タップ）用の太い透明パス（ヒット領域）
+  // 見える線（strokeHit）は「成功時に色が変わる」用に別で描く
+  paths.forEach((d, i) => {
+    // visible line
+    const vis = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    vis.setAttribute("d", d);
+    vis.classList.add("strokeHit");
+    vis.dataset.index = String(i);
+
+    // hit area
+    const hit = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    hit.setAttribute("d", d);
+    hit.classList.add("strokeTouch");
+    hit.dataset.index = String(i);
+
+    // pointer listeners (Day2)
+    hit.addEventListener("pointerdown", handlePointerDown);
+    hit.addEventListener("pointermove", handlePointerMove);
+    hit.addEventListener("pointerup", handlePointerUp);
+    hit.addEventListener("pointercancel", handlePointerCancel);
+    hit.addEventListener("pointerleave", handlePointerLeave);
+
+    svg.appendChild(vis);
     svg.appendChild(hit);
   });
 
   wrap.appendChild(svg);
+
+  // strokeKey がある場合は軽く表示（デバッグ用）
+  if (strokeKey) {
+    const dbg = document.createElement("div");
+    dbg.className = "debugKey";
+    dbg.textContent = `key: ${strokeKey}`;
+    wrap.appendChild(dbg);
+  }
 }
 
-function renderActiveOnly(item) {
-  const wrap = document.getElementById("svgWrap");
-  const svg = wrap.querySelector("svg");
-  if (!svg) return;
-
-  const oldActive = svg.querySelector('path[data-active="1"]');
-  if (oldActive) oldActive.remove();
-
-  const next = item.strokes.find((s) => s.index === strokeIndex);
-  if (!next) return;
-
-  const d = getStrokeD(next);
-  if (!d) return;
-
-  const activePath = svgEl("path", { d, class: "strokeActive", "data-active": "1" });
-
-  const firstHit = svg.querySelector(".strokeHit");
-  if (firstHit) svg.insertBefore(activePath, firstHit);
-  else svg.appendChild(activePath);
-
-  bounceStage();
+function circleSteps(n) {
+  // ①②③④⑤… を最大10程度
+  const marks = ["①", "②", "③", "④", "⑤", "⑥", "⑦", "⑧", "⑨", "⑩"];
+  const out = [];
+  for (let i = 0; i < n; i++) out.push(marks[i] || "●");
+  return out.join("");
 }
 
-function handlePointerDown(e, item) {
-  const idxTouched = Number(e.target.dataset.index);
-  if (idxTouched !== strokeIndex) return;
-
-  if (activePointerId !== null) return;
-
+// -------------------- trace handlers (Day2) --------------------
+function handlePointerDown(e) {
+  // ここで pointer を捕まえて “なぞり開始”
   isTracing = true;
   activePointerId = e.pointerId;
   activeTarget = e.target;
 
+  // トレース距離（指/マウス移動量）を計測
+  traceStartX = e.clientX;
+  traceStartY = e.clientY;
+  traceLastX = e.clientX;
+  traceLastY = e.clientY;
+  traceDist = 0;
+  traceStartT = performance.now();
+
+  // captureして pointerup を確実に取る
   try {
     activeTarget.setPointerCapture(activePointerId);
   } catch (_) {}
 
-  bounceStage();
-}
-
-function handlePointerMove(e, _item) {
-  if (!isTracing) return;
-  if (e.pointerId !== activePointerId) return;
-}
-
-function handlePointerLeave(e, _item) {
-  if (!isTracing) return;
-  if (e.pointerId !== activePointerId) return;
-}
-
-function handlePointerUp(e, item) {
-  if (!isTracing) return;
-  if (e.pointerId !== activePointerId) return;
-
+  // active表示（見える線を濃く）
   const idxTouched = Number(e.target.dataset.index);
-  if (idxTouched !== strokeIndex) {
+  setActiveStroke(idxTouched);
+}
+
+function handlePointerMove(e) {
+  if (!isTracing) return;
+  if (e.pointerId !== activePointerId) return;
+
+  // 移動距離を加算（タップだけ判定を防ぐ）
+  const dx = e.clientX - traceLastX;
+  const dy = e.clientY - traceLastY;
+  traceDist += Math.hypot(dx, dy);
+  traceLastX = e.clientX;
+  traceLastY = e.clientY;
+
+  // Day2: 形判定なし。moveは「触ってなぞってる」感を作る役のみ
+}
+
+function handlePointerUp(e) {
+  if (!isTracing) return;
+  if (e.pointerId !== activePointerId) return;
+
+  const elapsed = performance.now() - traceStartT;
+  const enoughTrace = traceDist >= MIN_TRACE_DIST && elapsed >= MIN_TRACE_TIME;
+
+  // pointerupは必ず発火する想定（capture済み）
+  const idxTouched = Number(e.target.dataset.index);
+
+  // 当たりストロークを「今のstrokeIndexの paths[0]...」として扱う
+  // （このゲームでは paths をまとめて1ストロークとして扱っている想定）
+  // → ここは「どれか1本でも触れたらOK」ではなく、
+  //    “なぞりが発生した” ことを条件に進める
+  if (Number.isNaN(idxTouched)) {
     cleanupTraceState();
     return;
   }
 
+  // タップだけ（移動がほぼ無い）場合は成功扱いにしない
+  if (!enoughTrace) {
+    cleanupTraceState();
+    // ちょいフィードバック（押した感は出す）
+    pulseChara();
+    return;
+  }
+
+  // 成功：次の線へ
   cleanupTraceState();
   pulseChara();
 
   strokeIndex += 1;
 
-  if (strokeIndex > item.strokes.length) {
-    onKanjiComplete();
+  const total = current.strokes?.length || 0;
+  if (strokeIndex >= total) {
+    // 次の漢字へ
+    idx = Math.min(items.length - 1, idx + 1);
+    loadCurrent();
+  } else {
+    renderCurrentKanji();
+  }
+}
+
+function handlePointerCancel(e) {
+  if (e.pointerId !== activePointerId) return;
+  cleanupTraceState();
+}
+
+function handlePointerLeave(e) {
+  // leaveは失敗扱いにはしない（iPadで指がズレやすい）
+  // pointerupで判定する
+}
+
+function cleanupTraceState() {
+  isTracing = false;
+  activePointerId = null;
+  if (activeTarget) {
+    try {
+      activeTarget.releasePointerCapture(activePointerId);
+    } catch (_) {}
+  }
+  activeTarget = null;
+  clearActiveStroke();
+}
+
+function setActiveStroke(i) {
+  // strokeHit の i番目を強調
+  const wrap = document.querySelector("#svgWrap");
+  if (!wrap) return;
+  wrap.querySelectorAll(".strokeHit").forEach((p) => p.classList.remove("strokeActive"));
+  const target = wrap.querySelector(`.strokeHit[data-index="${i}"]`);
+  if (target) target.classList.add("strokeActive");
+}
+
+function clearActiveStroke() {
+  const wrap = document.querySelector("#svgWrap");
+  if (!wrap) return;
+  wrap.querySelectorAll(".strokeHit").forEach((p) => p.classList.remove("strokeActive"));
+}
+
+function pulseChara() {
+  // 演出：中央の漢字タイトルを一瞬拡大
+  const title = document.querySelector("#kanjiTitle");
+  if (!title) return;
+  title.classList.remove("pulse");
+  // reflow
+  void title.offsetWidth;
+  title.classList.add("pulse");
+}
+
+// -------------------- boot --------------------
+(async function boot() {
+  buildAppShell();
+  await loadData();
+  if (!items.length) {
+    document.querySelector("#svgWrap").innerHTML = `<div class="msg">データが空です</div>`;
     return;
   }
-
-  renderActiveOnly(item);
-}
-
-function bindControls() {
-  document.getElementById("prevBtn").addEventListener("click", () => {
-    idx = clamp(idx - 1, 0, data.items.length - 1);
-    renderCurrentKanji();
-  });
-  document.getElementById("nextBtn").addEventListener("click", () => {
-    idx = clamp(idx + 1, 0, data.items.length - 1);
-    renderCurrentKanji();
-  });
-}
-
-async function boot() {
-  buildAppShell();
-  data = await loadKanjiData();
-  bindControls();
-  renderCurrentKanji();
-}
-
-boot().catch((e) => {
-  console.error(e);
-  alert("データの読みこみにしっぱいしました");
-});
+  loadCurrent();
+})();

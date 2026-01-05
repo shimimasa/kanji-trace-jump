@@ -1,123 +1,93 @@
-html, body {
-    height: 100%;
-    margin: 0;
-    touch-action: manipulation; /* 余計なズーム抑止 */
-    font-family: system-ui, -apple-system, "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-  }
-  
-  .app {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background: #f6fbff;
-  }
-  
-  .hud {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 14px;
-    font-size: 18px;
-  }
-  
-  .stage {
-    flex: 1;
-    position: relative;
-    display: grid;
-    place-items: center;
-    overflow: hidden;
-  }
-  
-  .kanji {
-    font-size: min(44vw, 320px);
-    line-height: 1;
-    opacity: 0.12;
-    user-select: none;
-  }
-  
-  .strokeRow {
-    position: absolute;
-    bottom: 110px;
-    font-size: 28px;
-    opacity: 0.9;
-    user-select: none;
-  }
-  
-  .ground {
-    position: absolute;
-    bottom: 24px;
-    left: 0;
-    right: 0;
-    height: 90px;
-  }
-  
-  .platform {
-    position: absolute;
-    left: 10%;
-    right: 10%;
-    top: 35px;
-    height: 14px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.08);
-  }
-  
-  .chara {
-    position: absolute;
-    left: 12%;
-    top: 0px;
-    font-size: 44px;
-    transform: translateY(18px);
-    user-select: none;
-  }
-  
-  .controls {
-    display: flex;
-    gap: 12px;
-    padding: 12px 14px;
-    justify-content: center;
-  }
-  
-  button {
-    font-size: 20px;
-    padding: 12px 18px;
-    border-radius: 14px;
-    border: 0;
-    background: rgba(0,0,0,0.08);
-  }
-  button:active { transform: scale(0.98); }
-
-  /* ===== Day2: Trace Hit Areas ===== */
-.strokeHit {
-  fill: none;
-  stroke: transparent;
-  /* 指が太くても当たる判定幅 */
-  stroke-width: 42;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  pointer-events: stroke;
+:root {
+  --bg: #f3f7fa;
+  --text: #111;
+  --muted: rgba(0, 0, 0, 0.35);
+  --btn: #e7eaee;
+  --btnText: #111;
+  --strokeBase: rgba(0, 0, 0, 0.12);
+  --strokeHit: rgba(0, 0, 0, 0.18);
+  --strokeActive: rgba(0, 0, 0, 0.45);
 }
 
-/* 今なぞるべき線を “少しだけ” 強調 */
-.strokeActive {
-  fill: none;
-  stroke: rgba(0,0,0,0.45);
-  stroke-width: 12;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+* {
+  box-sizing: border-box;
 }
 
-/* なぞり成功時の軽いフィードバック（任意） */
-.tracePulse {
-  animation: tracePulse 180ms ease-out 1;
+html,
+body {
+  height: 100%;
 }
 
-@keyframes tracePulse {
-  from { transform: scale(1); opacity: 1; }
-  to   { transform: scale(1.01); opacity: 0.95; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
 }
-  
-/* ===== SVG表示の基本 ===== */
+
+#app {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+  padding: 18px 18px 22px;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stars {
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.goal {
+  font-size: 22px;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  gap: 18px;
+}
+
+.titleRow {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.kanjiTitle {
+  font-size: 28px;
+  letter-spacing: 1px;
+  user-select: none;
+  transform-origin: center;
+}
+
+.kanjiTitle.pulse {
+  animation: pulse 180ms ease-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ★ iPadでスクロールやジェスチャーに奪われないようにする */
 .svgWrap {
+  touch-action: none;
+
   width: min(92vw, 900px);
   height: min(58vh, 520px);
   display: grid;
@@ -127,13 +97,73 @@ html, body {
 .svgWrap svg {
   width: 100%;
   height: 100%;
+  touch-action: none;
 }
 
-/* Day2で必要：薄い全ストローク（これが無いと漢字が見えない） */
+/* Day2：薄い全ストローク（背景） */
 .strokeBase {
   fill: none;
-  stroke: rgba(0,0,0,0.12);
-  stroke-width: 12;
+  stroke: var(--strokeBase);
+  stroke-width: 18;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* 見える線（当たりストローク） */
+.strokeHit {
+  fill: none;
+  stroke: var(--strokeHit);
+  stroke-width: 22;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 120ms ease;
+}
+
+/* 押している間だけ濃くする */
+.strokeHit.strokeActive {
+  stroke: var(--strokeActive);
+}
+
+/* 当たり判定（透明） */
+.strokeTouch {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  stroke-width: 60;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  cursor: pointer;
+}
+
+/* ボタン */
+.controls {
+  display: flex;
+  gap: 14px;
+}
+
+.btn {
+  appearance: none;
+  border: none;
+  background: var(--btn);
+  color: var(--btnText);
+  padding: 16px 30px;
+  border-radius: 16px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* メッセージ */
+.msg {
+  font-size: 18px;
+  color: var(--muted);
+}
+
+/* デバッグ表示 */
+.debugKey {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
 }
