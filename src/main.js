@@ -146,10 +146,47 @@ function renderCurrentKanji() {
 
   wrap.innerHTML = "";
 
-  const svg = svgEl("svg", {
-    viewBox: data.viewBox || "0 0 100 100",
-    "aria-label": `kanji ${item.kanji}`
-  });
+    // --- viewBoxをストロークから自動計算（座標系ズレ対策） ---
+    const tmpSvg = svgEl("svg", { viewBox: "0 0 10 10" });
+    // 一瞬DOMに入れないと getBBox が取れない環境があるのでラッパに仮挿入
+    wrap.appendChild(tmpSvg);
+  
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  
+    item.strokes.forEach((s) => {
+      const p = svgEl("path", { d: s.d });
+      tmpSvg.appendChild(p);
+      try {
+        const b = p.getBBox();
+        minX = Math.min(minX, b.x);
+        minY = Math.min(minY, b.y);
+        maxX = Math.max(maxX, b.x + b.width);
+        maxY = Math.max(maxY, b.y + b.height);
+      } catch (_) {
+        // getBBoxが取れない場合は後でフォールバック
+      }
+      p.remove();
+    });
+  
+    tmpSvg.remove();
+  
+    // フォールバック（BBox取れなかった場合）
+    if (!isFinite(minX) || !isFinite(minY) || !isFinite(maxX) || !isFinite(maxY)) {
+      minX = 0; minY = 0; maxX = 100; maxY = 100;
+    }
+  
+    // 余白（線の太さ分）
+    const pad = 12;
+    minX -= pad; minY -= pad; maxX += pad; maxY += pad;
+  
+    const vb = `${minX} ${minY} ${Math.max(1, maxX - minX)} ${Math.max(1, maxY - minY)}`;
+  
+    const svg = svgEl("svg", {
+      viewBox: vb,
+      "aria-label": `kanji ${item.kanji}`,
+      preserveAspectRatio: "xMidYMid meet"
+    });
+  
 
   // 1) 見た目：薄い全ストローク
   item.strokes.forEach((s) => {
