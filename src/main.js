@@ -127,6 +127,19 @@ function onKanjiComplete() {
   }
 }
 
+function getStrokeD(s) {
+  // いろんなJSON形式を吸収（d / path / svgPath など）
+  return (
+    s?.d ||
+    s?.path ||
+    s?.svgPath ||
+    s?.svg ||
+    s?.data ||
+    ""
+  );
+}
+
+
 function formatStrokeNums(count) {
   const nums = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩"];
   return nums.slice(0, count).join(" ");
@@ -145,7 +158,11 @@ function renderCurrentKanji() {
   info.textContent = `${item.kanji}（${idx + 1} / ${data.items.length}）  ${formatStrokeNums(item.strokes.length)}`;
 
   wrap.innerHTML = "";
-
+  const hasAnyPath = item.strokes.some((s) => !!getStrokeD(s));
+if (!hasAnyPath) {
+  wrap.textContent = "SVGデータが見つかりません（strokeのキー名を確認）";
+  return;
+}
     // --- viewBoxをストロークから自動計算（座標系ズレ対策） ---
     const tmpSvg = svgEl("svg", { viewBox: "0 0 10 10" });
     // 一瞬DOMに入れないと getBBox が取れない環境があるのでラッパに仮挿入
@@ -154,7 +171,9 @@ function renderCurrentKanji() {
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
   
     item.strokes.forEach((s) => {
-      const p = svgEl("path", { d: s.d });
+      const d = getStrokeD(s);
+ if (!d) return;
+ svg.appendChild(svgEl("path", { d, class: "strokeBase" }));
       tmpSvg.appendChild(p);
       try {
         const b = p.getBBox();
@@ -196,14 +215,15 @@ function renderCurrentKanji() {
   // 2) 見た目：現在の線を濃く
   const active = item.strokes.find((s) => s.index === strokeIndex);
   if (active) {
-    svg.appendChild(svgEl("path", { d: active.d, class: "strokeActive", "data-active": "1" }));
+    const d = getStrokeD(active);
+ if (d) svg.appendChild(svgEl("path", { d, class: "strokeActive", "data-active": "1" }));
   }
 
   // 3) 当たり判定：透明ストローク（各線）
   //    ただし、イベント側で strokeIndex を見て弾く
   item.strokes.forEach((s) => {
     const hit = svgEl("path", {
-      d: s.d,
+      d: getStrokeD(s),
       class: "strokeHit",
       "data-index": String(s.index)
     });
