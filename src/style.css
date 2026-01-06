@@ -1,245 +1,172 @@
-/* src/style.css */
+:root {
+  --bg: #f3f7f8;
+  --text: #111;
+  --muted: #7a7a7a;
+  --line: #dfe6e8;
+  --btn: #e9eef0;
+  --btn2: #f6f8f9;
 
-:root{
-  --bg:#eef3f6;
-  --text:#111;
-  --muted:#5b6470;
-  --card:#ffffff;
-  --shadow: 0 8px 22px rgba(0,0,0,.08);
+  --baseStroke: rgba(0, 0, 0, 0.18);
+  --doneStroke: rgba(0, 0, 0, 0.35);
+  --activeStroke: rgba(0, 0, 0, 0.55);
 }
 
-html, body {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
   height: 100%;
-}
-
-body{
-  margin:0;
+  margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
-  overflow-x:hidden;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+  overflow: hidden; /* ← これが効かないとスクロールが出てUIが崩れる */
 }
 
-#app{
-  min-height:100vh;
+#app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.app{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  padding: 18px 22px 22px;
-  box-sizing:border-box;
+.hud {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 18px;
 }
 
-.hud{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  font-weight:700;
+.stars {
+  font-size: 28px;
+  letter-spacing: 4px;
+  user-select: none;
 }
 
-.stars{
-  font-size:34px;
-  letter-spacing:2px;
-  user-select:none;
+.goal {
+  font-size: 28px;
+  font-weight: 700;
+  user-select: none;
 }
 
-.objective{
-  font-size:30px;
-  user-select:none;
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 16px 18px;
+  gap: 12px;
 }
 
-.titleRow{
-  display:flex;
-  justify-content:center;
-  margin-top: 18px;
-  margin-bottom: 10px;
+.topline {
+  margin-top: 6px;
 }
 
-.kanjiTitle{
-  font-size:30px;
-  font-weight:800;
-  user-select:none;
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  user-select: none;
+  text-align: center;
 }
 
-.kanjiTitle .progressLabel{
-  margin-left: 10px;
-  font-weight:700;
-  color: var(--muted);
+.stage {
+  width: min(720px, 92vw);
+  height: min(520px, 58vh);
+  display: grid;
+  place-items: center;
 }
 
-.stage{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height: 420px;
+.kanji-area {
+  width: min(560px, 88vw);
+  height: min(420px, 50vh);
+  display: grid;
+  place-items: center;
 }
 
-.svgWrap{
-  width:min(740px, 92vw);
-  aspect-ratio: 1 / 1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.kanji-area svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+  touch-action: none; /* スマホ/タブレットでもなぞれる */
 }
 
-.kanjiSvg{
-  width:100%;
-  height:100%;
-  display:block;
-  touch-action:none; /* pointer events */
+.stroke-ui {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 52px;
 }
 
-.layer{
-  pointer-events:none;
+.stroke-buttons {
+  display: flex;
+  gap: 14px;
 }
 
-/* strokes */
-.strokeBase{
-  fill:none;
-  stroke: rgba(0,0,0,.18);
-  stroke-width: 7.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.stroke-btn {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: white;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
 }
 
-.strokeBase.hint{
-  stroke: rgba(0,0,0,.35);
-  stroke-width: 10.5;
+.stroke-btn.is-done {
+  background: #f5f7f8;
+  color: #444;
 }
 
-.strokeDone{
-  fill:none;
-  stroke: rgba(0,0,0,.36);
-  stroke-width: 9;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.stroke-btn.is-active {
+  outline: 3px solid rgba(0, 0, 0, 0.08);
 }
 
-.strokeActive{
-  fill:none;
-  stroke: rgba(0,0,0,.45);
-  stroke-width: 12;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  pointer-events:none;
+.nav {
+  display: flex;
+  gap: 18px;
+  margin-top: 4px;
 }
 
-.strokeHit{
-  fill:none;
-  stroke: rgba(0,0,0,0); /* invisible */
-  stroke-width: 28;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  pointer-events: stroke;
+.btn {
+  min-width: 140px;
+  height: 64px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: var(--btn);
+  font-size: 22px;
+  font-weight: 700;
   cursor: pointer;
 }
 
-.tracePath{
-  fill:none;
-  stroke: rgba(0,0,0,.62);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  pointer-events:none;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,.10));
+.btn.primary {
+  background: var(--btn2);
 }
 
-.tracePath.good{
-  stroke: rgba(0,0,0,.75);
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.tracePath.bad{
-  stroke: rgba(200,0,0,.55);
-}
-
-/* dots */
-.strokeDots{
-  display:flex;
-  gap: 14px;
-  justify-content:center;
-  align-items:center;
-  margin: 10px 0 12px;
-}
-
-.dot{
-  width: 52px;
-  height: 52px;
-  border-radius: 999px;
-  border: 2px solid rgba(0,0,0,.25);
-  background: rgba(255,255,255,.6);
-  box-shadow: var(--shadow);
+.caption {
+  margin: 0;
   font-size: 18px;
-  font-weight: 800;
-  user-select:none;
-  cursor:pointer;
+  color: #111;
+  user-select: none;
 }
 
-.dot.active{
-  border-color: rgba(0,0,0,.55);
-  background: rgba(255,255,255,.92);
-}
-
-.dot.done{
-  border-color: rgba(0,0,0,.55);
-  background: rgba(255,255,255,.92);
-}
-
-.nav{
-  display:flex;
-  gap: 18px;
-  justify-content:center;
-  margin-top: 10px;
-  padding-bottom: 6px;
-}
-
-.btn{
-  min-width: 150px;
-  height: 78px;
-  border-radius: 18px;
-  border: 1px solid rgba(0,0,0,.14);
-  background: rgba(255,255,255,.70);
-  box-shadow: var(--shadow);
-  font-size: 28px;
-  font-weight: 800;
-  cursor:pointer;
-}
-
-.btn:disabled{
-  opacity: .45;
-  cursor:not-allowed;
-}
-
-.btn.primary{
-  background: rgba(255,255,255,.92);
-  border-color: rgba(0,0,0,.25);
-}
-
-.status{
-  text-align:center;
-  min-height: 28px;
-  margin-top: 10px;
-  font-weight: 700;
-  color: var(--muted);
-}
-
-.status[data-kind="error"]{
+.error {
+  margin: 0;
+  font-size: 14px;
   color: #b00020;
-}
-.status[data-kind="warn"]{
-  color: #7a4b00;
-}
-.status[data-kind="ok"]{
-  color: #0b6b2c;
+  min-height: 20px;
 }
 
-@media (max-width: 520px){
-  .stars{ font-size: 26px; }
-  .objective{ font-size: 22px; }
-  .kanjiTitle{ font-size: 22px; }
-  .btn{ min-width: 132px; height: 70px; font-size: 24px; }
-  .dot{ width: 46px; height: 46px; }
-}
 
