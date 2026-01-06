@@ -1,234 +1,206 @@
-// src/main.js
 import "./style.css";
 
 /**
- * Day2 方針：
- * - public/data/ に置いたJSONを確実に読めるようにする（Vercel/Vite両対応）
- * - stroke SVG 描画は使わない（このJSONはSVGではなく数値配列っぽい）
- * - 「漢字を巨大表示」＋「①②③...（ストローク数）」＋「順番ボタン」で進行
+ * Vite / Vercel 安全版
+ * - public/data/kanji_g1_min5.json を確実に読めるようにする
+ * - BASE_URL を絶対URL化して new URL() エラーを潰す
  */
 
-// Vite の base（/ や /subpath/）を吸収して public 配下を参照する
-const BASE = (import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : "/";
+const APP_ID = "app";
 
-// ✅ ここが最重要：あなたの配置は public/data/kanji_g1_min5.json
-const DATA_URL_CANDIDATES = [
-  new URL("data/kanji_g1_min5.json", BASE).toString(),
-  // 念のため：直下に置いた場合も拾える
-  new URL("kanji_g1_min5.json", BASE).toString(),
+// ここを切り替えるだけで Day2/Day3 を増やせる想定
+const DATA_FILES = [
+  "data/kanji_g1_min5.json", // Day1/Day2 共通でまずこれを読む
 ];
 
-const circledNums = [
-  "①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩",
-  "⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳",
-];
-
-function $(sel) {
-  const el = document.querySelector(sel);
-  if (!el) throw new Error(`Element not found: ${sel}`);
-  return el;
+function getBaseURL() {
+  // 例: "/" or "/myapp/"
+  const base = import.meta.env.BASE_URL || "/";
+  // base を “絶対URL” に変換（これがないと new URL(relative, "/") で死ぬケースがある）
+  return new URL(base, window.location.href);
 }
 
-function clamp(n, min, max) {
-  return Math.max(min, Math.min(max, n));
+async function loadJson(path) {
+  const baseURL = getBaseURL();
+  const url = new URL(path, baseURL).toString();
+
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error(`HTTP ${res.status} (${path})`);
+  }
+  return res.json();
 }
 
-async function loadJsonWithFallback() {
-  let lastErr = null;
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (text != null) node.textContent = text;
+  return node;
+}
 
-  for (const url of DATA_URL_CANDIDATES) {
-    try {
-      const res = await fetch(url, { cache: "no-store" });
-      if (!res.ok) throw new Error(`HTTP ${res.status} ${res.statusText} (${url})`);
-      const json = await res.json();
-      return json;
-    } catch (e) {
-      lastErr = e;
-    }
+function mountApp(root) {
+  // --- state ---
+  const state = {
+    goal: "5もじ",
+    items: [],
+    idx: 0,
+    doneStrokes: new Set(),
+    message: "",
+  };
+
+  // --- UI skeleton ---
+  root.innerHTML = "";
+  const shell = el("div", "app-shell");
+
+  const hud = el("div", "hud");
+  const stars = el("div", "stars", "☆☆☆☆☆");
+  const goal = el("div", "goal", `もくひょう：${state.goal}`);
+  hud.append(stars, goal);
+
+  const main = el("div", "main");
+  const title = el("div", "kanji-title", "—");
+  const display = el("div", "kanji-display", "データなし");
+
+  const strokeButtons = el("div", "stroke-buttons");
+  const message = el("div", "message", "");
+
+  main.append(title, display, strokeButtons, message);
+
+  const footer = el("div", "footer");
+  const prevBtn = el("button", "nav-btn", "まえ");
+  const nextBtn = el("button", "nav-btn", "つぎ");
+  footer.append(prevBtn, nextBtn);
+
+  shell.append(hud, main, footer);
+  root.append(shell);
+
+  // --- helpers ---
+  function setMessage(text) {
+    state.message = text || "";
+    message.textContent = state.message;
   }
 
-  throw lastErr ?? new Error("Failed to load JSON");
-}
+  function currentItem() {
+    return state.items[state.idx] || null;
+  }
 
-function normalizeItems(json) {
-  // いろんな形に対応
-  // - 配列そのもの: [{kanji, strokesCount, ...}, ...]
-  // - {items:[...]} / {data:[...]} のような形
-  const arr =
-    Array.isArray(json) ? json :
-    Array.isArray(json?.items) ? json.items :
-    Array.isArray(json?.data) ? json.data :
-    null;
+  function renderStars() {
+    // 進捗: 5問中の現在位置を★で表現（適当でOKならこのまま）
+    const total = Math.max(1, state.items.length || 5);
+    const done = Math.min(state.idx, total);
+    const filled = "★★★★★".slice(0, done);
+    const empty = "☆☆☆☆☆".slice(0, Math.max(0, 5 - done));
+    stars.textContent = (filled + empty).slice(0, 5);
+  }
 
-  if (!arr) return [];
+  function renderStrokeButtons(maxStrokes) {
+    strokeButtons.innerHTML = "";
+    state.doneStrokes = new Set();
 
-  return arr.map((raw) => {
-    const kanji = String(raw?.kanji ?? raw?.character ?? raw?.char ?? "").trim();
+    // ①〜 の丸数字
+    const nums = Array.from({ length: maxStrokes }, (_, i) => i + 1);
 
-    // strokesCount が無ければ strokes.length から推測
-    let strokesCount = Number(raw?.strokesCount ?? raw?.strokeCount ?? 0);
-    if (!Number.isFinite(strokesCount) || strokesCount <= 0) {
-      if (Array.isArray(raw?.strokes)) strokesCount = raw.strokes.length;
-    }
-    if (!Number.isFinite(strokesCount) || strokesCount < 0) strokesCount = 0;
+    nums.forEach((n) => {
+      const label = ["①","②","③","④","⑤","⑥","⑦","⑧","⑨","⑩","⑪","⑫","⑬","⑭","⑮","⑯","⑰","⑱","⑲","⑳"][n-1] || String(n);
+      const b = el("button", "stroke-btn", label);
 
-    return { kanji, strokesCount, raw };
-  }).filter((x) => x.kanji.length > 0);
-}
+      b.addEventListener("click", () => {
+        // ここは “クリックで反応” が大事なので、最小仕様で：押したら done 扱いにする
+        if (!state.doneStrokes.has(n)) {
+          state.doneStrokes.add(n);
+          b.classList.add("done");
+        } else {
+          // もう一回押したら戻せる（任意）
+          state.doneStrokes.delete(n);
+          b.classList.remove("done");
+        }
+      });
 
-function buildUI() {
-  const app = $("#app");
-  app.innerHTML = `
-    <div class="app-shell">
-
-      <header class="hud">
-        <div id="stars" class="stars">☆☆☆☆☆</div>
-        <div id="goal" class="goal">もくひょう：5もじ</div>
-      </header>
-
-      <main class="main">
-        <div id="kanjiTitle" class="kanji-title">—</div>
-
-        <div id="kanjiDisplay" class="kanji-display" aria-label="kanji">—</div>
-
-        <div id="strokeButtons" class="stroke-buttons" aria-label="strokes"></div>
-
-        <div id="message" class="message" aria-live="polite"></div>
-      </main>
-
-      <footer class="footer">
-        <button id="prevBtn" class="nav-btn" type="button">まえ</button>
-        <button id="nextBtn" class="nav-btn" type="button">つぎ</button>
-      </footer>
-
-    </div>
-  `;
-}
-
-function renderStars(starsEl, clearedCount) {
-  const n = clamp(clearedCount, 0, 5);
-  starsEl.textContent = "★".repeat(n) + "☆".repeat(5 - n);
-}
-
-function renderTitle(titleEl, item, idx, total) {
-  const circles = Array.from(
-    { length: item.strokesCount },
-    (_, i) => circledNums[i] ?? String(i + 1)
-  ).join(" ");
-  titleEl.textContent = `${item.kanji} (${idx + 1}/${total}) ${circles}`.trim();
-}
-
-function createStrokeButtons(container, strokesCount, strokeIndex, onTryAdvance) {
-  container.innerHTML = "";
-
-  if (!strokesCount || strokesCount <= 0) return;
-
-  for (let i = 1; i <= strokesCount; i++) {
-    const b = document.createElement("button");
-    b.type = "button";
-    b.className = "stroke-btn";
-    b.textContent = String(i);
-    b.setAttribute("aria-label", `stroke ${i}`);
-
-    if (i <= strokeIndex) b.classList.add("done");
-
-    b.addEventListener("click", () => {
-      if (i === strokeIndex + 1) {
-        onTryAdvance();
-      } else {
-        b.classList.remove("shake");
-        void b.offsetWidth;
-        b.classList.add("shake");
-      }
+      strokeButtons.appendChild(b);
     });
-
-    container.appendChild(b);
-  }
-}
-
-async function main() {
-  buildUI();
-
-  const starsEl = $("#stars");
-  const titleEl = $("#kanjiTitle");
-  const displayEl = $("#kanjiDisplay");
-  const strokeButtonsEl = $("#strokeButtons");
-  const msgEl = $("#message");
-  const prevBtn = $("#prevBtn");
-  const nextBtn = $("#nextBtn");
-
-  let items = [];
-  let idx = 0;
-  let strokeIndex = 0;
-  let cleared = new Set();
-
-  try {
-    const json = await loadJsonWithFallback();
-    items = normalizeItems(json);
-
-    if (!items.length) {
-      msgEl.textContent = "データなし（JSONが空、または kanji キーが見つかりません）";
-      titleEl.textContent = "データなし";
-      displayEl.textContent = "—";
-      nextBtn.disabled = true;
-      prevBtn.disabled = true;
-      return;
-    }
-  } catch (e) {
-    msgEl.textContent = `データ読み込み失敗：${String(e?.message ?? e)}`;
-    titleEl.textContent = "データなし";
-    displayEl.textContent = "—";
-    nextBtn.disabled = true;
-    prevBtn.disabled = true;
-    return;
-  }
-
-  function updateButtons() {
-    prevBtn.disabled = idx <= 0;
-
-    const item = items[idx];
-    const canNext = (item.strokesCount <= 0) || (strokeIndex >= item.strokesCount);
-    nextBtn.disabled = !canNext;
   }
 
   function render() {
-    const total = items.length;
-    const item = items[idx];
+    const item = currentItem();
 
-    renderStars(starsEl, cleared.size);
-    renderTitle(titleEl, item, idx, total);
-    displayEl.textContent = item.kanji;
+    renderStars();
 
-    msgEl.textContent = "";
+    if (!item) {
+      title.textContent = "—";
+      display.textContent = "データなし";
+      strokeButtons.innerHTML = "";
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+      return;
+    }
 
-    createStrokeButtons(strokeButtonsEl, item.strokesCount, strokeIndex, () => {
-      strokeIndex++;
-      if (strokeIndex >= item.strokesCount) {
-        cleared.add(idx);
-        msgEl.textContent = "OK！「つぎ」で進めます";
-      }
-      render();
-    });
+    // item の形がどう来ても耐える（kanji / char / text など）
+    const kanji = item.kanji || item.char || item.text || item.word || "？";
 
-    updateButtons();
+    // 1/5 表示（上の仕様に寄せる）
+    const total = state.items.length || 5;
+    const maxStrokes =
+      Number(item.strokes ?? item.strokeCount ?? item.kakusu ?? 4) || 4;
+
+    title.textContent = `${kanji}（${state.idx + 1}/${total}）`;
+    display.textContent = kanji;
+
+    renderStrokeButtons(Math.min(Math.max(maxStrokes, 1), 20));
+
+    prevBtn.disabled = state.idx <= 0;
+    nextBtn.disabled = state.idx >= state.items.length - 1;
   }
 
+  // --- events ---
   prevBtn.addEventListener("click", () => {
-    idx = clamp(idx - 1, 0, items.length - 1);
-    strokeIndex = 0;
-    render();
+    if (state.idx > 0) {
+      state.idx -= 1;
+      setMessage("");
+      render();
+    }
   });
 
   nextBtn.addEventListener("click", () => {
-    const item = items[idx];
-    if (item.strokesCount > 0 && strokeIndex < item.strokesCount) return;
-
-    idx = clamp(idx + 1, 0, items.length - 1);
-    strokeIndex = 0;
-    render();
+    if (state.idx < state.items.length - 1) {
+      state.idx += 1;
+      setMessage("");
+      render();
+    }
   });
 
+  // --- data load ---
+  (async () => {
+    try {
+      // 最初のファイルだけ読む（必要ならここで Day2 用に切替）
+      const json = await loadJson(DATA_FILES[0]);
+
+      // json の形が配列 or {items:[...]} どちらでもOKにする
+      const items = Array.isArray(json) ? json : (json.items || json.data || []);
+
+      state.items = items.slice(0, 5); // “5もじ” 前提
+      state.idx = 0;
+
+      setMessage("");
+      render();
+    } catch (e) {
+      console.error(e);
+      display.textContent = "データなし";
+      setMessage(`データ読み込み失敗：${String(e.message || e)}`);
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+    }
+  })();
+
+  // 初期描画
   render();
+}
+
+function main() {
+  const root = document.getElementById(APP_ID);
+  if (!root) {
+    throw new Error(`#${APP_ID} が見つかりません (index.html を確認)`);
+  }
+  mountApp(root);
 }
 
 main();
