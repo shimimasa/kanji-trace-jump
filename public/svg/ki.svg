@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="512" height="512">
+  <title>木</title>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <g id="guide" stroke="#9aa0a6" stroke-width="8" opacity="0.25">
+      <path d="M49.99 13.5 L49.99 84.5" data-stroke="1"/>
+      <path d="M24.0 39.5 L76.0 39.5" data-stroke="2"/>
+      <path d="M50.0 43.0 L27.0 74.0" data-stroke="3"/>
+      <path d="M50.0 43.0 L73.0 74.0" data-stroke="4"/>
+    </g>
+    <g id="strokes" stroke="#202124" stroke-width="8">
+      <path d="M49.99 13.5 L49.99 84.5" data-stroke="1" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+      <path d="M24.0 39.5 L76.0 39.5" data-stroke="2" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+      <path d="M50.0 43.0 L27.0 74.0" data-stroke="3" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+      <path d="M50.0 43.0 L73.0 74.0" data-stroke="4" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
+    </g>
+  </g>
+</svg>
