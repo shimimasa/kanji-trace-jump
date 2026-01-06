@@ -552,6 +552,12 @@ function buildSvgForKanji(strokes) {
 
   // ベース（薄いグレー）
   strokes.forEach((poly, i) => {
+     // ✅ 足場（影）：doneになった画だけ表示する
+    const shadow = document.createElementNS(ns, "path");
+    shadow.setAttribute("d", polyToPathD(poly));
+    shadow.dataset.strokeIndex = String(i);
+    shadow.setAttribute("class", "stroke-shadow");
+    s.appendChild(shadow);
     const p = document.createElementNS(ns, "path");
     p.setAttribute("d", polyToPathD(poly));
     p.dataset.strokeIndex = String(i);
@@ -753,6 +759,14 @@ function refreshSvgStates(svgEl, strokes) {
     const i = Number(p.dataset.strokeIndex);
     if (Number.isFinite(i) && done[i]) p.classList.add("done");
     else p.classList.remove("done");
+  });
+
+  // ✅ 足場（影）：done の画だけ表示
+  const shadowPaths = Array.from(svgEl.querySelectorAll("path.stroke-shadow"));
+  shadowPaths.forEach((p) => {
+    const i = Number(p.dataset.strokeIndex);
+    if (Number.isFinite(i) && done[i]) p.classList.add("on");
+    else p.classList.remove("on");
   });
 
   const active = svgEl.querySelector('path[data-role="active"]');

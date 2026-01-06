@@ -290,6 +290,25 @@ body {
 }
 
 /* ===========================
++   Footstep / Path shadow (done strokes only)
++   =========================== */
+.stroke-shadow {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.18);
+  stroke-width: 12;          /* 道っぽく“面”を作る */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;                /* 通常は非表示 */
+  filter: blur(1.2px);       /* 影を柔らかく */
+  pointer-events: none;
+}
+
+.stroke-shadow.on {
+  opacity: 1;                /* doneになったら表示 */
+}
+
+
+/* ===========================
 +   FX (success / fail)
 +   =========================== */
 .fx-layer {
