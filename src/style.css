@@ -44,7 +44,36 @@ body {
   font-size: 28px;
   letter-spacing: 4px;
   user-select: none;
+  position: relative;
+  display: inline-block;
+ }
+
+/* ===========================
++   Stars sparkle (5/5)
++   =========================== */
+.starsSparkle {
+  animation: starsPop 420ms ease-out;
 }
+@keyframes starsPop {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.12); }
+    100% { transform: scale(1); }
+  }
+
+.star-spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  animation: starSparkFly 420ms ease-out forwards;
+}
+ @keyframes starSparkFly {
+  0%   { transform: translate(0, 0) scale(1); opacity: 0.95; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
+}
+
 
 .goal {
   font-size: 28px;
