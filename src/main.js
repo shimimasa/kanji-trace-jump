@@ -286,6 +286,62 @@ function flashFail(svgEl) {
   setTimeout(() => svgEl.classList.remove("failFlash"), 160);
 }
 
+// ===========================
+// Hanamaru (final clear)
+// ===========================
+function showHanamaru(svgEl) {
+  const ns = "http://www.w3.org/2000/svg";
+  const layer = ensureFxLayer(svgEl);
+
+  // グループ
+  const g = document.createElementNS(ns, "g");
+  g.setAttribute("class", "hanamaru");
+  g.setAttribute("transform", "translate(50 50) scale(0)");
+  layer.appendChild(g);
+
+  // 円（はなまる）
+  const c = document.createElementNS(ns, "circle");
+  c.setAttribute("cx", "0");
+  c.setAttribute("cy", "0");
+  c.setAttribute("r", "26");
+  c.setAttribute("fill", "none");
+  c.setAttribute("stroke", "#ff7a00");
+  c.setAttribute("stroke-width", "6");
+  c.setAttribute("stroke-linecap", "round");
+  g.appendChild(c);
+
+  // テキスト
+  const t = document.createElementNS(ns, "text");
+  t.setAttribute("x", "0");
+  t.setAttribute("y", "10");
+  t.setAttribute("text-anchor", "middle");
+  t.setAttribute("font-size", "18");
+  t.setAttribute("font-weight", "700");
+  t.setAttribute("fill", "#ff7a00");
+  t.textContent = "はなまる！";
+  g.appendChild(t);
+
+  // アニメーション（ぽん → すこし弾む）
+  g.animate(
+    [
+      { transform: "translate(50px,50px) scale(0)", opacity: 0 },
+      { transform: "translate(50px,50px) scale(1.15)", opacity: 1 },
+      { transform: "translate(50px,50px) scale(1)", opacity: 1 },
+    ],
+    { duration: 420, easing: "ease-out", fill: "forwards" }
+  );
+
+  // SE（少し特別）
+  playTone(880, 0.08, "sine", 0.06);
+  setTimeout(() => playTone(1175, 0.1, "sine", 0.05), 90);
+
+  // 1.2秒後に消す（次の遷移用）
+  setTimeout(() => {
+    g.remove();
+  }, 1200);
+}
+
+
 function buildSvgForKanji(strokes) {
   const ns = "http://www.w3.org/2000/svg";
   const s = document.createElementNS(ns, "svg");
@@ -412,10 +468,14 @@ function attachTraceHandlers(svgEl, strokes) {
               if (!kanjiCompleted) return;
               move(1);
             }, AUTO_NEXT_DELAY_MS);
-          } else {
-            // 最後まで終わった（ここは後で「はなまる」演出に置き換えでOK）
-            // いったん次ボタンは無効のまま
-          }
+          }  else {
+                      // ✅ 最終クリア：はなまる演出
+                      kanjiCompleted = true;
+                      showHanamaru(svgEl);
+            
+                      // ここではまだ次へ進まない（余韻）
+                      // 次のステップで「もういちど / つぎの5もじ」などを出せる
+                    }
         }
      } else {
       // ✅ 失敗演出
