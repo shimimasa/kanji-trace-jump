@@ -66,6 +66,10 @@ let strokeIndex = 0; // 今なぞるべきストローク
 let done = []; // boolean[]
 let svg = null;
 
+// 1文字クリア後の自動進行（演出の余韻用）
+const AUTO_NEXT_DELAY_MS = 650;
+let kanjiCompleted = false;
+
 // トレース中
 let drawing = false;
 let points = [];
@@ -128,6 +132,7 @@ function move(delta) {
 
 function render() {
   clearError();
+  kanjiCompleted = false;
 
   const item = items[idx];
   const k = item?.kanji ?? "?";
@@ -336,6 +341,7 @@ function attachTraceHandlers(svgEl, strokes) {
   if (tracePathEl) tracePathEl.setAttribute("d", "");
 
   const onDown = (e) => {
+    if (kanjiCompleted) return;
     if (e.button != null && e.button !== 0) return;
 
     // 開始点がストローク始点に近いかもチェック（雑にスタートだけ正す）
@@ -384,17 +390,33 @@ function attachTraceHandlers(svgEl, strokes) {
       done[strokeIndex] = true;
       strokeIndex++;
 
-      if (strokeIndex >= strokes.length) {
-        // 1文字完了：最後の状態を表示として固定
-        strokeIndex = strokes.length - 1;
-      }
-
       refreshSvgStates(svgEl, strokes);
       renderStrokeButtons(strokes.length);
       // ✅ 成功演出
       pulse(svgEl);
       spawnSparks(svgEl, lastPoint || centroidOfPolyline(strokes[Math.max(0, strokeIndex - 1)]));
       playSuccessSfx();
+       // ✅ 1文字（全画）クリア → 自動で次の漢字へ
+      if (strokeIndex >= strokes.length) {
+          kanjiCompleted = true;
+  
+          // 表示としては「最後の画」を維持（activeが配列外参照しないように）
+          strokeIndex = strokes.length - 1;
+          refreshSvgStates(svgEl, strokes);
+          renderStrokeButtons(strokes.length);
+  
+          // 次があるなら少し待って自動で進む
+          if (idx < items.length - 1) {
+            setTimeout(() => {
+              // 途中で手動で移動されていたら二重遷移しない
+              if (!kanjiCompleted) return;
+              move(1);
+            }, AUTO_NEXT_DELAY_MS);
+          } else {
+            // 最後まで終わった（ここは後で「はなまる」演出に置き換えでOK）
+            // いったん次ボタンは無効のまま
+          }
+        }
      } else {
       // ✅ 失敗演出
       shake(svgEl);
