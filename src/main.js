@@ -400,6 +400,9 @@ function showHanamaru(svgEl) {
   playTone(880, 0.08, "sine", 0.06);
   setTimeout(() => playTone(1175, 0.1, "sine", 0.05), 90);
 
+
+  // ✅ 星も同時にキラる（連動）
+  sparkleStars();
   // 1.2秒後に消す（次の遷移用）
   setTimeout(() => {
     g.remove();
