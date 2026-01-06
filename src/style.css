@@ -1,169 +1,172 @@
-:root {
-  --bg: #f3f7fa;
-  --text: #111;
-  --muted: rgba(0, 0, 0, 0.35);
-  --btn: #e7eaee;
-  --btnText: #111;
-  --strokeBase: rgba(0, 0, 0, 0.12);
-  --strokeHit: rgba(0, 0, 0, 0.18);
-  --strokeActive: rgba(0, 0, 0, 0.45);
+/* src/style.css */
+
+:root{
+  --bg: #eef3f6;
+  --text: rgba(0,0,0,0.85);
+  --muted: rgba(0,0,0,0.55);
+  --panel: rgba(255,255,255,0.75);
+  --border: rgba(0,0,0,0.15);
+  --shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
 
-* {
-  box-sizing: border-box;
-}
+*{ box-sizing: border-box; }
 
-html,
-body {
+html, body{
   height: 100%;
 }
 
-body {
+body{
   margin: 0;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans JP", sans-serif;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN",
+               "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
   background: var(--bg);
   color: var(--text);
-  overflow: hidden;
 }
 
-#app {
+#app{
   height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 16px;
-  padding: 18px 18px 22px;
 }
 
-.hud {
+/* 全体レイアウト */
+.app-shell{
+  min-height: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
 }
 
-.stars {
+/* ヘッダー：左に星、右上に目標 */
+.hud{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+}
+
+.stars{
   font-size: 28px;
   letter-spacing: 2px;
 }
 
-.goal {
-  font-size: 22px;
+.goal{
+  font-size: 26px;
+  font-weight: 600;
 }
 
-.center {
-  display: grid;
-  place-items: center;
-  gap: 18px;
-}
-
-.titleRow {
-  width: 100%;
-  display: grid;
-  place-items: center;
-}
-
-.kanjiTitle {
-  font-size: 28px;
-  letter-spacing: 1px;
-  user-select: none;
-  transform-origin: center;
-}
-
-.kanjiTitle.pulse {
-  animation: pulse 180ms ease-out;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  60% {
-    transform: scale(1.12);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-/* ★ iPadでスクロールやジェスチャーに奪われないようにする */
-.svgWrap {
-  touch-action: none;
-
-  width: min(92vw, 900px);
-  height: min(58vh, 520px);
-  display: grid;
-  place-items: center;
-}
-
-.svgWrap svg {
-  width: 100%;
-  height: 100%;
-  touch-action: none;
-}
-
-/* Day2：薄い全ストローク（背景） */
-.strokeBase {
-  fill: none;
-  stroke: var(--strokeBase);
-  stroke-width: 18;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-/* 見える線（当たりストローク） */
-.strokeHit {
-  fill: none;
-  stroke: var(--strokeHit);
-  stroke-width: 22;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: stroke 120ms ease;
-}
-
-/* 押している間だけ濃くする */
-.strokeHit.strokeActive {
-  stroke: var(--strokeActive);
-}
-
-/* 当たり判定（透明） */
-.strokeTouch {
-  fill: none;
-  stroke: rgba(0, 0, 0, 0);
-  stroke-width: 60;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  cursor: pointer;
-}
-
-/* ボタン */
-.controls {
+/* メイン */
+.main{
+  flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 14px;
+  padding: 10px 20px 0;
 }
 
-.btn {
-  appearance: none;
-  border: none;
-  background: var(--btn);
-  color: var(--btnText);
-  padding: 16px 30px;
-  border-radius: 16px;
-  font-size: 22px;
+.kanji-title{
+  font-size: 26px;
+  letter-spacing: 1px;
+  color: var(--text);
+  text-align: center;
+}
+
+/* 漢字の巨大表示 */
+.kanji-display{
+  width: 100%;
+  height: min(52vh, 560px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(120px, 28vw, 380px);
+  line-height: 1;
+  color: rgba(0,0,0,0.35);
+  user-select: none;
+}
+
+/* ストロークボタン */
+.stroke-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: min(720px, 100%);
+  padding: 6px 0;
+}
+
+.stroke-btn{
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.btn:active {
+.stroke-btn:active{
   transform: translateY(1px);
 }
 
-/* メッセージ */
-.msg {
-  font-size: 18px;
+.stroke-btn.done{
+  background: rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.22);
+}
+
+.stroke-btn.shake{
+  animation: shake 140ms linear 2;
+}
+
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-4px)}
+  50%{transform:translateX(4px)}
+  75%{transform:translateX(-4px)}
+  100%{transform:translateX(0)}
+}
+
+.message{
+  min-height: 22px;
+  font-size: 16px;
   color: var(--muted);
 }
 
-/* デバッグ表示 */
-.debugKey {
-  margin-top: 8px;
-  font-size: 14px;
-  color: var(--muted);
+/* フッター：ナビボタン */
+.footer{
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  padding: 18px 20px 28px;
+}
+
+.nav-btn{
+  width: 140px;
+  height: 64px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.7);
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-btn:disabled{
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* 小さめ画面調整 */
+@media (max-width: 520px){
+  .stars{ font-size: 22px; }
+  .goal{ font-size: 20px; }
+  .kanji-title{ font-size: 20px; }
+  .nav-btn{
+    width: 128px;
+    height: 58px;
+    font-size: 20px;
+  }
 }
