@@ -1,172 +1,245 @@
 /* src/style.css */
 
 :root{
-  --bg: #eef3f6;
-  --text: rgba(0,0,0,0.85);
-  --muted: rgba(0,0,0,0.55);
-  --panel: rgba(255,255,255,0.75);
-  --border: rgba(0,0,0,0.15);
-  --shadow: 0 10px 30px rgba(0,0,0,0.06);
+  --bg:#eef3f6;
+  --text:#111;
+  --muted:#5b6470;
+  --card:#ffffff;
+  --shadow: 0 8px 22px rgba(0,0,0,.08);
 }
 
-*{ box-sizing: border-box; }
-
-html, body{
+html, body {
   height: 100%;
 }
 
 body{
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN",
-               "Hiragino Sans", "Noto Sans JP", "Yu Gothic", sans-serif;
+  margin:0;
   background: var(--bg);
   color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, Arial, sans-serif;
+  overflow-x:hidden;
 }
 
 #app{
-  height: 100%;
+  min-height:100vh;
 }
 
-/* 全体レイアウト */
-.app-shell{
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
+.app{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  padding: 18px 22px 22px;
+  box-sizing:border-box;
 }
 
-/* ヘッダー：左に星、右上に目標 */
 .hud{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-weight:700;
 }
 
 .stars{
-  font-size: 28px;
-  letter-spacing: 2px;
+  font-size:34px;
+  letter-spacing:2px;
+  user-select:none;
 }
 
-.goal{
-  font-size: 26px;
-  font-weight: 600;
+.objective{
+  font-size:30px;
+  user-select:none;
 }
 
-/* メイン */
-.main{
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-  padding: 10px 20px 0;
+.titleRow{
+  display:flex;
+  justify-content:center;
+  margin-top: 18px;
+  margin-bottom: 10px;
 }
 
-.kanji-title{
-  font-size: 26px;
-  letter-spacing: 1px;
-  color: var(--text);
-  text-align: center;
+.kanjiTitle{
+  font-size:30px;
+  font-weight:800;
+  user-select:none;
 }
 
-/* 漢字の巨大表示 */
-.kanji-display{
-  width: 100%;
-  height: min(52vh, 560px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(120px, 28vw, 380px);
-  line-height: 1;
-  color: rgba(0,0,0,0.35);
-  user-select: none;
-}
-
-/* ストロークボタン */
-.stroke-buttons{
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  width: min(720px, 100%);
-  padding: 6px 0;
-}
-
-.stroke-btn{
-  width: 46px;
-  height: 46px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  box-shadow: var(--shadow);
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.stroke-btn:active{
-  transform: translateY(1px);
-}
-
-.stroke-btn.done{
-  background: rgba(0,0,0,0.08);
-  border-color: rgba(0,0,0,0.22);
-}
-
-.stroke-btn.shake{
-  animation: shake 140ms linear 2;
-}
-
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-4px)}
-  50%{transform:translateX(4px)}
-  75%{transform:translateX(-4px)}
-  100%{transform:translateX(0)}
-}
-
-.message{
-  min-height: 22px;
-  font-size: 16px;
+.kanjiTitle .progressLabel{
+  margin-left: 10px;
+  font-weight:700;
   color: var(--muted);
 }
 
-/* フッター：ナビボタン */
-.footer{
-  display: flex;
-  justify-content: center;
-  gap: 18px;
-  padding: 18px 20px 28px;
+.stage{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height: 420px;
 }
 
-.nav-btn{
-  width: 140px;
-  height: 64px;
-  border-radius: 16px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.7);
-  font-size: 22px;
-  font-weight: 700;
+.svgWrap{
+  width:min(740px, 92vw);
+  aspect-ratio: 1 / 1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.kanjiSvg{
+  width:100%;
+  height:100%;
+  display:block;
+  touch-action:none; /* pointer events */
+}
+
+.layer{
+  pointer-events:none;
+}
+
+/* strokes */
+.strokeBase{
+  fill:none;
+  stroke: rgba(0,0,0,.18);
+  stroke-width: 7.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.strokeBase.hint{
+  stroke: rgba(0,0,0,.35);
+  stroke-width: 10.5;
+}
+
+.strokeDone{
+  fill:none;
+  stroke: rgba(0,0,0,.36);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.strokeActive{
+  fill:none;
+  stroke: rgba(0,0,0,.45);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events:none;
+}
+
+.strokeHit{
+  fill:none;
+  stroke: rgba(0,0,0,0); /* invisible */
+  stroke-width: 28;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: stroke;
   cursor: pointer;
+}
+
+.tracePath{
+  fill:none;
+  stroke: rgba(0,0,0,.62);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events:none;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.10));
+}
+
+.tracePath.good{
+  stroke: rgba(0,0,0,.75);
+}
+
+.tracePath.bad{
+  stroke: rgba(200,0,0,.55);
+}
+
+/* dots */
+.strokeDots{
+  display:flex;
+  gap: 14px;
+  justify-content:center;
+  align-items:center;
+  margin: 10px 0 12px;
+}
+
+.dot{
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 2px solid rgba(0,0,0,.25);
+  background: rgba(255,255,255,.6);
   box-shadow: var(--shadow);
-  -webkit-tap-highlight-color: transparent;
+  font-size: 18px;
+  font-weight: 800;
+  user-select:none;
+  cursor:pointer;
 }
 
-.nav-btn:disabled{
-  opacity: 0.55;
-  cursor: not-allowed;
+.dot.active{
+  border-color: rgba(0,0,0,.55);
+  background: rgba(255,255,255,.92);
 }
 
-/* 小さめ画面調整 */
+.dot.done{
+  border-color: rgba(0,0,0,.55);
+  background: rgba(255,255,255,.92);
+}
+
+.nav{
+  display:flex;
+  gap: 18px;
+  justify-content:center;
+  margin-top: 10px;
+  padding-bottom: 6px;
+}
+
+.btn{
+  min-width: 150px;
+  height: 78px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.14);
+  background: rgba(255,255,255,.70);
+  box-shadow: var(--shadow);
+  font-size: 28px;
+  font-weight: 800;
+  cursor:pointer;
+}
+
+.btn:disabled{
+  opacity: .45;
+  cursor:not-allowed;
+}
+
+.btn.primary{
+  background: rgba(255,255,255,.92);
+  border-color: rgba(0,0,0,.25);
+}
+
+.status{
+  text-align:center;
+  min-height: 28px;
+  margin-top: 10px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.status[data-kind="error"]{
+  color: #b00020;
+}
+.status[data-kind="warn"]{
+  color: #7a4b00;
+}
+.status[data-kind="ok"]{
+  color: #0b6b2c;
+}
+
 @media (max-width: 520px){
-  .stars{ font-size: 22px; }
-  .goal{ font-size: 20px; }
-  .kanji-title{ font-size: 20px; }
-  .nav-btn{
-    width: 128px;
-    height: 58px;
-    font-size: 20px;
-  }
+  .stars{ font-size: 26px; }
+  .objective{ font-size: 22px; }
+  .kanjiTitle{ font-size: 22px; }
+  .btn{ min-width: 132px; height: 70px; font-size: 24px; }
+  .dot{ width: 46px; height: 46px; }
 }
+
