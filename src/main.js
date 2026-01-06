@@ -425,26 +425,37 @@ const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上�
     setCharPos(svgEl, p);
   }
   
-  function charJumpTo(svgEl, to) {
-    const c = ensureChar(svgEl);
-    const from = getCharPos(svgEl);
-    const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 - 8 };
   
-    // 既存アニメが残っていても見た目破綻しないように
-    c.getAnimations().forEach((a) => a.cancel());
-  
-    c.animate(
-      [
-        { transform: `translate(${from.x}px,${from.y}px) scale(1,1)` },
-        { transform: `translate(${mid.x}px,${mid.y}px) scale(1.12,0.92)` },
-        { transform: `translate(${to.x}px,${to.y}px) scale(1,1)` },
-      ],
-      { duration: 420, easing: "ease-out", fill: "forwards" }
-    );
+ function charJumpTo(svgEl, to) {
+   const c = ensureChar(svgEl);
+   const from = getCharPos(svgEl);
+   const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 - 8 };
+ 
+   // 既存アニメが残っていても見た目破綻しないように
+   c.getAnimations().forEach((a) => a.cancel());
 
-    // 最終位置を確定
-    setTimeout(() => setCharPos(svgEl, to), 430);
-  }
+  // ✅ ジャンプ中：少し大きく（1.08）／着地：ぷにっと潰す
+  // ✅ 落下 → 復帰 → 着地ぷにっ
+  c.animate(
+      [
+        // 0%: その場
+        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
+        // 45%: 落下（縦に伸びる）
+        { transform: `translate(${down.x}px,${down.y}px) scale(0.92,1.10)` },
+        // 78%: 元の位置に戻る
+        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
+        // 90%: ぷにっ（横に広がる）
+        { transform: `translate(${base.x}px,${base.y}px) scale(1.12,0.88)` },
+        // 100%: 戻る
+        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
+      ],
+      { duration: 520, easing: "ease-out", fill: "forwards" }
+    );
+   // 最終位置を確定
+  setTimeout(() => setCharPos(svgEl, to), 540);
+ }
+
+  
   
   function charFailDrop(svgEl) {
     const c = ensureChar(svgEl);
