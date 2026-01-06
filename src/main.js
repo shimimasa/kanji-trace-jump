@@ -1,40 +1,45 @@
 // src/main.js
 // 目的：SVGストロークを「なぞる」ことで書き順どおりに進める
-// 修正点：Pointer Capture を導入し、ドラッグ中の pointermove 取りこぼしを防止
+// 重要：Vite本番でCSS/JSONパスが壊れないように BASE_URL を使う
+// 重要：Pointer Capture でドラッグ中の pointermove 取りこぼしを防止
 
-const DATA_PATH = "/data/kanji_g1_min5.json"; // public/data 配下
+import "./style.css";
+
+// Viteのbase（例: "/" or "/kanji-trace-jump/"）を考慮して public/ 配下を読む
+const BASE = import.meta.env.BASE_URL || "/";
+const DATA_PATH = new URL("data/kanji_g1_min5.json", BASE).toString(); // public/data 配下
 
 // 5文字（あなたの現状）を SVG ストローク（ポリライン）で再現
 // 座標系は viewBox="0 0 100 100"
 const SVG_STROKES = {
-  "木": [
+  木: [
     [{ x: 20, y: 30 }, { x: 80, y: 30 }], // ①横
     [{ x: 50, y: 12 }, { x: 50, y: 88 }], // ②縦
     [{ x: 50, y: 52 }, { x: 25, y: 85 }], // ③左はらい
     [{ x: 50, y: 52 }, { x: 75, y: 85 }], // ④右はらい
   ],
-  "山": [
+  山: [
     [{ x: 30, y: 18 }, { x: 30, y: 82 }], // ①左たて
     [{ x: 50, y: 28 }, { x: 50, y: 82 }, { x: 70, y: 82 }], // ②中たて→下よこ（まとめ）
     [{ x: 70, y: 18 }, { x: 70, y: 82 }], // ③右たて
   ],
-  "川": [
+  川: [
     [{ x: 34, y: 18 }, { x: 34, y: 82 }], // ①左
     [{ x: 50, y: 18 }, { x: 50, y: 82 }], // ②中
     [{ x: 66, y: 18 }, { x: 66, y: 82 }], // ③右
   ],
-  "口": [
+  口: [
     [{ x: 28, y: 30 }, { x: 72, y: 30 }], // ①上よこ
     [{ x: 28, y: 30 }, { x: 28, y: 72 }], // ②左たて
     [{ x: 72, y: 30 }, { x: 72, y: 72 }, { x: 28, y: 72 }], // ③右たて→下よこ
   ],
-  "人": [
+  人: [
     [{ x: 54, y: 22 }, { x: 36, y: 82 }], // ①左はらい
     [{ x: 54, y: 22 }, { x: 74, y: 82 }], // ②右はらい
   ],
 };
 
-const TOLERANCE = 10; // 近い判定（px相当：viewBox 100基準）
+const TOLERANCE = 10; // 近い判定（viewBox 100基準）
 const START_TOL = 14; // 書き始めの近さ
 const MIN_HIT_RATE = 0.7; // これ以上の割合が線に近ければ成功
 const MIN_DRAW_LEN_RATE = 0.45; // これ以上描いていれば成功（線長比）
@@ -75,6 +80,9 @@ async function boot() {
     showError("データなし");
     items = fallbackItems();
   }
+
+  // モード表示は固定（必要なら items.length に合わせてもOK）
+  if (elMode) elMode.textContent = "もくひょう：5もじ";
 
   elPrev.addEventListener("click", () => move(-1));
   elNext.addEventListener("click", () => move(1));
@@ -119,16 +127,12 @@ function render() {
   const item = items[idx];
   const k = item?.kanji ?? "?";
 
-  // stars
   renderStars(idx, items.length);
 
-  // label
   elLabel.textContent = `${k} (${idx + 1}/${items.length})`;
 
-  // strokes definition
   const strokes = SVG_STROKES[k];
   if (!strokes) {
-    // svgが無い場合は表示だけ（将来拡張用）
     elArea.innerHTML = `<div style="font-size:96px; opacity:.35; font-weight:700;">${escapeHtml(k)}</div>`;
     elStrokeButtons.innerHTML = "";
     elPrev.disabled = idx === 0;
@@ -136,24 +140,18 @@ function render() {
     return;
   }
 
-  // init done
   done = new Array(strokes.length).fill(false);
   strokeIndex = 0;
 
-  // buttons
   renderStrokeButtons(strokes.length);
 
-  // svg build
   elArea.innerHTML = "";
   svg = buildSvgForKanji(strokes);
   elArea.appendChild(svg);
 
-  // controls
   elPrev.disabled = idx === 0;
-  // 「つぎ」は全ストローク完了 or 最終ページなら disabled の運用にしたいなら変更可
   elNext.disabled = idx === items.length - 1;
 
-  // attach trace logic
   attachTraceHandlers(svg, strokes);
 
   pulse(svg);
@@ -176,13 +174,10 @@ function renderStrokeButtons(n) {
     b.className = "strokeBtn";
     b.textContent = String(i + 1);
 
-    // 今のストロークだけ強調
     if (i === strokeIndex) b.classList.add("active");
-
-    // 既に終わったもの
     if (done[i]) b.classList.add("done");
 
-    // ユーザーが勝手に飛ばせないように、ボタン自体は無効（表示だけ）
+    // 表示のみ（飛ばし防止）
     b.disabled = true;
 
     elStrokeButtons.appendChild(b);
@@ -196,25 +191,23 @@ function buildSvgForKanji(strokes) {
   s.setAttribute("class", "kanjiSvg");
   s.setAttribute("aria-label", "漢字ストローク");
 
-  // 各ストローク（ベース表示）
+  // ベース（薄いグレー）
   strokes.forEach((poly, i) => {
     const p = document.createElementNS(ns, "path");
     p.setAttribute("d", polyToPathD(poly));
     p.dataset.strokeIndex = String(i);
-
-    // ベースは薄いグレー
     p.setAttribute("class", "stroke-base");
     s.appendChild(p);
   });
 
-  // 現在ストロークを濃く表示するためのオーバーレイ
+  // 現在ストローク強調（濃い）
   const active = document.createElementNS(ns, "path");
   active.setAttribute("class", "stroke-active");
   active.setAttribute("d", polyToPathD(strokes[0]));
   active.dataset.role = "active";
   s.appendChild(active);
 
-  // クリック当たり判定（見えない太線）
+  // 当たり判定（透明の太線）
   strokes.forEach((poly, i) => {
     const hit = document.createElementNS(ns, "path");
     hit.setAttribute("d", polyToPathD(poly));
@@ -223,7 +216,7 @@ function buildSvgForKanji(strokes) {
     s.appendChild(hit);
   });
 
-  // トレース線（ユーザーがなぞっている軌跡）
+  // ユーザーの軌跡
   tracePathEl = document.createElementNS(ns, "path");
   tracePathEl.setAttribute("class", "trace-line");
   tracePathEl.setAttribute("d", "");
@@ -234,31 +227,29 @@ function buildSvgForKanji(strokes) {
 }
 
 function attachTraceHandlers(svgEl, strokes) {
-  // 重要：前回の trace をリセット
   drawing = false;
   points = [];
   if (tracePathEl) tracePathEl.setAttribute("d", "");
 
   const onDown = (e) => {
-    // 右クリック等除外
     if (e.button != null && e.button !== 0) return;
 
-    // 書き順：いまの strokeIndex 以外の線の上で開始したら無視
+    // 「stroke-hit」の上でしか開始させない（active/trace/baseに当たっても無視）
     const targetStroke = getStrokeIndexFromEvent(e);
     if (targetStroke !== strokeIndex) return;
 
+    // 開始点がストローク始点に近いかもチェック（雑にスタートだけ正す）
+    const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
+    const s0 = strokes[strokeIndex][0];
+    if (dist(p0, s0) > START_TOL) return;
+
     drawing = true;
-    points = [];
-    const p = toSvgPoint(svgEl, e.clientX, e.clientY);
-    points.push(p);
+    points = [p0];
     updateTracePath(points);
 
-    // ★ここが肝：ドラッグ中にSVG外へ少し出ても move を拾える
     try {
       svgEl.setPointerCapture(e.pointerId);
-    } catch (_) {
-      // 一部環境で失敗しても動作は継続
-    }
+    } catch (_) {}
 
     e.preventDefault();
   };
@@ -275,13 +266,13 @@ function attachTraceHandlers(svgEl, strokes) {
     if (!drawing) return;
     drawing = false;
 
-    // Pointer Capture解除
     try {
       svgEl.releasePointerCapture(e.pointerId);
     } catch (_) {}
 
     const ok = judgeTrace(points, strokes[strokeIndex]);
-    // トレース線は毎回消す（残したいなら消さなくてOK）
+
+    // 軌跡は毎回消す
     points = [];
     updateTracePath(points);
 
@@ -290,17 +281,14 @@ function attachTraceHandlers(svgEl, strokes) {
       strokeIndex++;
 
       if (strokeIndex >= strokes.length) {
-        // 1文字完了：自動で次へ進めたいならここで move(1)
-        // 今は「つぎ」ボタンで進む運用にしておく
-        strokeIndex = strokes.length - 1; // 末尾に固定表示
+        // 1文字完了：最後の状態を表示として固定
+        strokeIndex = strokes.length - 1;
       }
 
-      // UI更新
       refreshSvgStates(svgEl, strokes);
       renderStrokeButtons(strokes.length);
       pulse(svgEl);
     } else {
-      // 不正解：軽いフィードバック
       shake(svgEl);
     }
 
@@ -314,7 +302,6 @@ function attachTraceHandlers(svgEl, strokes) {
 }
 
 function refreshSvgStates(svgEl, strokes) {
-  // done stroke: stroke-base を濃くする（または別クラスに）
   const basePaths = Array.from(svgEl.querySelectorAll("path.stroke-base"));
   basePaths.forEach((p) => {
     const i = Number(p.dataset.strokeIndex);
@@ -322,7 +309,6 @@ function refreshSvgStates(svgEl, strokes) {
     else p.classList.remove("done");
   });
 
-  // active overlay
   const active = svgEl.querySelector('path[data-role="active"]');
   if (!active) return;
 
@@ -333,6 +319,11 @@ function refreshSvgStates(svgEl, strokes) {
 function getStrokeIndexFromEvent(e) {
   const t = e.target;
   if (!t) return null;
+
+  // stroke-hit 以外は対象外
+  if (!(t instanceof SVGPathElement)) return null;
+  if (!t.classList.contains("stroke-hit")) return null;
+
   const ds = t.dataset?.strokeIndex;
   if (ds == null) return null;
   const n = Number(ds);
@@ -351,17 +342,14 @@ function updateTracePath(pts) {
 function judgeTrace(drawnPoints, strokePoly) {
   if (!drawnPoints || drawnPoints.length < 6) return false;
 
-  // start near
   const start = drawnPoints[0];
   const s0 = strokePoly[0];
   if (dist(start, s0) > START_TOL) return false;
 
-  // 描画の長さが短すぎると不合格
   const strokeLen = polyLength(strokePoly);
   const drawnLen = polyLength(drawnPoints);
   if (strokeLen <= 0 || drawnLen < strokeLen * MIN_DRAW_LEN_RATE) return false;
 
-  // 点が線に近い割合
   let hit = 0;
   for (const p of drawnPoints) {
     const d = distancePointToPolyline(p, strokePoly);
@@ -383,7 +371,10 @@ function toSvgPoint(svgEl, clientX, clientY) {
 function polyToPathD(poly) {
   if (!poly || poly.length === 0) return "";
   const [p0, ...rest] = poly;
-  return `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)} ` + rest.map((p) => `L ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ");
+  return (
+    `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)} ` +
+    rest.map((p) => `L ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ")
+  );
 }
 
 function polyLength(poly) {
@@ -436,12 +427,21 @@ function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  return String(s).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;",
+      })[c]
+  );
 }
 function pulse(el) {
   if (!el) return;
   el.classList.remove("tracePulse");
-  // reflow
   void el.offsetWidth;
   el.classList.add("tracePulse");
 }
@@ -459,4 +459,3 @@ function shake(el) {
     { duration: 180, easing: "ease-out" }
   );
 }
-
