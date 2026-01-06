@@ -1,404 +1,462 @@
-// =========================
-// 5漢字のSVGパス（固定内蔵）
-//  - viewBox: 0 0 100 100
-//  - 1画が複数のM（サブパス）を含む場合あり → 自動分割して順番に判定する
-// =========================
-const SVG_DB = {
+// src/main.js
+// 目的：SVGストロークを「なぞる」ことで書き順どおりに進める
+// 修正点：Pointer Capture を導入し、ドラッグ中の pointermove 取りこぼしを防止
+
+const DATA_PATH = "/data/kanji_g1_min5.json"; // public/data 配下
+
+// 5文字（あなたの現状）を SVG ストローク（ポリライン）で再現
+// 座標系は viewBox="0 0 100 100"
+const SVG_STROKES = {
   "木": [
-    "M20 35 L80 35", // ① よこ
-    "M50 15 L50 85", // ② たて
-    "M48 55 L25 85", // ③ ひだりはらい
-    "M52 55 L75 85", // ④ みぎはらい
+    [{ x: 20, y: 30 }, { x: 80, y: 30 }], // ①横
+    [{ x: 50, y: 12 }, { x: 50, y: 88 }], // ②縦
+    [{ x: 50, y: 52 }, { x: 25, y: 85 }], // ③左はらい
+    [{ x: 50, y: 52 }, { x: 75, y: 85 }], // ④右はらい
   ],
   "山": [
-    "M30 20 L30 82", // ① 左たて
-    "M50 12 L50 88", // ② 中たて
-    // ③ 右たて＋下よこ（1画を2サブパスにして「完全再現」）
-    "M70 20 L70 82 M30 82 L70 82",
+    [{ x: 30, y: 18 }, { x: 30, y: 82 }], // ①左たて
+    [{ x: 50, y: 28 }, { x: 50, y: 82 }, { x: 70, y: 82 }], // ②中たて→下よこ（まとめ）
+    [{ x: 70, y: 18 }, { x: 70, y: 82 }], // ③右たて
   ],
   "川": [
-    "M32 18 L32 88", // ① 左
-    "M50 12 L50 92", // ② 中
-    "M68 18 L68 88", // ③ 右
+    [{ x: 34, y: 18 }, { x: 34, y: 82 }], // ①左
+    [{ x: 50, y: 18 }, { x: 50, y: 82 }], // ②中
+    [{ x: 66, y: 18 }, { x: 66, y: 82 }], // ③右
   ],
   "口": [
-    // ① たて＋よこ（コの字）＝上よこ＋左たて（この1画は2サブパス）
-    "M30 25 L70 25 M30 25 L30 75",
-    "M70 25 L70 75", // ② 右たて
-    "M30 75 L70 75", // ③ 下よこ
+    [{ x: 28, y: 30 }, { x: 72, y: 30 }], // ①上よこ
+    [{ x: 28, y: 30 }, { x: 28, y: 72 }], // ②左たて
+    [{ x: 72, y: 30 }, { x: 72, y: 72 }, { x: 28, y: 72 }], // ③右たて→下よこ
   ],
   "人": [
-    "M52 25 L35 85", // ① ひだりはらい
-    "M52 25 L70 85", // ② みぎはらい
+    [{ x: 54, y: 22 }, { x: 36, y: 82 }], // ①左はらい
+    [{ x: 54, y: 22 }, { x: 74, y: 82 }], // ②右はらい
   ],
 };
 
-// =========================
-// ユーティリティ
-// =========================
-function el(id) {
-  return document.getElementById(id);
+const TOLERANCE = 10; // 近い判定（px相当：viewBox 100基準）
+const START_TOL = 14; // 書き始めの近さ
+const MIN_HIT_RATE = 0.7; // これ以上の割合が線に近ければ成功
+const MIN_DRAW_LEN_RATE = 0.45; // これ以上描いていれば成功（線長比）
+
+// DOM
+const elStars = document.getElementById("stars");
+const elMode = document.getElementById("mode");
+const elLabel = document.getElementById("kanjiLabel");
+const elArea = document.getElementById("kanjiArea");
+const elStrokeButtons = document.getElementById("strokeButtons");
+const elPrev = document.getElementById("prevBtn");
+const elNext = document.getElementById("nextBtn");
+const elError = document.getElementById("error");
+
+let items = []; // データ読み込み
+let idx = 0;
+
+let strokeIndex = 0; // 今なぞるべきストローク
+let done = []; // boolean[]
+let svg = null;
+
+// トレース中
+let drawing = false;
+let points = [];
+let tracePathEl = null;
+
+boot();
+
+async function boot() {
+  try {
+    items = await loadData();
+  } catch (e) {
+    showError(`データ読み込み失敗: ${String(e?.message ?? e)}`);
+    items = fallbackItems();
+  }
+
+  if (!Array.isArray(items) || items.length === 0) {
+    showError("データなし");
+    items = fallbackItems();
+  }
+
+  elPrev.addEventListener("click", () => move(-1));
+  elNext.addEventListener("click", () => move(1));
+
+  render();
 }
 
-function clamp(v, a, b) {
-  return Math.max(a, Math.min(b, v));
+async function loadData() {
+  const res = await fetch(DATA_PATH, { cache: "no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status} (${DATA_PATH})`);
+  const json = await res.json();
+
+  // 期待：配列 [{kanji:"木", strokesCount:4}, ...]
+  if (Array.isArray(json)) return json;
+
+  // もし {items:[...]} 形式なら吸収
+  if (json && Array.isArray(json.items)) return json.items;
+
+  throw new Error("JSON形式が想定と違います（配列でも items でもない）");
 }
 
-// "M ... M ..." をサブパスに分割して配列化
-function splitSubpaths(d) {
-  const s = d.trim();
-  if (!s) return [];
-  // "M"で分割。ただし先頭もMなので空要素が出る
-  const parts = s.split(/(?=M)/g).map((p) => p.trim()).filter(Boolean);
-  return parts;
+function fallbackItems() {
+  return [
+    { kanji: "木", strokesCount: 4 },
+    { kanji: "山", strokesCount: 3 },
+    { kanji: "川", strokesCount: 3 },
+    { kanji: "口", strokesCount: 3 },
+    { kanji: "人", strokesCount: 2 },
+  ];
 }
 
-// SVG path 上の最近傍距離（サンプリングで近似）
-function approxMinDistanceToPath(pathEl, px, py) {
-  const total = pathEl.getTotalLength();
-  if (!isFinite(total) || total <= 0) return Infinity;
-  const steps = 60;
+function move(delta) {
+  idx = clamp(idx + delta, 0, items.length - 1);
+  strokeIndex = 0;
+  done = [];
+  render();
+}
+
+function render() {
+  clearError();
+
+  const item = items[idx];
+  const k = item?.kanji ?? "?";
+
+  // stars
+  renderStars(idx, items.length);
+
+  // label
+  elLabel.textContent = `${k} (${idx + 1}/${items.length})`;
+
+  // strokes definition
+  const strokes = SVG_STROKES[k];
+  if (!strokes) {
+    // svgが無い場合は表示だけ（将来拡張用）
+    elArea.innerHTML = `<div style="font-size:96px; opacity:.35; font-weight:700;">${escapeHtml(k)}</div>`;
+    elStrokeButtons.innerHTML = "";
+    elPrev.disabled = idx === 0;
+    elNext.disabled = idx === items.length - 1;
+    return;
+  }
+
+  // init done
+  done = new Array(strokes.length).fill(false);
+  strokeIndex = 0;
+
+  // buttons
+  renderStrokeButtons(strokes.length);
+
+  // svg build
+  elArea.innerHTML = "";
+  svg = buildSvgForKanji(strokes);
+  elArea.appendChild(svg);
+
+  // controls
+  elPrev.disabled = idx === 0;
+  // 「つぎ」は全ストローク完了 or 最終ページなら disabled の運用にしたいなら変更可
+  elNext.disabled = idx === items.length - 1;
+
+  // attach trace logic
+  attachTraceHandlers(svg, strokes);
+
+  pulse(svg);
+}
+
+function renderStars(current, total) {
+  const max = 5;
+  const ratio = total <= 1 ? 1 : current / (total - 1);
+  const filled = Math.round(ratio * (max - 1)) + 1; // 1〜5
+  const s = [];
+  for (let i = 0; i < max; i++) s.push(i < filled ? "★" : "☆");
+  elStars.textContent = s.join("");
+}
+
+function renderStrokeButtons(n) {
+  elStrokeButtons.innerHTML = "";
+  for (let i = 0; i < n; i++) {
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "strokeBtn";
+    b.textContent = String(i + 1);
+
+    // 今のストロークだけ強調
+    if (i === strokeIndex) b.classList.add("active");
+
+    // 既に終わったもの
+    if (done[i]) b.classList.add("done");
+
+    // ユーザーが勝手に飛ばせないように、ボタン自体は無効（表示だけ）
+    b.disabled = true;
+
+    elStrokeButtons.appendChild(b);
+  }
+}
+
+function buildSvgForKanji(strokes) {
+  const ns = "http://www.w3.org/2000/svg";
+  const s = document.createElementNS(ns, "svg");
+  s.setAttribute("viewBox", "0 0 100 100");
+  s.setAttribute("class", "kanjiSvg");
+  s.setAttribute("aria-label", "漢字ストローク");
+
+  // 各ストローク（ベース表示）
+  strokes.forEach((poly, i) => {
+    const p = document.createElementNS(ns, "path");
+    p.setAttribute("d", polyToPathD(poly));
+    p.dataset.strokeIndex = String(i);
+
+    // ベースは薄いグレー
+    p.setAttribute("class", "stroke-base");
+    s.appendChild(p);
+  });
+
+  // 現在ストロークを濃く表示するためのオーバーレイ
+  const active = document.createElementNS(ns, "path");
+  active.setAttribute("class", "stroke-active");
+  active.setAttribute("d", polyToPathD(strokes[0]));
+  active.dataset.role = "active";
+  s.appendChild(active);
+
+  // クリック当たり判定（見えない太線）
+  strokes.forEach((poly, i) => {
+    const hit = document.createElementNS(ns, "path");
+    hit.setAttribute("d", polyToPathD(poly));
+    hit.dataset.strokeIndex = String(i);
+    hit.setAttribute("class", "stroke-hit");
+    s.appendChild(hit);
+  });
+
+  // トレース線（ユーザーがなぞっている軌跡）
+  tracePathEl = document.createElementNS(ns, "path");
+  tracePathEl.setAttribute("class", "trace-line");
+  tracePathEl.setAttribute("d", "");
+  tracePathEl.dataset.role = "trace";
+  s.appendChild(tracePathEl);
+
+  return s;
+}
+
+function attachTraceHandlers(svgEl, strokes) {
+  // 重要：前回の trace をリセット
+  drawing = false;
+  points = [];
+  if (tracePathEl) tracePathEl.setAttribute("d", "");
+
+  const onDown = (e) => {
+    // 右クリック等除外
+    if (e.button != null && e.button !== 0) return;
+
+    // 書き順：いまの strokeIndex 以外の線の上で開始したら無視
+    const targetStroke = getStrokeIndexFromEvent(e);
+    if (targetStroke !== strokeIndex) return;
+
+    drawing = true;
+    points = [];
+    const p = toSvgPoint(svgEl, e.clientX, e.clientY);
+    points.push(p);
+    updateTracePath(points);
+
+    // ★ここが肝：ドラッグ中にSVG外へ少し出ても move を拾える
+    try {
+      svgEl.setPointerCapture(e.pointerId);
+    } catch (_) {
+      // 一部環境で失敗しても動作は継続
+    }
+
+    e.preventDefault();
+  };
+
+  const onMove = (e) => {
+    if (!drawing) return;
+    const p = toSvgPoint(svgEl, e.clientX, e.clientY);
+    points.push(p);
+    updateTracePath(points);
+    e.preventDefault();
+  };
+
+  const finish = (e) => {
+    if (!drawing) return;
+    drawing = false;
+
+    // Pointer Capture解除
+    try {
+      svgEl.releasePointerCapture(e.pointerId);
+    } catch (_) {}
+
+    const ok = judgeTrace(points, strokes[strokeIndex]);
+    // トレース線は毎回消す（残したいなら消さなくてOK）
+    points = [];
+    updateTracePath(points);
+
+    if (ok) {
+      done[strokeIndex] = true;
+      strokeIndex++;
+
+      if (strokeIndex >= strokes.length) {
+        // 1文字完了：自動で次へ進めたいならここで move(1)
+        // 今は「つぎ」ボタンで進む運用にしておく
+        strokeIndex = strokes.length - 1; // 末尾に固定表示
+      }
+
+      // UI更新
+      refreshSvgStates(svgEl, strokes);
+      renderStrokeButtons(strokes.length);
+      pulse(svgEl);
+    } else {
+      // 不正解：軽いフィードバック
+      shake(svgEl);
+    }
+
+    e.preventDefault();
+  };
+
+  svgEl.addEventListener("pointerdown", onDown, { passive: false });
+  svgEl.addEventListener("pointermove", onMove, { passive: false });
+  svgEl.addEventListener("pointerup", finish, { passive: false });
+  svgEl.addEventListener("pointercancel", finish, { passive: false });
+}
+
+function refreshSvgStates(svgEl, strokes) {
+  // done stroke: stroke-base を濃くする（または別クラスに）
+  const basePaths = Array.from(svgEl.querySelectorAll("path.stroke-base"));
+  basePaths.forEach((p) => {
+    const i = Number(p.dataset.strokeIndex);
+    if (Number.isFinite(i) && done[i]) p.classList.add("done");
+    else p.classList.remove("done");
+  });
+
+  // active overlay
+  const active = svgEl.querySelector('path[data-role="active"]');
+  if (!active) return;
+
+  const nextIdx = clamp(strokeIndex, 0, strokes.length - 1);
+  active.setAttribute("d", polyToPathD(strokes[nextIdx]));
+}
+
+function getStrokeIndexFromEvent(e) {
+  const t = e.target;
+  if (!t) return null;
+  const ds = t.dataset?.strokeIndex;
+  if (ds == null) return null;
+  const n = Number(ds);
+  return Number.isFinite(n) ? n : null;
+}
+
+function updateTracePath(pts) {
+  if (!tracePathEl) return;
+  if (!pts || pts.length === 0) {
+    tracePathEl.setAttribute("d", "");
+    return;
+  }
+  tracePathEl.setAttribute("d", polyToPathD(pts));
+}
+
+function judgeTrace(drawnPoints, strokePoly) {
+  if (!drawnPoints || drawnPoints.length < 6) return false;
+
+  // start near
+  const start = drawnPoints[0];
+  const s0 = strokePoly[0];
+  if (dist(start, s0) > START_TOL) return false;
+
+  // 描画の長さが短すぎると不合格
+  const strokeLen = polyLength(strokePoly);
+  const drawnLen = polyLength(drawnPoints);
+  if (strokeLen <= 0 || drawnLen < strokeLen * MIN_DRAW_LEN_RATE) return false;
+
+  // 点が線に近い割合
+  let hit = 0;
+  for (const p of drawnPoints) {
+    const d = distancePointToPolyline(p, strokePoly);
+    if (d <= TOLERANCE) hit++;
+  }
+  const rate = hit / drawnPoints.length;
+  return rate >= MIN_HIT_RATE;
+}
+
+// --- Geometry helpers ---
+
+function toSvgPoint(svgEl, clientX, clientY) {
+  const rect = svgEl.getBoundingClientRect();
+  const x = ((clientX - rect.left) / rect.width) * 100;
+  const y = ((clientY - rect.top) / rect.height) * 100;
+  return { x, y };
+}
+
+function polyToPathD(poly) {
+  if (!poly || poly.length === 0) return "";
+  const [p0, ...rest] = poly;
+  return `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)} ` + rest.map((p) => `L ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ");
+}
+
+function polyLength(poly) {
+  let len = 0;
+  for (let i = 1; i < poly.length; i++) len += dist(poly[i - 1], poly[i]);
+  return len;
+}
+
+function dist(a, b) {
+  const dx = a.x - b.x;
+  const dy = a.y - b.y;
+  return Math.hypot(dx, dy);
+}
+
+function distancePointToPolyline(p, poly) {
   let best = Infinity;
-  for (let i = 0; i <= steps; i++) {
-    const t = (total * i) / steps;
-    const p = pathEl.getPointAtLength(t);
-    const dx = p.x - px;
-    const dy = p.y - py;
-    const d = Math.hypot(dx, dy);
-    if (d < best) best = d;
+  for (let i = 1; i < poly.length; i++) {
+    best = Math.min(best, distancePointToSegment(p, poly[i - 1], poly[i]));
   }
   return best;
 }
 
-// path 上の「どこまで進んだか」を近似（サンプリング最近傍の最大位置）
-function approxProgressAlongPath(pathEl, points) {
-  const total = pathEl.getTotalLength();
-  if (!isFinite(total) || total <= 0) return 0;
-  const steps = 80;
+function distancePointToSegment(p, a, b) {
+  const vx = b.x - a.x;
+  const vy = b.y - a.y;
+  const wx = p.x - a.x;
+  const wy = p.y - a.y;
 
-  let maxLen = 0;
-  for (const pt of points) {
-    let bestLen = 0;
-    let bestDist = Infinity;
-    for (let i = 0; i <= steps; i++) {
-      const tLen = (total * i) / steps;
-      const p = pathEl.getPointAtLength(tLen);
-      const d = Math.hypot(p.x - pt.x, p.y - pt.y);
-      if (d < bestDist) {
-        bestDist = d;
-        bestLen = tLen;
-      }
-    }
-    // 近い点だけ採用（遠いタップを無視）
-    if (bestDist < 10) {
-      maxLen = Math.max(maxLen, bestLen);
-    }
-  }
+  const c1 = vx * wx + vy * wy;
+  if (c1 <= 0) return Math.hypot(p.x - a.x, p.y - a.y);
 
-  return maxLen / total;
+  const c2 = vx * vx + vy * vy;
+  if (c2 <= c1) return Math.hypot(p.x - b.x, p.y - b.y);
+
+  const t = c1 / c2;
+  const px = a.x + t * vx;
+  const py = a.y + t * vy;
+  return Math.hypot(p.x - px, p.y - py);
 }
 
-// =========================
-// データ読み込み（JSONはそのまま）
-// =========================
-async function loadKanjiData() {
-  const base = (import.meta && import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : "/";
-  // public/data 配下 → `${BASE_URL}data/...`
-  const url = new URL(`${base}data/kanji_g1_min5.json`, window.location.origin).toString();
+// --- UI helpers ---
 
-  const res = await fetch(url, { cache: "no-cache" });
-  if (!res.ok) {
-    throw new Error(`データ読み込み失敗：HTTP ${res.status} (${url})`);
-  }
-  return await res.json();
+function showError(msg) {
+  if (elError) elError.textContent = msg;
+}
+function clearError() {
+  if (elError) elError.textContent = "";
+}
+function clamp(n, min, max) {
+  return Math.max(min, Math.min(max, n));
+}
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function pulse(el) {
+  if (!el) return;
+  el.classList.remove("tracePulse");
+  // reflow
+  void el.offsetWidth;
+  el.classList.add("tracePulse");
+}
+function shake(el) {
+  if (!el) return;
+  el.animate(
+    [
+      { transform: "translateX(0)" },
+      { transform: "translateX(-3px)" },
+      { transform: "translateX(3px)" },
+      { transform: "translateX(-2px)" },
+      { transform: "translateX(2px)" },
+      { transform: "translateX(0)" },
+    ],
+    { duration: 180, easing: "ease-out" }
+  );
 }
 
-// =========================
-// 状態
-// =========================
-const state = {
-  items: [],
-  idx: 0, // 0..4
-  // ストローク進行
-  strokeIndex: 0, // 0-based (画)
-  subIndex: 0, // 0-based (サブパス)
-  doneStrokes: 0,
-  // トレース中
-  isPointerDown: false,
-  tracePoints: [], // svg座標の点列
-};
-
-// =========================
-// SVGレンダリング（ベース/完了/アクティブ）
-// =========================
-function buildStrokeSegments(dList) {
-  // dList: [stroke1, stroke2, ...] each may contain multiple "M"
-  return dList.map((d) => splitSubpaths(d));
-}
-
-function render() {
-  const errorText = el("errorText");
-  errorText.textContent = "";
-
-  const item = state.items[state.idx];
-  if (!item) {
-    el("kanjiTitle").textContent = "データなし";
-    el("kanjiArea").innerHTML = "";
-    el("strokeButtons").innerHTML = "";
-    el("prevBtn").disabled = true;
-    el("nextBtn").disabled = true;
-    return;
-  }
-
-  // タイトル
-  el("kanjiTitle").textContent = `${item.kanji} (${state.idx + 1}/5)`;
-
-  // 星（とりあえず: 完了文字数）
-  const stars = Array.from({ length: 5 }, (_, i) => (i < state.idx ? "★" : "☆")).join("");
-  el("stars").textContent = stars;
-
-  // ボタン
-  el("prevBtn").disabled = state.idx === 0;
-  el("nextBtn").disabled = state.idx === state.items.length - 1;
-
-  // ストロークボタン（①②③…）
-  const strokeButtons = el("strokeButtons");
-  strokeButtons.innerHTML = "";
-  const n = item.strokesCount || 0;
-  for (let i = 0; i < n; i++) {
-    const b = document.createElement("button");
-    b.className = "stroke-btn";
-    b.type = "button";
-    b.textContent = String(i + 1);
-    if (i < state.doneStrokes) b.classList.add("is-done");
-    if (i === state.strokeIndex) b.classList.add("is-active");
-    // クリック移動は禁止（書き順ゲーなので）
-    b.addEventListener("click", () => {});
-    strokeButtons.appendChild(b);
-  }
-
-  // SVG描画
-  const area = el("kanjiArea");
-  area.innerHTML = "";
-
-  const dList = SVG_DB[item.kanji];
-  if (!dList) {
-    errorText.textContent = `SVGデータがありません（${item.kanji}）`;
-    return;
-  }
-
-  const segments = buildStrokeSegments(dList);
-  // 完了の定義: strokeIndex より前の画は完了
-  // ただし、現在の strokeIndex の subIndex も考慮して「途中まで完了」を表現
-  const viewBox = "0 0 100 100";
-
-  const svgNS = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(svgNS, "svg");
-  svg.setAttribute("viewBox", viewBox);
-  svg.setAttribute("aria-label", "kanji-svg");
-
-  // クリック/トレース用の透明レイヤ
-  const gHit = document.createElementNS(svgNS, "g");
-  const gBase = document.createElementNS(svgNS, "g");
-  const gDone = document.createElementNS(svgNS, "g");
-  const gActive = document.createElementNS(svgNS, "g");
-
-  // ベース線（全ストローク）
-  for (let si = 0; si < segments.length; si++) {
-    for (let subi = 0; subi < segments[si].length; subi++) {
-      const p = document.createElementNS(svgNS, "path");
-      p.setAttribute("d", segments[si][subi]);
-      p.setAttribute("fill", "none");
-      p.setAttribute("stroke", "var(--baseStroke)");
-      p.setAttribute("stroke-width", "10");
-      p.setAttribute("stroke-linecap", "round");
-      p.setAttribute("stroke-linejoin", "round");
-      gBase.appendChild(p);
-    }
-  }
-
-  // 完了線（doneStrokes分は全部）
-  for (let si = 0; si < state.doneStrokes; si++) {
-    if (!segments[si]) continue;
-    for (let subi = 0; subi < segments[si].length; subi++) {
-      const p = document.createElementNS(svgNS, "path");
-      p.setAttribute("d", segments[si][subi]);
-      p.setAttribute("fill", "none");
-      p.setAttribute("stroke", "var(--doneStroke)");
-      p.setAttribute("stroke-width", "12");
-      p.setAttribute("stroke-linecap", "round");
-      p.setAttribute("stroke-linejoin", "round");
-      gDone.appendChild(p);
-    }
-  }
-
-  // 現在ストロークの「完了済みサブ」も done 表示
-  const curSegs = segments[state.strokeIndex] || [];
-  for (let subi = 0; subi < state.subIndex; subi++) {
-    const p = document.createElementNS(svgNS, "path");
-    p.setAttribute("d", curSegs[subi]);
-    p.setAttribute("fill", "none");
-    p.setAttribute("stroke", "var(--doneStroke)");
-    p.setAttribute("stroke-width", "12");
-    p.setAttribute("stroke-linecap", "round");
-    p.setAttribute("stroke-linejoin", "round");
-    gDone.appendChild(p);
-  }
-
-  // アクティブ（いまなぞるべき subpath）
-  const activeD = (segments[state.strokeIndex] || [])[state.subIndex];
-  let activePath = null;
-  if (activeD) {
-    activePath = document.createElementNS(svgNS, "path");
-    activePath.setAttribute("d", activeD);
-    activePath.setAttribute("fill", "none");
-    activePath.setAttribute("stroke", "var(--activeStroke)");
-    activePath.setAttribute("stroke-width", "14");
-    activePath.setAttribute("stroke-linecap", "round");
-    activePath.setAttribute("stroke-linejoin", "round");
-    gActive.appendChild(activePath);
-
-    // ヒット判定用（太め透明）
-    const hit = document.createElementNS(svgNS, "path");
-    hit.setAttribute("d", activeD);
-    hit.setAttribute("fill", "none");
-    hit.setAttribute("stroke", "transparent");
-    hit.setAttribute("stroke-width", "28");
-    hit.setAttribute("stroke-linecap", "round");
-    hit.setAttribute("stroke-linejoin", "round");
-    hit.style.pointerEvents = "stroke";
-    hit.dataset.kind = "hit";
-    gHit.appendChild(hit);
-  }
-
-  svg.appendChild(gBase);
-  svg.appendChild(gDone);
-  svg.appendChild(gActive);
-  svg.appendChild(gHit);
-  area.appendChild(svg);
-
-  // ポインタイベント
-  const toSvgPoint = (evt) => {
-    const rect = svg.getBoundingClientRect();
-    const x = ((evt.clientX - rect.left) / rect.width) * 100;
-    const y = ((evt.clientY - rect.top) / rect.height) * 100;
-    return { x, y };
-  };
-
-  const tolerance = 12; // だいたいの許容
-  const minProgress = 0.85; // ここまで行けば「書けた」
-
-  const onPointerDown = (evt) => {
-    if (!activePath) return;
-    state.isPointerDown = true;
-    state.tracePoints = [];
-    const pt = toSvgPoint(evt);
-    state.tracePoints.push(pt);
-
-    // 最初が遠すぎるなら即無視（誤タップ防止）
-    const dist = approxMinDistanceToPath(activePath, pt.x, pt.y);
-    if (dist > tolerance) {
-      state.isPointerDown = false;
-      state.tracePoints = [];
-      return;
-    }
-  };
-
-  const onPointerMove = (evt) => {
-    if (!state.isPointerDown || !activePath) return;
-    const pt = toSvgPoint(evt);
-    state.tracePoints.push(pt);
-
-    // 途中で大きく外れたら切る（暴走防止）
-    const dist = approxMinDistanceToPath(activePath, pt.x, pt.y);
-    if (dist > tolerance * 1.8) {
-      // ただし一発アウトにすると難しいので、少し甘め
-      // ここでは継続（判定はUP時）
-    }
-  };
-
-  const onPointerUp = () => {
-    if (!state.isPointerDown || !activePath) return;
-    state.isPointerDown = false;
-
-    const prog = approxProgressAlongPath(activePath, state.tracePoints);
-    if (prog >= minProgress) {
-      // サブパス完了 → 次へ
-      const segs = segments[state.strokeIndex] || [];
-      const nextSub = state.subIndex + 1;
-      if (nextSub < segs.length) {
-        state.subIndex = nextSub;
-      } else {
-        // 画完了
-        state.doneStrokes = Math.max(state.doneStrokes, state.strokeIndex + 1);
-        state.strokeIndex += 1;
-        state.subIndex = 0;
-
-        // 全画完了なら次の漢字へ自動（任意）
-        if (state.strokeIndex >= segments.length) {
-          // 次の漢字へ（最後なら止める）
-          if (state.idx < state.items.length - 1) {
-            state.idx += 1;
-          }
-          resetStrokeStateForCurrent();
-        }
-      }
-      render();
-    } else {
-      // 失敗 → そのまま
-    }
-
-    state.tracePoints = [];
-  };
-
-  svg.addEventListener("pointerdown", onPointerDown);
-  svg.addEventListener("pointermove", onPointerMove);
-  window.addEventListener("pointerup", onPointerUp, { once: true });
-}
-
-function resetStrokeStateForCurrent() {
-  state.strokeIndex = 0;
-  state.subIndex = 0;
-  state.doneStrokes = 0;
-}
-
-// =========================
-// ナビ（まえ/つぎ）
-// =========================
-function bindNav() {
-  el("prevBtn").addEventListener("click", () => {
-    if (state.idx <= 0) return;
-    state.idx -= 1;
-    resetStrokeStateForCurrent();
-    render();
-  });
-
-  el("nextBtn").addEventListener("click", () => {
-    if (state.idx >= state.items.length - 1) return;
-    state.idx += 1;
-    resetStrokeStateForCurrent();
-    render();
-  });
-}
-
-// =========================
-// 起動
-// =========================
-async function main() {
-  bindNav();
-
-  try {
-    const data = await loadKanjiData();
-    state.items = data.items || [];
-    state.idx = 0;
-    resetStrokeStateForCurrent();
-    render();
-  } catch (e) {
-    el("errorText").textContent = e instanceof Error ? e.message : String(e);
-    // 最低限の表示
-    state.items = [];
-    render();
-  }
-}
-
-main();
