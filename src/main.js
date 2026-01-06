@@ -502,29 +502,48 @@ function attachTraceHandlers(svgEl, strokes) {
       playSuccessSfx();
        // ✅ 1文字（全画）クリア → 自動で次の漢字へ
       if (strokeIndex >= strokes.length) {
-          kanjiCompleted = true;
-  
-          // 表示としては「最後の画」を維持（activeが配列外参照しないように）
-          strokeIndex = strokes.length - 1;
-          refreshSvgStates(svgEl, strokes);
-          renderStrokeButtons(strokes.length);
-  
-          // 次があるなら少し待って自動で進む
-          if (idx < items.length - 1) {
-            setTimeout(() => {
-              // 途中で手動で移動されていたら二重遷移しない
-              if (!kanjiCompleted) return;
-              move(1);
-            }, AUTO_NEXT_DELAY_MS);
-          }  else {
-                      // ✅ 最終クリア：はなまる演出
-                      kanjiCompleted = true;
-                      showHanamaru(svgEl);
-            
-                      // ここではまだ次へ進まない（余韻）
-                      // 次のステップで「もういちど / つぎの5もじ」などを出せる
-                    }
-        }
+        kanjiCompleted = true;
+        
+                // 表示としては「最後の画」を維持（activeが配列外参照しないように）
+                strokeIndex = strokes.length - 1;
+                refreshSvgStates(svgEl, strokes);
+                renderStrokeButtons(strokes.length);
+        
+                const set = getSetInfo(idx);
+        
+                // ✅ セット内なら：少し待って自動で次の漢字へ
+                if (set.pos < set.len - 1) {
+                  setTimeout(() => {
+                    // 途中で手動で移動されていたら二重遷移しない
+                    if (!kanjiCompleted) return;
+                    move(1);
+                  }, AUTO_NEXT_DELAY_MS);
+                } else {
+                  // ✅ セット最終：はなまる → メニュー表示（自動で進めない）
+                  showHanamaru(svgEl);
+        
+                  // はなまるの余韻を見せてからメニュー
+                  setTimeout(() => {
+                    if (!kanjiCompleted) return;
+                    showFinalMenu({
+                      onReplay: () => {
+                        closeFinalMenu();
+                        idx = set.start;
+                        kanjiCompleted = false;
+                        render();
+                      },
+                      onNextSet: () => {
+                        closeFinalMenu();
+                        const nextStart = set.end >= items.length ? 0 : set.end;
+                        idx = nextStart;
+                        kanjiCompleted = false;
+                        render();
+                      },
+                    });
+                  }, 900);
+                }
+              }
+        
      } else {
       // ✅ 失敗演出
       shake(svgEl);
