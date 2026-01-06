@@ -239,14 +239,13 @@ function attachTraceHandlers(svgEl, strokes) {
   const onDown = (e) => {
     if (e.button != null && e.button !== 0) return;
 
-    // 「stroke-hit」の上でしか開始させない（active/trace/baseに当たっても無視）
-    const targetStroke = getStrokeIndexFromEvent(e);
-    if (targetStroke !== strokeIndex) return;
-
     // 開始点がストローク始点に近いかもチェック（雑にスタートだけ正す）
     const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
-    const s0 = strokes[strokeIndex][0];
-    if (dist(p0, s0) > START_TOL) return;
+
+     // ✅ 変更：始点ではなく「現在ストロークの線そのもの」に近ければ開始OK
+    // これで「どこから書き始めればいいか分からない」を解消する
+    const d0 = distancePointToPolyline(p0, strokes[strokeIndex]);
+    if (d0 > START_TOL) return;
 
     drawing = true;
     points = [p0];
