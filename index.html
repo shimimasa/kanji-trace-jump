@@ -6,25 +6,31 @@
     <title>KANJI TRACE JUMP</title>
   </head>
   <body>
-    <div class="app">
+    <div id="app">
       <div class="hud">
         <div id="stars" class="stars" aria-label="進捗"></div>
-        <div id="mode" class="mode">もくひょう：5もじ</div>
+        <div id="mode" class="goal">もくひょう：5もじ</div>
       </div>
 
-      <div class="content">
-        <div id="kanjiLabel" class="kanjiLabel"></div>
+      <div class="main">
+        <div class="topline">
+          <div id="kanjiLabel" class="title"></div>
+        </div>
 
-        <div id="kanjiArea" class="kanjiArea" aria-label="漢字トレースエリア"></div>
+        <div class="stage">
+         <div id="kanjiArea" class="kanji-area" aria-label="漢字トレースエリア"></div>
+        </div>
 
-        <div id="strokeButtons" class="strokeButtons" aria-label="書き順"></div>
+        <div class="stroke-ui">
+          <div id="strokeButtons" class="stroke-buttons" aria-label="書き順"></div>
+        </div>
 
-        <div class="controls">
+        <div class="nav">
           <button id="prevBtn" class="btn" type="button">まえ</button>
           <button id="nextBtn" class="btn primary" type="button">つぎ</button>
         </div>
 
-        <div id="hint" class="hint">なぞって、書き順どおりに進めよう。</div>
+        <p id="hint" class="caption">なぞって、書き順どおりに進めよう。</p>
         <div id="error" class="error" role="status" aria-live="polite"></div>
       </div>
     </div>

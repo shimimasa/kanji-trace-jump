@@ -176,11 +176,11 @@ function renderStrokeButtons(n) {
   for (let i = 0; i < n; i++) {
     const b = document.createElement("button");
     b.type = "button";
-    b.className = "strokeBtn";
+    b.className = "stroke-btn";
     b.textContent = String(i + 1);
 
-    if (i === strokeIndex) b.classList.add("active");
-    if (done[i]) b.classList.add("done");
+    if (i === strokeIndex) b.classList.add("is-active");
+    if (done[i]) b.classList.add("is-done");
 
     // 表示のみ（飛ばし防止）
     b.disabled = true;
