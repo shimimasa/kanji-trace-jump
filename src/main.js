@@ -346,13 +346,66 @@ function ensureCharLayer(svgEl) {
     layer.appendChild(c);
     return c;
   }
+
+  // ===========================
+ // Character (minimal circle)
+ // ===========================
+const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上に乗る”感
   
   function getStrokeAnchor(strokes, i) {
-    // 「次に書く画の開始点」に置く：一番わかりやすい
-    const poly = strokes?.[i];
-    const p = poly?.[0];
-    return p ? { x: p.x, y: p.y } : { x: 50, y: 50 };
-  }
+      // ✅ 「道（画）の中央」に着地させる：体験が気持ちよくなる
+      const poly = strokes?.[i];
+      if (!poly || poly.length < 2) return { x: 50, y: 50 };
+    
+      // 総延長
+      let total = 0;
+      const seg = [];
+      for (let k = 0; k < poly.length - 1; k++) {
+        const a = poly[k], b = poly[k + 1];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const d = Math.hypot(dx, dy);
+        seg.push(d);
+        total += d;
+      }
+      if (total <= 0.0001) return { x: poly[0].x, y: poly[0].y };
+    
+      // 半分の長さ地点
+      const half = total / 2;
+      let acc = 0;
+      for (let k = 0; k < seg.length; k++) {
+        const d = seg[k];
+        if (acc + d >= half) {
+          const t = (half - acc) / d; // 0..1
+          const a = poly[k], b = poly[k + 1];
+          // 中央点
+      let x = a.x + (b.x - a.x) * t;
+      let y = a.y + (b.y - a.y) * t;
+
+      // ✅ 法線方向に少しだけオフセットして「道の上」に乗せる
+      // 接線（tangent）
+      let tx = (b.x - a.x);
+      let ty = (b.y - a.y);
+      const len = Math.hypot(tx, ty) || 1;
+      tx /= len;
+      ty /= len;
+      // 法線（normal）: (-ty, tx)
+      let nx = -ty;
+      let ny = tx;
+      // “上方向（yが小さい）”に揃える（nyが+なら下向きなので反転）
+      if (ny > 0) { nx = -nx; ny = -ny; }
+
+      x += nx * CHAR_RIDE_OFFSET;
+      y += ny * CHAR_RIDE_OFFSET;
+
+      return { x, y };
+        }
+        acc += d;
+      }
+      // 念のため最後
+      const last = poly[poly.length - 1];
+      return { x: last.x, y: last.y };
+    }
   
   function setCharPos(svgEl, p) {
     const c = ensureChar(svgEl);
