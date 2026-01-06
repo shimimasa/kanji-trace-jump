@@ -185,6 +185,60 @@ function renderStars(current, total) {
   const s = [];
   for (let i = 0; i < max; i++) s.push(i < filled ? "★" : "☆");
   elStars.textContent = s.join("");
+
+  // ✅ 5つ揃った瞬間だけキラ
+  if (filled === 5 && _lastStarFilled !== 5) {
+    sparkleStars();
+  }
+  _lastStarFilled = filled;
+ }
+
+// ===========================
+// Stars sparkle (on 5/5)
+// ===========================
+let _lastStarFilled = 0;
+
+function sparkleStars() {
+  if (!elStars) return;
+
+  // 文字（★）自体のポップ演出
+  elStars.classList.remove("starsSparkle");
+  // reflow to restart animation
+  void elStars.offsetWidth;
+  elStars.classList.add("starsSparkle");
+
+  // 小粒スパーク（8個）
+  spawnStarSparks(8);
+}
+
+function spawnStarSparks(count = 8) {
+  if (!elStars) return;
+  const rect = elStars.getBoundingClientRect();
+  // 星の中心（表示上の中心）を基準に飛ばす
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
+
+  for (let i = 0; i < count; i++) {
+    const spark = document.createElement("span");
+    spark.className = "star-spark";
+
+    // 中心付近からランダムに散る
+    const a = Math.random() * Math.PI * 2;
+    const d = 10 + Math.random() * 18;
+    const dx = Math.cos(a) * d;
+    const dy = Math.sin(a) * d;
+
+    // 開始位置（中心±少し）
+    const ox = cx + (Math.random() * 8 - 4);
+    const oy = cy + (Math.random() * 6 - 3);
+    spark.style.left = `${ox}px`;
+    spark.style.top = `${oy}px`;
+    spark.style.setProperty("--dx", `${dx}px`);
+    spark.style.setProperty("--dy", `${dy}px`);
+
+    elStars.appendChild(spark);
+    spark.addEventListener("animationend", () => spark.remove(), { once: true });
+  }
 }
 
 function renderStrokeButtons(n) {
