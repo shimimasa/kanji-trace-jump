@@ -78,13 +78,19 @@ body {
   height: min(520px, 58vh);
   display: grid;
   place-items: center;
+  /* 漢字とUIの間に“安全地帯”を作る */
+  padding-bottom: 18px;
 }
 
 .kanji-area {
-  width: min(560px, 88vw);
-  height: min(420px, 50vh);
+  /* ↓ 少し縮めて、下のUIに食い込まないようにする */
+  width: min(520px, 84vw);
+  height: min(360px, 42vh);
   display: grid;
   place-items: center;
+  /* SVGがはみ出してボタン領域に被るのを防ぐ */
+  overflow: hidden;
+  border-radius: 16px; /* 角丸は任意。見た目が整う */
 }
 
 .kanji-area svg {
@@ -93,6 +99,7 @@ body {
   display: block;
   user-select: none;
   touch-action: none; /* スマホ/タブレットでもなぞれる */
+  overflow: hidden;
 }
 
 .stroke-ui {
@@ -100,11 +107,15 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 52px;
+  /* 漢字との距離を確保 */
+  margin-top: 6px;
 }
 
 .stroke-buttons {
   display: flex;
   gap: 14px;
+  /* タップしやすいように下側に余白 */
+  padding-bottom: 4px;
 }
 
 .stroke-btn {
@@ -133,6 +144,8 @@ body {
   display: flex;
   gap: 18px;
   margin-top: 4px;
+  /* ここも少し下げて、漢字に近づかない */
+  padding-top: 6px;
 }
 
 .btn {
