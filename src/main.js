@@ -3,18 +3,19 @@ import "./style.css";
 
 /**
  * Day2 方針：
- * - JSONがどこに置かれていても読み込めるよう、候補URLを順番に fetch する
- * - stroke SVG 描画は捨てる（あなたのJSONは数値配列でSVGが無い）
- * - 代わりに「漢字を巨大表示」＋「①②③...（ストローク数）」＋「順番ボタン」で遊べるようにする
+ * - public/data/ に置いたJSONを確実に読めるようにする（Vercel/Vite両対応）
+ * - stroke SVG 描画は使わない（このJSONはSVGではなく数値配列っぽい）
+ * - 「漢字を巨大表示」＋「①②③...（ストローク数）」＋「順番ボタン」で進行
  */
 
+// Vite の base（/ や /subpath/）を吸収して public 配下を参照する
+const BASE = (import.meta.env && import.meta.env.BASE_URL) ? import.meta.env.BASE_URL : "/";
+
+// ✅ ここが最重要：あなたの配置は public/data/kanji_g1_min5.json
 const DATA_URL_CANDIDATES = [
-  // ① src/ と同階層に置いた場合（Viteがアセットとして扱う）
-  new URL("./kanji_g1_min5.json", import.meta.url).toString(),
-  // ② src/ の1つ上に置いた場合
-  new URL("../kanji_g1_min5.json", import.meta.url).toString(),
-  // ③ public/ に置いた場合（ルートから参照）
-  "/kanji_g1_min5.json",
+  new URL("data/kanji_g1_min5.json", BASE).toString(),
+  // 念のため：直下に置いた場合も拾える
+  new URL("kanji_g1_min5.json", BASE).toString(),
 ];
 
 const circledNums = [
@@ -71,11 +72,7 @@ function normalizeItems(json) {
     }
     if (!Number.isFinite(strokesCount) || strokesCount < 0) strokesCount = 0;
 
-    return {
-      kanji,
-      strokesCount,
-      raw,
-    };
+    return { kanji, strokesCount, raw };
   }).filter((x) => x.kanji.length > 0);
 }
 
@@ -109,15 +106,15 @@ function buildUI() {
 }
 
 function renderStars(starsEl, clearedCount) {
-  // 0〜5で表示（スクショに合わせて5つ）
   const n = clamp(clearedCount, 0, 5);
-  const filled = "★".repeat(n);
-  const empty = "☆".repeat(5 - n);
-  starsEl.textContent = filled + empty;
+  starsEl.textContent = "★".repeat(n) + "☆".repeat(5 - n);
 }
 
 function renderTitle(titleEl, item, idx, total) {
-  const circles = Array.from({ length: item.strokesCount }, (_, i) => circledNums[i] ?? String(i + 1)).join(" ");
+  const circles = Array.from(
+    { length: item.strokesCount },
+    (_, i) => circledNums[i] ?? String(i + 1)
+  ).join(" ");
   titleEl.textContent = `${item.kanji} (${idx + 1}/${total}) ${circles}`.trim();
 }
 
@@ -136,13 +133,11 @@ function createStrokeButtons(container, strokesCount, strokeIndex, onTryAdvance)
     if (i <= strokeIndex) b.classList.add("done");
 
     b.addEventListener("click", () => {
-      // 連番のみOK（次の番号だけ進める）
       if (i === strokeIndex + 1) {
         onTryAdvance();
       } else {
-        // ミス演出
         b.classList.remove("shake");
-        void b.offsetWidth; // reflow
+        void b.offsetWidth;
         b.classList.add("shake");
       }
     });
@@ -164,8 +159,8 @@ async function main() {
 
   let items = [];
   let idx = 0;
-  let strokeIndex = 0; // 0 なら未着手。1..strokesCount で進む
-  let cleared = new Set(); // クリア済み index を記録
+  let strokeIndex = 0;
+  let cleared = new Set();
 
   try {
     const json = await loadJsonWithFallback();
@@ -190,7 +185,7 @@ async function main() {
 
   function updateButtons() {
     prevBtn.disabled = idx <= 0;
-    // 次へは「ストロークを全部押し切った」or「ストローク数が0」のときに許可
+
     const item = items[idx];
     const canNext = (item.strokesCount <= 0) || (strokeIndex >= item.strokesCount);
     nextBtn.disabled = !canNext;
@@ -212,7 +207,7 @@ async function main() {
         cleared.add(idx);
         msgEl.textContent = "OK！「つぎ」で進めます";
       }
-      render(); // ボタンの done 更新
+      render();
     });
 
     updateButtons();
@@ -225,7 +220,6 @@ async function main() {
   });
 
   nextBtn.addEventListener("click", () => {
-    // ガード：未クリアなら進ませない（UIはdisabledだが念のため）
     const item = items[idx];
     if (item.strokesCount > 0 && strokeIndex < item.strokesCount) return;
 
