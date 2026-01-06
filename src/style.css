@@ -259,3 +259,21 @@ body {
     filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
   }
 }
+
+/* ===========================
++   FX (success / fail)
++   =========================== */
+.fx-layer {
+    pointer-events: none;
+  }
+  
+  .fx-spark {
+    fill: rgba(0,0,0,0.8);
+  }
+  
+  .kanjiSvg.failFlash {
+    filter: drop-shadow(0 0 0 rgba(255,0,0,0));
+  }
+  .kanjiSvg.failFlash .stroke-active {
+    stroke: rgba(255, 80, 80, 0.95);
+  }

@@ -189,6 +189,98 @@ function renderStrokeButtons(n) {
   }
 }
 
+// ===========================
+// FX / Sound (minimal)
+// ===========================
+let _audioCtx = null;
+function getAudioCtx() {
+  if (_audioCtx) return _audioCtx;
+  const AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) return null;
+  _audioCtx = new AC();
+  return _audioCtx;
+}
+
+function playTone(freq = 660, duration = 0.07, type = "sine", gain = 0.04) {
+  const ctx = getAudioCtx();
+  if (!ctx) return;
+  // iOSなどでユーザー操作後にresumeが必要な場合
+  if (ctx.state === "suspended") ctx.resume().catch(() => {});
+
+  const t0 = ctx.currentTime;
+  const osc = ctx.createOscillator();
+  const g = ctx.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, t0);
+  g.gain.setValueAtTime(0.0001, t0);
+  g.gain.exponentialRampToValueAtTime(gain, t0 + 0.01);
+  g.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+  osc.connect(g);
+  g.connect(ctx.destination);
+  osc.start(t0);
+  osc.stop(t0 + duration + 0.02);
+}
+
+function playSuccessSfx() {
+  // 軽い「ポン」
+  playTone(784, 0.06, "sine", 0.05);
+  playTone(988, 0.06, "sine", 0.04);
+}
+
+function playFailSfx() {
+  // 失敗は音を出さない方針ならコメントアウトでもOK
+  // playTone(180, 0.08, "triangle", 0.03);
+  if (navigator.vibrate) navigator.vibrate(30);
+}
+
+function ensureFxLayer(svgEl) {
+  const ns = "http://www.w3.org/2000/svg";
+  let layer = svgEl.querySelector('[data-role="fx"]');
+  if (layer) return layer;
+  layer = document.createElementNS(ns, "g");
+  layer.dataset.role = "fx";
+  layer.setAttribute("class", "fx-layer");
+  // traceの下に入れる（上に重なるのが嫌ならtraceの前）
+  svgEl.appendChild(layer);
+  return layer;
+}
+
+function spawnSparks(svgEl, p, count = 10) {
+  const ns = "http://www.w3.org/2000/svg";
+  const layer = ensureFxLayer(svgEl);
+  const { x, y } = p || { x: 50, y: 50 };
+
+  for (let i = 0; i < count; i++) {
+    const c = document.createElementNS(ns, "circle");
+    c.setAttribute("cx", x.toFixed(2));
+    c.setAttribute("cy", y.toFixed(2));
+    c.setAttribute("r", "1.2");
+    c.setAttribute("class", "fx-spark");
+    layer.appendChild(c);
+
+    const a = Math.random() * Math.PI * 2;
+    const d = 6 + Math.random() * 10; // 飛ぶ距離（viewBox=100想定）
+    const dx = Math.cos(a) * d;
+    const dy = Math.sin(a) * d;
+
+    // SVG要素でも Web Animations は動くブラウザが多い
+    const anim = c.animate(
+      [
+        { transform: "translate(0px, 0px)", opacity: 0.95 },
+        { transform: `translate(${dx}px, ${dy}px)`, opacity: 0 },
+      ],
+      { duration: 280 + Math.random() * 120, easing: "ease-out", fill: "forwards" }
+    );
+    anim.onfinish = () => c.remove();
+  }
+}
+
+function flashFail(svgEl) {
+  if (!svgEl) return;
+  svgEl.classList.add("failFlash");
+  setTimeout(() => svgEl.classList.remove("failFlash"), 160);
+}
+
 function buildSvgForKanji(strokes) {
   const ns = "http://www.w3.org/2000/svg";
   const s = document.createElementNS(ns, "svg");
@@ -227,6 +319,13 @@ function buildSvgForKanji(strokes) {
   tracePathEl.setAttribute("d", "");
   tracePathEl.dataset.role = "trace";
   s.appendChild(tracePathEl);
+
+  // FXレイヤー（成功/失敗演出用）
+  // ※ build時に作っておくと毎回探さなくて済む
+  const fx = document.createElementNS(ns, "g");
+  fx.dataset.role = "fx";
+  fx.setAttribute("class", "fx-layer");
+  s.appendChild(fx);
 
   return s;
 }
@@ -275,6 +374,7 @@ function attachTraceHandlers(svgEl, strokes) {
     } catch (_) {}
 
     const ok = judgeTrace(points, strokes[strokeIndex]);
+    const lastPoint = points.length ? points[points.length - 1] : null;
 
     // 軌跡は毎回消す
     points = [];
@@ -291,14 +391,25 @@ function attachTraceHandlers(svgEl, strokes) {
 
       refreshSvgStates(svgEl, strokes);
       renderStrokeButtons(strokes.length);
+      // ✅ 成功演出
       pulse(svgEl);
-    } else {
+      spawnSparks(svgEl, lastPoint || centroidOfPolyline(strokes[Math.max(0, strokeIndex - 1)]));
+      playSuccessSfx();
+     } else {
+      // ✅ 失敗演出
       shake(svgEl);
+      flashFail(svgEl);
+      playFailSfx();
     }
 
     e.preventDefault();
   };
-
+  function centroidOfPolyline(poly) {
+      if (!poly || poly.length === 0) return { x: 50, y: 50 };
+      let x = 0, y = 0;
+      for (const p of poly) { x += p.x; y += p.y; }
+      return { x: x / poly.length, y: y / poly.length };
+    }
   svgEl.addEventListener("pointerdown", onDown, { passive: false });
   svgEl.addEventListener("pointermove", onMove, { passive: false });
   svgEl.addEventListener("pointerup", finish, { passive: false });
