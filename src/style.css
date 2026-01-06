@@ -170,3 +170,79 @@ body {
 }
 
 
+
+/* ===========================
++   SVG（漢字）表示の見た目
++   main.js が付与するクラスに対応
++   =========================== */
+
+.kanjiSvg {
+  overflow: visible;
+}
+
+/* ベースの薄い線（お手本） */
+.stroke-base {
+  fill: none;
+  stroke: var(--baseStroke);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* なぞり終わった線（少し濃く） */
+.stroke-base.done {
+  stroke: var(--doneStroke);
+}
+
+/* 今なぞるべき線（強調） */
+.stroke-active {
+  fill: none;
+  stroke: var(--activeStroke);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.9;
+}
+
+/* 当たり判定：透明だけど太い（pointer-eventsはstroke） */
+.stroke-hit {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0);
+  stroke-width: 26;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: stroke;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ユーザーがなぞった軌跡 */
+.trace-line {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.9);
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* 少し気持ちよくする演出（main.js の pulse() が付け外し） */
+.tracePulse {
+  animation: tracePulse 220ms ease-out;
+}
+
+@keyframes tracePulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+  }
+  60% {
+    transform: scale(1.01);
+    filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.08));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+  }
+}
