@@ -6,8 +6,13 @@
 import "./style.css";
 
 // Viteのbase（例: "/" or "/kanji-trace-jump/"）を考慮して public/ 配下を読む
-const BASE = import.meta.env.BASE_URL || "/";
-const DATA_PATH = new URL("data/kanji_g1_min5.json", BASE).toString(); // public/data 配下
+const BASE_PATH = import.meta.env.BASE_URL ?? "/";
+
+// ✅ ここがポイント：base を「絶対URL」にする
+const BASE_URL = new URL(BASE_PATH, window.location.href);
+
+// public/data 配下
+const DATA_PATH = new URL("data/kanji_g1_min5.json", BASE_URL).toString();
 
 // 5文字（あなたの現状）を SVG ストローク（ポリライン）で再現
 // 座標系は viewBox="0 0 100 100"
