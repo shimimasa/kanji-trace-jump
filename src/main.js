@@ -62,6 +62,16 @@ const elError = document.getElementById("error");
 let items = []; // データ読み込み
 let idx = 0;
 
+const SET_SIZE = 5;
+
+function getSetInfo(i = idx) {
+  const start = Math.floor(i / SET_SIZE) * SET_SIZE;
+  const end = Math.min(start + SET_SIZE, items.length);
+  const len = end - start; // 1〜5
+  const pos = i - start;   // 0〜len-1
+  return { start, end, len, pos };
+}
+
 let strokeIndex = 0; // 今なぞるべきストローク
 let done = []; // boolean[]
 let svg = null;
@@ -137,9 +147,10 @@ function render() {
   const item = items[idx];
   const k = item?.kanji ?? "?";
 
-  renderStars(idx, items.length);
+  const set = getSetInfo(idx);
+renderStars(set.pos, set.len);                // ★は0〜4（5個）で進む
+elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
 
-  elLabel.textContent = `${k} (${idx + 1}/${items.length})`;
 
   const strokes = SVG_STROKES[k];
   if (!strokes) {
@@ -340,6 +351,43 @@ function showHanamaru(svgEl) {
     g.remove();
   }, 1200);
 }
+
+let finalOverlay = null;
+
+function closeFinalMenu() {
+  if (finalOverlay) {
+    finalOverlay.remove();
+    finalOverlay = null;
+  }
+}
+
+function showFinalMenu({ onReplay, onNextSet }) {
+  closeFinalMenu();
+
+  const wrap = document.createElement("div");
+  wrap.className = "final-overlay";
+  wrap.innerHTML = `
+    <div class="final-card" role="dialog" aria-label="クリアメニュー">
+      <div class="final-title">できた！</div>
+      <div class="final-actions">
+        <button type="button" class="btn" data-action="replay">もういちど</button>
+        <button type="button" class="btn primary" data-action="next">つぎの5もじ</button>
+      </div>
+    </div>
+  `;
+
+  wrap.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const action = btn.dataset.action;
+    if (action === "replay") onReplay?.();
+    if (action === "next") onNextSet?.();
+  });
+
+  document.body.appendChild(wrap);
+  finalOverlay = wrap;
+}
+
 
 
 function buildSvgForKanji(strokes) {
