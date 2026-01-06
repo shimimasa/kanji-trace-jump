@@ -295,6 +295,17 @@ body {
 .fx-layer {
     pointer-events: none;
   }
+
+  .char-layer {
+      pointer-events: none;
+    }
+    
+    .char {
+      fill: rgba(0, 0, 0, 0.9);
+      stroke: rgba(255, 255, 255, 0.9);
+      stroke-width: 1.2;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.18));
+    }
   
   .fx-spark {
     fill: rgba(0,0,0,0.8);

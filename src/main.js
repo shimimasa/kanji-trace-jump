@@ -169,6 +169,7 @@ elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
   elArea.innerHTML = "";
   svg = buildSvgForKanji(strokes);
   elArea.appendChild(svg);
+  resetCharForNewKanji(svg, strokes);
 
   elPrev.disabled = idx === 0;
   elNext.disabled = idx === items.length - 1;
@@ -314,6 +315,101 @@ function ensureFxLayer(svgEl) {
   svgEl.appendChild(layer);
   return layer;
 }
+
+// ===========================
+// Character (minimal circle)
+// ===========================
+function ensureCharLayer(svgEl) {
+    const ns = "http://www.w3.org/2000/svg";
+    let layer = svgEl.querySelector('[data-role="charLayer"]');
+    if (layer) return layer;
+    layer = document.createElementNS(ns, "g");
+    layer.dataset.role = "charLayer";
+    layer.setAttribute("class", "char-layer");
+    svgEl.appendChild(layer);
+    return layer;
+  }
+  
+  function ensureChar(svgEl) {
+    const ns = "http://www.w3.org/2000/svg";
+    let c = svgEl.querySelector('[data-role="char"]');
+    if (c) return c;
+    const layer = ensureCharLayer(svgEl);
+    c = document.createElementNS(ns, "circle");
+    c.dataset.role = "char";
+    c.setAttribute("r", "3.2");
+    c.setAttribute("cx", "0");
+    c.setAttribute("cy", "0");
+    c.setAttribute("class", "char");
+    // transformで位置を動かす
+    c.setAttribute("transform", "translate(50 50)");
+    layer.appendChild(c);
+    return c;
+  }
+  
+  function getStrokeAnchor(strokes, i) {
+    // 「次に書く画の開始点」に置く：一番わかりやすい
+    const poly = strokes?.[i];
+    const p = poly?.[0];
+    return p ? { x: p.x, y: p.y } : { x: 50, y: 50 };
+  }
+  
+  function setCharPos(svgEl, p) {
+    const c = ensureChar(svgEl);
+    c.setAttribute("transform", `translate(${p.x} ${p.y})`);
+    svgEl.dataset.charX = String(p.x);
+    svgEl.dataset.charY = String(p.y);
+  }
+  
+  function getCharPos(svgEl) {
+    const x = Number(svgEl.dataset.charX || "50");
+    const y = Number(svgEl.dataset.charY || "50");
+    return { x, y };
+  }
+  
+  function resetCharForNewKanji(svgEl, strokes) {
+    const p = getStrokeAnchor(strokes, 0);
+    setCharPos(svgEl, p);
+  }
+  
+  function charJumpTo(svgEl, to) {
+    const c = ensureChar(svgEl);
+    const from = getCharPos(svgEl);
+    const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 - 8 };
+  
+    // 既存アニメが残っていても見た目破綻しないように
+    c.getAnimations().forEach((a) => a.cancel());
+  
+    c.animate(
+      [
+        { transform: `translate(${from.x}px,${from.y}px) scale(1,1)` },
+        { transform: `translate(${mid.x}px,${mid.y}px) scale(1.12,0.92)` },
+        { transform: `translate(${to.x}px,${to.y}px) scale(1,1)` },
+      ],
+      { duration: 420, easing: "ease-out", fill: "forwards" }
+    );
+
+    // 最終位置を確定
+    setTimeout(() => setCharPos(svgEl, to), 430);
+  }
+  
+  function charFailDrop(svgEl) {
+    const c = ensureChar(svgEl);
+    const base = getCharPos(svgEl);
+    const down = { x: base.x, y: base.y + 16 };
+  
+    c.getAnimations().forEach((a) => a.cancel());
+  
+    c.animate(
+      [
+        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
+        { transform: `translate(${down.x}px,${down.y}px) scale(0.92,1.12)` },
+        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
+      ],
+      { duration: 500, easing: "ease-out", fill: "forwards" }
+    );
+    // 位置は変わらない（復帰で戻る）
+  }
 
 function spawnSparks(svgEl, p, count = 10) {
   const ns = "http://www.w3.org/2000/svg";
@@ -486,6 +582,24 @@ function buildSvgForKanji(strokes) {
   tracePathEl.dataset.role = "trace";
   s.appendChild(tracePathEl);
 
+  // キャラレイヤー（丸キャラ：後で画像差し替え可）
+  const charLayer = document.createElementNS(ns, "g");
+  charLayer.dataset.role = "charLayer";
+  charLayer.setAttribute("class", "char-layer");
+  s.appendChild(charLayer);
+
+  const ch = document.createElementNS(ns, "circle");
+  ch.dataset.role = "char";
+  ch.setAttribute("class", "char");
+  ch.setAttribute("r", "3.2");
+  ch.setAttribute("cx", "0");
+  ch.setAttribute("cy", "0");
+  // 初期位置：1画目の開始点
+  const p0 = getStrokeAnchor(strokes, 0);
+  ch.setAttribute("transform", `translate(${p0.x} ${p0.y})`);
+  s.dataset.charX = String(p0.x);
+  s.dataset.charY = String(p0.y);
+  charLayer.appendChild(ch);
   // FXレイヤー（成功/失敗演出用）
   // ※ build時に作っておくと毎回探さなくて済む
   const fx = document.createElementNS(ns, "g");
@@ -500,6 +614,8 @@ function attachTraceHandlers(svgEl, strokes) {
   drawing = false;
   points = [];
   if (tracePathEl) tracePathEl.setAttribute("d", "");
+  // 念のため（renderでbuild済みだが、再アタッチ時の保険）
+  ensureChar(svgEl);
 
   const onDown = (e) => {
     if (kanjiCompleted) return;
@@ -550,6 +666,13 @@ function attachTraceHandlers(svgEl, strokes) {
     if (ok) {
       done[strokeIndex] = true;
       strokeIndex++;
+
+       // ✅ 成功：次の画の開始点へジャンプ（最後の画ならそのまま）
+      const nextAnchor =
+        strokeIndex < strokes.length
+          ? getStrokeAnchor(strokes, strokeIndex)
+          : getStrokeAnchor(strokes, strokes.length - 1);
+      charJumpTo(svgEl, nextAnchor);
 
       refreshSvgStates(svgEl, strokes);
       renderStrokeButtons(strokes.length);
@@ -606,6 +729,8 @@ function attachTraceHandlers(svgEl, strokes) {
       shake(svgEl);
       flashFail(svgEl);
       playFailSfx();
+      // ✅ 失敗：ぽよんと落下→0.5秒で復帰（自動）
+      charFailDrop(svgEl);
     }
 
     e.preventDefault();
