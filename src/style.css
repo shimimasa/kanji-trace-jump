@@ -228,6 +228,14 @@ body {
     stroke-linejoin: round;
   }
 
+/* ===========================
++   Teacher overlay (numbers for ALL strokes)
++   - Hide in kid mode
++   - Show only in teacher mode
++   =========================== */
+.teacher-overlay { display: none; }
+.teacher-mode .teacher-overlay { display: block; }
+
 #teacherToggle {
   padding: 10px 16px;
   border-radius: 999px;

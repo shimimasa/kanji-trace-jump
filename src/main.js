@@ -806,7 +806,8 @@ function updateStrokeHint() {
     hintDot.setAttribute("cx", String(p0.x));
     hintDot.setAttribute("cy", String(p0.y));
     hintNum.setAttribute("x", String(p0.x));
-    hintNum.setAttribute("y", String(p0.y - 10));
+    // ✅ 数字は「黒丸の中心」に置く（ズレると重なって見えやすい）
+    hintNum.setAttribute("y", String(p0.y));
     hintNum.textContent = String(strokeIndex + 1);
   }
 
