@@ -485,8 +485,9 @@ const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上�
   
  function charJumpTo(svgEl, to) {
    const c = ensureChar(svgEl);
-   const from = getCharPos(svgEl);
-   const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 - 8 };
+   const base = getCharPos(svgEl); // ← これが未定義だった
+   const mid = { x: (base.x + to.x) / 2, y: (base.y + to.y) / 2 - 8 };
+   const down = { x: mid.x, y: mid.y + 10 }; // ← これが未定義だった（落下演出用）
  
    // 既存アニメが残っていても見た目破綻しないように
    c.getAnimations().forEach((a) => a.cancel());
@@ -495,16 +496,16 @@ const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上�
   // ✅ 落下 → 復帰 → 着地ぷにっ
   c.animate(
       [
-        // 0%: その場
-        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
-        // 45%: 落下（縦に伸びる）
-        { transform: `translate(${down.x}px,${down.y}px) scale(0.92,1.10)` },
-        // 78%: 元の位置に戻る
-        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
-        // 90%: ぷにっ（横に広がる）
-        { transform: `translate(${base.x}px,${base.y}px) scale(1.12,0.88)` },
-        // 100%: 戻る
-        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
+       // 0%: その場
+      { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
+       // 45%: 落下（縦に伸びる）
+      { transform: `translate(${down.x} ${down.y}) scale(0.92,1.10)` },
+       // 78%: 元の位置に戻る
+      { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
+       // 90%: ぷにっ（横に広がる）
+      { transform: `translate(${base.x} ${base.y}) scale(1.12,0.88)` },
+       // 100%: 戻る
+      { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
       ],
       { duration: 520, easing: "ease-out", fill: "forwards" }
     );
@@ -919,6 +920,7 @@ function refreshSvgStates(svgEl, strokes) {
   // ✅ 足場（影）：done の画だけ表示
   const shadowPaths = Array.from(svgEl.querySelectorAll("path.stroke-shadow"));
   shadowPaths.forEach((p) => {
+    const i = Number(p.dataset.strokeIndex); // ← これが必要（未定義 i の修正）
     if (!Number.isFinite(i)) return;
     const shouldOn = !!done[i];
     const wasOn = p.classList.contains("on");
