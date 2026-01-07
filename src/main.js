@@ -738,6 +738,16 @@ function buildSvgForKanji(strokes) {
   return s;
 }
 
+function emphasizeGoalShadow(svgEl, strokeIndex) {
+    const p = svgEl.querySelector(
+      `path.stroke-shadow[data-stroke-index="${strokeIndex}"]`
+    );
+    if (!p) return;
+    p.classList.add("goal");
+    // はなまる演出前に少し余韻を残して外す
+    setTimeout(() => p.classList.remove("goal"), 700);
+  }
+
 function attachTraceHandlers(svgEl, strokes) {
   drawing = false;
   points = [];
@@ -906,16 +916,6 @@ function refreshSvgStates(svgEl, strokes) {
     if (Number.isFinite(i) && done[i]) p.classList.add("done");
     else p.classList.remove("done");
   });
-
-  function emphasizeGoalShadow(svgEl, strokeIndex) {
-      const p = svgEl.querySelector(
-        `path.stroke-shadow[data-stroke-index="${strokeIndex}"]`
-      );
-      if (!p) return;
-      p.classList.add("goal");
-      // はなまる演出前に少し余韻を残して外す
-      setTimeout(() => p.classList.remove("goal"), 700);
-    }  
 
   // ✅ 足場（影）：done の画だけ表示
   const shadowPaths = Array.from(svgEl.querySelectorAll("path.stroke-shadow"));
