@@ -300,8 +300,8 @@ function playSuccessSfx() {
 
 function playFailSfx() {
   // 失敗は音を出さない方針ならコメントアウトでもOK
-  // playTone(180, 0.08, "triangle", 0.03);
-  if (navigator.vibrate) navigator.vibrate(30);
+  // ✅ 落下が主役：音は出さない（必要なら後で極小に）
+  if (navigator.vibrate) navigator.vibrate(18);
 }
 
 function ensureFxLayer(svgEl) {

@@ -333,9 +333,26 @@ body {
   .kanjiSvg.failFlash {
     filter: drop-shadow(0 0 0 rgba(255,0,0,0));
   }
-  .kanjiSvg.failFlash .stroke-active {
-    stroke: rgba(255, 80, 80, 0.95);
+  /* 失敗フラッシュ（弱め：注意の“気配”だけ） */
+.kanjiSvg.failFlash .stroke-active {
+    stroke: rgba(255, 120, 120, 0.45);
   }
+  
+  .kanjiSvg.failFlash {
+    /* 赤い光は出さず、ほんの少しだけ影で“違和感”を伝える */
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.10));
+  }
+  
+  .traceShake { animation: traceShake 350ms ease-out; }
+  /* shake（弱め・短め：酔わない/怒らない） */
+  @keyframes traceShake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    75% { transform: translateX(-1px); }
+    100% { transform: translateX(0); }
+  }
+  .traceShake { animation: traceShake 220ms ease-out; }
 
 /* ===========================
    Hanamaru
