@@ -688,7 +688,9 @@ function buildSvgForKanji(strokes) {
   teacherOverlay.setAttribute("class", "teacher-overlay");
   teacherOverlay.dataset.role = "teacherOverlay";
   strokes.forEach((poly, i) => {
-    const [x, y] = poly[0];
+    const p0 = poly?.[0];
+    if (!p0) return;
+    const { x, y } = p0;
 
     const dot = document.createElementNS(ns, "circle");
     dot.setAttribute("class", "teacher-start-dot");
