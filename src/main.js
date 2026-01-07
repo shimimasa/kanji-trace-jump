@@ -59,6 +59,41 @@ const elPrev = document.getElementById("prevBtn");
 const elNext = document.getElementById("nextBtn");
 const elError = document.getElementById("error");
 
+// ===========================
+// Teacher Mode (UI switch)
+// ===========================
+const TEACHER_MODE_LS_KEY = "kanjiTraceTeacherMode";
+let teacherMode = false;
+
+function readTeacherMode() {
+  const sp = new URLSearchParams(location.search);
+  const q = sp.get("teacher");
+  if (q === "1" || q === "true") return true;
+  if (q === "0" || q === "false") return false;
+  return localStorage.getItem(TEACHER_MODE_LS_KEY) === "1";
+}
+
+function applyTeacherMode(on) {
+  teacherMode = !!on;
+  document.documentElement.classList.toggle("teacher-mode", teacherMode);
+  localStorage.setItem(TEACHER_MODE_LS_KEY, teacherMode ? "1" : "0");
+
+  // 表示文言（子どもは目標、先生はモードも分かる）
+  if (elMode) {
+    elMode.textContent = teacherMode ? "teacher：ON（5もじ）" : "もくひょう：5もじ";
+  }
+}
+
+function toast(msg, ms = 900) {
+  showError(msg);
+  setTimeout(() => clearError(), ms);
+}
+
+function toggleTeacherMode() {
+  applyTeacherMode(!teacherMode);
+  toast(teacherMode ? "Teacher Mode: ON" : "Teacher Mode: OFF");
+}
+
 let items = []; // データ読み込み
 let idx = 0;
 
@@ -88,6 +123,24 @@ let tracePathEl = null;
 boot();
 
 async function boot() {
+  // teacherMode 初期化（URL / localStorage）
+  applyTeacherMode(readTeacherMode());
+
+  // 先生用の“隠しトグル”：目標表示をダブルクリック or 長押し(900ms)
+  if (elMode) {
+    elMode.addEventListener("dblclick", () => toggleTeacherMode());
+    let pressTimer = null;
+    elMode.addEventListener("pointerdown", () => {
+      pressTimer = setTimeout(() => toggleTeacherMode(), 900);
+    });
+    const cancel = () => {
+      if (pressTimer) clearTimeout(pressTimer);
+      pressTimer = null;
+    };
+    elMode.addEventListener("pointerup", cancel);
+    elMode.addEventListener("pointercancel", cancel);
+    elMode.addEventListener("pointerleave", cancel);
+  }
   try {
     items = await loadData();
   } catch (e) {

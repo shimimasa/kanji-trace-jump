@@ -309,6 +309,25 @@ body {
 }
 
 /* ===========================
++   Teacher mode UI
++   - default: kid mode (hide dev/teacher controls)
++   =========================== */
+.stroke-ui,
+.nav {
+  display: none;
+}
+
+.teacher-mode .stroke-ui,
+.teacher-mode .nav {
+  display: flex;
+}
+
+/* stroke-ui は縦に並ぶレイアウトなら block の方が良ければこちら */
+.teacher-mode .stroke-ui {
+  display: block;
+}
+
+/* ===========================
 +   Goal emphasis (last stroke)
 +   =========================== */
 .stroke-shadow.goal {
