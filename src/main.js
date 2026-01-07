@@ -5,6 +5,8 @@
 
 import "./style.css";
 
+const TEACHER_MODE_KEY = "ktj_teacherMode";
+
 // Viteのbase（例: "/" or "/kanji-trace-jump/"）を考慮して public/ 配下を読む
 const BASE_PATH = import.meta.env.BASE_URL ?? "/";
 
@@ -55,6 +57,7 @@ const MIN_DRAW_LEN_RATE = 0.25; // これ以上描いていれば成功（線長
 // DOM
 const elStars = document.getElementById("stars");
 const elMode = document.getElementById("mode");
+const elTeacherToggle = document.getElementById("teacherToggle");
 const elLabel = document.getElementById("kanjiLabel");
 const elArea = document.getElementById("kanjiArea");
 const elStrokeButtons = document.getElementById("strokeButtons");
@@ -62,29 +65,22 @@ const elPrev = document.getElementById("prevBtn");
 const elNext = document.getElementById("nextBtn");
 const elError = document.getElementById("error");
 
-// ===========================
-// Teacher Mode (UI switch)
-// ===========================
-const TEACHER_MODE_LS_KEY = "kanjiTraceTeacherMode";
-let teacherMode = false;
 
-function readTeacherMode() {
-  const sp = new URLSearchParams(location.search);
-  const q = sp.get("teacher");
-  if (q === "1" || q === "true") return true;
-  if (q === "0" || q === "false") return false;
-  return localStorage.getItem(TEACHER_MODE_LS_KEY) === "1";
+let teacherMode = readTeacherMode();
+
+function applyTeacherMode() {
+  document.documentElement.classList.toggle("teacher-mode", teacherMode);
+  if (elTeacherToggle) elTeacherToggle.setAttribute("aria-pressed", teacherMode ? "true" : "false");
 }
 
-function applyTeacherMode(on) {
-  teacherMode = !!on;
-  document.documentElement.classList.toggle("teacher-mode", teacherMode);
-  localStorage.setItem(TEACHER_MODE_LS_KEY, teacherMode ? "1" : "0");
+applyTeacherMode();
 
-  // 表示文言（子どもは目標、先生はモードも分かる）
-  if (elMode) {
-    elMode.textContent = teacherMode ? "teacher：ON（5もじ）" : "もくひょう：5もじ";
-  }
+if (elTeacherToggle) {
+  elTeacherToggle.addEventListener("click", () => {
+    teacherMode = !teacherMode;
+    writeTeacherMode(teacherMode);
+    applyTeacherMode();
+  });
 }
 
 function toast(msg, ms = 900) {
@@ -687,6 +683,30 @@ function buildSvgForKanji(strokes) {
     s.appendChild(p);
   });
 
+   // 先生用オーバーレイ（表示だけ）
+  const teacherOverlay = document.createElementNS(ns, "g");
+  teacherOverlay.setAttribute("class", "teacher-overlay");
+  teacherOverlay.dataset.role = "teacherOverlay";
+  strokes.forEach((poly, i) => {
+    const [x, y] = poly[0];
+
+    const dot = document.createElementNS(ns, "circle");
+    dot.setAttribute("class", "teacher-start-dot");
+    dot.setAttribute("cx", String(x));
+    dot.setAttribute("cy", String(y));
+    dot.setAttribute("r", "3.2");
+    teacherOverlay.appendChild(dot);
+
+    const label = document.createElementNS(ns, "text");
+    label.setAttribute("class", "teacher-start-num");
+    label.setAttribute("x", String(x));
+    label.setAttribute("y", String(y + 2.4));
+    label.setAttribute("text-anchor", "middle");
+    label.textContent = String(i + 1);
+    teacherOverlay.appendChild(label);
+  });
+  s.appendChild(teacherOverlay);
+
   // 現在ストローク強調（濃い）
   const active = document.createElementNS(ns, "path");
   active.setAttribute("class", "stroke-active");
@@ -1109,6 +1129,25 @@ function clearError() {
 function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
+
+function readTeacherMode() {
+    const qp = new URLSearchParams(location.search).get("teacher");
+    if (qp === "1" || qp === "true") return true;
+    if (qp === "0" || qp === "false") return false;
+    try {
+      return localStorage.getItem(TEACHER_MODE_KEY) === "1";
+    } catch {
+      return false;
+    }
+  }
+  
+  function writeTeacherMode(v) {
+    try {
+      localStorage.setItem(TEACHER_MODE_KEY, v ? "1" : "0");
+    } catch {
+      // ignore
+    }
+  }
 function escapeHtml(s) {
   return String(s).replace(
     /[&<>"']/g,

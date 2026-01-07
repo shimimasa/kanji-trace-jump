@@ -443,3 +443,48 @@ body {
     justify-content: center;
   }
   
+  /* =========================
++   Teacher mode (display-only)
++   - ゲーム判定/挙動は一切変えず、表示だけ切り替える
++   ========================= */
+
+.teacherToggle{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:14px;
+  font-weight:800;
+  color:#111;
+  cursor:pointer;
+  user-select:none;
+}
+.teacherToggle[aria-pressed="true"]{
+  background:var(--btn);
+}
+
+/* 画ボタンは子どもモードでは非表示（誤タップ防止） */
+#strokeButtons{ display:none; }
+.teacher-mode #strokeButtons{ display:flex; }
+
+/* 先生用オーバーレイ（書き始めドット＋番号） */
+.teacher-overlay{
+  opacity:0;
+  transition:opacity .15s ease;
+  pointer-events:none;
+}
+.teacher-mode .teacher-overlay{ opacity:1; }
+
+.teacher-start-dot{
+  fill:#fff;
+  stroke:rgba(0,0,0,.35);
+  stroke-width:1;
+}
+.teacher-start-num{
+  font-size:7px;
+  font-weight:800;
+  fill:rgba(0,0,0,.65);
+  paint-order:stroke;
+  stroke:#fff;
+  stroke-width:2px;
+}
