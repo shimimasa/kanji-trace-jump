@@ -87,11 +87,6 @@ function toast(msg, ms = 900) {
 }
 
 function toggleTeacherMode() {
-  applyTeacherMode(!teacherMode);
-  toast(teacherMode ? "Teacher Mode: ON" : "Teacher Mode: OFF");
-}
-
-function toggleTeacherMode() {
     teacherMode = !teacherMode;
     localStorage.setItem(TEACHER_MODE_LS_KEY, teacherMode ? "1" : "0");
     applyTeacherMode();
