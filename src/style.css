@@ -211,6 +211,23 @@ body {
   min-height: 20px;
 }
 
+/* ========== Stroke Hint (Kid mode) ========== */
+.stroke-hint-dot {
+    fill: var(--ink, #111);
+    stroke: #fff;
+    stroke-width: 6;
+  }
+  
+  .stroke-hint-num {
+    font-size: 42px;
+    font-weight: 800;
+    fill: var(--ink, #111);
+    paint-order: stroke;
+    stroke: #fff;
+    stroke-width: 8;
+    stroke-linejoin: round;
+  }
+
 #teacherToggle {
   padding: 10px 16px;
   border-radius: 999px;

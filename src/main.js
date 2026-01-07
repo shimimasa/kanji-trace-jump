@@ -721,6 +721,27 @@ function buildSvgForKanji(strokes) {
   active.dataset.role = "active";
   s.appendChild(active);
 
+   // 子ども向け：次に書く“今の1画だけ”のヒント（数字＋スタート点）
+  // 重なりが多い漢字では全画数表示だと読めないため、次の1画だけ出す。
+  const hintG = document.createElementNS(ns, "g");
+  hintG.dataset.role = "strokeHint";
+  hintG.setAttribute("pointer-events", "none");
+
+  const hintDot = document.createElementNS(ns, "circle");
+  hintDot.dataset.role = "strokeHintDot";
+  hintDot.setAttribute("r", "14");
+  hintDot.setAttribute("class", "stroke-hint-dot");
+
+  const hintText = document.createElementNS(ns, "text");
+  hintText.dataset.role = "strokeHintNum";
+  hintText.setAttribute("class", "stroke-hint-num");
+  hintText.setAttribute("text-anchor", "middle");
+  hintText.setAttribute("dominant-baseline", "middle");
+
+  hintG.appendChild(hintDot);
+  hintG.appendChild(hintText);
+  s.appendChild(hintG);
+
   // 当たり判定（透明の太線）
   strokes.forEach((poly, i) => {
     const hit = document.createElementNS(ns, "path");
@@ -942,7 +963,38 @@ function refreshSvgStates(svgEl, strokes) {
     const i = Number(p.dataset.strokeIndex);
     if (Number.isFinite(i) && done[i]) p.classList.add("done");
     else p.classList.remove("done");
+    // 子ども向け：今の1画だけヒントを表示
+    updateStrokeHint(svgEl, strokes, nextIdx);
   });
+
+  function updateStrokeHint(svgEl, strokes, idx) {
+      const hintG = svgEl.querySelector('[data-role="strokeHint"]');
+      if (!hintG) return;
+    
+      const dot = hintG.querySelector('circle[data-role="strokeHintDot"]');
+      const txt = hintG.querySelector('text[data-role="strokeHintNum"]');
+      if (!dot || !txt) return;
+    
+      const s = strokes[idx];
+      if (!s || !s.length) {
+        hintG.setAttribute("display", "none");
+        return;
+      }
+      hintG.removeAttribute("display");
+    
+      // スタート点（最初の点）
+      const p0 = s[0];
+      const x = p0[0];
+      const y = p0[1];
+    
+      dot.setAttribute("cx", String(x));
+      dot.setAttribute("cy", String(y));
+    
+      // 数字は少し上に逃がす（見やすさ優先）
+      txt.setAttribute("x", String(x));
+      txt.setAttribute("y", String(y - 34));
+      txt.textContent = String(idx + 1);
+    }
 
   // ✅ 足場（影）：done の画だけ表示
   const shadowPaths = Array.from(svgEl.querySelectorAll("path.stroke-shadow"));
