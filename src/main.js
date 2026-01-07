@@ -956,8 +956,9 @@ function judgeTrace(drawnPoints, strokePoly) {
   if (!drawnPoints || drawnPoints.length < 6) return false;
 
   const start = drawnPoints[0];
-  const s0 = strokePoly[0];
-  if (dist(start, s0) > START_TOL) return false;
+  // 開始点は「始点ピンポイント」ではなく「線に近いならOK」にする
+  // （pointerdown の開始条件と揃えて、1画目の横線が“反応しない”問題を防ぐ）
+  if (distancePointToPolyline(start, strokePoly) > START_TOL) return false;
 
   const strokeLen = polyLength(strokePoly);
   const drawnLen = polyLength(drawnPoints);
