@@ -44,10 +44,13 @@ const SVG_STROKES = {
   ],
 };
 
-const TOLERANCE = 10; // 近い判定（viewBox 100基準）
-const START_TOL = 16;        // 開始の許容（線の近くならOK）
-const MIN_HIT_RATE = 0.5;    // 「線の近くを通った点」の割合
-const MIN_DRAW_LEN_RATE = 0.22; // 書いた長さ（ストローク長に対する割合）
+// 小学生でも通りやすい“ゆるめ”設定（viewBox=100 基準）
+// 厳しすぎると「1画目は通るのに2画目以降が始点チェックで弾かれる」事故が起きやすい。
+// ここは“成功体験優先”で設定し、必要なら teacherMode で徐々に締める運用が安全。
+const TOLERANCE = 14; // 線に近い判定
+const START_TOL = 24; // 書き始めの近さ（端点付近ならOK）
+const MIN_HIT_RATE = 0.5; // これ以上の割合が線に近ければ成功
+const MIN_DRAW_LEN_RATE = 0.25; // これ以上描いていれば成功（線長比）
 
 // DOM
 const elStars = document.getElementById("stars");
@@ -747,7 +750,16 @@ function attachTraceHandlers(svgEl, strokes) {
 
     // stroke-hit上ならそれを優先して判定。外してても「線の近く」なら開始OKにする。
     const targetStroke = getStrokeIndexFromEvent(e); // null あり
+    // 開始点チェック（ゆるめ）
+    // ストローク点列が「逆順」になっているSVGがあり、先頭点だけを始点にすると
+    // 2画目以降が永遠に始まらない、という症状が起きる。
     const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
+    const poly = strokes[strokeIndex];
+    if (!poly || poly.length < 2) return;
+    const end0 = poly[0];
+    const end1 = poly[poly.length - 1];
+    const dEnd = Math.min(dist(p0, end0), dist(p0, end1));
+    if (dEnd > START_TOL) return;
 
     if (targetStroke != null) {
       if (targetStroke !== strokeIndex) return;
@@ -957,11 +969,14 @@ function updateTracePath(pts) {
 }
 
 function judgeTrace(drawnPoints, strokePoly) {
-  if (!drawnPoints || drawnPoints.length < 6) return false;
+  if (!drawnPoints || drawnPoints.length < 4) return false;
 
-  // 開始点を「始点ピンポイント」から「線に近ければOK」へ（小学生向け）
+  // 始点チェックは「端点どちらでもOK」にする
+  //（SVGによって点列の向きが逆で、strokePoly[0] が“終点”になることがある）
   const start = drawnPoints[0];
-  if (distancePointToPolyline(start, strokePoly) > START_TOL) return false;
+  const a = strokePoly[0];
+  const b = strokePoly[strokePoly.length - 1];
+  if (Math.min(dist(start, a), dist(start, b)) > START_TOL) return false;
 
   const strokeLen = polyLength(strokePoly);
   const drawnLen = polyLength(drawnPoints);
@@ -1021,10 +1036,17 @@ function samplePolyline(poly, n) {
 // --- Geometry helpers ---
 
 function toSvgPoint(svgEl, clientX, clientY) {
-  const rect = svgEl.getBoundingClientRect();
-  const x = ((clientX - rect.left) / rect.width) * 100;
-  const y = ((clientY - rect.top) / rect.height) * 100;
-  return { x, y };
+  // getBoundingClientRect ベースだと preserveAspectRatio の余白分でズレる（=書き始めがズレる）
+  // SVGの座標変換に正しく従うため、CTM 逆変換を使う。
+  const pt = svgEl.createSVGPoint();
+  pt.x = clientX;
+  pt.y = clientY;
+
+  const ctm = svgEl.getScreenCTM();
+  if (!ctm) return { x: 0, y: 0 };
+  const inv = ctm.inverse();
+  const p = pt.matrixTransform(inv);
+  return { x: p.x, y: p.y };
 }
 
 function polyToPathD(poly) {
