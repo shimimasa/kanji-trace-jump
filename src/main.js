@@ -63,6 +63,34 @@ const elPrev = document.getElementById("prevBtn");
 const elNext = document.getElementById("nextBtn");
 const elError = document.getElementById("error");
 
+
+
+// ============================
+// Hint text (kid-friendly)
+// ============================
+const elHint = document.getElementById("hint");
+function setHintText(text) {
+  if (!elHint) return;
+  elHint.textContent = String(text ?? "");
+}
+function updateHintText() {
+  // Prefer very short, action-oriented messages.
+  if (kanjiCompleted) {
+    setHintText('クリア！「つぎ」で次のもじへ');
+    return;
+  }
+  if (drawing) {
+    setHintText("そのまま、なぞっていこう");
+    return;
+  }
+
+  const next = strokeIndex + 1;
+  // ①②③… (1-20)
+  const circled = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳";
+  const mark = next >= 1 && next <= circled.length ? circled[next - 1] : String(next);
+  setHintText(`${mark}のところから、なぞろう`);
+}
+
 // ===========================
 // Teacher Mode（表示だけ / UI切替だけ）
 // ===========================
@@ -854,6 +882,7 @@ function attachTraceHandlers(svgEl, strokes) {
     }
 
     drawing = true;
+    updateHintText();
     points = [p0];
     updateTracePath(points);
 
@@ -905,6 +934,7 @@ function attachTraceHandlers(svgEl, strokes) {
 
       refreshSvgStates(svgEl, strokes);
       renderStrokeButtons(strokes.length);
+      updateHintText();
       // ✅ 成功演出
       pulse(svgEl);
       spawnSparks(svgEl, lastPoint || centroidOfPolyline(strokes[Math.max(0, strokeIndex - 1)]));
@@ -924,6 +954,7 @@ function attachTraceHandlers(svgEl, strokes) {
                 strokeIndex = strokes.length - 1;
                 refreshSvgStates(svgEl, strokes);
                 renderStrokeButtons(strokes.length);
+                updateHintText();
         
                 const set = getSetInfo(idx);
         
