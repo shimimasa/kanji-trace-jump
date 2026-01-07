@@ -57,20 +57,46 @@ const MIN_DRAW_LEN_RATE = 0.25; // これ以上描いていれば成功（線長
 // DOM
 const elStars = document.getElementById("stars");
 const elMode = document.getElementById("mode");
-const elTeacherToggle = document.getElementById("teacherToggle");
 const elLabel = document.getElementById("kanjiLabel");
 const elArea = document.getElementById("kanjiArea");
 const elStrokeButtons = document.getElementById("strokeButtons");
+const elTeacherToggle = document.getElementById("teacherToggle");
 const elPrev = document.getElementById("prevBtn");
 const elNext = document.getElementById("nextBtn");
 const elError = document.getElementById("error");
 
 
-let teacherMode = readTeacherMode();
+// =============================
+// Teacher Mode (表示だけ) - GOD方針
+// =============================
+const TEACHER_MODE_LS_KEY = "KanjiTraceTeacherMode";
 
-function applyTeacherMode() {
-  document.documentElement.classList.toggle("teacher-mode", teacherMode);
-  if (elTeacherToggle) elTeacherToggle.setAttribute("aria-pressed", teacherMode ? "true" : "false");
+let teacherMode = readTeacherMode();
+applyTeacherMode(teacherMode);
+
+if (elTeacherToggle) {
+  elTeacherToggle.addEventListener("click", () => {
+    teacherMode = !teacherMode;
+    writeTeacherMode(teacherMode);
+    applyTeacherMode(teacherMode);
+  });
+}
+
+function readTeacherMode() {
+  const sp = new URLSearchParams(location.search);
+  const q = sp.get("teacher");
+  if (q === "1" || q === "true") return true;
+  if (q === "0" || q === "false") return false;
+  return localStorage.getItem(TEACHER_MODE_LS_KEY) === "1";
+}
+
+function writeTeacherMode(v) {
+  localStorage.setItem(TEACHER_MODE_LS_KEY, v ? "1" : "0");
+}
+
+function applyTeacherMode(on) {
+  document.documentElement.classList.toggle("teacher-mode", !!on);
+  if (elTeacherToggle) elTeacherToggle.textContent = on ? "こども" : "先生";
 }
 
 applyTeacherMode();
@@ -1132,24 +1158,7 @@ function clamp(n, min, max) {
   return Math.max(min, Math.min(max, n));
 }
 
-function readTeacherMode() {
-    const qp = new URLSearchParams(location.search).get("teacher");
-    if (qp === "1" || qp === "true") return true;
-    if (qp === "0" || qp === "false") return false;
-    try {
-      return localStorage.getItem(TEACHER_MODE_KEY) === "1";
-    } catch {
-      return false;
-    }
-  }
   
-  function writeTeacherMode(v) {
-    try {
-      localStorage.setItem(TEACHER_MODE_KEY, v ? "1" : "0");
-    } catch {
-      // ignore
-    }
-  }
 function escapeHtml(s) {
   return String(s).replace(
     /[&<>"']/g,

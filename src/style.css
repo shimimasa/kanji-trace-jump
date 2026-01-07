@@ -442,101 +442,177 @@ body {
     gap: 12px;
     justify-content: center;
   }
-  
-  /* =========================
-+   Teacher mode (display-only)
-+   - ゲーム判定/挙動は一切変えず、表示だけ切り替える
-+   ========================= */
+  /* =========================================================
+   GOD (Kanji Trace Jump) - UI
+   - kid mode: simple / big / tappable
+   - teacher mode: 「表示だけ」（判定は変えない）
+   ========================================================= */
 
-.teacherToggle{
-  border:1px solid var(--line);
-  background:#fff;
-  border-radius:999px;
-  padding:8px 12px;
-  font-size:14px;
-  font-weight:800;
-  color:#111;
-  cursor:pointer;
-  user-select:none;
-}
-.teacherToggle[aria-pressed="true"]{
-  background:var(--btn);
+:root {
+  --bg: #f6f7f9;
+  --text: #111;
+  --muted: #666;
+  --line: rgba(0,0,0,.12);
+  --shadow: rgba(0,0,0,.18);
 }
 
-/* 画ボタンは子どもモードでは非表示（誤タップ防止） */
-#strokeButtons{ display:none; }
-.teacher-mode #strokeButtons{ display:flex; }
+* { box-sizing: border-box; }
 
-/* 先生用オーバーレイ（書き始めドット＋番号） */
-.teacher-overlay{
-  opacity:0;
-  transition:opacity .15s ease;
-  pointer-events:none;
-}
-.teacher-mode .teacher-overlay{ opacity:1; }
-
-.teacher-start-dot{
-  fill:#fff;
-  stroke:rgba(0,0,0,.35);
-  stroke-width:1;
-}
-.teacher-start-num{
-  font-size:7px;
-  font-weight:800;
-  fill:rgba(0,0,0,.65);
-  paint-order:stroke;
-  stroke:#fff;
-  stroke-width:2px;
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", sans-serif;
 }
 
+.app {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+/* ===== Header ===== */
 .hud {
-  height: 56px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 10px 18px;
+  padding: 14px 16px;
 }
 
-.goal,
-.mode {
-  font-size: 28px;
-  font-weight: 700;
+.hudLeft { display:flex; align-items:center; justify-content:flex-start; }
+.hudCenter { display:flex; align-items:center; justify-content:center; }
+.hudRight { display:flex; align-items:center; justify-content:flex-end; }
+
+.stars {
+  font-size: 22px;
+  letter-spacing: 2px;
   user-select: none;
-  justify-self: center;
+}
+
+.mode {
+  font-size: 18px;
+  color: var(--text);
+  user-select: none;
 }
 
 .teacherToggle {
-  justify-self: end;
-  padding: 10px 14px;
-  border: 2px solid #111;
+  appearance: none;
+  border: 2px solid var(--text);
   background: #fff;
+  color: var(--text);
   border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.teacherToggle:active { transform: translateY(1px); }
+
+/* ===== Content ===== */
+.content {
+  display: grid;
+  place-items: center;
+  padding: 8px 16px 0;
+  gap: 10px;
+}
+
+.kanjiLabel {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  user-select: none;
+}
+
+.kanjiArea {
+  width: min(900px, 92vw);
+  height: min(520px, 56svh);
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-radius: 18px;
+}
+
+/* SVGがはみ出ない＆中央固定 */
+#kanjiArea svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ===== Footer / Controls ===== */
+.controls {
+  padding: 10px 16px 16px;
+  display: grid;
+  place-items: center;
+  gap: 10px;
+}
+
+.strokeButtons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+}
+
+.strokeBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 2px solid var(--line);
+  background: #fff;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+.strokeBtn.active {
+  border-color: rgba(0,0,0,.25);
+  box-shadow: 0 1px 0 rgba(0,0,0,.08);
+  color: var(--text);
+}
+
+.btnRow {
+  display: flex;
+  gap: 14px;
+}
+
+.btn {
+  min-width: 180px;
+  height: 64px;
+  border-radius: 18px;
+  border: 2px solid var(--line);
+  background: #fff;
+  font-size: 28px;
   font-weight: 800;
   cursor: pointer;
 }
 
-.stroke-buttons {
-  display: flex;
-  gap: 14px;
-  pointer-events: none; /* 子どもモードでは表示だけ */
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
-.stroke-btn {
-  cursor: default;
+.hint {
+  margin-top: 4px;
+  font-size: 18px;
+  color: var(--text);
   user-select: none;
 }
 
-/* teacherMode の時だけ操作可能 */
-html.teacher-mode .stroke-buttons {
-  pointer-events: auto;
-}
-html.teacher-mode .stroke-btn {
-  cursor: pointer;
+/* ===== Teacher mode: 表示だけ増やしたいときはここに追加 ===== */
+html.teacher-mode .hint {
+  opacity: 0.9;
 }
 
-.nav {
-  display: none;
+/* kid modeでは strokeButtons を「進捗表示」扱いで押せない雰囲気に */
+html:not(.teacher-mode) .strokeButtons {
+  pointer-events: none;
 }
-html.teacher-mode .nav {
-  display: flex;
+
+/* small screens */
+@media (max-width: 520px) {
+  .kanjiLabel { font-size: 34px; }
+  .btn { min-width: 150px; height: 60px; font-size: 26px; }
+  .strokeBtn { width: 40px; height: 40px; }
 }
