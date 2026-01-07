@@ -45,9 +45,9 @@ const SVG_STROKES = {
 };
 
 const TOLERANCE = 10; // 近い判定（viewBox 100基準）
-const START_TOL = 14; // 書き始めの近さ
-const MIN_HIT_RATE = 0.7; // これ以上の割合が線に近ければ成功
-const MIN_DRAW_LEN_RATE = 0.45; // これ以上描いていれば成功（線長比）
+const START_TOL = 16;        // 開始の許容（線の近くならOK）
+const MIN_HIT_RATE = 0.5;    // 「線の近くを通った点」の割合
+const MIN_DRAW_LEN_RATE = 0.22; // 書いた長さ（ストローク長に対する割合）
 
 // DOM
 const elStars = document.getElementById("stars");
@@ -745,13 +745,17 @@ function attachTraceHandlers(svgEl, strokes) {
     if (kanjiCompleted) return;
     if (e.button != null && e.button !== 0) return;
 
-    // 開始点がストローク始点に近いかもチェック（雑にスタートだけ正す）
+    // stroke-hit上ならそれを優先して判定。外してても「線の近く」なら開始OKにする。
+    const targetStroke = getStrokeIndexFromEvent(e); // null あり
     const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
 
-     // ✅ 変更：始点ではなく「現在ストロークの線そのもの」に近ければ開始OK
-    // これで「どこから書き始めればいいか分からない」を解消する
-    const d0 = distancePointToPolyline(p0, strokes[strokeIndex]);
-    if (d0 > START_TOL) return;
+    if (targetStroke != null) {
+      if (targetStroke !== strokeIndex) return;
+    } else {
+      // 当たりから外しても、今の画の線に近ければ開始OK（小学生向け）
+      const d0 = distancePointToPolyline(p0, strokes[strokeIndex]);
+      if (d0 > START_TOL) return;
+    }
 
     drawing = true;
     points = [p0];
@@ -955,9 +959,8 @@ function updateTracePath(pts) {
 function judgeTrace(drawnPoints, strokePoly) {
   if (!drawnPoints || drawnPoints.length < 6) return false;
 
+  // 開始点を「始点ピンポイント」から「線に近ければOK」へ（小学生向け）
   const start = drawnPoints[0];
-  // 開始点は「始点ピンポイント」ではなく「線に近いならOK」にする
-  // （pointerdown の開始条件と揃えて、1画目の横線が“反応しない”問題を防ぐ）
   if (distancePointToPolyline(start, strokePoly) > START_TOL) return false;
 
   const strokeLen = polyLength(strokePoly);
@@ -970,8 +973,50 @@ function judgeTrace(drawnPoints, strokePoly) {
     if (d <= TOLERANCE) hit++;
   }
   const rate = hit / drawnPoints.length;
-  return rate >= MIN_HIT_RATE;
+  if (rate < MIN_HIT_RATE) return false;
+
+  // 追加：ストローク全体をある程度なぞったか（“なぞった感”）
+  // 緩めに：全体の45%くらいの点が近ければOK
+  const samples = samplePolyline(strokePoly, 24);
+  let cover = 0;
+  for (const sp of samples) {
+    const d = distancePointToPolyline(sp, drawnPoints);
+    if (d <= TOLERANCE * 1.1) cover++;
+  }
+  const coverRate = cover / samples.length;
+  return coverRate >= 0.45;
 }
+
+// polyline を均等サンプリング
+function samplePolyline(poly, n) {
+    const out = [];
+    if (!poly || poly.length === 0) return out;
+    if (poly.length === 1) return Array.from({ length: n }, () => ({ ...poly[0] }));
+  
+    const L = polyLength(poly);
+    if (L <= 0) return Array.from({ length: n }, () => ({ ...poly[0] }));
+  
+    for (let i = 0; i < n; i++) {
+      const t = (i / (n - 1)) * L;
+      out.push(pointAtLength(poly, t));
+    }
+    return out;
+  }
+  
+  function pointAtLength(poly, t) {
+    let acc = 0;
+    for (let i = 0; i < poly.length - 1; i++) {
+      const a = poly[i], b = poly[i + 1];
+      const seg = dist(a, b);
+      if (seg <= 0) continue;
+      if (acc + seg >= t) {
+        const r = (t - acc) / seg;
+        return { x: a.x + (b.x - a.x) * r, y: a.y + (b.y - a.y) * r };
+      }
+      acc += seg;
+    }
+    return { ...poly[poly.length - 1] };
+  }
 
 // --- Geometry helpers ---
 
