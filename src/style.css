@@ -485,3 +485,19 @@ body {
     justify-content: center;
   }
   
+  /* --- Stroke hint (child mode): show only the next stroke number --- */
+.stroke-hint-layer { pointer-events: none; }
+.stroke-hint-dot {
+  fill: #111;
+  stroke: #fff;
+  stroke-width: 4;
+  opacity: 0.95;
+}
+.stroke-hint-num {
+  font-size: 28px;
+  font-weight: 800;
+  fill: #111;
+  paint-order: stroke;
+  stroke: #fff;
+  stroke-width: 6;
+}

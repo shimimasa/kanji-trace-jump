@@ -109,6 +109,9 @@ function getSetInfo(i = idx) {
 let strokeIndex = 0; // 今なぞるべきストローク
 let done = []; // boolean[]
 let svg = null;
+let hintDot = null;
+let hintNum = null;
+let currentStrokes = null;
 
 // 1文字クリア後の自動進行（演出の余韻用）
 const AUTO_NEXT_DELAY_MS = 650;
@@ -226,6 +229,8 @@ elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
   elArea.innerHTML = "";
   svg = buildSvgForKanji(strokes);
   elArea.appendChild(svg);
+  currentStrokes = strokes;
+  updateStrokeHint();
   resetCharForNewKanji(svg, strokes);
 
   elPrev.disabled = idx === 0;
@@ -664,8 +669,6 @@ function showFinalMenu({ onReplay, onNextSet }) {
   finalOverlay = wrap;
 }
 
-
-
 function buildSvgForKanji(strokes) {
   const ns = "http://www.w3.org/2000/svg";
   const s = document.createElementNS(ns, "svg");
@@ -751,6 +754,26 @@ function buildSvgForKanji(strokes) {
     s.appendChild(hit);
   });
 
+  // Stroke hint (child mode): show ONLY the next stroke number to avoid overlaps
+  const hintLayer = document.createElementNS(ns, "g");
+  hintLayer.setAttribute("class", "stroke-hint-layer");
+
+  const dot = document.createElementNS(ns, "circle");
+  dot.setAttribute("class", "stroke-hint-dot");
+  dot.setAttribute("r", "5");
+
+  const num = document.createElementNS(ns, "text");
+  num.setAttribute("class", "stroke-hint-num");
+  num.setAttribute("text-anchor", "middle");
+  num.setAttribute("dominant-baseline", "central");
+
+  hintLayer.appendChild(dot);
+  hintLayer.appendChild(num);
+  s.appendChild(hintLayer);
+
+  hintDot = dot;
+  hintNum = num;
+
   // ユーザーの軌跡
   tracePathEl = document.createElementNS(ns, "path");
   tracePathEl.setAttribute("class", "trace-line");
@@ -785,6 +808,24 @@ function buildSvgForKanji(strokes) {
 
   return s;
 }
+
+function updateStrokeHint() {
+    if (!svg || !hintDot || !hintNum || !currentStrokes) return;
+    const stroke = currentStrokes[strokeIndex];
+    if (!stroke || !stroke.length) {
+      hintDot.style.display = "none";
+      hintNum.style.display = "none";
+      return;
+    }
+    const p0 = stroke[0];
+    hintDot.style.display = "";
+    hintNum.style.display = "";
+    hintDot.setAttribute("cx", String(p0.x));
+    hintDot.setAttribute("cy", String(p0.y));
+    hintNum.setAttribute("x", String(p0.x));
+    hintNum.setAttribute("y", String(p0.y - 10));
+    hintNum.textContent = String(strokeIndex + 1);
+  }
 
 function emphasizeGoalShadow(svgEl, strokeIndex) {
     const p = svgEl.querySelector(
@@ -865,6 +906,7 @@ function attachTraceHandlers(svgEl, strokes) {
     if (ok) {
       done[strokeIndex] = true;
       strokeIndex++;
+      updateStrokeHint();
 
        // ✅ 最後の画に着地したら「ゴールの道」を強調
       if (strokeIndex === strokes.length) {
