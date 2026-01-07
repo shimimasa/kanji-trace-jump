@@ -530,9 +530,9 @@ const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上�
   
     c.animate(
       [
-        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
-        { transform: `translate(${down.x}px,${down.y}px) scale(0.92,1.12)` },
-        { transform: `translate(${base.x}px,${base.y}px) scale(1,1)` },
+        { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
+        { transform: `translate(${down.x} ${down.y}) scale(0.92,1.12)` },
+        { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
       ],
       { duration: 500, easing: "ease-out", fill: "forwards" }
     );
@@ -730,19 +730,19 @@ function buildSvgForKanji(strokes) {
   hintG.dataset.role = "strokeHint";
   hintG.setAttribute("pointer-events", "none");
 
-  const hintDot = document.createElementNS(ns, "circle");
-  hintDot.dataset.role = "strokeHintDot";
-  hintDot.setAttribute("r", "14");
-  hintDot.setAttribute("class", "stroke-hint-dot");
+  const hintDotEl = document.createElementNS(ns, "circle");
+  hintDotEl.dataset.role = "strokeHintDot";
+  hintDotEl.setAttribute("r", "14");
+  hintDotEl.setAttribute("class", "stroke-hint-dot");
 
-  const hintText = document.createElementNS(ns, "text");
-  hintText.dataset.role = "strokeHintNum";
-  hintText.setAttribute("class", "stroke-hint-num");
-  hintText.setAttribute("text-anchor", "middle");
-  hintText.setAttribute("dominant-baseline", "middle");
+  const hintTextEl = document.createElementNS(ns, "text");
+  hintTextEl.dataset.role = "strokeHintNum";
+  hintTextEl.setAttribute("class", "stroke-hint-num");
+  hintTextEl.setAttribute("text-anchor", "middle");
+  hintTextEl.setAttribute("dominant-baseline", "middle");
 
-  hintG.appendChild(hintDot);
-  hintG.appendChild(hintText);
+  hintG.appendChild(hintDotEl);
+  hintG.appendChild(hintTextEl);
   s.appendChild(hintG);
 
   // 当たり判定（透明の太線）
@@ -753,26 +753,9 @@ function buildSvgForKanji(strokes) {
     hit.setAttribute("class", "stroke-hit");
     s.appendChild(hit);
   });
-
-  // Stroke hint (child mode): show ONLY the next stroke number to avoid overlaps
-  const hintLayer = document.createElementNS(ns, "g");
-  hintLayer.setAttribute("class", "stroke-hint-layer");
-
-  const dot = document.createElementNS(ns, "circle");
-  dot.setAttribute("class", "stroke-hint-dot");
-  dot.setAttribute("r", "5");
-
-  const num = document.createElementNS(ns, "text");
-  num.setAttribute("class", "stroke-hint-num");
-  num.setAttribute("text-anchor", "middle");
-  num.setAttribute("dominant-baseline", "central");
-
-  hintLayer.appendChild(dot);
-  hintLayer.appendChild(num);
-  s.appendChild(hintLayer);
-
-  hintDot = dot;
-  hintNum = num;
+// グローバル参照（次の画だけ表示用）
+  hintDot = hintDotEl;
+  hintNum = hintTextEl;
 
   // ユーザーの軌跡
   tracePathEl = document.createElementNS(ns, "path");
@@ -1005,38 +988,7 @@ function refreshSvgStates(svgEl, strokes) {
     const i = Number(p.dataset.strokeIndex);
     if (Number.isFinite(i) && done[i]) p.classList.add("done");
     else p.classList.remove("done");
-    // 子ども向け：今の1画だけヒントを表示
-    updateStrokeHint(svgEl, strokes, nextIdx);
   });
-
-  function updateStrokeHint(svgEl, strokes, idx) {
-      const hintG = svgEl.querySelector('[data-role="strokeHint"]');
-      if (!hintG) return;
-    
-      const dot = hintG.querySelector('circle[data-role="strokeHintDot"]');
-      const txt = hintG.querySelector('text[data-role="strokeHintNum"]');
-      if (!dot || !txt) return;
-    
-      const s = strokes[idx];
-      if (!s || !s.length) {
-        hintG.setAttribute("display", "none");
-        return;
-      }
-      hintG.removeAttribute("display");
-    
-      // スタート点（最初の点）
-      const p0 = s[0];
-      const x = p0[0];
-      const y = p0[1];
-    
-      dot.setAttribute("cx", String(x));
-      dot.setAttribute("cy", String(y));
-    
-      // 数字は少し上に逃がす（見やすさ優先）
-      txt.setAttribute("x", String(x));
-      txt.setAttribute("y", String(y - 34));
-      txt.textContent = String(idx + 1);
-    }
 
   // ✅ 足場（影）：done の画だけ表示
   const shadowPaths = Array.from(svgEl.querySelectorAll("path.stroke-shadow"));
@@ -1066,6 +1018,9 @@ function refreshSvgStates(svgEl, strokes) {
 
   const nextIdx = clamp(strokeIndex, 0, strokes.length - 1);
   active.setAttribute("d", polyToPathD(strokes[nextIdx]));
+
+  // 子ども向け：次に書く1画だけヒント更新（ここで1回だけ）
+  updateStrokeHint();
 }
 
 function getStrokeIndexFromEvent(e) {
@@ -1236,7 +1191,7 @@ function readTeacherMode() {
     if (qp === "1" || qp === "true") return true;
     if (qp === "0" || qp === "false") return false;
     try {
-      return localStorage.getItem(TEACHER_MODE_KEY) === "1";
+      return localStorage.getItem(TEACHER_MODE_LS_KEY) === "1";
     } catch {
       return false;
     }
@@ -1244,7 +1199,7 @@ function readTeacherMode() {
   
   function writeTeacherMode(v) {
     try {
-      localStorage.setItem(TEACHER_MODE_KEY, v ? "1" : "0");
+      localStorage.setItem(TEACHER_MODE_LS_KEY, v ? "1" : "0");
     } catch {
       // ignore
     }
