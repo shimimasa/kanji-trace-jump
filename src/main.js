@@ -370,8 +370,9 @@ const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上�
       }
       if (total <= 0.0001) return { x: poly[0].x, y: poly[0].y };
     
-      // 半分の長さ地点
-      const half = total / 2;
+      // ✅ 通常は少し先（60%）、最後の画だけ中央（50%）
+      const isLastStroke = (i === strokes.length - 1);
+      const half = total * (isLastStroke ? 0.5 : 0.6);
       let acc = 0;
       for (let k = 0; k < seg.length; k++) {
         const d = seg[k];
@@ -737,6 +738,10 @@ function attachTraceHandlers(svgEl, strokes) {
       done[strokeIndex] = true;
       strokeIndex++;
 
+       // ✅ 最後の画に着地したら「ゴールの道」を強調
+      if (strokeIndex === strokes.length) {
+          emphasizeGoalShadow(svgEl, strokes.length - 1);
+        }
        // ✅ 成功：次の画の開始点へジャンプ（最後の画ならそのまま）
       const nextAnchor =
         strokeIndex < strokes.length
@@ -750,6 +755,13 @@ function attachTraceHandlers(svgEl, strokes) {
       pulse(svgEl);
       spawnSparks(svgEl, lastPoint || centroidOfPolyline(strokes[Math.max(0, strokeIndex - 1)]));
       playSuccessSfx();
+
+      // ✅ 着地点にも小さくキラ（キャラの着地に合わせて）
+      setTimeout(() => {
+          // 途中で画面遷移/クリア等が走っていても安全に
+          if (!svgEl || !svgEl.isConnected) return;
+          spawnSparks(svgEl, nextAnchor, 6);
+        }, 420); // charJumpToの着地付近（duration 520msの中の終盤）
        // ✅ 1文字（全画）クリア → 自動で次の漢字へ
       if (strokeIndex >= strokes.length) {
         kanjiCompleted = true;
@@ -825,12 +837,36 @@ function refreshSvgStates(svgEl, strokes) {
     else p.classList.remove("done");
   });
 
+  function emphasizeGoalShadow(svgEl, strokeIndex) {
+      const p = svgEl.querySelector(
+        `path.stroke-shadow[data-stroke-index="${strokeIndex}"]`
+      );
+      if (!p) return;
+      p.classList.add("goal");
+      // はなまる演出前に少し余韻を残して外す
+      setTimeout(() => p.classList.remove("goal"), 700);
+    }  
+
   // ✅ 足場（影）：done の画だけ表示
   const shadowPaths = Array.from(svgEl.querySelectorAll("path.stroke-shadow"));
   shadowPaths.forEach((p) => {
-    const i = Number(p.dataset.strokeIndex);
-    if (Number.isFinite(i) && done[i]) p.classList.add("on");
-    else p.classList.remove("on");
+    if (!Number.isFinite(i)) return;
+    const shouldOn = !!done[i];
+    const wasOn = p.classList.contains("on");
+    if (shouldOn) {
+      p.classList.add("on");
+      // いま初めてONになった瞬間だけ pop
+      if (!wasOn) {
+        p.classList.remove("pop");
+        // reflow してアニメを確実に再生
+        void p.getBBox();
+        p.classList.add("pop");
+        setTimeout(() => p.classList.remove("pop"), 320);
+      }
+    } else {
+      p.classList.remove("on");
+      p.classList.remove("pop");
+    }
   });
 
   const active = svgEl.querySelector('path[data-role="active"]');

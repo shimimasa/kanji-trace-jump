@@ -301,11 +301,33 @@ body {
   opacity: 0;                /* 通常は非表示 */
   filter: blur(1.2px);       /* 影を柔らかく */
   pointer-events: none;
+  transition: opacity 260ms ease-out;
 }
 
 .stroke-shadow.on {
   opacity: 1;                /* doneになったら表示 */
 }
+
+/* ===========================
++   Goal emphasis (last stroke)
++   =========================== */
+.stroke-shadow.goal {
+    stroke: rgba(0, 0, 0, 0.28);   /* いつもより少し濃い */
+    stroke-width: 14;             /* 少し太くして“ゴール”感 */
+    filter: blur(1.4px);
+    transition: stroke 200ms ease-out, stroke-width 200ms ease-out;
+  }
+
+/* doneになった瞬間だけ、少しだけ強調して“ふわっ”感 */
+.stroke-shadow.pop {
+    animation: shadowPop 260ms ease-out;
+  }
+  
+  @keyframes shadowPop {
+    0%   { opacity: 0; }
+    60%  { opacity: 1; }
+    100% { opacity: 1; }
+  }
 
 
 /* ===========================
