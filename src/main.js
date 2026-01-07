@@ -44,13 +44,29 @@ const SVG_STROKES = {
   ],
 };
 
-// 小学生でも通りやすい“ゆるめ”設定（viewBox=100 基準）
-// 厳しすぎると「1画目は通るのに2画目以降が始点チェックで弾かれる」事故が起きやすい。
-// ここは“成功体験優先”で設定し、必要なら teacherMode で徐々に締める運用が安全。
-const TOLERANCE = 14; // 線に近い判定
-const START_TOL = 24; // 書き始めの近さ（端点付近ならOK）
-const MIN_HIT_RATE = 0.5; // これ以上の割合が線に近ければ成功
-const MIN_DRAW_LEN_RATE = 0.25; // これ以上描いていれば成功（線長比）
+// ---------------------------
+// 判定（子ども向け／安定版）
+// 0..100 のSVG座標系（viewBox前提）
+// ---------------------------
+const TOLERANCE = 16; // 線からの許容距離（viewBox 100基準）
+const START_TOL = 28; // 書き始めの近さ（開始ズレを吸収）
+
+// なぞり側の「線に近い」割合（ゆるめ）
+const MIN_HIT_RATE = 0.45;
+// 目標線長に対する「描いた長さ」最低比（短い画でも通す）
+const MIN_DRAW_LEN_RATE = 0.15;
+// 目標線の「カバー率」最低比（チート防止＆安定化）
+const MIN_COVER_RATE = 0.35;
+
+// 入力点が少ない端末でも落ちないように
+const MIN_POINTS = 3;
+// 微小な揺れは間引く
+const MIN_MOVE_EPS = 0.35;
+// 判定用に一定間隔で再サンプル（点密度を安定化）
+const RESAMPLE_STEP = 1.2;
+// カバー判定用のサンプル数
+const COVER_SAMPLES = 32;
+const COVER_TOL = TOLERANCE * 1.15;
 
 // DOM
 const elStars = document.getElementById("stars");
@@ -1079,37 +1095,40 @@ function updateTracePath(pts) {
 }
 
 function judgeTrace(drawnPoints, strokePoly) {
-  if (!drawnPoints || drawnPoints.length < 4) return false;
+  if (!Array.isArray(drawnPoints) || drawnPoints.length < MIN_POINTS) return false;
 
-  // 始点チェックは「端点どちらでもOK」にする
-  //（SVGによって点列の向きが逆で、strokePoly[0] が“終点”になることがある）
-  const start = drawnPoints[0];
-  const a = strokePoly[0];
-  const b = strokePoly[strokePoly.length - 1];
-  if (Math.min(dist(start, a), dist(start, b)) > START_TOL) return false;
+  // タッチ端末の「点が少ない／揺れる」を吸収するため、
+  // いったん間引き→一定間隔に再サンプルして判定のブレを減らす
+  const dp = normalizeDrawnPoints(drawnPoints, RESAMPLE_STEP, MIN_MOVE_EPS);
+  if (dp.length < 2) return false;
+
+  // start近さ（開始のズレは大きめに許す）
+  const start = dp[0];
+  const s0 = strokePoly[0];
+  if (dist(start, s0) > START_TOL) return false;
 
   const strokeLen = polyLength(strokePoly);
-  const drawnLen = polyLength(drawnPoints);
-  if (strokeLen <= 0 || drawnLen < strokeLen * MIN_DRAW_LEN_RATE) return false;
+  const drawnLen = polyLength(dp);
+  if (strokeLen <= 0) return false;
+  if (drawnLen < strokeLen * MIN_DRAW_LEN_RATE) return false;
 
+  // (1) なぞり点の「線に近い率」
   let hit = 0;
-  for (const p of drawnPoints) {
-    const d = distancePointToPolyline(p, strokePoly);
-    if (d <= TOLERANCE) hit++;
+  for (const p of dp) {
+    if (distancePointToPolyline(p, strokePoly) <= TOLERANCE) hit++;
   }
-  const rate = hit / drawnPoints.length;
-  if (rate < MIN_HIT_RATE) return false;
+  const hitRate = hit / dp.length;
 
-  // 追加：ストローク全体をある程度なぞったか（“なぞった感”）
-  // 緩めに：全体の45%くらいの点が近ければOK
-  const samples = samplePolyline(strokePoly, 24);
+  // (2) 目標線の「カバー率」（線の上をある程度進んでるか）
+  //   目標線を一定数サンプリングし、それぞれが描画線に近いかを見る
+  const samples = sampleAlongPolyline(strokePoly, COVER_SAMPLES);
   let cover = 0;
   for (const sp of samples) {
-    const d = distancePointToPolyline(sp, drawnPoints);
-    if (d <= TOLERANCE * 1.1) cover++;
+    if (distancePointToPolyline(sp, dp) <= COVER_TOL) cover++;
   }
   const coverRate = cover / samples.length;
-  return coverRate >= 0.45;
+
+  return hitRate >= MIN_HIT_RATE && coverRate >= MIN_COVER_RATE;
 }
 
 // polyline を均等サンプリング
@@ -1205,6 +1224,72 @@ function distancePointToSegment(p, a, b) {
   const py = a.y + t * vy;
   return Math.hypot(p.x - px, p.y - py);
 }
+
+
+// ---------------------------
+// 判定用の補助（イベント間引き／再サンプル）
+// ---------------------------
+
+function normalizeDrawnPoints(points, step = RESAMPLE_STEP, minMove = MIN_MOVE_EPS) {
+  if (!Array.isArray(points) || points.length === 0) return [];
+
+  // 連続の微小移動を間引く（タッチ端末での揺れ／過密を安定化）
+  const compact = [points[0]];
+  for (let i = 1; i < points.length; i++) {
+    const prev = compact[compact.length - 1];
+    const cur = points[i];
+    if (dist(prev, cur) >= minMove) compact.push(cur);
+  }
+  if (compact.length < 2) return compact;
+
+  // 一定間隔で再サンプル（点数が少ない端末でも判定が安定）
+  return resamplePolyline(compact, step);
+}
+
+function resamplePolyline(poly, step) {
+  const len = polyLength(poly);
+  if (len <= 0) return poly.slice();
+
+  const out = [];
+  for (let d = 0; d <= len; d += step) {
+    out.push(pointAtDistance(poly, d));
+  }
+  // 最後も必ず入れる
+  const last = poly[poly.length - 1];
+  const prev = out[out.length - 1];
+  if (!prev || dist(prev, last) > 0.01) out.push({ x: last.x, y: last.y });
+  return out;
+}
+
+function pointAtDistance(poly, d) {
+  if (poly.length === 1) return { x: poly[0].x, y: poly[0].y };
+  let acc = 0;
+  for (let i = 1; i < poly.length; i++) {
+    const a = poly[i - 1];
+    const b = poly[i];
+    const seg = dist(a, b);
+    if (acc + seg >= d) {
+      const t = seg === 0 ? 0 : (d - acc) / seg;
+      return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+    }
+    acc += seg;
+  }
+  const last = poly[poly.length - 1];
+  return { x: last.x, y: last.y };
+}
+
+function sampleAlongPolyline(poly, n) {
+  const len = polyLength(poly);
+  if (len <= 0) return poly.slice(0, 1);
+  if (n <= 1) return [pointAtDistance(poly, len * 0.5)];
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const d = (len * i) / (n - 1);
+    out.push(pointAtDistance(poly, d));
+  }
+  return out;
+}
+
 
 // --- UI helpers ---
 
