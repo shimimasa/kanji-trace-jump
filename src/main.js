@@ -5,8 +5,6 @@
 
 import "./style.css";
 
-const TEACHER_MODE_KEY = "ktj_teacherMode";
-
 // Viteのbase（例: "/" or "/kanji-trace-jump/"）を考慮して public/ 配下を読む
 const BASE_PATH = import.meta.env.BASE_URL ?? "/";
 
@@ -65,23 +63,22 @@ const elPrev = document.getElementById("prevBtn");
 const elNext = document.getElementById("nextBtn");
 const elError = document.getElementById("error");
 
-
-
-let teacherMode = readTeacherMode();
+// ===========================
+// Teacher Mode（表示だけ / UI切替だけ）
+// ===========================
+const TEACHER_MODE_LS_KEY = "kanjiTraceTeacherMode";
+let teacherMode = false;
 
 function applyTeacherMode() {
   document.documentElement.classList.toggle("teacher-mode", teacherMode);
-  if (elTeacherToggle) elTeacherToggle.setAttribute("aria-pressed", teacherMode ? "true" : "false");
-}
+  if (elTeacherToggle) {
+    elTeacherToggle.setAttribute("aria-pressed", teacherMode ? "true" : "false");
+  }
 
-applyTeacherMode();
-
-if (elTeacherToggle) {
-  elTeacherToggle.addEventListener("click", () => {
-    teacherMode = !teacherMode;
-    writeTeacherMode(teacherMode);
-    applyTeacherMode();
-  });
+  // 表示文言（子どもは目標、先生はモードも分かる）
+  if (elMode) {
+    elMode.textContent = teacherMode ? "もくひょう：5もじ（先生）" : "もくひょう：5もじ";
+  }
 }
 
 function toast(msg, ms = 900) {
@@ -93,6 +90,13 @@ function toggleTeacherMode() {
   applyTeacherMode(!teacherMode);
   toast(teacherMode ? "Teacher Mode: ON" : "Teacher Mode: OFF");
 }
+
+function toggleTeacherMode() {
+    teacherMode = !teacherMode;
+    localStorage.setItem(TEACHER_MODE_LS_KEY, teacherMode ? "1" : "0");
+    applyTeacherMode();
+    toast(teacherMode ? "先生モード：ON" : "先生モード：OFF");
+   }
 
 let items = []; // データ読み込み
 let idx = 0;
@@ -124,8 +128,8 @@ boot();
 
 async function boot() {
   // teacherMode 初期化（URL / localStorage）
-  applyTeacherMode(readTeacherMode());
-
+  teacherMode = readTeacherMode();
+  applyTeacherMode();
   // 先生用の“隠しトグル”：目標表示をダブルクリック or 長押し(900ms)
   if (elMode) {
     elMode.addEventListener("dblclick", () => toggleTeacherMode());
@@ -141,6 +145,13 @@ async function boot() {
     elMode.addEventListener("pointercancel", cancel);
     elMode.addEventListener("pointerleave", cancel);
   }
+
+  // ボタンからの切替（UIは teacher-mode の時だけ見える）
+  if (elTeacherToggle) {
+      elTeacherToggle.addEventListener("click", () => {
+        toggleTeacherMode();
+      });
+    }
   try {
     items = await loadData();
   } catch (e) {
@@ -153,9 +164,7 @@ async function boot() {
     items = fallbackItems();
   }
 
-  // モード表示は固定（必要なら items.length に合わせてもOK）
-  if (elMode) elMode.textContent = "もくひょう：5もじ";
-
+  // モード表示は applyTeacherMode() に一本化
   elPrev.addEventListener("click", () => move(-1));
   elNext.addEventListener("click", () => move(1));
 

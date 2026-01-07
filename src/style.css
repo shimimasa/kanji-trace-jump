@@ -211,6 +211,31 @@ body {
   min-height: 20px;
 }
 
+#teacherToggle {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(0, 0, 0, 0.65);
+  background: rgba(255, 255, 255, 0.96);
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* 子どもモード：先生ボタン/＋は見せない（teacher-mode の時だけ出す） */
+#teacherToggle,
+#plusBtn {
+  display: none;
+}
+.teacher-mode #teacherToggle,
+.teacher-mode #plusBtn {
+  display: inline-flex;
+}
+
+/* 子どもモード（デフォルト）：書き順UI/ナビは隠す */
+#strokeButtons,
+#navButtons { display: none; }
+.teacher-mode #strokeButtons,
+.teacher-mode #navButtons { display: flex; }
 
 
 /* ===========================
