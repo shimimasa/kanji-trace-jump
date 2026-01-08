@@ -12,11 +12,11 @@ const BASE_PATH = import.meta.env.BASE_URL ?? "/";
 const BASE_URL = new URL(BASE_PATH, window.location.href);
 
 // public/data 配下
-const DATA_PATH = new URL("data/kanji_g1_min5.json", BASE_URL).toString();
-
-// JSON（public/data/kanji_g1_min5.json）から生成した「漢字→ストローク点列」
-// 形式：{ "木": [ [ {x,y},... ], [ {x,y},... ] ... ] , ... }
-let KANJI_STROKES_MAP = {}
+const DATA_PATH = new URL("data/kanji_g1_proto.json", BASE_URL).toString();
+// 個別strokes JSON（g1）
+const STROKES_DIR = new URL("data/strokes/g1/", BASE_URL).toString();
+// 漢字→strokes(JSON) を遅延ロードしてキャッシュ
+const strokesCache = new Map(); // kanji -> Promise<polylines>
 
 // ---------------------------
 // 判定（子ども向け／安定版）
@@ -208,22 +208,8 @@ async function loadData() {
   if (!res.ok) throw new Error(`HTTP ${res.status} (${DATA_PATH})`);
   const json = await res.json();
 
-  // ✅ 推奨：{ items:[ {kanji, strokes:[{d,...},...] } ... ] }
-  if (json && Array.isArray(json.items)) {
-      KANJI_STROKES_MAP = buildKanjiStrokesMapFromJson(json.items);
-      // UI用には最小項目だけ返す
-      return json.items.map((it) => ({
-        id: it.id,
-        kanji: it.kanji,
-        strokesCount: it.strokesCount ?? it.strokes?.length ?? 0,
-      }));
-    }
-  
-    // 旧形式（配列）の場合：itemsとして扱うが strokes は無い想定
-    if (Array.isArray(json)) {
-      // strokes が無いと KANJI_STROKES_MAP は作れないので空のまま
-      return json;
-    }
+  // ✅ 80字リスト（配列）
+  if (Array.isArray(json)) return json;
 
   throw new Error("JSON形式が想定と違います（配列でも items でもない）");
 }
@@ -245,7 +231,7 @@ function move(delta) {
   render();
 }
 
-function render() {
+async function render() {
   clearError();
   kanjiCompleted = false;
 
@@ -253,13 +239,14 @@ function render() {
   const k = item?.kanji ?? "?";
 
   const set = getSetInfo(idx);
-renderStars(set.pos, set.len);                // ★は0〜4（5個）で進む
-elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
 
+  renderStars(set.pos, set.len);
+  elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`;
 
-  // ✅ JSONから生成した strokes を最優先
-  const strokes = KANJI_STROKES_MAP?.[k];
-  if (!strokes) {
+  // ✅ strokesは個別JSONからロード（キャッシュ）
+  elArea.innerHTML = `<div style="font-size:20px; opacity:.7; font-weight:700;">よみこみ中…</div>`;
+  const strokes = await getStrokesForKanji(k);
+  if (!strokes || strokes.length === 0) {
     elArea.innerHTML = `<div style="font-size:96px; opacity:.35; font-weight:700;">${escapeHtml(k)}</div>`;
     elStrokeButtons.innerHTML = "";
     elPrev.disabled = idx === 0;
@@ -287,6 +274,30 @@ elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
 
   pulse(svg);
 }
+
+async function getStrokesForKanji(kanji) {
+    if (!kanji) return null;
+    if (!strokesCache.has(kanji)) {
+      const url = new URL(`${encodeURIComponent(kanji)}.json`, STROKES_DIR).toString();
+      const p = fetch(url, { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => (j ? strokesJsonToPolylines(j) : null))
+        .catch(() => null);
+      strokesCache.set(kanji, p);
+    }
+    return await strokesCache.get(kanji);
+  }
+  
+  function strokesJsonToPolylines(j) {
+    // { kanji, strokeCount, strokes:[{path,start,...}] }
+    if (!j || !Array.isArray(j.strokes)) return null;
+    const out = [];
+    for (const s of j.strokes) {
+      if (!s?.path) continue;
+      out.push(parsePathDToPolyline(s.path));
+    }
+    return out;
+  }
 
 // ============================
 // JSON strokes(d) → polyline([{x,y},...]) 変換
