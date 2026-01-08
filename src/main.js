@@ -176,6 +176,11 @@ let kanjiCompleted = false;
 let drawing = false;
 let points = [];
 let tracePathEl = null;
+let inputLocked = false; // ✅ 演出中の入力無効
+
+// Cで設定したアニメ時間に合わせる（charJumpTo / charFailDrop と揃える）
+const JUMP_MS = 520;
+const FAIL_MS = 520;
 
 boot();
 
@@ -900,6 +905,15 @@ function emphasizeGoalShadow(svgEl, strokeIndex) {
     setTimeout(() => p.classList.remove("goal"), 700);
   }
 
+  function lockInput(ms) {
+      inputLocked = true;
+      // 万が一の取りこぼし対策で時間で解除（msは演出に合わせる）
+      setTimeout(() => {
+        inputLocked = false;
+        // 状態文言を戻したい場合はここで updateHintText() を呼んでもOK
+      }, ms);}
+
+
 function attachTraceHandlers(svgEl, strokes) {
   drawing = false;
   points = [];
@@ -909,6 +923,7 @@ function attachTraceHandlers(svgEl, strokes) {
 
   const onDown = (e) => {
     if (kanjiCompleted) return;
+    if (inputLocked) return;
     if (e.button != null && e.button !== 0) return;
 
     // stroke-hit上ならそれを優先して判定。外してても「線の近く」なら開始OKにする。
@@ -933,6 +948,7 @@ function attachTraceHandlers(svgEl, strokes) {
     }
 
     drawing = true;
+    // 演出中は動かないが、入力開始したらロックはしない（ロックは成功/失敗で行う）
     updateHintText();
     points = [p0];
     updateTracePath(points);
@@ -946,6 +962,7 @@ function attachTraceHandlers(svgEl, strokes) {
 
   const onMove = (e) => {
     if (!drawing) return;
+    if (inputLocked) return;
     const p = toSvgPoint(svgEl, e.clientX, e.clientY);
     points.push(p);
     updateTracePath(points);
@@ -954,6 +971,7 @@ function attachTraceHandlers(svgEl, strokes) {
 
   const finish = (e) => {
     if (!drawing) return;
+    if (inputLocked) return;
     drawing = false;
 
     try {
@@ -983,6 +1001,8 @@ function attachTraceHandlers(svgEl, strokes) {
         strokeIndex < strokes.length
           ? getStrokeAnchor(strokes, strokeIndex)
           : getStrokeAnchor(strokes, strokes.length - 1);
+          // ✅ 成功演出中は入力無効（ジャンプ着地まで）
+      lockInput(JUMP_MS);
       charJumpTo(svgEl, nextAnchor);
 
       refreshSvgStates(svgEl, strokes);
@@ -993,12 +1013,11 @@ function attachTraceHandlers(svgEl, strokes) {
       spawnSparks(svgEl, lastPoint || centroidOfPolyline(strokes[Math.max(0, strokeIndex - 1)]));
       playSuccessSfx();
 
-      // ✅ 着地点にも小さくキラ（キャラの着地に合わせて）
+      // ✅ 着地点にも小さくキラ（キャラの着地タイミングに合わせる）
       setTimeout(() => {
-          // 途中で画面遷移/クリア等が走っていても安全に
           if (!svgEl || !svgEl.isConnected) return;
           spawnSparks(svgEl, nextAnchor, 6);
-        }, 420); // charJumpToの着地付近（duration 520msの中の終盤）
+        }, Math.max(0, JUMP_MS - 80));
        // ✅ 1文字（全画）クリア → 自動で次の漢字へ
       if (strokeIndex >= strokes.length) {
         kanjiCompleted = true;
@@ -1048,6 +1067,8 @@ function attachTraceHandlers(svgEl, strokes) {
       // ✅ 失敗演出
       // ✅ 連続失敗救済：同じ画の失敗回数を加算（上限は judgeTrace 内で丸める）
       failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;
+      // ✅ 失敗演出中は入力無効（失敗演出まで）
+      lockInput(FAIL_MS);
       shake(svgEl);
       flashFail(svgEl);
       playFailSfx();
