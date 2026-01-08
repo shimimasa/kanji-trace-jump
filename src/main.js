@@ -100,6 +100,15 @@ function updateHintText() {
     setHintText("そのまま、なぞっていこう");
     return;
   }
+  // ✅ 連続失敗救済が発動中（同じ画でミスが続いた）なら、優しい文言に切り替え
+  const streak = Math.max(0, failStreak?.[strokeIndex] ?? 0);
+  if (streak >= 2) {
+    setHintText("だいじょうぶ！ゆっくりでOK");
+    return;
+  } else if (streak === 1) {
+    setHintText("もういちど。ゆっくりでOK");
+    return;
+  }
 
   const next = strokeIndex + 1;
   // ①②③… (1-20)
@@ -723,22 +732,74 @@ function buildSvgForKanji(strokes) {
   s.setAttribute("class", "kanjiSvg");
   s.setAttribute("aria-label", "漢字ストローク");
 
-  // ベース（薄いグレー）
+  // =========================================================
+  // Layers (fixed order): bg → road → char → stroke → hint
+  // =========================================================
+  const bgLayer = document.createElementNS(ns, "g");
+  bgLayer.dataset.role = "bgLayer";
+
+  const roadLayer = document.createElementNS(ns, "g");
+  roadLayer.dataset.role = "roadLayer";
+
+  const charLayer = document.createElementNS(ns, "g");
+  charLayer.dataset.role = "charLayer";
+  charLayer.setAttribute("class", "char-layer");
+
+  const strokeLayer = document.createElementNS(ns, "g");
+  strokeLayer.dataset.role = "strokeLayer";
+
+  const hintLayer = document.createElementNS(ns, "g");
+  hintLayer.dataset.role = "hintLayer";
+
+  // append in strict order
+  s.appendChild(bgLayer);
+  s.appendChild(roadLayer);
+  s.appendChild(charLayer);
+  s.appendChild(strokeLayer);
+  s.appendChild(hintLayer);
+
+  // Road (shadow) + Stroke base
   strokes.forEach((poly, i) => {
-     // ✅ 足場（影）：doneになった画だけ表示する
+    // ✅ 足場（影）：doneになった画だけ表示する（road layer）
     const shadow = document.createElementNS(ns, "path");
     shadow.setAttribute("d", polyToPathD(poly));
     shadow.dataset.strokeIndex = String(i);
     shadow.setAttribute("class", "stroke-shadow");
-    s.appendChild(shadow);
+    roadLayer.appendChild(shadow);
+
+    // ✅ ベース線（stroke layer）
     const p = document.createElementNS(ns, "path");
     p.setAttribute("d", polyToPathD(poly));
     p.dataset.strokeIndex = String(i);
     p.setAttribute("class", "stroke-base");
-    s.appendChild(p);
+    strokeLayer.appendChild(p);
   });
 
-   // 先生用オーバーレイ（表示だけ）
+  // Hint: child stroke hint (current only)
+  const hintG = document.createElementNS(ns, "g");
+  hintG.dataset.role = "strokeHint";
+  hintG.setAttribute("pointer-events", "none");
+
+  const hintDotEl = document.createElementNS(ns, "circle");
+  hintDotEl.dataset.role = "strokeHintDot";
+  hintDotEl.setAttribute("r", "14");
+  hintDotEl.setAttribute("class", "stroke-hint-dot");
+
+  const hintTextEl = document.createElementNS(ns, "text");
+  hintTextEl.dataset.role = "strokeHintNum";
+  hintTextEl.setAttribute("class", "stroke-hint-num");
+  hintTextEl.setAttribute("text-anchor", "middle");
+  hintTextEl.setAttribute("dominant-baseline", "middle");
+
+  hintG.appendChild(hintDotEl);
+  hintG.appendChild(hintTextEl);
+  hintLayer.appendChild(hintG);
+
+  // グローバル参照（次の画だけ表示用）
+  hintDot = hintDotEl;
+  hintNum = hintTextEl;
+
+  // Teacher overlay（表示だけ。CSSで kidでは非表示にしてOK）
   const teacherOverlay = document.createElementNS(ns, "g");
   teacherOverlay.setAttribute("class", "teacher-overlay");
   teacherOverlay.dataset.role = "teacherOverlay";
@@ -762,35 +823,15 @@ function buildSvgForKanji(strokes) {
     label.textContent = String(i + 1);
     teacherOverlay.appendChild(label);
   });
-  s.appendChild(teacherOverlay);
+  hintLayer.appendChild(teacherOverlay);
 
   // 現在ストローク強調（濃い）
   const active = document.createElementNS(ns, "path");
   active.setAttribute("class", "stroke-active");
   active.setAttribute("d", polyToPathD(strokes[0]));
   active.dataset.role = "active";
-  s.appendChild(active);
+  strokeLayer.appendChild(active);
 
-   // 子ども向け：次に書く“今の1画だけ”のヒント（数字＋スタート点）
-  // 重なりが多い漢字では全画数表示だと読めないため、次の1画だけ出す。
-  const hintG = document.createElementNS(ns, "g");
-  hintG.dataset.role = "strokeHint";
-  hintG.setAttribute("pointer-events", "none");
-
-  const hintDotEl = document.createElementNS(ns, "circle");
-  hintDotEl.dataset.role = "strokeHintDot";
-  hintDotEl.setAttribute("r", "14");
-  hintDotEl.setAttribute("class", "stroke-hint-dot");
-
-  const hintTextEl = document.createElementNS(ns, "text");
-  hintTextEl.dataset.role = "strokeHintNum";
-  hintTextEl.setAttribute("class", "stroke-hint-num");
-  hintTextEl.setAttribute("text-anchor", "middle");
-  hintTextEl.setAttribute("dominant-baseline", "middle");
-
-  hintG.appendChild(hintDotEl);
-  hintG.appendChild(hintTextEl);
-  s.appendChild(hintG);
 
   // 当たり判定（透明の太線）
   strokes.forEach((poly, i) => {
@@ -798,24 +839,15 @@ function buildSvgForKanji(strokes) {
     hit.setAttribute("d", polyToPathD(poly));
     hit.dataset.strokeIndex = String(i);
     hit.setAttribute("class", "stroke-hit");
-    s.appendChild(hit);
+    strokeLayer.appendChild(hit);
   });
-// グローバル参照（次の画だけ表示用）
-  hintDot = hintDotEl;
-  hintNum = hintTextEl;
 
   // ユーザーの軌跡
   tracePathEl = document.createElementNS(ns, "path");
   tracePathEl.setAttribute("class", "trace-line");
   tracePathEl.setAttribute("d", "");
   tracePathEl.dataset.role = "trace";
-  s.appendChild(tracePathEl);
-
-  // キャラレイヤー（丸キャラ：後で画像差し替え可）
-  const charLayer = document.createElementNS(ns, "g");
-  charLayer.dataset.role = "charLayer";
-  charLayer.setAttribute("class", "char-layer");
-  s.appendChild(charLayer);
+  strokeLayer.appendChild(tracePathEl);
 
   const ch = document.createElementNS(ns, "circle");
   ch.dataset.role = "char";
@@ -834,8 +866,8 @@ function buildSvgForKanji(strokes) {
   const fx = document.createElementNS(ns, "g");
   fx.dataset.role = "fx";
   fx.setAttribute("class", "fx-layer");
-  s.appendChild(fx);
-
+  // 演出は stroke の上、hint の下が扱いやすい
+  strokeLayer.appendChild(fx);
   return s;
 }
 
