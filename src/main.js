@@ -14,35 +14,9 @@ const BASE_URL = new URL(BASE_PATH, window.location.href);
 // public/data 配下
 const DATA_PATH = new URL("data/kanji_g1_min5.json", BASE_URL).toString();
 
-// 5文字（あなたの現状）を SVG ストローク（ポリライン）で再現
-// 座標系は viewBox="0 0 100 100"
-const SVG_STROKES = {
-  木: [
-    [{ x: 20, y: 30 }, { x: 80, y: 30 }], // ①横
-    [{ x: 50, y: 12 }, { x: 50, y: 88 }], // ②縦
-    [{ x: 50, y: 52 }, { x: 25, y: 85 }], // ③左はらい
-    [{ x: 50, y: 52 }, { x: 75, y: 85 }], // ④右はらい
-  ],
-  山: [
-    [{ x: 30, y: 18 }, { x: 30, y: 82 }], // ①左たて
-    [{ x: 50, y: 28 }, { x: 50, y: 82 }, { x: 70, y: 82 }], // ②中たて→下よこ（まとめ）
-    [{ x: 70, y: 18 }, { x: 70, y: 82 }], // ③右たて
-  ],
-  川: [
-    [{ x: 34, y: 18 }, { x: 34, y: 82 }], // ①左
-    [{ x: 50, y: 18 }, { x: 50, y: 82 }], // ②中
-    [{ x: 66, y: 18 }, { x: 66, y: 82 }], // ③右
-  ],
-  口: [
-    [{ x: 28, y: 30 }, { x: 72, y: 30 }], // ①上よこ
-    [{ x: 28, y: 30 }, { x: 28, y: 72 }], // ②左たて
-    [{ x: 72, y: 30 }, { x: 72, y: 72 }, { x: 28, y: 72 }], // ③右たて→下よこ
-  ],
-  人: [
-    [{ x: 54, y: 22 }, { x: 36, y: 82 }], // ①左はらい
-    [{ x: 54, y: 22 }, { x: 74, y: 82 }], // ②右はらい
-  ],
-};
+// JSON（public/data/kanji_g1_min5.json）から生成した「漢字→ストローク点列」
+// 形式：{ "木": [ [ {x,y},... ], [ {x,y},... ] ... ] , ... }
+let KANJI_STROKES_MAP = {}
 
 // ---------------------------
 // 判定（子ども向け／安定版）
@@ -234,11 +208,22 @@ async function loadData() {
   if (!res.ok) throw new Error(`HTTP ${res.status} (${DATA_PATH})`);
   const json = await res.json();
 
-  // 期待：配列 [{kanji:"木", strokesCount:4}, ...]
-  if (Array.isArray(json)) return json;
-
-  // もし {items:[...]} 形式なら吸収
-  if (json && Array.isArray(json.items)) return json.items;
+  // ✅ 推奨：{ items:[ {kanji, strokes:[{d,...},...] } ... ] }
+  if (json && Array.isArray(json.items)) {
+      KANJI_STROKES_MAP = buildKanjiStrokesMapFromJson(json.items);
+      // UI用には最小項目だけ返す
+      return json.items.map((it) => ({
+        id: it.id,
+        kanji: it.kanji,
+        strokesCount: it.strokesCount ?? it.strokes?.length ?? 0,
+      }));
+    }
+  
+    // 旧形式（配列）の場合：itemsとして扱うが strokes は無い想定
+    if (Array.isArray(json)) {
+      // strokes が無いと KANJI_STROKES_MAP は作れないので空のまま
+      return json;
+    }
 
   throw new Error("JSON形式が想定と違います（配列でも items でもない）");
 }
@@ -272,7 +257,8 @@ renderStars(set.pos, set.len);                // ★は0〜4（5個）で進む
 elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
 
 
-  const strokes = SVG_STROKES[k];
+  // ✅ JSONから生成した strokes を最優先
+  const strokes = KANJI_STROKES_MAP?.[k];
   if (!strokes) {
     elArea.innerHTML = `<div style="font-size:96px; opacity:.35; font-weight:700;">${escapeHtml(k)}</div>`;
     elStrokeButtons.innerHTML = "";
@@ -301,6 +287,44 @@ elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
 
   pulse(svg);
 }
+
+// ============================
+// JSON strokes(d) → polyline([{x,y},...]) 変換
+// ============================
+function buildKanjiStrokesMapFromJson(items) {
+    const map = {};
+    for (const it of items) {
+      if (!it?.kanji || !Array.isArray(it.strokes)) continue;
+      const polylines = [];
+      for (const s of it.strokes) {
+        if (!s?.d) continue;
+        polylines.push(parsePathDToPolyline(s.d));
+      }
+      if (polylines.length) map[it.kanji] = polylines;
+    }
+    return map;
+  }
+  
+  // 超軽量パーサ：M/L の座標だけを拾って点列化する（viewBox=0..100想定）
+  // 例: "M30 25 L30 80 L70 80" / "M70 20 L70 80 M30 80 L70 80"
+  function parsePathDToPolyline(d) {
+    const tokens = String(d).trim().match(/[ML]|-?\d*\.?\d+/g);
+    if (!tokens) return [];
+  
+    const pts = [];
+    let i = 0;
+    while (i < tokens.length) {
+      const t = tokens[i++];
+      if (t === "M" || t === "L") {
+        const x = Number(tokens[i++]);
+        const y = Number(tokens[i++]);
+        if (Number.isFinite(x) && Number.isFinite(y)) pts.push({ x, y });
+        continue;
+      }
+      // まれにコマンド省略で数値が続くケースに備えて握りつぶす
+    }
+    return pts;
+  }
 
 function renderStars(current, total) {
   const max = 5;
