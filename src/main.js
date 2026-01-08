@@ -13,10 +13,10 @@ const BASE_URL = new URL(BASE_PATH, window.location.href);
 
 // public/data 配下
 const DATA_PATH = new URL("data/kanji_g1_proto.json", BASE_URL).toString();
-// 個別strokes JSON（g1）
-const STROKES_DIR = new URL("data/strokes/g1/", BASE_URL).toString();
-// 漢字→strokes(JSON) を遅延ロードしてキャッシュ
-const strokesCache = new Map(); // kanji -> Promise<polylines>
+// 個別strokes JSON の基点（strokesRef を使う）
+const STROKES_BASE = new URL("data/strokes/", BASE_URL).toString();
+// 遅延ロードしてキャッシュ（keyはstrokesRef）
+const strokesCache = new Map(); // strokesRef -> Promise<polylines>
 
 // ---------------------------
 // 判定（子ども向け／安定版）
@@ -209,7 +209,18 @@ async function loadData() {
   const json = await res.json();
 
   // ✅ 80字リスト（配列）
-  if (Array.isArray(json)) return json;
+  if (Array.isArray(json)) {
+        // strokesRef が無い行は id から補完（B案：idファイル名）
+        return json.map((it) => {
+          const id = it?.id;
+          const grade = it?.grade ?? 1;
+          const fallbackRef = id ? `g${grade}/${id}.json` : null;
+          return {
+            ...it,
+            strokesRef: it?.strokesRef ?? fallbackRef,
+          };
+        });
+      }
 
   throw new Error("JSON形式が想定と違います（配列でも items でもない）");
 }
@@ -245,7 +256,8 @@ async function render() {
 
   // ✅ strokesは個別JSONからロード（キャッシュ）
   elArea.innerHTML = `<div style="font-size:20px; opacity:.7; font-weight:700;">よみこみ中…</div>`;
-  const strokes = await getStrokesForKanji(k);
+  // strokesRef 優先（無ければ kanji からの旧方式は最終フォールバック）
+  const strokes = await getStrokesForItem(item);
   if (!strokes || strokes.length === 0) {
     elArea.innerHTML = `<div style="font-size:96px; opacity:.35; font-weight:700;">${escapeHtml(k)}</div>`;
     elStrokeButtons.innerHTML = "";
@@ -274,20 +286,36 @@ async function render() {
 
   pulse(svg);
 }
-
-async function getStrokesForKanji(kanji) {
-    if (!kanji) return null;
-    if (!strokesCache.has(kanji)) {
-      const url = new URL(`${encodeURIComponent(kanji)}.json`, STROKES_DIR).toString();
-      const p = fetch(url, { cache: "no-store" })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((j) => (j ? strokesJsonToPolylines(j) : null))
-        .catch(() => null);
-      strokesCache.set(kanji, p);
-    }
-    return await strokesCache.get(kanji);
-  }
+async function getStrokesForItem(item) {
+    if (!item) return null;
+    const ref = item.strokesRef;
   
+    // 1) strokesRef があればそれを使う（推奨）
+    if (ref) {
+      if (!strokesCache.has(ref)) {
+        const url = new URL(ref, STROKES_BASE).toString();
+        const p = fetch(url, { cache: "no-store" })
+          .then((r) => (r.ok ? r.json() : null))
+          .then((j) => (j ? strokesJsonToPolylines(j) : null))
+          .catch(() => null);
+        strokesCache.set(ref, p);
+      }
+      return await strokesCache.get(ref);
+    }
+  // 2) 最終フォールバック（旧）：kanji名.json
+  const kanji = item.kanji;
+  if (!kanji) return null;
+  const legacyRef = `g1/${encodeURIComponent(kanji)}.json`;
+  if (!strokesCache.has(legacyRef)) {
+    const url = new URL(legacyRef, STROKES_BASE).toString();
+    const p = fetch(url, { cache: "no-store" })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => (j ? strokesJsonToPolylines(j) : null))
+      .catch(() => null);
+    strokesCache.set(legacyRef, p);
+  }
+  return await strokesCache.get(legacyRef);
+}
   function strokesJsonToPolylines(j) {
     // { kanji, strokeCount, strokes:[{path,start,...}] }
     if (!j || !Array.isArray(j.strokes)) return null;
@@ -299,22 +327,6 @@ async function getStrokesForKanji(kanji) {
     return out;
   }
 
-// ============================
-// JSON strokes(d) → polyline([{x,y},...]) 変換
-// ============================
-function buildKanjiStrokesMapFromJson(items) {
-    const map = {};
-    for (const it of items) {
-      if (!it?.kanji || !Array.isArray(it.strokes)) continue;
-      const polylines = [];
-      for (const s of it.strokes) {
-        if (!s?.d) continue;
-        polylines.push(parsePathDToPolyline(s.d));
-      }
-      if (polylines.length) map[it.kanji] = polylines;
-    }
-    return map;
-  }
   
   // 超軽量パーサ：M/L の座標だけを拾って点列化する（viewBox=0..100想定）
   // 例: "M30 25 L30 80 L70 80" / "M70 20 L70 80 M30 80 L70 80"
