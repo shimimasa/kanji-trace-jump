@@ -153,6 +153,7 @@ function getSetInfo(i = idx) {
 
 let strokeIndex = 0; // 今なぞるべきストローク
 let done = []; // boolean[]
+let failStreak = []; // 連続失敗救済（画ごと）
 let svg = null;
 let hintDot = null;
 let hintNum = null;
@@ -268,6 +269,7 @@ elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`; // 例：木 (1/5)
 
   done = new Array(strokes.length).fill(false);
   strokeIndex = 0;
+  failStreak = new Array(strokes.length).fill(0);
 
   renderStrokeButtons(strokes.length);
 
@@ -935,6 +937,8 @@ function attachTraceHandlers(svgEl, strokes) {
 
     if (ok) {
       done[strokeIndex] = true;
+      // ✅ 成功した画は救済カウントをリセット
+      failStreak[strokeIndex] = 0;
       strokeIndex++;
       updateStrokeHint();
 
@@ -1010,6 +1014,8 @@ function attachTraceHandlers(svgEl, strokes) {
         
      } else {
       // ✅ 失敗演出
+      // ✅ 連続失敗救済：同じ画の失敗回数を加算（上限は judgeTrace 内で丸める）
+      failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;
       shake(svgEl);
       flashFail(svgEl);
       playFailSfx();
@@ -1148,7 +1154,20 @@ function judgeTrace(drawnPoints, strokePoly) {
 
   const drawnLen = polyLength(dp);
   if (drawnLen < strokeLen * P.minDraw) return false;
-
+ // ✅ 連続失敗救済（小学生向け）
+  // 同じ画でミスが続いたら、少しずつ甘くする（最大3段階）
+  const streak = Math.max(0, Math.min(3, failStreak?.[strokeIndex] ?? 0));
+  if (streak > 0) {
+    const k = streak; // 1..3
+    // 許容距離を少し広げる（最大 +6）
+    P.tol += 2 * k;
+    P.coverTol = P.tol * 1.15;
+    // 閾値を少し下げる（最大 -0.12）
+    P.minHit = Math.max(0.30, P.minHit - 0.04 * k);
+    P.minCover = Math.max(0.20, P.minCover - 0.05 * k);
+    // 始点許容も少しだけ広げる（最大 +6）
+    P.startTol += 2 * k;
+  }
   // (1) なぞり点の「線に近い率」
   let hit = 0;
   for (const p of dp) {
