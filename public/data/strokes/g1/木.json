@@ -1,0 +1,32 @@
+{
+    "kanji": "木",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokes": [
+      {
+        "index": 1,
+        "path": "M24.0 39.5 L76.0 39.5",
+        "start": [24.0, 39.5],
+        "hintOffset": [-18, 0]
+      },
+      {
+        "index": 2,
+        "path": "M49.99 13.5 L49.99 84.5",
+        "start": [49.99, 13.5],
+        "hintOffset": [0, -18]
+      },
+      {
+        "index": 3,
+        "path": "M50.0 43.0 L27.0 74.0",
+        "start": [50.0, 43.0],
+        "hintOffset": [-12, 12]
+      },
+      {
+        "index": 4,
+        "path": "M50.0 43.0 L73.0 74.0",
+        "start": [50.0, 43.0],
+        "hintOffset": [12, 12]
+      }
+    ]
+  }
+  

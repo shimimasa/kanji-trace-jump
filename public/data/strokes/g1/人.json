@@ -1,0 +1,31 @@
+{
+  "kanji": "人",
+  "grade": 1,
+  "strokeCount": 2,
+  "strokes": [
+    {
+      "index": 1,
+      "path": "M55 18 L32 82",
+      "start": [
+        55.0,
+        18.0
+      ],
+      "hintOffset": [
+        0,
+        -18
+      ]
+    },
+    {
+      "index": 2,
+      "path": "M55 18 L78 82",
+      "start": [
+        55.0,
+        18.0
+      ],
+      "hintOffset": [
+        0,
+        -18
+      ]
+    }
+  ]
+}

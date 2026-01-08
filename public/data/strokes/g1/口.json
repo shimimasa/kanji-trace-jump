@@ -1,0 +1,55 @@
+{
+  "kanji": "口",
+  "grade": 1,
+  "strokeCount": 4,
+  "strokes": [
+    {
+      "index": 1,
+      "path": "M30 30 L70 30",
+      "start": [
+        30.0,
+        30.0
+      ],
+      "hintOffset": [
+        -18,
+        0
+      ]
+    },
+    {
+      "index": 2,
+      "path": "M30 30 L30 70",
+      "start": [
+        30.0,
+        30.0
+      ],
+      "hintOffset": [
+        -18,
+        -18
+      ]
+    },
+    {
+      "index": 3,
+      "path": "M70 30 L70 70",
+      "start": [
+        70.0,
+        30.0
+      ],
+      "hintOffset": [
+        18,
+        -18
+      ]
+    },
+    {
+      "index": 4,
+      "path": "M30 70 L70 70",
+      "start": [
+        30.0,
+        70.0
+      ],
+      "hintOffset": [
+        0,
+        18
+      ]
+    }
+  ]
+}
