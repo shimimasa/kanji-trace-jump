@@ -68,6 +68,7 @@ const RESAMPLE_STEP = 1.2;
 const COVER_SAMPLES = 32;
 const COVER_TOL = TOLERANCE * 1.15;
 
+
 // DOM
 const elStars = document.getElementById("stars");
 const elMode = document.getElementById("mode");
@@ -1094,6 +1095,39 @@ function updateTracePath(pts) {
   tracePathEl.setAttribute("d", polyToPathD(pts));
 }
 
+// ---------------------------
+// ストローク長に応じた「自動調整」
+// - 短い画：甘く（失敗しやすい）
+// - 長い画：少し締める（雑クリア防止）
+// ---------------------------
+function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+function getAdaptiveParams(strokeLen) {
+  // strokeLen: 0..200 くらい（viewBox=100の線分）
+  // 12以下は「短い」、60以上は「長い」と見なす
+  const short = 12;
+  const long = 60;
+  const t = clamp01((strokeLen - short) / (long - short)); // 0(短い)〜1(長い)
+
+  // 許容距離：短いほど甘く、長いほど基準へ
+  const tol = TOLERANCE + (1 - t) * 4;        // +0〜+4
+  const coverTol = tol * 1.15;
+
+  // 近い率：短いほど低くてOK、長いほど基準へ
+  const minHit = MIN_HIT_RATE + t * 0.08;     // 0.45〜0.53
+
+  // 描いた長さ：短いほど低くてOK、長いほど基準へ
+  const minDraw = MIN_DRAW_LEN_RATE + t * 0.07; // 0.15〜0.22
+
+  // カバー率：短いほど低くてOK、長いほど基準へ
+  const minCover = MIN_COVER_RATE + t * 0.15; // 0.35〜0.50
+
+  // 開始許容：短いほど広め（狙いにくい）、長いほど少し狭め
+  const startTol = START_TOL - t * 6;         // 28〜22
+
+  return { tol, coverTol, minHit, minDraw, minCover, startTol };
+}
+
 function judgeTrace(drawnPoints, strokePoly) {
   if (!Array.isArray(drawnPoints) || drawnPoints.length < MIN_POINTS) return false;
 
@@ -1105,17 +1139,20 @@ function judgeTrace(drawnPoints, strokePoly) {
   // start近さ（開始のズレは大きめに許す）
   const start = dp[0];
   const s0 = strokePoly[0];
-  if (dist(start, s0) > START_TOL) return false;
-
   const strokeLen = polyLength(strokePoly);
-  const drawnLen = polyLength(dp);
   if (strokeLen <= 0) return false;
-  if (drawnLen < strokeLen * MIN_DRAW_LEN_RATE) return false;
+
+  // ✅ 長さに応じた自動調整
+  const P = getAdaptiveParams(strokeLen);
+  if (dist(start, s0) > P.startTol) return false;
+
+  const drawnLen = polyLength(dp);
+  if (drawnLen < strokeLen * P.minDraw) return false;
 
   // (1) なぞり点の「線に近い率」
   let hit = 0;
   for (const p of dp) {
-    if (distancePointToPolyline(p, strokePoly) <= TOLERANCE) hit++;
+    if (distancePointToPolyline(p, strokePoly) <= P.tol) hit++;
   }
   const hitRate = hit / dp.length;
 
@@ -1124,11 +1161,11 @@ function judgeTrace(drawnPoints, strokePoly) {
   const samples = sampleAlongPolyline(strokePoly, COVER_SAMPLES);
   let cover = 0;
   for (const sp of samples) {
-    if (distancePointToPolyline(sp, dp) <= COVER_TOL) cover++;
+    if (distancePointToPolyline(sp, dp) <= P.coverTol) cover++;
   }
   const coverRate = cover / samples.length;
 
-  return hitRate >= MIN_HIT_RATE && coverRate >= MIN_COVER_RATE;
+  return hitRate >= P.minHit && coverRate >= P.minCover;
 }
 
 // polyline を均等サンプリング
