@@ -509,3 +509,24 @@ body {
   stroke: #fff;
   stroke-width: 6;
 }
+
+.stroke-shadow {
+    /* 道（影）は最初は見えない */
+    opacity: 0;
+    transition: opacity 180ms ease-out;
+  }
+  
+  .stroke-shadow.on {
+    /* done になったら “ふわっ” */
+    opacity: 1;
+  }
+    /* done になった瞬間だけ少し気持ちよく（ポップ） */
+  .stroke-shadow.pop {
+    animation: roadPop 220ms ease-out;
+  }
+  
+  @keyframes roadPop {
+    0%   { opacity: 0; }
+    60%  { opacity: 1; }
+    100% { opacity: 1; }
+  }
