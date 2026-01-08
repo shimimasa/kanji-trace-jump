@@ -1,30 +1,62 @@
-{"id": "g1-041",
+{
+  "schemaVersion": "1.0",
+  "id": "g1-041",
   "kanji": "人",
   "grade": 1,
-  "strokeCount": 2,
+  "strokeCount": 4,
+  "viewBox": [
+    0,
+    0,
+    100,
+    100
+  ],
   "strokes": [
     {
       "index": 1,
       "path": "M55 18 L32 82",
       "start": [
-        55.0,
-        18.0
+        55,
+        18
       ],
-      "hintOffset": [
-        0,
-        -18
+      "end": [
+        32,
+        82
       ]
     },
     {
       "index": 2,
+      "path": "M55 18 L32 82",
+      "start": [
+        55,
+        18
+      ],
+      "end": [
+        32,
+        82
+      ]
+    },
+    {
+      "index": 3,
       "path": "M55 18 L78 82",
       "start": [
-        55.0,
-        18.0
+        55,
+        18
       ],
-      "hintOffset": [
-        0,
-        -18
+      "end": [
+        78,
+        82
+      ]
+    },
+    {
+      "index": 4,
+      "path": "M55 18 L78 82",
+      "start": [
+        55,
+        18
+      ],
+      "end": [
+        78,
+        82
       ]
     }
   ]

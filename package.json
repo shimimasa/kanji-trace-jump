@@ -4,12 +4,14 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-      "dev": "vite",
-      "build": "vite build",
-      "preview": "vite preview"
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "svg2json:g1": "node scripts/svg-to-strokes.mjs --grade 1 --svgDir public/svg/g1 --proto public/data/kanji_g1_proto.json --out public/data/strokes/g1"
+
     },
     "devDependencies": {
-      "vite": "^5.0.0"
+        "fast-xml-parser": "^5.3.3",
+        "vite": "^5.0.0"
     }
-  }
-  
+}
