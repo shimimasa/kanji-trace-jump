@@ -544,56 +544,56 @@ const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上�
     setCharPos(svgEl, p);
   }
   
-  
- function charJumpTo(svgEl, to) {
-   const c = ensureChar(svgEl);
-   const base = getCharPos(svgEl); // ← これが未定義だった
-   const mid = { x: (base.x + to.x) / 2, y: (base.y + to.y) / 2 - 8 };
-   const down = { x: mid.x, y: mid.y + 10 }; // ← これが未定義だった（落下演出用）
- 
-   // 既存アニメが残っていても見た目破綻しないように
-   c.getAnimations().forEach((a) => a.cancel());
+  function charJumpTo(svgEl, to) {
+       const c = ensureChar(svgEl);
+       const from = getCharPos(svgEl);
+       const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 - 10 }; // 少し上に跳ぶ
+    
+       // 既存アニメが残っていても見た目破綻しないように
+       c.getAnimations().forEach((a) => a.cancel());
+    
+       // Web Animations は CSS transform として解釈されるので px とカンマを付ける
+       const kf = (p, sx = 1, sy = 1) => ({
+         transform: `translate(${p.x}px, ${p.y}px) scale(${sx}, ${sy})`,
+       });
+    
+       c.animate(
+         [
+           kf(from, 1, 1),          // 離陸
+           kf(mid, 1.08, 1.08),     // ジャンプ中：少し大きく
+           kf(to, 1, 1),            // 着地
+           kf(to, 1.12, 0.88),      // ぷにっ
+           kf(to, 1, 1),            // もどる
+         ],
+         { duration: 520, easing: "ease-out", fill: "forwards" }
+       );
+    
+       // SVG transform（viewBox座標）として確定
+       setTimeout(() => setCharPos(svgEl, to), 540);
+     }
 
-  // ✅ ジャンプ中：少し大きく（1.08）／着地：ぷにっと潰す
-  // ✅ 落下 → 復帰 → 着地ぷにっ
-  c.animate(
-      [
-       // 0%: その場
-      { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
-       // 45%: 落下（縦に伸びる）
-      { transform: `translate(${down.x} ${down.y}) scale(0.92,1.10)` },
-       // 78%: 元の位置に戻る
-      { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
-       // 90%: ぷにっ（横に広がる）
-      { transform: `translate(${base.x} ${base.y}) scale(1.12,0.88)` },
-       // 100%: 戻る
-      { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
-      ],
-      { duration: 520, easing: "ease-out", fill: "forwards" }
-    );
-   // 最終位置を確定
-  setTimeout(() => setCharPos(svgEl, to), 540);
- }
-
-  
-  
-  function charFailDrop(svgEl) {
-    const c = ensureChar(svgEl);
-    const base = getCharPos(svgEl);
-    const down = { x: base.x, y: base.y + 16 };
-  
-    c.getAnimations().forEach((a) => a.cancel());
-  
-    c.animate(
-      [
-        { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
-        { transform: `translate(${down.x} ${down.y}) scale(0.92,1.12)` },
-        { transform: `translate(${base.x} ${base.y}) scale(1,1)` },
-      ],
-      { duration: 500, easing: "ease-out", fill: "forwards" }
-    );
-    // 位置は変わらない（復帰で戻る）
-  }
+     function charFailDrop(svgEl) {
+         const c = ensureChar(svgEl);
+         const base = getCharPos(svgEl);
+         const down = { x: base.x, y: base.y + 14 };
+      
+         c.getAnimations().forEach((a) => a.cancel());
+      
+         const kf = (p, sx = 1, sy = 1) => ({
+           transform: `translate(${p.x}px, ${p.y}px) scale(${sx}, ${sy})`,
+         });
+      
+         c.animate(
+           [
+             kf(base, 1, 1),          // その場
+             kf(down, 0.92, 1.10),    // 落下
+             kf(base, 1, 1),          // 復帰
+             kf(base, 1.12, 0.88),    // ぷにっ
+             kf(base, 1, 1),          // もどる
+           ],
+           { duration: 520, easing: "ease-out", fill: "forwards" }
+         );
+       }
 
 function spawnSparks(svgEl, p, count = 10) {
   const ns = "http://www.w3.org/2000/svg";
