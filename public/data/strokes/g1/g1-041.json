@@ -3,7 +3,7 @@
   "id": "g1-041",
   "kanji": "人",
   "grade": 1,
-  "strokeCount": 4,
+  "strokeCount": 2,
   "viewBox": [
     0,
     0,
@@ -25,30 +25,6 @@
     },
     {
       "index": 2,
-      "path": "M55 18 L32 82",
-      "start": [
-        55,
-        18
-      ],
-      "end": [
-        32,
-        82
-      ]
-    },
-    {
-      "index": 3,
-      "path": "M55 18 L78 82",
-      "start": [
-        55,
-        18
-      ],
-      "end": [
-        78,
-        82
-      ]
-    },
-    {
-      "index": 4,
       "path": "M55 18 L78 82",
       "start": [
         55,

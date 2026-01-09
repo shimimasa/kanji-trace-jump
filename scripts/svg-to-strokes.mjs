@@ -34,6 +34,7 @@ function parseArgs(argv) {
     out: "public/data/strokes/g1",
     dryRun: false,
     overwrite: true,
+    strict: false,
   };
 
   for (let i = 2; i < argv.length; i++) {
@@ -45,6 +46,7 @@ function parseArgs(argv) {
     else if (a === "--out") args.out = next, i++;
     else if (a === "--dryRun") args.dryRun = true;
     else if (a === "--no-overwrite") args.overwrite = false;
+    else if (a === "--strictCount") args.strictCount = true;
   }
   return args;
 }
@@ -122,8 +124,56 @@ function getDataStroke(p) {
     p?.["@_data-index"] ??
     p?.["@_dataIndex"];
   const n = Number(raw);
-  return Number.isFinite(n) ? n : null;
+  if (Number.isFinite(n)) return n;
+
+  // KanjiVG: id に "-s1" のような番号が入っていることが多い
+  const id = p?.["@_id"];
+  if (id) {
+    const m = String(id).match(/-s(\d+)\b/i);
+    if (m) {
+      const k = Number(m[1]);
+      return Number.isFinite(k) ? k : null;
+    }
+  }
+  return null;
 }
+
+function getClassName(p) {
+    const cls = p?.["@_class"];
+    return cls ? String(cls) : "";
+  }
+  
+  function isKanjiVGStrokePath(p) {
+    // KanjiVGの本ストロークは class に "stroke_path" を含むことが多い
+    // もしくは id に "-s1" のような stroke番号が入る
+    const cls = getClassName(p);
+    if (cls.includes("stroke_path")) return true;
+    const id = p?.["@_id"];
+    if (id && /-s\d+\b/i.test(String(id))) return true;
+    return false;
+  }
+  
+  function isKanjiVGNonStroke(p) {
+    // 念のため：番号表示など（stroke_pathではないもの）を弾く
+    const cls = getClassName(p);
+    if (cls.includes("stroke_num") || cls.includes("stroke_numbers")) return true;
+    return false;
+  }
+  
+  function kanjiFromFilename(filename) {
+    // 期待： "木.svg" のように漢字1文字
+    const base = path.basename(filename, ".svg");
+    if (base.length === 1) return base;
+  
+    // KanjiVGのファイル名は 4e00.svg のような hex が多い（Unicode code point）
+    if (/^[0-9a-f]{4,6}$/i.test(base)) {
+      const cp = parseInt(base, 16);
+      if (Number.isFinite(cp)) return String.fromCodePoint(cp);
+    }
+    // それ以外はそのまま（protoと一致するように運用側で揃える）
+    return base;
+  }
+
 
 // Normalize coordinates to [0..100] if SVG viewBox isn't already 0..100
 // This is a simple numeric scaling on all numbers in "d".
@@ -185,7 +235,7 @@ async function main() {
   let ok = 0, skip = 0, fail = 0;
 
   for (const f of svgFiles) {
-    const kanji = path.basename(f, ".svg"); // expects 木.svg etc
+    const kanji = kanjiFromFilename(f);
     const it = map.get(kanji);
     if (!it) {
       console.warn(`[SKIP] proto not found for kanji="${kanji}" (file=${f})`);
@@ -206,15 +256,18 @@ async function main() {
     }
 
     const vb = getViewBox(parsed);
-    const paths = walkCollectPaths(parsed?.svg ?? parsed).filter((p) => p?.["@_d"] || p?.["@_D"] || p?.d);
+    const pathsAll = walkCollectPaths(parsed?.svg ?? parsed).filter((p) => p?.["@_d"] || p?.["@_D"] || p?.d);
 
-    // Normalize path objects to { d, dataStroke }
-    let strokes = paths
+    // KanjiVG判定：stroke_path / -sN が1つでもあれば KanjiVG式として扱う
+    const hasKvgStroke = pathsAll.some((p) => isKanjiVGStrokePath(p));
+
+    // Normalize path objects to { d, dataStroke, raw }
+    let strokes = pathsAll
       .map((p) => {
         const d = p?.["@_d"] ?? p?.["@_D"] ?? p?.d;
         if (!d) return null;
         const ds = getDataStroke(p);
-        return { d: String(d), dataStroke: ds };
+        return { d: String(d), dataStroke: ds, raw: p };
       })
       .filter(Boolean);
 
@@ -228,14 +281,20 @@ async function main() {
     // Filtering / Dedup (重要)
     // 1) data-stroke があるSVGは、data-stroke付きのみ採用（補助パス除外）
     // 2) (dataStroke, d) が同一のものは重複除去（同じ線が2回入る問題を潰す）
+    // 3) KanjiVGの場合は stroke_path / -sN のみ採用（補助パス除外）
     // ---------------------------------------------------------
     const hasAnyDS = strokes.some((s) => s.dataStroke != null);
     if (hasAnyDS) {
       strokes = strokes.filter((s) => s.dataStroke != null);
     }
 
+    if (hasKvgStroke) {
+            strokes = strokes
+              .filter((s) => isKanjiVGStrokePath(s.raw))
+              .filter((s) => !isKanjiVGNonStroke(s.raw));
+          }
     // Sort by data-stroke if present, else document order
-    if (hasAnyDS) {
+    if (hasAnyDS || hasKvgStroke){
       strokes.sort((a, b) => (a.dataStroke ?? 9999) - (b.dataStroke ?? 9999));
     }
 
@@ -249,6 +308,8 @@ async function main() {
       deduped.push(s);
     }
     strokes = deduped;
+    // raw参照はもう不要
+    strokes = strokes.map(({ d, dataStroke }) => ({ d, dataStroke }));
 
     const outStrokes = strokes.map((s, idx) => {
       const d100 = normalizePathDTo100(s.d, vb);
@@ -261,6 +322,18 @@ async function main() {
       };
     });
 
+    // ---- strokeCount validation (proto vs extracted) ----
+    const expectedCount = Number(it.strokeCount ?? it.strokes ?? it.strokesCount);
+    if (Number.isFinite(expectedCount) && expectedCount > 0 && outStrokes.length !== expectedCount) {
+      const msg = `[WARN] strokeCount mismatch: ${kanji} (${it.id}) expected=${expectedCount} actual=${outStrokes.length} file=${f}`;
+      if (args.strictCount) {
+        console.error(msg);
+        fail++;
+        continue;
+      } else {
+        console.warn(msg);
+      }
+    }
     const outJson = {
       schemaVersion: "1.0",
       id: it.id,
