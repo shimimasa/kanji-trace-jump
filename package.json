@@ -7,8 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "svg2json:g1": "node scripts/svg-to-strokes.mjs --grade 1 --svgDir public/svg/g1 --proto public/data/kanji_g1_proto.json --out public/data/strokes/g1"
-
+        "svg2json:g1:kvg": "node scripts/svg-to-strokes.mjs --grade 1 --svgDir public/svg/kvg/g1 --proto public/data/kanji_g1_proto.json --out public/data/strokes/g1 --strictCount"
     },
     "devDependencies": {
         "fast-xml-parser": "^5.3.3",
