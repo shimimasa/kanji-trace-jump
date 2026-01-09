@@ -322,32 +322,48 @@ async function getStrokesForItem(item) {
     const out = [];
     for (const s of j.strokes) {
       if (!s?.path) continue;
-      out.push(parsePathDToPolyline(s.path));
+      // KanjiVGは曲線(C/Q)が多いので、必ずサンプリングで点列化する
+    out.push(pathDToPolylineBySampling(s.path, 36));
     }
     return out;
   }
 
+  // KanjiVGのC/Q等を含むpathでも確実に点列化するため、SVGPathElementでサンプリングする
+function pathDToPolylineBySampling(d, samples = 36) {
+    const ns = "http://www.w3.org/2000/svg";
+    // オフスクリーンのSVG/pathを作って長さから点を取る
+    const svg = document.createElementNS(ns, "svg");
+    svg.setAttribute("viewBox", "0 0 100 100");
+    const p = document.createElementNS(ns, "path");
+    p.setAttribute("d", String(d));
+    svg.appendChild(p);
   
-  // 超軽量パーサ：M/L の座標だけを拾って点列化する（viewBox=0..100想定）
-  // 例: "M30 25 L30 80 L70 80" / "M70 20 L70 80 M30 80 L70 80"
-  function parsePathDToPolyline(d) {
-    const tokens = String(d).trim().match(/[ML]|-?\d*\.?\d+/g);
-    if (!tokens) return [];
+    let len = 0;
+    try {
+      len = p.getTotalLength();
+    } catch {
+      // 万一壊れたdなら空
+      return [];
+    }
+    if (!Number.isFinite(len) || len <= 0.01) return [];
   
     const pts = [];
-    let i = 0;
-    while (i < tokens.length) {
-      const t = tokens[i++];
-      if (t === "M" || t === "L") {
-        const x = Number(tokens[i++]);
-        const y = Number(tokens[i++]);
-        if (Number.isFinite(x) && Number.isFinite(y)) pts.push({ x, y });
-        continue;
-      }
-      // まれにコマンド省略で数値が続くケースに備えて握りつぶす
+    const n = Math.max(8, samples); // 少なすぎると判定が荒れる
+    for (let i = 0; i <= n; i++) {
+      const dist = (len * i) / n;
+      const pt = p.getPointAtLength(dist);
+      pts.push({ x: +pt.x.toFixed(2), y: +pt.y.toFixed(2) });
     }
-    return pts;
+  
+    // 連続重複点を軽く除去（ゼロ長セグメント対策）
+    const compact = [];
+    for (const q of pts) {
+      const prev = compact[compact.length - 1];
+      if (!prev || Math.hypot(prev.x - q.x, prev.y - q.y) > 0.01) compact.push(q);
+    }
+    return compact;
   }
+
 
 function renderStars(current, total) {
   const max = 5;
