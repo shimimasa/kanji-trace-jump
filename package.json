@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
       "dev": "vite",
-      "build": "vite build",
+      "build": "vite build --debug --logLevel info",
       "preview": "vite preview",
       "svg2json:g1:kvg": "node scripts/svg-to-strokes.mjs --grade 1 --svgDir public/svg/kvg/g1 --proto public/data/kanji_g1_proto.json --out public/data/strokes/g1 --strictCount"
     },

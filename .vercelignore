@@ -1,0 +1,6 @@
+# raw KanjiVG (never deploy)
+public/svg/kvg/
+kanjivg/
+
+# dev only
+node_modules/
