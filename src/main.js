@@ -1033,7 +1033,7 @@ function ensureCharLayer(svgEl) {
   }
 
   // ===========================
- // Character (minimal circle)
+ // Character (minimal 猫画像)
  // ===========================
 const CHAR_RIDE_OFFSET = 2.4; // viewBox(0-100)基準。1〜2px相当の“上に乗る”感
   
