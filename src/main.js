@@ -11,6 +11,11 @@ const BASE_PATH = import.meta.env.BASE_URL ?? "/";
 // ✅ ここがポイント：base を「絶対URL」にする
 const BASE_URL = new URL(BASE_PATH, window.location.href);
 
+// 猫キャラ（public/assets/characters/neko.png）
+const NEKO_URL = new URL("assets/characters/neko.png", BASE_URL).toString();
+// SVG viewBox(0-100)基準のサイズ（好みで調整：10〜16くらいが無難）
+const CHAR_SIZE = 14;
+
 // public/data 配下
 const DATA_PATH = new URL("data/kanji_g1_proto.json", BASE_URL).toString();
 // 個別strokes JSON の基点（strokesRef を使う）
@@ -1008,12 +1013,20 @@ function ensureCharLayer(svgEl) {
     const layer = ensureCharLayer(svgEl);
     c = document.createElementNS(ns, "circle");
     c.dataset.role = "char";
-    c.setAttribute("r", "3.2");
-    c.setAttribute("cx", "0");
-    c.setAttribute("cy", "0");
+    
     c.setAttribute("class", "char");
-    // transformで位置を動かす
-    c.setAttribute("transform", "translate(50 50)");
+    c.setAttribute("width", String(CHAR_SIZE));
+  c.setAttribute("height", String(CHAR_SIZE));
+  // translateした点が「画像の中心」になるように
+  c.setAttribute("x", String(-CHAR_SIZE / 2));
+  c.setAttribute("y", String(-CHAR_SIZE / 2));
+  // クリックを邪魔しない
+  c.setAttribute("pointer-events", "none");
+  // 画像参照（SVG2: href / 互換: xlink:href）
+  c.setAttribute("href", NEKO_URL);
+  c.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", NEKO_URL);
+  // transformで位置を動かす
+  c.setAttribute("transform", "translate(50 50)");
     layer.appendChild(c);
     return c;
   }
@@ -1957,19 +1970,12 @@ function buildSvgForKanji(strokes) {
   tracePathEl.setAttribute("d", "");
   tracePathEl.dataset.role = "trace";
   strokeLayer.appendChild(tracePathEl);
-
-  const ch = document.createElementNS(ns, "circle");
-  ch.dataset.role = "char";
-  ch.setAttribute("class", "char");
-  ch.setAttribute("r", "3.2");
-  ch.setAttribute("cx", "0");
-  ch.setAttribute("cy", "0");
-  // 初期位置：1画目の開始点
+// キャラ（猫）を生成（ensureChar が image を作る）
   const p0 = getStrokeAnchor(strokes, 0);
+  const ch = ensureChar(s);
   ch.setAttribute("transform", `translate(${p0.x} ${p0.y})`);
   s.dataset.charX = String(p0.x);
   s.dataset.charY = String(p0.y);
-  charLayer.appendChild(ch);
   // FXレイヤー（成功/失敗演出用）
   // ※ build時に作っておくと毎回探さなくて済む
   const fx = document.createElementNS(ns, "g");
@@ -2091,6 +2097,7 @@ function attachTraceHandlers(svgEl, strokes) {
     updateTracePath(points);
 
     try {
+      lastPointerId = e.pointerId;
       svgEl.setPointerCapture(e.pointerId);
     } catch (_) {}
 
