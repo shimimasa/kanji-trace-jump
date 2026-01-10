@@ -140,6 +140,40 @@ function getSetInfo(i = idx) {
 const SET_RESULTS_LS_KEY = "ktj_set_results_v1";
 let setRun = null; // { setStart, setLen, startedAt, attempts, success, fail, rescued, kanjiCleared }
 
+// Self best (fastest time) per setStart
+const SET_PB_LS_KEY = "ktj_set_pb_v1";
+
+function loadSetPBMap() {
+  try {
+    const raw = localStorage.getItem(SET_PB_LS_KEY);
+    if (!raw) return {};
+    const obj = JSON.parse(raw);
+    return obj && typeof obj === "object" ? obj : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveSetPBMap(map) {
+  try {
+    localStorage.setItem(SET_PB_LS_KEY, JSON.stringify(map));
+  } catch {
+    // ignore
+  }
+}
+
+function getSetKey(setStart, setLen) {
+  // setLenも含める（最後の短いセットが別扱いになる）
+  return `${setStart}_${setLen}`;
+}
+
+function getPersonalBest(setStart, setLen) {
+  const map = loadSetPBMap();
+  const k = getSetKey(setStart, setLen);
+  const ms = map?.[k]?.timeMs;
+  return Number.isFinite(ms) ? ms : null;
+}
+
 function loadSetResults() {
   try {
     const raw = localStorage.getItem(SET_RESULTS_LS_KEY);
@@ -204,8 +238,21 @@ function finalizeSetRun() {
     success: setRun.success,
     fail: setRun.fail,
     rescued: setRun.rescued,
-    accuracy: acc,
+    accuracy: acc, 
   };
+  // ✅ Phase3-2: Personal Best（最速タイム）判定＆更新
+  const pbMap = loadSetPBMap();
+  const key = getSetKey(result.setStart, result.setLen);
+  const prev = pbMap?.[key]?.timeMs;
+  const hasPrev = Number.isFinite(prev);
+  const isNewPB = !hasPrev || result.timeMs < prev;
+  if (isNewPB) {
+    pbMap[key] = { timeMs: result.timeMs, at: result.at };
+    saveSetPBMap(pbMap);
+  }
+  result.personalBestMs = isNewPB ? result.timeMs : prev;
+  result.personalBestText = formatMs(result.personalBestMs);
+  result.isNewPB = isNewPB;
   saveSetResult(result);
   return result;
 }
@@ -1175,6 +1222,7 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
                 r
                   ? `<div class="final-stats">
                       <div class="final-stat"><span>タイム</span><b>${r.timeText}</b></div>
+                      <div class="final-stat pb"><span>じこベスト</span><b>${r.personalBestText}${r.isNewPB ? ' <em class="pb-new">NEW!</em>' : ""}</b></div>
                       <div class="final-stat"><span>せいこうりつ</span><b>${r.accuracy}%</b></div>
                       <div class="final-stat"><span>せいこう/しこう</span><b>${r.success}/${r.attempts}</b></div>
                       <div class="final-stat"><span>きゅうさい</span><b>${r.rescued}</b></div>

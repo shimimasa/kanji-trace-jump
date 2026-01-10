@@ -607,3 +607,21 @@ body {
   .final-hist-row{
     opacity: 0.9;
   }
+  .final-stat.pb b{
+    display:flex;
+    gap:6px;
+    align-items:baseline;
+  }
+  .pb-new{
+    font-style: normal;
+    font-weight: 900;
+    font-size: 11px;
+    transform: translateY(-1px);
+    animation: pb-pop 320ms ease-out;
+  }
+  @keyframes pb-pop{
+    0%{ transform: translateY(-1px) scale(.7); opacity:.4; }
+    60%{ transform: translateY(-1px) scale(1.15); opacity:1; }
+    100%{ transform: translateY(-1px) scale(1); opacity:1; }
+  }
+  
