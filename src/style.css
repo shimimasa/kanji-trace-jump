@@ -213,19 +213,21 @@ body {
 
 /* ========== Stroke Hint (Kid mode) ========== */
 .stroke-hint-dot {
-    fill: var(--ink, #111);
-    stroke: #fff;
-    stroke-width: 6;
+  fill: rgba(0, 0, 0, 0.88);
+    stroke: rgba(255, 255, 255, 0.95);
+    stroke-width: 3;
+    opacity: 0.70;
   }
   
   .stroke-hint-num {
-    font-size: 42px;
-    font-weight: 800;
-    fill: var(--ink, #111);
-    paint-order: stroke;
-    stroke: #fff;
-    stroke-width: 8;
-    stroke-linejoin: round;
+    font-size: 18px;
+  font-weight: 800;
+  fill: rgba(0, 0, 0, 0.92);
+  paint-order: stroke;
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  opacity: 0.85;
   }
 
 /* ===========================
@@ -496,18 +498,20 @@ body {
   /* --- Stroke hint (child mode): show only the next stroke number --- */
 .stroke-hint-layer { pointer-events: none; }
 .stroke-hint-dot {
-  fill: #111;
-  stroke: #fff;
-  stroke-width: 4;
-  opacity: 0.95;
+  fill: rgba(0, 0, 0, 0.88);
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 3;
+  opacity: 0.70;
 }
 .stroke-hint-num {
-  font-size: 28px;
+  font-size: 18px;
   font-weight: 800;
-  fill: #111;
+  fill: rgba(0, 0, 0, 0.92);
   paint-order: stroke;
-  stroke: #fff;
-  stroke-width: 6;
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-width: 4;
+  stroke-linejoin: round;
+  opacity: 0.85;
 }
 
 .stroke-shadow {

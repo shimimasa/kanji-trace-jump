@@ -850,7 +850,8 @@ function buildSvgForKanji(strokes) {
 
   const hintDotEl = document.createElementNS(ns, "circle");
   hintDotEl.dataset.role = "strokeHintDot";
-  hintDotEl.setAttribute("r", "14");
+  // UI微調整：始点〇が大きすぎるので小さく
+  hintDotEl.setAttribute("r", "8");
   hintDotEl.setAttribute("class", "stroke-hint-dot");
 
   const hintTextEl = document.createElementNS(ns, "text");
@@ -954,7 +955,7 @@ function updateStrokeHint() {
     hintDot.setAttribute("cy", String(p0.y));
     hintNum.setAttribute("x", String(p0.x));
     // ✅ 数字は「黒丸の中心」に置く（ズレると重なって見えやすい）
-    hintNum.setAttribute("y", String(p0.y));
+    hintNum.setAttribute("y", String(p0.y - 8));
     hintNum.textContent = String(strokeIndex + 1);
   }
 
