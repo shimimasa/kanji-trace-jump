@@ -494,21 +494,42 @@ function pathDToPolylineBySampling(d, samples = 36) {
     return compact;
   }
 
+  function renderStars(posInSet, setLen) {
+      const max = clamp(setLen, 1, SET_SIZE); // 1..5
+      const filled = clamp(posInSet + 1, 1, max);
+    
+      // 初期化（個数が変わる場合のみ作り直す）
+      if (elStars.children.length !== max) {
+        elStars.innerHTML = "";
+        for (let i = 0; i < max; i++) {
+          const star = document.createElement("span");
+          star.className = "star";
+          star.textContent = "★";
+          elStars.appendChild(star);
+        }
+      }
+    
+      // 状態更新
+      [...elStars.children].forEach((star, i) => {
+        const isFilled = i < filled;
+        star.classList.toggle("filled", isFilled);
+    
+        // 直前から増えた星だけ「ぷるん」
+        if (isFilled && i === filled - 1 && _lastStarFilled < filled) {
+          star.classList.remove("pop"); // 再発火対策
+          void star.offsetWidth;        // reflow
+          star.classList.add("pop");
+        }
+      });
+    
+      // セット完了時のキラ（既存演出を流用）
+      if (filled === max && _lastStarFilled !== max) {
+        sparkleStars?.();
+      }
+    
+      _lastStarFilled = filled;
+    }
 
-function renderStars(current, total) {
-  const max = 5;
-  const ratio = total <= 1 ? 1 : current / (total - 1);
-  const filled = Math.round(ratio * (max - 1)) + 1; // 1〜5
-  const s = [];
-  for (let i = 0; i < max; i++) s.push(i < filled ? "★" : "☆");
-  elStars.textContent = s.join("");
-
-  // ✅ 5つ揃った瞬間だけキラ
-  if (filled === 5 && _lastStarFilled !== 5) {
-    sparkleStars();
-  }
-  _lastStarFilled = filled;
- }
 
 // ===========================
 // Stars sparkle (on 5/5)

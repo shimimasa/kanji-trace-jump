@@ -535,6 +535,38 @@ body {
     opacity: .95;
     user-select: none;
   }
+
+  /* ===== Star Gauge (DOM) ===== */
+#stars {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.star {
+  font-size: 18px;
+  line-height: 1;
+  color: #bbb;
+  transform: scale(0.9);
+  transition: color 0.2s ease, transform 0.2s ease;
+  user-select: none;
+}
+
+.star.filled {
+  color: #f6c343; /* やさしい金色 */
+}
+
+/* ぷるん */
+.star.pop {
+  animation: star-pop 260ms ease-out;
+}
+
+@keyframes star-pop {
+  0%   { transform: scale(0.6); }
+  60%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
   
   
   @keyframes roadPop {
