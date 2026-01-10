@@ -755,3 +755,48 @@ body {
   display:flex;
   justify-content: flex-end;
 }
+.tb-progress{
+  margin-bottom: 10px;
+}
+.tb-progress-text{
+  font-size: 12px;
+  opacity: .75;
+  margin-left: 6px;
+}
+.tb-bar{
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+.tb-bar-fill{
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.22);
+}
+.tb-progress-sub{
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: .8;
+}
+.tb-rarity{
+  display:inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  background: rgba(0,0,0,0.08);
+  opacity: .9;
+}
+.tb-r-SR{ background: rgba(0,0,0,0.18); }
+.tb-r-R{ background: rgba(0,0,0,0.12); }
+.tb-r-N{ background: rgba(0,0,0,0.08); }
+/* 未取得枠 */
+.tb-row.locked{
+  opacity: 0.62;
+  filter: grayscale(0.25);
+}
+.tb-row.locked .tb-title{
+  letter-spacing: .08em;
+}

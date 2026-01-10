@@ -240,33 +240,37 @@ function computeRank({ timeMs, accuracy, rescued, setLen }) {
   // ===========================
 // Title (based on rank + style)
 // ===========================
-function computeTitle({ rank, timeMs, accuracy, rescued }) {
-    // “褒めやすい”称号を優先。ネガティブ称号は出さない。
-    const safeRescued = Number.isFinite(rescued) ? rescued : 0;
-    const safeAcc = Number.isFinite(accuracy) ? accuracy : 0;
+function computeTitle({ rank, timeMs, accuracy, rescued, comboMax, isNewPB, setLen }) {
+    // ネガティブ称号は出さない
+    const acc = Number.isFinite(accuracy) ? accuracy : 0;
+    const res = Number.isFinite(rescued) ? rescued : 0;
+    const t = Number.isFinite(timeMs) ? timeMs : 0;
+    const len = Math.max(1, setLen || 5);
+    const perChar = t / len;
   
-    // 上位ほど分岐を増やす
+    // --- レア条件（優先） ---
+    if (acc >= 100) return "ノーミス王";
+    if (res === 0 && acc >= 92) return "きゅうさいゼロ王";
+    if (isNewPB) return "新記録王";
+    if (Number.isFinite(comboMax) && comboMax >= 8) return "連勝王";
+    if (perChar <= 15_000) return "タイムアタック王"; // 1文字15秒以内はかなり速い
+  
+    // --- 通常称号 ---
     if (rank === "S") {
-      // Sは速さ寄り。精度が高ければ“かんぺき”系も出す
-      if (safeAcc >= 97 && safeRescued <= 1) return "かんぺき王";
+      if (acc >= 97 && res <= 1) return "かんぺき王";
       return "スピード王";
     }
-  
     if (rank === "A") {
-      // Aは丁寧さ寄り。救済が少なければ丁寧、救済が多ければ挑戦を褒める
-      if (safeAcc >= 92 && safeRescued <= 2) return "ていねい王";
-      if (safeRescued >= 4) return "あきらめない王";
+      if (acc >= 92 && res <= 2) return "ていねい王";
+      if (res >= 4) return "あきらめない王";
       return "ナイス王";
     }
-  
     if (rank === "B") {
-      if (safeAcc >= 85) return "のびしろ王";
-      if (safeRescued >= 4) return "がんばり王";
+      if (acc >= 85) return "のびしろ王";
+      if (res >= 4) return "がんばり王";
       return "チャレンジ王";
     }
-  
-    // Cでも明るい称号にする
-    if (safeAcc >= 70) return "つぎはA王";
+    if (acc >= 70) return "つぎはA王";
     return "スタート王";
   }
 
@@ -353,12 +357,16 @@ function finalizeSetRun() {
     result.rankScore = rk.score;
 
     // ✅ Title
-  result.title = computeTitle({
-      rank: result.rank,
-      timeMs: result.timeMs,
-      accuracy: result.accuracy,
-      rescued: result.rescued,
-    });
+    result.title = computeTitle({
+          rank: result.rank,
+          timeMs: result.timeMs,
+          accuracy: result.accuracy,
+          rescued: result.rescued,
+          setLen: result.setLen,
+          isNewPB: !!result.isNewPB,
+          // comboMax は未実装なら undefined のままでOK
+          comboMax: result.comboMax,
+        });
 
     result.comment = computeComment({
           rank: result.rank,
@@ -1324,6 +1332,31 @@ function playSetClearFanfare() {
 // ===========================
 const TITLE_BOOK_LS_KEY = "ktj_title_book_v1";
 
+// ✅ 全称号カタログ（達成率の母数）
+// ここにある称号が「全種類」です（後で増やせば勝手に母数が増える）
+const TITLE_CATALOG = [
+    { title: "スピード王", rarity: "N", hint: "はやくクリア" },
+    { title: "かんぺき王", rarity: "R", hint: "高せいこうりつ＋きゅうさい少" },
+    { title: "ていねい王", rarity: "N", hint: "せいこうりつ高め" },
+    { title: "あきらめない王", rarity: "N", hint: "きゅうさい多めでも続けた" },
+    { title: "ナイス王", rarity: "N", hint: "いい感じ" },
+    { title: "のびしろ王", rarity: "N", hint: "これから伸びる" },
+    { title: "がんばり王", rarity: "N", hint: "ミスしても進めた" },
+    { title: "チャレンジ王", rarity: "N", hint: "挑戦した" },
+    { title: "つぎはA王", rarity: "N", hint: "もうすこし！" },
+    { title: "スタート王", rarity: "N", hint: "はじめの一歩" },
+    // --- Rare / Epic ---
+  { title: "ノーミス王", rarity: "R", hint: "ミス0（せいこうりつ100%）" },
+  { title: "きゅうさいゼロ王", rarity: "R", hint: "きゅうさい0でクリア" },
+  { title: "タイムアタック王", rarity: "R", hint: "かなり速い" },
+  { title: "連勝王", rarity: "SR", hint: "コンボ高めでクリア" },
+  { title: "新記録王", rarity: "R", hint: "じこベスト更新" },
+  ];
+  
+  function getTitleMeta(title) {
+    return TITLE_CATALOG.find((x) => x.title === title) || null;
+  }
+
 function loadTitleBook() {
   try {
     const raw = localStorage.getItem(TITLE_BOOK_LS_KEY);
@@ -1345,7 +1378,7 @@ function saveTitleBook(book) {
   }
 }
 
-function addTitleToBook({ title, rank, at } = {}) {
+function addTitleToBook({ title, rank, rarity, at } = {}) {
   if (!title) return false;
   const book = loadTitleBook();
   const key = String(title);
@@ -1355,6 +1388,7 @@ function addTitleToBook({ title, rank, at } = {}) {
   book.items[key] = {
     title: key,
     rank: rank || (cur?.rank ?? null),
+    rarity: rarity || (cur?.rarity ?? null),
     firstAt: cur?.firstAt ?? now,
     lastAt: now,
     count: (cur?.count ?? 0) + 1,
@@ -1374,20 +1408,38 @@ function closeTitleBook() {
 function showTitleBook() {
   closeTitleBook();
   const book = loadTitleBook();
-  const list = Object.values(book.items || {});
-  list.sort((a, b) => (b.lastAt ?? 0) - (a.lastAt ?? 0));
-
+  const ownedMap = book.items || {};
+  const total = TITLE_CATALOG.length;
+  const got = Object.keys(ownedMap).length;
+    const pct = total > 0 ? Math.round((got / total) * 100) : 0;
+    const remain = Math.max(0, total - got);
+  // ✅ カタログ順で表示（未取得は ???）
+  // rarity順に寄せたい場合はここで sort してもOK（今は作成順＝あなたの演出設計順）
   const rows =
-    list.length === 0
-      ? `<div class="tb-empty">まだ称号がありません。クリアして集めよう！</div>`
-      : list
-          .map((it) => {
-            const rk = it.rank ? `（${it.rank}）` : "";
-            const c = it.count ?? 0;
+    total === 0
+      ? `<div class="tb-empty">称号カタログが空です。</div>`
+      : TITLE_CATALOG
+          .map((meta, idx) => {
+            const owned = ownedMap?.[meta.title];
+            if (owned) {
+              const rk = owned.rank ? `（${owned.rank}）` : "";
+              const rr = owned.rarity ? `<span class="tb-rarity tb-r-${owned.rarity}">${owned.rarity}</span>` : "";
+              const c = owned.count ?? 0;
+              return `
+                <div class="tb-row">
+                  <div class="tb-title">${owned.title} <span class="tb-rank">${rk}</span> ${rr}</div>
+                  <div class="tb-meta">取得 ${c}回</div>
+                </div>
+              `;
+            }
+
+            // 未取得：名前は伏せる。ヒントだけ薄く出す（ネタバレしすぎない）
+            const hint = meta.hint ? `<div class="tb-meta">ヒント：${meta.hint}</div>` : `<div class="tb-meta">ヒント：？？？</div>`;
+            const rr2 = meta.rarity ? `<span class="tb-rarity tb-r-${meta.rarity}">${meta.rarity}</span>` : "";
             return `
-              <div class="tb-row">
-                <div class="tb-title">${it.title} <span class="tb-rank">${rk}</span></div>
-                <div class="tb-meta">取得 ${c}回</div>
+              <div class="tb-row locked">
+                <div class="tb-title">？？？ ${rr2}</div>
+                ${hint}
               </div>
             `;
           })
@@ -1398,10 +1450,16 @@ function showTitleBook() {
   wrap.innerHTML = `
     <div class="tb-card" role="dialog" aria-label="称号ずかん">
       <div class="tb-head">
-        <div class="tb-head-title">称号ずかん</div>
+        <div class="tb-head-title">称号ずかん <span class="tb-progress-text">${got}/${total}</span></div>
         <button type="button" class="tb-close" aria-label="閉じる">×</button>
       </div>
       <div class="tb-body">
+      <div class="tb-progress">
+          <div class="tb-bar">
+            <div class="tb-bar-fill" style="width:${pct}%"></div>
+          </div>
+          <div class="tb-progress-sub">達成率 ${pct}%（のこり ${remain}）</div>
+        </div>
         ${rows}
       </div>
       <div class="tb-foot">
@@ -1435,8 +1493,14 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
   closeFinalMenu();
 
   // ✅ 図鑑に保存（result.title がある場合）
+  const meta = result?.title ? getTitleMeta(result.title) : null;
   const isNewTitle = result?.title
-    ? addTitleToBook({ title: result.title, rank: result.rank, at: result.at })
+    ? addTitleToBook({
+        title: result.title,
+        rank: result.rank,
+        rarity: meta?.rarity ?? null,
+        at: result.at,
+      })
     : false;
   const r = result;
     const hist = Array.isArray(history) ? history : [];
