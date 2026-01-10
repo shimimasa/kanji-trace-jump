@@ -22,8 +22,8 @@ const strokesCache = new Map(); // strokesRef -> Promise<polylines>
 // 判定（子ども向け／安定版）
 // 0..100 のSVG座標系（viewBox前提）
 // ---------------------------
-const TOLERANCE = 16; // 線からの許容距離（viewBox 100基準）
-const START_TOL = 28; // 書き始めの近さ（開始ズレを吸収）
+const TOLERANCE = 20; // 線からの許容距離（子ども向けに甘く）
+const START_TOL = 34; // 書き始めの近さ（開始ズレをさらに吸収）
 
 // なぞり側の「線に近い」割合（ゆるめ）
 const MIN_HIT_RATE = 0.45;
@@ -360,6 +360,21 @@ async function render() {
 
     // strokeIndexが末尾以上なら表示上は最後の画に寄せる（active参照対策）
     if (strokeIndex >= strokes.length) strokeIndex = strokes.length - 1;
+  }
+
+  // ✅ A-3: 復元の保険（done[] と strokeIndex の矛盾を補正）
+  // done が true の最大連続分から「次にやる画」を決める
+  // 例：done=[true,true,false,...] → strokeIndex=2 が正
+  const nextTodo = done.findIndex((v) => !v);
+  if (nextTodo === -1) {
+    // 全部doneならクリア扱い
+    kanjiCompleted = true;
+    strokeIndex = strokes.length - 1; // active参照対策
+  } else {
+    // 途中なら、その画を次のターゲットに固定（prog.strokeIndexよりdone優先）
+    strokeIndex = clamp(nextTodo, 0, strokes.length - 1);
+    // 途中なら未クリア
+    kanjiCompleted = false;
   }
 
   renderStrokeButtons(strokes.length);
@@ -1114,7 +1129,10 @@ function attachTraceHandlers(svgEl, strokes) {
     drawing = true;
     // 演出中は動かないが、入力開始したらロックはしない（ロックは成功/失敗で行う）
     updateHintText();
-    points = [p0];
+    // ✅ 開始点にスナップ（端点の近い方へ吸着）
+    // 逆順ストロークでも始点が安定し、子どもの「ちょいズレ」で詰まらない
+    const snapStart = dist(p0, end0) <= dist(p0, end1) ? end0 : end1;
+    points = [snapStart];
     updateTracePath(points);
 
     try {
@@ -1383,13 +1401,13 @@ function judgeTrace(drawnPoints, strokePoly) {
   if (streak > 0) {
     const k = streak; // 1..3
     // 許容距離を少し広げる（最大 +6）
-    P.tol += 2 * k;
+    P.tol += 3 * k;
     P.coverTol = P.tol * 1.15;
-    // 閾値を少し下げる（最大 -0.12）
-    P.minHit = Math.max(0.30, P.minHit - 0.04 * k);
-    P.minCover = Math.max(0.20, P.minCover - 0.05 * k);
-    // 始点許容も少しだけ広げる（最大 +6）
-    P.startTol += 2 * k;
+   // 閾値を下げる（最大 -0.18）
+    P.minHit = Math.max(0.28, P.minHit - 0.06 * k);
+    P.minCover = Math.max(0.18, P.minCover - 0.06 * k);
+    // 始点許容も広げる（最大 +9）
+    P.startTol += 3 * k; 
   }
   // (1) なぞり点の「線に近い率」
   let hit = 0;
