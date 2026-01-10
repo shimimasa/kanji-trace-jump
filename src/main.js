@@ -932,6 +932,95 @@ function showHanamaru(svgEl) {
   }, 1200);
 }
 
+// ===========================
+// Phase2-2: Set Clear Celebration (Confetti + Fanfare)
+// ===========================
+function playSetClearFanfare() {
+    // シンプルで気持ちいい（やりすぎない）
+    const seq = [
+      { f: 659, d: 0.08 }, // E5
+      { f: 784, d: 0.08 }, // G5
+      { f: 988, d: 0.10 }, // B5
+      { f: 1319, d: 0.14 }, // E6
+    ];
+    let t = 0;
+    for (const n of seq) {
+      setTimeout(() => playTone(n.f, n.d, "triangle", 0.05), t);
+      t += 90;
+    }
+    setTimeout(() => playTone(1568, 0.12, "sine", 0.035), t + 40);
+  }
+  
+  function launchConfetti({ durationMs = 1600, count = 70 } = {}) {
+    // 端末によっては重いので配慮
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    if (reduce) return;
+  
+    const layer = document.createElement("div");
+    layer.className = "confetti-layer";
+    Object.assign(layer.style, {
+      position: "fixed",
+      inset: "0",
+      pointerEvents: "none",
+      overflow: "hidden",
+      zIndex: "9999",
+    });
+    document.body.appendChild(layer);
+  
+    const vw = window.innerWidth || 1;
+    const vh = window.innerHeight || 1;
+  
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement("span");
+      const w = 6 + Math.random() * 6;
+      const h = 10 + Math.random() * 10;
+      const x = Math.random() * vw;
+      const delay = Math.random() * 120;
+      const dur = durationMs * (0.75 + Math.random() * 0.55);
+      const rot = (Math.random() * 720 - 360) | 0;
+      const drift = (Math.random() * 240 - 120) | 0;
+      const hue = (Math.random() * 360) | 0;
+  
+      Object.assign(p.style, {
+        position: "absolute",
+        left: `${x}px`,
+        top: `-20px`,
+        width: `${w}px`,
+        height: `${h}px`,
+        background: `hsl(${hue} 90% 60%)`,
+        borderRadius: "2px",
+        opacity: "0.95",
+        transform: `translate3d(0,0,0) rotate(0deg)`,
+        willChange: "transform, opacity",
+      });
+  
+      layer.appendChild(p);
+      p.animate(
+        [
+          { transform: `translate3d(0,0,0) rotate(0deg)`, opacity: 1 },
+          { transform: `translate3d(${drift}px, ${vh + 40}px, 0) rotate(${rot}deg)`, opacity: 0.98 },
+        ],
+        { duration: dur, delay, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
+      ).onfinish = () => p.remove();
+    }
+  
+    setTimeout(() => layer.remove(), durationMs + 800);
+  }
+  
+  function showSetClearCelebration(svgEl) {
+    // 既存の「はなまる」を核にして豪華にする
+    showHanamaru(svgEl);
+    // 中央付近にスパークを少し増やす（軽め）
+    const p = { x: 50, y: 50 };
+    spawnSparks(svgEl, p, 18);
+    setTimeout(() => spawnSparks(svgEl, p, 14), 120);
+    setTimeout(() => spawnSparks(svgEl, p, 10), 240);
+    // 画面全体の紙吹雪
+    launchConfetti({ durationMs: 1600, count: 70 });
+    // ファンファーレ
+    playSetClearFanfare();
+  }
+
 let finalOverlay = null;
 
 function closeFinalMenu() {
@@ -1331,7 +1420,7 @@ function attachTraceHandlers(svgEl, strokes) {
                   }, AUTO_NEXT_DELAY_MS);
                 } else {
                   // ✅ セット最終：はなまる → メニュー表示（自動で進めない）
-                  showHanamaru(svgEl);
+                  showSetClearCelebration(svgEl);
                    // ✅ Phase2: クリア花火（少し豪華）
                   const p = { x: 50, y: 50 };
                   spawnSparks(svgEl, p, 18);
@@ -1357,7 +1446,7 @@ function attachTraceHandlers(svgEl, strokes) {
                         render();
                       },
                     });
-                  }, 900);
+                  }, 1100);
                 }
               }
         
