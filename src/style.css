@@ -528,6 +528,14 @@ body {
   .stroke-shadow.pop {
     animation: roadPop 220ms ease-out;
   }
+
+  .fx-combo-text{
+    font-weight: 800;
+    font-size: 10px;
+    opacity: .95;
+    user-select: none;
+  }
+  
   
   @keyframes roadPop {
     0%   { opacity: 0; }

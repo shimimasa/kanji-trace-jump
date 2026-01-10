@@ -146,6 +146,13 @@ let currentStrokes = null;
 const AUTO_NEXT_DELAY_MS = 650;
 let kanjiCompleted = false;
 
+// ===========================
+// Phase2: Combo / FX tuning
+// ===========================
+let combo = 0;
+let lastSuccessAt = 0;
+const COMBO_WINDOW_MS = 1400; // この時間内に成功するとコンボ継続
+
 // トレース中
 let drawing = false;
 let points = [];
@@ -606,6 +613,51 @@ function playSuccessSfx() {
   playTone(784, 0.06, "sine", 0.05);
   playTone(988, 0.06, "sine", 0.04);
 }
+
+function playComboSuccessSfx(level = 0) {
+    // level: 0.. (0=通常)
+    const base = 740 + level * 60;
+    playTone(base, 0.055, "sine", 0.05);
+    playTone(base + 220, 0.055, "sine", 0.04);
+    if (level >= 2) {
+      setTimeout(() => playTone(base + 420, 0.06, "triangle", 0.035), 55);
+    }
+  }
+  
+  function spawnSuccessFx(svgEl, p, comboLevel = 0) {
+    // コンボが上がるほど少し派手に（やりすぎない）
+    const n = 10 + Math.min(10, comboLevel * 4);
+    spawnSparks(svgEl, p, n);
+    if (comboLevel >= 3) {
+      // 追加で小さめの追いスパーク
+      setTimeout(() => {
+        if (!svgEl || !svgEl.isConnected) return;
+        spawnSparks(svgEl, p, 6);
+      }, 90);
+    }
+  }
+  
+  function showComboPop(svgEl, text) {
+    // SVG上に小さなテキストポップ（壊れにくい）
+    const ns = "http://www.w3.org/2000/svg";
+    const layer = ensureFxLayer(svgEl);
+    const t = document.createElementNS(ns, "text");
+    t.setAttribute("x", "50");
+    t.setAttribute("y", "18");
+    t.setAttribute("text-anchor", "middle");
+    t.setAttribute("class", "fx-combo-text");
+    t.textContent = text;
+    layer.appendChild(t);
+    const anim = t.animate(
+      [
+        { transform: "translate(0px, 6px) scale(0.9)", opacity: 0 },
+        { transform: "translate(0px, 0px) scale(1.05)", opacity: 1 },
+        { transform: "translate(0px, -8px) scale(1)", opacity: 0 },
+      ],
+      { duration: 520, easing: "ease-out", fill: "forwards" }
+    );
+    anim.onfinish = () => t.remove();
+  }
 
 function playFailSfx() {
   // 失敗は音を出さない方針ならコメントアウトでもOK
@@ -1127,7 +1179,6 @@ function safeSaveNow() {
       // pointerIdが取れない場合もあるので、ここは失敗しても無視
       // releasePointerCapture は “現在キャプチャ中のpointerId” が必要だが、
       // 取れないケースがあるため try/catch で握る
-      lastPointerId = e.pointerId;
       svgEl?.releasePointerCapture?.(0);
     } catch (_) {}
   }
@@ -1236,11 +1287,20 @@ function attachTraceHandlers(svgEl, strokes) {
       refreshSvgStates(svgEl, strokes);
       renderStrokeButtons(strokes.length);
       updateHintText();
-      // ✅ 成功演出
-      pulse(svgEl);
-      spawnSparks(svgEl, lastPoint || centroidOfPolyline(strokes[Math.max(0, strokeIndex - 1)]));
-      playSuccessSfx();
+      // ✅ Phase2: 成功演出（コンボ）
+      const now = Date.now();
+      const within = now - lastSuccessAt <= COMBO_WINDOW_MS;
+      combo = within ? combo + 1 : 1;
+      lastSuccessAt = now;
+      const comboLevel = Math.min(5, Math.floor((combo - 1) / 2)); // 0..5（2回ごとに1段）
 
+      pulse(svgEl);
+      const fxPoint =
+        lastPoint || centroidOfPolyline(strokes[Math.max(0, strokeIndex - 1)]);
+      spawnSuccessFx(svgEl, fxPoint, comboLevel);
+      playComboSuccessSfx(comboLevel);
+
+      if (combo >= 3) showComboPop(svgEl, `コンボ ${combo}!`);
       // ✅ 着地点にも小さくキラ（キャラの着地タイミングに合わせる）
       setTimeout(() => {
           if (!svgEl || !svgEl.isConnected) return;
@@ -1272,6 +1332,12 @@ function attachTraceHandlers(svgEl, strokes) {
                 } else {
                   // ✅ セット最終：はなまる → メニュー表示（自動で進めない）
                   showHanamaru(svgEl);
+                   // ✅ Phase2: クリア花火（少し豪華）
+                  const p = { x: 50, y: 50 };
+                  spawnSparks(svgEl, p, 18);
+                  setTimeout(() => spawnSparks(svgEl, p, 14), 120);
+                  setTimeout(() => spawnSparks(svgEl, p, 10), 240);
+
         
                   // はなまるの余韻を見せてからメニュー
                   setTimeout(() => {
