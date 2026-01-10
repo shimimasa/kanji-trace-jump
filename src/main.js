@@ -1744,63 +1744,77 @@ function closeFinalMenu() {
   }
 }
 
-function showFinalMenu({ onReplay, onNextSet, result , history}) {
+function showFinalMenu({ onReplay, onNextSet, result, history }) {
   closeFinalMenu();
 
-  // ✅ 図鑑に保存（result.title がある場合）
-  const meta = result?.title ? getTitleMeta(result.title) : null;
-  const isNewTitle = result?.title
+  const r = result || null;
+
+  // 図鑑に保存（titleがある時だけ）
+  const meta = r?.title ? getTitleMeta(r.title) : null;
+  const isNewTitle = r?.title
     ? addTitleToBook({
-        title: result.title,
-        rank: result.rank,
+        title: r.title,
+        rank: r.rank,
         rarity: meta?.rarity ?? null,
-        at: result.at,
+        at: r.at,
       })
     : false;
-  const r = result;
-    const hist = Array.isArray(history) ? history : [];
-    const histHtml = hist
-      .slice(0, 5)
-      .map((h, i) => {
-        const t = h?.timeText ?? "-:--";
-        const a = Number.isFinite(h?.accuracy) ? h.accuracy : 0;
-        const rk = h?.rank ?? "-";
+
+  const hist = Array.isArray(history) ? history : [];
+  const histHtml = hist
+    .slice(0, 5)
+    .map((h, i) => {
+      const t = h?.timeText ?? "-:--";
+      const a = Number.isFinite(h?.accuracy) ? h.accuracy : 0;
+      const rk = h?.rank ?? "-";
       return `<div class="final-hist-row">${i + 1}. ${t} / ${a}% / ${rk}</div>`;
-      })
-      .join("");
+    })
+    .join("");
+
   const wrap = document.createElement("div");
   wrap.className = "final-overlay";
   wrap.innerHTML = `
     <div class="final-card" role="dialog" aria-label="クリアメニュー">
       <div class="final-title">できた！</div>
+
       ${
-                result?.title
-                  ? `<div class="final-sub">
-                      称号：<b>${result.title}</b>${isNewTitle ? ` <span class="tb-new">NEW!</span>` : ``}
-                    </div>`
-                  : ``
-             }
+        r?.title
+          ? `<div class="final-sub">
+              称号：<b>${r.title}</b>${isNewTitle ? ` <span class="tb-new">NEW!</span>` : ``}
+            </div>`
+          : ``
+      }
+
       ${
-                r
-                  ? `<div class="final-stats">
-                      <div class="final-stat rank"><span>ランク</span><b>${r.rank}</b></div>
-                      <div class="title-row">
-              
-                      <div class="comment-row">
-              <span class="comment-text">${r.comment}</span>
-            </div></div>
-            </div></div><div class="final-stat"><span>タイム</span><b>${r.timeText}</b></div>
-                      <div class="final-stat pb"><span>じこベスト</span><b>${r.personalBestText}${r.isNewPB ? ' <em class="pb-new">NEW!</em>' : ""}</b></div>
-                      <div class="final-stat"><span>せいこうりつ</span><b>${r.accuracy}%</b></div>
-                      <div class="final-stat"><span>せいこう/しこう</span><b>${r.success}/${r.attempts}</b></div>
-                      <div class="final-stat"><span>きゅうさい</span><b>${r.rescued}</b></div>
-                    </div>`
-                  : ""
-              }
-              ${histHtml ? `<div class="final-hist"><div class="final-hist-title">さいきん5かい</div>${histHtml}</div>` : ""}
+        r
+          ? `
+            <div class="final-top">
+              <div class="rank-row">
+                <span class="rank-badge rank-${r.rank}">ランク ${r.rank}</span>
+              </div>
+              <div class="comment-row">
+                <span class="comment-text">${r.comment ?? ""}</span>
+              </div>
+            </div>
+
+            <div class="final-stats">
+              <div class="final-stat"><span>タイム</span><b>${r.timeText}</b></div>
+              <div class="final-stat pb"><span>じこベスト</span><b>${r.personalBestText ?? "-:--"}${r.isNewPB ? ' <em class="pb-new">NEW!</em>' : ""}</b></div>
+              <div class="final-stat"><span>せいこうりつ</span><b>${r.accuracy ?? 0}%</b></div>
+              <div class="final-stat"><span>せいこう/しこう</span><b>${r.success ?? 0}/${r.attempts ?? 0}</b></div>
+              <div class="final-stat"><span>きゅうさい</span><b>${r.rescued ?? 0}</b></div>
+              <div class="final-stat"><span>セット</span><b>${(r.setLen ?? 5)}もじ</b></div>
+            </div>
+          `
+          : ``
+      }
+
+      ${histHtml ? `<div class="final-hist"><div class="final-hist-title">さいきん5かい</div>${histHtml}</div>` : ""}
+
       <div class="final-actions">
         <button type="button" class="btn" data-action="replay">もういちど</button>
         <button type="button" class="btn primary" data-action="next">つぎの5もじ</button>
+        <button type="button" class="btn" data-action="titlebook">称号ずかん</button>
       </div>
     </div>
   `;
@@ -1811,14 +1825,13 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
     const action = btn.dataset.action;
     if (action === "replay") onReplay?.();
     if (action === "next") onNextSet?.();
-    if (action === "title") showTitleBook();
-    if (action === "resetProgress") doReset("progress");
-    if (action === "resetAll") doReset("all");
+    if (action === "titlebook") showTitleBook();
   });
 
   document.body.appendChild(wrap);
   finalOverlay = wrap;
 }
+
 
 function buildSvgForKanji(strokes) {
   const ns = "http://www.w3.org/2000/svg";
