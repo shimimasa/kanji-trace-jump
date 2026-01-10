@@ -219,6 +219,14 @@ function updateNavDisabled() {
 
 boot();
 
+// ✅ A-5：離脱・タブ切替時に進捗を確実に保存
+window.addEventListener("beforeunload", () => {
+    safeSaveNow();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) safeSaveNow();
+  }, { passive: true });
+
 async function boot() {
   // teacherMode 初期化（URL / localStorage）
   teacherMode = readTeacherMode();
@@ -1092,6 +1100,37 @@ function emphasizeGoalShadow(svgEl, strokeIndex) {
         // 状態文言を戻したい場合はここで updateHintText() を呼んでもOK
       }, ms);}
 
+      // ===========================
+// A-4/A-5: Safety finish & save
+// ===========================
+function safeSaveNow() {
+    try {
+      // strokes未ロード時もあるので done は配列かだけ保証
+      saveProgressState({
+        idx,
+        strokeIndex: Number.isFinite(strokeIndex) ? strokeIndex : 0,
+        done: Array.isArray(done) ? done : [],
+        kanjiCompleted: !!kanjiCompleted,
+      });
+    } catch (_) {}
+  }
+  
+  function cancelDrawingState(svgEl) {
+    // 「描画中」状態だけを安全に解除（判定はしない）
+    drawing = false;
+    points = [];
+    updateTracePath(points);
+    inputLocked = false;
+    updateHintText();
+    // pointer captureが残っていれば解放（安全）
+    try {
+      // pointerIdが取れない場合もあるので、ここは失敗しても無視
+      // releasePointerCapture は “現在キャプチャ中のpointerId” が必要だが、
+      // 取れないケースがあるため try/catch で握る
+      lastPointerId = e.pointerId;
+      svgEl?.releasePointerCapture?.(0);
+    } catch (_) {}
+  }
 
 function attachTraceHandlers(svgEl, strokes) {
   drawing = false;
@@ -1099,7 +1138,7 @@ function attachTraceHandlers(svgEl, strokes) {
   if (tracePathEl) tracePathEl.setAttribute("d", "");
   // 念のため（renderでbuild済みだが、再アタッチ時の保険）
   ensureChar(svgEl);
-
+  let lastPointerId = null;
   const onDown = (e) => {
     if (kanjiCompleted) return;
     if (inputLocked) return;
@@ -1157,8 +1196,13 @@ function attachTraceHandlers(svgEl, strokes) {
     drawing = false;
 
     try {
-      svgEl.releasePointerCapture(e.pointerId);
-    } catch (_) {}
+      if (lastPointerId != null) {
+                svgEl.releasePointerCapture(lastPointerId);
+              } else {
+                svgEl.releasePointerCapture(e.pointerId);
+              }
+             } catch (_) {}
+            lastPointerId = null;
 
     const ok = judgeTrace(points, strokes[strokeIndex]);
     const lastPoint = points.length ? points[points.length - 1] : null;
@@ -1276,6 +1320,16 @@ function attachTraceHandlers(svgEl, strokes) {
   svgEl.addEventListener("pointermove", onMove, { passive: false });
   svgEl.addEventListener("pointerup", finish, { passive: false });
   svgEl.addEventListener("pointercancel", finish, { passive: false });
+
+  // ✅ A-4仕上げ：予期せぬ中断（タブ切替/通知/画面ロック等）で詰まらないようにする
+  const hardCancel = () => {
+      if (!svgEl.isConnected) return;
+      cancelDrawingState(svgEl);
+    };
+    window.addEventListener("blur", hardCancel, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) hardCancel();
+    }, { passive: true });
 }
 
 function refreshSvgStates(svgEl, strokes) {
