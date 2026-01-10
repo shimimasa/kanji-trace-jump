@@ -661,4 +661,97 @@ body {
     letter-spacing: .02em;
     background: rgba(0,0,0,0.06);
   }
-  
+  .comment-row{
+    display:flex;
+    justify-content:center;
+    margin: 4px 0 10px;
+    text-align:center;
+  }
+  .comment-text{
+    font-weight: 800;
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.05);
+  }
+  /* ===== Title Book (称号図鑑) ===== */
+.final-sub{
+  margin: 6px 0 10px;
+  font-size: 12px;
+  text-align: center;
+}
+.tb-new{
+  display:inline-block;
+  margin-left: 6px;
+  font-weight: 900;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.08);
+}
+
+.tb-overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: grid;
+  place-items: center;
+  z-index: 10000;
+}
+.tb-card{
+  width: min(520px, 92vw);
+  max-height: min(560px, 80vh);
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+}
+.tb-head{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  font-weight: 900;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+.tb-close{
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+.tb-body{
+  padding: 12px 14px;
+  overflow: auto;
+}
+.tb-row{
+  padding: 10px 10px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.04);
+  margin-bottom: 8px;
+}
+.tb-title{
+  font-weight: 900;
+  font-size: 13px;
+}
+.tb-rank{
+  opacity: 0.75;
+  font-weight: 800;
+}
+.tb-meta{
+  margin-top: 4px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+.tb-empty{
+  padding: 12px;
+  opacity: 0.85;
+}
+.tb-foot{
+  padding: 12px 14px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  display:flex;
+  justify-content: flex-end;
+}

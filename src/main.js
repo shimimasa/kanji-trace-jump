@@ -270,6 +270,42 @@ function computeTitle({ rank, timeMs, accuracy, rescued }) {
     return "スタート王";
   }
 
+  function pick(arr) {
+      return arr[(Math.random() * arr.length) | 0];
+    }
+    
+    function computeComment({ rank, accuracy, rescued, timeMs, setLen }) {
+      const acc = Number.isFinite(accuracy) ? accuracy : 0;
+      const res = Number.isFinite(rescued) ? rescued : 0;
+      const t = Number.isFinite(timeMs) ? timeMs : 0;
+      const len = Math.max(1, setLen || 5);
+      const perChar = len > 0 ? t / len : t;
+    
+      // 速さ/丁寧さの“褒め軸”を決める
+      const fast = perChar <= 18_000;     // 1文字18秒以内
+      const careful = acc >= 92 && res <= 2;
+      const persistent = res >= 4;
+    
+      if (rank === "S") {
+        if (careful) return pick(["すごい！はやいのに ていねい！", "かんぺき！そのままいこう！"]);
+        return pick(["はやい！ゲーマーの手だ！", "スピードが神！その調子！"]);
+      }
+      if (rank === "A") {
+        if (careful) return pick(["線がきれい！ていねいだね！", "いいね！おちついて書けてる！"]);
+        if (persistent) return pick(["あきらめないのが一番つよい！", "ねばり勝ち！えらい！"]);
+        return pick(["ナイス！この調子でOK！", "あとちょっとでSいける！"]);
+      }
+      if (rank === "B") {
+        if (fast) return pick(["けっこう速い！つぎは ていねいさも！", "スピードいいね！線を意識！"]);
+        if (careful) return pick(["ていねい！あとは少しスピード！", "きれいに書けてる！"]);
+        if (persistent) return pick(["がんばりが勝つ！続けよう！", "くり返すほど上手になる！"]);
+        return pick(["いいスタート！つぎはAめざそう！", "あと1こずつ良くしていこう！"]);
+      }
+      // C
+      if (persistent) return pick(["やめなかったのが勝ち！", "つぎは ぜったい進むよ！"]);
+      return pick(["OK！まずは1こずつ！", "はじめはみんなここから！"]);
+    }
+
 function startSetRun(set) {
   setRun = {
     setStart: set.start,
@@ -323,6 +359,14 @@ function finalizeSetRun() {
       accuracy: result.accuracy,
       rescued: result.rescued,
     });
+
+    result.comment = computeComment({
+          rank: result.rank,
+          accuracy: result.accuracy,
+          rescued: result.rescued,
+          timeMs: result.timeMs,
+          setLen: result.setLen,
+        });
   // ✅ Phase3-2: Personal Best（最速タイム）判定＆更新
   const pbMap = loadSetPBMap();
   const key = getSetKey(result.setStart, result.setLen);
@@ -1275,6 +1319,109 @@ function playSetClearFanfare() {
     playSetClearFanfare();
   }
 
+// ===========================
+// Phase3-5: Title Book (称号図鑑)
+// ===========================
+const TITLE_BOOK_LS_KEY = "ktj_title_book_v1";
+
+function loadTitleBook() {
+  try {
+    const raw = localStorage.getItem(TITLE_BOOK_LS_KEY);
+    if (!raw) return { items: {} };
+    const obj = JSON.parse(raw);
+    if (!obj || typeof obj !== "object") return { items: {} };
+    if (!obj.items || typeof obj.items !== "object") obj.items = {};
+    return obj;
+  } catch {
+    return { items: {} };
+  }
+}
+
+function saveTitleBook(book) {
+  try {
+    localStorage.setItem(TITLE_BOOK_LS_KEY, JSON.stringify(book));
+  } catch {
+    // ignore
+  }
+}
+
+function addTitleToBook({ title, rank, at } = {}) {
+  if (!title) return false;
+  const book = loadTitleBook();
+  const key = String(title);
+  const now = Number.isFinite(at) ? at : Date.now();
+  const cur = book.items[key];
+  const first = !cur;
+  book.items[key] = {
+    title: key,
+    rank: rank || (cur?.rank ?? null),
+    firstAt: cur?.firstAt ?? now,
+    lastAt: now,
+    count: (cur?.count ?? 0) + 1,
+  };
+  saveTitleBook(book);
+  return first; // NEWかどうか
+}
+
+let titleBookOverlay = null;
+function closeTitleBook() {
+  if (titleBookOverlay) {
+    titleBookOverlay.remove();
+    titleBookOverlay = null;
+  }
+}
+
+function showTitleBook() {
+  closeTitleBook();
+  const book = loadTitleBook();
+  const list = Object.values(book.items || {});
+  list.sort((a, b) => (b.lastAt ?? 0) - (a.lastAt ?? 0));
+
+  const rows =
+    list.length === 0
+      ? `<div class="tb-empty">まだ称号がありません。クリアして集めよう！</div>`
+      : list
+          .map((it) => {
+            const rk = it.rank ? `（${it.rank}）` : "";
+            const c = it.count ?? 0;
+            return `
+              <div class="tb-row">
+                <div class="tb-title">${it.title} <span class="tb-rank">${rk}</span></div>
+                <div class="tb-meta">取得 ${c}回</div>
+              </div>
+            `;
+          })
+          .join("");
+
+  const wrap = document.createElement("div");
+  wrap.className = "tb-overlay";
+  wrap.innerHTML = `
+    <div class="tb-card" role="dialog" aria-label="称号ずかん">
+      <div class="tb-head">
+        <div class="tb-head-title">称号ずかん</div>
+        <button type="button" class="tb-close" aria-label="閉じる">×</button>
+      </div>
+      <div class="tb-body">
+        ${rows}
+      </div>
+      <div class="tb-foot">
+        <button type="button" class="btn" data-action="close">とじる</button>
+      </div>
+    </div>
+  `;
+
+  wrap.addEventListener("click", (e) => {
+    const t = e.target;
+    if (t?.classList?.contains("tb-overlay")) closeTitleBook();
+    if (t?.classList?.contains("tb-close")) closeTitleBook();
+    if (t?.dataset?.action === "close") closeTitleBook();
+  });
+
+  document.body.appendChild(wrap);
+  titleBookOverlay = wrap;
+}
+
+
 let finalOverlay = null;
 
 function closeFinalMenu() {
@@ -1286,6 +1433,11 @@ function closeFinalMenu() {
 
 function showFinalMenu({ onReplay, onNextSet, result , history}) {
   closeFinalMenu();
+
+  // ✅ 図鑑に保存（result.title がある場合）
+  const isNewTitle = result?.title
+    ? addTitleToBook({ title: result.title, rank: result.rank, at: result.at })
+    : false;
   const r = result;
     const hist = Array.isArray(history) ? history : [];
     const histHtml = hist
@@ -1303,11 +1455,21 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
     <div class="final-card" role="dialog" aria-label="クリアメニュー">
       <div class="final-title">できた！</div>
       ${
+                result?.title
+                  ? `<div class="final-sub">
+                      称号：<b>${result.title}</b>${isNewTitle ? ` <span class="tb-new">NEW!</span>` : ``}
+                    </div>`
+                  : ``
+             }
+      ${
                 r
                   ? `<div class="final-stats">
                       <div class="final-stat rank"><span>ランク</span><b>${r.rank}</b></div>
                       <div class="title-row">
-              <span class="title-badge">称号：${r.title}</span>
+              
+                      <div class="comment-row">
+              <span class="comment-text">${r.comment}</span>
+            </div></div>
             </div></div><div class="final-stat"><span>タイム</span><b>${r.timeText}</b></div>
                       <div class="final-stat pb"><span>じこベスト</span><b>${r.personalBestText}${r.isNewPB ? ' <em class="pb-new">NEW!</em>' : ""}</b></div>
                       <div class="final-stat"><span>せいこうりつ</span><b>${r.accuracy}%</b></div>
@@ -1330,6 +1492,7 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
     const action = btn.dataset.action;
     if (action === "replay") onReplay?.();
     if (action === "next") onNextSet?.();
+    if (action === "title") showTitleBook();
   });
 
   document.body.appendChild(wrap);
@@ -1721,7 +1884,10 @@ function attachTraceHandlers(svgEl, strokes) {
                   // はなまるの余韻を見せてからメニュー
                   setTimeout(() => {
                     if (!kanjiCompleted) return;
-                    const result = finalizeSetRun();
+                    
+                    // result がある環境（Phase3）なら受け取って図鑑/表示に使う
+                    const result =
+                      typeof finalizeSetRun === "function" ? finalizeSetRun() : null;
                     showFinalMenu({
                       result,
                       history: loadSetResults(),
