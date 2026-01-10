@@ -1011,7 +1011,7 @@ function ensureCharLayer(svgEl) {
     let c = svgEl.querySelector('[data-role="char"]');
     if (c) return c;
     const layer = ensureCharLayer(svgEl);
-    c = document.createElementNS(ns, "circle");
+    c = document.createElementNS(ns, "image");
     c.dataset.role = "char";
     
     c.setAttribute("class", "char");
@@ -1025,6 +1025,7 @@ function ensureCharLayer(svgEl) {
   // 画像参照（SVG2: href / 互換: xlink:href）
   c.setAttribute("href", NEKO_URL);
   c.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", NEKO_URL);
+  c.setAttribute("preserveAspectRatio", "xMidYMid meet");
   // transformで位置を動かす
   c.setAttribute("transform", "translate(50 50)");
     layer.appendChild(c);
