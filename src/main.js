@@ -368,8 +368,17 @@ async function render() {
   svg = buildSvgForKanji(strokes);
   elArea.appendChild(svg);
   currentStrokes = strokes;
-  updateStrokeHint();
-  resetCharForNewKanji(svg, strokes);
+  // ✅ 復元した strokeIndex に合わせて見た目とキャラ位置を同期
+  // done/active/hint を整える（activeは strokeIndex 参照）
+  refreshSvgStates(svg, strokes);
+
+  // キャラは「今なぞる画」のアンカーへ（クリア済みなら最後の画）
+  const safeIdx = clamp(strokeIndex, 0, strokes.length - 1);
+  const anchor = getStrokeAnchor(strokes, safeIdx);
+  setCharPos(svg, anchor);
+
+  // ヒント文言も復元状態に合わせる
+  updateHintText();
 
   updateNavDisabled();
 
