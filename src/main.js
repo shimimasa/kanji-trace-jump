@@ -134,6 +134,82 @@ function getSetInfo(i = idx) {
   return { start, end, len, pos };
 }
 
+// ===========================
+// Phase3: Set result tracking (time / accuracy / history)
+// ===========================
+const SET_RESULTS_LS_KEY = "ktj_set_results_v1";
+let setRun = null; // { setStart, setLen, startedAt, attempts, success, fail, rescued, kanjiCleared }
+
+function loadSetResults() {
+  try {
+    const raw = localStorage.getItem(SET_RESULTS_LS_KEY);
+    if (!raw) return [];
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveSetResult(entry) {
+  try {
+    const arr = loadSetResults();
+    arr.unshift(entry);
+    // 最新5件だけ保持
+    const clipped = arr.slice(0, 5);
+    localStorage.setItem(SET_RESULTS_LS_KEY, JSON.stringify(clipped));
+  } catch {
+    // ignore
+  }
+}
+
+function formatMs(ms) {
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const m = Math.floor(s / 60);
+  const r = s % 60;
+  return `${m}:${String(r).padStart(2, "0")}`;
+}
+
+function startSetRun(set) {
+  setRun = {
+    setStart: set.start,
+    setLen: set.len,
+    startedAt: Date.now(),
+    attempts: 0,
+    success: 0,
+    fail: 0,
+    rescued: 0,
+    kanjiCleared: 0,
+  };
+}
+
+function ensureSetRun(set) {
+  if (!setRun || setRun.setStart !== set.start || setRun.setLen !== set.len) {
+    startSetRun(set);
+  }
+}
+
+function finalizeSetRun() {
+  if (!setRun) return null;
+  const durationMs = Date.now() - setRun.startedAt;
+  const total = Math.max(0, setRun.attempts);
+  const acc = total > 0 ? Math.round((setRun.success / total) * 100) : 0;
+  const result = {
+    at: Date.now(),
+    setStart: setRun.setStart,
+    setLen: setRun.setLen,
+    timeMs: durationMs,
+    timeText: formatMs(durationMs),
+    attempts: setRun.attempts,
+    success: setRun.success,
+    fail: setRun.fail,
+    rescued: setRun.rescued,
+    accuracy: acc,
+  };
+  saveSetResult(result);
+  return result;
+}
+
 let strokeIndex = 0; // 今なぞるべきストローク
 let done = []; // boolean[]
 let failStreak = []; // 連続失敗救済（画ごと）
@@ -336,7 +412,7 @@ async function render() {
   const k = item?.kanji ?? "?";
 
   const set = getSetInfo(idx);
-
+  ensureSetRun(set);
   renderStars(set.pos, set.len);
   elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`;
 
@@ -630,9 +706,36 @@ function playTone(freq = 660, duration = 0.07, type = "sine", gain = 0.04) {
 }
 
 function playSuccessSfx() {
-  // 軽い「ポン」
-  playTone(784, 0.06, "sine", 0.05);
-  playTone(988, 0.06, "sine", 0.04);
+  // ✅ Phase2-4: 成功SEを3種ランダム化（連続同じを避ける）
+  if (!playTone) return;
+
+  // 直前と同じパターンは避ける
+  if (typeof playSuccessSfx._last !== "number") playSuccessSfx._last = -1;
+  const variants = [
+    // ① いつもの「ポン」（安心）
+    () => {
+      playTone(784, 0.06, "sine", 0.05);
+      playTone(988, 0.06, "sine", 0.04);
+    },
+    // ② 小さめキラ（ちょっと嬉しい）
+    () => {
+      playTone(880, 0.05, "triangle", 0.045);
+      setTimeout(() => playTone(1175, 0.05, "triangle", 0.04), 45);
+      setTimeout(() => playTone(1568, 0.06, "sine", 0.035), 90);
+    },
+    // ③ どんっ（達成感・低めを少し）
+    () => {
+      playTone(523, 0.07, "sine", 0.045);
+      setTimeout(() => playTone(659, 0.06, "sine", 0.04), 55);
+      setTimeout(() => playTone(988, 0.05, "triangle", 0.03), 105);
+    },
+  ];
+
+  let pick = (Math.random() * variants.length) | 0;
+  if (pick === playSuccessSfx._last) pick = (pick + 1) % variants.length;
+  playSuccessSfx._last = pick;
+
+  variants[pick]();
 }
 
 function playComboSuccessSfx(level = 0) {
@@ -1051,14 +1154,34 @@ function closeFinalMenu() {
   }
 }
 
-function showFinalMenu({ onReplay, onNextSet }) {
+function showFinalMenu({ onReplay, onNextSet, result , history}) {
   closeFinalMenu();
-
+  const r = result;
+    const hist = Array.isArray(history) ? history : [];
+    const histHtml = hist
+      .slice(0, 5)
+      .map((h, i) => {
+        const t = h?.timeText ?? "-:--";
+        const a = Number.isFinite(h?.accuracy) ? h.accuracy : 0;
+        return `<div class="final-hist-row">${i + 1}. ${t} / ${a}%</div>`;
+      })
+      .join("");
   const wrap = document.createElement("div");
   wrap.className = "final-overlay";
   wrap.innerHTML = `
     <div class="final-card" role="dialog" aria-label="クリアメニュー">
       <div class="final-title">できた！</div>
+      ${
+                r
+                  ? `<div class="final-stats">
+                      <div class="final-stat"><span>タイム</span><b>${r.timeText}</b></div>
+                      <div class="final-stat"><span>せいこうりつ</span><b>${r.accuracy}%</b></div>
+                      <div class="final-stat"><span>せいこう/しこう</span><b>${r.success}/${r.attempts}</b></div>
+                      <div class="final-stat"><span>きゅうさい</span><b>${r.rescued}</b></div>
+                    </div>`
+                  : ""
+              }
+              ${histHtml ? `<div class="final-hist"><div class="final-hist-title">さいきん5かい</div>${histHtml}</div>` : ""}
       <div class="final-actions">
         <button type="button" class="btn" data-action="replay">もういちど</button>
         <button type="button" class="btn primary" data-action="next">つぎの5もじ</button>
@@ -1366,6 +1489,8 @@ function attachTraceHandlers(svgEl, strokes) {
             lastPointerId = null;
 
     const ok = judgeTrace(points, strokes[strokeIndex]);
+    // ✅ Phase3: 1回なぞった＝1試行
+    if (setRun) setRun.attempts += 1;
     const lastPoint = points.length ? points[points.length - 1] : null;
 
     // 軌跡は毎回消す
@@ -1373,6 +1498,13 @@ function attachTraceHandlers(svgEl, strokes) {
     updateTracePath(points);
 
     if (ok) {
+       // ✅ Phase3: 成功カウント
+      if (setRun) {
+          setRun.success += 1;
+          // 失敗後の“救済（甘さ）”が効いていたら rescued++
+          const streak = failStreak?.[strokeIndex] ?? 0;
+          if (streak > 0) setRun.rescued += 1;
+        }
       done[strokeIndex] = true;
       // ✅ 成功した画は救済カウントをリセット
       failStreak[strokeIndex] = 0;
@@ -1418,6 +1550,8 @@ function attachTraceHandlers(svgEl, strokes) {
         }, Math.max(0, JUMP_MS - 80));
        // ✅ 1文字（全画）クリア → 自動で次の漢字へ
       if (strokeIndex >= strokes.length) {
+        // ✅ Phase3: 文字クリアカウント
+        if (setRun) setRun.kanjiCleared += 1;
         kanjiCompleted = true;
         // ✅ クリアしたら「まえ/つぎ」を解放
         updateNavDisabled();
@@ -1452,7 +1586,10 @@ function attachTraceHandlers(svgEl, strokes) {
                   // はなまるの余韻を見せてからメニュー
                   setTimeout(() => {
                     if (!kanjiCompleted) return;
+                    const result = finalizeSetRun();
                     showFinalMenu({
+                      result,
+                      history: loadSetResults(),
                       onReplay: () => {
                         closeFinalMenu();
                         idx = set.start;
@@ -1472,6 +1609,8 @@ function attachTraceHandlers(svgEl, strokes) {
               }
         
      } else {
+      // ✅ Phase3: 失敗カウント
+      if (setRun) setRun.fail += 1;
       // ✅ 失敗演出
       // ✅ 連続失敗救済：同じ画の失敗回数を加算（上限は judgeTrace 内で丸める）
       failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;

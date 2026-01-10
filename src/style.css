@@ -574,3 +574,36 @@ body {
     60%  { opacity: 1; }
     100% { opacity: 1; }
   }
+
+  .final-stats{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 10px 0 6px;
+  }
+  .final-stat{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 6px 8px;
+    border-radius: 10px;
+    background: rgba(0,0,0,0.06);
+    font-size: 12px;
+  }
+  .final-stat b{
+    font-size: 13px;
+  }
+  .final-hist{
+    margin: 8px 0 4px;
+    padding: 8px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.05);
+    font-size: 12px;
+  }
+  .final-hist-title{
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .final-hist-row{
+    opacity: 0.9;
+  }
