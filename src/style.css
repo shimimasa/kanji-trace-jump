@@ -848,3 +848,13 @@ body {
 .btn.danger.ghost{
   background: rgba(220, 0, 0, 0.06);
 }
+/* A-2: モバイル誤作動対策 */
+#area, #area * {
+  touch-action: none;         /* ピンチ/スクロールなどを抑制（pointer向け） */
+  -ms-touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+html, body {
+  overscroll-behavior: none;  /* 画面端のビヨーンを抑制（対応ブラウザ） */
+}

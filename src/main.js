@@ -541,6 +541,10 @@ async function boot() {
   }
 
   await render();
+
+  // ✅ A-2: mobile / resize guards
+  installMobileGuards();
+  installResizeGuards();
 }
 
 async function loadData() {
@@ -1374,6 +1378,74 @@ function safeRemoveLS(key) {
     // 画面を描き直す
     try { render(); } catch (_) {}
   }
+
+// ===========================
+// A-2: Mobile interaction guards
+// ===========================
+function installMobileGuards() {
+    // すでに入ってたら二重登録しない
+    if (installMobileGuards._installed) return;
+    installMobileGuards._installed = true;
+  
+    const isInGameArea = (target) => {
+      // #area があなたの「なぞり領域」ならこれでOK
+      // もしIDが違うなら、あなたの領域要素に合わせて変更してOK
+      return !!target?.closest?.("#area");
+    };
+  
+    // ✅ iOSのピンチ/ジェスチャー拡大を抑制（Safari系）
+    document.addEventListener(
+      "gesturestart",
+      (e) => {
+        if (isInGameArea(e.target)) e.preventDefault();
+      },
+      { passive: false }
+    );
+  
+    // ✅ ゲーム領域上のスクロール誤作動を抑制（タッチ移動でページが動くのを防ぐ）
+    document.addEventListener(
+      "touchmove",
+      (e) => {
+        if (isInGameArea(e.target)) e.preventDefault();
+      },
+      { passive: false }
+    );
+  
+    // ✅ ダブルタップでの拡大を抑制（主にiOS）
+    let lastTouchEnd = 0;
+    document.addEventListener(
+      "touchend",
+      (e) => {
+        if (!isInGameArea(e.target)) return;
+        const now = Date.now();
+        if (now - lastTouchEnd < 300) {
+          e.preventDefault();
+        }
+        lastTouchEnd = now;
+      },
+      { passive: false }
+    );
+  }
+  
+  function installResizeGuards() {
+    if (installResizeGuards._installed) return;
+    installResizeGuards._installed = true;
+  
+    let t = null;
+    const onResize = () => {
+      clearTimeout(t);
+      t = setTimeout(() => {
+        // ✅ リサイズ/回転の前後で進捗を守る（途中状態の事故防止）
+        try { safeSaveNow?.(); } catch (_) {}
+        // renderは「復元込み」で描き直す（今までの実装を活かす）
+        try { render?.(); } catch (_) {}
+      }, 180);
+    };
+  
+    window.addEventListener("resize", onResize, { passive: true });
+    window.addEventListener("orientationchange", onResize, { passive: true });
+  }
+  
   
 
 // ===========================
