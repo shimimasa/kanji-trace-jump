@@ -1035,7 +1035,7 @@ function ensureCharLayer(svgEl) {
   // ===========================
  // Character (minimal circle)
  // ===========================
-const CHAR_RIDE_OFFSET = 1.6; // viewBox(0-100)基準。1〜2px相当の“上に乗る”感
+const CHAR_RIDE_OFFSET = 2.4; // viewBox(0-100)基準。1〜2px相当の“上に乗る”感
   
   function getStrokeAnchor(strokes, i) {
       // ✅ 「道（画）の中央」に着地させる：体験が気持ちよくなる
