@@ -156,6 +156,34 @@ let inputLocked = false; // ✅ 演出中の入力無効
 const JUMP_MS = 520;
 const FAIL_MS = 520;
 
+// ============================
+// Progress (kid mode): save/restore current index
+// ============================
+const PROGRESS_LS_KEY = "ktj_progress_v1";
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(PROGRESS_LS_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+function saveProgress(p) {
+  try {
+    localStorage.setItem(PROGRESS_LS_KEY, JSON.stringify(p));
+  } catch {
+    // ignore
+  }
+}
+
+function updateNavDisabled() {
+  // 未クリアなら押せない
+  const locked = !kanjiCompleted;
+  if (elPrev) elPrev.disabled = locked || idx === 0;
+  if (elNext) elNext.disabled = locked || idx === items.length - 1;
+}
+
 boot();
 
 async function boot() {
@@ -200,7 +228,13 @@ async function boot() {
   elPrev.addEventListener("click", () => move(-1));
   elNext.addEventListener("click", () => move(1));
 
-  render();
+  // ✅ 進捗復帰（idxのみ最小）
+  const prog = loadProgress();
+  if (prog && Number.isFinite(prog.idx)) {
+    idx = clamp(prog.idx, 0, items.length - 1);
+  }
+
+  await render();
 }
 
 async function loadData() {
@@ -239,6 +273,8 @@ function move(delta) {
   idx = clamp(idx + delta, 0, items.length - 1);
   strokeIndex = 0;
   done = [];
+   // ✅ 移動したら保存（復帰用）
+  saveProgress({ idx, t: Date.now() });
   render();
 }
 
@@ -261,8 +297,7 @@ async function render() {
   if (!strokes || strokes.length === 0) {
     elArea.innerHTML = `<div style="font-size:96px; opacity:.35; font-weight:700;">${escapeHtml(k)}</div>`;
     elStrokeButtons.innerHTML = "";
-    elPrev.disabled = idx === 0;
-    elNext.disabled = idx === items.length - 1;
+    updateNavDisabled();
     return;
   }
 
@@ -1085,6 +1120,10 @@ function attachTraceHandlers(svgEl, strokes) {
        // ✅ 1文字（全画）クリア → 自動で次の漢字へ
       if (strokeIndex >= strokes.length) {
         kanjiCompleted = true;
+        // ✅ クリアしたら「まえ/つぎ」を解放
+        updateNavDisabled();
+        // ✅ クリア時点のidxを保存
+        saveProgress({ idx, t: Date.now() });
         
                 // 表示としては「最後の画」を維持（activeが配列外参照しないように）
                 strokeIndex = strokes.length - 1;
