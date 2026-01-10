@@ -1327,10 +1327,106 @@ function playSetClearFanfare() {
     playSetClearFanfare();
   }
 
+  // ===========================
+// A-1: Recovery / Reset (teacher-safe)
+// ===========================
+function safeRemoveLS(key) {
+    try { localStorage.removeItem(key); } catch (_) {}
+  }
+  
+  function resetProgressOnly() {
+    // 進捗だけ消す（学習成績/称号は残す）
+    safeRemoveLS("ktj_progress_v2");
+    safeRemoveLS("ktj_progress_v1"); // 互換キーも一応
+  }
+  
+  function resetAllLocalData() {
+    // 全部消す（成績・称号図鑑も含む）
+    resetProgressOnly();
+    safeRemoveLS("ktj_set_results_v1");
+    safeRemoveLS("ktj_set_pb_v1");
+    safeRemoveLS("ktj_title_book_v1");
+    safeRemoveLS("ktj_title_book_sort_v1");
+    safeRemoveLS("ktj_title_book_search_v1");
+  }
+  
+  function confirmReset(kind = "progress") {
+    // kind: "progress" | "all"
+    const msg =
+      kind === "all"
+        ? "本当にリセットしますか？\n\n・進捗\n・自己ベスト\n・ランク/称号/図鑑\n・履歴\n\nすべて消えます。"
+        : "進捗だけリセットしますか？\n（自己ベスト・称号図鑑は残ります）";
+    return window.confirm(msg);
+  }
+  
+  function doReset(kind = "progress") {
+    if (!confirmReset(kind)) return;
+    if (kind === "all") resetAllLocalData();
+    else resetProgressOnly();
+  
+    // UIを安全に戻す（モーダルが開いててもOK）
+    try { closeTitleBook?.(); } catch (_) {}
+    try { closeFinalMenu?.(); } catch (_) {}
+  
+    // 最初のセット先頭へ戻す
+    idx = 0;
+    kanjiCompleted = false;
+    // 画面を描き直す
+    try { render(); } catch (_) {}
+  }
+  
+
 // ===========================
 // Phase3-5: Title Book (称号図鑑)
 // ===========================
-const TITLE_BOOK_LS_KEY = "ktj_title_book_v1";
+const TITLE_BOOK_SEARCH_LS_KEY = "ktj_title_book_search_v1";
+
+function loadTitleBookSearch() {
+    try {
+      return localStorage.getItem(TITLE_BOOK_SEARCH_LS_KEY) || "";
+    } catch {
+      return "";
+    }
+  }
+  
+  function saveTitleBookSearch(q) {
+    try {
+      localStorage.setItem(TITLE_BOOK_SEARCH_LS_KEY, q ?? "");
+    } catch {
+      // ignore
+    }
+  }
+  
+  function normalizeJa(s) {
+    return String(s ?? "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, "");
+  }
+
+function loadTitleBookSort() {
+    try {
+      return localStorage.getItem(TITLE_BOOK_SORT_LS_KEY) || "rarity";
+    } catch {
+      return "rarity";
+    }
+  }
+  
+  function saveTitleBookSort(mode) {
+    try {
+      localStorage.setItem(TITLE_BOOK_SORT_LS_KEY, mode);
+    } catch {
+      // ignore
+    }
+  }
+  
+  function rarityWeight(r) {
+    // 高いほど上（SR > R > N > null）
+    if (r === "SR") return 3;
+    if (r === "R") return 2;
+    if (r === "N") return 1;
+    return 0;
+  }
 
 // ✅ 全称号カタログ（達成率の母数）
 // ここにある称号が「全種類」です（後で増やせば勝手に母数が増える）
@@ -1413,14 +1509,61 @@ function showTitleBook() {
   const got = Object.keys(ownedMap).length;
     const pct = total > 0 ? Math.round((got / total) * 100) : 0;
     const remain = Math.max(0, total - got);
+
+    // ✅ 並び替えモード
+  const sortMode = loadTitleBookSort(); // "rarity" | "recent" | "name"
+  const searchQuery = loadTitleBookSearch();
+  const qn = normalizeJa(searchQuery);
+
+  // カタログを「表示用アイテム」に変換（取得情報があれば合体）
+  const display = TITLE_CATALOG.map((meta) => {
+    const owned = ownedMap?.[meta.title] || null;
+    return {
+      meta,
+      owned,
+      // 取得していないなら lastAt=0, count=0
+      lastAt: owned?.lastAt ?? 0,
+      count: owned?.count ?? 0,
+      // レア度は meta 優先（未取得でも並び替えできる）
+      rarity: owned?.rarity ?? meta.rarity ?? null,
+      title: meta.title,
+      isOwned: !!owned,
+    };
+  });
+    // ✅ ソート適用（基本：取得済みを上に）
+  display.sort((a, b) => {
+    // まず「取得済み」を上へ
+    if (a.isOwned !== b.isOwned) return a.isOwned ? -1 : 1;
+
+    if (sortMode === "recent") {
+      // 取得順（最近使った/取った順）
+      return (b.lastAt ?? 0) - (a.lastAt ?? 0);
+    }
+    if (sortMode === "name") {
+      // 名前順（ひらがな/カタカナ/漢字混在でもJSのlocaleCompareでOK）
+      return String(a.title).localeCompare(String(b.title), "ja");
+    }
+    // rarity（デフォルト）：レア→ノーマル
+    const rw = rarityWeight(b.rarity) - rarityWeight(a.rarity);
+    if (rw !== 0) return rw;
+    // レアが同じなら最近順
+    return (b.lastAt ?? 0) - (a.lastAt ?? 0);
+  });
+
+  // ✅ 検索（部分一致）: 取得済みの称号だけ対象（未取得???はネタバレ防止）
+  const filtered = qn
+    ? display.filter((it) => it.isOwned && normalizeJa(it.title).includes(qn))
+    : display;
   // ✅ カタログ順で表示（未取得は ???）
   // rarity順に寄せたい場合はここで sort してもOK（今は作成順＝あなたの演出設計順）
   const rows =
     total === 0
       ? `<div class="tb-empty">称号カタログが空です。</div>`
-      : TITLE_CATALOG
-          .map((meta, idx) => {
-            const owned = ownedMap?.[meta.title];
+      : filtered
+          .map((item) => {
+            const meta = item.meta;
+            const owned = item.owned;
+            // 検索中は「未取得枠」を表示しない（上のfilterで除外される想定）
             if (owned) {
               const rk = owned.rank ? `（${owned.rank}）` : "";
               const rr = owned.rarity ? `<span class="tb-rarity tb-r-${owned.rarity}">${owned.rarity}</span>` : "";
@@ -1451,6 +1594,8 @@ function showTitleBook() {
     <div class="tb-card" role="dialog" aria-label="称号ずかん">
       <div class="tb-head">
         <div class="tb-head-title">称号ずかん <span class="tb-progress-text">${got}/${total}</span></div>
+        <button type="button" class="btn danger" data-action="resetProgress">進捗リセット</button>
++        <button type="button" class="btn danger ghost" data-action="resetAll">全部リセット</button>
         <button type="button" class="tb-close" aria-label="閉じる">×</button>
       </div>
       <div class="tb-body">
@@ -1460,10 +1605,27 @@ function showTitleBook() {
           </div>
           <div class="tb-progress-sub">達成率 ${pct}%（のこり ${remain}）</div>
         </div>
+        <div class="tb-sort">
+          <button type="button" class="tb-sort-btn ${sortMode === "rarity" ? "active" : ""}" data-sort="rarity">レア順</button>
+          <button type="button" class="tb-sort-btn ${sortMode === "recent" ? "active" : ""}" data-sort="recent">取得順</button>
+          <button type="button" class="tb-sort-btn ${sortMode === "name" ? "active" : ""}" data-sort="name">名前順</button>
+        </div>
+        <div class="tb-search">
+          <input
+            class="tb-search-input"
+            type="text"
+            inputmode="search"
+            placeholder="称号を検索（例：王）"
+            value="${String(searchQuery).replace(/"/g, "&quot;")}"
+            aria-label="称号検索"
+          />
+          <button type="button" class="tb-search-clear" data-action="clearSearch" aria-label="検索をクリア">×</button>
+        </div>
         ${rows}
       </div>
       <div class="tb-foot">
         <button type="button" class="btn" data-action="close">とじる</button>
+        <button type="button" class="btn danger" data-action="resetProgress">進捗リセット</button>
       </div>
     </div>
   `;
@@ -1473,8 +1635,29 @@ function showTitleBook() {
     if (t?.classList?.contains("tb-overlay")) closeTitleBook();
     if (t?.classList?.contains("tb-close")) closeTitleBook();
     if (t?.dataset?.action === "close") closeTitleBook();
+    if (t?.dataset?.action === "resetProgress") doReset("progress");
+    if (t?.dataset?.action === "clearSearch") {
+      saveTitleBookSearch("");
+      showTitleBook(); // 再描画（モーダルごと作り直すのが一番安全）
+    }
+    const mode = t?.dataset?.sort;
+        if (mode === "rarity" || mode === "recent" || mode === "name") {
+          saveTitleBookSort(mode);
+          showTitleBook(); // 再描画（モーダルごと作り直すのが一番安全）
+        }
   });
-
+  
+    // ✅ 入力で即時検索（保存→再描画）
+    const input = wrap.querySelector(".tb-search-input");
+    if (input) {
+      input.addEventListener("input", () => {
+        saveTitleBookSearch(input.value);
+        // 入力中のチラつきを抑えるため軽くデバウンス
+        clearTimeout(showTitleBook._t);
+        showTitleBook._t = setTimeout(() => showTitleBook(), 120);
+      });
+    }
+  
   document.body.appendChild(wrap);
   titleBookOverlay = wrap;
 }
@@ -1557,6 +1740,8 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
     if (action === "replay") onReplay?.();
     if (action === "next") onNextSet?.();
     if (action === "title") showTitleBook();
+    if (action === "resetProgress") doReset("progress");
+    if (action === "resetAll") doReset("all");
   });
 
   document.body.appendChild(wrap);

@@ -800,3 +800,51 @@ body {
 .tb-row.locked .tb-title{
   letter-spacing: .08em;
 }
+.tb-sort{
+  display:flex;
+  gap: 8px;
+  margin: 8px 0 12px;
+  flex-wrap: wrap;
+}
+.tb-sort-btn{
+  border: none;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.06);
+  font-weight: 900;
+  font-size: 12px;
+}
+.tb-sort-btn.active{
+  background: rgba(0,0,0,0.16);
+}
+.tb-search{
+  display:flex;
+  gap: 8px;
+  align-items:center;
+  margin: 0 0 12px;
+}
+.tb-search-input{
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.9);
+  font-size: 12px;
+}
+.tb-search-clear{
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: none;
+  background: rgba(0,0,0,0.06);
+  font-weight: 900;
+  cursor: pointer;
+}
+.btn.danger{
+  background: rgba(220, 0, 0, 0.10);
+  font-weight: 900;
+}
+.btn.danger.ghost{
+  background: rgba(220, 0, 0, 0.06);
+}
