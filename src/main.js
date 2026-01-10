@@ -157,24 +157,57 @@ const JUMP_MS = 520;
 const FAIL_MS = 520;
 
 // ============================
-// Progress (kid mode): save/restore current index
+// Progress (kid mode): save/restore full state (v2)
 // ============================
-const PROGRESS_LS_KEY = "ktj_progress_v1";
+const PROGRESS_LS_KEY = "ktj_progress_v2";
+
 function loadProgress() {
   try {
     const raw = localStorage.getItem(PROGRESS_LS_KEY);
     if (!raw) return null;
-    return JSON.parse(raw);
+    const p = JSON.parse(raw);
+    if (!p || typeof p !== "object") return null;
+    return p;
   } catch {
     return null;
   }
 }
+
 function saveProgress(p) {
   try {
     localStorage.setItem(PROGRESS_LS_KEY, JSON.stringify(p));
   } catch {
     // ignore
   }
+}
+
+// v1互換：昔の key(ktj_progress_v1) が残っていたら idx だけ拾えるようにする
+function loadProgressCompat() {
+  // v2優先
+  const v2 = loadProgress();
+  if (v2) return { v: 2, ...v2 };
+
+  // v1( idxのみ ) を拾う
+  try {
+    const raw1 = localStorage.getItem("ktj_progress_v1");
+    if (!raw1) return null;
+    const p1 = JSON.parse(raw1);
+    if (p1 && Number.isFinite(p1.idx)) return { v: 1, idx: p1.idx };
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function saveProgressState({ idx, strokeIndex, done, kanjiCompleted }) {
+  saveProgress({
+    v: 2,
+    idx: Number.isFinite(idx) ? idx : 0,
+    strokeIndex: Number.isFinite(strokeIndex) ? strokeIndex : 0,
+    done: Array.isArray(done) ? done.map(Boolean) : [],
+    kanjiCompleted: !!kanjiCompleted,
+    t: Date.now(),
+  });
 }
 
 function updateNavDisabled() {
@@ -228,8 +261,8 @@ async function boot() {
   elPrev.addEventListener("click", () => move(-1));
   elNext.addEventListener("click", () => move(1));
 
-  // ✅ 進捗復帰（idxのみ最小）
-  const prog = loadProgress();
+ // ✅ 進捗復帰：まず idx だけ復元（strokesはrender内で確定するため）
+  const prog = loadProgressCompat();
   if (prog && Number.isFinite(prog.idx)) {
     idx = clamp(prog.idx, 0, items.length - 1);
   }
@@ -274,7 +307,9 @@ function move(delta) {
   strokeIndex = 0;
   done = [];
    // ✅ 移動したら保存（復帰用）
-  saveProgress({ idx, t: Date.now() });
+  // ✅ 移動時：その文字の途中状態は捨てて「idxだけ」保存（安定優先）
+  saveProgressState({ idx, strokeIndex: 0, done: [], kanjiCompleted: false });
+
   render();
 }
 
@@ -301,9 +336,31 @@ async function render() {
     return;
   }
 
+   // 初期化
   done = new Array(strokes.length).fill(false);
   strokeIndex = 0;
   failStreak = new Array(strokes.length).fill(0);
+
+  // ✅ 進捗復元（同じ idx のときだけ）
+  const prog = loadProgressCompat();
+  if (prog && Number.isFinite(prog.idx) && prog.idx === idx) {
+    // done復元（長さをstrokesに合わせる）
+    if (Array.isArray(prog.done) && prog.done.length) {
+      for (let i = 0; i < strokes.length; i++) done[i] = !!prog.done[i];
+    }
+
+    // strokeIndex復元（範囲内に丸める）
+    if (Number.isFinite(prog.strokeIndex)) {
+      strokeIndex = clamp(prog.strokeIndex, 0, strokes.length);
+    }
+
+    // クリア状態復元（doneからも推定）
+    kanjiCompleted =
+      !!prog.kanjiCompleted || done.every(Boolean) || strokeIndex >= strokes.length;
+
+    // strokeIndexが末尾以上なら表示上は最後の画に寄せる（active参照対策）
+    if (strokeIndex >= strokes.length) strokeIndex = strokes.length - 1;
+  }
 
   renderStrokeButtons(strokes.length);
 
@@ -314,8 +371,7 @@ async function render() {
   updateStrokeHint();
   resetCharForNewKanji(svg, strokes);
 
-  elPrev.disabled = idx === 0;
-  elNext.disabled = idx === items.length - 1;
+  updateNavDisabled();
 
   attachTraceHandlers(svg, strokes);
 
@@ -1090,6 +1146,8 @@ function attachTraceHandlers(svgEl, strokes) {
       failStreak[strokeIndex] = 0;
       strokeIndex++;
       updateStrokeHint();
+      // ✅ 1画進むたびに保存（途中再開の核）
+      saveProgressState({ idx, strokeIndex, done, kanjiCompleted: false });
 
        // ✅ 最後の画に着地したら「ゴールの道」を強調
       if (strokeIndex === strokes.length) {
@@ -1122,8 +1180,8 @@ function attachTraceHandlers(svgEl, strokes) {
         kanjiCompleted = true;
         // ✅ クリアしたら「まえ/つぎ」を解放
         updateNavDisabled();
-        // ✅ クリア時点のidxを保存
-        saveProgress({ idx, t: Date.now() });
+        // ✅ クリア状態を保存（次回来た時に再開/解放が正しくなる）
+        saveProgressState({ idx, strokeIndex: strokes.length, done, kanjiCompleted: true });
         
                 // 表示としては「最後の画」を維持（activeが配列外参照しないように）
                 strokeIndex = strokes.length - 1;
