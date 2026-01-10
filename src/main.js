@@ -204,6 +204,72 @@ function formatMs(ms) {
   return `${m}:${String(r).padStart(2, "0")}`;
 }
 
+// ===========================
+// Rank (time x accuracy)
+// ===========================
+function computeRank({ timeMs, accuracy, rescued, setLen }) {
+    // setLenに応じた “目標タイム” を置く（5文字=基準）
+    // ※授業で使う想定なので過度に厳しくしない
+    const basePerChar = 22_000; // 1文字あたり22秒を基準
+    const base = Math.max(1, setLen) * basePerChar; // 例: 5文字=110秒
+  
+    // timeScore: 0〜1（速いほど高い）
+    // baseの0.7倍以内なら満点寄り、1.4倍以上は低め
+    const t = timeMs / base;
+    const timeScore =
+      t <= 0.7 ? 1 :
+      t >= 1.4 ? 0 :
+      1 - (t - 0.7) / (1.4 - 0.7);
+  
+    // accuracyScore: 0〜1
+    const accScore = Math.max(0, Math.min(1, (accuracy ?? 0) / 100));
+  
+    // rescuePenalty: 救済が多いと上位を抑える（でも罰は軽く）
+    const rp = Math.max(0, Math.min(0.25, (rescued ?? 0) * 0.03)); // 最大 -0.25
+  
+    // 総合スコア（重み：正確さ>速さ）
+    const score = 0.55 * accScore + 0.45 * timeScore - rp;
+  
+    // ランク判定
+    if (score >= 0.88 && accuracy >= 92) return { rank: "S", score };
+    if (score >= 0.76 && accuracy >= 85) return { rank: "A", score };
+    if (score >= 0.62) return { rank: "B", score };
+    return { rank: "C", score };
+  }
+
+  // ===========================
+// Title (based on rank + style)
+// ===========================
+function computeTitle({ rank, timeMs, accuracy, rescued }) {
+    // “褒めやすい”称号を優先。ネガティブ称号は出さない。
+    const safeRescued = Number.isFinite(rescued) ? rescued : 0;
+    const safeAcc = Number.isFinite(accuracy) ? accuracy : 0;
+  
+    // 上位ほど分岐を増やす
+    if (rank === "S") {
+      // Sは速さ寄り。精度が高ければ“かんぺき”系も出す
+      if (safeAcc >= 97 && safeRescued <= 1) return "かんぺき王";
+      return "スピード王";
+    }
+  
+    if (rank === "A") {
+      // Aは丁寧さ寄り。救済が少なければ丁寧、救済が多ければ挑戦を褒める
+      if (safeAcc >= 92 && safeRescued <= 2) return "ていねい王";
+      if (safeRescued >= 4) return "あきらめない王";
+      return "ナイス王";
+    }
+  
+    if (rank === "B") {
+      if (safeAcc >= 85) return "のびしろ王";
+      if (safeRescued >= 4) return "がんばり王";
+      return "チャレンジ王";
+    }
+  
+    // Cでも明るい称号にする
+    if (safeAcc >= 70) return "つぎはA王";
+    return "スタート王";
+  }
+
 function startSetRun(set) {
   setRun = {
     setStart: set.start,
@@ -240,6 +306,23 @@ function finalizeSetRun() {
     rescued: setRun.rescued,
     accuracy: acc, 
   };
+  // ✅ Rank
+  const rk = computeRank({
+      timeMs: result.timeMs,
+      accuracy: result.accuracy,
+      rescued: result.rescued,
+      setLen: result.setLen,
+    });
+    result.rank = rk.rank;
+    result.rankScore = rk.score;
+
+    // ✅ Title
+  result.title = computeTitle({
+      rank: result.rank,
+      timeMs: result.timeMs,
+      accuracy: result.accuracy,
+      rescued: result.rescued,
+    });
   // ✅ Phase3-2: Personal Best（最速タイム）判定＆更新
   const pbMap = loadSetPBMap();
   const key = getSetKey(result.setStart, result.setLen);
@@ -1210,7 +1293,8 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
       .map((h, i) => {
         const t = h?.timeText ?? "-:--";
         const a = Number.isFinite(h?.accuracy) ? h.accuracy : 0;
-        return `<div class="final-hist-row">${i + 1}. ${t} / ${a}%</div>`;
+        const rk = h?.rank ?? "-";
+      return `<div class="final-hist-row">${i + 1}. ${t} / ${a}% / ${rk}</div>`;
       })
       .join("");
   const wrap = document.createElement("div");
@@ -1221,7 +1305,10 @@ function showFinalMenu({ onReplay, onNextSet, result , history}) {
       ${
                 r
                   ? `<div class="final-stats">
-                      <div class="final-stat"><span>タイム</span><b>${r.timeText}</b></div>
+                      <div class="final-stat rank"><span>ランク</span><b>${r.rank}</b></div>
+                      <div class="title-row">
+              <span class="title-badge">称号：${r.title}</span>
+            </div></div><div class="final-stat"><span>タイム</span><b>${r.timeText}</b></div>
                       <div class="final-stat pb"><span>じこベスト</span><b>${r.personalBestText}${r.isNewPB ? ' <em class="pb-new">NEW!</em>' : ""}</b></div>
                       <div class="final-stat"><span>せいこうりつ</span><b>${r.accuracy}%</b></div>
                       <div class="final-stat"><span>せいこう/しこう</span><b>${r.success}/${r.attempts}</b></div>

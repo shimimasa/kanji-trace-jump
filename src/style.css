@@ -624,4 +624,41 @@ body {
     60%{ transform: translateY(-1px) scale(1.15); opacity:1; }
     100%{ transform: translateY(-1px) scale(1); opacity:1; }
   }
+  .rank-row{
+    display:flex;
+    justify-content:center;
+    margin: 6px 0 2px;
+  }
+  .rank-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: .04em;
+    transform: translateZ(0);
+  }
+  .rank-S{ background: rgba(255, 215, 0, .25); }
+  .rank-A{ background: rgba(100, 180, 255, .22); }
+  .rank-B{ background: rgba(120, 220, 160, .20); }
+  .rank-C{ background: rgba(0, 0, 0, .08); }
+  
+  .title-row{
+    display:flex;
+    justify-content:center;
+    margin: 4px 0 6px;
+  }
+  .title-badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: .02em;
+    background: rgba(0,0,0,0.06);
+  }
   
