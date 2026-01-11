@@ -1184,6 +1184,24 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             saveProgress(ctx.progress);
           }
 
+           // ✅ single練習：ここで完了→図鑑へ戻す（Resultには行かない）
+          if (isSingleMode) {
+                showSetClearCelebration(svgEl);
+                setTimeout(() => {
+                  const result = finalizeSetRun();
+                  onSetFinished?.({
+                    mode: "single",
+                    singleId,
+                    result,
+                    set: { start: 0, end: 1, len: 1, pos: 0 },
+                    history: loadSetResults(),
+                    nextStart: 0,
+                  });
+                }, 900);
+                return;
+              }
+    
+
           // 表示上の安全
           strokeIndex = strokes.length - 1;
           refreshSvgStates(svgEl, strokes);
@@ -1267,23 +1285,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     const set = getSetInfo(idx);
     ensureSetRun(set);
 
-    // ✅ single練習：セットの概念なし（演出→図鑑へ戻す）
-          if (isSingleMode) {
-                // クリア演出は残す（はなまる等）
-                showSetClearCelebration?.(svgEl);
-                setTimeout(() => {
-                  const result = finalizeSetRun();
-                  onSetFinished?.({
-                    mode: "single",
-                    singleId,
-                    result,
-                    set,
-                    history: loadSetResults?.() ?? [],
-                    nextStart: 0,
-                  });
-                }, 900);
-                return;
-              }
     
     // ✅ single練習は常に 1/1 表示（途中変化しない）
     if (isSingleMode) renderStars(0, 1);
@@ -1362,16 +1363,17 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           items = [one];
           idx = 0;
         } else {
-    // ✅ startFromIdx 優先（Resultの「つぎの5もじ」で使う）
-    if (Number.isFinite(startFromIdx)) {
-          idx = clamp(startFromIdx, 0, items.length - 1);
-        } else if (startFromId) {
-          const found = items.findIndex((x) => x.id === startFromId);
-          if (found >= 0) idx = found;
-        }
-
-    await render();
-  }
+                  // ✅ startFromIdx 優先（Resultの「つぎの5もじ」で使う）
+                  if (Number.isFinite(startFromIdx)) {
+                    idx = clamp(startFromIdx, 0, items.length - 1);
+                  } else if (startFromId) {
+                    const found = items.findIndex((x) => x.id === startFromId);
+                    if (found >= 0) idx = found;
+                  }
+                }
+            
+                await render();
+              }
 
   // 起動
   const bootPromise = boot();
@@ -1399,5 +1401,4 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     stop,
     modeText,
   };
-}
 }
