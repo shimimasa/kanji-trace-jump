@@ -70,6 +70,18 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   let tracePathEl = null;
   let inputLocked = false;
 
+  // ===========================
+  // Phase2: Combo / FX / Sound
+  // ===========================
+  let combo = 0;
+  let lastSuccessAt = 0;
+  const COMBO_WINDOW_MS = 1400; // この時間内に成功するとコンボ継続
+
+  // Stars sparkle
+  let _lastStarFilled = 0;
+
+  // Audio
+  let _audioCtx = null;
   let teacherMode = false;
 
   // イベント解除用（グローバル / SVGで分離）
@@ -289,12 +301,290 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     const r = s % 60;
     return `${m}:${String(r).padStart(2, "0")}`;
   }
+    function ensureFxLayer(svgEl) {
+        const ns = "http://www.w3.org/2000/svg";
+        let layer = svgEl.querySelector('[data-role="fx"]');
+        if (layer) return layer;
+        layer = document.createElementNS(ns, "g");
+        layer.dataset.role = "fx";
+        layer.setAttribute("class", "fx-layer");
+        svgEl.appendChild(layer);
+        return layer;
+      }
+    
+      function spawnSparks(svgEl, p, count = 10) {
+        const ns = "http://www.w3.org/2000/svg";
+        const layer = ensureFxLayer(svgEl);
+        const { x, y } = p || { x: 50, y: 50 };
+        for (let i = 0; i < count; i++) {
+          const c = document.createElementNS(ns, "circle");
+          c.setAttribute("cx", x.toFixed(2));
+          c.setAttribute("cy", y.toFixed(2));
+          c.setAttribute("r", "1.2");
+          c.setAttribute("class", "fx-spark");
+          layer.appendChild(c);
+          const a = Math.random() * Math.PI * 2;
+          const d = 6 + Math.random() * 10;
+          const dx = Math.cos(a) * d;
+          const dy = Math.sin(a) * d;
+          const anim = c.animate(
+            [
+              { transform: "translate(0px, 0px)", opacity: 0.95 },
+              { transform: `translate(${dx}px, ${dy}px)`, opacity: 0 },
+            ],
+            { duration: 280 + Math.random() * 120, easing: "ease-out", fill: "forwards" }
+          );
+          anim.onfinish = () => c.remove();
+        }
+      }
+    
+      function showComboPop(svgEl, text) {
+        const ns = "http://www.w3.org/2000/svg";
+        const layer = ensureFxLayer(svgEl);
+        const t = document.createElementNS(ns, "text");
+        t.setAttribute("x", "50");
+        t.setAttribute("y", "18");
+        t.setAttribute("text-anchor", "middle");
+        t.setAttribute("class", "fx-combo-text");
+        t.textContent = text;
+        layer.appendChild(t);
+        const anim = t.animate(
+          [
+            { transform: "translate(0px, 6px) scale(0.9)", opacity: 0 },
+            { transform: "translate(0px, 0px) scale(1.05)", opacity: 1 },
+            { transform: "translate(0px, -8px) scale(1)", opacity: 0 },
+          ],
+          { duration: 520, easing: "ease-out", fill: "forwards" }
+        );
+        anim.onfinish = () => t.remove();
+      }
+    
+      function showHanamaru(svgEl) {
+        const ns = "http://www.w3.org/2000/svg";
+        const layer = ensureFxLayer(svgEl);
+        const g = document.createElementNS(ns, "g");
+        g.setAttribute("class", "hanamaru");
+        g.setAttribute("transform", "translate(50 50) scale(0)");
+        layer.appendChild(g);
+        const c = document.createElementNS(ns, "circle");
+        c.setAttribute("cx", "0");
+        c.setAttribute("cy", "0");
+        c.setAttribute("r", "26");
+        c.setAttribute("fill", "none");
+        c.setAttribute("stroke", "#ff7a00");
+        c.setAttribute("stroke-width", "6");
+        c.setAttribute("stroke-linecap", "round");
+        g.appendChild(c);
+        const t = document.createElementNS(ns, "text");
+        t.setAttribute("x", "0");
+        t.setAttribute("y", "10");
+        t.setAttribute("text-anchor", "middle");
+        t.setAttribute("font-size", "18");
+        t.setAttribute("font-weight", "700");
+        t.setAttribute("fill", "#ff7a00");
+        t.textContent = "はなまる！";
+        g.appendChild(t);
+        g.animate(
+          [
+            { transform: "translate(50px,50px) scale(0)", opacity: 0 },
+            { transform: "translate(50px,50px) scale(1.15)", opacity: 1 },
+            { transform: "translate(50px,50px) scale(1)", opacity: 1 },
+          ],
+          { duration: 420, easing: "ease-out", fill: "forwards" }
+        );
+        // 小さめファンファーレ
+        playTone(880, 0.08, "sine", 0.06);
+        setTimeout(() => playTone(1175, 0.1, "sine", 0.05), 90);
+        sparkleStars();
+        setTimeout(() => g.remove(), 1200);
+      }
+    
+      function playSetClearFanfare() {
+        const seq = [
+          { f: 659, d: 0.08 },
+          { f: 784, d: 0.08 },
+          { f: 988, d: 0.10 },
+          { f: 1319, d: 0.14 },
+        ];
+        let t = 0;
+        for (const n of seq) {
+          setTimeout(() => playTone(n.f, n.d, "triangle", 0.05), t);
+          t += 90;
+        }
+        setTimeout(() => playTone(1568, 0.12, "sine", 0.035), t + 40);
+      }
+    
+      function launchConfetti({ durationMs = 1600, count = 70 } = {}) {
+        const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+        if (reduce) return;
+        const layer = document.createElement("div");
+        layer.className = "confetti-layer";
+        Object.assign(layer.style, {
+          position: "fixed",
+          inset: "0",
+          pointerEvents: "none",
+          overflow: "hidden",
+          zIndex: "9999",
+        });
+        document.body.appendChild(layer);
+        const vw = window.innerWidth || 1;
+        const vh = window.innerHeight || 1;
+        for (let i = 0; i < count; i++) {
+          const p = document.createElement("span");
+          const w = 6 + Math.random() * 6;
+          const h = 10 + Math.random() * 10;
+          const x = Math.random() * vw;
+          const delay = Math.random() * 120;
+          const dur = durationMs * (0.75 + Math.random() * 0.55);
+          const rot = (Math.random() * 720 - 360) | 0;
+          const drift = (Math.random() * 240 - 120) | 0;
+          const hue = (Math.random() * 360) | 0;
+          Object.assign(p.style, {
+            position: "absolute",
+            left: `${x}px`,
+            top: `-20px`,
+            width: `${w}px`,
+            height: `${h}px`,
+            background: `hsl(${hue} 90% 60%)`,
+            borderRadius: "2px",
+            opacity: "0.95",
+            transform: `translate3d(0,0,0) rotate(0deg)`,
+            willChange: "transform, opacity",
+          });
+          layer.appendChild(p);
+          p.animate(
+            [
+              { transform: `translate3d(0,0,0) rotate(0deg)`, opacity: 1 },
+              { transform: `translate3d(${drift}px, ${vh + 40}px, 0) rotate(${rot}deg)`, opacity: 0.98 },
+            ],
+            { duration: dur, delay, easing: "cubic-bezier(.2,.8,.2,1)", fill: "forwards" }
+          ).onfinish = () => p.remove();
+        }
+        setTimeout(() => layer.remove(), durationMs + 800);
+      }
+    
+      function showSetClearCelebration(svgEl) {
+        showHanamaru(svgEl);
+        const p = { x: 50, y: 50 };
+        spawnSparks(svgEl, p, 18);
+        setTimeout(() => spawnSparks(svgEl, p, 14), 120);
+        setTimeout(() => spawnSparks(svgEl, p, 10), 240);
+        launchConfetti({ durationMs: 1600, count: 70 });
+        playSetClearFanfare();
+      }
+    
+
+    // ===========================
+  // FX / Sound
+  // ===========================
+  function getAudioCtx() {
+    if (_audioCtx) return _audioCtx;
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    _audioCtx = new AC();
+    return _audioCtx;
+  }
+
+  function playTone(freq = 660, duration = 0.07, type = "sine", gain = 0.04) {
+    const ctxA = getAudioCtx();
+    if (!ctxA) return;
+    if (ctxA.state === "suspended") ctxA.resume().catch(() => {});
+    const t0 = ctxA.currentTime;
+    const osc = ctxA.createOscillator();
+    const g = ctxA.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t0);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(gain, t0 + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+    osc.connect(g);
+    g.connect(ctxA.destination);
+    osc.start(t0);
+    osc.stop(t0 + duration + 0.02);
+  }
+
+  function playComboSuccessSfx(level = 0) {
+    const base = 740 + level * 60;
+    playTone(base, 0.055, "sine", 0.05);
+    playTone(base + 220, 0.055, "sine", 0.04);
+    if (level >= 2) setTimeout(() => playTone(base + 420, 0.06, "triangle", 0.035), 55);
+  }
+
+  function playFailSfx() {
+    if (navigator.vibrate) navigator.vibrate(18);
+    // 音は好みで。必要なら極小で足す
+    // playTone(220, 0.06, "sine", 0.02);
+  }
 
   // ---------------------------
   // UI helper
   // ---------------------------
   function showError(msg) { if (elError) elError.textContent = String(msg ?? ""); }
   function clearError() { if (elError) elError.textContent = ""; }
+
+  // ===========================
+  // Stars (set progress)
+  // ===========================
+  function renderStars(posInSet, setLen) {
+    if (!elStars) return;
+    const max = clamp(setLen, 1, SET_SIZE); // 1..5
+    const filled = clamp(posInSet + 1, 1, max);
+
+    if (elStars.children.length !== max) {
+      elStars.innerHTML = "";
+      for (let i = 0; i < max; i++) {
+        const star = document.createElement("span");
+        star.className = "star";
+        star.textContent = "★";
+        elStars.appendChild(star);
+      }
+    }
+
+    [...elStars.children].forEach((star, i) => {
+      const isFilled = i < filled;
+      star.classList.toggle("filled", isFilled);
+
+      if (isFilled && i === filled - 1 && _lastStarFilled < filled) {
+        star.classList.remove("pop");
+        void star.offsetWidth;
+        star.classList.add("pop");
+      }
+    });
+
+    if (filled === max && _lastStarFilled !== max) sparkleStars();
+    _lastStarFilled = filled;
+  }
+
+  function sparkleStars() {
+    if (!elStars) return;
+    elStars.classList.remove("starsSparkle");
+    void elStars.offsetWidth;
+    elStars.classList.add("starsSparkle");
+    spawnStarSparks(8);
+  }
+
+  function spawnStarSparks(count = 8) {
+    if (!elStars) return;
+    const rect = elStars.getBoundingClientRect();
+    const cx = rect.width / 2;
+    const cy = rect.height / 2;
+    for (let i = 0; i < count; i++) {
+      const spark = document.createElement("span");
+      spark.className = "star-spark";
+      const a = Math.random() * Math.PI * 2;
+      const d = 10 + Math.random() * 18;
+      const dx = Math.cos(a) * d;
+      const dy = Math.sin(a) * d;
+      const ox = cx + (Math.random() * 8 - 4);
+      const oy = cy + (Math.random() * 6 - 3);
+      spark.style.left = `${ox}px`;
+      spark.style.top = `${oy}px`;
+      spark.style.setProperty("--dx", `${dx}px`);
+      spark.style.setProperty("--dy", `${dy}px`);
+      elStars.appendChild(spark);
+      spark.addEventListener("animationend", () => spark.remove(), { once: true });
+    }
+  }
 
   function setHintText(text) { if (elHint) elHint.textContent = String(text ?? ""); }
   function updateHintText() {
@@ -860,6 +1150,17 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         lockInput(JUMP_MS);
         charJumpTo(svgEl, nextAnchor);
 
+         // ✅ 成功演出：コンボ / SFX / スパーク
+        const now = Date.now();
+        const within = now - lastSuccessAt <= COMBO_WINDOW_MS;
+        combo = within ? combo + 1 : 1;
+        lastSuccessAt = now;
+        const comboLevel = Math.min(5, Math.floor((combo - 1) / 2)); // 0..5
+
+        spawnSparks(svgEl, nextAnchor, 8 + comboLevel * 3);
+        playComboSuccessSfx(comboLevel);
+        if (combo >= 3) showComboPop(svgEl, `コンボ ${combo}!`);
+
         refreshSvgStates(svgEl, strokes);
         renderStrokeButtons(strokes.length);
         updateHintText();
@@ -893,7 +1194,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             }, AUTO_NEXT_DELAY_MS);
           } else {
             // ✅ セット最終：overlayやめて Result画面へ
-            // 余韻を見せてから結果へ
+            // ✅ クリア演出（はなまる＋紙吹雪＋ファンファーレ）→余韻→結果へ
+            showSetClearCelebration(svgEl);
             setTimeout(() => {
               if (!kanjiCompleted) return;
               const result = finalizeSetRun();
@@ -901,10 +1203,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
                 result,
                 set,
                 history: loadSetResults(),
-                // 次のセット先頭（Resultの「つぎの5もじ」で使う）
                 nextStart: set.end >= items.length ? 0 : set.end,
               });
-            }, 900);
+            }, 1200);
           }
         }
       } else {
@@ -913,6 +1214,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;
         lockInput(FAIL_MS);
         charFailDrop(svgEl);
+        combo = 0;
+        playFailSfx();
       }
 
       e.preventDefault();
@@ -956,6 +1259,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
     const set = getSetInfo(idx);
     ensureSetRun(set);
+    
+    renderStars(set.pos, set.len);
 
     if (elLabel) elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`;
     if (elArea) elArea.innerHTML = `<div style="font-size:20px; opacity:.7; font-weight:700;">よみこみ中…</div>`;
@@ -1035,6 +1340,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function stop() {
     clearTimeout(moveTimer);
     clearTimeout(unlockTimer);
+    clearTimeout(charJumpTimer);
+    // confetti残留掃除（念のため）
+    document.querySelectorAll(".confetti-layer").forEach((n) => n.remove());
     // pointer capture残り対策
     try { svg?.releasePointerCapture?.(0); } catch {}
 
