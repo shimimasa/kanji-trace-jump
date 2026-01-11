@@ -23,10 +23,12 @@ export function HomeScreen(ctx, nav) {
       const onStart = () => nav.go("game", { selectedRangeId: selected });
       const onRange = () => nav.go("rangeSelect");
       const onProg = () => nav.go("progress");
+      const onTB = () => nav.go("titleBook", { from: "result" });
 
       el.querySelector("#start").addEventListener("click", onStart);
       el.querySelector("#range").addEventListener("click", onRange);
       el.querySelector("#progress").addEventListener("click", onProg);
+      el.querySelector("#titlebook").addEventListener("click", onTB);
 
       return {
         el,
@@ -34,6 +36,7 @@ export function HomeScreen(ctx, nav) {
           el.querySelector("#start").removeEventListener("click", onStart);
           el.querySelector("#range").removeEventListener("click", onRange);
           el.querySelector("#progress").removeEventListener("click", onProg);
+          el.querySelector("#titlebook").removeEventListener("click", onTB);
         }
       };
     }

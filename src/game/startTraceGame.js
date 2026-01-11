@@ -265,6 +265,13 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           timeMs: result.timeMs,
           setLen: result.setLen,
         });
+
+        addTitleToBook({
+            title: result.title,
+            rank: result.rank,
+            rarity: getTitleMeta(result.title)?.rarity ?? null,
+            at: result.at,
+          });
     
         // 履歴に保存（最新5件）
         saveSetResult(result);

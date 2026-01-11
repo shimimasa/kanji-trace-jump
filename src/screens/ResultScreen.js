@@ -53,6 +53,7 @@ export function ResultScreen(ctx, nav) {
               <button id="replay" class="btn">もういちど</button>
               <button id="next" class="btn primary">つぎの5もじ</button>
               <button id="progress" class="btn">クリアしたもの</button>
+              <button id="titlebook" class="btn">称号ずかん</button>
               <button id="home" class="btn">ホーム</button>
             </div>
           </div>
