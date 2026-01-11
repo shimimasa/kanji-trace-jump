@@ -2,7 +2,7 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { markCleared, saveProgress } from "../lib/progressStore.js";
 
-export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSetFinished }) {
+export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, onSetFinished }) {
   // ---------------------------
   // ✅ 旧 main.js の “定数” はここへ移植
   // ---------------------------
@@ -71,8 +71,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
 
   let teacherMode = false;
 
-  // イベント解除用
+  // イベント解除用（グローバル / SVGで分離）
   const disposers = [];
+  const svgDisposers = [];
   let moveTimer = null;
   let unlockTimer = null;
 
@@ -81,6 +82,107 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
   // ---------------------------
   let setRun = null;
 
+   // --- Phase3: Set results / PB (old-main.js移植) ---
+  const SET_RESULTS_LS_KEY = "ktj_set_results_v1";
+  const SET_PB_LS_KEY = "ktj_set_pb_v1";
+
+  function loadSetPBMap() {
+    try {
+      const raw = localStorage.getItem(SET_PB_LS_KEY);
+      if (!raw) return {};
+      const obj = JSON.parse(raw);
+      return obj && typeof obj === "object" ? obj : {};
+    } catch {
+      return {};
+    }
+  }
+  function saveSetPBMap(map) {
+    try { localStorage.setItem(SET_PB_LS_KEY, JSON.stringify(map)); } catch {}
+  }
+  function getSetKey(setStart, setLen) {
+    return `${setStart}_${setLen}`;
+  }
+  function loadSetResults() {
+    try {
+      const raw = localStorage.getItem(SET_RESULTS_LS_KEY);
+      if (!raw) return [];
+      const arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
+    }
+  }
+  function saveSetResult(entry) {
+    try {
+      const arr = loadSetResults();
+      arr.unshift(entry);
+      localStorage.setItem(SET_RESULTS_LS_KEY, JSON.stringify(arr.slice(0, 5)));
+    } catch {}
+  }
+
+  function computeRank({ timeMs, accuracy, rescued, setLen }) {
+    const basePerChar = 22_000;
+    const base = Math.max(1, setLen) * basePerChar;
+    const t = timeMs / base;
+    const timeScore = t <= 0.7 ? 1 : t >= 1.4 ? 0 : 1 - (t - 0.7) / (1.4 - 0.7);
+    const accScore = Math.max(0, Math.min(1, (accuracy ?? 0) / 100));
+    const rp = Math.max(0, Math.min(0.25, (rescued ?? 0) * 0.03));
+    const score = 0.55 * accScore + 0.45 * timeScore - rp;
+    if (score >= 0.88 && accuracy >= 92) return { rank: "S", score };
+    if (score >= 0.76 && accuracy >= 85) return { rank: "A", score };
+    if (score >= 0.62) return { rank: "B", score };
+    return { rank: "C", score };
+  }
+  function computeTitle({ rank, timeMs, accuracy, rescued, isNewPB, comboMax, setLen }) {
+    const acc = Number.isFinite(accuracy) ? accuracy : 0;
+    const res = Number.isFinite(rescued) ? rescued : 0;
+    const t = Number.isFinite(timeMs) ? timeMs : 0;
+    const len = Math.max(1, setLen || 5);
+    const perChar = t / len;
+    if (acc >= 100) return "ノーミス王";
+    if (res === 0 && acc >= 92) return "きゅうさいゼロ王";
+    if (isNewPB) return "新記録王";
+    if (Number.isFinite(comboMax) && comboMax >= 8) return "連勝王";
+    if (perChar <= 15_000) return "タイムアタック王";
+    if (rank === "S") return acc >= 97 && res <= 1 ? "かんぺき王" : "スピード王";
+    if (rank === "A") {
+      if (acc >= 92 && res <= 2) return "ていねい王";
+      if (res >= 4) return "あきらめない王";
+      return "ナイス王";
+    }
+    if (rank === "B") {
+      if (acc >= 85) return "のびしろ王";
+      if (res >= 4) return "がんばり王";
+      return "チャレンジ王";
+    }
+    if (acc >= 70) return "つぎはA王";
+    return "スタート王";
+  }
+  function computeComment({ rank, accuracy, rescued, timeMs, setLen }) {
+    const acc = Number.isFinite(accuracy) ? accuracy : 0;
+    const res = Number.isFinite(rescued) ? rescued : 0;
+    const t = Number.isFinite(timeMs) ? timeMs : 0;
+    const len = Math.max(1, setLen || 5);
+    const perChar = t / len;
+    const fast = perChar <= 18_000;
+    const careful = acc >= 92 && res <= 2;
+    const persistent = res >= 4;
+    const pick = (arr) => arr[(Math.random() * arr.length) | 0];
+    if (rank === "S") return careful ? pick(["すごい！はやいのに ていねい！", "かんぺき！そのままいこう！"]) : pick(["はやい！ゲーマーの手だ！", "スピードが神！その調子！"]);
+    if (rank === "A") {
+      if (careful) return pick(["線がきれい！ていねいだね！", "いいね！おちついて書けてる！"]);
+      if (persistent) return pick(["あきらめないのが一番つよい！", "ねばり勝ち！えらい！"]);
+      return pick(["ナイス！この調子でOK！", "あとちょっとでSいける！"]);
+    }
+    if (rank === "B") {
+      if (fast) return pick(["けっこう速い！つぎは ていねいさも！", "スピードいいね！線を意識！"]);
+      if (careful) return pick(["ていねい！あとは少しスピード！", "きれいに書けてる！"]);
+      if (persistent) return pick(["がんばりが勝つ！続けよう！", "くり返すほど上手になる！"]);
+      return pick(["いいスタート！つぎはAめざそう！", "あと1こずつ良くしていこう！"]);
+    }
+    if (persistent) return pick(["やめなかったのが勝ち！", "つぎは ぜったい進むよ！"]);
+    return pick(["OK！まずは1こずつ！", "はじめはみんなここから！"]);
+  }
   function getSetInfo(i = idx) {
     const start = Math.floor(i / SET_SIZE) * SET_SIZE;
     const end = Math.min(start + SET_SIZE, items.length);
@@ -110,7 +212,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
     const timeMs = Date.now() - setRun.startedAt;
     const total = Math.max(0, setRun.attempts);
     const accuracy = total > 0 ? Math.round((setRun.success / total) * 100) : 0;
-    return {
+    const result = {
       at: Date.now(),
       setStart: setRun.setStart,
       setLen: setRun.setLen,
@@ -121,8 +223,52 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
       fail: setRun.fail,
       rescued: setRun.rescued,
       accuracy,
-      // rank/title/comment は今後 Result 画面で再利用したいなら旧ロジックも移植OK
     };
+    // Rank
+    const rk = computeRank({
+          timeMs: result.timeMs,
+          accuracy: result.accuracy,
+          rescued: result.rescued,
+          setLen: result.setLen,
+        });
+        result.rank = rk.rank;
+        result.rankScore = rk.score;
+    
+        // PB（最速）
+        const pbMap = loadSetPBMap();
+        const key = getSetKey(result.setStart, result.setLen);
+        const prev = pbMap?.[key]?.timeMs;
+        const hasPrev = Number.isFinite(prev);
+        const isNewPB = !hasPrev || result.timeMs < prev;
+        if (isNewPB) {
+          pbMap[key] = { timeMs: result.timeMs, at: result.at };
+          saveSetPBMap(pbMap);
+        }
+        result.personalBestMs = isNewPB ? result.timeMs : prev;
+        result.personalBestText = formatMs(result.personalBestMs);
+        result.isNewPB = isNewPB;
+    
+        // Title / Comment（PB判定後）
+        result.title = computeTitle({
+          rank: result.rank,
+          timeMs: result.timeMs,
+          accuracy: result.accuracy,
+          rescued: result.rescued,
+          setLen: result.setLen,
+          isNewPB: !!result.isNewPB,
+          comboMax: result.comboMax,
+        });
+        result.comment = computeComment({
+          rank: result.rank,
+          accuracy: result.accuracy,
+          rescued: result.rescued,
+          timeMs: result.timeMs,
+          setLen: result.setLen,
+        });
+    
+        // 履歴に保存（最新5件）
+        saveSetResult(result);
+        return result;
   }
 
   function formatMs(ms) {
@@ -740,6 +886,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
               onSetFinished?.({
                 result,
                 set,
+                history: loadSetResults(),
                 // 次のセット先頭（Resultの「つぎの5もじ」で使う）
                 nextStart: set.end >= items.length ? 0 : set.end,
               });
@@ -755,19 +902,25 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
 
       e.preventDefault();
     };
-
+    
     svgEl.addEventListener("pointerdown", onDown, { passive: false });
-    svgEl.addEventListener("pointermove", onMove, { passive: false });
-    svgEl.addEventListener("pointerup", finish, { passive: false });
-    svgEl.addEventListener("pointercancel", finish, { passive: false });
-
-    disposers.push(() => {
+        svgEl.addEventListener("pointermove", onMove, { passive: false });
+        svgEl.addEventListener("pointerup", finish, { passive: false });
+        svgEl.addEventListener("pointercancel", finish, { passive: false });
+    
+        svgDisposers.push(() => {    
       svgEl.removeEventListener("pointerdown", onDown);
       svgEl.removeEventListener("pointermove", onMove);
       svgEl.removeEventListener("pointerup", finish);
       svgEl.removeEventListener("pointercancel", finish);
     });
   }
+
+  function cleanupSvgHandlers() {
+        for (const d of svgDisposers.splice(0)) {
+         try { d(); } catch {}
+        }
+      }
 
   function move(delta) {
     idx = clamp(idx + delta, 0, items.length - 1);
@@ -778,6 +931,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
   }
 
   async function render() {
+    // ✅ 前のSVGのイベントを必ず解除（多重登録防止）
+    cleanupSvgHandlers();
     clearError();
     kanjiCompleted = false;
 
@@ -847,11 +1002,13 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
 
     if (!items.length) throw new Error("データなし");
 
-    // startFromId があればそこへジャンプ
-    if (startFromId) {
-      const found = items.findIndex((x) => x.id === startFromId);
-      if (found >= 0) idx = found;
-    }
+    // ✅ startFromIdx 優先（Resultの「つぎの5もじ」で使う）
+    if (Number.isFinite(startFromIdx)) {
+          idx = clamp(startFromIdx, 0, items.length - 1);
+        } else if (startFromId) {
+          const found = items.findIndex((x) => x.id === startFromId);
+          if (found >= 0) idx = found;
+        }
 
     await render();
   }
@@ -865,6 +1022,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSe
     clearTimeout(unlockTimer);
     // pointer capture残り対策
     try { svg?.releasePointerCapture?.(0); } catch {}
+
+    // ✅ SVG側のイベントも必ず解除
+    cleanupSvgHandlers();
 
     for (const d of disposers.splice(0)) {
       try { d(); } catch {}

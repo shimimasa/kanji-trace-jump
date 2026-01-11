@@ -50,9 +50,10 @@ export function GameScreen(ctx, nav) {
         ctx,
         selectedRangeId: ctx.selectedRangeId,
         startFromId: ctx.startFromId,
-        onSetFinished: ({ result, nextStart }) => {
+        startFromIdx: ctx.startFromIdx,
+        onSetFinished: ({ result, nextStart, history }) => {
           // Result画面へ
-          nav.go("result", { lastResult: result, nextStart });
+          nav.go("result", { lastResult: result, nextStart, history });
         },
       });
 
