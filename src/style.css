@@ -1286,15 +1286,30 @@ root{
   }
   .tileBook{
     position:absolute;
-    right: 6px;
-    top: 6px;
-    width: 34px;
-    height: 34px;
-    border-radius: 12px;
-    border: 1px solid rgba(18,38,63,.10);
-    background: rgba(246,248,251,.95);
-    cursor:pointer;
+  right: 8px;
+  bottom: 8px;           /* ✅ 右下へ移動して文字を隠しにくく */
+  width: 28px;           /* ✅ 小さく */
+  height: 28px;
+  border-radius: 10px;
+  border: 1px solid rgba(18,38,63,.10);
+  background: rgba(246,248,251,.70); /* ✅ 薄め */
+  cursor:pointer;
+  opacity: .55;          /* ✅ 普段は控えめ */
+  transform: scale(.98);
+  transition: opacity .12s ease, transform .12s ease, background .12s ease;
   }
+
+.tile:hover .tileBook,
+.tile:focus-within .tileBook{
+  opacity: 1;
+  transform: scale(1);
+  background: rgba(246,248,251,.95);
+}
+
+/* タッチ端末は hover が無いので、押しやすさ重視で少しだけ濃く */
+@media (hover: none) and (pointer: coarse){
+  .tileBook{ opacity: .72; }
+}
   .emptyNote{
     opacity: .7;
     padding: 10px 0;
@@ -1368,3 +1383,47 @@ root{
     .tileChar{ font-size: 20px; }
     .dexChar{ font-size: 78px; }
   }
+  .dexTools{
+      margin-top: 14px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .dexInfo{
+      margin-top: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(18,38,63,.08);
+      background: rgba(255,255,255,.78);
+      padding: 12px 14px;
+    }
+    .dexInfoRow{
+      display:grid;
+      grid-template-columns: 44px 1fr;
+      gap: 10px;
+      padding: 6px 0;
+      border-top: 1px dashed rgba(18,38,63,.12);
+    }
+    .dexInfoRow:first-child{ border-top:none; }
+    .dexInfoLabel{
+      font-weight: 1000;
+      opacity: .7;
+    }
+    .dexInfoValue{
+      font-weight: 900;
+    }
+    .dexExample{
+      margin-top: 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(18,38,63,.08);
+      background: rgba(246,248,251,.85);
+      padding: 12px 14px;
+    }
+    .dexExampleLabel{
+      font-weight: 1000;
+      opacity: .75;
+      margin-bottom: 6px;
+    }
+    .dexExampleText{
+      font-weight: 800;
+      line-height: 1.6;
+    }
