@@ -42,6 +42,11 @@ export function GameScreen(ctx, nav) {
       `;
 
       const quit = el.querySelector("#quitBtn");
+      if (!quit) {
+        // ここで落とすと「何が足りないか」が分かる
+        console.error("[GameScreen] DOM missing. expected #quitBtn. current HTML:", el.innerHTML);
+        throw new Error("[GameScreen] #quitBtn が見つかりません（DOM生成/ID不一致の可能性）");
+      }
       const onQuit = () => nav.go("home");
       quit.addEventListener("click", onQuit);
 

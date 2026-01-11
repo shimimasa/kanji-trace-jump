@@ -73,18 +73,34 @@ export function ResultScreen(ctx, nav) {
         const onProgress = () => nav.go("progress");
         const onHome = () => nav.go("home");
   
-        el.querySelector("#replay").addEventListener("click", onReplay);
-        el.querySelector("#next").addEventListener("click", onNext);
-        el.querySelector("#progress").addEventListener("click", onProgress);
-        el.querySelector("#home").addEventListener("click", onHome);
-  
+        const replayBtn = el.querySelector("#replay");
+        const nextBtn = el.querySelector("#next");
+        const progressBtn = el.querySelector("#progress");
+        const homeBtn = el.querySelector("#home");
+        // （titlebook は現状 listener を付けてないので、ここでは必須にしない）
+
+        const missing = [];
+        if (!replayBtn) missing.push("#replay");
+        if (!nextBtn) missing.push("#next");
+        if (!progressBtn) missing.push("#progress");
+        if (!homeBtn) missing.push("#home");
+        if (missing.length) {
+          console.error("[ResultScreen] DOM missing:", missing, "current HTML:", el.innerHTML);
+          throw new Error(`[ResultScreen] 必須ボタンが見つかりません: ${missing.join(", ")}`);
+        }
+
+        replayBtn.addEventListener("click", onReplay);
+        nextBtn.addEventListener("click", onNext);
+        progressBtn.addEventListener("click", onProgress);
+        homeBtn.addEventListener("click", onHome);
+
         return {
           el,
           cleanup() {
-            el.querySelector("#replay").removeEventListener("click", onReplay);
-            el.querySelector("#next").removeEventListener("click", onNext);
-            el.querySelector("#progress").removeEventListener("click", onProgress);
-            el.querySelector("#home").removeEventListener("click", onHome);
+            replayBtn.removeEventListener("click", onReplay);
+            nextBtn.removeEventListener("click", onNext);
+            progressBtn.removeEventListener("click", onProgress);
+            homeBtn.removeEventListener("click", onHome);
           }
         };
       }
