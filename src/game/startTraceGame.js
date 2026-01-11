@@ -1175,7 +1175,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
        // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
       const curItem = items[idx];
       if (curItem?.id) {
-        const key = `${range.id}::${curItem.id}`;
+        const key = `${selectedRangeId}::${curItem.id}`;
+
         recordAttempt(ctx.progress, key, { failed: !ok });
         saveProgress(ctx.progress);
       }
