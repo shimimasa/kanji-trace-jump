@@ -1,5 +1,13 @@
 import { CONTENT_MANIFEST, groupByType } from "../data/contentManifest.js";
 
+const TYPE_LABEL = {
+  kanji: "漢字",
+  hiragana: "ひらがな",
+  katakana: "カタカナ",
+  romaji: "ローマ字",
+  alphabet: "アルファベット",
+};
+
 export function RangeSelectScreen(ctx, nav) {
   return {
     async mount() {
@@ -7,34 +15,30 @@ export function RangeSelectScreen(ctx, nav) {
       el.className = "screen range";
 
       const grouped = groupByType(CONTENT_MANIFEST);
-      const types = Object.keys(grouped);
+      const current = ctx.selectedRangeId ?? "kanji_g1";
 
       el.innerHTML = `
-        <h1>範囲をえらぶ</h1>
-        <div id="list"></div>
-        <button id="back">もどる</button>
+        <div class="card">
+          <h1>範囲をえらぶ</h1>
+          <div id="list"></div>
+          <div style="margin-top:12px;">
+            <button id="back" class="btn">もどる</button>
+          </div>
+        </div>
       `;
 
       const list = el.querySelector("#list");
-      list.innerHTML = types.map(type => {
-        const items = grouped[type]
-          .map(item => {
-            const checked = (ctx.selectedRangeId ?? "kanji_g1") === item.id ? "checked" : "";
-            return `
-              <label class="row">
-                <input type="radio" name="range" value="${item.id}" ${checked} />
-                <span>${item.label}</span>
-              </label>
-            `;
-          }).join("");
-        const title =
-          type === "kanji" ? "漢字" :
-          type === "hiragana" ? "ひらがな" :
-          type === "katakana" ? "カタカナ" :
-          type === "romaji" ? "ローマ字" :
-          type === "alphabet" ? "アルファベット" : type;
-
-        return `<div class="card"><h2>${title}</h2>${items}</div>`;
+      list.innerHTML = Object.keys(grouped).map(type => {
+        const items = grouped[type].map(item => {
+          const checked = item.id === current ? "checked" : "";
+          return `
+            <label class="row">
+              <input type="radio" name="range" value="${item.id}" ${checked}/>
+              <span>${item.label}</span>
+            </label>
+          `;
+        }).join("");
+        return `<div class="subcard"><h2>${TYPE_LABEL[type] ?? type}</h2>${items}</div>`;
       }).join("");
 
       const onChange = (e) => {
@@ -42,7 +46,6 @@ export function RangeSelectScreen(ctx, nav) {
         if (!v) return;
         nav.ctx.selectedRangeId = v;
       };
-
       const onBack = () => nav.go("home");
 
       el.addEventListener("change", onChange);

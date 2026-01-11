@@ -1,33 +1,71 @@
+// src/screens/GameScreen.js
+import { startTraceGame } from "../game/startTraceGame.js";
+
 export function GameScreen(ctx, nav) {
-    return {
-      async mount() {
-        const el = document.createElement("div");
-        el.className = "screen game";
-  
-        // 既存UIを流用するなら、今のindex.html構造をここへ移す or 部分的に作る
-        el.innerHTML = `
-          <div id="gameRoot">
-            <canvas id="traceCanvas"></canvas>
-            <div id="hud"></div>
-            <button id="quit">やめる</button>
+  let game = null;
+
+  return {
+    async mount() {
+      const el = document.createElement("div");
+      el.className = "screen game";
+
+      // 旧 index.html のDOMをここで生成（あなたの既存CSSを活かす）
+      el.innerHTML = `
+        <div class="hud">
+          <div id="stars" class="stars" aria-label="進捗"></div>
+          <div id="mode" class="mode">もくひょう：5もじ</div>
+          <button id="teacherToggle" class="teacherToggle" type="button" aria-pressed="false">先生</button>
+        </div>
+
+        <div class="main">
+          <div class="topline">
+            <div id="kanjiLabel" class="title"></div>
           </div>
-        `;
-  
-        const quitBtn = el.querySelector("#quit");
-        const onQuit = () => nav.go("home");
-        quitBtn.addEventListener("click", onQuit);
-  
-        // TODO: ここで「既存のゲーム起動関数」を呼ぶ
-        // const { stop } = startTraceGame({ ctx, el, onSetFinished: (result)=> nav.go("result", { lastResult: result }) })
-  
-        return {
-          el,
-          cleanup() {
-            quitBtn.removeEventListener("click", onQuit);
-            // stop?.(); // 既存ゲームのタイマー/イベント解除
-          }
-        };
-      }
-    };
-  }
-  
+
+          <div class="stage">
+            <div id="kanjiArea" class="kanji-area" aria-label="漢字トレースエリア"></div>
+          </div>
+
+          <div class="stroke-ui">
+            <div id="strokeButtons" class="stroke-buttons" aria-label="書き順"></div>
+          </div>
+
+          <div class="nav">
+            <button id="prevBtn" class="btn" type="button">まえ</button>
+            <button id="nextBtn" class="btn primary" type="button">つぎ</button>
+            <button id="quitBtn" class="btn" type="button">やめる</button>
+          </div>
+
+          <p id="hint" class="caption">なぞって、書き順どおりに進めよう。</p>
+          <div id="error" class="error" role="status" aria-live="polite"></div>
+        </div>
+      `;
+
+      const quit = el.querySelector("#quitBtn");
+      const onQuit = () => nav.go("home");
+      quit.addEventListener("click", onQuit);
+
+      game = startTraceGame({
+        rootEl: el,
+        ctx,
+        selectedRangeId: ctx.selectedRangeId,
+        startFromId: ctx.startFromId,
+        onSetFinished: ({ result, nextStart }) => {
+          // Result画面へ
+          nav.go("result", { lastResult: result, nextStart });
+        },
+      });
+
+      await game.ready;
+
+      return {
+        el,
+        cleanup() {
+          quit.removeEventListener("click", onQuit);
+          game?.stop?.();
+          game = null;
+        }
+      };
+    }
+  };
+}

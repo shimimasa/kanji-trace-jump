@@ -1,0 +1,875 @@
+// src/game/startTraceGame.js
+import { CONTENT_MANIFEST } from "../data/contentManifest.js";
+import { markCleared, saveProgress } from "../lib/progressStore.js";
+
+export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, onSetFinished }) {
+  // ---------------------------
+  // ✅ 旧 main.js の “定数” はここへ移植
+  // ---------------------------
+  const BASE_PATH = import.meta.env.BASE_URL ?? "/";
+  const BASE_URL = new URL(BASE_PATH, window.location.href);
+
+  const NEKO_URL = new URL("assets/characters/neko.png", BASE_URL).toString();
+  const CHAR_SIZE = 14;
+
+  const range = CONTENT_MANIFEST.find((x) => x.id === (selectedRangeId ?? "kanji_g1"));
+  const DATA_PATH = new URL(range?.source ?? "data/kanji_g1_proto.json", BASE_URL).toString();
+  const STROKES_BASE = new URL("data/strokes/", BASE_URL).toString();
+
+  const strokesCache = new Map();
+
+  const SET_SIZE = 5;
+  const AUTO_NEXT_DELAY_MS = 650;
+
+  // 判定パラメータ（旧コードから）
+  const TOLERANCE = 20;
+  const START_TOL = 34;
+  const MIN_HIT_RATE = 0.45;
+  const MIN_DRAW_LEN_RATE = 0.15;
+  const MIN_COVER_RATE = 0.35;
+  const MIN_POINTS = 3;
+  const MIN_MOVE_EPS = 0.35;
+  const RESAMPLE_STEP = 1.2;
+  const COVER_SAMPLES = 32;
+
+  const JUMP_MS = 520;
+  const FAIL_MS = 520;
+
+  // ---------------------------
+  // ✅ DOM（document直参照禁止）
+  // ---------------------------
+  const elStars = rootEl.querySelector("#stars");
+  const elMode = rootEl.querySelector("#mode");
+  const elLabel = rootEl.querySelector("#kanjiLabel");
+  const elArea = rootEl.querySelector("#kanjiArea");
+  const elStrokeButtons = rootEl.querySelector("#strokeButtons");
+  const elTeacherToggle = rootEl.querySelector("#teacherToggle");
+  const elPrev = rootEl.querySelector("#prevBtn");
+  const elNext = rootEl.querySelector("#nextBtn");
+  const elError = rootEl.querySelector("#error");
+  const elHint = rootEl.querySelector("#hint");
+
+  // ---------------------------
+  // 状態（旧main.jsから）
+  // ---------------------------
+  let items = [];
+  let idx = 0;
+
+  let strokeIndex = 0;
+  let done = [];
+  let failStreak = [];
+  let svg = null;
+  let hintDot = null;
+  let hintNum = null;
+  let currentStrokes = null;
+
+  let kanjiCompleted = false;
+  let drawing = false;
+  let points = [];
+  let tracePathEl = null;
+  let inputLocked = false;
+
+  let teacherMode = false;
+
+  // イベント解除用
+  const disposers = [];
+  let moveTimer = null;
+  let unlockTimer = null;
+
+  // ---------------------------
+  // セット記録（旧main.jsから移植：必要最小）
+  // ---------------------------
+  let setRun = null;
+
+  function getSetInfo(i = idx) {
+    const start = Math.floor(i / SET_SIZE) * SET_SIZE;
+    const end = Math.min(start + SET_SIZE, items.length);
+    const len = end - start;
+    const pos = i - start;
+    return { start, end, len, pos };
+  }
+
+  function startSetRun(set) {
+    setRun = {
+      setStart: set.start,
+      setLen: set.len,
+      startedAt: Date.now(),
+      attempts: 0,
+      success: 0,
+      fail: 0,
+      rescued: 0,
+      kanjiCleared: 0,
+    };
+  }
+  function ensureSetRun(set) {
+    if (!setRun || setRun.setStart !== set.start || setRun.setLen !== set.len) startSetRun(set);
+  }
+
+  function finalizeSetRun() {
+    if (!setRun) return null;
+    const timeMs = Date.now() - setRun.startedAt;
+    const total = Math.max(0, setRun.attempts);
+    const accuracy = total > 0 ? Math.round((setRun.success / total) * 100) : 0;
+    return {
+      at: Date.now(),
+      setStart: setRun.setStart,
+      setLen: setRun.setLen,
+      timeMs,
+      timeText: formatMs(timeMs),
+      attempts: setRun.attempts,
+      success: setRun.success,
+      fail: setRun.fail,
+      rescued: setRun.rescued,
+      accuracy,
+      // rank/title/comment は今後 Result 画面で再利用したいなら旧ロジックも移植OK
+    };
+  }
+
+  function formatMs(ms) {
+    const s = Math.max(0, Math.floor(ms / 1000));
+    const m = Math.floor(s / 60);
+    const r = s % 60;
+    return `${m}:${String(r).padStart(2, "0")}`;
+  }
+
+  // ---------------------------
+  // UI helper
+  // ---------------------------
+  function showError(msg) { if (elError) elError.textContent = String(msg ?? ""); }
+  function clearError() { if (elError) elError.textContent = ""; }
+
+  function setHintText(text) { if (elHint) elHint.textContent = String(text ?? ""); }
+  function updateHintText() {
+    if (kanjiCompleted) { setHintText('クリア！「つぎ」で次のもじへ'); return; }
+    if (drawing) { setHintText("そのまま、なぞっていこう"); return; }
+    const streak = Math.max(0, failStreak?.[strokeIndex] ?? 0);
+    if (streak >= 2) { setHintText("だいじょうぶ！ゆっくりでOK"); return; }
+    if (streak === 1) { setHintText("もういちど。ゆっくりでOK"); return; }
+    const next = strokeIndex + 1;
+    const circled = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳";
+    const mark = next >= 1 && next <= circled.length ? circled[next - 1] : String(next);
+    setHintText(`${mark}のところから、なぞろう`);
+  }
+
+  function applyTeacherMode() {
+    document.documentElement.classList.toggle("teacher-mode", teacherMode);
+    if (elTeacherToggle) elTeacherToggle.setAttribute("aria-pressed", teacherMode ? "true" : "false");
+    if (elMode) elMode.textContent = teacherMode ? "もくひょう：5もじ（先生）" : "もくひょう：5もじ";
+  }
+
+  function lockInput(ms) {
+    inputLocked = true;
+    clearTimeout(unlockTimer);
+    unlockTimer = setTimeout(() => { inputLocked = false; }, ms);
+  }
+
+  // ---------------------------
+  // データ
+  // ---------------------------
+  async function loadData() {
+    const res = await fetch(DATA_PATH, { cache: "no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const json = await res.json();
+    if (Array.isArray(json)) {
+      return json.map((it) => {
+        const id = it?.id;
+        const grade = it?.grade ?? 1;
+        const fallbackRef = id ? `g${grade}/${id}.json` : null;
+        return { ...it, strokesRef: it?.strokesRef ?? fallbackRef };
+      });
+    }
+    throw new Error("JSON形式が配列ではありません");
+  }
+
+  async function getStrokesForItem(item) {
+    const ref = item?.strokesRef;
+    if (!ref) return null;
+
+    if (!strokesCache.has(ref)) {
+      const url = new URL(ref, STROKES_BASE).toString();
+      const p = fetch(url, { cache: "no-store" })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((j) => (j ? strokesJsonToPolylines(j) : null))
+        .catch(() => null);
+      strokesCache.set(ref, p);
+    }
+    return await strokesCache.get(ref);
+  }
+
+  function strokesJsonToPolylines(j) {
+    if (!j || !Array.isArray(j.strokes)) return null;
+    const out = [];
+    for (const s of j.strokes) {
+      if (!s?.path) continue;
+      out.push(pathDToPolylineBySampling(s.path, 36));
+    }
+    return out;
+  }
+
+  function pathDToPolylineBySampling(d, samples = 36) {
+    const ns = "http://www.w3.org/2000/svg";
+    const tmp = document.createElementNS(ns, "svg");
+    tmp.setAttribute("viewBox", "0 0 100 100");
+    const p = document.createElementNS(ns, "path");
+    p.setAttribute("d", String(d));
+    tmp.appendChild(p);
+
+    let len = 0;
+    try { len = p.getTotalLength(); } catch { return []; }
+    if (!Number.isFinite(len) || len <= 0.01) return [];
+
+    const pts = [];
+    const n = Math.max(8, samples);
+    for (let i = 0; i <= n; i++) {
+      const dist = (len * i) / n;
+      const pt = p.getPointAtLength(dist);
+      pts.push({ x: +pt.x.toFixed(2), y: +pt.y.toFixed(2) });
+    }
+
+    const compact = [];
+    for (const q of pts) {
+      const prev = compact[compact.length - 1];
+      if (!prev || Math.hypot(prev.x - q.x, prev.y - q.y) > 0.01) compact.push(q);
+    }
+    return compact;
+  }
+
+  // ---------------------------
+  // SVG描画（あなたの旧 buildSvgForKanji を移植。必要最低限だけ）
+  // ※ ここは長いので「この骨格に旧関数を丸ごと貼る」でOK
+  // ---------------------------
+  function buildSvgForKanji(strokes) {
+    const ns = "http://www.w3.org/2000/svg";
+    const s = document.createElementNS(ns, "svg");
+    s.setAttribute("viewBox", "0 0 100 100");
+    s.setAttribute("class", "kanjiSvg");
+
+    // レイヤー
+    const roadLayer = document.createElementNS(ns, "g");
+    const strokeLayer = document.createElementNS(ns, "g");
+    const hintLayer = document.createElementNS(ns, "g");
+    s.appendChild(roadLayer);
+    s.appendChild(strokeLayer);
+    s.appendChild(hintLayer);
+
+    // shadow/base/hit
+    strokes.forEach((poly, i) => {
+      const shadow = document.createElementNS(ns, "path");
+      shadow.setAttribute("d", polyToPathD(poly));
+      shadow.dataset.strokeIndex = String(i);
+      shadow.setAttribute("class", "stroke-shadow");
+      roadLayer.appendChild(shadow);
+
+      const base = document.createElementNS(ns, "path");
+      base.setAttribute("d", polyToPathD(poly));
+      base.dataset.strokeIndex = String(i);
+      base.setAttribute("class", "stroke-base");
+      strokeLayer.appendChild(base);
+
+      const hit = document.createElementNS(ns, "path");
+      hit.setAttribute("d", polyToPathD(poly));
+      hit.dataset.strokeIndex = String(i);
+      hit.setAttribute("class", "stroke-hit");
+      strokeLayer.appendChild(hit);
+    });
+
+    // active
+    const active = document.createElementNS(ns, "path");
+    active.setAttribute("class", "stroke-active");
+    active.dataset.role = "active";
+    active.setAttribute("d", polyToPathD(strokes[0]));
+    strokeLayer.appendChild(active);
+
+    // trace
+    tracePathEl = document.createElementNS(ns, "path");
+    tracePathEl.setAttribute("class", "trace-line");
+    tracePathEl.dataset.role = "trace";
+    strokeLayer.appendChild(tracePathEl);
+
+    // hint
+    const hintG = document.createElementNS(ns, "g");
+    const hintDotEl = document.createElementNS(ns, "circle");
+    hintDotEl.setAttribute("r", "8");
+    hintDotEl.setAttribute("class", "stroke-hint-dot");
+    const hintTextEl = document.createElementNS(ns, "text");
+    hintTextEl.setAttribute("class", "stroke-hint-num");
+    hintTextEl.setAttribute("text-anchor", "middle");
+    hintTextEl.setAttribute("dominant-baseline", "middle");
+    hintG.appendChild(hintDotEl);
+    hintG.appendChild(hintTextEl);
+    hintLayer.appendChild(hintG);
+
+    hintDot = hintDotEl;
+    hintNum = hintTextEl;
+
+    // char
+    ensureChar(s);
+    const p0 = getStrokeAnchor(strokes, 0);
+    setCharPos(s, p0);
+
+    return s;
+  }
+
+  function ensureChar(svgEl) {
+    const ns = "http://www.w3.org/2000/svg";
+    let c = svgEl.querySelector('[data-role="char"]');
+    if (c) return c;
+
+    const layer = svgEl.querySelector('[data-role="charLayer"]') ?? (() => {
+      const g = document.createElementNS(ns, "g");
+      g.dataset.role = "charLayer";
+      svgEl.appendChild(g);
+      return g;
+    })();
+
+    c = document.createElementNS(ns, "image");
+    c.dataset.role = "char";
+    c.setAttribute("class", "char");
+    c.setAttribute("width", String(CHAR_SIZE));
+    c.setAttribute("height", String(CHAR_SIZE));
+    c.setAttribute("x", String(-CHAR_SIZE / 2));
+    c.setAttribute("y", String(-CHAR_SIZE / 2));
+    c.setAttribute("pointer-events", "none");
+    c.setAttribute("href", NEKO_URL);
+    c.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", NEKO_URL);
+    c.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    c.setAttribute("transform", "translate(50 50)");
+    layer.appendChild(c);
+    return c;
+  }
+
+  function setCharPos(svgEl, p) {
+    const c = ensureChar(svgEl);
+    c.setAttribute("transform", `translate(${p.x} ${p.y})`);
+    svgEl.dataset.charX = String(p.x);
+    svgEl.dataset.charY = String(p.y);
+  }
+  function getCharPos(svgEl) {
+    return { x: Number(svgEl.dataset.charX || "50"), y: Number(svgEl.dataset.charY || "50") };
+  }
+  function charJumpTo(svgEl, to) {
+    const c = ensureChar(svgEl);
+    const from = getCharPos(svgEl);
+    const mid = { x: (from.x + to.x) / 2, y: (from.y + to.y) / 2 - 10 };
+    c.getAnimations().forEach((a) => a.cancel());
+    const kf = (p, sx = 1, sy = 1) => ({ transform: `translate(${p.x}px, ${p.y}px) scale(${sx}, ${sy})` });
+    c.animate([kf(from), kf(mid, 1.08, 1.08), kf(to), kf(to, 1.12, 0.88), kf(to)], { duration: JUMP_MS, easing: "ease-out", fill: "forwards" });
+    setTimeout(() => setCharPos(svgEl, to), JUMP_MS + 20);
+  }
+  function charFailDrop(svgEl) {
+    const c = ensureChar(svgEl);
+    const base = getCharPos(svgEl);
+    const down = { x: base.x, y: base.y + 14 };
+    c.getAnimations().forEach((a) => a.cancel());
+    const kf = (p, sx = 1, sy = 1) => ({ transform: `translate(${p.x}px, ${p.y}px) scale(${sx}, ${sy})` });
+    c.animate([kf(base), kf(down, 0.92, 1.10), kf(base), kf(base, 1.12, 0.88), kf(base)], { duration: FAIL_MS, easing: "ease-out", fill: "forwards" });
+  }
+
+  function getStrokeAnchor(strokes, i) {
+    const poly = strokes?.[i];
+    if (!poly || poly.length < 2) return { x: 50, y: 50 };
+    let total = 0;
+    const seg = [];
+    for (let k = 0; k < poly.length - 1; k++) {
+      const a = poly[k], b = poly[k + 1];
+      const d = Math.hypot(b.x - a.x, b.y - a.y);
+      seg.push(d);
+      total += d;
+    }
+    if (total <= 0.0001) return { x: poly[0].x, y: poly[0].y };
+    const isLast = i === strokes.length - 1;
+    const target = total * (isLast ? 0.5 : 0.6);
+    let acc = 0;
+    for (let k = 0; k < seg.length; k++) {
+      const d = seg[k];
+      if (acc + d >= target) {
+        const t = (target - acc) / d;
+        const a = poly[k], b = poly[k + 1];
+        return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+      }
+      acc += d;
+    }
+    const last = poly[poly.length - 1];
+    return { x: last.x, y: last.y };
+  }
+
+  function polyToPathD(poly) {
+    if (!poly || poly.length === 0) return "";
+    const [p0, ...rest] = poly;
+    return `M ${p0.x.toFixed(2)} ${p0.y.toFixed(2)} ` + rest.map((p) => `L ${p.x.toFixed(2)} ${p.y.toFixed(2)}`).join(" ");
+  }
+
+  function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
+
+  // ---------------------------
+  // 判定（旧main.jsの judgeTrace 周りを必要最低限で移植）
+  // ※ ここも「旧関数を丸ごと貼る」でOK。今回は要点だけ残す
+  // ---------------------------
+  function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
+
+  function distancePointToSegment(p, a, b) {
+    const vx = b.x - a.x, vy = b.y - a.y;
+    const wx = p.x - a.x, wy = p.y - a.y;
+    const c1 = vx * wx + vy * wy;
+    if (c1 <= 0) return Math.hypot(p.x - a.x, p.y - a.y);
+    const c2 = vx * vx + vy * vy;
+    if (c2 <= c1) return Math.hypot(p.x - b.x, p.y - b.y);
+    const t = c1 / c2;
+    const px = a.x + t * vx, py = a.y + t * vy;
+    return Math.hypot(p.x - px, p.y - py);
+  }
+  function distancePointToPolyline(p, poly) {
+    let best = Infinity;
+    for (let i = 1; i < poly.length; i++) best = Math.min(best, distancePointToSegment(p, poly[i - 1], poly[i]));
+    return best;
+  }
+  function polyLength(poly) {
+    let len = 0;
+    for (let i = 1; i < poly.length; i++) len += dist(poly[i - 1], poly[i]);
+    return len;
+  }
+  function normalizeDrawnPoints(points, step = RESAMPLE_STEP, minMove = MIN_MOVE_EPS) {
+    if (!Array.isArray(points) || points.length === 0) return [];
+    const compact = [points[0]];
+    for (let i = 1; i < points.length; i++) {
+      const prev = compact[compact.length - 1];
+      const cur = points[i];
+      if (dist(prev, cur) >= minMove) compact.push(cur);
+    }
+    if (compact.length < 2) return compact;
+    return resamplePolyline(compact, step);
+  }
+  function resamplePolyline(poly, step) {
+    const len = polyLength(poly);
+    if (len <= 0) return poly.slice();
+    const out = [];
+    for (let d = 0; d <= len; d += step) out.push(pointAtDistance(poly, d));
+    const last = poly[poly.length - 1];
+    const prev = out[out.length - 1];
+    if (!prev || dist(prev, last) > 0.01) out.push({ x: last.x, y: last.y });
+    return out;
+  }
+  function pointAtDistance(poly, d) {
+    if (poly.length === 1) return { ...poly[0] };
+    let acc = 0;
+    for (let i = 1; i < poly.length; i++) {
+      const a = poly[i - 1], b = poly[i];
+      const seg = dist(a, b);
+      if (acc + seg >= d) {
+        const t = seg === 0 ? 0 : (d - acc) / seg;
+        return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+      }
+      acc += seg;
+    }
+    return { ...poly[poly.length - 1] };
+  }
+  function sampleAlongPolyline(poly, n) {
+    const len = polyLength(poly);
+    if (len <= 0) return poly.slice(0, 1);
+    if (n <= 1) return [pointAtDistance(poly, len * 0.5)];
+    const out = [];
+    for (let i = 0; i < n; i++) {
+      const d = (len * i) / (n - 1);
+      out.push(pointAtDistance(poly, d));
+    }
+    return out;
+  }
+
+  function getAdaptiveParams(strokeLen) {
+    const short = 12;
+    const long = 60;
+    const t = Math.max(0, Math.min(1, (strokeLen - short) / (long - short)));
+
+    const tol = TOLERANCE + (1 - t) * 4;
+    const coverTol = tol * 1.15;
+    const minHit = MIN_HIT_RATE + t * 0.08;
+    const minDraw = MIN_DRAW_LEN_RATE + t * 0.07;
+    const minCover = MIN_COVER_RATE + t * 0.15;
+    const startTol = START_TOL - t * 6;
+
+    return { tol, coverTol, minHit, minDraw, minCover, startTol };
+  }
+
+  function judgeTrace(drawnPoints, strokePoly) {
+    if (!Array.isArray(drawnPoints) || drawnPoints.length < MIN_POINTS) return false;
+
+    const dp = normalizeDrawnPoints(drawnPoints, RESAMPLE_STEP, MIN_MOVE_EPS);
+    if (dp.length < 2) return false;
+
+    const strokeLen = polyLength(strokePoly);
+    if (strokeLen <= 0) return false;
+
+    const P = getAdaptiveParams(strokeLen);
+
+    // 連続失敗救済
+    const streak = Math.max(0, Math.min(3, failStreak?.[strokeIndex] ?? 0));
+    if (streak > 0) {
+      P.tol += 3 * streak;
+      P.coverTol = P.tol * 1.15;
+      P.minHit = Math.max(0.28, P.minHit - 0.06 * streak);
+      P.minCover = Math.max(0.18, P.minCover - 0.06 * streak);
+      P.startTol += 3 * streak;
+    }
+
+    const start = dp[0];
+    const s0 = strokePoly[0];
+    if (dist(start, s0) > P.startTol) return false;
+
+    const drawnLen = polyLength(dp);
+    if (drawnLen < strokeLen * P.minDraw) return false;
+
+    let hit = 0;
+    for (const p of dp) if (distancePointToPolyline(p, strokePoly) <= P.tol) hit++;
+    const hitRate = hit / dp.length;
+
+    const samples = sampleAlongPolyline(strokePoly, COVER_SAMPLES);
+    let cover = 0;
+    for (const sp of samples) if (distancePointToPolyline(sp, dp) <= P.coverTol) cover++;
+    const coverRate = cover / samples.length;
+
+    return hitRate >= P.minHit && coverRate >= P.minCover;
+  }
+
+  function updateTracePath(pts) {
+    if (!tracePathEl) return;
+    if (!pts || pts.length === 0) { tracePathEl.setAttribute("d", ""); return; }
+    tracePathEl.setAttribute("d", polyToPathD(pts));
+  }
+
+  function toSvgPoint(svgEl, clientX, clientY) {
+    const pt = svgEl.createSVGPoint();
+    pt.x = clientX; pt.y = clientY;
+    const ctm = svgEl.getScreenCTM();
+    if (!ctm) return { x: 0, y: 0 };
+    const inv = ctm.inverse();
+    const p = pt.matrixTransform(inv);
+    return { x: p.x, y: p.y };
+  }
+
+  // ---------------------------
+  // 画面描画＆操作
+  // ---------------------------
+  function renderStrokeButtons(n) {
+    if (!elStrokeButtons) return;
+    elStrokeButtons.innerHTML = "";
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "stroke-btn";
+      b.textContent = String(i + 1);
+      if (i === strokeIndex) b.classList.add("is-active");
+      if (done[i]) b.classList.add("is-done");
+      b.disabled = true;
+      elStrokeButtons.appendChild(b);
+    }
+  }
+
+  function updateStrokeHint() {
+    if (!svg || !hintDot || !hintNum || !currentStrokes) return;
+    const stroke = currentStrokes[strokeIndex];
+    if (!stroke || !stroke.length) {
+      hintDot.style.display = "none";
+      hintNum.style.display = "none";
+      return;
+    }
+    const p0 = stroke[0];
+    hintDot.style.display = "";
+    hintNum.style.display = "";
+    hintDot.setAttribute("cx", String(p0.x));
+    hintDot.setAttribute("cy", String(p0.y));
+    hintNum.setAttribute("x", String(p0.x));
+    hintNum.setAttribute("y", String(p0.y - 8));
+    hintNum.textContent = String(strokeIndex + 1);
+  }
+
+  function refreshSvgStates(svgEl, strokes) {
+    const basePaths = Array.from(svgEl.querySelectorAll("path.stroke-base"));
+    basePaths.forEach((p) => {
+      const i = Number(p.dataset.strokeIndex);
+      if (Number.isFinite(i) && done[i]) p.classList.add("done");
+      else p.classList.remove("done");
+    });
+
+    const shadowPaths = Array.from(svgEl.querySelectorAll("path.stroke-shadow"));
+    shadowPaths.forEach((p) => {
+      const i = Number(p.dataset.strokeIndex);
+      if (!Number.isFinite(i)) return;
+      const shouldOn = !!done[i];
+      const wasOn = p.classList.contains("on");
+      if (shouldOn) {
+        p.classList.add("on");
+        if (!wasOn) {
+          p.classList.remove("pop");
+          void p.getBBox();
+          p.classList.add("pop");
+          setTimeout(() => p.classList.remove("pop"), 320);
+        }
+      } else {
+        p.classList.remove("on");
+        p.classList.remove("pop");
+      }
+    });
+
+    const active = svgEl.querySelector('path[data-role="active"]');
+    if (!active) return;
+    const nextIdx = clamp(strokeIndex, 0, strokes.length - 1);
+    active.setAttribute("d", polyToPathD(strokes[nextIdx]));
+    updateStrokeHint();
+  }
+
+  function attachTraceHandlers(svgEl, strokes) {
+    drawing = false;
+    points = [];
+    updateTracePath([]);
+
+    let lastPointerId = null;
+
+    const onDown = (e) => {
+      if (kanjiCompleted || inputLocked) return;
+      if (e.button != null && e.button !== 0) return;
+
+      const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
+      const poly = strokes[strokeIndex];
+      if (!poly || poly.length < 2) return;
+
+      const end0 = poly[0];
+      const end1 = poly[poly.length - 1];
+      const dEnd = Math.min(dist(p0, end0), dist(p0, end1));
+      if (dEnd > START_TOL) return;
+
+      // 線の近くだけ開始OK
+      const d0 = distancePointToPolyline(p0, strokes[strokeIndex]);
+      if (d0 > START_TOL) return;
+
+      drawing = true;
+      updateHintText();
+
+      const snapStart = dist(p0, end0) <= dist(p0, end1) ? end0 : end1;
+      points = [snapStart];
+      updateTracePath(points);
+
+      try {
+        lastPointerId = e.pointerId;
+        svgEl.setPointerCapture(e.pointerId);
+      } catch {}
+
+      e.preventDefault();
+    };
+
+    const onMove = (e) => {
+      if (!drawing || inputLocked) return;
+      const p = toSvgPoint(svgEl, e.clientX, e.clientY);
+      points.push(p);
+      updateTracePath(points);
+      e.preventDefault();
+    };
+
+    const finish = (e) => {
+      if (!drawing || inputLocked) return;
+      drawing = false;
+
+      try {
+        if (lastPointerId != null) svgEl.releasePointerCapture(lastPointerId);
+        else svgEl.releasePointerCapture(e.pointerId);
+      } catch {}
+      lastPointerId = null;
+
+      const ok = judgeTrace(points, strokes[strokeIndex]);
+      if (setRun) setRun.attempts += 1;
+
+      const lastPoint = points.length ? points[points.length - 1] : null;
+      points = [];
+      updateTracePath([]);
+
+      if (ok) {
+        if (setRun) {
+          setRun.success += 1;
+          const streak = failStreak?.[strokeIndex] ?? 0;
+          if (streak > 0) setRun.rescued += 1;
+        }
+
+        done[strokeIndex] = true;
+        failStreak[strokeIndex] = 0;
+        strokeIndex++;
+
+        const nextAnchor =
+          strokeIndex < strokes.length
+            ? getStrokeAnchor(strokes, strokeIndex)
+            : getStrokeAnchor(strokes, strokes.length - 1);
+
+        lockInput(JUMP_MS);
+        charJumpTo(svgEl, nextAnchor);
+
+        refreshSvgStates(svgEl, strokes);
+        renderStrokeButtons(strokes.length);
+        updateHintText();
+
+        // ✅ 1文字クリア
+        if (strokeIndex >= strokes.length) {
+          if (setRun) setRun.kanjiCleared += 1;
+          kanjiCompleted = true;
+
+          // ✅ クリア済みを “共通進捗” に保存（Progress画面と繋がる）
+          const item = items[idx];
+          if (item?.id) {
+            markCleared(ctx.progress, `${range.id}::${item.id}`);
+            saveProgress(ctx.progress);
+          }
+
+          // 表示上の安全
+          strokeIndex = strokes.length - 1;
+          refreshSvgStates(svgEl, strokes);
+          renderStrokeButtons(strokes.length);
+          updateHintText();
+
+          const set = getSetInfo(idx);
+
+          // ✅ セット途中なら自動で次へ
+          if (set.pos < set.len - 1) {
+            clearTimeout(moveTimer);
+            moveTimer = setTimeout(() => {
+              if (!kanjiCompleted) return;
+              move(1);
+            }, AUTO_NEXT_DELAY_MS);
+          } else {
+            // ✅ セット最終：overlayやめて Result画面へ
+            // 余韻を見せてから結果へ
+            setTimeout(() => {
+              if (!kanjiCompleted) return;
+              const result = finalizeSetRun();
+              onSetFinished?.({
+                result,
+                set,
+                // 次のセット先頭（Resultの「つぎの5もじ」で使う）
+                nextStart: set.end >= items.length ? 0 : set.end,
+              });
+            }, 900);
+          }
+        }
+      } else {
+        if (setRun) setRun.fail += 1;
+        failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;
+        lockInput(FAIL_MS);
+        charFailDrop(svgEl);
+      }
+
+      e.preventDefault();
+    };
+
+    svgEl.addEventListener("pointerdown", onDown, { passive: false });
+    svgEl.addEventListener("pointermove", onMove, { passive: false });
+    svgEl.addEventListener("pointerup", finish, { passive: false });
+    svgEl.addEventListener("pointercancel", finish, { passive: false });
+
+    disposers.push(() => {
+      svgEl.removeEventListener("pointerdown", onDown);
+      svgEl.removeEventListener("pointermove", onMove);
+      svgEl.removeEventListener("pointerup", finish);
+      svgEl.removeEventListener("pointercancel", finish);
+    });
+  }
+
+  function move(delta) {
+    idx = clamp(idx + delta, 0, items.length - 1);
+    strokeIndex = 0;
+    done = [];
+    kanjiCompleted = false;
+    render().catch((e) => showError(String(e?.message ?? e)));
+  }
+
+  async function render() {
+    clearError();
+    kanjiCompleted = false;
+
+    const item = items[idx];
+    const k = item?.kanji ?? "?";
+
+    const set = getSetInfo(idx);
+    ensureSetRun(set);
+
+    if (elLabel) elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`;
+    if (elArea) elArea.innerHTML = `<div style="font-size:20px; opacity:.7; font-weight:700;">よみこみ中…</div>`;
+
+    const strokes = await getStrokesForItem(item);
+    if (!strokes || strokes.length === 0) {
+      if (elArea) elArea.innerHTML = `<div style="font-size:96px; opacity:.35; font-weight:700;">${k}</div>`;
+      if (elStrokeButtons) elStrokeButtons.innerHTML = "";
+      return;
+    }
+
+    done = new Array(strokes.length).fill(false);
+    strokeIndex = 0;
+    failStreak = new Array(strokes.length).fill(0);
+
+    if (elStrokeButtons) renderStrokeButtons(strokes.length);
+
+    if (elArea) {
+      elArea.innerHTML = "";
+      svg = buildSvgForKanji(strokes);
+      elArea.appendChild(svg);
+    }
+    currentStrokes = strokes;
+
+    refreshSvgStates(svg, strokes);
+    setCharPos(svg, getStrokeAnchor(strokes, 0));
+    updateHintText();
+
+    attachTraceHandlers(svg, strokes);
+  }
+
+  async function boot() {
+    teacherMode = false;
+    applyTeacherMode();
+
+    if (elTeacherToggle) {
+      const onT = () => { teacherMode = !teacherMode; applyTeacherMode(); };
+      elTeacherToggle.addEventListener("click", onT);
+      disposers.push(() => elTeacherToggle.removeEventListener("click", onT));
+    }
+
+    if (elPrev) {
+      const onP = () => move(-1);
+      elPrev.addEventListener("click", onP);
+      disposers.push(() => elPrev.removeEventListener("click", onP));
+    }
+    if (elNext) {
+      const onN = () => move(1);
+      elNext.addEventListener("click", onN);
+      disposers.push(() => elNext.removeEventListener("click", onN));
+    }
+
+    try {
+      items = await loadData();
+    } catch (e) {
+      showError(`データ読み込み失敗: ${String(e?.message ?? e)}`);
+      items = [];
+    }
+
+    if (!items.length) throw new Error("データなし");
+
+    // startFromId があればそこへジャンプ
+    if (startFromId) {
+      const found = items.findIndex((x) => x.id === startFromId);
+      if (found >= 0) idx = found;
+    }
+
+    await render();
+  }
+
+  // 起動
+  const bootPromise = boot();
+
+  // stop（画面遷移時に必ず呼ぶ）
+  function stop() {
+    clearTimeout(moveTimer);
+    clearTimeout(unlockTimer);
+    // pointer capture残り対策
+    try { svg?.releasePointerCapture?.(0); } catch {}
+
+    for (const d of disposers.splice(0)) {
+      try { d(); } catch {}
+    }
+  }
+
+  return { ready: bootPromise, stop };
+}

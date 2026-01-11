@@ -1,6 +1,10 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared } from "../lib/progressStore.js";
 
+function makeItemId(rangeId, itemId) {
+  return `${rangeId}::${itemId}`;
+}
+
 export function ProgressScreen(ctx, nav) {
   return {
     async mount() {
@@ -11,40 +15,40 @@ export function ProgressScreen(ctx, nav) {
       const range = CONTENT_MANIFEST.find(x => x.id === selected);
 
       el.innerHTML = `
-        <h1>クリアしたもの</h1>
         <div class="card">
+          <h1>クリアしたもの</h1>
           <div>範囲：<b>${range?.label ?? "未選択"}</b></div>
           <div>総クリア数：<b>${ctx.progress?.stats?.totalCleared ?? 0}</b></div>
+          <div id="grid" class="grid" style="margin-top:12px;"></div>
+          <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+            <button id="back" class="btn">もどる</button>
+          </div>
         </div>
-        <div id="grid" class="grid"></div>
-        <button id="back">もどる</button>
       `;
 
-      // ここは「範囲のデータ(JSON)を読んで一覧化」する
-      // 今のkanji_g1_proto.jsonが items を持っている前提で、最低限の実装例：
+      // 配列JSON対応
       const base = import.meta.env.BASE_URL ?? "/";
       const url = new URL(range.source, new URL(base, window.location.href)).toString();
       const res = await fetch(url);
-      const data = await res.json();
+      const items = await res.json(); // ← 配列
 
-      // data.items の形はあなたのJSONに合わせて調整してください
-      const items = data.items ?? data.kanjiList ?? [];
       const grid = el.querySelector("#grid");
-
       grid.innerHTML = items.map((it) => {
-        const itemId = makeItemId(range.id, it.id ?? it.kanji ?? it.label ?? "");
-        const cleared = isCleared(ctx.progress, itemId);
-        const label = it.kanji ?? it.label ?? it.id ?? "？";
-        return `<button class="chip ${cleared ? "cleared" : ""}" data-id="${itemId}">${label}</button>`;
+        const itemKey = makeItemId(range.id, it.id);
+        const cleared = isCleared(ctx.progress, itemKey);
+        return `
+          <button class="chip ${cleared ? "cleared" : ""}" data-item="${it.id}">
+            ${it.kanji}
+          </button>
+        `;
       }).join("");
 
       const onChip = (e) => {
-        const btn = e.target.closest("button[data-id]");
+        const btn = e.target.closest("button[data-item]");
         if (!btn) return;
-        // 押したらその文字から練習に入る、みたいな導線も可能
-        nav.go("game", { selectedRangeId: selected, startFromItemId: btn.dataset.id });
+        // その漢字から開始（後でGameScreen側で対応）
+        nav.go("game", { selectedRangeId: selected, startFromId: btn.dataset.item });
       };
-
       const onBack = () => nav.go("home");
 
       grid.addEventListener("click", onChip);
@@ -59,8 +63,4 @@ export function ProgressScreen(ctx, nav) {
       };
     }
   };
-}
-
-function makeItemId(rangeId, raw) {
-  return `${rangeId}::${String(raw)}`;
 }
