@@ -1542,4 +1542,56 @@ body {
   @media (max-width: 720px){
     .reviewSummary{ grid-template-columns: 1fr; }
   }
-  
+  /* ===========================
+   Recent review summary (Progress)
+   =========================== */
+.reviewSummaryCard{
+  margin-top: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(18,38,63,.08);
+  background: rgba(255,255,255,.78);
+  padding: 12px 14px;
+}
+
+.reviewSummaryTitle{
+  font-weight: 1000;
+  opacity: .78;
+  margin-bottom: 8px;
+}
+
+.reviewSummaryList{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reviewRowLine{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(18,38,63,.12);
+}
+.reviewRowLine:first-child{
+  border-top: none;
+  padding-top: 0;
+}
+
+.reviewRowMain{
+  font-weight: 900;
+}
+.reviewRowSub{
+  margin-top: 4px;
+  font-weight: 800;
+}
+
+.reviewRowTag{
+  font-size: 12px;
+  font-weight: 1000;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(56,117,255,.10);
+  border: 1px solid rgba(56,117,255,.18);
+  white-space: nowrap;
+}

@@ -1,13 +1,15 @@
 export const CONTENT_MANIFEST = [
-    {
-      type: "kanji",
-      id: "kanji_g1",
-      label: "漢字（小1）",
-      source: "data/kanji_g1_proto.json",
-    },
-    // 将来ここに追加：
-    // { type:"kanji", id:"kanji_g2", label:"漢字（小2）", source:"data/kanji_g2.json" },
-    // { type:"hiragana", id:"hiragana", label:"ひらがな", source:"data/hiragana.json" },
+    // ✅ kanji_all を共通参照（フィルタは id から grade を読む）
+  { type: "kanji", id: "kanji_g1",  label: "漢字（小1）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g2",  label: "漢字（小2）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g3",  label: "漢字（小3）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g4",  label: "漢字（小4）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g5",  label: "漢字（小5）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g6",  label: "漢字（小6）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g7",  label: "漢字（中1）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g8",  label: "漢字（中2）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g9",  label: "漢字（中3）",  source: "data/kanji/kanji_all.json" },
+  { type: "kanji", id: "kanji_g10", label: "漢字（高校/常用拡張）", source: "data/kanji/kanji_all.json" },
   ];
   
   export function groupByType(list) {

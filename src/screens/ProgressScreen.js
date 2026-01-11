@@ -22,7 +22,7 @@ export function ProgressScreen(ctx, nav) {
               <div class="progressMeta">範囲：<b>${range?.label ?? "未選択"}</b></div>
             </div>
             <div class="progressHeadActions">
-              <button id="dex" class="btn" type="button">図鑑を見る</button>
+            <button id="reviewStart" class="btn" type="button">復習</button>
               <button id="titlebook" class="btn" type="button">称号ずかん</button>
               <button id="back" class="btn" type="button">もどる</button>
             </div>
@@ -34,6 +34,8 @@ export function ProgressScreen(ctx, nav) {
             </div>
             <div id="barText" class="progressBarText">達成率 -%</div>
           </div>
+
+          <div id="reviewSummary" class="reviewSummaryCard"></div>
 
           <div class="progressTabs" role="tablist" aria-label="表示フィルタ">
             <button id="filterAll" class="tab active" type="button" data-filter="all" role="tab">全部</button>
@@ -54,6 +56,7 @@ export function ProgressScreen(ctx, nav) {
       const grid = el.querySelector("#grid");
       const barFill = el.querySelector("#barFill");
       const barText = el.querySelector("#barText");
+      const reviewSummary = el.querySelector("#reviewSummary");
       // フィルタ状態（デフォルト：全部）
       let filter = "all"; // "all" | "uncleared" | "cleared"
 
@@ -85,6 +88,36 @@ export function ProgressScreen(ctx, nav) {
         const { clearedCount, total, pct } = computeRangeProgress();
         if (barFill) barFill.style.width = `${pct}%`;
         if (barText) barText.textContent = `達成率 ${pct}%（${clearedCount}/${total}）`;
+
+        // ✅ 直近の復習（最新3件）表示
+        if (reviewSummaryEl) {
+            const list = Array.isArray(ctx.progress?.reviewSessions) ? ctx.progress.reviewSessions : [];
+            const latest = list.slice(0, 3);
+            if (!latest.length) {
+              reviewSummaryEl.innerHTML = `
+                <div class="reviewSummaryTitle">直近の復習</div>
+                <div class="muted">まだ復習の記録がありません。</div>
+              `;
+           } else {
+              const rows = latest.map((s, i) => {
+                const d = new Date(s.at ?? Date.now());
+                const dateText = `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`;
+                return `
+                  <div class="reviewRowLine">
+                    <div class="reviewRowLeft">
+                      <div class="reviewRowMain">${i + 1}. <b>${dateText}</b></div>
+                      <div class="reviewRowSub muted">出題 ${s.total ?? "-"} / クリア ${s.clearedCount ?? "-"} / ミス ${s.totalFails ?? "-"}</div>
+                    </div>
+                    <div class="reviewRowTag">${(s.policy === "mist") ? "ミス多い" : (s.policy === "uncleared") ? "未クリア" : "バランス"}</div>
+                  </div>
+                `;
+              }).join("");
+              reviewSummaryEl.innerHTML = `
+                <div class="reviewSummaryTitle">直近の復習</div>
+                <div class="reviewSummaryList">${rows}</div>
+              `;
+            }
+          }
         const html = items
           .filter((it) => {
             const key = makeItemId(range.id, it.id);
@@ -161,7 +194,10 @@ export function ProgressScreen(ctx, nav) {
                 if (tbBtn) { nav.go("titleBook", { from: "progress" }); return; }
                 const dexBtn = e.target.closest("#dex");
                 if (dexBtn) { nav.go("dex", { selectedRangeId: selected, from: "progress" }); return; }
-              };
+                const reviewBtn = e.target.closest("#reviewStart");
+                        if (reviewBtn) { nav.go("reviewStart", { selectedRangeId: selected, from: "progress" }); return; }
+                       };
+              
         
               el.addEventListener("click", onClick);
       return {

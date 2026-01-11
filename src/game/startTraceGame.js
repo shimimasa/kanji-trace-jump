@@ -13,10 +13,18 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const NEKO_URL = new URL("assets/characters/neko.png", BASE_URL).toString();
   const CHAR_SIZE = 14;
 
-  const range = CONTENT_MANIFEST.find((x) => x.id === (selectedRangeId ?? "kanji_g1"));
-  const DATA_PATH = new URL(range?.source ?? "data/kanji_g1_proto.json", BASE_URL).toString();
-  const STROKES_BASE = new URL("data/strokes/", BASE_URL).toString();
+   // ✅ StepB: データは kanji_all + index_traceable を参照する
+  const ALL_PATH = new URL("data/kanji/kanji_all.json", BASE_URL).toString();
+  const TRACEABLE_PATH = new URL("data/kanji/index_traceable.json", BASE_URL).toString();
+  // strokesRef は "strokes/g2/..." なので data/ をベースにする
+  const STROKES_BASE = new URL("data/", BASE_URL).toString();
 
+  // selectedRangeId から grade を抽出（例: kanji_g3 => 3）
+  const gradeFromRange = (() => {
+    const id = selectedRangeId ?? "kanji_g1";
+    const m = String(id).match(/kanji_g(\d+)/);
+    return m ? Number(m[1]) : null;
+  })();
   const strokesCache = new Map();
 
   const SET_SIZE = 5;
@@ -622,19 +630,50 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   // データ
   // ---------------------------
   async function loadData() {
-    const res = await fetch(DATA_PATH, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-    if (Array.isArray(json)) {
-      return json.map((it) => {
-        const id = it?.id;
-        const grade = it?.grade ?? 1;
-        const fallbackRef = id ? `g${grade}/${id}.json` : null;
-        return { ...it, strokesRef: it?.strokesRef ?? fallbackRef };
-      });
-    }
-    throw new Error("JSON形式が配列ではありません");
+    // 1) all
+    const resAll = await fetch(ALL_PATH, { cache: "no-store" });
+    if (!resAll.ok) throw new Error(`kanji_all HTTP ${resAll.status}`);
+    const all = await resAll.json();
+    if (!Array.isArray(all)) throw new Error("kanji_all.json は配列である必要があります");
+
+    // 2) traceable ids
+    const resTr = await fetch(TRACEABLE_PATH, { cache: "no-store" });
+    if (!resTr.ok) throw new Error(`index_traceable HTTP ${resTr.status}`);
+    const traceable = await resTr.json();
+    const traceSet = new Set(Array.isArray(traceable) ? traceable : []);
+
+    // 3) grade filter + traceable filter + strokesRef normalize
+    const filtered = all
+      .filter((it) => {
+        if (!it?.id || !it?.kanji) return false;
+        if (!traceSet.has(it.id)) return false;
+        if (gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
+        return true;
+      })
+      .map((it) => {
+        // strokesRef を normalize（旧形式 g1/g1-001.json が来ても対応）
+        const ref = normalizeStrokesRef(it.strokesRef, it.grade, it.id);
+        return { ...it, strokesRef: ref };
+      })
+      .filter((it) => !!it.strokesRef);
+
+    return filtered;
   }
+
+
+  function normalizeStrokesRef(ref, grade, id) {
+        if (!ref) return null;
+        const r = String(ref);
+        // すでに "strokes/..." ならそのまま
+        if (r.startsWith("strokes/")) return r;
+        // 旧形式 "g1/g1-001.json" を "strokes/g1/g1-001.json" に
+        if (/^g\d+\//.test(r)) return `strokes/${r}`;
+        // 万一 "g1-001.json" だけ来たら grade から補う
+        if (/^g\d+-\d+\.json$/.test(r)) return `strokes/g${grade}/${r}`;
+        // 想定外はそのまま返す（fetchで失敗したら null になる）
+        return r;
+      }
+
 
   async function getStrokesForItem(item) {
     const ref = item?.strokesRef;

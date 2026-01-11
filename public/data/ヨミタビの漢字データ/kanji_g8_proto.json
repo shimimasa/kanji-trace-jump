@@ -1,0 +1,5439 @@
+[
+  
+  {
+    "id": "g8-001",
+    "stageId": ["Europe_area1"],
+    "kanji": "哀",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "アイ"
+    ],
+    "kunyomi": [
+      "あわ"
+    ],
+    "meaning": "あわれむ。深く感じて嘆くこと。悲しむこと。",
+    "exampleSentence": "彼は、戦争で家族を失った人々の哀しみ（かなしみ）に深く共感し、支援活動に参加した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-002",
+    "stageId": ["Europe_area1"],
+    "kanji": "慰",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "なぐさ"
+    ],
+    "meaning": "なぐさめる。人の心を、やわらげること。",
+    "exampleSentence": "友人が悲しんでいるとき、ただそばにいて慰める（なぐさめる）ことしかできないが、それが一番大切だと感じた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-003",
+    "stageId": ["Europe_area1"],
+    "kanji": "詠",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "エイ"
+    ],
+    "kunyomi": [
+      "よ"
+    ],
+    "meaning": "よむ。詩歌をよむこと。",
+    "exampleSentence": "彼は、日本の古典文学に登場する和歌を詠み（よみ）、その情景を心に描いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-004",
+    "stageId": ["Europe_area1"],
+    "kanji": "悦",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "エツ"
+    ],
+    "kunyomi": [],
+    "meaning": "よろこぶ。心から、うれしく思うこと。",
+    "exampleSentence": "長年の努力が実を結び、目標を達成した彼は、心から悦び（よろこび）を感じた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-005",
+    "stageId": ["Europe_area1"],
+    "kanji": "閲",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "エツ"
+    ],
+    "kunyomi": [],
+    "meaning": "けみする。物事を、詳しく調べること。",
+    "exampleSentence": "図書館では、貴重な古文書を閲覧（えつらん）する際、専門家の立ち会いが必要となる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-006",
+    "stageId": ["Europe_area1"],
+    "kanji": "炎",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [
+      "ほのお"
+    ],
+    "meaning": "ほのお。物が燃え上がる火。",
+    "exampleSentence": "夏の夜空に打ち上げられた花火は、色とりどりの炎（ほのお）を上げ、人々を魅了した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-007",
+    "stageId": ["Europe_area1"],
+    "kanji": "宴",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [],
+    "meaning": "うたげ。祝宴や酒宴など、人々が集まって飲食を共にする会。",
+    "exampleSentence": "会社の創立記念日には、社員全員が参加する盛大な宴（うたげ）が催された。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-008",
+    "stageId": ["Europe_area1"],
+    "kanji": "欧",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "オウ"
+    ],
+    "kunyomi": [],
+    "meaning": "おう。ヨーロッパのこと。",
+    "exampleSentence": "彼は、将来、ヨーロッパ諸国を巡り、異文化に触れることを夢見ている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-009",
+    "stageId": ["Europe_area1"],
+    "kanji": "殴",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "オウ"
+    ],
+    "kunyomi": [
+      "なぐ"
+    ],
+    "meaning": "なぐる。拳などで、強く打つこと。",
+    "exampleSentence": "暴力は、いかなる理由があっても許される行為ではなく、人を殴る（なぐる）ことは絶対にしてはならない。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-010",
+    "stageId": ["Europe_area1"],
+    "kanji": "乙",
+    "grade": 8,
+    "strokes": 1,
+    "onyomi": [
+      "オツ"
+    ],
+    "kunyomi": [],
+    "meaning": "おつ。十干の第二。また、風変わりで趣があること。",
+    "exampleSentence": "彼は、一般的な考え方にとらわれず、常に乙（おつ）な発想で周囲を驚かせる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-011",
+    "stageId": ["Europe_area1"],
+    "kanji": "卸",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [],
+    "kunyomi": [
+      "おろし",
+      "おろ"
+    ],
+    "meaning": "おろし。商品をまとめて仕入れ、小売業者に売ること。",
+    "exampleSentence": "この会社は、全国のスーパーマーケットに商品を卸し（おろし）、流通を支えている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-012",
+    "stageId": ["Europe_area1"],
+    "kanji": "穏",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "オン"
+    ],
+    "kunyomi": [
+      "おだ"
+    ],
+    "meaning": "おだやか。静かで落ち着いていること。",
+    "exampleSentence": "彼は、どんな困難な状況でも、常に穏やか（おだやか）な心で冷静に対処する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-013",
+    "stageId": ["Europe_area1"],
+    "kanji": "佳",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [],
+    "meaning": "か。姿や形が美しいこと。",
+    "exampleSentence": "彼女は、その佳麗（かれい）な容姿と、優れた才能で、多くの人々を魅了した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-014",
+    "stageId": ["Europe_area1"],
+    "kanji": "架",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かける。物をかけること。",
+    "exampleSentence": "彼は、二つの山の間を繋ぐ、巨大な橋を架ける（かける）という壮大な計画を立てた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-015",
+    "stageId": ["Europe_area1"],
+    "kanji": "華",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "カ",
+      "ケ"
+    ],
+    "kunyomi": [
+      "はな"
+    ],
+    "meaning": "はなやか。はなやかで美しいこと。",
+    "exampleSentence": "彼女は、舞台の上で、華麗（かれい）な衣装を身につけ、観客を魅了した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-016",
+    "stageId": ["Europe_area1"],
+    "kanji": "嫁",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [
+      "よめ",
+      "とつ"
+    ],
+    "meaning": "よめ。結婚して他家に入ること。",
+    "exampleSentence": "彼女は、遠い故郷を離れ、新しい家庭に嫁ぎ（とつぎ）、幸せな生活を築いている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-017",
+    "stageId": ["Europe_area1"],
+    "kanji": "餓",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ガ"
+    ],
+    "kunyomi": [],
+    "meaning": "うえる。飢えること。",
+    "exampleSentence": "世界には、紛争や貧困によって、飢餓（きが）に苦しむ人々が、まだ多く存在する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-018",
+    "stageId": ["Europe_area1"],
+    "kanji": "怪",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "あや"
+    ],
+    "meaning": "あやしい。不思議なこと。",
+    "exampleSentence": "夜の森で、怪しげ（あやしげ）な光が点滅しており、彼は思わず立ち止まった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-019",
+    "stageId": ["Europe_area1"],
+    "kanji": "悔",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "く",
+      "くや"
+    ],
+    "meaning": "くやむ。後悔すること。",
+    "exampleSentence": "彼は、過去の過ちを深く悔い（くい）、二度と同じ間違いを繰り返さないと誓った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-020",
+    "stageId": ["Europe_area1"],
+    "kanji": "塊",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "かたまり"
+    ],
+    "meaning": "かたまり。物が、一つにまとまっていること。",
+    "exampleSentence": "彼は、粘土をこねて、大きな塊（かたまり）を作り、そこから彫刻を始めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-021",
+    "stageId": ["Europe_area1"],
+    "kanji": "慨",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ガイ"
+    ],
+    "kunyomi": [],
+    "meaning": "なげく。深く感じて嘆くこと。",
+    "exampleSentence": "彼は、社会の不公平な現状を憂い、深く慨嘆（がいたん）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-022",
+    "stageId": ["Europe_area1"],
+    "kanji": "該",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ガイ"
+    ],
+    "kunyomi": [],
+    "meaning": "がい。そのものに当てはまること。",
+    "exampleSentence": "この法律は、特定の条件に該当（がいとう）する人々にのみ適用される。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-023",
+    "stageId": ["Europe_area1"],
+    "kanji": "概",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ガイ"
+    ],
+    "kunyomi": [],
+    "meaning": "おおよそ。だいたい。",
+    "exampleSentence": "彼は、会議の冒頭で、プロジェクトの概要（がいよう）を簡潔に説明した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-024",
+    "stageId": ["Europe_area1"],
+    "kanji": "郭",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "カク"
+    ],
+    "kunyomi": [],
+    "meaning": "くるわ。城壁。",
+    "exampleSentence": "この古い城は、堅固な石垣と、広大な外郭（がいかく）に囲まれている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-025",
+    "stageId": ["Europe_area1"],
+    "kanji": "隔",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "カク"
+    ],
+    "kunyomi": [
+      "へだ"
+    ],
+    "meaning": "へだてる。間に距離を置くこと。",
+    "exampleSentence": "私たちは、国境を隔て（へだて）ていても、心は一つだと信じている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-026",
+    "stageId": ["Europe_area1"],
+    "kanji": "穫",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "カク"
+    ],
+    "kunyomi": [],
+    "meaning": "かる。刈り取ること。",
+    "exampleSentence": "農家の人々は、秋の収穫（しゅうかく）期に、黄金色の稲を刈り穫る（かりとる）作業に追われる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-027",
+    "stageId": ["Europe_area1"],
+    "kanji": "岳",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ガク"
+    ],
+    "kunyomi": [
+      "たけ"
+    ],
+    "meaning": "たけ。高くそびえる山。",
+    "exampleSentence": "彼は、冬の厳しい寒さの中、雪に覆われた峻厳な山岳（さんがく）地帯を単独で踏破した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-028",
+    "stageId": ["Europe_area1"],
+    "kanji": "掛",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [],
+    "kunyomi": [
+      "か",
+      "かかり"
+    ],
+    "meaning": "かける。物を吊るすこと。",
+    "exampleSentence": "彼は、壁に世界地図を掛け（かけ）、将来の旅の計画を立て始めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-029",
+    "stageId": ["Europe_area1"],
+    "kanji": "滑",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "カツ",
+      "コツ"
+    ],
+    "kunyomi": [
+      "すべ",
+      "なめ"
+    ],
+    "meaning": "すべる。摩擦が少なく、なめらかに動くこと。",
+    "exampleSentence": "冬のスキー場では、雪の上を滑る（すべる）感覚が、何よりも楽しい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-030",
+    "stageId": ["Europe_area1"],
+    "kanji": "肝",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "きも"
+    ],
+    "meaning": "きも。体の内臓の一つ。物事の最も大切な部分。",
+    "exampleSentence": "この計画の肝（きも）は、いかにして地域住民の協力を得るかにある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-031",
+    "stageId": ["Europe_area2"],
+    "kanji": "冠",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "かんむり"
+    ],
+    "meaning": "かむり。頭にかぶるもの。",
+    "exampleSentence": "彼は、マラソン大会で優勝し、栄光の冠（かんむり）を頭に戴いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-032",
+    "stageId": ["Europe_area2"],
+    "kanji": "勘",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "かんがえる。物事を、深く考えること。",
+    "exampleSentence": "彼は、長年の経験から培われた勘（かん）を頼りに、危険な状況を乗り越えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-033",
+    "stageId": ["Europe_area2"],
+    "kanji": "貫",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "つらぬ"
+    ],
+    "meaning": "つらぬく。物事を、最後までやり通すこと。",
+    "exampleSentence": "彼は、どんな困難があっても、自分の信念を貫き（つらぬき）通す強い意志を持っている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-034",
+    "stageId": ["Europe_area2"],
+    "kanji": "喚",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "よびだす。大声で、人を呼び出すこと。",
+    "exampleSentence": "彼は、意識不明の患者を救うため、大声で医師を喚び（よび）出した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-035",
+    "stageId": ["Europe_area2"],
+    "kanji": "換",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かえる。古いものと、新しいものを交換すること。",
+    "exampleSentence": "地球温暖化対策として、古い家電製品を省エネタイプに買い換え（かえ）ることが推奨されている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-036",
+    "stageId": ["Europe_area2"],
+    "kanji": "敢",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "ゆる"
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-037",
+    "stageId": ["Europe_area2"],
+    "kanji": "緩",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "ゆる"
+    ],
+    "meaning": "ゆるむ。物事が、きつくなく、ゆったりとすること。",
+    "exampleSentence": "彼は、緊張した雰囲気を和らげるため、冗談を言って場を緩め（ゆるめ）た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-038",
+    "stageId": ["Europe_area2"],
+    "kanji": "企",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "くわだ"
+    ],
+    "meaning": "くわだてる。物事を、計画すること。",
+    "exampleSentence": "彼は、世界を変えるような、壮大な事業を企て（くわだて）ている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-039",
+    "stageId": ["Europe_area2"],
+    "kanji": "忌",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "い"
+    ],
+    "meaning": "いむ。嫌って、避けること。",
+    "exampleSentence": "この地域では、昔から特定の動物を忌み（いみ）嫌う習慣がある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-040",
+    "stageId": ["Europe_area2"],
+    "kanji": "軌",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "わだち。車輪が通った跡。",
+    "exampleSentence": "彼は、これまでの常識にとらわれず、新しい軌道（きどう）を切り開いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-041",
+    "stageId": ["Europe_area2"],
+    "kanji": "既",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "すで"
+    ],
+    "meaning": "すでに。もう、その状態になっていること。",
+    "exampleSentence": "彼は、約束の時間には、すでに駅に到着しており、友人を待っていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-042",
+    "stageId": ["Europe_area2"],
+    "kanji": "棋",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。碁や将棋のこと。",
+    "exampleSentence": "彼は、幼い頃から将棋（しょうぎ）を学び、今ではプロ棋士を目指している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-043",
+    "stageId": ["Europe_area2"],
+    "kanji": "棄",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "すてる。いらないものを、手放すこと。",
+    "exampleSentence": "彼は、過去の栄光を潔く棄て（すて）、新しい挑戦に踏み出した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-044",
+    "stageId": ["Europe_area2"],
+    "kanji": "騎",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。馬に乗ること。",
+    "exampleSentence": "彼は、白馬にまたがり、颯爽と騎馬（きば）隊を率いて戦場を駆け抜けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-045",
+    "stageId": ["Europe_area2"],
+    "kanji": "欺",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ギ"
+    ],
+    "kunyomi": [
+      "あざむ"
+    ],
+    "meaning": "あざむく。人をだますこと。",
+    "exampleSentence": "彼は、巧みな言葉で人々を欺き（あざむき）、私腹を肥やした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-046",
+    "stageId": ["Europe_area2"],
+    "kanji": "犠",
+    "grade": 8,
+    "strokes": 17,
+    "onyomi": [
+      "ギ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぎ。いけにえ。",
+    "exampleSentence": "彼は、多くの人々の犠牲（ぎせい）の上に、現在の平和があることを忘れてはならないと語った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-046",
+    "stageId": ["Europe_area2"],
+    "kanji": "菊",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "キク"
+    ],
+    "kunyomi": [],
+    "meaning": "きく。キク科の植物。",
+    "exampleSentence": "秋になると、庭には色とりどりの菊（きく）の花が咲き誇り、美しい景色を作り出す。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-048",
+    "stageId": ["Europe_area2"],
+    "kanji": "吉",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "キチ",
+      "キツ"
+    ],
+    "kunyomi": [],
+    "meaning": "よい。縁起が良いこと。",
+    "exampleSentence": "今日の占いは大吉（だいきち）だったので、何か良いことがあるかもしれない。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-049",
+    "stageId": ["Europe_area2"],
+    "kanji": "喫",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "キツ"
+    ],
+    "kunyomi": [],
+    "meaning": "きつ。のむこと。",
+    "exampleSentence": "彼は、毎朝、喫茶店（きっさてん）でコーヒーを飲みながら、新聞を読むのが日課だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-050",
+    "stageId": ["Europe_area2"],
+    "kanji": "虐",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "ギャク"
+    ],
+    "kunyomi": [
+      "しいた"
+    ],
+    "meaning": "しいたげる。弱いものを、いじめること。",
+    "exampleSentence": "歴史上、多くの人々が権力者によって虐げられ（しいたげられ）、苦しい生活を強いられた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-051",
+    "stageId": ["Europe_area2"],
+    "kanji": "虚",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "キョ",
+      "コ"
+    ],
+    "kunyomi": [],
+    "meaning": "むなしい。内容がなく、空っぽなこと。",
+    "exampleSentence": "彼は、目標を失い、虚無感（きょむかん）に襲われ、何も手につかなくなった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-052",
+    "stageId": ["Europe_area2"],
+    "kanji": "峡",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "きょう。山や谷に、はさまれた地形。",
+    "exampleSentence": "彼は、深い峡谷（きょうこく）を越え、未踏の地へと足を踏み入れた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-053",
+    "stageId": ["Europe_area2"],
+    "kanji": "脅",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "おびや",
+      "おど"
+    ],
+    "meaning": "おどす。人を怖がらせること。",
+    "exampleSentence": "彼は、脅迫（きょうはく）に屈することなく、自分の信念を貫き通した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-054",
+    "stageId": ["Europe_area2"],
+    "kanji": "凝",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ギョウ"
+    ],
+    "kunyomi": [
+      "こ"
+    ],
+    "meaning": "こりかたまる。液体などが、固まること。",
+    "exampleSentence": "冬の寒い朝、窓ガラスには美しい氷の結晶が凝結（ぎょうけつ）していた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-055",
+    "stageId": ["Europe_area2"],
+    "kanji": "斤",
+    "grade": 8,
+    "strokes": 4,
+    "onyomi": [
+      "キン"
+    ],
+    "kunyomi": [],
+    "meaning": "きん。重さの単位。",
+    "exampleSentence": "このパンは、一斤（いっきん）が約340グラムで、家族みんなで食べるのにちょうど良い量だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-056",
+    "stageId": ["Europe_area2"],
+    "kanji": "緊",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "キン"
+    ],
+    "kunyomi": [],
+    "meaning": "きん。ひきしまること。",
+    "exampleSentence": "彼は、緊迫（きんぱく）した状況の中でも、冷静沈着に判断を下した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-057",
+    "stageId": ["Europe_area2"],
+    "kanji": "愚",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "グ"
+    ],
+    "kunyomi": [
+      "おろ"
+    ],
+    "meaning": "おろか。頭が悪く、物事を理解できないこと。",
+    "exampleSentence": "彼は、自分の愚か（おろか）な行動を深く反省し、二度と同じ過ちを繰り返さないと誓った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-058",
+    "stageId": ["Europe_area2"],
+    "kanji": "偶",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "グウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぐう。たまたま。",
+    "exampleSentence": "彼は、偶然（ぐうぜん）にも、昔の友人と街で再会し、旧交を温めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-059",
+    "stageId": ["Europe_area2"],
+    "kanji": "遇",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "グウ"
+    ],
+    "kunyomi": [],
+    "meaning": "あう。思いがけず、人に会うこと。",
+    "exampleSentence": "彼は、旅の途中で、様々な人々と出会い、貴重な経験に恵まれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-060",
+    "stageId": ["Europe_area2"],
+    "kanji": "刑",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [],
+    "meaning": "けい。罪を犯した人に、与えられる罰。",
+    "exampleSentence": "彼は、過去の罪を償うため、刑務所（けいむしょ）で服役している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-061",
+    "stageId": ["Europe_area3"],
+    "kanji": "契",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "ちぎ"
+    ],
+    "meaning": "ちぎる。約束をすること。",
+    "exampleSentence": "二人は、固い契り（ちぎり）を交わし、永遠の愛を誓った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-062",
+    "stageId": ["Europe_area3"] ,
+    "kanji": "啓",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [],
+    "meaning": "ひらく。物事を、教え導くこと。",
+    "exampleSentence": "彼は、新しい時代の幕開けを告げる、啓蒙（けいもう）的な思想を提唱した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-063",
+    "stageId": ["Europe_area3"],
+    "kanji": "掲",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "かか"
+    ],
+    "meaning": "かかげる。高く掲げること。",
+    "exampleSentence": "彼は、自分の信念を堂々と掲げ（かかげ）、多くの人々の共感を呼んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-064",
+    "stageId": ["Europe_area3"],
+    "kanji": "携",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "たずさ"
+    ],
+    "meaning": "たずさえる。手に持つこと。",
+    "exampleSentence": "彼は、常にスマートフォンを携帯（けいたい）し、いつでも情報にアクセスできるようにしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-065",
+    "stageId": ["Europe_area3"],
+    "kanji": "憩",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "いこ"
+    ],
+    "meaning": "いこう。疲れた体を休めること。",
+    "exampleSentence": "公園のベンチで、彼は一日の疲れを癒すため、しばらく憩い（いこい）の時間を過ごした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-066",
+    "stageId": ["Europe_area3"],
+    "kanji": "鶏",
+    "grade": 8,
+    "strokes": 19,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "にわとり"
+    ],
+    "meaning": "にわとり。家禽の一種。",
+    "exampleSentence": "朝、鶏（にわとり）の鳴き声で目が覚め、新しい一日が始まった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-067",
+    "stageId": ["Europe_area3"],
+    "kanji": "鯨",
+    "grade": 8,
+    "strokes": 19,
+    "onyomi": [
+      "ゲイ"
+    ],
+    "kunyomi": [
+      "くじら"
+    ],
+    "meaning": "くじら。海に住む、大きな哺乳類。",
+    "exampleSentence": "彼は、広大な海を泳ぎ回る、巨大な鯨（くじら）の姿に感動した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-068",
+    "stageId": ["Europe_area3"],
+    "kanji": "倹",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [],
+    "meaning": "つつましい。無駄を省き、質素なこと。",
+    "exampleSentence": "彼は、質素倹約（けんやく）を心がけ、無駄な出費を抑えている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-069",
+    "stageId": ["Europe_area3"],
+    "kanji": "賢",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "かしこ"
+    ],
+    "meaning": "かしこい。頭が良いこと。",
+    "exampleSentence": "彼は、どんな難しい問題でも、賢明（けんめい）な判断で解決に導く。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-070",
+    "stageId": ["Europe_area3"]           ,
+    "kanji": "幻",
+    "grade": 8,
+    "strokes": 4,
+    "onyomi": [
+      "ゲン"
+    ],
+    "kunyomi": [
+      "まぼろ"
+    ],
+    "meaning": "まぼろし。実際には存在しない、見せかけのもの。",
+    "exampleSentence": "彼は、砂漠の中で、蜃気楼（しんきろう）という幻（まぼろし）を見た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-071",
+    "stageId": ["Europe_area3"],
+    "kanji": "孤",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [],
+    "meaning": "ひとり。仲間がいないこと。",
+    "exampleSentence": "彼は、どんな困難な状況でも、孤立（こりつ）することなく、自分の信念を貫き通した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-072",
+    "stageId": ["Europe_area3"],
+    "kanji": "弧",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [],
+    "meaning": "こ。弓形。",
+    "exampleSentence": "夜空には、美しい弧（こ）を描く、三日月が輝いていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-073",
+    "stageId": ["Europe_area3"],
+    "kanji": "雇",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "やと"
+    ],
+    "meaning": "やとう。人を、仕事のために使うこと。",
+    "exampleSentence": "彼は、新しい事業を始めるため、多くの従業員を雇用（こよう）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-074",
+    "stageId": ["Europe_area3"],
+    "kanji": "顧",
+    "grade": 8,
+    "strokes": 21,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "かえり"
+    ],
+    "meaning": "かえりみる。過去を振り返ること。",
+    "exampleSentence": "彼は、自分の過去の行動を顧み（かえりみ）、反省すべき点がないか考えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-075",
+    "stageId": ["Europe_area3"],
+    "kanji": "娯",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ゴ"
+    ],
+    "kunyomi": [],
+    "meaning": "たのしむ。遊びや、趣味を楽しむこと。",
+    "exampleSentence": "彼は、休日は、娯楽（ごらく）施設で、友人たちと楽しい時間を過ごしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-076",
+    "stageId": ["Europe_area3"],
+    "kanji": "悟",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ゴ"
+    ],
+    "kunyomi": [
+      "さと"
+    ],
+    "meaning": "さとる。物事の真理を、理解すること。",
+    "exampleSentence": "彼は、長年の修行の末、ついに人生の真理を悟り（さとった）。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-077",
+    "stageId": ["Europe_area3"],
+    "kanji": "孔",
+    "grade": 8,
+    "strokes": 4,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "あな。穴のこと。",
+    "exampleSentence": "彼は、壁に小さな孔（あな）を開け、そこから外の様子を伺った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-078",
+    "stageId": ["Europe_area3"],
+    "kanji": "巧",
+    "grade": 8,
+    "strokes": 5,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "たく"
+    ],
+    "meaning": "たくみ。物事を、うまくやること。",
+    "exampleSentence": "彼女は、巧み（たくみ）な話術で、聴衆を魅了した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-079",
+    "stageId": ["Europe_area3"],
+    "kanji": "甲",
+    "grade": 8,
+    "strokes": 5,
+    "onyomi": [
+      "コウ",
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。かたい。",
+    "exampleSentence": "彼は、甲羅（こうら）の硬いカメを捕まえ、観察した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-080",
+    "stageId": ["Europe_area3"],
+    "kanji": "坑",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "あな。穴のこと。",
+    "exampleSentence": "この鉱山には、地下深くへと続く、いくつもの坑道（こうどう）がある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-081",
+    "stageId": ["Europe_area3"],
+    "kanji": "拘",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こだわる。物事に、とらわれること。",
+    "exampleSentence": "彼は、些細なことにこだわり（こだわり）、なかなか物事を進められない。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-082",
+    "stageId": ["Europe_area3"],
+    "kanji": "郊",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。まちのはずれ。",
+    "exampleSentence": "彼は、休日に郊外（こうがい）へ出かけ、自然の中でリフレッシュする。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-083",
+    "stageId": ["Europe_area3"],
+    "kanji": "控",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "ひか"
+    ],
+    "meaning": "ひかえる。物事を、控えめにすること。",
+    "exampleSentence": "健康のためには、塩分や糖分の摂取を控える（ひかえる）ことが大切だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-084",
+    "stageId": ["Europe_area3"],
+    "kanji": "慌",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "あわ"
+    ],
+    "meaning": "あわてる。落ち着きを失うこと。",
+    "exampleSentence": "彼は、予期せぬ事態に遭遇し、慌て（あわて）て対応を考えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-085",
+    "stageId": ["Europe_area3"],
+    "kanji": "硬",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "かた"
+    ],
+    "meaning": "かたい。物が、しっかりしていて、壊れにくいこと。",
+    "exampleSentence": "この石は、非常に硬く（かたく）、加工するのが難しい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-086",
+    "stageId": ["Europe_area3"],
+    "kanji": "絞",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "しぼ",
+      "し"
+    ],
+    "meaning": "しぼる。力を加えて、液体を出すこと。",
+    "exampleSentence": "彼は、濡れたタオルを力いっぱい絞り（しぼり）、水気を切った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-087",
+    "stageId": ["Europe_area3"],
+    "kanji": "綱",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "つな"
+    ],
+    "meaning": "つな。太いひも。",
+    "exampleSentence": "彼は、綱（つな）をしっかりと握り、崖を登り始めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-088",
+    "stageId": ["Europe_area3"],
+    "kanji": "酵",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。発酵する。",
+    "exampleSentence": "パンを作るためには、酵母（こうぼ）という微生物の働きが不可欠だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-089",
+    "stageId": ["Europe_area3"],
+    "kanji": "克",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "コク"
+    ],
+    "kunyomi": [],
+    "meaning": "かつ。よく。",
+    "exampleSentence": "彼は、どんな困難にも打ち克ち（うちかち）、目標を達成した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-090",
+    "stageId": ["Europe_area3"],
+    "kanji": "獄",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ゴク"
+    ],
+    "kunyomi": [],
+    "meaning": "ごく。ろうや。",
+    "exampleSentence": "彼は、無実の罪で投獄（とうごく）され、長い間苦しんだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-091",
+    "stageId": ["Europe_area4"],
+    "kanji": "恨",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "コン"
+    ],
+    "kunyomi": [
+      "うら"
+    ],
+    "meaning": "うらむ。相手の行いを、憎むこと。",
+    "exampleSentence": "彼は、過去の出来事を深く恨み（うらみ）、復讐を誓った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-092",
+    "stageId": ["Europe_area4"],
+    "kanji": "紺",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "コン"
+    ],
+    "kunyomi": [],
+    "meaning": "こんいろ。濃い青色。",
+    "exampleSentence": "彼女は、紺色（こんいろ）の制服を身につけ、学校へ向かった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-093",
+    "stageId": ["Europe_area4"],
+    "kanji": "魂",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "コン"
+    ],
+    "kunyomi": [
+      "たましい"
+    ],
+    "meaning": "たましい。体の中に宿る、精神的な存在。",
+    "exampleSentence": "彼は、試合の最後まで、魂（たましい）を込めてプレーした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-094",
+    "stageId": ["Europe_area4"],
+    "kanji": "墾",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "コン"
+    ],
+    "kunyomi": [],
+    "meaning": "ひらく。新しい土地を切り開くこと。",
+    "exampleSentence": "昔の人々は、荒れ地を墾（ひら）き、新しい農地を作り出した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-095",
+    "stageId": ["Europe_area4"],
+    "kanji": "債",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [],
+    "meaning": "かり。借りたお金。",
+    "exampleSentence": "彼は、多額の債務（さいむ）を抱え、返済に苦しんでいる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-096",
+    "stageId": ["Europe_area4"],
+    "kanji": "催",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [
+      "もよお"
+    ],
+    "meaning": "もよおす。物事を、開催すること。",
+    "exampleSentence": "この公園では、毎年春に、桜まつりが催さ（もよおさ）れる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-097",
+    "stageId": ["Europe_area4"],
+    "kanji": "削",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "サク"
+    ],
+    "kunyomi": [
+      "けず"
+    ],
+    "meaning": "けずる。物の表面を、薄く削り取ること。",
+    "exampleSentence": "彼は、鉛筆を削り（けずり）、芯を尖らせた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-098",
+    "stageId": ["Europe_area4"],
+    "kanji": "搾",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "サク"
+    ],
+    "kunyomi": [
+      "しぼ"
+    ],
+    "meaning": "しぼる。力を加えて、液体を出すこと。",
+    "exampleSentence": "彼は、レモンを搾り（しぼり）、ジュースを作った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-099",
+    "stageId": ["Europe_area4"],
+    "kanji": "錯",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "サク"
+    ],
+    "kunyomi": [],
+    "meaning": "まじる。物事が、入り乱れること。",
+    "exampleSentence": "彼は、複雑な状況に直面し、錯乱（さくらん）状態に陥った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-100",
+    "stageId": ["Europe_area4"],
+    "kanji": "撮",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "サツ"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "meaning": "とる。写真や映像を、記録すること。",
+    "exampleSentence": "彼女は、旅行先で、美しい景色を写真に撮り（とり）、思い出を残した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-101",
+    "stageId": ["Europe_area4"],
+    "kanji": "擦",
+    "grade": 8,
+    "strokes": 17,
+    "onyomi": [
+      "サツ"
+    ],
+    "kunyomi": [
+      "す"
+    ],
+    "meaning": "こする。物と物を、こすり合わせること。",
+    "exampleSentence": "彼は、マッチを擦り（すり）、火をつけた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-102",
+    "stageId": ["Europe_area4"],
+    "kanji": "暫",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ザン"
+    ],
+    "kunyomi": [],
+    "meaning": "しばらく。短い時間。",
+    "exampleSentence": "彼は、暫時（ざんじ）休憩した後、再び仕事に戻った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-103",
+    "stageId": ["Europe_area4"],
+    "kanji": "祉",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [],
+    "meaning": "さいわい。幸せ。",
+    "exampleSentence": "私たちは、社会福祉（ふくし）の充実を目指し、誰もが安心して暮らせる社会を築きたい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-104",
+    "stageId": ["Europe_area4"],
+    "kanji": "施",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "シ",
+      "セ"
+    ],
+    "kunyomi": [
+      "ほどこ"
+    ],
+    "meaning": "ほどこす。物事を、与えること。",
+    "exampleSentence": "彼は、困っている人々に、惜しみなく慈善（じぜん）を施し（ほどこし）た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-105",
+    "stageId": ["Europe_area4"]           ,
+    "kanji": "諮",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "はか"
+    ],
+    "meaning": "はかる。物事を、相談すること。",
+    "exampleSentence": "彼は、重要な決定を下す前に、専門家に諮問（しもん）し、意見を求めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-106",
+    "stageId": ["Europe_area4"],
+    "kanji": "侍",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ジ"
+    ],
+    "kunyomi": [
+      "さむらい"
+    ],
+    "meaning": "さむらい。昔の武士。",
+    "exampleSentence": "彼は、日本の歴史に登場する侍（さむらい）の生き方に、深く感銘を受けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-107",
+    "stageId": ["Europe_area4"],
+    "kanji": "慈",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ジ"
+    ],
+    "kunyomi": [
+      "いつく"
+    ],
+    "meaning": "いつくしむ。人を、優しく思いやること。",
+    "exampleSentence": "彼女は、どんな小さな命にも慈愛（じあい）の心を持って接する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-108",
+    "stageId": ["Europe_area4"],
+    "kanji": "軸",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ジク"
+    ],
+    "kunyomi": [],
+    "meaning": "じく。物事の中心となる部分。",
+    "exampleSentence": "地球は、地軸（ちじく）を中心に自転しており、昼と夜の移り変わりをもたらす。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-109",
+    "stageId": ["Europe_area4"],
+    "kanji": "疾",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "シッ"
+    ],
+    "kunyomi": [],
+    "meaning": "はやい。動きが素早いこと。",
+    "exampleSentence": "彼は、疾風（しっぷう）のごとく駆け抜け、ゴールラインを一番に通過した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-110",
+    "stageId": ["Europe_area4"],
+    "kanji": "湿",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "シッ"
+    ],
+    "kunyomi": [
+      "しめ"
+    ],
+    "meaning": "しめる。水気を含んでいること。",
+    "exampleSentence": "梅雨の時期は、湿度（しつど）が高く、洗濯物が乾きにくい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-111",
+    "stageId": ["Europe_area4"],
+    "kanji": "赦",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "シャ"
+    ],
+    "kunyomi": [
+      ""
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-112",
+    "stageId": ["Europe_area4"],
+    "kanji": "邪",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ジャ"
+    ],
+    "kunyomi": [],
+    "meaning": "よこしま。正しくないこと。",
+    "exampleSentence": "彼は、どんな誘惑にも負けず、邪念（じゃねん）を抱くことなく、自分の信念を貫き通した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-113",
+    "stageId": ["Europe_area4"]         ,
+    "kanji": "殊",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "シュ"
+    ],
+    "kunyomi": [
+      "こと"
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-114",
+    "stageId": ["Europe_area4"],
+    "kanji": "寿",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ジュ"
+    ],
+    "kunyomi": [
+      "ことぶき"
+    ],
+    "meaning": "ことぶき。長生きすること。",
+    "exampleSentence": "彼は、長寿（ちょうじゅ）を祝う会で、多くの人々から祝福された。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-115",
+    "stageId": ["Europe_area4"],
+    "kanji": "潤",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ジュン"
+    ],
+    "kunyomi": [
+      "うるお"
+    ],
+    "meaning": "うるおう。水気を含んで、しっとりすること。",
+    "exampleSentence": "乾燥した冬の季節は、肌が潤い（うるおい）を失いやすいので、保湿ケアが大切だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-116",
+    "stageId": ["Europe_area4"],
+    "kanji": "遵",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ジュン"
+    ],
+    "kunyomi": [],
+    "meaning": "したがう。きまりや、命令に、従うこと。",
+    "exampleSentence": "彼は、どんな状況でも、法律を遵守（じゅんしゅ）し、正しい行動を心がける。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-117",
+    "stageId": ["Europe_area4"],
+    "kanji": "如",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "ジョ",
+      "ニョ"
+    ],
+    "kunyomi": [],
+    "meaning": "ごとし。?のようである。",
+    "exampleSentence": "彼の言葉は、まるで真実であるかの如く（ごとく）、人々の心を揺さぶった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-118",
+    "stageId": ["Europe_area4"],
+    "kanji": "徐",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ジョ"
+    ],
+    "kunyomi": [],
+    "meaning": "おもむろに。ゆっくりと。",
+    "exampleSentence": "彼は、徐々（じょじょ）に力をつけ、ついに目標を達成した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-119",
+    "stageId": ["Europe_area4"],
+    "kanji": "匠",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [],
+    "meaning": "たくみ。物事を、うまくやること。",
+    "exampleSentence": "彼は、伝統工芸の匠（たくみ）として、美しい作品を作り続けている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-120",
+    "stageId": ["Europe_area4"],
+    "kanji": "昇",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "のぼ"
+    ],
+    "meaning": "のぼる。高い所へ、上がること。",
+    "exampleSentence": "太陽が東の空から昇り（のぼり）、新しい一日が始まった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-121",
+    "stageId": ["Europe_area5"],
+    "kanji": "掌",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [],
+    "meaning": "てのひら。手のひらのこと。",
+    "exampleSentence": "彼は、小さな鳥を掌（てのひら）に乗せ、優しく撫でた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-122",
+    "stageId": ["Europe_area5"] ,
+    "kanji": "晶",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [],
+    "meaning": "きらめく。光り輝くこと。",
+    "exampleSentence": "冬の朝、木々には美しい氷の結晶（けっしょう）が輝いていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-123",
+    "stageId": ["Europe_area5"],
+    "kanji": "焦",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "こ",
+      "あせ"
+    ],
+    "meaning": "こげる。火が強すぎて、物が黒くなること。",
+    "exampleSentence": "彼は、失敗を恐れるあまり、焦り（あせり）を感じ、冷静な判断ができなかった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-124",
+    "stageId": ["Europe_area5"],
+    "kanji": "衝",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [],
+    "meaning": "つく。勢いよく、ぶつかること。",
+    "exampleSentence": "彼は、突然の衝撃（しょうげき）に、思わず体がよろめいた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-125",
+    "stageId": ["Europe_area5"],
+    "kanji": "鐘",
+    "grade": 8,
+    "strokes": 20,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "かね"
+    ],
+    "meaning": "かね。金属でできた、大きな音を出す道具。",
+    "exampleSentence": "除夜の鐘（かね）の音が、静かな夜空に響き渡り、新しい年を迎えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-126",
+    "stageId": ["Europe_area5"],
+    "kanji": "冗",
+    "grade": 8,
+    "strokes": 4,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "むだ。必要のないこと。",
+    "exampleSentence": "彼の話は、冗長（じょうちょう）で、なかなか要点が掴めなかった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-127",
+    "stageId": ["Europe_area5"],
+    "kanji": "嬢",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "むすめ。若い女性。",
+    "exampleSentence": "彼女は、お嬢様（おじょうさま）育ちで、世間知らずなところがある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-128",
+    "stageId": ["Europe_area5"],
+    "kanji": "錠",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "とじがね。鍵をかけるための道具。",
+    "exampleSentence": "彼は、玄関の鍵をしっかりと錠（じょう）し、家を出た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-129",
+    "stageId": ["Europe_area5"],
+    "kanji": "譲",
+    "grade": 8,
+    "strokes": 20,
+    "onyomi": [
+      "ジュウ"
+    ],
+    "kunyomi": [
+      "ゆず"
+    ],
+    "meaning": "ゆずる。自分のものを、人に与えること。",
+    "exampleSentence": "彼は、電車の中で、お年寄りに席を譲り（ゆずり）、親切な行動を示した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-130",
+    "stageId": ["Europe_area5"]       ,
+    "kanji": "嘱",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ショク"
+    ],
+    "kunyomi": [],
+    "meaning": "たのむ。人に、あることを頼むこと。",
+    "exampleSentence": "彼は、重要な任務を、信頼できる部下に嘱託（しょくたく）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-131",
+    "stageId": ["Europe_area5"],
+    "kanji": "辱",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ジョク"
+    ],
+    "kunyomi": [
+      "はずかし"
+    ],
+    "meaning": "はずかしめる。人の名誉を傷つけること。",
+    "exampleSentence": "彼は、自分の行いが、家族の名誉を辱める（はずかしめる）ことになるとは思わなかった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-132",
+    "stageId": ["Europe_area5"],
+    "kanji": "伸",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "の"
+    ],
+    "meaning": "のびる。長さや、範囲が、長くなること。",
+    "exampleSentence": "彼は、毎日ストレッチをして、体の柔軟性（じゅうなんせい）を伸（のば）している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-133",
+    "stageId": ["Europe_area5"],
+    "kanji": "辛",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "から"
+    ],
+    "meaning": "からい。舌を刺激する味。",
+    "exampleSentence": "彼は、辛い（からい）食べ物が大好きで、どんな激辛料理でも平気で食べる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-134",
+    "stageId": ["Europe_area5"],
+    "kanji": "審",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [],
+    "meaning": "つまびらか。物事を、詳しく調べること。",
+    "exampleSentence": "裁判官は、事件の真相を審理（しんり）し、公正な判決を下した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-135",
+    "stageId": ["Europe_area5"],
+    "kanji": "炊",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "スイ"
+    ],
+    "kunyomi": [
+      "た"
+    ],
+    "meaning": "たく。米などを、火にかけて煮ること。",
+    "exampleSentence": "彼女は、毎朝、家族のためにご飯を炊き（たき）、美味しい朝食を作る。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-136",
+    "stageId": ["Europe_area5"],
+    "kanji": "粋",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "スイ"
+    ],
+    "kunyomi": [
+      "いき"
+    ],
+    "meaning": "いき。すぐれていること。",
+    "exampleSentence": "彼は、粋（いき）な計らいで、パーティーの雰囲気を盛り上げた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-137",
+    "stageId": ["Europe_area5"],
+    "kanji": "衰",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "スイ"
+    ],
+    "kunyomi": [
+      "おとろ"
+    ],
+    "meaning": "おとろえる。勢いや、力が、弱くなること。",
+    "exampleSentence": "高齢化社会では、地域の活力が衰え（おとろえ）ていくことが懸念されている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-138",
+    "stageId": ["Europe_area5"]       ,
+    "kanji": "酔",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "スイ"
+    ],
+    "kunyomi": [
+      "よ"
+    ],
+    "meaning": "よう。酒などを飲んで、意識がぼんやりすること。",
+    "exampleSentence": "彼は、酒に酔い（よい）、普段は言わないような本音を語り始めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-139",
+    "stageId": ["Europe_area5"],
+    "kanji": "遂",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "スイ"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "meaning": "とげる。物事を、最後までやり遂げること。",
+    "exampleSentence": "彼は、長年の夢を遂げ（とげ）、ついに世界一周の旅に出た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-140",
+    "stageId": ["Europe_area5"],
+    "kanji": "穂",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "スイ"
+    ],
+    "kunyomi": [
+      "ほ"
+    ],
+    "meaning": "ほ。稲や麦などの、実がなる部分。",
+    "exampleSentence": "秋風に揺れる黄金色の稲穂（いなほ）が、豊かな実りを象徴している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-141",
+    "stageId": ["Europe_area5"],
+    "kanji": "随",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ズイ"
+    ],
+    "kunyomi": [],
+    "meaning": "したがう。人の言うことや、きまりに、そむかずに従うこと。",
+    "exampleSentence": "彼は、どんな困難な状況でも、自分の信念に随（したが）って行動する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-142",
+    "stageId": ["Europe_area5"],
+    "kanji": "髄",
+    "grade": 8,
+    "strokes": 19,
+    "onyomi": [
+      "ズイ"
+    ],
+    "kunyomi": [],
+    "meaning": "ずい。骨の中にある、柔らかい組織。",
+    "exampleSentence": "彼は、病気で骨髄（こつずい）の移植手術を受け、一命を取り留めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-143",
+    "stageId": ["Europe_area5"],
+    "kanji": "瀬",
+    "grade": 8,
+    "strokes": 19,
+    "onyomi": [],
+    "kunyomi": [
+      "せ"
+    ],
+    "meaning": "せ。川の、水が浅く、流れが速い場所。",
+    "exampleSentence": "彼は、川の瀬（せ）を渡り、対岸へとたどり着いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-144",
+    "stageId": ["Europe_area5"],
+    "kanji": "牲",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "セイ"
+    ],
+    "kunyomi": [],
+    "meaning": "いけにえ。神に捧げる動物。",
+    "exampleSentence": "彼は、平和のために、自らの命を犠牲（ぎせい）にする覚悟を決めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-145",
+    "stageId": ["Europe_area5"],
+    "kanji": "婿",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "セイ"
+    ],
+    "kunyomi": [
+      "むこ"
+    ],
+    "meaning": "むこ。結婚して、妻の家に入る男。",
+    "exampleSentence": "彼女は、優しくて頼りになる婿（むこ）を迎え、幸せな家庭を築いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-146",
+    "stageId": ["Europe_area5"]         ,
+    "kanji": "請",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "セイ",
+      "シン"
+    ],
+    "kunyomi": [
+      "こ","う"
+    ],
+    "meaning": "むこ。結婚して、妻の家に入る男。",
+    "exampleSentence": "彼女は、優しくて頼りになる婿（むこ）を迎え、幸せな家庭を築いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-147",
+    "stageId": ["Europe_area5"],
+    "kanji": "斥",
+    "grade": 8,
+    "strokes": 5,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [],
+    "meaning": "しりぞける。人を、遠ざけること。",
+    "exampleSentence": "彼は、不正な誘惑を斥け（しりぞけ）、自分の信念を貫き通した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-148",
+    "stageId": ["Europe_area5"],
+    "kanji": "隻",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [],
+    "meaning": "せき。船を数えるときの言葉。",
+    "exampleSentence": "港には、たくさんの漁船が停泊しており、その中には一隻（いっせき）の大型船も含まれていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-149",
+    "stageId": ["Europe_area5"],
+    "kanji": "惜",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [
+      "お"
+    ],
+    "meaning": "おしい。残念なこと。",
+    "exampleSentence": "彼は、惜しい（おしい）ところで優勝を逃し、悔し涙を流した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-150",
+    "stageId": ["Europe_area5"],
+    "kanji": "籍",
+    "grade": 8,
+    "strokes": 20,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [],
+    "meaning": "せき。戸籍のこと。",
+    "exampleSentence": "彼は、海外で長く暮らしていたが、日本の国籍（こくせき）を保持している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-151",
+    "stageId": ["Europe_area6"],
+    "kanji": "摂",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "セツ"
+    ],
+    "kunyomi": [],
+    "meaning": "おさめる。物事を、うまく処理すること。",
+    "exampleSentence": "彼は、摂理（せつり）に従い、自然の法則を尊重する生き方を選んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-152",
+    "stageId": ["Europe_area6"],
+    "kanji": "潜",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "ひそ",
+      "もぐ"
+    ],
+    "meaning": "ひそむ。隠れて、見えないこと。",
+    "exampleSentence": "彼は、水中に潜り（もぐり）、美しいサンゴ礁の海を探索した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-153",
+    "stageId": ["Europe_area6"],
+    "kanji": "繕",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "ゼン"
+    ],
+    "kunyomi": [
+      "つくろ"
+    ],
+    "meaning": "つくろう。壊れたものを、直すこと。",
+    "exampleSentence": "彼女は、破れた服を繕い（つくろい）、大切に使い続けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-154",
+    "stageId": ["Europe_area6"] ,
+    "kanji": "阻",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ソ"
+    ],
+    "kunyomi": [
+      "はば"
+    ],
+    "meaning": "はばむ。物事を、邪魔すること。",
+    "exampleSentence": "彼は、どんな困難にも阻まれる（はばまれる）ことなく、目標に向かって突き進んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-155",
+    "stageId": ["Europe_area6"],
+    "kanji": "措",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ソ"
+    ],
+    "kunyomi": [],
+    "meaning": "おく。物事を、ある状態にすること。",
+    "exampleSentence": "彼は、問題解決のために、具体的な措置（そち）を講じた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-156",
+    "stageId": ["Europe_area6"],
+    "kanji": "粗",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ソ"
+    ],
+    "kunyomi": [
+      "あら"
+    ],
+    "meaning": "あらい。きめが粗いこと。",
+    "exampleSentence": "この生地は、粗い（あらい）織り方で、素朴な風合いがある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-157",
+    "stageId": ["Europe_area6"],
+    "kanji": "礎",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "ソ"
+    ],
+    "kunyomi": [
+      "いしずえ"
+    ],
+    "meaning": "いしずえ。建物の土台となる石。物事の基礎。",
+    "exampleSentence": "この研究は、今後の科学技術の発展の礎（いしずえ）となるだろう。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-158",
+    "stageId": ["Europe_area6"],
+    "kanji": "双",
+    "grade": 8,
+    "strokes": 4,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "ふた"
+    ],
+    "meaning": "ふたつ。二つのものが、対になっていること。",
+    "exampleSentence": "彼は、双子（ふたご）の兄弟と、いつも一緒に遊んでいる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-159",
+    "stageId": ["Europe_area6"],
+    "kanji": "桑",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "くわ"
+    ],
+    "meaning": "くわ。カイコの餌となる植物。",
+    "exampleSentence": "昔の日本では、桑（くわ）の葉を育てて、カイコを飼育する養蚕（ようさん）が盛んだった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-160",
+    "stageId": ["Europe_area6"],
+    "kanji": "掃",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "は"
+    ],
+    "meaning": "はく。ほうきなどで、ごみを取り除くこと。",
+    "exampleSentence": "彼は、毎朝、玄関をきれいに掃き（はき）、一日を始める。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-161",
+    "stageId": ["Europe_area6"],
+    "kanji": "葬",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "ほうむ"
+    ],
+    "meaning": "ほうむる。亡くなった人を、土の中に埋めること。",
+    "exampleSentence": "彼は、大切な家族を葬り（ほうむり）、深い悲しみに暮れた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-162",
+    "stageId": ["Europe_area6"],
+    "kanji": "遭",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "あ"
+    ],
+    "meaning": "あう。思いがけず、悪いことに遭遇すること。",
+    "exampleSentence": "彼は、旅行中に、予期せぬ事故に遭い（あい）、怪我をしてしまった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-163",
+    "stageId": ["Europe_area6"],
+    "kanji": "憎",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ゾウ"
+    ],
+    "kunyomi": [
+      "にく"
+    ],
+    "meaning": "にくむ。相手を、ひどく嫌うこと。",
+    "exampleSentence": "彼は、不正を憎み（にくみ）、常に正義のために行動する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-164",
+    "stageId": ["Europe_area6"],
+    "kanji": "促",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "ソク"
+    ],
+    "kunyomi": [
+      "うなが"
+    ],
+    "meaning": "うながす。物事を、早くするように、働きかけること。",
+    "exampleSentence": "彼は、会議の進行を促し（うながし）、時間内に議論をまとめた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-165",
+    "stageId": ["Europe_area6"],
+    "kanji": "賊",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ゾク"
+    ],
+    "kunyomi": [],
+    "meaning": "ぞく。盗賊のこと。",
+    "exampleSentence": "彼は、夜道で賊（ぞく）に襲われ、金品を奪われた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-166",
+    "stageId": ["Europe_area6"],
+    "kanji": "怠",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "おこた",
+      "なま"
+    ],
+    "meaning": "おこたる。なまけること。",
+    "exampleSentence": "彼は、日々の努力を怠り（おこたり）、目標達成を逃してしまった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-167",
+    "stageId": ["Europe_area6"],
+    "kanji": "胎",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [],
+    "meaning": "はらむ。お腹の中に、子供を宿すこと。",
+    "exampleSentence": "彼女は、新しい命を胎内（たいない）に宿し、母親になる喜びを感じている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-168",
+    "stageId": ["Europe_area6"],
+    "kanji": "袋",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "ふくろ"
+    ],
+    "meaning": "ふくろ。物を入れるための入れ物。",
+    "exampleSentence": "彼は、買い物でたくさんの袋（ふくろ）を抱え、家路を急いだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-169",
+    "stageId": ["Europe_area6"],
+    "kanji": "逮",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [],
+    "meaning": "とらえる。犯人を捕まえること。",
+    "exampleSentence": "警察は、長年の捜査の末、ついに犯人を逮捕（たいほ）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-170",
+    "stageId": ["Europe_area6"],
+    "kanji": "滞",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "とどこお"
+    ],
+    "meaning": "とどこおる。物事が、順調に進まないこと。",
+    "exampleSentence": "彼は、海外旅行中に、予期せぬトラブルで滞在（たいざい）が長引いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-171",
+    "stageId": ["Europe_area6"],
+    "kanji": "滝",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [],
+    "kunyomi": [
+      "たき"
+    ],
+    "meaning": "たき。高い所から、水が勢いよく落ちる場所。",
+    "exampleSentence": "彼は、雄大な滝（たき）の景色に感動し、しばらくその場を動けなかった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-172",
+    "stageId": ["Europe_area6"],
+    "kanji": "択",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "タク"
+    ],
+    "kunyomi": [],
+    "meaning": "えらぶ。物事を、選び取ること。",
+    "exampleSentence": "彼は、人生の岐路に立ち、どちらの道を選択（せんたく）すべきか悩んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-173",
+    "stageId": ["Europe_area6"],
+    "kanji": "卓",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "タク"
+    ],
+    "kunyomi": [],
+    "meaning": "たかい。物事が、優れていること。",
+    "exampleSentence": "彼は、卓抜（たくばつ）した才能と努力で、世界の頂点に立った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-174",
+    "stageId": ["Europe_area6"],
+    "kanji": "託",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "タク"
+    ],
+    "kunyomi": [],
+    "meaning": "たのむ。人に、物事を頼むこと。",
+    "exampleSentence": "彼は、大切な仕事を、信頼できる部下に託し（たくし）、全幅の信頼を寄せた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-175",
+    "stageId": ["Europe_area6"],
+    "kanji": "諾",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ダク"
+    ],
+    "kunyomi": [],
+    "meaning": "うべなう。承知すること。",
+    "exampleSentence": "彼は、上司の提案を快く承諾（しょうだく）し、すぐに実行に移した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-176",
+    "stageId": ["Europe_area6"],
+    "kanji": "奪",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ダツ"
+    ],
+    "kunyomi": [
+      "うば"
+    ],
+    "meaning": "うばう。人のものを、無理やり取ること。",
+    "exampleSentence": "彼は、敵から大切な情報を奪い（うばい）、作戦を成功させた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-177",
+    "stageId": ["Europe_area6"],
+    "kanji": "胆",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [],
+    "meaning": "きも。体の内臓の一つ。勇気。",
+    "exampleSentence": "彼は、どんな困難な状況でも、大胆（だいたん）な行動で道を切り開く。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-178",
+    "stageId": ["Europe_area6"],
+    "kanji": "鍛",
+    "grade": 8,
+    "strokes": 17,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [
+      "きた"
+    ],
+    "meaning": "きたえる。金属を打って、強くすること。",
+    "exampleSentence": "彼は、毎日体を鍛え（きたえ）、強靭な肉体を作り上げた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-179",
+    "stageId": ["Europe_area6"]       ,
+    "kanji": "壇",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ダン",
+      "タン"
+    ],
+    "kunyomi": [],
+    "meaning": "だん。高く盛り上がった場所。",
+    "exampleSentence": "彼は、演壇（えんだん）に立ち、聴衆に向かって熱弁を振るった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-180",
+    "stageId": ["Europe_area6"],
+    "kanji": "稚",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "チ"
+    ],
+    "kunyomi": [],
+    "meaning": "おさない。年がとても若いこと。",
+    "exampleSentence": "彼は、稚拙（ちせつ）な絵だが、子供の純粋な心が表現されていると評価した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-181",
+    "stageId": ["Europe_area7"],
+    "kanji": "畜",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "チク"
+    ],
+    "kunyomi": [],
+    "meaning": "やしない。家畜を飼育すること。",
+    "exampleSentence": "この牧場では、たくさんの家畜（かちく）が飼育されており、豊かな自然の中で育っている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-182",
+    "stageId": ["Europe_area7"],
+    "kanji": "窒",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "チッ"
+    ],
+    "kunyomi": [],
+    "meaning": "ふさがる。物が、詰まって、通じなくなること。",
+    "exampleSentence": "彼は、狭い空間に閉じ込められ、窒息（ちっそく）しそうになった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-183",
+    "stageId": ["Europe_area7"],
+    "kanji": "抽",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ひきぬく。多くのものの中から、選び出すこと。",
+    "exampleSentence": "彼は、たくさんの候補者の中から、抽選（ちゅうせん）で選ばれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-184",
+    "stageId": ["Europe_area7"],
+    "kanji": "鋳",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [
+      "い"
+    ],
+    "meaning": "いもの。金属を溶かして、型に流し込んで作ったもの。",
+    "exampleSentence": "彼は、古い鉄を溶かし、新しい鋳物（いもの）を作り出した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-185",
+    "stageId": ["Europe_area7"],
+    "kanji": "駐",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [],
+    "meaning": "とどまる。ある場所に、とどまること。",
+    "exampleSentence": "彼は、海外の支社に駐在（ちゅうざい）し、現地のビジネスを統括している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-186",
+    "stageId": ["Europe_area7"],
+    "kanji": "彫",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "ほ"
+    ],
+    "meaning": "ほる。物を、削って形を作ること。",
+    "exampleSentence": "彼は、木材を彫り（ほり）、美しい仏像を作り上げた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-187",
+    "stageId": ["Europe_area7"],
+    "kanji": "超",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "こ"
+    ],
+    "meaning": "こえる。ある基準や範囲を、上回ること。",
+    "exampleSentence": "彼は、世界記録を大幅に超える（こえる）タイムを出し、観客を熱狂させた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-188",
+    "stageId": ["Europe_area7"],
+    "kanji": "聴",
+    "grade": 8,
+    "strokes": 17,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "き"
+    ],
+    "meaning": "きく。耳で、音を聞くこと。",
+    "exampleSentence": "彼は、音楽を聴き（きき）ながら、静かに読書を楽しんだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-189",
+    "stageId": ["Europe_area7"],
+    "kanji": "陳",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "チン"
+    ],
+    "kunyomi": [
+      ""
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-190",
+    "stageId": ["Europe_area7"],
+    "kanji": "鎮",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "チン"
+    ],
+    "kunyomi": [
+      "しず"
+    ],
+    "meaning": "しずめる。騒ぎや、怒りを、落ち着かせること。",
+    "exampleSentence": "彼は、暴動を鎮圧（ちんあつ）するため、軍隊を派遣した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-191",
+    "stageId": ["Europe_area7"],
+    "kanji": "墜",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ツイ"
+    ],
+    "kunyomi": [],
+    "meaning": "おちる。高い所から、落ちること。",
+    "exampleSentence": "飛行機が墜落（ついらく）し、多くの犠牲者が出た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-192",
+    "stageId": ["Europe_area7"],
+    "kanji": "帝",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [],
+    "meaning": "みかど。天皇のこと。",
+    "exampleSentence": "日本の歴史は、初代天皇から、現在の天皇まで、歴代の帝（みかど）によって紡がれてきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-193",
+    "stageId": ["Europe_area7"],
+    "kanji": "訂",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [],
+    "meaning": "ただす。間違いを、正しく直すこと。",
+    "exampleSentence": "彼は、自分の誤りを認め、訂正（ていせい）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-194",
+    "stageId": ["Europe_area7"],
+    "kanji": "締",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [
+      "し"
+    ],
+    "meaning": "しめる。物事を、きつくすること。",
+    "exampleSentence": "彼は、ネクタイを締め（しめ）、身だしなみを整えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-195",
+    "stageId": ["Europe_area7"],
+    "kanji": "哲",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "テツ"
+    ],
+    "kunyomi": [],
+    "meaning": "あきらか。物事の道理を、深く考えること。",
+    "exampleSentence": "彼は、哲学（てつがく）を学び、人生の意味について深く考察した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-196",
+    "stageId": ["Europe_area7"],
+    "kanji": "斗",
+    "grade": 8,
+    "strokes": 4,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [],
+    "meaning": "ひしゃく。水を汲むための道具。",
+    "exampleSentence": "彼は、北斗七星（ほくとしちせい）を眺めながら、宇宙の神秘に思いをはせた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-197",
+    "stageId": ["Europe_area7"],
+    "kanji": "塗",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [
+      "ぬ"
+    ],
+    "meaning": "ぬる。色や液体を、物に塗ること。",
+    "exampleSentence": "彼は、壁にペンキを塗り（ぬり）、部屋の雰囲気を変えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-198",
+    "stageId": ["Europe_area7"],
+    "kanji": "凍",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "こお",
+      "こご"
+    ],
+    "meaning": "こおる。水が、冷えて固まること。",
+    "exampleSentence": "冬の寒い朝、湖の水が凍り（こおり）、一面が銀世界になった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-199",
+    "stageId": ["Europe_area7"],
+    "kanji": "陶",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [],
+    "meaning": "やきもの。土を焼いて作った器。",
+    "exampleSentence": "彼女は、陶芸（とうげい）教室に通い、美しい陶器を作り続けている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-200",
+    "stageId": ["Europe_area7"],
+    "kanji": "痘",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [],
+    "meaning": "もがさ。天然痘のこと。",
+    "exampleSentence": "昔は、天然痘（てんねんとう）という病気が流行し、多くの人々の命を奪った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-201",
+    "stageId": ["Europe_area7"],
+    "kanji": "匿",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "トク"
+    ],
+    "kunyomi": [],
+    "meaning": "かくす。人や物を、隠すこと。",
+    "exampleSentence": "彼は、犯罪者を匿い（かくまい）、警察の捜査を妨害した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-202",
+    "stageId": ["Europe_area7"],
+    "kanji": "篤",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "トク"
+    ],
+    "kunyomi": [],
+    "meaning": "あつい。病気が重いこと。",
+    "exampleSentence": "彼は、篤志（とくし）家として、社会貢献活動に積極的に取り組んでいる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-203",
+    "stageId": ["Europe_area7"],
+    "kanji": "豚",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "トン"
+    ],
+    "kunyomi": [
+      "ぶた"
+    ],
+    "meaning": "ぶた。家畜の一種。",
+    "exampleSentence": "彼は、豚肉（ぶたにく）を使った料理が大好きで、特に豚カツがお気に入りだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-204",
+    "stageId": ["Europe_area7"],
+    "kanji": "尿",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ニョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "しょうべん。体から出る、液体状の老廃物。",
+    "exampleSentence": "彼は、健康診断で、尿検査（にょうけんさ）を受けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-205",
+    "stageId": ["Europe_area7"],
+    "kanji": "粘",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ネン"
+    ],
+    "kunyomi": [
+      "ねば"
+    ],
+    "meaning": "ねばる。物が、ねばねばすること。",
+    "exampleSentence": "この接着剤は、粘着力（ねんちゃくりょく）が強く、一度くっつけると剥がれにくい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-206",
+    "stageId": ["Europe_area7"],
+    "kanji": "娑",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "バ"
+    ],
+    "kunyomi": [],
+    "meaning": "うごく。",
+    "exampleSentence": "彼は、娑婆（しゃば）の生活に疲れ、静かな隠居生活を送ることを決めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-207",
+    "stageId": ["Europe_area7"],
+    "kanji": "排",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ハイ"
+    ],
+    "kunyomi": [],
+    "meaning": "おしのける。物事を、押し退けること。",
+    "exampleSentence": "彼は、排他的（はいたてき）な考え方で、他人の意見を受け入れようとしない。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-208",
+    "stageId": ["Europe_area7"],
+    "kanji": "陪",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "バイ"
+    ],
+    "kunyomi": [],
+    "meaning": "そえる。人に、付き添うこと。",
+    "exampleSentence": "彼は、裁判で、被告人の弁護に陪席（ばいせき）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-209",
+    "stageId": ["Europe_area7"],
+    "kanji": "縛",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "バク"
+    ],
+    "kunyomi": [
+      "しば"
+    ],
+    "meaning": "しばる。ひもなどで、物を縛ること。",
+    "exampleSentence": "彼は、捕らえられた犯人を、縄で縛り（しばり）、警察に引き渡した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-210",
+    "stageId": ["Europe_area7"],
+    "kanji": "伐",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "バツ"
+    ],
+    "kunyomi": [],
+    "meaning": "きる。木を切り倒すこと。",
+    "exampleSentence": "森林伐採（ばっさい）は、地球温暖化の原因の一つとして問題視されている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-211",
+    "stageId": ["Europe_area8"],
+    "kanji": "帆",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [
+      "ほ"
+    ],
+    "meaning": "ほ。風を受けて、船を進めるための布。",
+    "exampleSentence": "彼は、ヨットの帆（ほ）を張り、風を受けて海を進んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-212",
+    "stageId": ["Europe_area8"],
+    "kanji": "伴",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ハン",
+      "バン"
+    ],
+    "kunyomi": [
+      "ともな"
+    ],
+    "meaning": "ともなう。人と、一緒に行くこと。",
+    "exampleSentence": "彼は、常に危険と隣り合わせの冒険に、仲間を伴い（ともない）、旅を続けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-213",
+    "stageId": ["Europe_area8"],
+    "kanji": "畔",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "あぜ。田んぼの、境にある土手。",
+    "exampleSentence": "彼は、田んぼの畔（あぜ）を歩きながら、稲の生育状況を確認した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-214",
+    "stageId": ["Europe_area8"],
+    "kanji": "藩",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。昔の日本の、大名が治めていた領地。",
+    "exampleSentence": "彼は、江戸時代の藩（はん）の歴史について、深く研究している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-215",
+    "stageId": ["Europe_area8"],
+    "kanji": "蛮",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "バン"
+    ],
+    "kunyomi": [],
+    "meaning": "ばん。未開で、野蛮なこと。",
+    "exampleSentence": "彼は、蛮勇（ばんゆう）を振るい、敵陣に単身で乗り込んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-216",
+    "stageId": ["Europe_area8"],
+    "kanji": "卑",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "ヒ"
+    ],
+    "kunyomi": [
+      "いや"
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-217",
+    "stageId": ["Europe_area8"],
+    "kanji": "碑",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ヒ"
+    ],
+    "kunyomi": [],
+    "meaning": "いしぶみ。石に文字を刻んだもの。",
+    "exampleSentence": "彼は、歴史的な出来事を後世に伝えるため、記念碑（きねんひ）を建立した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-218",
+    "stageId": ["Europe_area8"],
+    "kanji": "泌",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ヒツ",
+      "ヒ"
+    ],
+    "kunyomi": [],
+    "meaning": "しみる。液体が、染み出すこと。",
+    "exampleSentence": "彼は、緊張のあまり、手のひらに汗が泌み（しみ）出した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-219",
+    "stageId": ["Europe_area8"],
+    "kanji": "姫",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [],
+    "kunyomi": [
+      "ひめ"
+    ],
+    "meaning": "ひめ。身分の高い女性。",
+    "exampleSentence": "彼女は、おとぎ話に出てくるような、美しい姫（ひめ）のような容姿をしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-220",
+    "stageId": ["Europe_area8"],
+    "kanji": "漂",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ヒョウ"
+    ],
+    "kunyomi": [
+      "ただよ"
+    ],
+    "meaning": "ただよう。水面などを、あてもなく漂うこと。",
+    "exampleSentence": "彼は、大海原を漂流（ひょうりゅう）し、奇跡的に生還した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-221",
+    "stageId": ["Europe_area8"],
+    "kanji": "苗",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ビョウ"
+    ],
+    "kunyomi": [
+      "なえ",
+      "なわ"
+    ],
+    "meaning": "なえ。植物の、まだ小さいもの。",
+    "exampleSentence": "農家の人たちは、春になると、田んぼに稲の苗（なえ）を植える。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-222",
+    "stageId": ["Europe_area8"],
+    "kanji": "赴",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [
+      "おもむ"
+    ],
+    "meaning": "おもむく。ある場所へ、向かうこと。",
+    "exampleSentence": "彼は、危険を顧みず、災害現場へ赴き（おもむき）、救助活動に参加した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-223",
+    "stageId": ["Europe_area8"],
+    "kanji": "符",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [],
+    "meaning": "ふ。しるし。",
+    "exampleSentence": "彼は、この事件の解決の鍵となる、重要な符号（ふごう）を見つけた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-224",
+    "stageId": ["Europe_area8"],
+    "kanji": "封",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "フウ",
+      "ホウ"
+    ],
+    "kunyomi": [],
+    "meaning": "とじる。物を、閉じ込めること。",
+    "exampleSentence": "彼は、大切な手紙を封筒（ふうとう）に入れ、しっかりと封（ふう）をした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-225",
+    "stageId": ["Europe_area8"],
+    "kanji": "伏",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "フク"
+    ],
+    "kunyomi": [
+      "ふ"
+    ],
+    "meaning": "ふす。うつ伏せになること。",
+    "exampleSentence": "彼は、敵の目を欺くため、草むらに身を伏せ（ふせ）、じっと機会を伺った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-226",
+    "stageId": ["Europe_area8"],
+    "kanji": "覆",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "フク"
+    ],
+    "kunyomi": [
+      "おお",
+      "くつがえ"
+    ],
+    "meaning": "おおう。物事を、覆い隠すこと。",
+    "exampleSentence": "彼は、過去の過ちを覆い（おおい）隠そうとしたが、結局は真実が明らかになった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-227",
+    "stageId": ["Europe_area8"],
+    "kanji": "紛",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "フン"
+    ],
+    "kunyomi": [
+      "まぎ"
+    ],
+    "meaning": "まぎれる。物事が、入り乱れること。",
+    "exampleSentence": "彼は、人混みに紛れ（まぎれ）、姿を消した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-228",
+    "stageId": ["Europe_area8"],
+    "kanji": "墳",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "フン"
+    ],
+    "kunyomi": [],
+    "meaning": "ふん。土を盛り上げたもの。",
+    "exampleSentence": "この地域には、古代の古墳（こふん）が数多く存在し、歴史のロマンを感じさせる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-229",
+    "stageId": ["Europe_area8"],
+    "kanji": "癖",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "ヘキ"
+    ],
+    "kunyomi": [
+      "くせ"
+    ],
+    "meaning": "くせ。無意識に繰り返す、習慣的な行動。",
+    "exampleSentence": "彼は、緊張すると、髪の毛を触る癖（くせ）がある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-230",
+    "stageId": ["Europe_area8"],
+    "kanji": "募",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ボ"
+    ],
+    "kunyomi": [
+      "つの"
+    ],
+    "meaning": "つのる。広く、人を集めること。",
+    "exampleSentence": "彼は、新しいプロジェクトのメンバーを募集（ぼしゅう）するため、広く参加を募った（つのった）。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-231",
+    "stageId": ["Europe_area8"],
+    "kanji": "慕",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ボ"
+    ],
+    "kunyomi": [
+      "した"
+    ],
+    "meaning": "したう。人を、尊敬し、憧れること。",
+    "exampleSentence": "彼は、恩師を深く慕い（したう）、その教えを生涯の指針とした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-232",
+    "stageId": ["Europe_area8"],
+    "kanji": "簿",
+    "grade": 8,
+    "strokes": 19,
+    "onyomi": [
+      "ボ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぼ。帳簿のこと。",
+    "exampleSentence": "彼は、家計簿（かけいぼ）をつけ、毎月の収支を管理している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-233",
+    "stageId": ["Europe_area8"],
+    "kanji": "芳",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "かんば"
+    ],
+    "meaning": "かんばしい。良い香りがすること。",
+    "exampleSentence": "庭には、芳醇（ほうじゅん）な香りを放つバラの花が咲き誇っていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-234",
+    "stageId": ["Europe_area8"],
+    "kanji": "邦",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [],
+    "meaning": "くに。国。",
+    "exampleSentence": "彼は、海外で日本の文化を広めるため、邦楽（ほうがく）の演奏活動を行っている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-235",
+    "stageId": ["Europe_area8"],
+    "kanji": "奉",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ホウ",
+      "ブ"
+    ],
+    "kunyomi": [
+      "たてまつ"
+    ],
+    "meaning": "たてまつる。神仏に、物を捧げること。",
+    "exampleSentence": "彼は、神に感謝の気持ちを捧げ（たてまつり）、平和を祈った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-236",
+    "stageId": ["Europe_area8"],
+    "kanji": "胞",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [],
+    "meaning": "つつむ。",
+    "exampleSentence": "彼は、細胞（さいぼう）の構造を顕微鏡で観察し、生命の神秘に触れた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-237",
+    "stageId": ["Europe_area8"],
+    "kanji": "倣",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "なら"
+    ],
+    "meaning": "ならう。手本として、真似ること。",
+    "exampleSentence": "彼は、偉大な先人に倣い（ならい）、常に向上心を持って努力を続けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-238",
+    "stageId": ["Europe_area8"]       ,
+    "kanji": "崩",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "くず"
+    ],
+    "meaning": "くずれる。物が、形を保てなくなること。",
+    "exampleSentence": "地震によって、古い建物が崩れ（くずれ）、甚大な被害が出た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-239",
+    "stageId": ["Europe_area8"],
+    "kanji": "飽",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "あ"
+    ],
+    "meaning": "あきる。同じことを繰り返して、嫌になること。",
+    "exampleSentence": "彼は、どんなに美味しい料理でも、毎日食べ続けると飽きて（あきて）しまう。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-240",
+    "stageId": ["Europe_area8"],
+    "kanji": "縫",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "ぬ"
+    ],
+    "meaning": "ぬう。針と糸で、布などをつなぎ合わせること。",
+    "exampleSentence": "彼女は、破れた服を丁寧に縫い（ぬい）、大切に使い続けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-241",
+    "stageId": ["Europe_area9"],
+    "kanji": "乏",
+    "grade": 8,
+    "strokes": 4,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [
+      "とぼ"
+    ],
+    "meaning": "とぼしい。物が、少ないこと。",
+    "exampleSentence": "この地域は、水資源が乏しく（とぼしく）、農業の発展が難しい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-242",
+    "stageId": ["Europe_area9"],
+    "kanji": "妨",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [
+      "さまた"
+    ],
+    "meaning": "さまたげる。物事を、邪魔すること。",
+    "exampleSentence": "彼は、他人の自由を妨げる（さまたげる）ような行為は、決してしない。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-243",
+    "stageId": ["Europe_area9"],
+    "kanji": "房",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [
+      "ふさ"
+    ],
+    "meaning": "ふさ。植物の、実がなる部分。",
+    "exampleSentence": "彼は、ブドウの房（ふさ）を手に取り、一粒ずつ味わった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-244",
+    "stageId": ["Europe_area9"],
+    "kanji": "某",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [],
+    "meaning": "なにがし。名前を伏せること。",
+    "exampleSentence": "彼は、某（ぼう）国のスパイとして、秘密裏に活動していた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-245",
+    "stageId": ["Europe_area9"],
+    "kanji": "膨",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [
+      "ふく"
+    ],
+    "meaning": "ふくれる。物が、大きくなること。",
+    "exampleSentence": "彼は、期待に胸を膨らませ（ふくらませ）、新しい挑戦に臨んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-246",
+    "stageId": ["Europe_area9"],
+    "kanji": "謀",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ボウ",
+      "ム"
+    ],
+    "kunyomi": [
+      "はか"
+    ],
+    "meaning": "はかる。物事を、計画すること。",
+    "exampleSentence": "彼は、敵の裏をかく巧妙な策略（さくりゃく）を謀り（はかり）、勝利を収めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-247",
+    "stageId": ["Europe_area9"],
+    "kanji": "墨",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ボク"
+    ],
+    "kunyomi": [
+      "すみ"
+    ],
+    "meaning": "すみ。書道に使う、黒い液体。",
+    "exampleSentence": "彼は、墨（すみ）をすり、筆を走らせて、美しい文字を書いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-248",
+    "stageId": ["Europe_area9"],
+    "kanji": "没",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ボツ"
+    ],
+    "kunyomi": [],
+    "meaning": "しずむ。水の中に、物が沈むこと。",
+    "exampleSentence": "夕日が水平線に没し（ぼっし）、あたりは茜色に染まった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-249",
+    "stageId": ["Europe_area9"],
+    "kanji": "翻",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "ホン"
+    ],
+    "kunyomi": [
+      "ひるがえ"
+    ],
+    "meaning": "ひるがえす。物事を、反対にすること。",
+    "exampleSentence": "彼は、自分の意見を翻し（ひるがえし）、相手の提案を受け入れた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-250",
+    "stageId": ["Europe_area9"],
+    "kanji": "魔",
+    "grade": 8,
+    "strokes": 21,
+    "onyomi": [
+      "マ"
+    ],
+    "kunyomi": [],
+    "meaning": "ま。人を惑わす、悪い力。",
+    "exampleSentence": "彼は、悪魔（あくま）の誘惑に打ち勝ち、自分の信念を貫き通した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-251",
+    "stageId": ["Europe_area9"],
+    "kanji": "埋",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "マイ"
+    ],
+    "kunyomi": [
+      "う"
+    ],
+    "meaning": "うめる。物を、土の中に隠すこと。",
+    "exampleSentence": "彼は、大切な宝物を、庭の土の中に埋め（うめ）、秘密にした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-252",
+    "stageId": ["Europe_area9"],
+    "kanji": "膜",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "マク"
+    ],
+    "kunyomi": [],
+    "meaning": "まく。薄い膜。",
+    "exampleSentence": "彼は、目の膜（まく）が剥がれ、視力が低下した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-253",
+    "stageId": ["Europe_area9"],
+    "kanji": "又",
+    "grade": 8,
+    "strokes": 2,
+    "onyomi": [],
+    "kunyomi": [
+      "また"
+    ],
+    "meaning": "また。再び。",
+    "exampleSentence": "彼は、失敗を恐れず、又（また）新しいことに挑戦する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-254",
+    "stageId": ["Europe_area9"],
+    "kanji": "魅",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ミ"
+    ],
+    "kunyomi": [],
+    "meaning": "みりょうする。人を、引きつけること。",
+    "exampleSentence": "彼女は、その美しい歌声で、多くの人々を魅了（みりょう）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-255",
+    "stageId": ["Europe_area9"],
+    "kanji": "滅",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "メツ"
+    ],
+    "kunyomi": [
+      "ほろ"
+    ],
+    "meaning": "ほろびる。物事が、なくなること。",
+    "exampleSentence": "彼は、古代文明が滅び（ほろび）た原因について、深く考察した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-256",
+    "stageId": ["Europe_area9"],
+    "kanji": "免",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "メン"
+    ],
+    "kunyomi": [
+      "まぬか"
+    ],
+    "meaning": "まぬかれる。危険なことや、悪いことから、逃れること。",
+    "exampleSentence": "彼は、間一髪で事故を免れ（まぬがれ）、九死に一生を得た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-257",
+    "stageId": ["Europe_area9"],
+    "kanji": "幽",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "ユウ"
+    ],
+    "kunyomi": [],
+    "meaning": "かすか。奥深く、はっきりしないこと。",
+    "exampleSentence": "彼は、幽玄（ゆうげん）な美しさに魅了され、静かに瞑想にふけった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-258",
+    "stageId": ["Europe_area9"],
+    "kanji": "誘",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ユウ"
+    ],
+    "kunyomi": [
+      "さそ"
+    ],
+    "meaning": "さそう。人を、ある場所へ、誘い出すこと。",
+    "exampleSentence": "彼は、友達を誘い（さそい）、一緒に映画を見に行った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-259",
+    "stageId": ["Europe_area9"],
+    "kanji": "憂",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "ユウ"
+    ],
+    "kunyomi": [
+      "うれ",
+      "う"
+    ],
+    "meaning": "うれえる。心配すること。",
+    "exampleSentence": "彼は、地球温暖化の進行を憂い（うれい）、環境保護活動に積極的に取り組んでいる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-260",
+    "stageId": ["Europe_area9"],
+    "kanji": "揚",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "あ"
+    ],
+    "meaning": "あげる。物を、高い所へ上げること。",
+    "exampleSentence": "彼は、国旗を掲揚（けいよう）し、国家斉唱を行った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-261",
+    "stageId": ["Europe_area9"],
+    "kanji": "揺",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "ゆ"
+    ],
+    "meaning": "ゆれる。物が、小刻みに動くこと。",
+    "exampleSentence": "地震の揺れで、建物全体が大きく揺れ（ゆれ）、恐怖を感じた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-262",
+    "stageId": ["Europe_area9"],
+    "kanji": "擁",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [],
+    "meaning": "いだく。腕で、物を抱きしめること。",
+    "exampleSentence": "彼は、自分の意見を擁護（ようご）し、最後まで主張を貫いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-263",
+    "stageId": ["Europe_area9"],
+    "kanji": "抑",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "ヨク"
+    ],
+    "kunyomi": [
+      "おさ"
+    ],
+    "meaning": "おさえる。物事を、抑えつけること。",
+    "exampleSentence": "彼は、怒りの感情を抑え（おさえ）、冷静に対処した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-264",
+    "stageId": ["Europe_area9"],
+    "kanji": "裸",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ラ"
+    ],
+    "kunyomi": [
+      "はだか"
+    ],
+    "meaning": "はだか。何も身につけていないこと。",
+    "exampleSentence": "彼は、裸（はだか）のまま、海に飛び込んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-265",
+    "stageId": ["Europe_area9"],
+    "kanji": "濫",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "ラン"
+    ],
+    "kunyomi": [],
+    "meaning": "みだれる。物事が、乱れること。",
+    "exampleSentence": "彼は、権力を濫用（らんよう）し、多くの人々を苦しめた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-266",
+    "stageId": ["Europe_area9"],
+    "kanji": "吏",
+    "grade": 8,
+    "strokes": 6,
+    "onyomi": [
+      "リ"
+    ],
+    "kunyomi": [],
+    "meaning": "つかさ。役人。",
+    "exampleSentence": "彼は、清廉潔白な官吏（かんり）として、国民のために尽力した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-267",
+    "stageId": ["Europe_area9"],
+    "kanji": "隆",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "リュウ"
+    ],
+    "kunyomi": [],
+    "meaning": "さかん。勢いが強く、活気があること。",
+    "exampleSentence": "この地域は、商業が隆盛（りゅうせい）を極め、多くの人々で賑わっている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-268",
+    "stageId": ["Europe_area9"],
+    "kanji": "了",
+    "grade": 8,
+    "strokes": 2,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "おわる。物事が、終わりになること。",
+    "exampleSentence": "彼は、すべての仕事を完了（かんりょう）し、達成感に満たされた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-269",
+    "stageId": ["Europe_area9"],
+    "kanji": "猟",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "かり。動物を捕らえること。",
+    "exampleSentence": "彼は、休日に山へ猟（かり）に出かけ、獲物を捕らえた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-270",
+    "stageId": ["Europe_area9"],
+    "kanji": "陵",
+    "grade": 8,
+    "strokes": 11,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [
+      "みささぎ"
+    ],
+    "meaning": "みささぎ。天皇や、皇后の墓。",
+    "exampleSentence": "彼は、歴史の教科書で、仁徳天皇陵（にんとくてんのうりょう）の巨大さに驚いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-271",
+    "stageId": ["Europe_area10"],
+    "kanji": "糧",
+    "grade": 8,
+    "strokes": 18,
+    "onyomi": [
+      "リョウ",
+      "ロウ"
+    ],
+    "kunyomi": [
+      "かて"
+    ],
+    "meaning": "かて。食料。",
+    "exampleSentence": "彼は、旅の途中で、食料が尽き、飢えに苦しんだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-272",
+    "stageId": ["Europe_area10"],
+    "kanji": "厘",
+    "grade": 8,
+    "strokes": 9,
+    "onyomi": [
+      "リン"
+    ],
+    "kunyomi": [],
+    "meaning": "りん。わずかなこと。",
+    "exampleSentence": "彼は、どんな些細なことでも、厘毛（りんもう）の狂いもなく正確にこなす。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-273",
+    "stageId": ["Europe_area10"],
+    "kanji": "励",
+    "grade": 8,
+    "strokes": 7,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [
+      "はげ"
+    ],
+    "meaning": "はげむ。物事を、一生懸命にすること。",
+    "exampleSentence": "彼は、目標達成のために、毎日努力に励み（はげみ）、決して諦めない。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-274",
+    "stageId": ["Europe_area10"],
+    "kanji": "零",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [],
+    "meaning": "ゼロ。何もないこと。",
+    "exampleSentence": "彼は、テストで零点（れいてん）を取り、深く反省した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-275",
+    "stageId": ["Europe_area10"],
+    "kanji": "霊",
+    "grade": 8,
+    "strokes": 15,
+    "onyomi": [
+      "レイ",
+      "リョウ"
+    ],
+    "kunyomi": [
+      "たま"
+    ],
+    "meaning": "たましい。体の中に宿る、精神的な存在。",
+    "exampleSentence": "彼は、心霊（しんれい）現象を信じており、夜中に一人で肝試しに行った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-276",
+    "stageId": ["Europe_area10"],
+    "kanji": "裂",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "レツ"
+    ],
+    "kunyomi": [
+      "さ"
+    ],
+    "meaning": "さける。物が、破れること。",
+    "exampleSentence": "彼は、怒りのあまり、シャツを力任せに引き裂い（さき）た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-277",
+    "stageId": ["Europe_area10"],
+    "kanji": "廉",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "レン"
+    ],
+    "kunyomi": [],
+    "meaning": "いさぎよい。心がきれいで、不正をしないこと。",
+    "exampleSentence": "彼は、清廉潔白（せいれんけっぱく）な政治家として、国民から厚い信頼を得ている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-278",
+    "stageId": ["Europe_area10"],
+    "kanji": "錬",
+    "grade": 8,
+    "strokes": 16,
+    "onyomi": [
+      "レン"
+    ],
+    "kunyomi": [],
+    "meaning": "きたえる。金属を打って、強くすること。",
+    "exampleSentence": "彼は、毎日体を鍛錬（たんれん）し、強靭な肉体を作り上げた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-279",
+    "stageId": ["Europe_area10"],
+    "kanji": "炉",
+    "grade": 8,
+    "strokes": 8,
+    "onyomi": [
+      "ロ"
+    ],
+    "kunyomi": [],
+    "meaning": "いろり。火を燃やすための場所。",
+    "exampleSentence": "冬の寒い夜は、囲炉裏（いろり）を囲んで、家族団らんの時間を過ごす。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-280",
+    "stageId": ["Europe_area10"],
+    "kanji": "浪",
+    "grade": 8,
+    "strokes": 10,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [],
+    "meaning": "なみ。海の波。",
+    "exampleSentence": "彼は、荒波（あらなみ）を乗り越え、無事に港にたどり着いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-281",
+    "stageId": ["Europe_area10"],
+    "kanji": "廊",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ろうか。建物の中の、細長い通路。",
+    "exampleSentence": "彼は、長い廊下（ろうか）を歩き、目的の部屋へと向かった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-282",
+    "stageId": ["Europe_area10"],
+    "kanji": "楼",
+    "grade": 8,
+    "strokes": 13,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ろう。高くそびえる建物。",
+    "exampleSentence": "彼は、高層ビル（こうそうビル）の最上階から、美しい夜景を眺めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-283",
+    "stageId": ["Europe_area10"],
+    "kanji": "漏",
+    "grade": 8,
+    "strokes": 14,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [
+      "も"
+    ],
+    "meaning": "もれる。液体や、秘密が、外に出ること。",
+    "exampleSentence": "彼は、重要な情報が外部に漏れ（もれ）ないように、厳重に管理した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g8-284",
+    "stageId": ["Europe_area10"],
+    "kanji": "湾",
+    "grade": 8,
+    "strokes": 12,
+    "onyomi": [
+      "ワン"
+    ],
+    "kunyomi": [],
+    "meaning": "いりえ。海が、陸地に入り込んだ場所。",
+    "exampleSentence": "彼は、美しい湾（わん）に面したホテルに宿泊し、休暇を楽しんだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+      }
+]

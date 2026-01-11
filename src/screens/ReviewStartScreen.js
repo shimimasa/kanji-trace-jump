@@ -21,6 +21,16 @@ export function ReviewStartScreen(ctx, nav) {
       const res = await fetch(url);
       const items = await res.json();
 
+      const getLabel = (it) => (
+                it?.label ??
+                it?.kanji ??
+                it?.kana ??
+                it?.char ??
+                it?.text ??
+                it?.id ??
+                "？"
+              );
+
       // 設定（デフォルト）
       let count = 10; // 5/10/15
       let policy = "balanced"; // "uncleared" | "mist" | "balanced"
@@ -186,6 +196,12 @@ export function ReviewStartScreen(ctx, nav) {
             return;
           }
 
+          // ✅ 今回の出題分だけ id→label を作る（Resultで文字表示するため）
+          const labelMap = {};
+          for (const it of items) {
+            if (queue.includes(it.id)) labelMap[it.id] = getLabel(it);
+          }
+
           // 復習セッションをctxに載せてゲームへ
           nav.go("game", {
             selectedRangeId: selected,
@@ -197,6 +213,10 @@ export function ReviewStartScreen(ctx, nav) {
               startedAt: Date.now(),
               mistakes: {}, // itemId -> fail count
               cleared: [],  // itemId[]
+              labels: labelMap,
+              rangeId: range.id,
+              policy,
+              onlyUncleared,
             },
             // まず1問目へ
             singleId: queue[0],

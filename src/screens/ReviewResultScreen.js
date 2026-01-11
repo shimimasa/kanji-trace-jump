@@ -42,9 +42,11 @@ export function ReviewResultScreen(ctx, nav) {
                       <div class="reviewList">
                         ${
                           topMistakes.length
-                            ? topMistakes
-                                .map(([id, n], i) => `<div class="reviewRow">${i + 1}. <b>${id}</b> <span class="muted">ミス ${n}</span></div>`)
-                                .join("")
+                             ? topMistakes
+                                .map(([id, n], i) => {
+                                  const label = review?.labels?.[id] ?? id;
+                                  return `<div class="reviewRow">${i + 1}. <b>${label}</b> <span class="muted">ミス ${n}</span></div>`;
+                                }).join("")
                             : `<div class="muted">ミスはありませんでした！</div>`
                         }
                       </div>

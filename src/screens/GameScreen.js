@@ -1,6 +1,6 @@
 // src/screens/GameScreen.js
 import { startTraceGame } from "../game/startTraceGame.js";
-
+import { recordReviewSession, saveProgress } from "../lib/progressStore.js";
 export function GameScreen(ctx, nav) {
   let game = null;
 
@@ -122,6 +122,20 @@ export function GameScreen(ctx, nav) {
                       if (nextIndex >= review.queue.length) {
                         // 終了 → 結果画面
                         const totalFails = Object.values(review.mistakes).reduce((a, b) => a + (b ?? 0), 0);
+                        
+                        
+              // ✅ 永続化（直近30件）
+              recordReviewSession(ctx.progress, {
+                rangeId: ctx.selectedRangeId,
+                total: review.queue.length,
+                clearedCount: review.cleared.length,
+                totalFails,
+                policy: review.policy,
+                onlyUncleared: review.onlyUncleared,
+              });
+              saveProgress(ctx.progress);
+                        
+                        
                         nav.go("reviewResult", {
                           reviewResult: {
                             startedAt: review.startedAt,
@@ -129,6 +143,7 @@ export function GameScreen(ctx, nav) {
                             clearedCount: review.cleared.length,
                             totalFails,
                             mistakes: review.mistakes,
+                            labels: review.labels,
                           },
                         });
                         return;

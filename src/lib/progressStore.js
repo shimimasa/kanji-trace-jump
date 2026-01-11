@@ -19,6 +19,33 @@ export function saveProgress(progress) {
   localStorage.setItem(KEY, JSON.stringify(progress));
 }
 
+// ===========================
+// Review session persistence
+// ===========================
+function ensureReview(progress) {
+    if (!progress.reviewSessions) progress.reviewSessions = [];
+    return progress.reviewSessions;
+  }
+  
+  /**
+  + * reviewSession = {
+  + *   at: number,
+  + *   rangeId: string,
+  + *   total: number,
+  + *   clearedCount: number,
+  + *   totalFails: number,
+  + *   policy?: string,
+  + *   onlyUncleared?: boolean
+  + * }
+  + */
+  export function recordReviewSession(progress, session) {
+    const list = ensureReview(progress);
+    list.unshift({ at: Date.now(), ...session });
+    // 直近30件だけ
+    progress.reviewSessions = list.slice(0, 30);
+    return progress.reviewSessions[0];
+  }
+
 function ensureItem(progress, itemId) {
       if (!progress.items) progress.items = {};
       if (!progress.items[itemId]) {

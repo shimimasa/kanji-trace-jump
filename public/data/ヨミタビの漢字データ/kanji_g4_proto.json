@@ -1,0 +1,3963 @@
+[
+  {
+    "id": "g4-001",
+  "stageId": ["chubu_area1"],
+    "kanji": "愛",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "アイ"
+    ],
+    "kunyomi": [],
+    "meaning": "あい。ひとや どうぶつ、ものごとを たいせつに おもう きもち。",
+    "exampleSentence": "ぼくは、公園の鳥にえさをあげるとき、動物を愛（あい）する心を忘れない。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-002",
+    "stageId": ["chubu_area1"],
+    "kanji": "案",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "アン"
+    ],
+    "kunyomi": [],
+    "meaning": "あん。なにかを決めるときのかんがえや、けいかくのこと。",
+    "exampleSentence": "クラス会の出し物について、みんなで話し合い、良い案（あん）を出し合った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-003",
+    "stageId": ["chubu_area1"],
+    "kanji": "以",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "meaning": "い。ある数をふくんで、それよりも上か下かを表すことば。",
+    "exampleSentence": "この乗り物は、身長が百二十センチメートル以（い）上の人だけが乗れる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-004",
+    "stageId": ["chubu_area1"],
+    "kanji": "衣",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "ころも"
+    ],
+    "meaning": "ころも。人が寒さや、はずかしさから体を守るために身につけるもの。",
+    "exampleSentence": "お母さんが、季節に合わせて冬の衣（ころも）を出してくれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-005",
+    "stageId": ["chubu_area1"],
+    "kanji": "位",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "くらい"
+    ],
+    "meaning": "くらい。じゅんばんや、もののねだん。数字の場所をしめすときにもつかう。",
+    "exampleSentence": "算数の時間に、数字の「一の位（くらい）」と「十の位」について学習した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-006",
+    "stageId": ["chubu_area1"],
+    "kanji": "茨",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [],
+    "kunyomi": [
+      "いばら"
+    ],
+    "meaning": "いばら。とげのある、ひくい木のこと。都道府県の名前にも使われる。",
+    "exampleSentence": "おじさんの家がある茨（いばら）城県へ、夏休みに遊びに行く計画を立てた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-007",
+    "stageId": ["chubu_area1"],
+    "kanji": "印",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [
+      "しるし"
+    ],
+    "meaning": "しるし。あとで分かるように、または、わすれないようにつけるめじるし。",
+    "exampleSentence": "宝の地図に書かれた、大きな木の印（しるし）を見つけた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-008",
+    "stageId": ["chubu_area1"],
+    "kanji": "英",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "エイ"
+    ],
+    "kunyomi": [],
+    "meaning": "えい。とくに、すぐれていること。また、イギリスという国の名前にもつかう。",
+    "exampleSentence": "お兄ちゃんは、しょうらい英語（えいご）を話せるようになって、世界中を旅したいそうだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-009",
+    "stageId": ["chubu_area1"],
+    "kanji": "栄",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "エイ"
+    ],
+    "kunyomi": [
+      "さか",
+      "は"
+    ],
+    "meaning": "さかえる。いきおいや力がつよくなって、はってんすること。",
+    "exampleSentence": "この町が、これからもずっと平和で栄（さか）えていくことを、みんなで願っている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-010",
+    "stageId": ["chubu_area1"],
+    "kanji": "媛",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [
+      "ひめ"
+    ],
+    "meaning": "ひめ。天皇や、身分の高い人のむすめ。小さくて、かわいらしいもの。",
+    "exampleSentence": "おじさんが住んでいる愛媛（えひめ）県は、みかんの生産で有名だと聞いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-011",
+    "stageId": ["chubu_area1"],
+    "kanji": "塩",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [
+      "しお"
+    ],
+    "meaning": "しお。しょっぱいあじがする、白いこな。料理のあじつけにつかう。",
+    "exampleSentence": "理科の実験で、海水から塩（しお）の結晶を取り出すことに成功した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-012",
+    "stageId": ["chubu_area1"],
+    "kanji": "岡",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      ""
+    ],
+    "kunyomi": [
+      "おか"
+    ],
+    "meaning": "おか。まわりより、少しだけ高くなっている、なだらかな土地。",
+    "exampleSentence": "天気の良い日に、近所の丘（おか）にのぼって、町全体の景色をながめた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-013",
+    "stageId": ["chubu_area1"],
+    "kanji": "億",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "オク"
+    ],
+    "kunyomi": [],
+    "meaning": "おく。一の、一万倍の一万倍。とても大きい数をあらわすことば。",
+    "exampleSentence": "世界の人口は、八十億（おく）人をこえたとニュースで知った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-014",
+    "stageId": ["chubu_area1"],
+    "kanji": "加",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [
+      "くわ"
+    ],
+    "meaning": "くわえる。すでにあるものに、あたらしいものを足すこと。",
+    "exampleSentence": "料理の最後に、かくし味としてさとうを少し加（くわ）えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-015",
+    "stageId": ["chubu_area1"],
+    "kanji": "果",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [
+      "は"
+    ],
+    "meaning": "か。植物が実を結んだもの。また、物事のけっか。",
+    "exampleSentence": "努力の果実（かじつ）がみのり、テストで百点を取ることができた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-016",
+    "stageId": ["chubu_area1"],
+    "kanji": "貨",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [],
+    "meaning": "か。お金や、ねうちのある品物のこと。",
+    "exampleSentence": "長い貨物（かもつ）列車が、たくさんのコンテナを運んで走っていく。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-017",
+    "stageId": ["chubu_area1"],
+    "kanji": "課",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [],
+    "meaning": "か。わりあてられた、やるべきこと。勉強のひと区切り。",
+    "exampleSentence": "毎週金曜日の五時間目は、図工の課題（かだい）に取り組む時間だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-018",
+    "stageId": ["chubu_area1"],
+    "kanji": "芽",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ガ"
+    ],
+    "kunyomi": [
+      "め"
+    ],
+    "meaning": "め。植物の種から、さいしょに出てくるわかい部分。",
+    "exampleSentence": "春になって、植木ばちにまいた花の種から、小さな芽（め）が出てきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-019",
+    "stageId": ["chubu_area1"],
+    "kanji": "賀",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ガ"
+    ],
+    "kunyomi": [],
+    "meaning": "が。よろこび、いわうこと。おめでたいことば。",
+    "exampleSentence": "新しい年のはじまりに、友達から年賀状（ねんがじょう）がとどいた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-020",
+    "stageId": ["chubu_area1"],
+    "kanji": "改",
+    "grade": 4,
+    "strokes": 1,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "あらた"
+    ],
+    "meaning": "あらためる。前のものをやめて、新しくすること。よくすること。",
+    "exampleSentence": "自分のまちがいをみとめ、考えを改（あらた）めることは、とても勇気がいることだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-021",
+    "stageId": ["chubu_area2"],
+    "kanji": "械",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [],
+    "meaning": "かい。しかけや、どうぐのこと。",
+    "exampleSentence": "工場では、大きな機械（きかい）が、すごい音を立てて動いていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-022",
+    "stageId": ["chubu_area2"],
+    "kanji": "害",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "ガイ"
+    ],
+    "kunyomi": [],
+    "meaning": "がい。ためにならないこと。じゃまになること。きずつけること。",
+    "exampleSentence": "工場のけむりが引き起こす公害（こうがい）について、社会の授業で学んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-023",
+    "stageId": ["chubu_area2"],
+    "kanji": "街",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ガイ",
+      "カイ"
+    ],
+    "kunyomi": [
+      "まち"
+    ],
+    "meaning": "まち。たくさんの家や店がならんでいる、にぎやかな場所。",
+    "exampleSentence": "日曜日の街（まち）は、たくさんの人でにぎわっていて、とても活気があった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-024",
+    "stageId": ["chubu_area2"],
+    "kanji": "各",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "カク"
+    ],
+    "kunyomi": [
+      "おのおの"
+    ],
+    "meaning": "おのおの。ひとつひとつの、それぞれ。みんな、めいめい。",
+    "exampleSentence": "運動会では、各（かく）クラスが、自分たちの色の旗を作って応援した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-025",
+    "stageId": ["chubu_area2"],
+    "kanji": "覚",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "カク"
+    ],
+    "kunyomi": [
+      "おぼ",
+      "さ"
+    ],
+    "meaning": "おぼえる。物事をわすれないように、頭や体にしみこませること。",
+    "exampleSentence": "新しい漢字の書き方を、毎日れんしゅうして覚（おぼ）えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-026",
+    "stageId": ["chubu_area2"],
+    "kanji": "潟",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      ""
+    ],
+    "kunyomi": [
+      "がた"
+    ],
+    "meaning": "かた。海の水が、砂などによってせき止められてできた、浅い湖。",
+    "exampleSentence": "新潟（にいがた）県には、冬になるとたくさんの白鳥が飛んでくる湖がある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-027",
+    "stageId": ["chubu_area2"],
+    "kanji": "完",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "かん。すべてやりとげること。のこりがないこと。",
+    "exampleSentence": "夏休みの宿題を、八月中にすべて完成（かんせい）させることが目標だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-028",
+    "stageId": ["chubu_area2"],
+    "kanji": "官",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "かん。国や、おおやけの仕事をする人のこと。",
+    "exampleSentence": "社会科見学で、警察官（けいさつかん）の仕事について話を聞いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-029",
+    "stageId": ["chubu_area2"],
+    "kanji": "管",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "くだ"
+    ],
+    "meaning": "くだ。中が空洞になっている、細長い筒のこと。",
+    "exampleSentence": "水道管（すいどうかん）の工事のため、今日は昼から水が出ないそうだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-030",
+    "stageId": ["chubu_area2"],
+    "kanji": "関",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "せき",
+      "かか"
+    ],
+    "meaning": "せき。人や物が自由に行き来できないように、さえぎる場所。",
+    "exampleSentence": "昔の人が、旅の途中で関所（せきしょ）を通る様子を、絵で見たことがある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-031",
+    "stageId": ["chubu_area2"],
+    "kanji": "観",
+    "grade": 4,
+    "strokes": 18,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "み"
+    ],
+    "meaning": "みる。けしきや、スポーツ、えいがなどを、よく見ること。",
+    "exampleSentence": "家族みんなで、夜空の星を観測（かんそく）し、流れ星を見つけた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-032",
+    "stageId": ["chubu_area2"],
+    "kanji": "願",
+    "grade": 4,
+    "strokes": 19,
+    "onyomi": [
+      "ガン"
+    ],
+    "kunyomi": [
+      "ねが"
+    ],
+    "meaning": "ねがう。こうなってほしいと、心から強くのぞむこと。",
+    "exampleSentence": "七夕のたんざくに、自分の願い（ねがい）事を書いて、ささの葉にかざった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-033",
+    "stageId": ["chubu_area2"],
+    "kanji": "岐",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。道が、いくつかに分かれているところ。",
+    "exampleSentence": "岐阜（ぎふ）県にある白川郷は、合掌造りの家で有名な村だと学んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-034",
+    "stageId": ["chubu_area2"],
+    "kanji": "希",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。めったにないこと。そうあってほしいと、のぞむこと。",
+    "exampleSentence": "ぼくは、将来の希望（きぼう）を、作文に書いて発表した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-035",
+    "stageId": ["chubu_area2"],
+    "kanji": "季",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。春、夏、秋、冬の、一年の四つの区切りのこと。",
+    "exampleSentence": "日本には、美しい四季（しき）があり、季節（きせつ）ごとにちがう景色が楽しめる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-036",
+    "stageId": ["chubu_area2"],
+    "kanji": "旗",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "はた"
+    ],
+    "meaning": "はた。布や紙などで作り、ぼうの先につけて、しるしとして立てるもの。",
+    "exampleSentence": "運動会の入場行進で、ぼくはクラスの旗（はた）を持つ係になった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-037",
+    "stageId": ["chubu_area2"],
+    "kanji": "器",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "うつわ"
+    ],
+    "meaning": "うつわ。ものを入れたり、もりつけたりするための道具の、一般的な呼び名。",
+    "exampleSentence": "お母さんが、誕生日にきれいなガラスの器（うつわ）をプレゼントしてくれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-038",
+    "stageId": ["chubu_area2"],
+    "kanji": "機",
+    "grade": 4,
+    "strokes": 16,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "はた"
+    ],
+    "meaning": "はた。糸をおりあわせて、布を作るための機械。",
+    "exampleSentence": "昔の人は、機（はた）を使って、時間と手間をかけて布をおっていたそうだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-039",
+    "stageId": ["chubu_area2"],
+    "kanji": "議",
+    "grade": 4,
+    "strokes": 20,
+    "onyomi": [
+      "ギ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぎ。おおぜいで集まって、話し合い、物事を決めること。",
+    "exampleSentence": "学級会で、クラスのスローガンを決めるための話し議（ぎ）が行われた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-040",
+    "stageId": ["chubu_area2"],
+    "kanji": "求",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "もと"
+    ],
+    "meaning": "もとめる。ほしいものや、そうしてほしいことを、相手に伝えること。",
+    "exampleSentence": "お店の求人（きゅうじん）広告を見て、お兄ちゃんがアルバイトの面接に行った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-041",
+    "stageId": ["chubu_area3"],
+    "kanji": "泣",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "な"
+    ],
+    "meaning": "なく。かなしいときや、うれしいときに、目からなみだを出すこと。",
+    "exampleSentence": "物語の最後の場面がとても感動的で、思わず泣（な）いてしまった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-042",
+    "stageId": ["chubu_area3"],
+    "kanji": "給",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [],
+    "meaning": "きゅう。ひつようなものを、あたえること。",
+    "exampleSentence": "学校の給食（きゅうしょく）は、栄養のバランスが考えられていて、とてもおいしい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-043",
+    "stageId": ["chubu_area3"],
+    "kanji": "挙",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "キョ"
+    ],
+    "kunyomi": [
+      "あ"
+    ],
+    "meaning": "あげる。下にあるものを、上のほうへ動かすこと。",
+    "exampleSentence": "質問がある人は、静かに手を挙（あ）げて、先生に知らせてください。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-044",
+    "stageId": ["chubu_area3"],
+    "kanji": "漁",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "ギョ",
+      "リョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぎょ。川や海へ出て、魚や貝をとること。",
+    "exampleSentence": "漁師（りょうし）さんたちは、朝早くから船に乗って、漁（りょう）に出かける。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-045",
+    "stageId": ["chubu_area3"],
+    "kanji": "共",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "とも"
+    ],
+    "meaning": "とも。二人以上の人が、何かをいっしょにすること。",
+    "exampleSentence": "友達と力を合わせ、共に（とも）助け合って、むずかしい問題を解決した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-046",
+    "stageId": ["chubu_area3"],
+    "kanji": "協",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "きょう。力を合わせて、何かをいっしょにすること。",
+    "exampleSentence": "クラスのみんなで協力（きょうりょく）して、文化祭の準備を進めた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-047",
+    "stageId": ["chubu_area3"],
+    "kanji": "鏡",
+    "grade": 4,
+    "strokes": 19,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "かがみ"
+    ],
+    "meaning": "かがみ。光をはねかえして、姿や形をうつすもの。",
+    "exampleSentence": "毎朝、鏡（かがみ）を見て、自分の髪型をきちんと整える。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-048",
+    "stageId": ["chubu_area3"],
+    "kanji": "競",
+    "grade": 4,
+    "strokes": 20,
+    "onyomi": [
+      "キョウ",
+      "ケイ"
+    ],
+    "kunyomi": [
+      "きそ",
+      "せ"
+    ],
+    "meaning": "きそう。相手とくらべて、どちらが上手か、はやいかなどをためすこと。",
+    "exampleSentence": "運動会で、友達とゴールまで競い（きそい）合って走った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-049",
+    "stageId": ["chubu_area3"],
+    "kanji": "極",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "キョク",
+      "ゴク"
+    ],
+    "kunyomi": [
+      "きわ"
+    ],
+    "meaning": "きわめる。物事のいちばん上や、いちばん終わりまで、やりとおすこと。",
+    "exampleSentence": "北極（ほっきょく）や南極（なんきょく）は、地球の極（きょく）にある寒い場所だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-050",
+    "stageId": ["chubu_area3"],
+    "kanji": "熊",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "ユウ"
+    ],
+    "kunyomi": [
+      "くま"
+    ],
+    "meaning": "くま。大きくて、力がつよい、毛のふかい動物。",
+    "exampleSentence": "熊本（くまもと）県のマスコットキャラクターは、黒くて元気な熊（くま）だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-051",
+    "stageId": ["chubu_area3"],
+    "kanji": "訓",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "クン"
+    ],
+    "kunyomi": [],
+    "meaning": "くん。おしえさとすこと。漢字の、意味をあらわす日本の読み方。",
+    "exampleSentence": "先生の教訓（きょうくん）を、いつも心にとめて行動している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-052",
+    "stageId": ["chubu_area3"],
+    "kanji": "軍",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "グン"
+    ],
+    "kunyomi": [],
+    "meaning": "ぐん。国を守るために、武器をもって戦う人たちの集まり。",
+    "exampleSentence": "歴史の物語で、二つの軍（ぐん）が戦う場面を読んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-053",
+    "stageId": ["chubu_area3"],
+    "kanji": "郡",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "グン"
+    ],
+    "kunyomi": [],
+    "meaning": "ぐん。都道府県の中を、いくつかに分けた地域の一つ。",
+    "exampleSentence": "ぼくの住んでいる町は、〇〇県（けん）の△△郡（ぐん）にある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-054",
+    "stageId": ["chubu_area3"],
+    "kanji": "群",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "グン"
+    ],
+    "kunyomi": [
+      "む",
+      "むら"
+    ],
+    "meaning": "むれ。たくさんの人や動物が、一か所にあつまっているようす。",
+    "exampleSentence": "空を見上げると、たくさんの鳥が群（む）れをなして、南の方へ飛んでいった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-055",
+      "stageId": ["chubu_area3"],
+    "kanji": "径",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [],
+    "meaning": "けい。円の中心を通って、円のまわりまで引いた直線のこと。",
+    "exampleSentence": "算数の時間に、コンパスを使って、直径（ちょっけい）が十センチの円をかいた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-056",
+    "stageId": ["chubu_area3"],
+    "kanji": "景",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [],
+    "meaning": "けい。目に見える、自然のようすや、場所のありさま。",
+    "exampleSentence": "山の頂上から見た景色（けしき）は、言葉にできないほど美しかった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-057",
+    "stageId": ["chubu_area3"],
+    "kanji": "芸",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ゲイ"
+    ],
+    "kunyomi": [],
+    "meaning": "げい。特別な練習をして、身につけた、すぐれたわざのこと。",
+    "exampleSentence": "学芸会（がくげいかい）で、クラスのみんなと劇を発表した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-058",
+    "stageId": ["chubu_area3"],
+    "kanji": "欠",
+    "grade": 4,
+    "strokes": 4,
+    "onyomi": [
+      "ケツ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かける。あなや、すきまがあくこと。また、必要なものが足りないこと。",
+    "exampleSentence": "大事にしていたお皿が欠（か）けてしまい、とても悲しい気持ちになった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-059",
+    "stageId": ["chubu_area3"],
+    "kanji": "結",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ケツ"
+    ],
+    "kunyomi": [
+      "むす",
+      "ゆ"
+    ],
+    "weaknessケツ": "kunyomi",
+    "meaning": "むすぶ。ひもなどをつないで、一つにまとめること。約束をすること。",
+    "exampleSentence": "靴ひもがほどけないように、しっかりと結（むす）んでから、外へ出かけた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-060",
+    "stageId": ["chubu_area3"],
+    "kanji": "建",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ケン",
+      "コン"
+    ],
+    "kunyomi": [
+      "た"
+    ],
+    "meaning": "たてる。家やビルなど、大きなものをつくり上げること。",
+    "exampleSentence": "駅の前に、新しい図書館を建（た）てるための工事が始まった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-061",
+    "stageId": ["chubu_area4"],
+    "kanji": "健",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "すこ"
+    ],
+    "meaning": "すこやか。体がじょうぶで、元気なようす。",
+    "exampleSentence": "毎日、早寝早起きを心がけて、健康（けんこう）な生活を送っている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-062",
+    "stageId": ["chubu_area4"],
+    "kanji": "験",
+    "grade": 4,
+    "strokes": 18,
+    "onyomi": [
+      "ケン",
+      "ゲン"
+    ],
+    "kunyomi": [],
+    "meaning": "けん。じっさいに、ためしてみること。しらべてみること。",
+    "exampleSentence": "理科の実験（じっけん）で、食塩水が電気を通すかどうかを調べた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-063",
+    "stageId": ["chubu_area4"],
+    "kanji": "固",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "かた"
+    ],
+    "meaning": "かたい。力を加えても、形がくずれたり、変わったりしにくいようす。",
+    "exampleSentence": "コンクリートで固（かた）められた地面は、とてもじょうぶだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-064",
+    "stageId": ["chubu_area4"],
+    "kanji": "功",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "コウ",
+      "ク"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。何かをやりとげた、すばらしい働きや、てがらのこと。",
+    "exampleSentence": "たくさんの練習を重ね、ついに逆上がりに成功（せいこう）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-065",
+    "stageId": ["chubu_area4"],
+    "kanji": "好",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "す",
+      "この"
+    ],
+    "meaning": "すき。自分の心が、それにひかれること。気に入ること。",
+    "exampleSentence": "ぼくは、犬が好（す）きで、いつか大きな犬を飼ってみたいと思っている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-066",
+    "stageId": ["chubu_area4"],
+    "kanji": "香",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "コウ",
+      "キョウ"
+    ],
+    "kunyomi": [
+      "かお",
+      "か"
+    ],
+    "meaning": "かおり。はなや食べ物などから、ただよってくる、よいにおい。",
+    "exampleSentence": "庭に咲いたキンモクセイの、甘い香（かお）りが風にのって部屋まで届く。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-067",
+    "stageId": ["chubu_area4"],
+    "kanji": "候",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "そうろう"
+    ],
+    "meaning": "こう。季節や、天気のこと。また、何かの様子をうかがうこと。",
+    "exampleSentence": "春の訪れとともに、気候（きこう）がだんだんと暖かくなってきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-068",
+    "stageId": ["chubu_area4"],
+    "kanji": "康",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。体や心が、すこやかで、ぶじなこと。",
+    "exampleSentence": "おじいちゃんとおばあちゃんが、いつまでも健康（けんこう）でいてほしいと願う。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-069",
+    "stageId": ["chubu_area4"],
+    "kanji": "佐",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "サ"
+    ],
+    "kunyomi": [],
+    "meaning": "さ。人のそばにいて、助けること。",
+    "exampleSentence": "大佐（たいさ）は、部下たちに的確な指示をあたえ、チームを勝利にみちびいた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-070",
+    "stageId": ["chubu_area4"],
+    "kanji": "差",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "サ"
+    ],
+    "kunyomi": [
+      "さ"
+    ],
+    "meaning": "さ。ふたつのものをくらべたときの、ちがい。へだたり。",
+    "exampleSentence": "計算問題で、大きい数と小さい数の差（さ）を求める練習をした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-071",
+    "stageId": ["chubu_area4"],
+    "kanji": "菜",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [
+      "な"
+    ],
+    "meaning": "な。人が食べるために、畑で育てる草や葉っぱ。",
+    "exampleSentence": "夕食のサラダに使う、新鮮な野菜（やさい）を畑からとってきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-072",
+    "stageId": ["chubu_area4"],
+    "kanji": "最",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [
+      "もっと"
+    ],
+    "meaning": "もっとも。くらべるものがないほど、いちばんであること。",
+    "exampleSentence": "ぼくは、数ある教科の中で、体育が最も（もっとも）得意だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-073",
+    "stageId": ["chubu_area4"],
+    "kanji": "埼",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [],
+    "kunyomi": [
+      "さい"
+    ],
+    "meaning": "さき。つきでた土地の、はし。みさき。",
+    "exampleSentence": "ぼくが住んでいる埼玉（さいたま）県は、都心へのアクセスが便利な場所だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-074",
+    "stageId": ["chubu_area4"],
+    "kanji": "材",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ザイ"
+    ],
+    "kunyomi": [],
+    "meaning": "ざい。ものを作るための、もとになる材料のこと。",
+    "exampleSentence": "この机は、じょうぶな木材（もくざい）を使って、ていねいに作られている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-075",
+    "stageId": ["chubu_area4"],
+    "kanji": "崎",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [],
+    "kunyomi": [
+      "さき"
+    ],
+    "meaning": "山が海や湖に突き出たところ。",
+    "exampleSentence": "長崎の町は坂が多い。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-076",
+    "stageId": ["chubu_area4"],
+    "kanji": "昨",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "サク"
+    ],
+    "kunyomi": [],
+    "meaning": "さく。今日から見て、一つ前の日。きのう。",
+    "exampleSentence": "昨日（さくじつ）の夜に見た、まんげつの美しさが心にのこっている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-077",
+    "stageId": ["chubu_area4"],
+    "kanji": "札",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "サツ"
+    ],
+    "kunyomi": [
+      "ふだ"
+    ],
+    "meaning": "ふだ。名前などを書いて、ものにつける小さな板や紙。",
+    "exampleSentence": "お店で、品物に付けられた値札（ねふだ）を見て、ねだんを確かめた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-078",
+    "stageId": ["chubu_area4"],
+    "kanji": "刷",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "サツ"
+    ],
+    "kunyomi": [
+      "す"
+    ],
+    "meaning": "する。もじや絵を、インクをつかって紙などにうつすこと。",
+    "exampleSentence": "新聞は、大きな印刷（いんさつ）機で、一晩に何万部も刷（す）られるそうだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-079",
+    "stageId": ["chubu_area4"],
+    "kanji": "察",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "サツ"
+    ],
+    "kunyomi": [],
+    "meaning": "さつ。物事のようすや人の気持ちを、よく見て考えること。",
+    "exampleSentence": "警察官（けいさつかん）は、町の安全を守るため、すみずみまで観察（かんさつ）している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-080",
+    "stageId": ["chubu_area4"],
+    "kanji": "参",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "サン"
+    ],
+    "kunyomi": [
+      "まい"
+    ],
+    "meaning": "まいる。お寺や神社など、とうとい場所へおもむくこと。",
+    "exampleSentence": "お正月に、家族みんなで近くの神社へお参（まい）りに行った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-081",
+    "stageId": ["chubu_area5"],
+    "kanji": "産",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "サン"
+    ],
+    "kunyomi": [
+      "う",
+      "うぶ"
+    ],
+    "meaning": "さん。子どもがうまれること。また、新しいものをつくり出すこと。",
+    "exampleSentence": "この地域では、米や野菜の生産（せいさん）がとてもさかんだと学んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-082",
+    "stageId": ["chubu_area5"],
+    "kanji": "散",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "サン"
+    ],
+    "kunyomi": [
+      "ち"
+    ],
+    "meaning": "ちる。あつなっていたものが、ばらばらになること。",
+    "exampleSentence": "桜の花びらが、風にふかれて、ひらひらと散って（ちって）いく。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-083",
+    "stageId": ["chubu_area5"],
+    "kanji": "残",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "ザン"
+    ],
+    "kunyomi": [
+      "のこ"
+    ],
+    "meaning": "のこる。つかったり、食べたりしたあとに、まだあること。",
+    "exampleSentence": "給食は、感謝の気持ちをこめて、残さ（のこさ）ずに全部食べるようにしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-084",
+    "stageId": ["chubu_area5"],
+    "kanji": "氏",
+    "grade": 4,
+    "strokes": 4,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "うじ"
+    ],
+    "meaning": "し。いえがらや、けっとうをあらわすなまえ。",
+    "exampleSentence": "歴史の授業で、源氏（げんじ）と平氏（へいし）の戦いについて学んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-085",
+    "stageId": ["chubu_area5"],
+    "kanji": "司",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [],
+    "meaning": "つかさどる。あるやくめや仕事を、中心になってうけもつこと。",
+    "exampleSentence": "運動会で、応援団の進行役を司会（しかい）の人がつとめていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-086",
+    "stageId": ["chubu_area5"],
+    "kanji": "試",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "こころ",
+      "ため"
+    ],
+    "meaning": "ためす。うまくいくかどうか、じっさいにやってみること。",
+    "exampleSentence": "新しいゲームを、発売される前に体験版で試して（ためして）みた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-087",
+    "stageId": ["chubu_area5"],
+    "kanji": "児",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ジ",
+      "ニ"
+    ],
+    "kunyomi": [],
+    "meaning": "じ。としのいかない、小さなこどものこと。",
+    "exampleSentence": "この公園には、たくさんの児童（じどう）が元気に遊べる遊具がおいてある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-088",
+    "stageId": ["chubu_area5"],
+    "kanji": "治",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ジ",
+      "チ"
+    ],
+    "kunyomi": [
+      "おさ",
+      "なお"
+    ],
+    "meaning": "おさめる。国や地域を、うまくまとめて、しずかな状態にたもつこと。",
+    "exampleSentence": "昔の王様が、どのようにして国を治めた（おさめた）のかを本で読んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-089",
+    "stageId": ["chubu_area5"],
+    "kanji": "滋",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ジ"
+    ],
+    "kunyomi": [],
+    "meaning": "じ。栄養があって、体をじょうぶにすること。",
+    "exampleSentence": "滋賀（しが）県には、日本でいちばん大きな湖の、びわ湖がある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-090",
+    "stageId": ["chubu_area5"],
+    "kanji": "辞",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "ジ"
+    ],
+    "kunyomi": [
+      "や"
+    ],
+    "meaning": "やめる。今までつとめていた役目や仕事を、自分からしりぞくこと。",
+    "exampleSentence": "意味が分からない言葉は、すぐに国語辞典（こくごじてん）で調べるくせをつけよう。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-091",
+    "stageId": ["chubu_area5"],
+    "kanji": "鹿",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ロク"
+    ],
+    "kunyomi": [
+      "しか",
+      "か"
+    ],
+    "meaning": "しか。頭に、枝のような角をもつ、草食動物。",
+    "exampleSentence": "奈良の公園で、たくさんの鹿（しか）が、観光客からせんべいをもらっていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-092",
+    "stageId": ["chubu_area5"],
+    "kanji": "失",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "シツ"
+    ],
+    "kunyomi": [
+      "うしな"
+    ],
+    "meaning": "うしなう。もっていたものを、なくしてしまうこと。",
+    "exampleSentence": "試合に敗れて、くやしい気持ちになったが、相手の健闘をたたえ、失礼（しつれい）のないようにした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-093",
+    "stageId": ["chubu_area5"],
+    "kanji": "借",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "シャク"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かりる。あとで返すやくそくで、人のものを使わせてもらうこと。",
+    "exampleSentence": "図書館へ行って、夏休みの間に読む本を五さつ借（か）りてきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-094",
+    "stageId": ["chubu_area5"],
+    "kanji": "種",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "シュ"
+    ],
+    "kunyomi": [
+      "たね"
+    ],
+    "meaning": "たね。しょくぶつが、なかまをふやすために作るもの。物事のもと。",
+    "exampleSentence": "春になって、庭にアサガオの種（たね）をまいたら、小さな芽が出てきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-095",
+    "stageId": ["chubu_area5"],
+    "kanji": "周",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "まわ"
+    ],
+    "meaning": "まわり。もののぐるり。あるものをとりかこんでいる部分。",
+    "exampleSentence": "公園の池の周（まわ）りを、犬といっしょに元気に走って散歩した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-096",
+    "stageId": ["chubu_area5"],
+    "kanji": "祝",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "シュク"
+    ],
+    "kunyomi": [
+      "いわ"
+    ],
+    "meaning": "いわう。よろこびやおめでたいことを、ことばや行いで示すこと。",
+    "exampleSentence": "友達の誕生日を、クラスのみんなで歌をうたってお祝（いわ）いした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-097",
+    "stageId": ["chubu_area5"],
+    "kanji": "順",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ジュン"
+    ],
+    "kunyomi": [],
+    "meaning": "じゅん。きめられた、正しいならび。物事のただしいみちすじ。",
+    "exampleSentence": "図書館では、本を棚の番号の順（じゅん）にならべて、きちんとせいりする。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-098",
+    "stageId": ["chubu_area5"],
+    "kanji": "初",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ショ"
+    ],
+    "kunyomi": [
+      "はじ",
+      "はつ",
+      "そ",
+      "うい"
+    ],
+    "meaning": "はじめ。いちばんさいしょ。物事のおこり。",
+    "exampleSentence": "生まれて初（はじ）めて飛行機に乗ったとき、空から見る景色にとても感動した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-099",
+    "stageId": ["chubu_area5"],
+    "kanji": "松",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "まつ"
+    ],
+    "meaning": "まつ。一年中、みどりの葉をつけている、針のように細い葉の木。",
+    "exampleSentence": "おじいちゃんの家の庭には、立派な松（まつ）の木が一本、堂々と立っている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-100",
+    "stageId": ["chubu_area5"],
+    "kanji": "笑",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "わら",
+      "え"
+    ],
+    "meaning": "わらう。うれしいときや、おもしろいときに、顔をほころばせること。",
+    "exampleSentence": "友達が話してくれた面白い話に、思わず笑って（わらって）しまった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-101",
+    "stageId": ["chubu_area6"],
+    "kanji": "唱",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "とな"
+    ],
+    "meaning": "となえる。声に出して、詩や歌をうたうこと。くりかえして言うこと。",
+    "exampleSentence": "音楽の授業で、みんなと声を合わせて、元気よく校歌を合唱（がっしょう）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-102",
+    "stageId": ["chubu_area6"],
+    "kanji": "焼",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "や"
+    ],
+    "meaning": "やく。火に近づけたり、火の中に入れたりして、熱を通すこと。",
+    "exampleSentence": "キャンプで、自分たちでつかまえた魚を、たき火でこんがりと焼（や）いて食べた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-103",
+    "stageId": ["chubu_area6"],
+    "kanji": "照",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "て"
+    ],
+    "meaning": "てる。光をはなって、まわりを明るくすること。てらしだすこと。",
+    "exampleSentence": "雲のすきまから、太陽の光が地上を明（あか）るく照（て）らしていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-104",
+    "stageId": ["chubu_area6"],
+    "kanji": "城",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [
+      "しろ"
+    ],
+    "meaning": "しろ。てきから身をまもるために、石や土で高くきずいたたてもの。",
+    "exampleSentence": "お城（しろ）のまわりにある、深いおほりを、船にのって見学した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-105",
+    "stageId": ["chubu_area6"],
+    "kanji": "縄",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [
+      "なわ"
+    ],
+    "meaning": "しばるもの",
+    "exampleSentence": "縄（なわ）とび大会を開催した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-106",
+    "stageId": ["chubu_area6"],
+    "kanji": "臣",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "シン",
+      "ジン"
+    ],
+    "kunyomi": [],
+    "meaning": "しん。昔、王様や天皇につかえて、政治を手伝っていた人のこと。",
+    "exampleSentence": "歴史の劇で、ぼくは王様に仕える大臣（だいじん）の役をえんじることになった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-107",
+    "stageId": ["chubu_area6"],
+    "kanji": "信",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [],
+    "meaning": "しん。あいてをうたがわず、本当だとおもうこと。たよりにすること。",
+    "exampleSentence": "友達との約束は、必ず守ることで、おたがいの信頼（しんらい）が生まれる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-108",
+    "stageId": ["chubu_area6"],
+    "kanji": "井",
+    "grade": 4,
+    "strokes": 4,
+    "onyomi": [
+      "セイ",
+      "ショウ"
+    ],
+    "kunyomi": [
+      "い"
+    ],
+    "meaning": "い。地面をふかくほって、地下水などをくみ上げるためのしかけ。",
+    "exampleSentence": "昔の人は、深い井戸（いど）をほって、生活に使う水をくんでいたそうだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-109",
+    "stageId": ["chubu_area6"],
+    "kanji": "成",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "セイ",
+      "ジョウ"
+    ],
+    "kunyomi": [
+      "な"
+    ],
+    "meaning": "なる。今までなかったものが、できあがること。一つの形になること。",
+    "exampleSentence": "弟は、たくさんの練習を重ねて、ついに逆上がりに成功（せいこう）した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-110",
+    "stageId": ["chubu_area6"],
+    "kanji": "省",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "セイ",
+      "ショウ"
+    ],
+    "kunyomi": [
+      "はぶ",
+      "かえり"
+    ],
+    "meaning": "はぶく。むだな部分をへらして、かんたんにすること。かえりみること。",
+    "exampleSentence": "電気のむだづかいをなくすため、使わない部屋の電気は、省略（しょうりゃく）せずに消すようにしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-111",
+    "stageId": ["chubu_area6"],
+    "kanji": "清",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "セイ",
+      "ショウ"
+    ],
+    "kunyomi": [
+      "きよ"
+    ],
+    "meaning": "きよい。にごりがなく、すきとおっているようす。心にけがれがないこと。",
+    "exampleSentence": "山の奥からわき出る清（きよ）い水を、みんなで大切に飲んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-112",
+    "stageId": ["chubu_area6"],
+    "kanji": "静",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "セイ",
+      "ジョウ"
+    ],
+    "kunyomi": [
+      "しず"
+    ],
+    "meaning": "しずか。音がしなくて、ひっそりとしているようす。おちついていること。",
+    "exampleSentence": "図書館の中では、みんなが本に集中できるよう、静（しず）かにすごすのがルールだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-113",
+    "stageId": ["chubu_area6"],
+    "kanji": "席",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [],
+    "meaning": "せき。すわるための場所。人があつまる場所。",
+    "exampleSentence": "映画館では、指定された席（せき）にすわって、静かに映画を観賞した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-114",
+    "stageId": ["chubu_area6"],
+    "kanji": "積",
+    "grade": 4,
+    "strokes": 16,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つむ。ものを、いくつもかさねて、高くすること。",
+    "exampleSentence": "冬の間に、たくさんの雪が地面に積（つ）もり、あたり一面が真っ白になった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-115",
+    "stageId": ["chubu_area6"],
+    "kanji": "折",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "セツ"
+    ],
+    "kunyomi": [
+      "お",
+      "おり"
+    ],
+    "meaning": "おる。かたいものを、まげて二つにしたり、こわしたりすること。",
+    "exampleSentence": "友達の誕生日に、きれいな色の紙で、心をこめて鶴を折（お）ってあげた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-116",
+    "stageId": ["chubu_area6"],
+    "kanji": "節",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "セツ",
+      "セチ"
+    ],
+    "kunyomi": [
+      "ふし"
+    ],
+    "meaning": "ふし。竹や指などの、くぎりとなっている、ふくらんだ部分。",
+    "exampleSentence": "季節（きせつ）の変わり目は、かぜをひきやすいので、体調管理に気をつけよう。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-117",
+    "stageId": ["chubu_area6"],
+    "kanji": "説",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "セツ",
+      "ゼイ"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "meaning": "とく。物事のいみや理由を、相手によく分かるように話すこと。",
+    "exampleSentence": "先生が、理科の実験の結果について、分かりやすく説明（せつめい）してくれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-118",
+    "stageId": ["chubu_area6"],
+    "kanji": "浅",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "あさ"
+    ],
+    "meaning": "あさい。そこまでの深さがあまりないこと。時間が少ししかたっていないこと。",
+    "exampleSentence": "夏休みに、家族で川へ行き、水が浅（あさ）い場所で、魚つりを楽しんだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-119",
+    "stageId": ["chubu_area6"],
+    "kanji": "戦",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "たたか",
+      "いくさ"
+    ],
+    "meaning": "たたかう。相手に勝つために、力や技をくらべあうこと。",
+    "exampleSentence": "歴史の物語で、二人の武将が、正々堂々と戦う（たたかう）場面を読んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-120",
+    "stageId": ["chubu_area6"],
+    "kanji": "選",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "えら"
+    ],
+    "meaning": "えらぶ。たくさんの中から、自分の好きなものや、良いと思うものをとること。",
+    "exampleSentence": "体育大会のリレーの選手（せんしゅ）に、クラスの代表として選（えら）ばれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-121",
+    "stageId": ["chubu_area7"],
+    "kanji": "然",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ゼン",
+      "ネン"
+    ],
+    "kunyomi": [],
+    "meaning": "ぜん。そのとおりである、という状態をあらわすことば。",
+    "exampleSentence": "大自然（だいしぜん）の中で、深呼吸をすると、とてもすがすがしい気持ちになる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-122",
+    "stageId": ["chubu_area7"],
+    "kanji": "争",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "あらそ"
+    ],
+    "meaning": "あらそう。相手に勝とうとして、言い合ったり、たたかったりすること。",
+    "exampleSentence": "兄弟げんかで、おもちゃの取り合いを争って（あらそって）しまったことを、後で反省した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-123",
+    "stageId": ["chubu_area7"],
+    "kanji": "倉",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "くら"
+    ],
+    "meaning": "くら。米や、大切な品物などを、しまっておくための建物。",
+    "exampleSentence": "おじいちゃんの家の裏には、古い道具をしまっておく倉庫（そうこ）がある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-124",
+    "stageId": ["chubu_area7"],
+    "kanji": "巣",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "す"
+    ],
+    "meaning": "す。鳥や虫などが、たまごを産み、子を育てるために作るいえ。",
+    "exampleSentence": "家の軒下に、ツバメが土やわらを集めて、じょうぶな巣（す）を作っていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-125",
+    "stageId": ["chubu_area7"],
+    "kanji": "束",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ソク"
+    ],
+    "kunyomi": [
+      "たば"
+    ],
+    "meaning": "たば。ひもなどで、いくつかまとめて、一つにくくったもの。",
+    "exampleSentence": "お母さんへのプレゼントに、きれいな花を束（たば）にしてもらった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-126",
+    "stageId": ["chubu_area7"],
+    "kanji": "側",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ソク"
+    ],
+    "kunyomi": [
+      "がわ",
+      "かわ"
+    ],
+    "meaning": "がわ。ものの右や左、まわりの部分。近く。そば。",
+    "exampleSentence": "道路を歩くときは、車に気をつけて、安全な歩道側（ほどうがわ）を通るようにしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-127",
+    "stageId": ["chubu_area7"],
+    "kanji": "続",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "ゾク"
+    ],
+    "kunyomi": [
+      "つづ"
+    ],
+    "meaning": "つづく。物事がとぎれずに、先へとのびていくこと。つながっていくこと。",
+    "exampleSentence": "雨の日が何日も続（つづ）いたので、外で元気に遊べなくて残念だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-128",
+    "stageId": ["chubu_area7"],
+    "kanji": "卒",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ソツ"
+    ],
+    "kunyomi": [],
+    "meaning": "そつ。学校のすべての勉強を、おえること。",
+    "exampleSentence": "六年生は、三月になると、お世話になった小学校を卒業（そつぎょう）する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-129",
+    "stageId": ["chubu_area7"],
+    "kanji": "孫",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "ソン"
+    ],
+    "kunyomi": [
+      "まご"
+    ],
+    "meaning": "まご。自分の子どもが、うんだ子どものこと。",
+    "exampleSentence": "おじいちゃんは、孫（まご）のぼくが遊びに来るのを、いつも楽しみにしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-130",
+    "stageId": ["chubu_area7"],
+    "kanji": "帯",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "おび",
+      "お"
+    ],
+    "meaning": "おび。着物の上から、こしにまきつけて、しめるための長い布。",
+    "exampleSentence": "夏祭りには、お母さんに手伝ってもらって、きれいな浴衣の帯（おび）を結んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-131",
+    "stageId": ["chubu_area7"],
+    "kanji": "隊",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [],
+    "meaning": "たい。目的のために、集団をつくって行動する人たちの一団。",
+    "exampleSentence": "消防隊（しょうぼうたい）の人たちは、火事を消すために、毎日きびしい訓練をしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-132",
+    "stageId": ["chubu_area7"],
+    "kanji": "達",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "タツ"
+    ],
+    "kunyomi": [],
+    "meaning": "たつ。あるレベルや目的地まで、行きつくこと。上手になること。",
+    "exampleSentence": "長い道のりを歩き続け、ようやく山の頂上に到逹（とうたつ）することができた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-133",
+    "stageId": ["chubu_area7"],
+    "kanji": "単",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [],
+    "meaning": "たん。ひとつだけであること。ひとりであること。かさなっていないこと。",
+    "exampleSentence": "この問題は、複雑そうに見えるけど、実は単純（たんじゅん）な計算でとける。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-134",
+    "stageId": ["chubu_area7"],
+    "kanji": "置",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "チ"
+    ],
+    "kunyomi": [
+      "お"
+    ],
+    "meaning": "おく。ある場所に、ものをすえること。かまえること。",
+    "exampleSentence": "机の上が散らかっていたので、本や文房具を、もとの場所へきちんと置（お）いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-135",
+    "stageId": ["chubu_area7"],
+    "kanji": "仲",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [
+      "なか"
+    ],
+    "meaning": "なか。人と人との、つながり。したしい関係。",
+    "exampleSentence": "ぼくは、クラスの友達と、みんな仲（なか）よく、毎日楽しくすごしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-136",
+    "stageId": ["chubu_area7"],
+    "kanji": "沖",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [
+      "おき"
+    ],
+    "meaning": "おき。陸地から、遠くはなれた海の上。",
+    "exampleSentence": "船に乗って、沖縄（おきなわ）の美しい海で、色とりどりの魚を見た。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-137",
+    "stageId": ["chubu_area7"],
+    "kanji": "兆",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "きざ"
+    ],
+    "meaning": "ちょう。億の一万倍。とても大きい数をあらわすことば。",
+    "exampleSentence": "空に、雨がふる前触れの兆し（きざし）として、黒い雲が出てきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-138",
+    "stageId": ["chubu_area7"],
+    "kanji": "低",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [
+      "ひく"
+    ],
+    "meaning": "ひくい。地面からの高さがすくないこと。位置がしたのほうなこと。",
+    "exampleSentence": "飛行機が、だんだんと高さを下げて、低（ひく）い雲の中へ入っていった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-139",
+    "stageId": ["chubu_area7"],
+    "kanji": "底",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [
+      "そこ"
+    ],
+    "meaning": "そこ。ものの、いちばん下の部分。おくふかいところ。",
+    "exampleSentence": "プールの底（そこ）に、きらきら光るきれいな石がしずんでいるのを見つけた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-140",
+    "stageId": ["chubu_area7"],
+    "kanji": "的",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "テキ"
+    ],
+    "kunyomi": [
+      "まと"
+    ],
+    "meaning": "まと。弓や鉄砲をいるときに、ねらいとするえもの。めあて。",
+    "exampleSentence": "弓道の練習で、矢がみごとに的（まと）の真ん中に当たった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-141",
+    "stageId": ["chubu_area8"],
+    "kanji": "典",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "テン"
+    ],
+    "kunyomi": [],
+    "meaning": "てん。おおやけの儀式。また、昔から伝わる、手本となる書物のこと。",
+    "exampleSentence": "卒業式は、体育館で厳粛な雰囲気の中、式典（しきてん）として行われた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-142",
+    "stageId": ["chubu_area8"],
+    "kanji": "伝",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "デン"
+    ],
+    "kunyomi": [
+      "つた"
+    ],
+    "meaning": "つたえる。人から人へ、ことばや情報、気持ちなどをとどけること。",
+    "exampleSentence": "昔の人は、大切な知らせを、伝書鳩（でんしょばと）を使って遠くまで伝（つた）えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-143",
+    "stageId": ["chubu_area8"],
+    "kanji": "徒",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [],
+    "meaning": "と。ある教えを受ける人。また、何も持たず、自分の足で歩くこと。",
+    "exampleSentence": "この学校の生徒（せいと）は、みんな元気に勉強や運動にはげんでいる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-144",
+    "stageId": ["chubu_area8"],
+    "kanji": "努",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ド"
+    ],
+    "kunyomi": [
+      "つと"
+    ],
+    "meaning": "つとめる。目標のために、自分の力を出しきって、がんばること。",
+    "exampleSentence": "苦手な算数の問題も、あきらめずに努力（どりょく）すれば、必ずとけるようになる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-145",
+    "stageId": ["chubu_area8"],
+    "kanji": "灯",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "ひ"
+    ],
+    "meaning": "ひ。あたりを明るくするために、ともすあかり。ともしび。",
+    "exampleSentence": "夜の道を安全に歩けるように、街灯（がいとう）が明るくあたりを照らしている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-146",
+    "stageId": ["chubu_area8"],
+    "kanji": "働",
+    "grade": 4,
+    "strokes": 13,
+    "onyomi": [
+      "ドウ"
+    ],
+    "kunyomi": [
+      "はたら"
+    ],
+    "meaning": "はたらく。人が、生活のために、体や頭をつかって仕事をすること。",
+    "exampleSentence": "お父さんは、家族のために、毎日一生懸命に働（はたら）いてくれている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-147",
+    "stageId": ["chubu_area8"],
+    "kanji": "特",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "トク"
+    ],
+    "kunyomi": [],
+    "meaning": "とく。ほかと比べて、とくにちがっていること。すぐれていること。",
+    "exampleSentence": "この電車は、特別（とくべつ）な急行列車で、いくつかの駅をとばして走る。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-148",
+    "stageId": ["chubu_area9"],
+    "kanji": "徳",
+    "grade": 4,
+    "strokes": 14,
+    "onyomi": [
+      "トク"
+    ],
+    "kunyomi": [],
+    "meaning": "とく。すぐれた品性。ただしい行いができる、立派な心。",
+    "exampleSentence": "道徳（どうとく）の授業で、人に親切にすることの大切さについて考えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-149",
+    "stageId": ["chubu_area9"],
+    "kanji": "栃",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [],
+    "kunyomi": [
+      "とち"
+    ],
+    "meaning": "とち。大きな葉を持つ木の名前。また、県のなまえにも使われる。",
+    "exampleSentence": "栃木（とちぎ）県の日光には、有名な東照宮という建物がある。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-150",
+    "stageId": ["chubu_area2"],
+    "kanji": "奈",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ナ"
+    ],
+    "kunyomi": [],
+    "meaning": "な。からなし、という木の名前。また、県のなまえにも使われる。",
+    "exampleSentence": "奈良（なら）県にある大仏の大きさに、ぼくはとてもおどろいた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-151",
+    "stageId": ["chubu_area8"],
+    "kanji": "梨",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [],
+    "kunyomi": [
+      "なし"
+    ],
+    "meaning": "なし。秋にみのる、あまくて、しゃきしゃきとした食感の果物。",
+    "exampleSentence": "秋になると、おじいちゃんの家の畑で、みずみずしい梨（なし）がたくさんとれる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-152",
+    "stageId": ["chubu_area8"],
+    "kanji": "熱",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "ネツ"
+    ],
+    "kunyomi": [
+      "あつ"
+    ],
+    "meaning": "ねつ。あたたかさの度合い。また、病気で体温が高くなること。",
+    "exampleSentence": "やかんにいれた水が、火の力で熱（ねつ）くなって、湯気が出てきた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-153",
+    "stageId": ["chubu_area8"],
+    "kanji": "念",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ネン"
+    ],
+    "kunyomi": [],
+    "meaning": "ねん。心の中で、強くおもい続けること。いのること。",
+    "exampleSentence": "試合に勝てるように、勝利を念（ねん）じて、チーム全員で円陣を組んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-154",
+    "stageId": ["chubu_area8"],
+    "kanji": "敗",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ハイ",
+      "パイ"
+    ],
+    "kunyomi": [
+      "やぶ"
+    ],
+    "meaning": "やぶれる。たたかいに負けること。しくじること。",
+    "exampleSentence": "サッカーの試合で、相手チームに敗（やぶ）れてしまったが、最後まで全力で戦った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-155",
+    "stageId": ["chubu_area8"],
+    "kanji": "梅",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "バイ"
+    ],
+    "kunyomi": [
+      "うめ"
+    ],
+    "meaning": "うめ。春の初めに、白やピンクの、香りのよい花を咲かせる木。",
+    "exampleSentence": "庭の梅（うめ）の木に、きれいな花が咲き、春の訪れを知らせてくれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-156",
+    "stageId": ["chubu_area8"],
+    "kanji": "博",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ハク",
+      "バク"
+    ],
+    "kunyomi": [],
+    "meaning": "はく。物事を、ひろく知っていること。",
+    "exampleSentence": "夏休みに、恐竜博物館（きょうりゅうはくぶつかん）へ行って、大昔の生物について学んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-157",
+    "stageId": ["chubu_area6"],
+    "kanji": "阪",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [
+      "さか"
+    ],
+    "meaning": "さか。ななめに傾いている道。また、県のなまえにも使われる。",
+    "exampleSentence": "大阪（おおさか）は、たこ焼きやお好み焼きなど、おいしい食べ物で有名だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  
+  {
+    "id": "g4-158",
+    "stageId": ["chubu_area8"],
+    "kanji": "飯",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [
+      "めし"
+    ],
+    "meaning": "めし。炊いた米。また、食事そのもののこと。",
+    "exampleSentence": "朝ごはんは、一日の元気の源だから、しっかりとご飯（はん）を食べよう。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-159",
+    "stageId": ["chubu_area8"],
+    "kanji": "飛",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ヒ"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "meaning": "とぶ。つばさや羽をうごかして、空をすすむこと。",
+    "exampleSentence": "鳥のように、自由に大空を飛（と）んでみたいと、小さいころから夢見ていた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+
+  {
+    "id": "g4-160",
+    "stageId": ["chubu_area8"],
+    "kanji": "必",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "ヒツ"
+    ],
+    "kunyomi": [
+      "かなら"
+    ],
+    "meaning": "かならず。そうなるにちがいない、ということ。ぜったいに。",
+    "exampleSentence": "明日の遠足にそなえて、持ち物を、忘れないように必ず（かならず）確認する。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-161",
+    "stageId": ["chubu_area8"],
+    "kanji": "票",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ヒョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ひょう。選挙や、何かを決めるときに、自分の意見をしめすための札。",
+    "exampleSentence": "学級委員の選挙で、ぼくは友達に一票（いっぴょう）をとうじた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-162",
+    "stageId": ["chubu_area8"],
+    "kanji": "標",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "ヒョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ひょう。めじるし。また、何かをするときの、めあて。",
+    "exampleSentence": "山道に立てられた道標（どうひょう）のおかげで、迷わずに頂上まで行けた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-163",
+    "stageId": ["chubu_area8"],
+    "kanji": "不",
+    "grade": 4,
+    "strokes": 4,
+    "onyomi": [
+      "フ",
+      "ブ"
+    ],
+    "kunyomi": [],
+    "meaning": "ふ。そうではない、ということ。あとに続く言葉を、うちけす言葉。",
+    "exampleSentence": "大雨で川の水が増え、外出するのが不安（ふあん）になるほどだった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-164",
+    "stageId": ["chubu_area8"],
+    "kanji": "夫",
+    "grade": 4,
+    "strokes": 4,
+    "onyomi": [
+      "フ",
+      "フウ"
+    ],
+    "kunyomi": [
+      "おっと"
+    ],
+    "meaning": "おっと。結婚している男女のうち、男性のほうをさす言葉。",
+    "exampleSentence": "ぼくの父は、母の夫（おっと）であり、ぼくたち家族の大黒柱だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-165",
+    "stageId": ["chubu_area8"],
+    "kanji": "付",
+    "grade": 4,
+    "strokes": 1,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つける。あるものに、別のものを、はなれないようにくっつけること。",
+    "exampleSentence": "お母さんが、手紙にきれいな花の切手を貼（は）り付けて（つけて）くれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-166",
+    "stageId": ["chubu_area9"],
+    "kanji": "府",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [],
+    "meaning": "ふ。昔の役所。また、大阪府や京都府のように、都や道、県と並ぶもの。",
+    "exampleSentence": "社会の授業で、日本の都道府県について学び、大阪府（おおさかふ）の場所を覚えた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-167",
+    "stageId": ["chubu_area9"],
+    "kanji": "阜",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [],
+    "meaning": "",
+    "exampleSentence": "岐阜（ぎふ）県に行く。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-168",
+    "stageId": ["chubu_area9"],
+    "kanji": "富",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "フ",
+      "フウ"
+    ],
+    "kunyomi": [
+      "とみ",
+      "と"
+    ],
+    "meaning": "とみ。財産がたくさんあること。ゆたかなこと。",
+    "exampleSentence": "富士（ふじ）山の頂上から見る日の出は、言葉にできないほど美しいそうだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-169",
+    "stageId": ["chubu_area9"],
+    "kanji": "副",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "フク"
+    ],
+    "kunyomi": [],
+    "meaning": "ふく。主になるものに、そえてたすける役割。二番目の。",
+    "exampleSentence": "学級委員長を助ける、副（ふく）委員長に、クラスの友達が選ばれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-170",
+    "stageId": ["chubu_area9"],
+    "kanji": "兵",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ヘイ",
+      "ヒョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "へい。武器をもって、国のために戦う人のこと。",
+    "exampleSentence": "おじいちゃんから、昔、兵隊（へいたい）だったころの話を聞いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-171",
+    "stageId": ["chubu_area9"],
+    "kanji": "別",
+    "grade": 4,
+    "strokes": 1,
+    "onyomi": [
+      "ベツ"
+    ],
+    "kunyomi": [
+      "わか"
+    ],
+    "meaning": "わかれる。いっしょだったものが、はなればなれになること。ちがうこと。",
+    "exampleSentence": "卒業式で、お世話になった先生や友達と、お別（わか）れするのがさみしかった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-172",
+    "stageId": ["chubu_area9"],
+    "kanji": "辺",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "ヘン"
+    ],
+    "kunyomi": [
+      "あた",
+      "べ"
+    ],
+    "meaning": "へん。ある場所の、まわり。ちかく。",
+    "exampleSentence": "この辺（へん）りは、夜になると静かで、星がとてもきれいに見える。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-173",
+    "stageId": ["chubu_area9"],
+    "kanji": "変",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ヘン"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かわる。前の状態と、ちがった様子になること。あやしいこと。",
+    "exampleSentence": "信号の色が、赤から青に変（か）わるのを、しっかりと見てから道をわたる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-174",
+    "stageId": ["chubu_area9"],
+    "kanji": "便",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ベン",
+      "ビン"
+    ],
+    "kunyomi": [
+      "たよ"
+    ],
+    "meaning": "びん。手紙や荷物を、送りとどけること。つごうがよいこと。",
+    "exampleSentence": "遠くに住んでいるおばあちゃんに、元気な様子を伝える手紙を、郵便（ゆうびん）で送った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-175",
+    "stageId": ["chubu_area9"],
+    "kanji": "包",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "つつ"
+    ],
+    "meaning": "つつむ。ものを、紙や布などで、くるむこと。おおいかくすこと。",
+    "exampleSentence": "割れやすいお皿を、新聞紙でていねいに包（つつ）んで、箱に入れた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-176",
+    "stageId": ["chubu_area9"],
+    "kanji": "法",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ホウ",
+      "ハッ",
+      "ホッ"
+    ],
+    "kunyomi": [],
+    "meaning": "ほう。社会の秩序をたもつために、みんなが守るべき、きまり。",
+    "exampleSentence": "法律（ほうりつ）は、みんなが安全に暮らすために守る、大切な決まりごとだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-177",
+    "stageId": ["chubu_area9"],
+    "kanji": "望",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "ボウ",
+      "モウ"
+    ],
+    "kunyomi": [
+      "のぞ"
+    ],
+    "meaning": "のぞむ。こうなってほしいと、遠くを見るように、心にえがくこと。",
+    "exampleSentence": "遠くに住んでいるおじいちゃんに、もう一度会いたいと強く望（のぞ）んでいる。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-178",
+    "stageId": ["chubu_area9"],
+    "kanji": "牧",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "ボク"
+    ],
+    "kunyomi": [
+      "まき"
+    ],
+    "meaning": "まき。牛や馬、羊などを、広い場所でかうための土地。",
+    "exampleSentence": "夏休みに、北海道の牧場（ぼくじょう）へ行って、牛の乳しぼり体験をした。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-179",
+    "stageId": ["chubu_area9"],
+    "kanji": "末",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "マツ",
+      "バツ"
+    ],
+    "kunyomi": [
+      "すえ"
+    ],
+    "meaning": "すえ。いちばんおわり。さいご。ものの、はしの部分。",
+    "exampleSentence": "長い物語を読み終え、その結末（けつまつ）に、ぼくは深く感動した。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-180",
+    "stageId": ["chubu_area9"],
+    "kanji": "満",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "マン"
+    ],
+    "kunyomi": [
+      "み"
+    ],
+    "meaning": "みちる。いれものの中が、いっぱいになること。たりない所がなくなること。",
+    "exampleSentence": "お風呂に、お湯がちょうど良い量まで満（み）ちるのを、静かに待った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-181",
+    "stageId": ["chubu_area9"],
+    "kanji": "未",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "ミ"
+    ],
+    "kunyomi": [],
+    "meaning": "み。まだ、そうではない。まだ、きていない、ということ。",
+    "exampleSentence": "ぼくたちの未来（みらい）が、明るく希望に満ちたものになるよう、毎日勉強している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-182",
+    "stageId": ["chubu_area9"],
+    "kanji": "民",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "ミン"
+    ],
+    "kunyomi": [
+      "たみ"
+    ],
+    "meaning": "たみ。国や、ある地域に住んでいる、すべての人々のこと。",
+    "exampleSentence": "日本国憲法では、国民（こくみん）が主役であることが定められていると学んだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-183",
+    "stageId": ["chubu_area9"],
+    "kanji": "無",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "ム",
+      "ブ"
+    ],
+    "kunyomi": [
+      "な"
+    ],
+    "meaning": "ない。ものが、存在しないこと。ゼロであること。",
+    "exampleSentence": "だれもいない教室は、しんとしていて、まるで無音（むおん）の世界のようだった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-184",
+    "stageId": ["chubu_area9"],
+    "kanji": "約",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ヤク"
+    ],
+    "kunyomi": [],
+    "meaning": "やく。とりきめ。おたがいに、守るとちかうこと。かんたんにすること。",
+    "exampleSentence": "友達と、明日また公園で遊ぶ約束（やくそく）をして、家に帰った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-185",
+    "stageId": ["chubu_area9"],
+    "kanji": "勇",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ユウ"
+    ],
+    "kunyomi": [
+      "いさ"
+    ],
+    "meaning": "いさましい。困難や危険をおそれず、立ち向かう強い心。",
+    "exampleSentence": "消防士は、危険な火の中へも飛び込んでいく、とても勇（いさ）ましい仕事だ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-186",
+    "stageId": ["chubu_area9"],
+    "kanji": "要",
+    "grade": 4,
+    "strokes": 9,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "かなめ",
+      "い"
+    ],
+    "meaning": "かなめ。物事の、いちばん大切で、中心となる部分。",
+    "exampleSentence": "明日の遠足で、持ち物リストの中で、お弁当が最も重要（じゅうよう）なものだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-187",
+    "stageId": ["chubu_area9"],
+    "kanji": "養",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "やしな"
+    ],
+    "meaning": "やしなう。食べ物などをあたえて、そだてること。体を休ませること。",
+    "exampleSentence": "病気の友達が、家でゆっくりと静養（せいよう）していると聞いた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-188",
+    "stageId": ["chubu_area9"],
+    "kanji": "浴",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "ヨク"
+    ],
+    "kunyomi": [
+      "あ"
+    ],
+    "meaning": "あびる。からだに、水やお湯をそそぎかけること。光をうけること。",
+    "exampleSentence": "夏の暑い日には、冷たいシャワーを浴（あ）びると、とても気持ちがいい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-189",
+    "stageId": ["chubu_area9"],
+    "kanji": "利",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "リ"
+    ],
+    "kunyomi": [
+      "き"
+    ],
+    "meaning": "り。つごうがよいこと。もうけ。よく切れること。",
+    "exampleSentence": "このハサミは、とても切れ味が良く、便利な道具（どうぐ）として利用（りよう）している。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-190",
+    "stageId": ["chubu_area9"],
+    "kanji": "陸",
+    "grade": 4,
+    "strokes": 11,
+    "onyomi": [
+      "リク"
+    ],
+    "kunyomi": [],
+    "meaning": "りく。地球の表面で、海以外の、土や岩でおおわれた部分。",
+    "exampleSentence": "船が港に着き、ぼくたちは、長い船旅を終えて陸（りく）に上がった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-191",
+    "stageId": ["chubu_area9"],
+    "kanji": "良",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [
+      "よ"
+    ],
+    "meaning": "よい。性質や状態が、すぐれていること。正しいこと。",
+    "exampleSentence": "友達の正直で、善良（ぜんりょう）な行動は、みんなのお手本になった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-192",
+    "stageId": ["chubu_area9"],
+    "kanji": "料",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "りょう。何かをするための、もとになるもの。お金。",
+    "exampleSentence": "今日の給食の材料（ざいりょう）には、地元でとれた新鮮な野菜が使われている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-193",
+    "stageId": ["chubu_area9"],
+    "kanji": "量",
+    "grade": 4,
+    "strokes": 12,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [
+      "はか"
+    ],
+    "meaning": "はかる。ものの重さや、かさ、長さを、きかいや道具でしらべること。",
+    "exampleSentence": "料理をするときは、きちんと分量を量（はか）ることが、おいしく作るこつだ。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-194",
+    "stageId": ["chubu_area9"],
+    "kanji": "輪",
+    "grade": 4,
+    "strokes": 15,
+    "onyomi": [
+      "リン"
+    ],
+    "kunyomi": [
+      "わ"
+    ],
+    "meaning": "わ。円い形をしたもの。また、人や物のつながり。",
+    "exampleSentence": "友達と手をつないで、大きな輪（わ）になって、みんなで歌をうたった。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-195",
+    "stageId": ["chubu_area9"],
+    "kanji": "類",
+    "grade": 4,
+    "strokes": 18,
+    "onyomi": [
+      "ルイ"
+    ],
+    "kunyomi": [
+      "たぐ"
+    ],
+    "meaning": "るい。似ている性質や特徴で、分けたものの集まり。なかま。",
+    "exampleSentence": "図書館では、本が物語や科学など、種類（しゅるい）ごとに分けられている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-196",
+    "stageId": ["chubu_area9"],
+    "kanji": "令",
+    "grade": 4,
+    "strokes": 5,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [],
+    "meaning": "れい。おおやけの、さしず。いいつけ。きまり。",
+    "exampleSentence": "敵の城から、全軍に攻撃を開始せよとの命令（めいれい）が下された。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-197",
+    "stageId": ["chubu_area9"],
+    "kanji": "冷",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [
+      "つめ",
+      "ひ",
+      "さ"
+    ],
+    "meaning": "つめたい。温度がひくいこと。あたたかみがないこと。",
+    "exampleSentence": "暑い夏の日には、冷蔵庫で冷（ひ）やした、冷（つめ）たい麦茶がおいしい。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-198",
+    "stageId": ["chubu_area9"],
+    "kanji": "例",
+    "grade": 4,
+    "strokes": 8,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [
+      "たと"
+    ],
+    "meaning": "れい。いくつもある中の一つで、分かりやすくしめしたもの。ためし。",
+    "exampleSentence": "先生は、算数の問題を、具体例（ぐたいれい）をあげて、ていねいに教えてくれた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-199",
+    "stageId": ["chubu_area9"],
+    "kanji": "連",
+    "grade": 4,
+    "strokes": 10,
+    "onyomi": [
+      "レン"
+    ],
+    "kunyomi": [
+      "つら",
+      "つ"
+    ],
+    "meaning": "つらなる。ものが、長くつながっているようす。人をともなうこと。",
+    "exampleSentence": "休みの日に、家族と連（つ）れだって、近くの公園へ遊びに行った。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-200",
+    "stageId": ["chubu_area9"],
+    "kanji": "老",
+    "grade": 4,
+    "strokes": 6,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [
+      "お",
+      "ふ"
+    ],
+    "meaning": "おいる。年をとること。また、年をとった人のこと。",
+    "exampleSentence": "ぼくは、電車の中で、お年寄りの老人（ろうじん）に、席をゆずってあげた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-201",
+    "stageId": ["chubu_area9"],
+    "kanji": "労",
+    "grade": 4,
+    "strokes": 7,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ろう。仕事や勉強などで、体や心をつかうこと。つかれ。",
+    "exampleSentence": "お父さんは、いつも家族のために、一生懸命に労働（ろうどう）してくれている。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g4-202",
+    "stageId": ["chubu_area9"],
+    "kanji": "録",
+    "grade": 4,
+    "strokes": 16,
+    "onyomi": [
+      "ロク"
+    ],
+    "kunyomi": [],
+    "meaning": "ろく。あとでのこすために、文字や音、映像などを、きろくすること。",
+    "exampleSentence": "運動会の大切な思い出を、ビデオカメラで録画（ろくが）しておいた。",
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  }
+  
+]
