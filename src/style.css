@@ -1010,3 +1010,164 @@ root{
     padding: 8px 14px;
     box-shadow: 0 10px 20px rgba(18,38,63,.10);
   }
+  /* ===========================
++   Result screen: game-like board
++   =========================== */
+.resultBoard{
+    max-width: 980px;
+    margin: 0 auto;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(18,38,63,.08);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(18,38,63,.12);
+    padding: 18px 18px 16px;
+  }
+  
+  .resultHeader{
+    display:flex;
+    align-items:flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .resultTitleMain{
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: .02em;
+  }
+  .resultTitleSub{
+    margin-top: 6px;
+    font-size: 14px;
+  }
+  
+  .resultRankBadge{
+    width: 110px;
+    height: 110px;
+    border-radius: 22px;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content:center;
+    border: 1px solid rgba(18,38,63,.10);
+    box-shadow: 0 12px 26px rgba(18,38,63,.12);
+    background: rgba(246,248,251,.8);
+  }
+  .resultRankLabel{
+    font-size: 12px;
+    font-weight: 800;
+    opacity: .7;
+  }
+  .resultRankValue{
+    font-size: 56px;
+    font-weight: 1000;
+    line-height: 1;
+  }
+  
+  .commentBubble{
+    margin-top: 10px;
+    background: rgba(246,248,251,.9);
+    border: 1px solid rgba(18,38,63,.08);
+    border-radius: 18px;
+    padding: 12px 14px;
+    font-weight: 800;
+  }
+  .muted{ opacity:.68; }
+  
+  .resultHighlights{
+    margin-top: 14px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .highlightCard{
+    border-radius: 20px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 12px 28px rgba(18,38,63,.10);
+    padding: 14px 14px;
+  }
+  .highlightCard.isPB{
+    box-shadow: 0 14px 30px rgba(56, 117, 255, .18);
+  }
+  .hLabel{
+    font-size: 13px;
+    font-weight: 800;
+    opacity: .65;
+  }
+  .hValue{
+    margin-top: 6px;
+    font-size: 30px;
+    font-weight: 1000;
+    display:flex;
+    align-items:baseline;
+    gap: 10px;
+  }
+  .pbChip{
+    font-size: 12px;
+    font-weight: 1000;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(56, 117, 255, .12);
+    border: 1px solid rgba(56, 117, 255, .25);
+  }
+  
+  .resultStatsGrid{
+    margin-top: 12px;
+    display:grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .statPill{
+    border-radius: 16px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(246,248,251,.8);
+    padding: 10px 12px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    gap: 10px;
+  }
+  .statPill span{ opacity:.7; font-weight: 800; }
+  .statPill b{ font-weight: 1000; }
+  
+  .resultHistory{
+    margin-top: 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(255,255,255,.8);
+    padding: 12px 14px;
+  }
+  .resultHistoryTitle{
+    font-weight: 1000;
+    opacity:.75;
+    margin-bottom: 8px;
+  }
+  .resultHistoryList .final-hist-row{
+    padding: 6px 0;
+    border-top: 1px dashed rgba(18,38,63,.12);
+  }
+  .resultHistoryList .final-hist-row:first-child{
+    border-top: none;
+  }
+  
+  .resultActions{
+    margin-top: 14px;
+  }
+  .btn.big{
+    width: 100%;
+    height: 62px;
+    font-size: 20px;
+    border-radius: 18px;
+  }
+  .resultActionsSub{
+    margin-top: 10px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  @media (max-width: 720px){
+    .resultHighlights{ grid-template-columns: 1fr; }
+    .resultStatsGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .resultRankBadge{ width: 96px; height: 96px; }
+    .resultRankValue{ font-size: 50px; }
+  }

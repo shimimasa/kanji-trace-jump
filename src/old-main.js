@@ -1783,7 +1783,7 @@ function showFinalMenu({ onReplay, onNextSet, result, history }) {
       const t = h?.timeText ?? "-:--";
       const a = Number.isFinite(h?.accuracy) ? h.accuracy : 0;
       const rk = h?.rank ?? "-";
-      return `<div class="final-hist-row">${i + 1}. ${t} / ${a}% / ${rk}</div>`;
+      return `<div class="final-hist-row">${i + 1}. <b>${t}</b> <span class="muted">/ ${a}% / ${rk}</span></div>`;
     })
     .join("");
 
