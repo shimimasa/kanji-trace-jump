@@ -192,7 +192,13 @@ export function KanjiDexScreen(ctx, nav) {
 
         if (t.closest("#practice")) {
           const it = view[index];
-          nav.go("game", { selectedRangeId: selected, startFromId: it.id });
+          // ✅ その1文字だけ練習（クリア後に図鑑へ戻る）
+          nav.go("game", {
+                selectedRangeId: selected,
+                singleId: it.id,
+                returnTo: "dex",
+                returnFrom: ctx.from ?? "progress",
+              });
           return;
         }
 

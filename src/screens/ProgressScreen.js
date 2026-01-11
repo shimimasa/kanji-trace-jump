@@ -145,7 +145,8 @@ export function ProgressScreen(ctx, nav) {
                   const id = actionBtn.dataset.item;
                   const action = actionBtn.dataset.action;
                   if (action === "practice") {
-                    nav.go("game", { selectedRangeId: selected, startFromId: id });
+                    // ✅ タイルタップは“図鑑を開く”に変更（練習は図鑑から）
+                    nav.go("dex", { selectedRangeId: selected, focusId: id, from: "progress" });
                     return;
                   }
                   if (action === "dex") {

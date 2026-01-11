@@ -3,7 +3,7 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { markCleared, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
 
-export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, onSetFinished }) {
+export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, onSetFinished }) {
   // ---------------------------
   // ✅ 旧 main.js の “定数” はここへ移植
   // ---------------------------
@@ -21,6 +21,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   const SET_SIZE = 5;
   const AUTO_NEXT_DELAY_MS = 650;
+  const isSingleMode = !!singleId;
+  const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${SET_SIZE}もじ`;
+  const modeText = baseModeText; // GameScreen側が読む用（固定値）
 
   // 判定パラメータ（旧コードから）
   const TOLERANCE = 20;
@@ -197,6 +200,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     return pick(["OK！まずは1こずつ！", "はじめはみんなここから！"]);
   }
   function getSetInfo(i = idx) {
+    if (isSingleMode) {
+              return { start: 0, end: 1, len: 1, pos: 0 };
+            }
     const start = Math.floor(i / SET_SIZE) * SET_SIZE;
     const end = Math.min(start + SET_SIZE, items.length);
     const len = end - start;
@@ -527,8 +533,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   // ===========================
   function renderStars(posInSet, setLen) {
     if (!elStars) return;
-    const max = clamp(setLen, 1, SET_SIZE); // 1..5
-    const filled = clamp(posInSet + 1, 1, max);
+    // ✅ single練習は常に★1個固定
+    const max = isSingleMode ? 1 : clamp(setLen, 1, SET_SIZE);
+    const filled = isSingleMode ? 1 : clamp(posInSet + 1, 1, max);
 
     if (elStars.children.length !== max) {
       elStars.innerHTML = "";
@@ -602,7 +609,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function applyTeacherMode() {
     document.documentElement.classList.toggle("teacher-mode", teacherMode);
     if (elTeacherToggle) elTeacherToggle.setAttribute("aria-pressed", teacherMode ? "true" : "false");
-    if (elMode) elMode.textContent = teacherMode ? "もくひょう：5もじ（先生）" : "もくひょう：5もじ";
+    if (elMode) elMode.textContent = teacherMode ? `${baseModeText}（先生）` : baseModeText;
   }
 
   function lockInput(ms) {
@@ -1259,8 +1266,28 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
     const set = getSetInfo(idx);
     ensureSetRun(set);
+
+    // ✅ single練習：セットの概念なし（演出→図鑑へ戻す）
+          if (isSingleMode) {
+                // クリア演出は残す（はなまる等）
+                showSetClearCelebration?.(svgEl);
+                setTimeout(() => {
+                  const result = finalizeSetRun();
+                  onSetFinished?.({
+                    mode: "single",
+                    singleId,
+                    result,
+                    set,
+                    history: loadSetResults?.() ?? [],
+                    nextStart: 0,
+                  });
+                }, 900);
+                return;
+              }
     
-    renderStars(set.pos, set.len);
+    // ✅ single練習は常に 1/1 表示（途中変化しない）
+    if (isSingleMode) renderStars(0, 1);
+    else renderStars(set.pos, set.len);
 
     if (elLabel) elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`;
     if (elArea) elArea.innerHTML = `<div style="font-size:20px; opacity:.7; font-weight:700;">よみこみ中…</div>`;
@@ -1322,6 +1349,13 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
     if (!items.length) throw new Error("データなし");
 
+    // ✅ single練習：その1文字だけに絞る
+    if (isSingleMode) {
+          const one = items.find((x) => x?.id === singleId);
+          if (!one) throw new Error(`singleId not found: ${singleId}`);
+          items = [one];
+          idx = 0;
+        } else {
     // ✅ startFromIdx 優先（Resultの「つぎの5もじ」で使う）
     if (Number.isFinite(startFromIdx)) {
           idx = clamp(startFromIdx, 0, items.length - 1);
@@ -1354,5 +1388,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     }
   }
 
-  return { ready: bootPromise, stop };
+  return { ready: bootPromise, stop, modeText };
+}
 }
