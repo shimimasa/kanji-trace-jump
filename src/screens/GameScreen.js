@@ -107,19 +107,57 @@ export function GameScreen(ctx, nav) {
         startFromId: ctx.startFromId,
         startFromIdx: ctx.startFromIdx,
         singleId: ctx.singleId,
-                onSetFinished: ({ result, nextStart, history, mode, singleId }) => {
-                  // ✅ single練習なら図鑑に戻す
-                  if (mode === "single") {
-                    nav.go("dex", {
-                      selectedRangeId: ctx.selectedRangeId,
-                      focusId: singleId ?? ctx.singleId,
-                      from: ctx.returnFrom ?? "progress",
-                    });
-                    return;
-                  }
-                  // 通常はResult画面へ
-                  nav.go("result", { lastResult: result, nextStart, history });
-            },
+        onSetFinished: ({ result, nextStart, history, mode, singleId }) => {
+                    // ✅ single練習（復習モード）
+                    if (mode === "single" && ctx.review?.active) {
+                      const review = ctx.review;
+                      const id = singleId ?? ctx.singleId;
+          
+                      // 失敗数（result.failは「判定失敗（ストローク）」が入る想定）
+                      const fails = Number.isFinite(result?.fail) ? result.fail : 0;
+                      review.mistakes[id] = (review.mistakes[id] ?? 0) + fails;
+                      review.cleared.push(id);
+          
+                      const nextIndex = (review.index ?? 0) + 1;
+                      if (nextIndex >= review.queue.length) {
+                        // 終了 → 結果画面
+                        const totalFails = Object.values(review.mistakes).reduce((a, b) => a + (b ?? 0), 0);
+                        nav.go("reviewResult", {
+                          reviewResult: {
+                            startedAt: review.startedAt,
+                            total: review.queue.length,
+                            clearedCount: review.cleared.length,
+                            totalFails,
+                            mistakes: review.mistakes,
+                          },
+                        });
+                        return;
+                      }
+          
+                      // 次の問題へ
+                      nav.go("game", {
+                        selectedRangeId: ctx.selectedRangeId,
+                        review: { ...review, index: nextIndex },
+                        singleId: review.queue[nextIndex],
+                        returnTo: "review",
+                        returnFrom: ctx.returnFrom ?? "progress",
+                      });
+                      return;
+                    }
+          
+                    // ✅ single練習（通常：図鑑へ戻る）
+                    if (mode === "single") {
+                      nav.go("dex", {
+                        selectedRangeId: ctx.selectedRangeId,
+                        focusId: singleId ?? ctx.singleId,
+                        from: ctx.returnFrom ?? "progress",
+                      });
+                      return;
+                    }
+          
+                    // 通常はResult画面へ
+                    nav.go("result", { lastResult: result, nextStart, history });
+                  },
       });
 
       if (!game || !game.ready) {

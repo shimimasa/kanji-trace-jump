@@ -1466,3 +1466,80 @@ body {
 .card {
   padding-bottom: calc(16px + env(safe-area-inset-bottom));
 }
+
+/* ===========================
+   Review screens
+   =========================== */
+   .reviewBoard{
+    max-width: 980px;
+    margin: 0 auto;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(18,38,63,.08);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(18,38,63,.10);
+    padding: 18px;
+  }
+  .reviewHead{
+    display:flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    gap: 12px;
+  }
+  .reviewTitle{ font-size: 28px; font-weight: 1000; }
+  .reviewMeta{ margin-top: 6px; opacity:.72; font-weight: 700; }
+  .reviewHeadActions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+  
+  .reviewCard{
+    margin-top: 14px;
+    border-radius: 22px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(246,248,251,.85);
+    padding: 18px;
+    box-shadow: 0 12px 30px rgba(18,38,63,.08);
+  }
+  .reviewSection{ margin-top: 14px; }
+  .reviewLabel{ font-weight: 1000; opacity:.75; margin-bottom: 8px; }
+  .reviewChips{ display:flex; gap:10px; flex-wrap:wrap; }
+  .chipBtn{
+    border-radius: 999px;
+    padding: 10px 14px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.9);
+    font-weight: 1000;
+  }
+  .chipBtn.active{
+    border:none;
+    background: rgba(56,117,255,.14);
+    box-shadow: 0 12px 26px rgba(56,117,255,.16);
+  }
+  .reviewToggle{ display:flex; gap:10px; align-items:center; font-weight: 900; opacity:.85; }
+  
+  .reviewActions{ margin-top: 16px; }
+  .reviewNote{ margin-top: 10px; }
+  
+  .reviewSummary{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .sumBox{
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(255,255,255,.78);
+    padding: 12px 14px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+  .sumBox span{ opacity:.7; font-weight: 900; }
+  .sumBox b{ font-weight: 1000; }
+  .reviewList .reviewRow{
+    padding: 8px 0;
+    border-top: 1px dashed rgba(18,38,63,.12);
+  }
+  .reviewList .reviewRow:first-child{ border-top:none; }
+  
+  @media (max-width: 720px){
+    .reviewSummary{ grid-template-columns: 1fr; }
+  }
+  

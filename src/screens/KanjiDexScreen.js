@@ -119,6 +119,7 @@ export function KanjiDexScreen(ctx, nav) {
                 <div class="dexMeta">範囲：<b>${range?.label ?? "未選択"}</b></div>
               </div>
               <div class="dexHeadActions">
+              <button id="review" class="btn" type="button">復習</button>
                 <button id="back" class="btn" type="button">もどる</button>
               </div>
             </div>
@@ -218,6 +219,10 @@ export function KanjiDexScreen(ctx, nav) {
           render();
           return;
         }
+        if (t.closest("#review")) {
+                    nav.go("reviewStart", { selectedRangeId: selected, from: "dex" });
+                    return;
+                  }
 
         if (t.closest("#next")) {
           index = Math.min(view.length - 1, index + 1);
