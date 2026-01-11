@@ -880,3 +880,133 @@ html, body {
   height: 54px; /* 結果画面では少し小さめにして収まりを良く */
   font-size: 18px;
 }
+/* ===========================
++   Confetti layer (set clear)
++   =========================== */
+.confetti-layer{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+  }
+
+  
+/* ===========================
++   UI polish (kids-friendly)
++   =========================== */
+root{
+    --bg: #f6f8fb;
+    --card: rgba(255,255,255,.92);
+    --ink: #1c2430;
+    --muted: rgba(28,36,48,.62);
+    --shadow: 0 10px 30px rgba(18, 38, 63, .10);
+    --radius: 18px;
+  }
+  
+  body{
+    background: radial-gradient(1200px 600px at 50% 0%, #ffffff 0%, var(--bg) 55%, #f1f5fb 100%);
+    color: var(--ink);
+  }
+  
+  .screen{
+    padding: 20px;
+  }
+  
+  .card{
+    background: var(--card);
+    border: 1px solid rgba(18, 38, 63, .08);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(8px);
+  }
+  
+  /* Buttons: primaryを“1つだけ強い”設計に */
+  .btn{
+    border-radius: 16px;
+    border: 1px solid rgba(18,38,63,.10);
+    box-shadow: 0 6px 16px rgba(18,38,63,.08);
+    transition: transform .08s ease, box-shadow .12s ease;
+  }
+  .btn:active{ transform: translateY(1px); box-shadow: 0 3px 10px rgba(18,38,63,.10); }
+  .btn.primary{
+    border: none;
+    box-shadow: 0 10px 20px rgba(56, 117, 255, .22);
+  }
+  
+  /* HUD：右上にまとまる・押しやすい */
+  .hud{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(246, 248, 251, .72);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(18,38,63,.06);
+    border-radius: 0 0 16px 16px;
+    padding: 10px 14px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .hud-right{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+  }
+  .mode{
+    color: var(--muted);
+    font-weight: 700;
+  }
+  
+  .iconBtn{
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.9);
+    box-shadow: 0 6px 16px rgba(18,38,63,.10);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+  }
+  .iconBtn:active{ transform: translateY(1px); }
+  
+  /* Game main：中央に視線が集まる */
+  .main{
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .stage{
+    border-radius: 22px;
+    box-shadow: 0 14px 40px rgba(18,38,63,.08);
+  }
+  
+  /* Stars：少し大きめ＆見やすく */
+  .stars{
+    display:flex;
+    gap: 6px;
+    align-items:center;
+  }
+  .star{
+    font-size: 18px;
+    opacity: .28;
+  }
+  .star.filled{
+    opacity: 1;
+    filter: drop-shadow(0 8px 16px rgba(255, 184, 0, .28));
+  }
+  
+  /* Result：表っぽさを減らす（最低限の上書き） */
+  .final-stats{
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(18,38,63,.08);
+  }
+  .final-stat span{ color: var(--muted); font-weight: 700; }
+  .rank-badge{
+    border-radius: 999px;
+    padding: 8px 14px;
+    box-shadow: 0 10px 20px rgba(18,38,63,.10);
+  }

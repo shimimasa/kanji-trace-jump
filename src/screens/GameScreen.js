@@ -13,8 +13,11 @@ export function GameScreen(ctx, nav) {
       el.innerHTML = `
         <div class="hud">
           <div id="stars" class="stars" aria-label="進捗"></div>
-          <div id="mode" class="mode">もくひょう：5もじ</div>
-          <button id="teacherToggle" class="teacherToggle" type="button" aria-pressed="false">先生</button>
+          <div class="hud-right">
+            <div id="mode" class="mode">もくひょう：5もじ</div>
+            <button id="teacherToggle" class="teacherToggle" type="button" aria-pressed="false">先生</button>
+            <button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠</button>
+          </div>
         </div>
 
         <div class="main">
@@ -47,9 +50,22 @@ export function GameScreen(ctx, nav) {
         console.error("[GameScreen] DOM missing. expected #quitBtn. current HTML:", el.innerHTML);
         throw new Error("[GameScreen] #quitBtn が見つかりません（DOM生成/ID不一致の可能性）");
       }
-      const onQuit = () => nav.go("home");
+      const onQuit = () => {
+                // 誤タップ防止：プレイ中だけ確認
+                const ok = window.confirm("ホームにもどりますか？\n（プレイ中の進み具合は保存されません）");
+                if (!ok) return;
+                nav.go("home");
+              };
       quit.addEventListener("click", onQuit);
 
+
+      const homeBtn = el.querySelector("#homeBtn");
+      const onHome = () => {
+        const ok = window.confirm("ホームにもどりますか？\n（プレイ中の進み具合は保存されません）");
+        if (!ok) return;
+        nav.go("home");
+      };
+      homeBtn?.addEventListener("click", onHome);
       game = startTraceGame({
         rootEl: el,
         ctx,
@@ -68,6 +84,7 @@ export function GameScreen(ctx, nav) {
         el,
         cleanup() {
           quit.removeEventListener("click", onQuit);
+          homeBtn?.removeEventListener("click", onHome);
           game?.stop?.();
           game = null;
         }
