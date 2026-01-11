@@ -1,4 +1,32 @@
+import "./style.css";
+import { ScreenManager } from "./screens/ScreenManager.js";
+import { loadProgress } from "./lib/progressStore.js";
+
+import { HomeScreen } from "./screens/HomeScreen.js";
+import { RangeSelectScreen } from "./screens/RangeSelectScreen.js";
+import { GameScreen } from "./screens/GameScreen.js";
+import { ResultScreen } from "./screens/ResultScreen.js";
+import { ProgressScreen } from "./screens/ProgressScreen.js";
+
+const root = document.getElementById("app");
+if (!root) throw new Error("#app が必要です");
+
+const nav = new ScreenManager(root, {
+  progress: loadProgress(),
+  selectedRangeId: "kanji_g1",
+});
+
+nav.register("home", HomeScreen);
+nav.register("rangeSelect", RangeSelectScreen);
+nav.register("game", GameScreen);
+nav.register("result", ResultScreen);
+nav.register("progress", ProgressScreen);
+
+nav.go("home");
+
+
 // src/main.js
+
 // 目的：SVGストロークを「なぞる」ことで書き順どおりに進める
 // 重要：Vite本番でCSS/JSONパスが壊れないように BASE_URL を使う
 // 重要：Pointer Capture でドラッグ中の pointermove 取りこぼしを防止
