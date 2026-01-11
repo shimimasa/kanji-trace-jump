@@ -1,6 +1,7 @@
 // src/game/startTraceGame.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { markCleared, saveProgress } from "../lib/progressStore.js";
+import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
 
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, onSetFinished }) {
   // ---------------------------
@@ -76,7 +77,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const svgDisposers = [];
   let moveTimer = null;
   let unlockTimer = null;
-
+  let charJumpTimer = null;
   // ---------------------------
   // セット記録（旧main.jsから移植：必要最小）
   // ---------------------------
@@ -201,6 +202,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       fail: 0,
       rescued: 0,
       kanjiCleared: 0,
+      combo: 0,
+      comboMax: 0,
     };
   }
   function ensureSetRun(set) {
@@ -223,6 +226,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       fail: setRun.fail,
       rescued: setRun.rescued,
       accuracy,
+      combo: setRun.combo,
+      comboMax: setRun.comboMax,
     };
     // Rank
     const rk = computeRank({
@@ -507,7 +512,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     c.getAnimations().forEach((a) => a.cancel());
     const kf = (p, sx = 1, sy = 1) => ({ transform: `translate(${p.x}px, ${p.y}px) scale(${sx}, ${sy})` });
     c.animate([kf(from), kf(mid, 1.08, 1.08), kf(to), kf(to, 1.12, 0.88), kf(to)], { duration: JUMP_MS, easing: "ease-out", fill: "forwards" });
-    setTimeout(() => setCharPos(svgEl, to), JUMP_MS + 20);
+    clearTimeout(charJumpTimer);
+    charJumpTimer = setTimeout(() => setCharPos(svgEl, to), JUMP_MS + 20);
   }
   function charFailDrop(svgEl) {
     const c = ensureChar(svgEl);
@@ -830,7 +836,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       const ok = judgeTrace(points, strokes[strokeIndex]);
       if (setRun) setRun.attempts += 1;
 
-      const lastPoint = points.length ? points[points.length - 1] : null;
       points = [];
       updateTracePath([]);
 
@@ -839,6 +844,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           setRun.success += 1;
           const streak = failStreak?.[strokeIndex] ?? 0;
           if (streak > 0) setRun.rescued += 1;
+          setRun.combo = (setRun.combo ?? 0) + 1;
+          setRun.comboMax = Math.max(setRun.comboMax ?? 0, setRun.combo);
         }
 
         done[strokeIndex] = true;
@@ -902,6 +909,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         }
       } else {
         if (setRun) setRun.fail += 1;
+        if (setRun) setRun.combo = 0;
         failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;
         lockInput(FAIL_MS);
         charFailDrop(svgEl);

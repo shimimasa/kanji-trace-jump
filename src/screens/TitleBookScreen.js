@@ -1,33 +1,8 @@
 // src/screens/TitleBookScreen.js
-//
-// Title Book (称号ずかん) screen
-// overlay版 showTitleBook() を ScreenManager に移植
-//
-// Storage keys are aligned with old-main.js :contentReference[oaicite:1]{index=1}
+import { TITLE_CATALOG, loadTitleBook } from "../lib/titleBookStore.js";
 
-const TITLE_BOOK_LS_KEY = "ktj_title_book_v1";
 const TITLE_BOOK_SORT_LS_KEY = "ktj_title_book_sort_v1";
 const TITLE_BOOK_SEARCH_LS_KEY = "ktj_title_book_search_v1";
-
-// ✅ 全称号カタログ（old-main.jsのTITLE_CATALOGを移植）:contentReference[oaicite:2]{index=2}
-const TITLE_CATALOG = [
-  { title: "スピード王", rarity: "N", hint: "はやくクリア" },
-  { title: "かんぺき王", rarity: "R", hint: "高せいこうりつ＋きゅうさい少" },
-  { title: "ていねい王", rarity: "N", hint: "せいこうりつ高め" },
-  { title: "あきらめない王", rarity: "N", hint: "きゅうさい多めでも続けた" },
-  { title: "ナイス王", rarity: "N", hint: "いい感じ" },
-  { title: "のびしろ王", rarity: "N", hint: "これから伸びる" },
-  { title: "がんばり王", rarity: "N", hint: "ミスしても進めた" },
-  { title: "チャレンジ王", rarity: "N", hint: "挑戦した" },
-  { title: "つぎはA王", rarity: "N", hint: "もうすこし！" },
-  { title: "スタート王", rarity: "N", hint: "はじめの一歩" },
-  // --- Rare / Epic ---
-  { title: "ノーミス王", rarity: "R", hint: "ミス0（せいこうりつ100%）" },
-  { title: "きゅうさいゼロ王", rarity: "R", hint: "きゅうさい0でクリア" },
-  { title: "タイムアタック王", rarity: "R", hint: "かなり速い" },
-  { title: "連勝王", rarity: "SR", hint: "コンボ高めでクリア" },
-  { title: "新記録王", rarity: "R", hint: "じこベスト更新" },
-];
 
 function normalizeJa(s) {
   return String(s ?? "")
@@ -41,19 +16,6 @@ function rarityWeight(r) {
   if (r === "R") return 2;
   if (r === "N") return 1;
   return 0;
-}
-
-function loadTitleBook() {
-  try {
-    const raw = localStorage.getItem(TITLE_BOOK_LS_KEY);
-    if (!raw) return { items: {} };
-    const obj = JSON.parse(raw);
-    if (!obj || typeof obj !== "object") return { items: {} };
-    if (!obj.items || typeof obj.items !== "object") obj.items = {};
-    return obj;
-  } catch {
-    return { items: {} };
-  }
 }
 
 function loadTitleBookSort() {
@@ -88,10 +50,10 @@ function safeRemoveLS(key) {
   } catch {}
 }
 
-// old-main.js の reset系キーに合わせる :contentReference[oaicite:3]{index=3}
+// old-main.js系キー互換（必要なら増やしてOK）
 function resetProgressOnly() {
   safeRemoveLS("ktj_progress_v2");
-  safeRemoveLS("ktj_progress_v1"); // 互換キー
+  safeRemoveLS("ktj_progress_v1");
 }
 
 function resetAllLocalData() {
@@ -119,9 +81,9 @@ export function TitleBookScreen(ctx, nav) {
       const el = document.createElement("div");
       el.className = "screen titlebook";
 
-      // state
       const book = loadTitleBook();
       const ownedMap = book.items || {};
+
       const total = TITLE_CATALOG.length;
       const got = Object.keys(ownedMap).length;
       const pct = total > 0 ? Math.round((got / total) * 100) : 0;
@@ -131,7 +93,6 @@ export function TitleBookScreen(ctx, nav) {
       const searchQuery = loadTitleBookSearch();
       const qn = normalizeJa(searchQuery);
 
-      // display list
       const display = TITLE_CATALOG.map((meta) => {
         const owned = ownedMap?.[meta.title] || null;
         return {
@@ -156,7 +117,7 @@ export function TitleBookScreen(ctx, nav) {
         return (b.lastAt ?? 0) - (a.lastAt ?? 0);
       });
 
-      // 検索は取得済みだけ（ネタバレ防止） :contentReference[oaicite:4]{index=4}
+      // 検索は取得済みだけ（ネタバレ防止）
       const filtered = qn
         ? display.filter((it) => it.isOwned && normalizeJa(it.title).includes(qn))
         : display;
@@ -183,7 +144,6 @@ export function TitleBookScreen(ctx, nav) {
                   `;
                 }
 
-                // 未取得：??? + ヒント
                 const hint = meta.hint
                   ? `<div class="tb-meta">ヒント：${meta.hint}</div>`
                   : `<div class="tb-meta">ヒント：？？？</div>`;
@@ -247,15 +207,13 @@ export function TitleBookScreen(ctx, nav) {
       const rerender = () => nav.go("titleBook", { from: ctx.from ?? "home" });
 
       const onClick = (e) => {
-        const t = e.target;
-        const btn = t?.closest?.("button");
+        const btn = e.target?.closest?.("button");
         if (!btn) return;
 
         const action = btn.dataset.action;
         const sort = btn.dataset.sort;
 
         if (action === "back") {
-          // 遷移元がResultならResultへ、それ以外はHomeへ
           if (ctx.from === "result") nav.go("result");
           else if (ctx.from === "progress") nav.go("progress");
           else nav.go("home");
@@ -271,8 +229,6 @@ export function TitleBookScreen(ctx, nav) {
         if (action === "resetProgress") {
           if (!confirmReset("progress")) return;
           resetProgressOnly();
-          // 進捗はctxにも載ってるので、必要ならctx.progressも更新（画面側の再計算用）
-          // ここは “進捗だけ” なので TitleBook は維持
           rerender();
           return;
         }
@@ -280,7 +236,6 @@ export function TitleBookScreen(ctx, nav) {
         if (action === "resetAll") {
           if (!confirmReset("all")) return;
           resetAllLocalData();
-          // TitleBookも消えるので再描画
           rerender();
           return;
         }

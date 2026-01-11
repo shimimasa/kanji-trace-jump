@@ -22,6 +22,7 @@ export function ProgressScreen(ctx, nav) {
           <div id="grid" class="grid" style="margin-top:12px;"></div>
           <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
             <button id="back" class="btn">もどる</button>
+            <button id="titlebook" class="btn">称号ずかん</button>
           </div>
         </div>
       `;
@@ -50,15 +51,17 @@ export function ProgressScreen(ctx, nav) {
         nav.go("game", { selectedRangeId: selected, startFromId: btn.dataset.item });
       };
       const onBack = () => nav.go("home");
+      const onTB = () => nav.go("titleBook", { from: "progress" });
 
       grid.addEventListener("click", onChip);
       el.querySelector("#back").addEventListener("click", onBack);
-
+      el.querySelector("#titlebook").addEventListener("click", onTB);
       return {
         el,
         cleanup() {
           grid.removeEventListener("click", onChip);
           el.querySelector("#back").removeEventListener("click", onBack);
+          el.querySelector("#titlebook").removeEventListener("click", onTB);
         }
       };
     }
