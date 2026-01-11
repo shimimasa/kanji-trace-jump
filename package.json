@@ -1,15 +1,17 @@
 {
     "name": "kanji-trace-jump",
-    "private": true,
     "version": "0.0.0",
+    "private": true,
     "type": "module",
     "scripts": {
       "dev": "vite",
-      "build": "vite build",
-      "preview": "vite preview"
+      "build": "vite build --debug --logLevel info",
+      "preview": "vite preview",
+      "svg2json:g1:kvg": "node scripts/svg-to-strokes.mjs --grade 1 --svgDir public/svg/kvg/g1 --proto public/data/kanji_g1_proto.json --out public/data/strokes/g1 --strictCount"
     },
     "devDependencies": {
-      "vite": "^5.0.0"
+      "vite": "^5.0.0",
+      "fast-xml-parser": "^4.0.0"
     }
   }
   

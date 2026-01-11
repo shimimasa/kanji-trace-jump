@@ -1,0 +1,784 @@
+[
+  {
+    "id": "g1-001",
+    "kanji": "一",
+    "grade": 1,
+    "strokeCount": 1,
+    "strokesRef": "g1/g1-001.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-002",
+    "kanji": "右",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-002.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-003",
+    "kanji": "雨",
+    "grade": 1,
+    "strokeCount": 8,
+    "strokesRef": "g1/g1-003.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-004",
+    "kanji": "円",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-004.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-005",
+    "kanji": "王",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-005.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-006",
+    "kanji": "音",
+    "grade": 1,
+    "strokeCount": 9,
+    "strokesRef": "g1/g1-006.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-007",
+    "kanji": "下",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-007.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-008",
+    "kanji": "火",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-008.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-009",
+    "kanji": "花",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-009.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-010",
+    "kanji": "貝",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-010.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-011",
+    "kanji": "学",
+    "grade": 1,
+    "strokeCount": 8,
+    "strokesRef": "g1/g1-011.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-012",
+    "kanji": "気",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-012.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-013",
+    "kanji": "九",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-013.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-014",
+    "kanji": "休",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-014.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-015",
+    "kanji": "玉",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-015.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-016",
+    "kanji": "金",
+    "grade": 1,
+    "strokeCount": 8,
+    "strokesRef": "g1/g1-016.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-017",
+    "kanji": "空",
+    "grade": 1,
+    "strokeCount": 8,
+    "strokesRef": "g1/g1-017.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-018",
+    "kanji": "月",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-018.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-019",
+    "kanji": "犬",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-019.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-020",
+    "kanji": "見",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-020.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-021",
+    "kanji": "五",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-021.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-022",
+    "kanji": "口",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-022.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-023",
+    "kanji": "校",
+    "grade": 1,
+    "strokeCount": 10,
+    "strokesRef": "g1/g1-023.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-024",
+    "kanji": "左",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-024.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-025",
+    "kanji": "三",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-025.json",
+    "stageId": "hokkaido_area1"
+  },
+  {
+    "id": "g1-026",
+    "kanji": "山",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-026.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-027",
+    "kanji": "子",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-027.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-028",
+    "kanji": "四",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-028.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-029",
+    "kanji": "糸",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-029.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-030",
+    "kanji": "字",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-030.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-031",
+    "kanji": "耳",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-031.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-032",
+    "kanji": "七",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-032.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-033",
+    "kanji": "車",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-033.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-034",
+    "kanji": "手",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-034.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-035",
+    "kanji": "十",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-035.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-036",
+    "kanji": "出",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-036.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-037",
+    "kanji": "女",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-037.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-038",
+    "kanji": "小",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-038.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-039",
+    "kanji": "上",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-039.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-040",
+    "kanji": "森",
+    "grade": 1,
+    "strokeCount": 12,
+    "strokesRef": "g1/g1-040.json",
+    "stageId": [
+      "hokkaido_area1"
+    ]
+  },
+  {
+    "id": "g1-041",
+    "kanji": "人",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-041.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-042",
+    "kanji": "水",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-042.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-043",
+    "kanji": "正",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-043.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-044",
+    "kanji": "生",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-044.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-045",
+    "kanji": "青",
+    "grade": 1,
+    "strokeCount": 8,
+    "strokesRef": "g1/g1-045.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-046",
+    "kanji": "夕",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-046.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-047",
+    "kanji": "石",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-047.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-048",
+    "kanji": "赤",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-048.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-049",
+    "kanji": "千",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-049.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-050",
+    "kanji": "川",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-050.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-051",
+    "kanji": "先",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-051.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-052",
+    "kanji": "早",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-052.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-053",
+    "kanji": "草",
+    "grade": 1,
+    "strokeCount": 9,
+    "strokesRef": "g1/g1-053.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-054",
+    "kanji": "足",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-054.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-055",
+    "kanji": "村",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-055.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-056",
+    "kanji": "大",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-056.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-057",
+    "kanji": "男",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-057.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-058",
+    "kanji": "竹",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-058.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-059",
+    "kanji": "中",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-059.json",
+    "stageId": "hokkaido_area2"
+  },
+  {
+    "id": "g1-060",
+    "kanji": "虫",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-060.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-061",
+    "kanji": "町",
+    "grade": 1,
+    "strokeCount": 7,
+    "strokesRef": "g1/g1-061.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-062",
+    "kanji": "天",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-062.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-063",
+    "kanji": "田",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-063.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-064",
+    "kanji": "土",
+    "grade": 1,
+    "strokeCount": 3,
+    "strokesRef": "g1/g1-064.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-065",
+    "kanji": "二",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-065.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-066",
+    "kanji": "日",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-066.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-067",
+    "kanji": "入",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-067.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-068",
+    "kanji": "年",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-068.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-069",
+    "kanji": "白",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-069.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-070",
+    "kanji": "八",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-070.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-071",
+    "kanji": "百",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-071.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-072",
+    "kanji": "文",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-072.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-073",
+    "kanji": "木",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-073.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-074",
+    "kanji": "本",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-074.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-075",
+    "kanji": "名",
+    "grade": 1,
+    "strokeCount": 6,
+    "strokesRef": "g1/g1-075.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-076",
+    "kanji": "目",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-076.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-077",
+    "kanji": "立",
+    "grade": 1,
+    "strokeCount": 5,
+    "strokesRef": "g1/g1-077.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-078",
+    "kanji": "力",
+    "grade": 1,
+    "strokeCount": 2,
+    "strokesRef": "g1/g1-078.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-079",
+    "kanji": "林",
+    "grade": 1,
+    "strokeCount": 8,
+    "strokesRef": "g1/g1-079.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  },
+  {
+    "id": "g1-080",
+    "kanji": "六",
+    "grade": 1,
+    "strokeCount": 4,
+    "strokesRef": "g1/g1-080.json",
+    "stageId": [
+      "hokkaido_area2"
+    ]
+  }
+]

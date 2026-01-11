@@ -1,0 +1,7 @@
+node_modules
+# dependencies
+node_modules/
+
+# KanjiVG raw dataset (do not track)
+public/svg/kvg/
+kanjivg/
