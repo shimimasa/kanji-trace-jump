@@ -1288,8 +1288,14 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     // ✅ single練習は常に 1/1 表示（途中変化しない）
     if (isSingleMode) renderStars(0, 1);
     else renderStars(set.pos, set.len);
-
-    if (elLabel) elLabel.textContent = `${k} (${set.pos + 1}/${set.len})`;
+    
+    // ✅ single練習は常に (1/1) 表示
+    if (elLabel) {
+          const a = isSingleMode ? 1 : (set.pos + 1);
+          const b = isSingleMode ? 1 : set.len;
+          elLabel.textContent = `${k} (${a}/${b})`;
+        }
+   
     if (elArea) elArea.innerHTML = `<div style="font-size:20px; opacity:.7; font-weight:700;">よみこみ中…</div>`;
 
     const strokes = await getStrokesForItem(item);
