@@ -15,23 +15,33 @@ export function ProgressScreen(ctx, nav) {
       const range = CONTENT_MANIFEST.find(x => x.id === selected);
 
       el.innerHTML = `
-        <div class="card">
-          <h1>クリアしたもの</h1>
-          <div>範囲：<b>${range?.label ?? "未選択"}</b></div>
-          <div>総クリア数：<b>${ctx.progress?.stats?.totalCleared ?? 0}</b></div>
-
-          <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-            <span style="opacity:.75;">表示：</span>
-            <button id="filterAll" class="btn" type="button" data-filter="all">全部</button>
-            <button id="filterUncleared" class="btn" type="button" data-filter="uncleared">未クリア</button>
-            <button id="filterCleared" class="btn" type="button" data-filter="cleared">クリア済み</button>
+        <div class="progressBoard">
+          <div class="progressHead">
+            <div>
+              <div class="progressTitle">クリアしたもの</div>
+              <div class="progressMeta">範囲：<b>${range?.label ?? "未選択"}</b></div>
+            </div>
+            <div class="progressHeadActions">
+              <button id="dex" class="btn" type="button">図鑑を見る</button>
+              <button id="titlebook" class="btn" type="button">称号ずかん</button>
+              <button id="back" class="btn" type="button">もどる</button>
+            </div>
           </div>
 
-          <div id="grid" class="grid" style="margin-top:12px;"></div>
-          <div style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-            <button id="back" class="btn">もどる</button>
-            <button id="titlebook" class="btn">称号ずかん</button>
+          <div class="progressBarWrap">
+            <div class="progressBar">
+              <div id="barFill" class="progressBarFill" style="width:0%"></div>
+            </div>
+            <div id="barText" class="progressBarText">達成率 -%</div>
           </div>
+
+          <div class="progressTabs" role="tablist" aria-label="表示フィルタ">
+            <button id="filterAll" class="tab active" type="button" data-filter="all" role="tab">全部</button>
+            <button id="filterUncleared" class="tab" type="button" data-filter="uncleared" role="tab">未クリア</button>
+            <button id="filterCleared" class="tab" type="button" data-filter="cleared" role="tab">クリア済み</button>
+          </div>
+
+          <div id="grid" class="tileGrid" aria-label="一覧"></div>
         </div>
       `;
 
@@ -42,6 +52,8 @@ export function ProgressScreen(ctx, nav) {
       const items = await res.json(); // ← 配列
 
       const grid = el.querySelector("#grid");
+      const barFill = el.querySelector("#barFill");
+      const barText = el.querySelector("#barText");
       // フィルタ状態（デフォルト：全部）
       let filter = "all"; // "all" | "uncleared" | "cleared"
 
@@ -58,7 +70,21 @@ export function ProgressScreen(ctx, nav) {
         );
       };
 
+      const computeRangeProgress = () => {
+                let clearedCount = 0;
+                for (const it of items) {
+                  const key = makeItemId(range.id, it.id);
+                  if (isCleared(ctx.progress, key)) clearedCount++;
+                }
+                const total = items.length || 0;
+                const pct = total > 0 ? Math.round((clearedCount / total) * 100) : 0;
+                return { clearedCount, total, pct };
+              };
+
       const renderGrid = () => {
+        const { clearedCount, total, pct } = computeRangeProgress();
+        if (barFill) barFill.style.width = `${pct}%`;
+        if (barText) barText.textContent = `達成率 ${pct}%（${clearedCount}/${total}）`;
         const html = items
           .filter((it) => {
             const key = makeItemId(range.id, it.id);
@@ -72,34 +98,31 @@ export function ProgressScreen(ctx, nav) {
             const cleared = isCleared(ctx.progress, itemKey);
             const label = getLabel(it);
             return `
-              <button class="chip ${cleared ? "cleared" : ""}" data-item="${it.id}">
-                ${label}
-              </button>
+              <div class="tile ${cleared ? "cleared" : ""}" data-item="${it.id}">
+                <button class="tileMain" type="button" data-action="practice" data-item="${it.id}">
+                  <div class="tileChar">${label}</div>
+                  <div class="tileBadge">${cleared ? "✓" : ""}</div>
+                </button>
+                <button class="tileBook" type="button" title="図鑑" aria-label="図鑑" data-action="dex" data-item="${it.id}">📘</button>
+              </div>
             `;
           })
           .join("");
 
-        grid.innerHTML = html || `<div style="opacity:.7; padding:8px 0;">表示する項目がありません。</div>`;
-
-        // ボタンの見た目（active）
-        const allBtn = el.querySelector("#filterAll");
-        const unBtn = el.querySelector("#filterUncleared");
-        const clBtn = el.querySelector("#filterCleared");
-        [allBtn, unBtn, clBtn].forEach((b) => b && b.classList.remove("primary"));
-        if (filter === "all") allBtn?.classList.add("primary");
-        if (filter === "uncleared") unBtn?.classList.add("primary");
-        if (filter === "cleared") clBtn?.classList.add("primary");
+          grid.innerHTML = html || `<div class="emptyNote">表示する項目がありません。</div>`;
+          
+                  // タブの見た目（active）
+                  const allBtn = el.querySelector("#filterAll");
+                  const unBtn = el.querySelector("#filterUncleared");
+                  const clBtn = el.querySelector("#filterCleared");
+                  [allBtn, unBtn, clBtn].forEach((b) => b && b.classList.remove("active"));
+                  if (filter === "all") allBtn?.classList.add("active");
+                  if (filter === "uncleared") unBtn?.classList.add("active");
+                  if (filter === "cleared") clBtn?.classList.add("active");
       };
 
       // 初回描画
       renderGrid();
-
-      const onChip = (e) => {
-        const btn = e.target.closest("button[data-item]");
-        if (!btn) return;
-        // その漢字から開始（後でGameScreen側で対応）
-        nav.go("game", { selectedRangeId: selected, startFromId: btn.dataset.item });
-      };
 
       const onFilter = (e) => {
         const btn = e.target.closest("button[data-filter]");
@@ -108,20 +131,42 @@ export function ProgressScreen(ctx, nav) {
         renderGrid();
       };
 
-      const onBack = () => nav.go("home");
-      const onTB = () => nav.go("titleBook", { from: "progress" });
-
-      grid.addEventListener("click", onChip);
-      el.addEventListener("click", onFilter);
-      el.querySelector("#back").addEventListener("click", onBack);
-      el.querySelector("#titlebook").addEventListener("click", onTB);
+      const onClick = (e) => {
+                // フィルタタブ
+                const tab = e.target.closest("button[data-filter]");
+                if (tab) {
+                  filter = tab.dataset.filter || "all";
+                  renderGrid();
+                  return;
+                }
+                // タイルアクション
+                const actionBtn = e.target.closest("button[data-action][data-item]");
+                if (actionBtn) {
+                  const id = actionBtn.dataset.item;
+                  const action = actionBtn.dataset.action;
+                  if (action === "practice") {
+                    nav.go("game", { selectedRangeId: selected, startFromId: id });
+                    return;
+                  }
+                  if (action === "dex") {
+                    nav.go("dex", { selectedRangeId: selected, focusId: id, from: "progress" });
+                    return;
+                  }
+                }
+                // 上部ボタン
+                const backBtn = e.target.closest("#back");
+                if (backBtn) { nav.go("home"); return; }
+                const tbBtn = e.target.closest("#titlebook");
+                if (tbBtn) { nav.go("titleBook", { from: "progress" }); return; }
+                const dexBtn = e.target.closest("#dex");
+                if (dexBtn) { nav.go("dex", { selectedRangeId: selected, from: "progress" }); return; }
+              };
+        
+              el.addEventListener("click", onClick);
       return {
         el,
         cleanup() {
-          grid.removeEventListener("click", onChip);
-          el.removeEventListener("click", onFilter);
-          el.querySelector("#back").removeEventListener("click", onBack);
-          el.querySelector("#titlebook").removeEventListener("click", onTB);
+            el.removeEventListener("click", onClick);
         }
       };
     }
