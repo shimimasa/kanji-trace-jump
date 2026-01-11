@@ -1436,3 +1436,33 @@ root{
     from{ opacity: 0; transform: translateY(-2px); }
     to{ opacity: 1; transform: translateY(0); }
   }
+  /* ===== Mobile scrolling fix ===== */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  /* スマホで下が押せない原因になりがちなoverflow:hiddenを避ける */
+  overflow: hidden;
+}
+
+/* 画面の入れ物：ここをスクロールコンテナにする */
+#app {
+  height: 100dvh;              /* iOS Safari対策（dvh） */
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 各スクリーンは高さを固定せず、縦に伸びる */
+.screen {
+  min-height: 100%;
+}
+
+.resultBoard,
+.progressBoard,
+.dexBoard,
+.card {
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
