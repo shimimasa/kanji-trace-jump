@@ -122,7 +122,10 @@ export function GameScreen(ctx, nav) {
             },
       });
 
-      await game.ready;
+      if (!game || !game.ready) {
+           throw new Error("[GameScreen] startTraceGame() did not return { ready }");
+         }
+         await game.ready;
 
       // ✅ modeTextを反映（フェード）
       const modeEl = el.querySelector("#mode");

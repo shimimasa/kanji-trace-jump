@@ -1394,6 +1394,10 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     }
   }
 
-  return { ready: bootPromise, stop, modeText };
+  return {
+    ready: bootPromise, // or ready
+    stop,
+    modeText,
+  };
 }
 }
