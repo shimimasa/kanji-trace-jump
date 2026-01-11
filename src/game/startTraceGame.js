@@ -1,6 +1,6 @@
 // src/game/startTraceGame.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
-import { markCleared, saveProgress } from "../lib/progressStore.js";
+import { markCleared, recordAttempt, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
 
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, onSetFinished }) {
@@ -1132,6 +1132,14 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
       const ok = judgeTrace(points, strokes[strokeIndex]);
       if (setRun) setRun.attempts += 1;
+
+       // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
+      const curItem = items[idx];
+      if (curItem?.id) {
+        const key = `${range.id}::${curItem.id}`;
+        recordAttempt(ctx.progress, key, { failed: !ok });
+        saveProgress(ctx.progress);
+      }
 
       points = [];
       updateTracePath([]);

@@ -1,6 +1,6 @@
 // src/screens/KanjiDexScreen.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
-import { isCleared } from "../lib/progressStore.js";
+import { isCleared, getWeakScore } from "../lib/progressStore.js";
 
 function makeItemId(rangeId, itemId) {
   return `${rangeId}::${itemId}`;
@@ -39,7 +39,7 @@ export function KanjiDexScreen(ctx, nav) {
 
       // --- Dex state ---
       let onlyUncleared = false; // 未クリアだけ
-      let sortMode = "default";  // "default" | "review"
+      let sortMode = "default";  // "default" | "review" | "mist"
       let view = [];             // フィルタ/ソート後の配列
       let index = 0;
 
@@ -48,6 +48,11 @@ export function KanjiDexScreen(ctx, nav) {
         const key = makeItemId(range.id, it.id);
         return ctx.progress?.cleared?.[key]?.clearedAt ?? 0;
       };
+
+      const getMistScore = (it) => {
+                const key = makeItemId(range.id, it.id);
+                return getWeakScore(ctx.progress, key);
+              };
 
       const buildView = () => {
         let arr = items.slice();
@@ -59,6 +64,9 @@ export function KanjiDexScreen(ctx, nav) {
         if (sortMode === "review") {
           // 最近やってない順（古い→新しい）
           arr.sort((a, b) => getLastAt(a) - getLastAt(b));
+        } else if (sortMode === "mist") {
+          // 失敗率：高い順（ミス数を主軸）
+          arr.sort((a, b) => getMistScore(b) - getMistScore(a));
         } else {
           // デフォルト：データ順（JSON順）
         }
@@ -124,6 +132,9 @@ export function KanjiDexScreen(ctx, nav) {
               </button>
               <button id="sortReview" class="tab ${sortMode === "review" ? "active" : ""}" type="button">
                 復習（最近やってない順）
+              </button>
+              <button id="sortMist" class="tab ${sortMode === "mist" ? "active" : ""}" type="button">
+                復習（ミス多い順）
               </button>
             </div>
 
@@ -244,6 +255,15 @@ export function KanjiDexScreen(ctx, nav) {
           render();
           return;
         }
+        if (t.closest("#sortMist")) {
+                      const currentId = view[index]?.id;
+                      sortMode = "mist";
+                      buildView();
+                      setIndexById(currentId);
+                      clampIndex();
+                      render();
+                      return;
+                    }
       };
 
       buildView();
