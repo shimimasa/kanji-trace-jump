@@ -1152,15 +1152,18 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (e.button != null && e.button !== 0) return;
 
       const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
-      // ✅ Master: どの画の近くでも開始OK（線の近くなら開始）
+      
+      // ✅ Master: “どの画でも”開始OK（ただし漢字の線から遠すぎる場合は除外）
       // ✅ Kid: 次の画（strokeIndex）の開始点付近のみ開始OK（従来通り）
       if (isMaster) {
-        // どれかのstrokeの線に近いなら開始許可
+        // どれかのstrokeの線に近いなら開始許可（strokeIndexに依存しない）
         let best = Infinity;
         for (let i = 0; i < strokes.length; i++) {
           best = Math.min(best, distancePointToPolyline(p0, strokes[i]));
         }
-        if (best > START_TOL) return;
+        // Masterは少し厳しめにして誤タップ開始を減らす（好みで調整可）
+        const START_TOL_MASTER = 26;
+        if (best > START_TOL_MASTER) return;
       } else {
         const poly = strokes[strokeIndex];
         if (!poly || poly.length < 2) return;
@@ -1178,7 +1181,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       drawing = true;
       updateHintText();
 
-      // ✅ Masterではスナップしない（推定を歪めない）
+      // ✅ Masterではスナップしない（“どこをなぞったか推定”の精度を守る）
       // ✅ Kidでは従来通り端点へスナップ
       if (isMaster) {
         points = [p0];
