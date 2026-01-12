@@ -1,6 +1,6 @@
 // src/game/startTraceGame.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
-import { markCleared, recordAttempt, saveProgress } from "../lib/progressStore.js";
+import { markCleared, recordAttempt, recordMasterAttempt, recordMasterPass, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
 
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
@@ -1370,7 +1370,12 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (curItem?.id) {
         const key = `${selectedRangeId ?? "kanji"}::${curItem.id}`;
 
+        // 通常の試行記録（復習キュー用）
         recordAttempt(ctx.progress, key, { failed: !ok });
+        // ✅ Masterの試行記録（理由付き）
+        if (isMaster) {
+          recordMasterAttempt(ctx.progress, key, { ok, reason });
+        }
         saveProgress(ctx.progress);
       }
 
@@ -1439,6 +1444,10 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           const item = items[idx];
           if (item?.id) {
             markCleared(ctx.progress, `${selectedRangeId ?? "kanji"}::${item.id}`);
+            // ✅ Masterの合格記録
+            if (isMaster) {
+                recordMasterPass(ctx.progress, `${selectedRangeId ?? "kanji"}::${item.id}`);
+              }
             saveProgress(ctx.progress);
           }
 

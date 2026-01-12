@@ -54,6 +54,17 @@ function ensureItem(progress, itemId) {
           fails: 0,
           lastAttemptAt: 0,
           clearedAt: null,
+          // ✅ Master stats (A-4)
+          masterAttempts: 0,
+          masterPasses: 0,
+          masterLastAt: 0,
+          masterMistakes: {
+            WRONG_ORDER: 0,
+            BAD_SHAPE: 0,
+            TOO_SHORT: 0,
+            START_OFF: 0,
+            FAR_FROM_STROKE: 0,
+          },
         };
       }
       return progress.items[itemId];
@@ -83,7 +94,26 @@ export function recordAttempt(progress, itemId, { failed }) {
       it.lastAttemptAt = Date.now();
       return it;
     }
-    
+    // ✅ Master attempt record (A-4)
+// reason は startTraceGame の MASTER_FAIL_REASON のキー（例: "WRONG_ORDER"）
+export function recordMasterAttempt(progress, itemId, { ok, reason }) {
+    const it = ensureItem(progress, itemId);
+    it.masterAttempts = (it.masterAttempts ?? 0) + 1;
+    it.masterLastAt = Date.now();
+    if (!ok) {
+      const mm = (it.masterMistakes ||= {});
+      const key = String(reason || "BAD_SHAPE");
+      mm[key] = (mm[key] ?? 0) + 1;
+    }
+    return it;
+  }
+  
+  export function recordMasterPass(progress, itemId) {
+    const it = ensureItem(progress, itemId);
+    it.masterPasses = (it.masterPasses ?? 0) + 1;
+    it.masterLastAt = Date.now();
+    return it;
+  }
     // 便利：弱点スコアを計算（Dex側のソートに使う）
     export function getWeakScore(progress, itemId) {
       const it = progress?.items?.[itemId];
