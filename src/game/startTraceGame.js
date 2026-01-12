@@ -1152,23 +1152,45 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (e.button != null && e.button !== 0) return;
 
       const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
-      const poly = strokes[strokeIndex];
-      if (!poly || poly.length < 2) return;
+      // ✅ Master: どの画の近くでも開始OK（線の近くなら開始）
+      // ✅ Kid: 次の画（strokeIndex）の開始点付近のみ開始OK（従来通り）
+      if (isMaster) {
+        // どれかのstrokeの線に近いなら開始許可
+        let best = Infinity;
+        for (let i = 0; i < strokes.length; i++) {
+          best = Math.min(best, distancePointToPolyline(p0, strokes[i]));
+        }
+        if (best > START_TOL) return;
+      } else {
+        const poly = strokes[strokeIndex];
+        if (!poly || poly.length < 2) return;
 
-      const end0 = poly[0];
-      const end1 = poly[poly.length - 1];
-      const dEnd = Math.min(dist(p0, end0), dist(p0, end1));
-      if (dEnd > START_TOL) return;
+        const end0 = poly[0];
+        const end1 = poly[poly.length - 1];
+        const dEnd = Math.min(dist(p0, end0), dist(p0, end1));
+        if (dEnd > START_TOL) return;
 
-      // 線の近くだけ開始OK
-      const d0 = distancePointToPolyline(p0, strokes[strokeIndex]);
-      if (d0 > START_TOL) return;
+        // 線の近くだけ開始OK
+        const d0 = distancePointToPolyline(p0, poly);
+        if (d0 > START_TOL) return;
+      }
 
       drawing = true;
       updateHintText();
 
-      const snapStart = dist(p0, end0) <= dist(p0, end1) ? end0 : end1;
-      points = [snapStart];
+      // ✅ Masterではスナップしない（推定を歪めない）
+      // ✅ Kidでは従来通り端点へスナップ
+      if (isMaster) {
+        points = [p0];
+      } else {
+        const poly = strokes[strokeIndex];
+        const end0 = poly[0];
+        const end1 = poly[poly.length - 1];
+        const snapStart = dist(p0, end0) <= dist(p0, end1) ? end0 : end1;
+        points = [snapStart];
+      }
+
+
       updateTracePath(points);
 
       try {
