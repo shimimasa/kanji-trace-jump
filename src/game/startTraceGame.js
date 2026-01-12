@@ -1175,7 +1175,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
        // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
       const curItem = items[idx];
       if (curItem?.id) {
-        const key = `${selectedRangeId}::${curItem.id}`;
+        const key = `${selectedRangeId ?? "kanji"}::${curItem.id}`;
 
         recordAttempt(ctx.progress, key, { failed: !ok });
         saveProgress(ctx.progress);
@@ -1228,7 +1228,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           // ✅ クリア済みを “共通進捗” に保存（Progress画面と繋がる）
           const item = items[idx];
           if (item?.id) {
-            markCleared(ctx.progress, `${range.id}::${item.id}`);
+            markCleared(ctx.progress, `${selectedRangeId ?? "kanji"}::${item.id}`);
             saveProgress(ctx.progress);
           }
 
