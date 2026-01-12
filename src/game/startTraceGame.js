@@ -1279,6 +1279,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             charFailDrop(svgEl);
             combo = 0;
             playFailSfx();
+            showMasterFailFx(svgEl, "順番×");
             showMasterFailFx(svgEl, "×");
             points = [];
             updateTracePath([]);
@@ -1421,7 +1422,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         charFailDrop(svgEl);
         combo = 0;
         playFailSfx();
-        showMasterFailFx(svgEl, "×");
+        showMasterFailFx(svgEl, "線×");
       }
 
       e.preventDefault();
