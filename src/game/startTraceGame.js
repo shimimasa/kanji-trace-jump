@@ -35,6 +35,27 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const isMaster = mode === "master";
   const modeText = isMaster ? `${baseModeText}（MASTER）` : baseModeText;
 
+ // ===========================
+  // Master fail reasons (A-1)
+  // ===========================
+  const MASTER_FAIL_REASON = {
+    WRONG_ORDER: "WRONG_ORDER", // 書き順違い
+    BAD_SHAPE: "BAD_SHAPE",     // 形（精度）が違う
+    TOO_SHORT: "TOO_SHORT",     // 短すぎ
+    START_OFF: "START_OFF",     // 開始位置ずれ
+    FAR_FROM_STROKE: "FAR_FROM_STROKE", // 線から離れすぎ（安全柵）
+  };
+
+  function failReasonLabel(reason) {
+    switch (reason) {
+      case MASTER_FAIL_REASON.WRONG_ORDER: return "順番×";
+      case MASTER_FAIL_REASON.BAD_SHAPE: return "線×";
+      case MASTER_FAIL_REASON.TOO_SHORT: return "短×";
+      case MASTER_FAIL_REASON.START_OFF: return "始×";
+      case MASTER_FAIL_REASON.FAR_FROM_STROKE: return "外×";
+      default: return "×";
+    }
+  }
   // 判定パラメータ（旧コードから）
   const TOLERANCE = 20;
   const START_TOL = 34;
@@ -1094,6 +1115,66 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     return hitRate >= P.minHit && coverRate >= P.minCover;
   }
 
+  // ===========================
+  // Master judge (A-2)
+  //  - returns { ok, reason }
+  //  - DOES NOT check order (order is checked outside using guessStrokeIndex)
+  // ===========================
+  function judgeTraceMaster(drawnPoints, strokePoly) {
+    if (!Array.isArray(drawnPoints) || drawnPoints.length < MIN_POINTS) {
+      return { ok: false, reason: MASTER_FAIL_REASON.TOO_SHORT };
+    }
+
+    const dp = normalizeDrawnPoints(drawnPoints, RESAMPLE_STEP, MIN_MOVE_EPS);
+    if (dp.length < 2) {
+      return { ok: false, reason: MASTER_FAIL_REASON.TOO_SHORT };
+    }
+
+    const strokeLen = polyLength(strokePoly);
+    if (strokeLen <= 0) {
+      return { ok: false, reason: MASTER_FAIL_REASON.BAD_SHAPE };
+    }
+
+    const P = getAdaptiveParams(strokeLen);
+    // Masterは救済しない（failStreak緩和を入れない）
+
+    // 開始位置ずれ
+    const start = dp[0];
+    const s0 = strokePoly[0];
+    if (dist(start, s0) > P.startTol) {
+      return { ok: false, reason: MASTER_FAIL_REASON.START_OFF };
+    }
+
+    // 短すぎ
+    const drawnLen = polyLength(dp);    if (drawnLen < strokeLen * P.minDraw) {
+      return { ok: false, reason: MASTER_FAIL_REASON.TOO_SHORT };
+    }
+
+    // 線から離れすぎ（安全柵：明らかに別物）
+    // dpの平均距離がtolよりかなり大きい場合は即外れ
+    let sumD = 0;
+    for (const p of dp) sumD += distancePointToPolyline(p, strokePoly);
+    const avgD = sumD / dp.length;
+    if (avgD > P.tol * 2.2) {
+      return { ok: false, reason: MASTER_FAIL_REASON.FAR_FROM_STROKE };
+    }
+
+    // hit/cover
+    let hit = 0;
+    for (const p of dp) if (distancePointToPolyline(p, strokePoly) <= P.tol) hit++;
+    const hitRate = hit / dp.length;
+
+    const samples = sampleAlongPolyline(strokePoly, COVER_SAMPLES);
+    let cover = 0;
+    for (const sp of samples) if (distancePointToPolyline(sp, dp) <= P.coverTol) cover++;
+    const coverRate = cover / samples.length;
+
+    if (hitRate >= P.minHit && coverRate >= P.minCover) {
+      return { ok: true, reason: null };
+    }
+    return { ok: false, reason: MASTER_FAIL_REASON.BAD_SHAPE };
+  }
+
   function updateTracePath(pts) {
     if (!tracePathEl) return;
     if (!pts || pts.length === 0) { tracePathEl.setAttribute("d", ""); return; }
@@ -1263,30 +1344,26 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       } catch {}
       lastPointerId = null;
 
-      const ok = judgeTrace(points, strokes[strokeIndex]);
-      if (setRun) setRun.attempts += 1;
+      // ✅ 判定結果を {ok, reason} に統一（A-3）
+      let ok = false;
+      let reason = null;
 
-      // ✅ Phase 2: Masterは「どの画をなぞったか」を推定し、順番違いなら即×
       if (isMaster && points.length) {
-          const { bestI, bestD } = guessStrokeIndex(points, strokes);
-          // bestIが取れない場合も失敗
-          if (bestI < 0 || bestI !== strokeIndex) {
-            // “順番違い”の失敗として扱う
-            if (setRun) setRun.fail += 1;
-            if (setRun) setRun.combo = 0;
-            failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;
-            lockInput(FAIL_MS);
-            charFailDrop(svgEl);
-            combo = 0;
-            playFailSfx();
-            showMasterFailFx(svgEl, "順番×");
-            showMasterFailFx(svgEl, "×");
-            points = [];
-            updateTracePath([]);
-            e.preventDefault();
-            return;
-          }
+        const { bestI } = guessStrokeIndex(points, strokes);
+        if (bestI < 0 || bestI !== strokeIndex) {
+          ok = false;
+          reason = MASTER_FAIL_REASON.WRONG_ORDER;
+        } else {
+          const r = judgeTraceMaster(points, strokes[strokeIndex]);
+          ok = r.ok;
+          reason = r.reason;
         }
+      } else {
+        ok = judgeTrace(points, strokes[strokeIndex]);
+        reason = ok ? null : MASTER_FAIL_REASON.BAD_SHAPE;
+      }
+
+      if (setRun) setRun.attempts += 1;
 
        // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
       const curItem = items[idx];
@@ -1422,7 +1499,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         charFailDrop(svgEl);
         combo = 0;
         playFailSfx();
-        showMasterFailFx(svgEl, "線×");
+        if (isMaster) showMasterFailFx(svgEl, failReasonLabel(reason));
       }
 
       e.preventDefault();
