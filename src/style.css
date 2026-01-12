@@ -1595,3 +1595,21 @@ body {
   border: 1px solid rgba(56,117,255,.18);
   white-space: nowrap;
 }
+
+
+/* ===========================
++   MASTER mode: hide hints
++   =========================== */
+.master-mode .stroke-active{
+  opacity: 0 !important;
+}
+.master-mode .stroke-hint-dot,
+.master-mode .stroke-hint-num{
+  display: none !important;
+}
+
+/* Masterでは teacher UI を見せない（先生モードで確認する場合は別途調整） */
+.master-mode .stroke-ui,
+.master-mode .nav{
+  display: none !important;
+}

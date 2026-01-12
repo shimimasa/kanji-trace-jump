@@ -3,7 +3,8 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { markCleared, recordAttempt, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
 
-export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, onSetFinished }) {
+export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
+  
   // ---------------------------
   // ✅ 旧 main.js の “定数” はここへ移植
   // ---------------------------
@@ -31,7 +32,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const AUTO_NEXT_DELAY_MS = 650;
   const isSingleMode = !!singleId;
   const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${SET_SIZE}もじ`;
-  const modeText = baseModeText; // GameScreen側が読む用（固定値）
+  const isMaster = mode === "master";
+  const modeText = isMaster ? `${baseModeText}（MASTER）` : baseModeText;
 
   // 判定パラメータ（旧コードから）
   const TOLERANCE = 20;
@@ -796,10 +798,11 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     hintDot = hintDotEl;
     hintNum = hintTextEl;
 
-    // char
-    ensureChar(s);
-    const p0 = getStrokeAnchor(strokes, 0);
+    // ✅ Masterでは猫は最初“漢字外で待機”
+    // （Kidでは従来通り 1画目アンカーへ）
+    const p0 = isMaster ? { x: 8, y: 92 } : getStrokeAnchor(strokes, 0);
     setCharPos(s, p0);
+
 
     return s;
   }
@@ -1375,6 +1378,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   }
 
   async function boot() {
+
+    // ✅ master-mode クラス（CSSでヒントを完全OFF）
+    document.documentElement.classList.toggle("master-mode", isMaster);
     teacherMode = false;
     applyTeacherMode();
 
@@ -1433,6 +1439,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     clearTimeout(charJumpTimer);
     // confetti残留掃除（念のため）
     document.querySelectorAll(".confetti-layer").forEach((n) => n.remove());
+    // 画面遷移でmaster-modeが残らないように
+    document.documentElement.classList.remove("master-mode");
     // pointer capture残り対策
     try { svg?.releasePointerCapture?.(0); } catch {}
 

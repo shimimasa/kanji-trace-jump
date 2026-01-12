@@ -9,6 +9,7 @@ export function GameScreen(ctx, nav) {
       const el = document.createElement("div");
       el.className = "screen game";
 
+      const mode = ctx.mode ?? "kid"; // "kid" | "master"
       // ✅ single練習（図鑑から来た）判定
       const isSinglePractice = !!ctx.singleId && ctx.returnTo === "dex";
 
@@ -19,6 +20,7 @@ export function GameScreen(ctx, nav) {
           <div class="hud-right">
             <div id="mode" class="mode">もくひょう：5もじ</div>
             <button id="teacherToggle" class="teacherToggle" type="button" aria-pressed="false">先生</button>
+            <button id="masterToggle" class="teacherToggle" type="button" aria-pressed="${mode === "master" ? "true" : "false"}">MASTER</button>
             ${
                               isSinglePractice
                                 ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="図鑑へもどる">📘</button>`
@@ -97,7 +99,14 @@ export function GameScreen(ctx, nav) {
       
             homeBtn?.addEventListener("click", onHome);
             dexBackBtn?.addEventListener("click", onDexBack);
-      
+
+            // ✅ MASTER切替：画面を再マウントして startTraceGame を作り直す（事故が少ない）
+      const masterToggle = el.querySelector("#masterToggle");
+      const onToggleMaster = () => {
+        const nextMode = (ctx.mode ?? "kid") === "master" ? "kid" : "master";
+        nav.go("game", { ...ctx, mode: nextMode });
+      };
+      masterToggle?.addEventListener("click", onToggleMaster);
 
 
       game = startTraceGame({
@@ -107,6 +116,7 @@ export function GameScreen(ctx, nav) {
         startFromId: ctx.startFromId,
         startFromIdx: ctx.startFromIdx,
         singleId: ctx.singleId,
+        mode: ctx.mode ?? "kid",
         onSetFinished: ({ result, nextStart, history, mode, singleId }) => {
                     // ✅ single練習（復習モード）
                     if (mode === "single" && ctx.review?.active) {
@@ -197,6 +207,8 @@ export function GameScreen(ctx, nav) {
           quit.removeEventListener("click", onQuit);
           homeBtn?.removeEventListener("click", onHome);
           dexBackBtn?.removeEventListener("click", onDexBack);
+
+          masterToggle?.removeEventListener("click", onToggleMaster);
           game?.stop?.();
           game = null;
         }
