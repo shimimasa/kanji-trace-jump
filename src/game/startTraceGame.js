@@ -1292,9 +1292,19 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         lastSuccessAt = now;
         const comboLevel = Math.min(5, Math.floor((combo - 1) / 2)); // 0..5
 
-        spawnSparks(svgEl, nextAnchor, 8 + comboLevel * 3);
+        // ✅ Masterでは「次の画」を示す演出は禁止（nextAnchorを使わない）
+        // 猫（catAnchor＝直前正解位置）に演出を寄せる
+        const fxAnchor = isMaster ? catAnchor : nextAnchor;
+        spawnSparks(svgEl, fxAnchor, 8 + comboLevel * 3);
+
+        // SFXはあってOK（位置情報を漏らさない）
         playComboSuccessSfx(comboLevel);
-        if (combo >= 3) showComboPop(svgEl, `コンボ ${combo}!`);
+
+        // コンボ表示はMasterでは固定位置にする（次の画を示さない）
+        if (combo >= 3) {
+          if (isMaster) showComboPop(svgEl, `コンボ ${combo}!`); // 文字は中央固定なのでOK
+          else showComboPop(svgEl, `コンボ ${combo}!`);
+        }
 
         refreshSvgStates(svgEl, strokes);
         renderStrokeButtons(strokes.length);
