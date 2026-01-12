@@ -104,6 +104,21 @@ export function KanjiDexScreen(ctx, nav) {
         const label = getLabel(it);
 
         const cleared = isCleared(ctx.progress, makeItemId(range.id, it.id));
+        const pKey = makeItemId(range.id, it.id);
+        const pItem = ctx.progress?.items?.[pKey] ?? null;
+        const masterAttempts = pItem?.masterAttempts ?? 0;
+        const masterPasses = pItem?.masterPasses ?? 0;
+        const masterOk = masterPasses > 0;
+        const mm = pItem?.masterMistakes ?? {};
+        const mistakeRows = [
+          ["WRONG_ORDER", "順番×"],
+          ["BAD_SHAPE", "線×"],
+          ["TOO_SHORT", "短×"],
+          ["START_OFF", "始×"],
+          ["FAR_FROM_STROKE", "外×"],
+        ]
+          .map(([k, label]) => ({ k, label, v: Number(mm?.[k] ?? 0) }))
+          .filter((x) => x.v > 0);
         const on = getReadingOn(it);
         const kun = getReadingKun(it);
         const ex = getExample(it);
@@ -142,7 +157,27 @@ export function KanjiDexScreen(ctx, nav) {
             <div class="dexCard">
               <div class="dexChar">${label}</div>
               <div class="dexStatus">${cleared ? "✓ クリア済み" : "未クリア"}</div>
-
+<div class="dexMasterBox">
+                <div class="dexMasterHead">
+                  <div class="dexMasterTitle">MASTER</div>
+                  ${masterOk ? `<div class="dexMasterBadge ok">✓</div>` : `<div class="dexMasterBadge">—</div>`}
+                </div>
+                <div class="dexMasterStats">
+                  <div class="dexMasterStat"><span>挑戦</span><b>${masterAttempts}</b></div>
+                  <div class="dexMasterStat"><span>合格</span><b>${masterPasses}</b></div>
+                </div>
+                ${
+                  mistakeRows.length
+                    ? `
+                      <div class="dexMasterMist">
+                        ${mistakeRows
+                          .map((m) => `<div class="dexMistPill"><span>${m.label}</span><b>${m.v}</b></div>`)
+                          .join("")}
+                      </div>
+                    `
+                    : `<div class="dexMasterMist muted">（Masterの失敗内訳はまだありません）</div>`
+                }
+              </div>
               ${
                 hasReading
                   ? `

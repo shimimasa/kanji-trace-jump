@@ -1641,3 +1641,67 @@ body {
     75%{ transform: translateX(-1px); }
     100%{ transform: translateX(0px); }
   }
+  .dexMasterBox{
+    margin-top: 12px;
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(255,255,255,.78);
+    padding: 12px 14px;
+  }
+  .dexMasterHead{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .dexMasterTitle{
+    font-weight: 1000;
+    opacity: .8;
+  }
+  .dexMasterBadge{
+    font-weight: 1000;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(246,248,251,.85);
+  }
+  .dexMasterBadge.ok{
+    border: 1px solid rgba(56,117,255,.25);
+    background: rgba(56,117,255,.12);
+  }
+  .dexMasterStats{
+    margin-top: 10px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .dexMasterStat{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    border-radius: 14px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(246,248,251,.85);
+    padding: 8px 10px;
+  }
+  .dexMasterStat span{ opacity:.7; font-weight: 900; }
+  .dexMasterStat b{ font-weight: 1000; }
+  .dexMasterMist{
+    margin-top: 10px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dexMistPill{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.9);
+    font-weight: 900;
+  }
+  .dexMistPill span{ opacity:.75; }
+  .dexMistPill b{ font-weight: 1000; }
+  
