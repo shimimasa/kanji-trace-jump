@@ -1265,6 +1265,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
         done[strokeIndex] = true;
         failStreak[strokeIndex] = 0;
+        // ✅ 正解した画（直前）の index を保存
+        const solvedIndex = strokeIndex;
         strokeIndex++;
 
         const nextAnchor =
@@ -1272,8 +1274,13 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             ? getStrokeAnchor(strokes, strokeIndex)
             : getStrokeAnchor(strokes, strokes.length - 1);
 
+        // ✅ Masterでは猫は「次」ではなく「今の正解（1つ前）」に置く
+        const catAnchor = isMaster
+          ? getStrokeAnchor(strokes, solvedIndex)
+          : nextAnchor;
+
         lockInput(JUMP_MS);
-        charJumpTo(svgEl, nextAnchor);
+        charJumpTo(svgEl, catAnchor);
 
          // ✅ 成功演出：コンボ / SFX / スパーク
         const now = Date.now();
