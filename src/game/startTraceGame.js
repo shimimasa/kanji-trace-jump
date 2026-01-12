@@ -605,6 +605,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   function setHintText(text) { if (elHint) elHint.textContent = String(text ?? ""); }
   function updateHintText() {
+    if (isMaster) { setHintText("書き順を思い出して書こう"); return; }
     if (kanjiCompleted) { setHintText('クリア！「つぎ」で次のもじへ'); return; }
     if (drawing) { setHintText("そのまま、なぞっていこう"); return; }
     const streak = Math.max(0, failStreak?.[strokeIndex] ?? 0);
@@ -921,6 +922,30 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     for (let i = 1; i < poly.length; i++) best = Math.min(best, distancePointToSegment(p, poly[i - 1], poly[i]));
     return best;
   }
+
+// ===========================
+  // Phase 2: master stroke guess
+  // ===========================
+  function avgDistancePolyline(points, poly) {
+    if (!points || points.length === 0 || !poly || poly.length < 2) return Infinity;
+    let sum = 0;
+    for (const p of points) sum += distancePointToPolyline(p, poly);
+    return sum / points.length;
+  }
+
+  function guessStrokeIndex(points, strokes) {
+    let bestI = -1;
+    let bestD = Infinity;
+    for (let i = 0; i < strokes.length; i++) {
+      const d = avgDistancePolyline(points, strokes[i]);
+      if (d < bestD) {
+        bestD = d;
+        bestI = i;
+      }
+    }
+    return { bestI, bestD };
+  }
+
   function polyLength(poly) {
     let len = 0;
     for (let i = 1; i < poly.length; i++) len += dist(poly[i - 1], poly[i]);
@@ -1175,6 +1200,26 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       const ok = judgeTrace(points, strokes[strokeIndex]);
       if (setRun) setRun.attempts += 1;
 
+      // ✅ Phase 2: Masterは「どの画をなぞったか」を推定し、順番違いなら即×
+      if (isMaster && points.length) {
+          const { bestI, bestD } = guessStrokeIndex(points, strokes);
+          // bestIが取れない場合も失敗
+          if (bestI < 0 || bestI !== strokeIndex) {
+            // “順番違い”の失敗として扱う
+            if (setRun) setRun.fail += 1;
+            if (setRun) setRun.combo = 0;
+            failStreak[strokeIndex] = (failStreak[strokeIndex] ?? 0) + 1;
+            lockInput(FAIL_MS);
+            charFailDrop(svgEl);
+            combo = 0;
+            playFailSfx();
+            points = [];
+            updateTracePath([]);
+            e.preventDefault();
+            return;
+          }
+        }
+
        // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
       const curItem = items[idx];
       if (curItem?.id) {
@@ -1371,7 +1416,14 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     currentStrokes = strokes;
 
     refreshSvgStates(svg, strokes);
-    setCharPos(svg, getStrokeAnchor(strokes, 0));
+    
+    // ✅ Masterでは猫は「待機位置」のまま（render()で上書きしない）
+    if (isMaster) {
+        setCharPos(svg, { x: 8, y: 92 });
+      } else {
+        setCharPos(svg, getStrokeAnchor(strokes, 0));
+      }
+  
     updateHintText();
 
     attachTraceHandlers(svg, strokes);
