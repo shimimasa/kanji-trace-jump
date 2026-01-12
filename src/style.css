@@ -1613,3 +1613,31 @@ body {
 .master-mode .nav{
   display: none !important;
 }
+
+/* ===========================
++   Master fail FX
++   =========================== */
+.masterFailMark{
+    font-size: 34px;
+    font-weight: 1000;
+    fill: rgba(255, 60, 60, .95);
+    stroke: rgba(255,255,255,.85);
+    stroke-width: 2px;
+    paint-order: stroke;
+  }
+  
+  .kanjiSvg.masterFailFlash{
+    filter: drop-shadow(0 0 18px rgba(255, 60, 60, .45));
+  }
+  
+  .kanjiSvg.masterFailShake{
+    animation: masterShake 0.22s ease-out;
+  }
+  
+  @keyframes masterShake{
+    0%{ transform: translateX(0px); }
+    25%{ transform: translateX(-2px); }
+    50%{ transform: translateX(2px); }
+    75%{ transform: translateX(-1px); }
+    100%{ transform: translateX(0px); }
+  }

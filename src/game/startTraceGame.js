@@ -327,6 +327,47 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         svgEl.appendChild(layer);
         return layer;
       }
+
+      // ===========================
+  // Master fail FX (visible penalty)
+  // ===========================
+  function showMasterFailFx(svgEl, message = "×") {
+    if (!svgEl) return;
+    const ns = "http://www.w3.org/2000/svg";
+    const layer = ensureFxLayer(svgEl);
+
+    // 1) SVGにクラスを付けて「赤フラッシュ＆シェイク」
+    svgEl.classList.remove("masterFailFlash");
+    svgEl.classList.remove("masterFailShake");
+    void svgEl.getBBox(); // reflow-ish
+    svgEl.classList.add("masterFailFlash");
+    svgEl.classList.add("masterFailShake");
+    setTimeout(() => {
+      svgEl.classList.remove("masterFailFlash");
+      svgEl.classList.remove("masterFailShake");
+    }, 320);
+
+    // 2) 大きい × を一瞬表示（中央固定）
+    const t = document.createElementNS(ns, "text");
+    t.setAttribute("x", "50");
+    t.setAttribute("y", "56");
+    t.setAttribute("text-anchor", "middle");
+    t.setAttribute("class", "masterFailMark");
+    t.textContent = message;
+    layer.appendChild(t);
+    const anim = t.animate(
+      [
+        { transform: "translate(0px, 6px) scale(0.9)", opacity: 0 },
+        { transform: "translate(0px, 0px) scale(1.05)", opacity: 1 },
+        { transform: "translate(0px, -6px) scale(1)", opacity: 0 },
+      ],
+      { duration: 520, easing: "ease-out", fill: "forwards" }
+    );
+    anim.onfinish = () => t.remove();
+
+    // 3) バイブ（対応端末）
+    if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
+  }
     
       function spawnSparks(svgEl, p, count = 10) {
         const ns = "http://www.w3.org/2000/svg";
@@ -1238,6 +1279,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             charFailDrop(svgEl);
             combo = 0;
             playFailSfx();
+            showMasterFailFx(svgEl, "×");
             points = [];
             updateTracePath([]);
             e.preventDefault();
@@ -1379,6 +1421,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         charFailDrop(svgEl);
         combo = 0;
         playFailSfx();
+        showMasterFailFx(svgEl, "×");
       }
 
       e.preventDefault();
