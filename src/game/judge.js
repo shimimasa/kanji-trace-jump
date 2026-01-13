@@ -6,7 +6,6 @@ import {
     START_TOL_MASTER,
     MASTER_FAIL_REASON
   } from "./config.js";
-  import { dist as d2, polylineLength as len2, distancePointToPolyline } from "./strokeMath.js";
   /**
    * 総合判定エントリ
    */
