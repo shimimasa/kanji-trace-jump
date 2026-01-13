@@ -1718,10 +1718,14 @@ body {
 ========================= */
 .title-popup{
   position: fixed;
-  inset: 0;
+  /* 中央を避ける：右上に固定（漢字に被りにくい） */
+  top: calc(env(safe-area-inset-top, 0px) + 10px);
+  right: calc(env(safe-area-inset-right, 0px) + 10px);
+  left: auto;
+  bottom: auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-end;
   pointer-events: none;
   z-index: 9999;
   opacity: 0;
@@ -1733,23 +1737,25 @@ body {
 .title-popup-inner{
   background: linear-gradient(180deg, #fff, #f6f8fb);
   border-radius: 24px;
-  padding: 24px 32px;
-  min-width: 240px;
+  /* 目立ちすぎないよう少しコンパクトに */
+  padding: 14px 16px;
+  min-width: auto;
+  max-width: min(320px, calc(100vw - 24px));
   box-shadow: 0 20px 60px rgba(0,0,0,.18);
-  text-align: center;
-  transform: scale(.9);
+  text-align: left;
+  transform: translateY(-6px) scale(.98);
   transition: transform .25s ease;
 }
 .title-popup.show .title-popup-inner{
-  transform: scale(1);
+  transform: translateY(0) scale(1);
 }
 .title-popup-head{
   font-weight: 900;
-  font-size: 18px;
-  margin-bottom: 10px;
+  font-size: 14px;
+  margin-bottom: 6px;
 }
 .title-popup-title{
   font-weight: 1000;
-  font-size: 22px;
+  font-size: 18px;
   color: #2b6cff;
 }
