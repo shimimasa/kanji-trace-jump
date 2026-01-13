@@ -1705,3 +1705,11 @@ body {
   .dexMistPill span{ opacity:.75; }
   .dexMistPill b{ font-weight: 1000; }
   
+  /* Dex: master practice button */
+#practiceMaster.btn.big{
+  border: 1px solid rgba(18,38,63,.12);
+  background: rgba(246,248,251,.9);
+}
+#practiceMaster.btn.big:active{
+  transform: translateY(1px);
+}

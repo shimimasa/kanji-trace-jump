@@ -104,6 +104,7 @@ export function KanjiDexScreen(ctx, nav) {
         const label = getLabel(it);
 
         const cleared = isCleared(ctx.progress, makeItemId(range.id, it.id));
+        
         const pKey = makeItemId(range.id, it.id);
         const pItem = ctx.progress?.items?.[pKey] ?? null;
         const masterAttempts = pItem?.masterAttempts ?? 0;
@@ -212,6 +213,7 @@ export function KanjiDexScreen(ctx, nav) {
 
               <div class="dexActions">
                 <button id="practice" class="btn primary big" type="button">この文字を練習する</button>
+                <button id="practiceMaster" class="btn big" type="button">MASTERで練習</button>
               </div>
 
               <div class="dexNav">
@@ -248,6 +250,19 @@ export function KanjiDexScreen(ctx, nav) {
               });
           return;
         }
+
+         // ✅ 図鑑から Master モードで single 練習
+        if (t.closest("#practiceMaster")) {
+            const it = view[index];
+            nav.go("game", {
+              selectedRangeId: selected,
+              singleId: it.id,
+              mode: "master",
+              returnTo: "dex",
+              returnFrom: ctx.from ?? "progress",
+            });
+            return;
+          }
 
         if (t.closest("#prev")) {
           index = Math.max(0, index - 1);
