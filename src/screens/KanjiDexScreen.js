@@ -1,10 +1,11 @@
 // src/screens/KanjiDexScreen.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
+import { makeKanjiKey } from "../lib/progressKey.js";
 
-function makeItemId(rangeId, itemId) {
-  return `${rangeId}::${itemId}`;
-}
+function makeItemId(_rangeId, itemId) {
+    return makeKanjiKey(itemId);
+  }
 
 function getLabel(it) {
   return it?.label ?? it?.kanji ?? it?.kana ?? it?.char ?? it?.text ?? it?.id ?? "？";

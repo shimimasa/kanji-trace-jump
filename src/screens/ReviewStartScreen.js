@@ -1,9 +1,9 @@
 // src/screens/ReviewStartScreen.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
-
+import { makeKanjiKey } from "../lib/progressKey.js";
 function makeItemKey(rangeId, itemId) {
-  return `${rangeId}::${itemId}`;
+  return makeKanjiKey(itemId);
 }
 
 export function ReviewStartScreen(ctx, nav) {

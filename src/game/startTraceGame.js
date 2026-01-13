@@ -2,7 +2,13 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { markCleared, recordAttempt, recordMasterAttempt, recordMasterPass, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
-
+import { makeKanjiKey } from "../lib/progressKey.js";
+import {
+  SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
+  TOLERANCE, START_TOL, MIN_HIT_RATE, MIN_DRAW_LEN_RATE, MIN_COVER_RATE,
+  MIN_POINTS, MIN_MOVE_EPS, RESAMPLE_STEP, COVER_SAMPLES, COMBO_WINDOW_MS,
+  MASTER_FAIL_REASON, failReasonLabel
+} from "./config.js";
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
   
   // ---------------------------
@@ -28,23 +34,12 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   })();
   const strokesCache = new Map();
 
-  const SET_SIZE = 5;
-  const AUTO_NEXT_DELAY_MS = 650;
+  
   const isSingleMode = !!singleId;
   const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${SET_SIZE}もじ`;
   const isMaster = mode === "master";
   const modeText = isMaster ? `${baseModeText}（MASTER）` : baseModeText;
 
- // ===========================
-  // Master fail reasons (A-1)
-  // ===========================
-  const MASTER_FAIL_REASON = {
-    WRONG_ORDER: "WRONG_ORDER", // 書き順違い
-    BAD_SHAPE: "BAD_SHAPE",     // 形（精度）が違う
-    TOO_SHORT: "TOO_SHORT",     // 短すぎ
-    START_OFF: "START_OFF",     // 開始位置ずれ
-    FAR_FROM_STROKE: "FAR_FROM_STROKE", // 線から離れすぎ（安全柵）
-  };
   // ===========================
   // Title popup (称号獲得演出)
   // ===========================
@@ -64,31 +59,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       setTimeout(() => el.remove(), 500);
     }, 2200);
   }
-
-
-  function failReasonLabel(reason) {
-    switch (reason) {
-      case MASTER_FAIL_REASON.WRONG_ORDER: return "順番×";
-      case MASTER_FAIL_REASON.BAD_SHAPE: return "線×";
-      case MASTER_FAIL_REASON.TOO_SHORT: return "短×";
-      case MASTER_FAIL_REASON.START_OFF: return "始×";
-      case MASTER_FAIL_REASON.FAR_FROM_STROKE: return "外×";
-      default: return "×";
-    }
-  }
-  // 判定パラメータ（旧コードから）
-  const TOLERANCE = 20;
-  const START_TOL = 34;
-  const MIN_HIT_RATE = 0.45;
-  const MIN_DRAW_LEN_RATE = 0.15;
-  const MIN_COVER_RATE = 0.35;
-  const MIN_POINTS = 3;
-  const MIN_MOVE_EPS = 0.35;
-  const RESAMPLE_STEP = 1.2;
-  const COVER_SAMPLES = 32;
-
-  const JUMP_MS = 520;
-  const FAIL_MS = 520;
 
   // ---------------------------
   // ✅ DOM（document直参照禁止）
@@ -129,7 +99,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   // ===========================
   let combo = 0;
   let lastSuccessAt = 0;
-  const COMBO_WINDOW_MS = 1400; // この時間内に成功するとコンボ継続
 
   // Stars sparkle
   let _lastStarFilled = 0;
@@ -1028,6 +997,21 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     return { bestI, bestD };
   }
 
+  // ===========================
+  // Stage1: judge functionization
+  // ===========================
+  function judgeAttempt(points, strokes, strokeIndex) {
+    // returns { ok, reason }
+    if (isMaster && points.length) {
+      const { bestI } = guessStrokeIndex(points, strokes);
+      if (bestI < 0 || bestI !== strokeIndex) {
+        return { ok: false, reason: MASTER_FAIL_REASON.WRONG_ORDER };
+      }
+      return judgeTraceMaster(points, strokes[strokeIndex]); // {ok, reason}
+    }
+    const ok = judgeTrace(points, strokes[strokeIndex]);
+    return { ok, reason: ok ? null : MASTER_FAIL_REASON.BAD_SHAPE };
+  }
   function polyLength(poly) {
     let len = 0;
     for (let i = 1; i < poly.length; i++) len += dist(poly[i - 1], poly[i]);
@@ -1364,31 +1348,14 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       } catch {}
       lastPointerId = null;
 
-      // ✅ 判定結果を {ok, reason} に統一（A-3）
-      let ok = false;
-      let reason = null;
-
-      if (isMaster && points.length) {
-        const { bestI } = guessStrokeIndex(points, strokes);
-        if (bestI < 0 || bestI !== strokeIndex) {
-          ok = false;
-          reason = MASTER_FAIL_REASON.WRONG_ORDER;
-        } else {
-          const r = judgeTraceMaster(points, strokes[strokeIndex]);
-          ok = r.ok;
-          reason = r.reason;
-        }
-      } else {
-        ok = judgeTrace(points, strokes[strokeIndex]);
-        reason = ok ? null : MASTER_FAIL_REASON.BAD_SHAPE;
-      }
+      const { ok, reason } = judgeAttempt(points, strokes, strokeIndex);
 
       if (setRun) setRun.attempts += 1;
 
        // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
       const curItem = items[idx];
       if (curItem?.id) {
-        const key = `${selectedRangeId ?? "kanji"}::${curItem.id}`;
+        const key = makeKanjiKey(curItem.id);
 
         // 通常の試行記録（復習キュー用）
         recordAttempt(ctx.progress, key, { failed: !ok });
@@ -1463,10 +1430,11 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           // ✅ クリア済みを “共通進捗” に保存（Progress画面と繋がる）
           const item = items[idx];
           if (item?.id) {
-            markCleared(ctx.progress, `${selectedRangeId ?? "kanji"}::${item.id}`);
+            const key = makeKanjiKey(item.id);
+            markCleared(ctx.progress, key);
             // ✅ Masterの合格記録
             if (isMaster) {
-              const pKey = `${selectedRangeId ?? "kanji"}::${item.id}`;
+              const pKey = key;
                               // 直前の合格回数を見て「初合格」を判定
                               const prevPass = ctx.progress?.items?.[pKey]?.masterPasses ?? 0;
                               recordMasterPass(ctx.progress, pKey);

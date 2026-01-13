@@ -1,4 +1,5 @@
 const KEY = "ktj_progress_v1";
+import { normalizeToKanjiKey } from "./progressKey.js";
 
 export function loadProgress() {
   try {
@@ -9,6 +10,8 @@ export function loadProgress() {
     if (!parsed.items) parsed.items = {};
     if (!parsed.cleared) parsed.cleared = {};
     if (!parsed.stats) parsed.stats = { totalCleared: 0 };
+    // ✅ 旧キー → 新キーへ移行（段階1）
+    migrateKeysInPlace(parsed);
     return parsed;
   } catch {
     return { cleared: {}, items: {}, stats: { totalCleared: 0 } };
@@ -18,6 +21,48 @@ export function loadProgress() {
 export function saveProgress(progress) {
   localStorage.setItem(KEY, JSON.stringify(progress));
 }
+
+function migrateKeysInPlace(progress) {
+    // cleared
+    const nextCleared = {};
+    for (const k in (progress.cleared || {})) {
+      const nk = normalizeToKanjiKey(k);
+      nextCleared[nk] = progress.cleared[k];
+    }
+    progress.cleared = nextCleared;
+  
+    // items
+    const nextItems = {};
+    for (const k in (progress.items || {})) {
+      const nk = normalizeToKanjiKey(k);
+      // 同じ漢字に統合された場合は “より新しい/大きい” 側を優先してマージ
+      const cur = progress.items[k];
+      const prev = nextItems[nk];
+      if (!prev) {
+        nextItems[nk] = cur;
+      } else {
+        nextItems[nk] = {
+          ...prev,
+          ...cur,
+          attempts: Math.max(prev.attempts ?? 0, cur.attempts ?? 0),
+          fails: Math.max(prev.fails ?? 0, cur.fails ?? 0),
+          lastAttemptAt: Math.max(prev.lastAttemptAt ?? 0, cur.lastAttemptAt ?? 0),
+          clearedAt: prev.clearedAt ?? cur.clearedAt,
+          masterAttempts: Math.max(prev.masterAttempts ?? 0, cur.masterAttempts ?? 0),
+          masterPasses: Math.max(prev.masterPasses ?? 0, cur.masterPasses ?? 0),
+          masterLastAt: Math.max(prev.masterLastAt ?? 0, cur.masterLastAt ?? 0),
+          masterMistakes: mergeMistakes(prev.masterMistakes, cur.masterMistakes),
+        };
+      }
+    }
+    progress.items = nextItems;
+  }
+  
+  function mergeMistakes(a = {}, b = {}) {
+    const out = { ...a };
+    for (const k in b) out[k] = Math.max(out[k] ?? 0, b[k] ?? 0);
+    return out;
+  }
 
 // ===========================
 // Review session persistence

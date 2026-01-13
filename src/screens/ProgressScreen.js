@@ -1,8 +1,8 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared } from "../lib/progressStore.js";
-
+import { makeKanjiKey } from "../lib/progressKey.js";
 function makeItemId(rangeId, itemId) {
-  return `${rangeId}::${itemId}`;
+  return makeKanjiKey(itemId);
 }
 
 export function ProgressScreen(ctx, nav) {
