@@ -36,3 +36,23 @@ export function failReasonLabel(reason) {
     default: return "×";
   }
 }
+
+// ===========================
+// Master mode UI/behavior (v2)
+// ===========================
+export const MASTER_HINT_TEXT = "書き順を思い出して書こう";
+
+// Master: どの線でも開始OKだが、線から遠すぎるタップは除外
+export const START_TOL_MASTER = 26;
+
+// 猫の待機位置（viewBox内に置く。外に出したいなら負値でもOK）
+export const CAT_WAIT_POS = { x: 8, y: 92 };
+
+// Master fail mark (SVG text)
+export const MASTER_FAIL_MARK_POS = { x: 50, y: 56 };
+
+// Title popup timing (ms)
+export const TITLE_POPUP_MS = 2200;
+
+// Confetti defaults
+export const CONFETTI_DEFAULTS = { durationMs: 1600, count: 70 };

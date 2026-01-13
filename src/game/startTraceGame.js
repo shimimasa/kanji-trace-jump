@@ -7,7 +7,8 @@ import {
   SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
   TOLERANCE, START_TOL, MIN_HIT_RATE, MIN_DRAW_LEN_RATE, MIN_COVER_RATE,
   MIN_POINTS, MIN_MOVE_EPS, RESAMPLE_STEP, COVER_SAMPLES, COMBO_WINDOW_MS,
-  MASTER_FAIL_REASON, failReasonLabel
+  MASTER_FAIL_REASON, failReasonLabel,MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
+    TITLE_POPUP_MS, CONFETTI_DEFAULTS
 } from "./config.js";
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
   
@@ -57,7 +58,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     setTimeout(() => {
       el.classList.remove("show");
       setTimeout(() => el.remove(), 500);
-    }, 2200);
+    }, TITLE_POPUP_MS);
   }
 
   // ---------------------------
@@ -359,8 +360,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
     // 2) 大きい × を一瞬表示（中央固定）
     const t = document.createElementNS(ns, "text");
-    t.setAttribute("x", "50");
-    t.setAttribute("y", "56");
+    t.setAttribute("x", String(MASTER_FAIL_MARK_POS.x));
+    t.setAttribute("y", String(MASTER_FAIL_MARK_POS.y));
     t.setAttribute("text-anchor", "middle");
     t.setAttribute("class", "masterFailMark");
     t.textContent = message;
@@ -536,7 +537,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         spawnSparks(svgEl, p, 18);
         setTimeout(() => spawnSparks(svgEl, p, 14), 120);
         setTimeout(() => spawnSparks(svgEl, p, 10), 240);
-        launchConfetti({ durationMs: 1600, count: 70 });
+        launchConfetti(CONFETTI_DEFAULTS);
         playSetClearFanfare();
       }
     
@@ -656,7 +657,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   function setHintText(text) { if (elHint) elHint.textContent = String(text ?? ""); }
   function updateHintText() {
-    if (isMaster) { setHintText("書き順を思い出して書こう"); return; }
+    if (isMaster) { setHintText(MASTER_HINT_TEXT); return; }
     if (kanjiCompleted) { setHintText('クリア！「つぎ」で次のもじへ'); return; }
     if (drawing) { setHintText("そのまま、なぞっていこう"); return; }
     const streak = Math.max(0, failStreak?.[strokeIndex] ?? 0);
@@ -852,10 +853,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
     // ✅ Masterでは猫は最初“漢字外で待機”
     // （Kidでは従来通り 1画目アンカーへ）
-    const p0 = isMaster ? { x: 8, y: 92 } : getStrokeAnchor(strokes, 0);
+    const p0 = isMaster ? CAT_WAIT_POS : getStrokeAnchor(strokes, 0);
     setCharPos(s, p0);
-
-
     return s;
   }
 
@@ -1288,7 +1287,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           best = Math.min(best, distancePointToPolyline(p0, strokes[i]));
         }
         // Masterは少し厳しめにして誤タップ開始を減らす（好みで調整可）
-        const START_TOL_MASTER = 26;
         if (best > START_TOL_MASTER) return;
       } else {
         const poly = strokes[strokeIndex];
@@ -1634,8 +1632,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     
     // ✅ Masterでは猫は「待機位置」のまま（render()で上書きしない）
     if (isMaster) {
-        setCharPos(svg, { x: 8, y: 92 });
-      } else {
+              setCharPos(svg, CAT_WAIT_POS);
+            } else {
         setCharPos(svg, getStrokeAnchor(strokes, 0));
       }
   
