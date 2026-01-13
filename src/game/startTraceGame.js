@@ -7,8 +7,9 @@ import {
   SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
   TOLERANCE, START_TOL, MIN_HIT_RATE, MIN_DRAW_LEN_RATE, MIN_COVER_RATE,
   MIN_POINTS, MIN_MOVE_EPS, RESAMPLE_STEP, COVER_SAMPLES, COMBO_WINDOW_MS,
-  MASTER_FAIL_REASON, failReasonLabel,MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
-    TITLE_POPUP_MS, CONFETTI_DEFAULTS
+  MASTER_FAIL_REASON, failReasonLabel, MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
+  TITLE_POPUP_MS, CONFETTI_DEFAULTS,
+  TITLE_POPUP_FADE_OUT_MS, MASTER_FAIL_FLASH_MS, MASTER_FAIL_MARK_MS
 } from "./config.js";
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
   
@@ -356,7 +357,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     setTimeout(() => {
       svgEl.classList.remove("masterFailFlash");
       svgEl.classList.remove("masterFailShake");
-    }, 320);
+    }, MASTER_FAIL_FLASH_MS);
 
     // 2) 大きい × を一瞬表示（中央固定）
     const t = document.createElementNS(ns, "text");
@@ -372,7 +373,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         { transform: "translate(0px, 0px) scale(1.05)", opacity: 1 },
         { transform: "translate(0px, -6px) scale(1)", opacity: 0 },
       ],
-      { duration: 520, easing: "ease-out", fill: "forwards" }
+      { duration: MASTER_FAIL_MARK_MS, easing: "ease-out", fill: "forwards" }
     );
     anim.onfinish = () => t.remove();
 

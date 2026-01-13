@@ -56,3 +56,16 @@ export const TITLE_POPUP_MS = 2200;
 
 // Confetti defaults
 export const CONFETTI_DEFAULTS = { durationMs: 1600, count: 70 };
+
+// ===========================
+// UI timings (ms)
+// ===========================
+export const TITLE_POPUP_FADE_OUT_MS = 500;
+export const MASTER_FAIL_FLASH_MS = 320;
+export const MASTER_FAIL_MARK_MS = 520;
+
+// ===========================
+// Master strictness knobs
+// ===========================
+// Phase2 推定後、同一ストローク扱いの許容（今は未使用、将来の調整用）
+export const MASTER_GUESS_EPS = 0;
