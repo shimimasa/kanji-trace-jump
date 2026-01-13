@@ -4,6 +4,7 @@ import { markCleared, recordAttempt, recordMasterAttempt, recordMasterPass, save
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
 import { makeKanjiKey } from "../lib/progressKey.js";
 import { judgeAttempt } from "./judge.js";
+import { dist, distancePointToPolyline } from "./strokeMath.js";
 import {
   SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
   START_TOL, COMBO_WINDOW_MS,
@@ -951,29 +952,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
 
-  // ---------------------------
-  // 入力ゲート用の幾何ヘルパ（判定ロジックは judge.js に一本化）
-  // ---------------------------
-  function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
-
-  function distancePointToSegment(p, a, b) {
-    const vx = b.x - a.x, vy = b.y - a.y;
-    const wx = p.x - a.x, wy = p.y - a.y;
-    const c1 = vx * wx + vy * wy;
-    if (c1 <= 0) return Math.hypot(p.x - a.x, p.y - a.y);
-    const c2 = vx * vx + vy * vy;
-    if (c2 <= c1) return Math.hypot(p.x - b.x, p.y - b.y);
-    const t = c1 / c2;
-    const px = a.x + t * vx, py = a.y + t * vy;
-    return Math.hypot(p.x - px, p.y - py);
-  }
-  function distancePointToPolyline(p, poly) {
-    let best = Infinity;
-    for (let i = 1; i < poly.length; i++) best = Math.min(best, distancePointToSegment(p, poly[i - 1], poly[i]));
-    return best;
-  }
-
-
+ // 入力ゲート用の幾何ヘルパは strokeMath.js に移管
 
   function updateTracePath(pts) {
     if (!tracePathEl) return;
