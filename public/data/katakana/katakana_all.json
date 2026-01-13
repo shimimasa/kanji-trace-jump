@@ -1,0 +1,7 @@
+[
+      { "id": "KATA_A", "char": "ア", "strokesRef": "strokes/katakana/KATA_A.json" },
+      { "id": "KATA_I", "char": "イ", "strokesRef": "strokes/katakana/KATA_I.json" },
+      { "id": "KATA_U", "char": "ウ", "strokesRef": "strokes/katakana/KATA_U.json" },
+      { "id": "KATA_E", "char": "エ", "strokesRef": "strokes/katakana/KATA_E.json" },
+      { "id": "KATA_O", "char": "オ", "strokesRef": "strokes/katakana/KATA_O.json" }
+    ]

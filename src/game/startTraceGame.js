@@ -29,22 +29,32 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const isHiragana = rangeId === "hiragana";
   const isKanji = !isHiragana; // いまは kanji or hiragana の2択
 
-  const ALL_PATH = isHiragana
-    ? new URL("data/hiragana/hiragana_all.json", BASE_URL).toString()
-    : new URL("data/kanji/kanji_all.json", BASE_URL).toString();
+  // ✅ データセットは CONTENT_MANIFEST から解決する（漢字以外もここで増やせる）
+  const selectedId = selectedRangeId ?? "kanji_g1";
+  const manifestItem = CONTENT_MANIFEST.find((x) => x.id === selectedId) ?? null;
+  const contentType = manifestItem?.type ?? "kanji";
 
-  const TRACEABLE_PATH = isHiragana
-    ? new URL("data/hiragana/index_traceable_hiragana.json", BASE_URL).toString()
-    : new URL("data/kanji/index_traceable.json", BASE_URL).toString(); 
-  // strokesRef は "strokes/g2/..." なので data/ をベースにする
-  const STROKES_BASE = new URL("data/", BASE_URL).toString();
+  // all.json は manifest の source を信用する
+  const ALL_PATH = new URL(manifestItem?.source ?? "data/kanji/kanji_all.json", BASE_URL).toString();
 
+  // traceable index は type ごとに固定パス（まずは必要分だけ）
+  const TRACEABLE_PATH = (() => {
+    switch (contentType) {
+      case "hiragana": return new URL("data/hiragana/index_traceable_hiragana.json", BASE_URL).toString();
+      case "katakana": return new URL("data/katakana/index_traceable_katakana.json", BASE_URL).toString();
+      case "alphabet": return new URL("data/alphabet/index_traceable_alphabet.json", BASE_URL).toString();
+      case "romaji":   return new URL("data/romaji/index_traceable_romaji.json", BASE_URL).toString();
+      case "kanji":
+      default:         return new URL("data/kanji/index_traceable.json", BASE_URL).toString();
+    }
+  })();
   // selectedRangeId から grade を抽出（漢字のときだけ）
   const gradeFromRange = (() => {
       if (!isKanji) return null;
-      const id = selectedRangeId ?? "kanji_g1";
-      const m = String(id).match(/kanji_g(\d+)/);
-      return m ? Number(m[1]) : null;
+      if (contentType !== "kanji") return null;
+    const id = selectedId ?? "kanji_g1";
+    const m = String(id).match(/kanji_g(\d+)/);
+    return m ? Number(m[1]) : null;
     })();
   const strokesCache = new Map();
 
@@ -713,12 +723,12 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     // 3) grade filter + traceable filter + strokesRef normalize
     const filtered = all
       .filter((it) => {
-        // ✅ ひらがなは it.char を許可、漢字は it.kanji
-        const ch = it?.kanji ?? it?.char;
+        // ✅ 漢字以外も許容（kanji / char / letter / symbol など）
+        const ch = it?.kanji ?? it?.char ?? it?.letter ?? it?.symbol ?? it?.text;
         if (!it?.id || !ch) return false;
         if (!traceSet.has(it.id)) return false;
         // ✅ grade フィルタは漢字のみ
-        if (isKanji && gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
+        if (contentType === "kanji" && gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
         return true;
       })
       .map((it) => {
@@ -1385,7 +1395,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     kanjiCompleted = false;
 
     const item = items[idx];
-    const k = item?.kanji ?? item?.char ?? "?";
+    const k = item?.kanji ?? item?.char ?? item?.letter ?? item?.symbol ?? item?.text ?? "?";
 
     const set = getSetInfo(idx);
     ensureSetRun(set);

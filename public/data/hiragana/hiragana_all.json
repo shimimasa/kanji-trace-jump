@@ -1,13 +1,7 @@
 [
-    {
-      "id": "HIRA_A",
-      "char": "あ",
-      "strokesRef": "strokes/hiragana/hira_a.json"
-    },
-    {
-      "id": "HIRA_I",
-      "char": "い",
-      "strokesRef": "strokes/hiragana/hira_i.json"
-    }
-  ]
-  
+  { "id": "HIRA_A", "char": "あ", "strokesRef": "strokes/hiragana/HIRA_A.json" },
+  { "id": "HIRA_I", "char": "い", "strokesRef": "strokes/hiragana/HIRA_I.json" },
+  { "id": "HIRA_U", "char": "う", "strokesRef": "strokes/hiragana/HIRA_U.json" },
+  { "id": "HIRA_E", "char": "え", "strokesRef": "strokes/hiragana/HIRA_E.json" },
+  { "id": "HIRA_O", "char": "お", "strokesRef": "strokes/hiragana/HIRA_O.json" }
+]
