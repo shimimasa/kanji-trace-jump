@@ -30,3 +30,87 @@ export function distancePointToPolyline(p, poly) {
   }
   return best;
 }
+
+// ---------------------------
+// 旧判定（高精度）で使う純計算ユーティリティ
+// ---------------------------
+
+export function pointAtDistance(poly, d) {
+  if (!poly || poly.length === 0) return { x: 0, y: 0 };
+  if (poly.length === 1) return { ...poly[0] };
+  let acc = 0;
+  for (let i = 1; i < poly.length; i++) {
+    const a = poly[i - 1], b = poly[i];
+    const seg = dist(a, b);
+    if (acc + seg >= d) {
+      const t = seg === 0 ? 0 : (d - acc) / seg;
+      return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
+    }
+    acc += seg;
+  }
+  return { ...poly[poly.length - 1] };
+}
+
+export function resamplePolyline(poly, step) {
+  const len = polylineLength(poly);
+  if (!Number.isFinite(len) || len <= 0) return (poly || []).slice();
+  const out = [];
+  for (let d = 0; d <= len; d += step) out.push(pointAtDistance(poly, d));
+  const last = poly[poly.length - 1];
+  const prev = out[out.length - 1];
+  if (!prev || dist(prev, last) > 0.01) out.push({ x: last.x, y: last.y });
+  return out;
+}
+
+export function normalizeDrawnPoints(points, { step, minMoveEps }) {
+  if (!Array.isArray(points) || points.length === 0) return [];
+  const compact = [points[0]];
+  for (let i = 1; i < points.length; i++) {
+    const prev = compact[compact.length - 1];
+    const cur = points[i];
+    if (dist(prev, cur) >= minMoveEps) compact.push(cur);
+  }
+  if (compact.length < 2) return compact;
+  return resamplePolyline(compact, step);
+}
+
+export function sampleAlongPolyline(poly, n) {
+  const len = polylineLength(poly);
+  if (!Number.isFinite(len) || len <= 0) return (poly || []).slice(0, 1);
+  if (n <= 1) return [pointAtDistance(poly, len * 0.5)];
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const d = (len * i) / (n - 1);
+    out.push(pointAtDistance(poly, d));
+  }
+  return out;
+}
+
+export function avgDistancePolyline(points, poly) {
+  if (!points || points.length === 0 || !poly || poly.length < 2) return Infinity;
+  let sum = 0;
+  for (const p of points) sum += distancePointToPolyline(p, poly);
+  return sum / points.length;
+}
+
+export function getAdaptiveParams(strokeLen, {
+  tolerance,
+  startTol,
+  minHitRate,
+  minDrawLenRate,
+  minCoverRate
+}) {
+  // 短い線ほど甘く、長い線ほど厳密に（旧main.jsの挙動）
+  const short = 12;
+  const long = 60;
+  const t = Math.max(0, Math.min(1, (strokeLen - short) / (long - short)));
+
+  const tol = tolerance + (1 - t) * 4;
+  const coverTol = tol * 1.15;
+  const minHit = minHitRate + t * 0.08;
+  const minDraw = minDrawLenRate + t * 0.07;
+  const minCover = minCoverRate + t * 0.15;
+  const startTol2 = startTol - t * 6;
+
+  return { tol, coverTol, minHit, minDraw, minCover, startTol: startTol2 };
+}

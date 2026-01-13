@@ -1127,6 +1127,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
                 strokes,
                 strokeIndex,
                 isMaster,
+                failStreak, // ← これで「連続失敗救済」まで旧判定と同等に復活
               });
 
       if (setRun) setRun.attempts += 1;
