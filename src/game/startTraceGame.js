@@ -3,11 +3,11 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { markCleared, recordAttempt, recordMasterAttempt, recordMasterPass, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
 import { makeKanjiKey } from "../lib/progressKey.js";
+import { judgeAttempt } from "./judge.js";
 import {
   SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
-  TOLERANCE, START_TOL, MIN_HIT_RATE, MIN_DRAW_LEN_RATE, MIN_COVER_RATE,
-  MIN_POINTS, MIN_MOVE_EPS, RESAMPLE_STEP, COVER_SAMPLES, COMBO_WINDOW_MS,
-  MASTER_FAIL_REASON, failReasonLabel, MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
+  START_TOL, COMBO_WINDOW_MS,
+  failReasonLabel, MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
   TITLE_POPUP_MS, CONFETTI_DEFAULTS,
   TITLE_POPUP_FADE_OUT_MS, MASTER_FAIL_FLASH_MS, MASTER_FAIL_MARK_MS
 } from "./config.js";
@@ -952,8 +952,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
 
   // ---------------------------
-  // 判定（旧main.jsの judgeTrace 周りを必要最低限で移植）
-  // ※ ここも「旧関数を丸ごと貼る」でOK。今回は要点だけ残す
+  // 入力ゲート用の幾何ヘルパ（判定ロジックは judge.js に一本化）
   // ---------------------------
   function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
 
@@ -974,210 +973,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     return best;
   }
 
-// ===========================
-  // Phase 2: master stroke guess
-  // ===========================
-  function avgDistancePolyline(points, poly) {
-    if (!points || points.length === 0 || !poly || poly.length < 2) return Infinity;
-    let sum = 0;
-    for (const p of points) sum += distancePointToPolyline(p, poly);
-    return sum / points.length;
-  }
 
-  function guessStrokeIndex(points, strokes) {
-    let bestI = -1;
-    let bestD = Infinity;
-    for (let i = 0; i < strokes.length; i++) {
-      const d = avgDistancePolyline(points, strokes[i]);
-      if (d < bestD) {
-        bestD = d;
-        bestI = i;
-      }
-    }
-    return { bestI, bestD };
-  }
-
-  // ===========================
-  // Stage1: judge functionization
-  // ===========================
-  function judgeAttempt(points, strokes, strokeIndex) {
-    // returns { ok, reason }
-    if (isMaster && points.length) {
-      const { bestI } = guessStrokeIndex(points, strokes);
-      if (bestI < 0 || bestI !== strokeIndex) {
-        return { ok: false, reason: MASTER_FAIL_REASON.WRONG_ORDER };
-      }
-      return judgeTraceMaster(points, strokes[strokeIndex]); // {ok, reason}
-    }
-    const ok = judgeTrace(points, strokes[strokeIndex]);
-    return { ok, reason: ok ? null : MASTER_FAIL_REASON.BAD_SHAPE };
-  }
-  function polyLength(poly) {
-    let len = 0;
-    for (let i = 1; i < poly.length; i++) len += dist(poly[i - 1], poly[i]);
-    return len;
-  }
-  function normalizeDrawnPoints(points, step = RESAMPLE_STEP, minMove = MIN_MOVE_EPS) {
-    if (!Array.isArray(points) || points.length === 0) return [];
-    const compact = [points[0]];
-    for (let i = 1; i < points.length; i++) {
-      const prev = compact[compact.length - 1];
-      const cur = points[i];
-      if (dist(prev, cur) >= minMove) compact.push(cur);
-    }
-    if (compact.length < 2) return compact;
-    return resamplePolyline(compact, step);
-  }
-  function resamplePolyline(poly, step) {
-    const len = polyLength(poly);
-    if (len <= 0) return poly.slice();
-    const out = [];
-    for (let d = 0; d <= len; d += step) out.push(pointAtDistance(poly, d));
-    const last = poly[poly.length - 1];
-    const prev = out[out.length - 1];
-    if (!prev || dist(prev, last) > 0.01) out.push({ x: last.x, y: last.y });
-    return out;
-  }
-  function pointAtDistance(poly, d) {
-    if (poly.length === 1) return { ...poly[0] };
-    let acc = 0;
-    for (let i = 1; i < poly.length; i++) {
-      const a = poly[i - 1], b = poly[i];
-      const seg = dist(a, b);
-      if (acc + seg >= d) {
-        const t = seg === 0 ? 0 : (d - acc) / seg;
-        return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
-      }
-      acc += seg;
-    }
-    return { ...poly[poly.length - 1] };
-  }
-  function sampleAlongPolyline(poly, n) {
-    const len = polyLength(poly);
-    if (len <= 0) return poly.slice(0, 1);
-    if (n <= 1) return [pointAtDistance(poly, len * 0.5)];
-    const out = [];
-    for (let i = 0; i < n; i++) {
-      const d = (len * i) / (n - 1);
-      out.push(pointAtDistance(poly, d));
-    }
-    return out;
-  }
-
-  function getAdaptiveParams(strokeLen) {
-    const short = 12;
-    const long = 60;
-    const t = Math.max(0, Math.min(1, (strokeLen - short) / (long - short)));
-
-    const tol = TOLERANCE + (1 - t) * 4;
-    const coverTol = tol * 1.15;
-    const minHit = MIN_HIT_RATE + t * 0.08;
-    const minDraw = MIN_DRAW_LEN_RATE + t * 0.07;
-    const minCover = MIN_COVER_RATE + t * 0.15;
-    const startTol = START_TOL - t * 6;
-
-    return { tol, coverTol, minHit, minDraw, minCover, startTol };
-  }
-
-  function judgeTrace(drawnPoints, strokePoly) {
-    if (!Array.isArray(drawnPoints) || drawnPoints.length < MIN_POINTS) return false;
-
-    const dp = normalizeDrawnPoints(drawnPoints, RESAMPLE_STEP, MIN_MOVE_EPS);
-    if (dp.length < 2) return false;
-
-    const strokeLen = polyLength(strokePoly);
-    if (strokeLen <= 0) return false;
-
-    const P = getAdaptiveParams(strokeLen);
-
-    // 連続失敗救済
-    const streak = Math.max(0, Math.min(3, failStreak?.[strokeIndex] ?? 0));
-    if (streak > 0) {
-      P.tol += 3 * streak;
-      P.coverTol = P.tol * 1.15;
-      P.minHit = Math.max(0.28, P.minHit - 0.06 * streak);
-      P.minCover = Math.max(0.18, P.minCover - 0.06 * streak);
-      P.startTol += 3 * streak;
-    }
-
-    const start = dp[0];
-    const s0 = strokePoly[0];
-    if (dist(start, s0) > P.startTol) return false;
-
-    const drawnLen = polyLength(dp);
-    if (drawnLen < strokeLen * P.minDraw) return false;
-
-    let hit = 0;
-    for (const p of dp) if (distancePointToPolyline(p, strokePoly) <= P.tol) hit++;
-    const hitRate = hit / dp.length;
-
-    const samples = sampleAlongPolyline(strokePoly, COVER_SAMPLES);
-    let cover = 0;
-    for (const sp of samples) if (distancePointToPolyline(sp, dp) <= P.coverTol) cover++;
-    const coverRate = cover / samples.length;
-
-    return hitRate >= P.minHit && coverRate >= P.minCover;
-  }
-
-  // ===========================
-  // Master judge (A-2)
-  //  - returns { ok, reason }
-  //  - DOES NOT check order (order is checked outside using guessStrokeIndex)
-  // ===========================
-  function judgeTraceMaster(drawnPoints, strokePoly) {
-    if (!Array.isArray(drawnPoints) || drawnPoints.length < MIN_POINTS) {
-      return { ok: false, reason: MASTER_FAIL_REASON.TOO_SHORT };
-    }
-
-    const dp = normalizeDrawnPoints(drawnPoints, RESAMPLE_STEP, MIN_MOVE_EPS);
-    if (dp.length < 2) {
-      return { ok: false, reason: MASTER_FAIL_REASON.TOO_SHORT };
-    }
-
-    const strokeLen = polyLength(strokePoly);
-    if (strokeLen <= 0) {
-      return { ok: false, reason: MASTER_FAIL_REASON.BAD_SHAPE };
-    }
-
-    const P = getAdaptiveParams(strokeLen);
-    // Masterは救済しない（failStreak緩和を入れない）
-
-    // 開始位置ずれ
-    const start = dp[0];
-    const s0 = strokePoly[0];
-    if (dist(start, s0) > P.startTol) {
-      return { ok: false, reason: MASTER_FAIL_REASON.START_OFF };
-    }
-
-    // 短すぎ
-    const drawnLen = polyLength(dp);    if (drawnLen < strokeLen * P.minDraw) {
-      return { ok: false, reason: MASTER_FAIL_REASON.TOO_SHORT };
-    }
-
-    // 線から離れすぎ（安全柵：明らかに別物）
-    // dpの平均距離がtolよりかなり大きい場合は即外れ
-    let sumD = 0;
-    for (const p of dp) sumD += distancePointToPolyline(p, strokePoly);
-    const avgD = sumD / dp.length;
-    if (avgD > P.tol * 2.2) {
-      return { ok: false, reason: MASTER_FAIL_REASON.FAR_FROM_STROKE };
-    }
-
-    // hit/cover
-    let hit = 0;
-    for (const p of dp) if (distancePointToPolyline(p, strokePoly) <= P.tol) hit++;
-    const hitRate = hit / dp.length;
-
-    const samples = sampleAlongPolyline(strokePoly, COVER_SAMPLES);
-    let cover = 0;
-    for (const sp of samples) if (distancePointToPolyline(sp, dp) <= P.coverTol) cover++;
-    const coverRate = cover / samples.length;
-
-    if (hitRate >= P.minHit && coverRate >= P.minCover) {
-      return { ok: true, reason: null };
-    }
-    return { ok: false, reason: MASTER_FAIL_REASON.BAD_SHAPE };
-  }
 
   function updateTracePath(pts) {
     if (!tracePathEl) return;
@@ -1347,7 +1143,12 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       } catch {}
       lastPointerId = null;
 
-      const { ok, reason } = judgeAttempt(points, strokes, strokeIndex);
+      const { ok, reason } = judgeAttempt({
+                points,
+                strokes,
+                strokeIndex,
+                isMaster,
+              });
 
       if (setRun) setRun.attempts += 1;
 
