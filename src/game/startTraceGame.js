@@ -23,18 +23,29 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const NEKO_URL = new URL("assets/characters/neko.png", BASE_URL).toString();
   const CHAR_SIZE = 14;
 
-   // ✅ StepB: データは kanji_all + index_traceable を参照する
-  const ALL_PATH = new URL("data/kanji/kanji_all.json", BASE_URL).toString();
-  const TRACEABLE_PATH = new URL("data/kanji/index_traceable.json", BASE_URL).toString();
+  // ✅ データセット切替（漢字 / ひらがな…）
+  // まずは hiragana を導入（他カテゴリも同じ要領で増やせる）
+  const rangeId = String(selectedRangeId ?? "kanji_g1");
+  const isHiragana = rangeId === "hiragana";
+  const isKanji = !isHiragana; // いまは kanji or hiragana の2択
+
+  const ALL_PATH = isHiragana
+    ? new URL("data/hiragana/hiragana_all.json", BASE_URL).toString()
+    : new URL("data/kanji/kanji_all.json", BASE_URL).toString();
+
+  const TRACEABLE_PATH = isHiragana
+    ? new URL("data/hiragana/index_traceable_hiragana.json", BASE_URL).toString()
+    : new URL("data/kanji/index_traceable.json", BASE_URL).toString(); 
   // strokesRef は "strokes/g2/..." なので data/ をベースにする
   const STROKES_BASE = new URL("data/", BASE_URL).toString();
 
-  // selectedRangeId から grade を抽出（例: kanji_g3 => 3）
+  // selectedRangeId から grade を抽出（漢字のときだけ）
   const gradeFromRange = (() => {
-    const id = selectedRangeId ?? "kanji_g1";
-    const m = String(id).match(/kanji_g(\d+)/);
-    return m ? Number(m[1]) : null;
-  })();
+      if (!isKanji) return null;
+      const id = selectedRangeId ?? "kanji_g1";
+      const m = String(id).match(/kanji_g(\d+)/);
+      return m ? Number(m[1]) : null;
+    })();
   const strokesCache = new Map();
 
   
@@ -702,9 +713,12 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     // 3) grade filter + traceable filter + strokesRef normalize
     const filtered = all
       .filter((it) => {
-        if (!it?.id || !it?.kanji) return false;
+        // ✅ ひらがなは it.char を許可、漢字は it.kanji
+        const ch = it?.kanji ?? it?.char;
+        if (!it?.id || !ch) return false;
         if (!traceSet.has(it.id)) return false;
-        if (gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
+        // ✅ grade フィルタは漢字のみ
+        if (isKanji && gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
         return true;
       })
       .map((it) => {
@@ -1371,7 +1385,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     kanjiCompleted = false;
 
     const item = items[idx];
-    const k = item?.kanji ?? "?";
+    const k = item?.kanji ?? item?.char ?? "?";
 
     const set = getSetInfo(idx);
     ensureSetRun(set);

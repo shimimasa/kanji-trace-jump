@@ -1,0 +1,13 @@
+[
+    {
+      "id": "HIRA_A",
+      "char": "あ",
+      "strokesRef": "strokes/hiragana/hira_a.json"
+    },
+    {
+      "id": "HIRA_I",
+      "char": "い",
+      "strokesRef": "strokes/hiragana/hira_i.json"
+    }
+  ]
+  
