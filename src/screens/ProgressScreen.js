@@ -90,11 +90,11 @@ export function ProgressScreen(ctx, nav) {
         if (barText) barText.textContent = `達成率 ${pct}%（${clearedCount}/${total}）`;
 
         // ✅ 直近の復習（最新3件）表示
-        if (reviewSummaryEl) {
+        if (reviewSummary) {
             const list = Array.isArray(ctx.progress?.reviewSessions) ? ctx.progress.reviewSessions : [];
             const latest = list.slice(0, 3);
             if (!latest.length) {
-              reviewSummaryEl.innerHTML = `
+              reviewSummary.innerHTML = `
                 <div class="reviewSummaryTitle">直近の復習</div>
                 <div class="muted">まだ復習の記録がありません。</div>
               `;
@@ -112,7 +112,7 @@ export function ProgressScreen(ctx, nav) {
                   </div>
                 `;
               }).join("");
-              reviewSummaryEl.innerHTML = `
+              reviewSummary.innerHTML = `
                 <div class="reviewSummaryTitle">直近の復習</div>
                 <div class="reviewSummaryList">${rows}</div>
               `;
