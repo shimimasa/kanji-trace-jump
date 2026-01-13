@@ -1713,3 +1713,43 @@ body {
 #practiceMaster.btn.big:active{
   transform: translateY(1px);
 }
+/* =========================
+   Title Popup
+========================= */
+.title-popup{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.title-popup.show{
+  opacity: 1;
+}
+.title-popup-inner{
+  background: linear-gradient(180deg, #fff, #f6f8fb);
+  border-radius: 24px;
+  padding: 24px 32px;
+  min-width: 240px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.18);
+  text-align: center;
+  transform: scale(.9);
+  transition: transform .25s ease;
+}
+.title-popup.show .title-popup-inner{
+  transform: scale(1);
+}
+.title-popup-head{
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.title-popup-title{
+  font-weight: 1000;
+  font-size: 22px;
+  color: #2b6cff;
+}

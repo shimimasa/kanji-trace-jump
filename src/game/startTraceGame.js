@@ -45,6 +45,26 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     START_OFF: "START_OFF",     // 開始位置ずれ
     FAR_FROM_STROKE: "FAR_FROM_STROKE", // 線から離れすぎ（安全柵）
   };
+  // ===========================
+  // Title popup (称号獲得演出)
+  // ===========================
+  function showTitlePopup(title) {
+    const el = document.createElement("div");
+    el.className = "title-popup";
+    el.innerHTML = `
+      <div class="title-popup-inner">
+        <div class="title-popup-head">🎉 称号獲得！</div>
+        <div class="title-popup-title">${title}</div>
+      </div>
+    `;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add("show"));
+    setTimeout(() => {
+      el.classList.remove("show");
+      setTimeout(() => el.remove(), 500);
+    }, 2200);
+  }
+
 
   function failReasonLabel(reason) {
     switch (reason) {
@@ -1446,7 +1466,62 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             markCleared(ctx.progress, `${selectedRangeId ?? "kanji"}::${item.id}`);
             // ✅ Masterの合格記録
             if (isMaster) {
-                recordMasterPass(ctx.progress, `${selectedRangeId ?? "kanji"}::${item.id}`);
+              const pKey = `${selectedRangeId ?? "kanji"}::${item.id}`;
+                              // 直前の合格回数を見て「初合格」を判定
+                              const prevPass = ctx.progress?.items?.[pKey]?.masterPasses ?? 0;
+                              recordMasterPass(ctx.progress, pKey);
+              
+                              // ✅ 初合格の称号（A-5: 称号連動）
+                              if (prevPass === 0) {
+                                const added = addTitleToBook({
+                                     title: "MASTER初合格",
+                                     rank: "MASTER",
+                                     rarity: "R",
+                                     at: Date.now(),
+                                   });
+                                   if (added) showTitlePopup("MASTER初合格");
+                              }
+
+                              // =========================
+                // 追加：Master称号の付与判定
+                // =========================
+                const pItem = ctx.progress?.items?.[pKey];
+                const mm = pItem?.masterMistakes ?? {};
+
+                // 書き順マスター：順番×が一度も出ていない
+                if ((mm.WRONG_ORDER ?? 0) === 0) {
+                  addTitleToBook({
+                    title: "書き順マスター",
+                    rank: "MASTER",
+                    rarity: "SR",
+                    at: Date.now(),
+                  });
+                }
+
+                // 線マスター：線×が一度も出ていない
+                if ((mm.BAD_SHAPE ?? 0) === 0) {
+                  addTitleToBook({
+                    title: "線マスター",
+                    rank: "MASTER",
+                    rarity: "R",
+                    at: Date.now(),
+                  });
+                }
+
+                // MASTER皆伝：Master合格数の累計で判定（全漢字合計）
+                const items = ctx.progress?.items ?? {};
+                let totalMasterPasses = 0;
+                for (const k in items) {
+                  totalMasterPasses += items[k]?.masterPasses ?? 0;
+                }
+                if (totalMasterPasses >= 20) {
+                  addTitleToBook({
+                    title: "MASTER皆伝",
+                    rank: "MASTER",
+                    rarity: "SR",
+                    at: Date.now(),
+                  });
+                }
               }
             saveProgress(ctx.progress);
           }
