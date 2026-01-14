@@ -727,7 +727,10 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         // ✅ 漢字以外も許容（kanji / char / letter / symbol など）
         const ch = it?.kanji ?? it?.char ?? it?.letter ?? it?.symbol ?? it?.text;
         if (!it?.id || !ch) return false;
-        if (!traceSet.has(it.id)) return false;
+        // ✅ alphabetは all.json を全件採用（indexが未整備でもJ以降へ進めるようにする）
+        if (contentType !== "alphabet") {
+            if (!traceSet.has(it.id)) return false;
+          }
         // ✅ grade フィルタは漢字のみ
         if (contentType === "kanji" && gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
         return true;
@@ -839,11 +842,40 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (!s?.path) continue;
       out.push(pathDToPolylineBySampling(s.path, 36));
     }
-    // ✅ かな/英字などの座標系を 0..100 に正規化して可視化する
-    // ※ SVGフォント由来（alphabet）はY軸が逆（上向き）になりやすいので flipY する
+    // ✅ alphabetは “それっぽい書き順” に並び替え（点は最後など）
+    const ordered = (contentType === "alphabet") ? reorderLatinStrokes(out) : out;
+
+    // ✅ 座標正規化（alphabetはSVGフォント座標でYが逆なのでflip）
     const flipY = (contentType === "alphabet") || (contentType === "romaji");
-    return normalizePolylinesToViewBox(out, { pad: 6, flipY });
+    return normalizePolylinesToViewBox(ordered, { pad: 6, flipY });
 }
+
+function reorderLatinStrokes(polys) {
+      if (!Array.isArray(polys) || polys.length <= 1) return polys;
+      const info = polys.map((poly, idx) => {
+        const p0 = poly?.[0] ?? { x: 0, y: 0 };
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        let len = 0;
+        for (let i = 1; i < (poly?.length ?? 0); i++) {
+          const a = poly[i - 1], b = poly[i];
+          len += Math.hypot(b.x - a.x, b.y - a.y);
+        }
+        for (const p of poly || []) {
+          minX = Math.min(minX, p.x); minY = Math.min(minY, p.y);
+          maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y);
+        }
+        const w = (maxX - minX), h = (maxY - minY);
+        // 点（i/jのdotなど）っぽい：小さくて短い
+        const isDot = (len < 12) && (w < 6) && (h < 6);
+        return { idx, p0, isDot };
+      });
+      info.sort((a, b) => {
+        if (a.isDot !== b.isDot) return a.isDot ? 1 : -1; // dotは最後
+        if (a.p0.y !== b.p0.y) return a.p0.y - b.p0.y;     // 上→下
+        return a.p0.x - b.p0.x;                            // 左→右
+      });
+      return info.map((x) => polys[x.idx]);
+    }
 
   /**
    * ポリライン群の座標を viewBox(0..100) に収める正規化
