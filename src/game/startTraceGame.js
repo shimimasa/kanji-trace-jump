@@ -747,6 +747,15 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             hiragana_row_ra: ["ら", "り", "る", "れ", "ろ"],
             hiragana_row_wa: ["わ", "を", "ん"],
 
+             // --- ひらがな（濁点/半濁点） ---
+            hiragana_dakuten_ga: ["が", "ぎ", "ぐ", "げ", "ご"],
+            hiragana_dakuten_za: ["ざ", "じ", "ず", "ぜ", "ぞ"],
+            hiragana_dakuten_da: ["だ", "ぢ", "づ", "で", "ど"],
+            hiragana_dakuten_ba: ["ば", "び", "ぶ", "べ", "ぼ"],
+            hiragana_handakuten_pa: ["ぱ", "ぴ", "ぷ", "ぺ", "ぽ"],
+
+            // --- ひらがな（小書き） ---
+            hiragana_small_tsu_ya_yu_yo: ["っ", "ゃ", "ゅ", "ょ"],
             // --- カタカナ（基本） ---
             katakana_row_a:  ["ア", "イ", "ウ", "エ", "オ"],
             katakana_row_ka: ["カ", "キ", "ク", "ケ", "コ"],
@@ -758,6 +767,16 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
             katakana_row_ya: ["ヤ", "ユ", "ヨ"],
             katakana_row_ra: ["ラ", "リ", "ル", "レ", "ロ"],
             katakana_row_wa: ["ワ", "ヲ", "ン"],
+
+            // --- カタカナ（濁点/半濁点） ---
+            katakana_dakuten_ga: ["ガ", "ギ", "グ", "ゲ", "ゴ"],
+            katakana_dakuten_za: ["ザ", "ジ", "ズ", "ゼ", "ゾ"],
+            katakana_dakuten_da: ["ダ", "ヂ", "ヅ", "デ", "ド"],
+            katakana_dakuten_ba: ["バ", "ビ", "ブ", "ベ", "ボ"],
+            katakana_handakuten_pa: ["パ", "ピ", "プ", "ペ", "ポ"],
+
+            // --- カタカナ（小書き） ---
+            katakana_small_tsu_ya_yu_yo: ["ッ", "ャ", "ュ", "ョ"],
           };
           const allow = rowMap[selectedId];
           if (Array.isArray(allow)) return allow.includes(ch);

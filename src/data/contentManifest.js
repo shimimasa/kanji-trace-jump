@@ -23,6 +23,16 @@ export const CONTENT_MANIFEST = [
   { type: "hiragana", id: "hiragana_row_ra", label: "ひらがな（ら行）", source: "data/hiragana/hiragana_all.json" },
   { type: "hiragana", id: "hiragana_row_wa", label: "ひらがな（わ行）", source: "data/hiragana/hiragana_all.json" },
 
+  // ひらがな（濁点/半濁点）
+  { type: "hiragana", id: "hiragana_dakuten_ga", label: "ひらがな（が行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_dakuten_za", label: "ひらがな（ざ行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_dakuten_da", label: "ひらがな（だ行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_dakuten_ba", label: "ひらがな（ば行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_handakuten_pa", label: "ひらがな（ぱ行）", source: "data/hiragana/hiragana_all.json" },
+
+  // ひらがな（小書き）
+  { type: "hiragana", id: "hiragana_small_tsu_ya_yu_yo", label: "ひらがな（小さい っゃゅょ）", source: "data/hiragana/hiragana_all.json" },
+  
   // カタカナ（基本）
   { type: "katakana", id: "katakana_row_a",  label: "カタカナ（ア行）", source: "data/katakana/katakana_all.json" },
   { type: "katakana", id: "katakana_row_ka", label: "カタカナ（カ行）", source: "data/katakana/katakana_all.json" },
@@ -34,6 +44,16 @@ export const CONTENT_MANIFEST = [
   { type: "katakana", id: "katakana_row_ya", label: "カタカナ（ヤ行）", source: "data/katakana/katakana_all.json" },
   { type: "katakana", id: "katakana_row_ra", label: "カタカナ（ラ行）", source: "data/katakana/katakana_all.json" },
   { type: "katakana", id: "katakana_row_wa", label: "カタカナ（ワ行）", source: "data/katakana/katakana_all.json" },
+  
+  // カタカナ（濁点/半濁点）
+  { type: "katakana", id: "katakana_dakuten_ga", label: "カタカナ（ガ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_dakuten_za", label: "カタカナ（ザ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_dakuten_da", label: "カタカナ（ダ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_dakuten_ba", label: "カタカナ（バ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_handakuten_pa", label: "カタカナ（パ行）", source: "data/katakana/katakana_all.json" },
+
+  // カタカナ（小書き）
+  { type: "katakana", id: "katakana_small_tsu_ya_yu_yo", label: "カタカナ（小さい ッャュョ）", source: "data/katakana/katakana_all.json" },
   // アルファベット
   { type: "alphabet", id: "alphabet_upper", label: "アルファベット（大文字）", source: "data/alphabet/alphabet_upper_all.json" },
   { type: "alphabet", id: "alphabet_lower", label: "アルファベット（小文字）", source: "data/alphabet/alphabet_lower_all.json" },
