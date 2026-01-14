@@ -844,10 +844,11 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     }
     // ✅ alphabetは “それっぽい書き順” に並び替え（点は最後など）
     const ordered = (contentType === "alphabet") ? reorderLatinStrokes(out) : out;
+    const oriented = (contentType === "alphabet") ? orientLatinStrokes(ordered) : ordered;
 
     // ✅ 座標正規化（alphabetはSVGフォント座標でYが逆なのでflip）
     const flipY = (contentType === "alphabet") || (contentType === "romaji");
-    return normalizePolylinesToViewBox(ordered, { pad: 6, flipY });
+    return normalizePolylinesToViewBox(oriented, { pad: 6, flipY });
 }
 
 function reorderLatinStrokes(polys) {
@@ -876,6 +877,49 @@ function reorderLatinStrokes(polys) {
       });
       return info.map((x) => polys[x.idx]);
     }
+
+    // ✅ 各strokeの「向き」を自然側に寄せる（上→下、左→右、点は最後など）
+  // - フォント由来のパスは開始点が不自然になりやすいので、reverseするだけでかなり改善する
+  function orientLatinStrokes(polys) {
+    if (!Array.isArray(polys) || polys.length === 0) return polys;
+    return polys.map((poly) => {
+      if (!Array.isArray(poly) || poly.length < 2) return poly;
+      const a = poly[0];
+      const b = poly[poly.length - 1];
+
+      // bounding box
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      for (const p of poly) {
+        minX = Math.min(minX, p.x); minY = Math.min(minY, p.y);
+        maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y);
+      }
+      const w = Math.max(1e-6, maxX - minX);
+      const h = Math.max(1e-6, maxY - minY);
+
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+
+      // 1) 縦線っぽい：上→下にする（yが小さい方を始点へ）
+      if (h > w * 1.4) {
+        if (a.y > b.y) return poly.slice().reverse();
+        return poly;
+      }
+
+      // 2) 横線っぽい：左→右にする（xが小さい方を始点へ）
+      if (w > h * 1.4) {
+        if (a.x > b.x) return poly.slice().reverse();
+        return poly;
+      }
+
+      // 3) 曲線/輪郭：開始点を「左上寄り」にしたい
+      //    目標点：左上(=x小, y小) に近いほうを始点に寄せる
+      const target = { x: minX, y: minY };
+      const da = Math.hypot(a.x - target.x, a.y - target.y);
+      const db = Math.hypot(b.x - target.x, b.y - target.y);
+      if (db < da) return poly.slice().reverse();
+      return poly;
+    });
+  }
 
   /**
    * ポリライン群の座標を viewBox(0..100) に収める正規化
