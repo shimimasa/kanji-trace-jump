@@ -1,0 +1,407 @@
+[
+  {
+    "id": "KATA_U30FC",
+    "char": "ー",
+    "strokesRef": "strokes/katakana/KATA_U30FC.json"
+  },
+  {
+    "id": "KATA_U30A1",
+    "char": "ァ",
+    "strokesRef": "strokes/katakana/KATA_U30A1.json"
+  },
+  {
+    "id": "KATA_U30A2",
+    "char": "ア",
+    "strokesRef": "strokes/katakana/KATA_U30A2.json"
+  },
+  {
+    "id": "KATA_U30A3",
+    "char": "ィ",
+    "strokesRef": "strokes/katakana/KATA_U30A3.json"
+  },
+  {
+    "id": "KATA_U30A4",
+    "char": "イ",
+    "strokesRef": "strokes/katakana/KATA_U30A4.json"
+  },
+  {
+    "id": "KATA_U30A5",
+    "char": "ゥ",
+    "strokesRef": "strokes/katakana/KATA_U30A5.json"
+  },
+  {
+    "id": "KATA_U30A6",
+    "char": "ウ",
+    "strokesRef": "strokes/katakana/KATA_U30A6.json"
+  },
+  {
+    "id": "KATA_U30F4",
+    "char": "ヴ",
+    "strokesRef": "strokes/katakana/KATA_U30F4.json"
+  },
+  {
+    "id": "KATA_U30A7",
+    "char": "ェ",
+    "strokesRef": "strokes/katakana/KATA_U30A7.json"
+  },
+  {
+    "id": "KATA_U30A8",
+    "char": "エ",
+    "strokesRef": "strokes/katakana/KATA_U30A8.json"
+  },
+  {
+    "id": "KATA_U30A9",
+    "char": "ォ",
+    "strokesRef": "strokes/katakana/KATA_U30A9.json"
+  },
+  {
+    "id": "KATA_U30AA",
+    "char": "オ",
+    "strokesRef": "strokes/katakana/KATA_U30AA.json"
+  },
+  {
+    "id": "KATA_U30AB",
+    "char": "カ",
+    "strokesRef": "strokes/katakana/KATA_U30AB.json"
+  },
+  {
+    "id": "KATA_U30AC",
+    "char": "ガ",
+    "strokesRef": "strokes/katakana/KATA_U30AC.json"
+  },
+  {
+    "id": "KATA_U30AD",
+    "char": "キ",
+    "strokesRef": "strokes/katakana/KATA_U30AD.json"
+  },
+  {
+    "id": "KATA_U30AE",
+    "char": "ギ",
+    "strokesRef": "strokes/katakana/KATA_U30AE.json"
+  },
+  {
+    "id": "KATA_U30AF",
+    "char": "ク",
+    "strokesRef": "strokes/katakana/KATA_U30AF.json"
+  },
+  {
+    "id": "KATA_U30B0",
+    "char": "グ",
+    "strokesRef": "strokes/katakana/KATA_U30B0.json"
+  },
+  {
+    "id": "KATA_U30B1",
+    "char": "ケ",
+    "strokesRef": "strokes/katakana/KATA_U30B1.json"
+  },
+  {
+    "id": "KATA_U30B2",
+    "char": "ゲ",
+    "strokesRef": "strokes/katakana/KATA_U30B2.json"
+  },
+  {
+    "id": "KATA_U30B3",
+    "char": "コ",
+    "strokesRef": "strokes/katakana/KATA_U30B3.json"
+  },
+  {
+    "id": "KATA_U30B4",
+    "char": "ゴ",
+    "strokesRef": "strokes/katakana/KATA_U30B4.json"
+  },
+  {
+    "id": "KATA_U30B5",
+    "char": "サ",
+    "strokesRef": "strokes/katakana/KATA_U30B5.json"
+  },
+  {
+    "id": "KATA_U30B6",
+    "char": "ザ",
+    "strokesRef": "strokes/katakana/KATA_U30B6.json"
+  },
+  {
+    "id": "KATA_U30B7",
+    "char": "シ",
+    "strokesRef": "strokes/katakana/KATA_U30B7.json"
+  },
+  {
+    "id": "KATA_U30B8",
+    "char": "ジ",
+    "strokesRef": "strokes/katakana/KATA_U30B8.json"
+  },
+  {
+    "id": "KATA_U30B9",
+    "char": "ス",
+    "strokesRef": "strokes/katakana/KATA_U30B9.json"
+  },
+  {
+    "id": "KATA_U30BA",
+    "char": "ズ",
+    "strokesRef": "strokes/katakana/KATA_U30BA.json"
+  },
+  {
+    "id": "KATA_U30BB",
+    "char": "セ",
+    "strokesRef": "strokes/katakana/KATA_U30BB.json"
+  },
+  {
+    "id": "KATA_U30BC",
+    "char": "ゼ",
+    "strokesRef": "strokes/katakana/KATA_U30BC.json"
+  },
+  {
+    "id": "KATA_U30BD",
+    "char": "ソ",
+    "strokesRef": "strokes/katakana/KATA_U30BD.json"
+  },
+  {
+    "id": "KATA_U30BE",
+    "char": "ゾ",
+    "strokesRef": "strokes/katakana/KATA_U30BE.json"
+  },
+  {
+    "id": "KATA_U30BF",
+    "char": "タ",
+    "strokesRef": "strokes/katakana/KATA_U30BF.json"
+  },
+  {
+    "id": "KATA_U30C0",
+    "char": "ダ",
+    "strokesRef": "strokes/katakana/KATA_U30C0.json"
+  },
+  {
+    "id": "KATA_U30C1",
+    "char": "チ",
+    "strokesRef": "strokes/katakana/KATA_U30C1.json"
+  },
+  {
+    "id": "KATA_U30C2",
+    "char": "ヂ",
+    "strokesRef": "strokes/katakana/KATA_U30C2.json"
+  },
+  {
+    "id": "KATA_U30C4",
+    "char": "ツ",
+    "strokesRef": "strokes/katakana/KATA_U30C4.json"
+  },
+  {
+    "id": "KATA_U30C5",
+    "char": "ヅ",
+    "strokesRef": "strokes/katakana/KATA_U30C5.json"
+  },
+  {
+    "id": "KATA_U30C6",
+    "char": "テ",
+    "strokesRef": "strokes/katakana/KATA_U30C6.json"
+  },
+  {
+    "id": "KATA_U30C7",
+    "char": "デ",
+    "strokesRef": "strokes/katakana/KATA_U30C7.json"
+  },
+  {
+    "id": "KATA_U30C8",
+    "char": "ト",
+    "strokesRef": "strokes/katakana/KATA_U30C8.json"
+  },
+  {
+    "id": "KATA_U30C9",
+    "char": "ド",
+    "strokesRef": "strokes/katakana/KATA_U30C9.json"
+  },
+  {
+    "id": "KATA_U30CA",
+    "char": "ナ",
+    "strokesRef": "strokes/katakana/KATA_U30CA.json"
+  },
+  {
+    "id": "KATA_U30CB",
+    "char": "ニ",
+    "strokesRef": "strokes/katakana/KATA_U30CB.json"
+  },
+  {
+    "id": "KATA_U30CC",
+    "char": "ヌ",
+    "strokesRef": "strokes/katakana/KATA_U30CC.json"
+  },
+  {
+    "id": "KATA_U30CD",
+    "char": "ネ",
+    "strokesRef": "strokes/katakana/KATA_U30CD.json"
+  },
+  {
+    "id": "KATA_U30CE",
+    "char": "ノ",
+    "strokesRef": "strokes/katakana/KATA_U30CE.json"
+  },
+  {
+    "id": "KATA_U30CF",
+    "char": "ハ",
+    "strokesRef": "strokes/katakana/KATA_U30CF.json"
+  },
+  {
+    "id": "KATA_U30D0",
+    "char": "バ",
+    "strokesRef": "strokes/katakana/KATA_U30D0.json"
+  },
+  {
+    "id": "KATA_U30D1",
+    "char": "パ",
+    "strokesRef": "strokes/katakana/KATA_U30D1.json"
+  },
+  {
+    "id": "KATA_U30D2",
+    "char": "ヒ",
+    "strokesRef": "strokes/katakana/KATA_U30D2.json"
+  },
+  {
+    "id": "KATA_U30D3",
+    "char": "ビ",
+    "strokesRef": "strokes/katakana/KATA_U30D3.json"
+  },
+  {
+    "id": "KATA_U30D4",
+    "char": "ピ",
+    "strokesRef": "strokes/katakana/KATA_U30D4.json"
+  },
+  {
+    "id": "KATA_U30D5",
+    "char": "フ",
+    "strokesRef": "strokes/katakana/KATA_U30D5.json"
+  },
+  {
+    "id": "KATA_U30D6",
+    "char": "ブ",
+    "strokesRef": "strokes/katakana/KATA_U30D6.json"
+  },
+  {
+    "id": "KATA_U30D7",
+    "char": "プ",
+    "strokesRef": "strokes/katakana/KATA_U30D7.json"
+  },
+  {
+    "id": "KATA_U30D8",
+    "char": "ヘ",
+    "strokesRef": "strokes/katakana/KATA_U30D8.json"
+  },
+  {
+    "id": "KATA_U30D9",
+    "char": "ベ",
+    "strokesRef": "strokes/katakana/KATA_U30D9.json"
+  },
+  {
+    "id": "KATA_U30DA",
+    "char": "ペ",
+    "strokesRef": "strokes/katakana/KATA_U30DA.json"
+  },
+  {
+    "id": "KATA_U30DB",
+    "char": "ホ",
+    "strokesRef": "strokes/katakana/KATA_U30DB.json"
+  },
+  {
+    "id": "KATA_U30DC",
+    "char": "ボ",
+    "strokesRef": "strokes/katakana/KATA_U30DC.json"
+  },
+  {
+    "id": "KATA_U30DD",
+    "char": "ポ",
+    "strokesRef": "strokes/katakana/KATA_U30DD.json"
+  },
+  {
+    "id": "KATA_U30DE",
+    "char": "マ",
+    "strokesRef": "strokes/katakana/KATA_U30DE.json"
+  },
+  {
+    "id": "KATA_U30DF",
+    "char": "ミ",
+    "strokesRef": "strokes/katakana/KATA_U30DF.json"
+  },
+  {
+    "id": "KATA_U30E0",
+    "char": "ム",
+    "strokesRef": "strokes/katakana/KATA_U30E0.json"
+  },
+  {
+    "id": "KATA_U30E1",
+    "char": "メ",
+    "strokesRef": "strokes/katakana/KATA_U30E1.json"
+  },
+  {
+    "id": "KATA_U30E2",
+    "char": "モ",
+    "strokesRef": "strokes/katakana/KATA_U30E2.json"
+  },
+  {
+    "id": "KATA_U30E3",
+    "char": "ャ",
+    "strokesRef": "strokes/katakana/KATA_U30E3.json"
+  },
+  {
+    "id": "KATA_U30E4",
+    "char": "ヤ",
+    "strokesRef": "strokes/katakana/KATA_U30E4.json"
+  },
+  {
+    "id": "KATA_U30E5",
+    "char": "ュ",
+    "strokesRef": "strokes/katakana/KATA_U30E5.json"
+  },
+  {
+    "id": "KATA_U30E6",
+    "char": "ユ",
+    "strokesRef": "strokes/katakana/KATA_U30E6.json"
+  },
+  {
+    "id": "KATA_U30E7",
+    "char": "ョ",
+    "strokesRef": "strokes/katakana/KATA_U30E7.json"
+  },
+  {
+    "id": "KATA_U30E8",
+    "char": "ヨ",
+    "strokesRef": "strokes/katakana/KATA_U30E8.json"
+  },
+  {
+    "id": "KATA_U30E9",
+    "char": "ラ",
+    "strokesRef": "strokes/katakana/KATA_U30E9.json"
+  },
+  {
+    "id": "KATA_U30EA",
+    "char": "リ",
+    "strokesRef": "strokes/katakana/KATA_U30EA.json"
+  },
+  {
+    "id": "KATA_U30EB",
+    "char": "ル",
+    "strokesRef": "strokes/katakana/KATA_U30EB.json"
+  },
+  {
+    "id": "KATA_U30EC",
+    "char": "レ",
+    "strokesRef": "strokes/katakana/KATA_U30EC.json"
+  },
+  {
+    "id": "KATA_U30ED",
+    "char": "ロ",
+    "strokesRef": "strokes/katakana/KATA_U30ED.json"
+  },
+  {
+    "id": "KATA_U30EF",
+    "char": "ワ",
+    "strokesRef": "strokes/katakana/KATA_U30EF.json"
+  },
+  {
+    "id": "KATA_U30F2",
+    "char": "ヲ",
+    "strokesRef": "strokes/katakana/KATA_U30F2.json"
+  },
+  {
+    "id": "KATA_U30F3",
+    "char": "ン",
+    "strokesRef": "strokes/katakana/KATA_U30F3.json"
+  }
+]

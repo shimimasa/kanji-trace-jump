@@ -1,0 +1,397 @@
+[
+  {
+    "id": "HIRA_U3041",
+    "char": "ぁ",
+    "strokesRef": "strokes/hiragana/HIRA_U3041.json"
+  },
+  {
+    "id": "HIRA_U3042",
+    "char": "あ",
+    "strokesRef": "strokes/hiragana/HIRA_U3042.json"
+  },
+  {
+    "id": "HIRA_U3043",
+    "char": "ぃ",
+    "strokesRef": "strokes/hiragana/HIRA_U3043.json"
+  },
+  {
+    "id": "HIRA_U3044",
+    "char": "い",
+    "strokesRef": "strokes/hiragana/HIRA_U3044.json"
+  },
+  {
+    "id": "HIRA_U3045",
+    "char": "ぅ",
+    "strokesRef": "strokes/hiragana/HIRA_U3045.json"
+  },
+  {
+    "id": "HIRA_U3046",
+    "char": "う",
+    "strokesRef": "strokes/hiragana/HIRA_U3046.json"
+  },
+  {
+    "id": "HIRA_U3047",
+    "char": "ぇ",
+    "strokesRef": "strokes/hiragana/HIRA_U3047.json"
+  },
+  {
+    "id": "HIRA_U3048",
+    "char": "え",
+    "strokesRef": "strokes/hiragana/HIRA_U3048.json"
+  },
+  {
+    "id": "HIRA_U3049",
+    "char": "ぉ",
+    "strokesRef": "strokes/hiragana/HIRA_U3049.json"
+  },
+  {
+    "id": "HIRA_U304A",
+    "char": "お",
+    "strokesRef": "strokes/hiragana/HIRA_U304A.json"
+  },
+  {
+    "id": "HIRA_U304B",
+    "char": "か",
+    "strokesRef": "strokes/hiragana/HIRA_U304B.json"
+  },
+  {
+    "id": "HIRA_U304C",
+    "char": "が",
+    "strokesRef": "strokes/hiragana/HIRA_U304C.json"
+  },
+  {
+    "id": "HIRA_U304D",
+    "char": "き",
+    "strokesRef": "strokes/hiragana/HIRA_U304D.json"
+  },
+  {
+    "id": "HIRA_U304E",
+    "char": "ぎ",
+    "strokesRef": "strokes/hiragana/HIRA_U304E.json"
+  },
+  {
+    "id": "HIRA_U304F",
+    "char": "く",
+    "strokesRef": "strokes/hiragana/HIRA_U304F.json"
+  },
+  {
+    "id": "HIRA_U3050",
+    "char": "ぐ",
+    "strokesRef": "strokes/hiragana/HIRA_U3050.json"
+  },
+  {
+    "id": "HIRA_U3051",
+    "char": "け",
+    "strokesRef": "strokes/hiragana/HIRA_U3051.json"
+  },
+  {
+    "id": "HIRA_U3052",
+    "char": "げ",
+    "strokesRef": "strokes/hiragana/HIRA_U3052.json"
+  },
+  {
+    "id": "HIRA_U3053",
+    "char": "こ",
+    "strokesRef": "strokes/hiragana/HIRA_U3053.json"
+  },
+  {
+    "id": "HIRA_U3054",
+    "char": "ご",
+    "strokesRef": "strokes/hiragana/HIRA_U3054.json"
+  },
+  {
+    "id": "HIRA_U3055",
+    "char": "さ",
+    "strokesRef": "strokes/hiragana/HIRA_U3055.json"
+  },
+  {
+    "id": "HIRA_U3056",
+    "char": "ざ",
+    "strokesRef": "strokes/hiragana/HIRA_U3056.json"
+  },
+  {
+    "id": "HIRA_U3057",
+    "char": "し",
+    "strokesRef": "strokes/hiragana/HIRA_U3057.json"
+  },
+  {
+    "id": "HIRA_U3058",
+    "char": "じ",
+    "strokesRef": "strokes/hiragana/HIRA_U3058.json"
+  },
+  {
+    "id": "HIRA_U3059",
+    "char": "す",
+    "strokesRef": "strokes/hiragana/HIRA_U3059.json"
+  },
+  {
+    "id": "HIRA_U305A",
+    "char": "ず",
+    "strokesRef": "strokes/hiragana/HIRA_U305A.json"
+  },
+  {
+    "id": "HIRA_U305B",
+    "char": "せ",
+    "strokesRef": "strokes/hiragana/HIRA_U305B.json"
+  },
+  {
+    "id": "HIRA_U305C",
+    "char": "ぜ",
+    "strokesRef": "strokes/hiragana/HIRA_U305C.json"
+  },
+  {
+    "id": "HIRA_U305D",
+    "char": "そ",
+    "strokesRef": "strokes/hiragana/HIRA_U305D.json"
+  },
+  {
+    "id": "HIRA_U305E",
+    "char": "ぞ",
+    "strokesRef": "strokes/hiragana/HIRA_U305E.json"
+  },
+  {
+    "id": "HIRA_U305F",
+    "char": "た",
+    "strokesRef": "strokes/hiragana/HIRA_U305F.json"
+  },
+  {
+    "id": "HIRA_U3060",
+    "char": "だ",
+    "strokesRef": "strokes/hiragana/HIRA_U3060.json"
+  },
+  {
+    "id": "HIRA_U3061",
+    "char": "ち",
+    "strokesRef": "strokes/hiragana/HIRA_U3061.json"
+  },
+  {
+    "id": "HIRA_U3062",
+    "char": "ぢ",
+    "strokesRef": "strokes/hiragana/HIRA_U3062.json"
+  },
+  {
+    "id": "HIRA_U3064",
+    "char": "つ",
+    "strokesRef": "strokes/hiragana/HIRA_U3064.json"
+  },
+  {
+    "id": "HIRA_U3065",
+    "char": "づ",
+    "strokesRef": "strokes/hiragana/HIRA_U3065.json"
+  },
+  {
+    "id": "HIRA_U3066",
+    "char": "て",
+    "strokesRef": "strokes/hiragana/HIRA_U3066.json"
+  },
+  {
+    "id": "HIRA_U3067",
+    "char": "で",
+    "strokesRef": "strokes/hiragana/HIRA_U3067.json"
+  },
+  {
+    "id": "HIRA_U3068",
+    "char": "と",
+    "strokesRef": "strokes/hiragana/HIRA_U3068.json"
+  },
+  {
+    "id": "HIRA_U3069",
+    "char": "ど",
+    "strokesRef": "strokes/hiragana/HIRA_U3069.json"
+  },
+  {
+    "id": "HIRA_U306A",
+    "char": "な",
+    "strokesRef": "strokes/hiragana/HIRA_U306A.json"
+  },
+  {
+    "id": "HIRA_U306B",
+    "char": "に",
+    "strokesRef": "strokes/hiragana/HIRA_U306B.json"
+  },
+  {
+    "id": "HIRA_U306C",
+    "char": "ぬ",
+    "strokesRef": "strokes/hiragana/HIRA_U306C.json"
+  },
+  {
+    "id": "HIRA_U306D",
+    "char": "ね",
+    "strokesRef": "strokes/hiragana/HIRA_U306D.json"
+  },
+  {
+    "id": "HIRA_U306E",
+    "char": "の",
+    "strokesRef": "strokes/hiragana/HIRA_U306E.json"
+  },
+  {
+    "id": "HIRA_U306F",
+    "char": "は",
+    "strokesRef": "strokes/hiragana/HIRA_U306F.json"
+  },
+  {
+    "id": "HIRA_U3070",
+    "char": "ば",
+    "strokesRef": "strokes/hiragana/HIRA_U3070.json"
+  },
+  {
+    "id": "HIRA_U3071",
+    "char": "ぱ",
+    "strokesRef": "strokes/hiragana/HIRA_U3071.json"
+  },
+  {
+    "id": "HIRA_U3072",
+    "char": "ひ",
+    "strokesRef": "strokes/hiragana/HIRA_U3072.json"
+  },
+  {
+    "id": "HIRA_U3073",
+    "char": "び",
+    "strokesRef": "strokes/hiragana/HIRA_U3073.json"
+  },
+  {
+    "id": "HIRA_U3074",
+    "char": "ぴ",
+    "strokesRef": "strokes/hiragana/HIRA_U3074.json"
+  },
+  {
+    "id": "HIRA_U3075",
+    "char": "ふ",
+    "strokesRef": "strokes/hiragana/HIRA_U3075.json"
+  },
+  {
+    "id": "HIRA_U3076",
+    "char": "ぶ",
+    "strokesRef": "strokes/hiragana/HIRA_U3076.json"
+  },
+  {
+    "id": "HIRA_U3077",
+    "char": "ぷ",
+    "strokesRef": "strokes/hiragana/HIRA_U3077.json"
+  },
+  {
+    "id": "HIRA_U3078",
+    "char": "へ",
+    "strokesRef": "strokes/hiragana/HIRA_U3078.json"
+  },
+  {
+    "id": "HIRA_U3079",
+    "char": "べ",
+    "strokesRef": "strokes/hiragana/HIRA_U3079.json"
+  },
+  {
+    "id": "HIRA_U307A",
+    "char": "ぺ",
+    "strokesRef": "strokes/hiragana/HIRA_U307A.json"
+  },
+  {
+    "id": "HIRA_U307B",
+    "char": "ほ",
+    "strokesRef": "strokes/hiragana/HIRA_U307B.json"
+  },
+  {
+    "id": "HIRA_U307C",
+    "char": "ぼ",
+    "strokesRef": "strokes/hiragana/HIRA_U307C.json"
+  },
+  {
+    "id": "HIRA_U307D",
+    "char": "ぽ",
+    "strokesRef": "strokes/hiragana/HIRA_U307D.json"
+  },
+  {
+    "id": "HIRA_U307E",
+    "char": "ま",
+    "strokesRef": "strokes/hiragana/HIRA_U307E.json"
+  },
+  {
+    "id": "HIRA_U307F",
+    "char": "み",
+    "strokesRef": "strokes/hiragana/HIRA_U307F.json"
+  },
+  {
+    "id": "HIRA_U3080",
+    "char": "む",
+    "strokesRef": "strokes/hiragana/HIRA_U3080.json"
+  },
+  {
+    "id": "HIRA_U3081",
+    "char": "め",
+    "strokesRef": "strokes/hiragana/HIRA_U3081.json"
+  },
+  {
+    "id": "HIRA_U3082",
+    "char": "も",
+    "strokesRef": "strokes/hiragana/HIRA_U3082.json"
+  },
+  {
+    "id": "HIRA_U3083",
+    "char": "ゃ",
+    "strokesRef": "strokes/hiragana/HIRA_U3083.json"
+  },
+  {
+    "id": "HIRA_U3084",
+    "char": "や",
+    "strokesRef": "strokes/hiragana/HIRA_U3084.json"
+  },
+  {
+    "id": "HIRA_U3085",
+    "char": "ゅ",
+    "strokesRef": "strokes/hiragana/HIRA_U3085.json"
+  },
+  {
+    "id": "HIRA_U3086",
+    "char": "ゆ",
+    "strokesRef": "strokes/hiragana/HIRA_U3086.json"
+  },
+  {
+    "id": "HIRA_U3087",
+    "char": "ょ",
+    "strokesRef": "strokes/hiragana/HIRA_U3087.json"
+  },
+  {
+    "id": "HIRA_U3088",
+    "char": "よ",
+    "strokesRef": "strokes/hiragana/HIRA_U3088.json"
+  },
+  {
+    "id": "HIRA_U3089",
+    "char": "ら",
+    "strokesRef": "strokes/hiragana/HIRA_U3089.json"
+  },
+  {
+    "id": "HIRA_U308A",
+    "char": "り",
+    "strokesRef": "strokes/hiragana/HIRA_U308A.json"
+  },
+  {
+    "id": "HIRA_U308B",
+    "char": "る",
+    "strokesRef": "strokes/hiragana/HIRA_U308B.json"
+  },
+  {
+    "id": "HIRA_U308C",
+    "char": "れ",
+    "strokesRef": "strokes/hiragana/HIRA_U308C.json"
+  },
+  {
+    "id": "HIRA_U308D",
+    "char": "ろ",
+    "strokesRef": "strokes/hiragana/HIRA_U308D.json"
+  },
+  {
+    "id": "HIRA_U308F",
+    "char": "わ",
+    "strokesRef": "strokes/hiragana/HIRA_U308F.json"
+  },
+  {
+    "id": "HIRA_U3092",
+    "char": "を",
+    "strokesRef": "strokes/hiragana/HIRA_U3092.json"
+  },
+  {
+    "id": "HIRA_U3093",
+    "char": "ん",
+    "strokesRef": "strokes/hiragana/HIRA_U3093.json"
+  }
+]
