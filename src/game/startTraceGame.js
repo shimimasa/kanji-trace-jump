@@ -839,15 +839,17 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (!s?.path) continue;
       out.push(pathDToPolylineBySampling(s.path, 36));
     }
-     // ✅ かなSVGなどは座標系が 0..100 ではないことがあるので正規化して可視化する
-    return normalizePolylinesToViewBox(out, { pad: 6 });
+    // ✅ かな/英字などの座標系を 0..100 に正規化して可視化する
+    // ※ SVGフォント由来（alphabet）はY軸が逆（上向き）になりやすいので flipY する
+    const flipY = (contentType === "alphabet") || (contentType === "romaji");
+    return normalizePolylinesToViewBox(out, { pad: 6, flipY });
 }
 
   /**
    * ポリライン群の座標を viewBox(0..100) に収める正規化
    * - かな/英字など、元SVGの座標系が大きい(例: 0..1024)場合でも描画できるようにする
    */
-  function normalizePolylinesToViewBox(polys, { pad = 6 } = {}) {
+  function normalizePolylinesToViewBox(polys, { pad = 6, flipY = false } = {}) {
     if (!Array.isArray(polys) || polys.length === 0) return polys;
 
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -883,7 +885,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     const norm = polys.map((poly) =>
       (poly || []).map((p) => ({
         x: (p.x - cx) * s + tcx,
-        y: (p.y - cy) * s + tcy,
+        // ✅ flipY=true のときは上下反転（フォント座標系対策）
+        y: (flipY ? -(p.y - cy) : (p.y - cy)) * s + tcy,
       }))
     );
 
