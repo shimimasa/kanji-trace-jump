@@ -842,13 +842,18 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (!s?.path) continue;
       out.push(pathDToPolylineBySampling(s.path, 36));
     }
-    // ✅ alphabetは “それっぽい書き順” に並び替え（点は最後など）
-    const ordered = (contentType === "alphabet") ? reorderLatinStrokes(out) : out;
-    const oriented = (contentType === "alphabet") ? orientLatinStrokes(ordered) : ordered;
+    const isLatin = (contentType === "alphabet") || (contentType === "romaji");
 
-    // ✅ 座標正規化（alphabetはSVGフォント座標でYが逆なのでflip）
-    const flipY = (contentType === "alphabet") || (contentType === "romaji");
-    return normalizePolylinesToViewBox(oriented, { pad: 6, flipY });
+    // 1) まずは順序（点は最後など）
+    const ordered = isLatin ? reorderLatinStrokes(out) : out;
+
+    // 2) 座標正規化（フォント座標系→表示座標系へ。ここでflipYも確定）
+    const flipY = isLatin;
+    const normed = normalizePolylinesToViewBox(ordered, { pad: 6, flipY });
+
+    // 3) ✅ 最後に「表示後の座標」に対して向き補正をかける（これが効く）
+    const oriented = isLatin ? orientLatinStrokes(normed) : normed;
+    return oriented;
 }
 
 function reorderLatinStrokes(polys) {
