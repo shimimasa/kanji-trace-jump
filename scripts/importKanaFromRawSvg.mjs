@@ -74,25 +74,33 @@ function extractPathDs(svgText) {
   const strokesGroup = pickGroup("strokes");
   const target = strokesGroup ?? svgText; // フォーマット違いの保険
   
-    // ✅ 改善：strokes グループ内の「1画ごとの sub <g>」を走査し、
-    // その中の最初の <path d="..."> だけを採用する。
-    // （見た目用の重複パスやガイドパスの混入を避ける）
-    const reSubG = /<g\b[^>]*>([\s\S]*?)<\/g>/gi;
-    const reFirstPath = /<path\b[^>]*\sd="([^"]+)"/i;
-  
-    const picked = [];
-    let gm;
-    while ((gm = reSubG.exec(target))) {
-      const inner = gm[1] ?? "";
-      const pm = reFirstPath.exec(inner);
-      if (pm?.[1]) {
-        const d = pm[1].trim();
-        if (d) picked.push(d);
-      }
+  // ✅ 本命：data-strokesvg="stroke" を持つ path だけ抜く（strokesvgの正規データ）
+  // 例: <path data-strokesvg="stroke" d="..."/>
+  const picked = [];
+  const reStrokePath = /<path\b[^>]*data-strokesvg=["']stroke["'][^>]*\sd="([^"]+)"/gi;
+  let sm;
+  while ((sm = reStrokePath.exec(target))) {
+    const d = (sm[1] ?? "").trim();
+    if (d) picked.push(d);
+  }
+  if (picked.length > 0) return dedupe(picked);
+
+  // ✅ 次善：sub <g> から最初の path（フォーマットが違うSVG用）
+  const reSubG = /<g\b[^>]*>([\s\S]*?)<\/g>/gi;
+  const reFirstPath = /<path\b[^>]*\sd="([^"]+)"/i;
+  const picked2 = [];
+  let gm;
+  while ((gm = reSubG.exec(target))) {
+    const inner = gm[1] ?? "";
+    const pm = reFirstPath.exec(inner);
+    if (pm?.[1]) {
+      const d = pm[1].trim();
+      if (d) picked2.push(d);
     }
-  
-    // sub <g> が取れないSVGもあるのでフォールバック（従来方式）
-    if (picked.length > 0) return dedupe(picked);
+  }
+  if (picked2.length > 0) return dedupe(picked2); 
+
+
   
     const out = [];
     const rePath = /<path\b[^>]*\sd="([^"]+)"/gi;
