@@ -15,6 +15,10 @@ import path from "node:path";
 const ROOT = path.resolve(process.cwd());
 const kind = process.argv[2];
 
+console.log("[importKanaFromRawSvg] start");
+console.log("[importKanaFromRawSvg] cwd =", ROOT);
+console.log("[importKanaFromRawSvg] kind =", kind);
+
 if (!kind || !["hiragana", "katakana"].includes(kind)) {
   console.error("Usage: node scripts/importKanaFromRawSvg.mjs <hiragana|katakana>");
   process.exit(1);
@@ -130,3 +134,10 @@ function main() {
   console.log("  Wrote:", ALL_PATH);
   console.log("  Wrote:", IDX_PATH);
 }
+
+try {
+    main();
+  } catch (e) {
+    console.error("❌ importKanaFromRawSvg failed:", e?.stack ?? e);
+    process.exit(99);
+  }
