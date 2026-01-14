@@ -60,10 +60,24 @@ function makeId(kind, ch) {
 }
 
 function extractPathDs(svgText) {
+  // ✅ strokesvg(dist) は <g data-strokesvg="strokes"> の中が「なぞる線」
+  // shadows/clipPath まで拾うと重なりが崩れるので、まず strokes グループだけを抽出する。
+  const pickGroup = (key) => {
+    const reGroup = new RegExp(
+      `<g\\b[^>]*data-strokesvg=["']${key}["'][^>]*>([\\s\\S]*?)<\\/g>`,
+      "i"
+    );
+    const m = reGroup.exec(svgText);
+    return m ? m[1] : null;
+  };
+
+  const strokesGroup = pickGroup("strokes");
+  const target = strokesGroup ?? svgText; // フォーマット違いの保険
+
   const out = [];
-  const re = /<path\b[^>]*\sd="([^"]+)"/g;
+  const rePath = /<path\b[^>]*\sd="([^"]+)"/gi;
   let m;
-  while ((m = re.exec(svgText))) {
+  while ((m = rePath.exec(target))) {
     const d = (m[1] ?? "").trim();
     if (d) out.push(d);
   }
