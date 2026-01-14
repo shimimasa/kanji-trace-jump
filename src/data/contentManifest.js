@@ -10,11 +10,30 @@ export const CONTENT_MANIFEST = [
   { type: "kanji", id: "kanji_g8",  label: "漢字（中2）",  source: "data/kanji/kanji_all.json" },
   { type: "kanji", id: "kanji_g9",  label: "漢字（中3）",  source: "data/kanji/kanji_all.json" },
   { type: "kanji", id: "kanji_g10", label: "漢字（高校/常用拡張）", source: "data/kanji/kanji_all.json" },
-  // ✅ 追加：かな / 英字など（まずは導入用の最小セットだけ入れる）
-  // ひらがな
-  { type: "hiragana", id: "hiragana_row_a", label: "ひらがな（あ行）", source: "data/hiragana/hiragana_all.json" },
-  // カタカナ
-  { type: "katakana", id: "katakana_row_a", label: "カタカナ（ア行）", source: "data/katakana/katakana_all.json" },
+  // ✅ 追加：かな（行セットを一気に拡大）
+  // ひらがな（基本）
+  { type: "hiragana", id: "hiragana_row_a",  label: "ひらがな（あ行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_ka", label: "ひらがな（か行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_sa", label: "ひらがな（さ行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_ta", label: "ひらがな（た行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_na", label: "ひらがな（な行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_ha", label: "ひらがな（は行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_ma", label: "ひらがな（ま行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_ya", label: "ひらがな（や行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_ra", label: "ひらがな（ら行）", source: "data/hiragana/hiragana_all.json" },
+  { type: "hiragana", id: "hiragana_row_wa", label: "ひらがな（わ行）", source: "data/hiragana/hiragana_all.json" },
+
+  // カタカナ（基本）
+  { type: "katakana", id: "katakana_row_a",  label: "カタカナ（ア行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_ka", label: "カタカナ（カ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_sa", label: "カタカナ（サ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_ta", label: "カタカナ（タ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_na", label: "カタカナ（ナ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_ha", label: "カタカナ（ハ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_ma", label: "カタカナ（マ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_ya", label: "カタカナ（ヤ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_ra", label: "カタカナ（ラ行）", source: "data/katakana/katakana_all.json" },
+  { type: "katakana", id: "katakana_row_wa", label: "カタカナ（ワ行）", source: "data/katakana/katakana_all.json" },
   // アルファベット
   { type: "alphabet", id: "alphabet_upper", label: "アルファベット（大文字）", source: "data/alphabet/alphabet_upper_all.json" },
   { type: "alphabet", id: "alphabet_lower", label: "アルファベット（小文字）", source: "data/alphabet/alphabet_lower_all.json" },

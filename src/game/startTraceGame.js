@@ -735,8 +735,29 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   
           // 行セット（manifestの id に合わせる）
           const rowMap = {
-            hiragana_row_a: ["あ", "い", "う", "え", "お"],
-            katakana_row_a: ["ア", "イ", "ウ", "エ", "オ"],
+            // --- ひらがな（基本） ---
+            hiragana_row_a:  ["あ", "い", "う", "え", "お"],
+            hiragana_row_ka: ["か", "き", "く", "け", "こ"],
+            hiragana_row_sa: ["さ", "し", "す", "せ", "そ"],
+            hiragana_row_ta: ["た", "ち", "つ", "て", "と"],
+            hiragana_row_na: ["な", "に", "ぬ", "ね", "の"],
+            hiragana_row_ha: ["は", "ひ", "ふ", "へ", "ほ"],
+            hiragana_row_ma: ["ま", "み", "む", "め", "も"],
+            hiragana_row_ya: ["や", "ゆ", "よ"],
+            hiragana_row_ra: ["ら", "り", "る", "れ", "ろ"],
+            hiragana_row_wa: ["わ", "を", "ん"],
+
+            // --- カタカナ（基本） ---
+            katakana_row_a:  ["ア", "イ", "ウ", "エ", "オ"],
+            katakana_row_ka: ["カ", "キ", "ク", "ケ", "コ"],
+            katakana_row_sa: ["サ", "シ", "ス", "セ", "ソ"],
+            katakana_row_ta: ["タ", "チ", "ツ", "テ", "ト"],
+            katakana_row_na: ["ナ", "ニ", "ヌ", "ネ", "ノ"],
+            katakana_row_ha: ["ハ", "ヒ", "フ", "ヘ", "ホ"],
+            katakana_row_ma: ["マ", "ミ", "ム", "メ", "モ"],
+            katakana_row_ya: ["ヤ", "ユ", "ヨ"],
+            katakana_row_ra: ["ラ", "リ", "ル", "レ", "ロ"],
+            katakana_row_wa: ["ワ", "ヲ", "ン"],
           };
           const allow = rowMap[selectedId];
           if (Array.isArray(allow)) return allow.includes(ch);
