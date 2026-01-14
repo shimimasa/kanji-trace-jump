@@ -1131,6 +1131,13 @@ function reorderLatinStrokes(polys) {
   function getStrokeAnchor(strokes, i) {
     const poly = strokes?.[i];
     if (!poly || poly.length < 2) return { x: 50, y: 50 };
+
+    // ✅ alphabet は「始点ドット」を“本当の始点”に置く（漢字のように途中60%にしない）
+    // flipY/並び替え後の poly[0] が「その画の開始点」になる
+    if (contentType === "alphabet") {
+      const p0 = poly[0];
+      return { x: p0.x, y: p0.y };
+    }
     let total = 0;
     const seg = [];
     for (let k = 0; k < poly.length - 1; k++) {
