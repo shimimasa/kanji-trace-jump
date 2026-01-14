@@ -60,57 +60,86 @@ function makeId(kind, ch) {
 }
 
 function extractPathDs(svgText) {
-  // ✅ strokesvg(dist) は <g data-strokesvg="strokes"> の中が「なぞる線」
-  // shadows/clipPath まで拾うと重なりが崩れるので、まず strokes グループだけを抽出する。
-  const pickGroup = (key) => {
-    const reGroup = new RegExp(
-      `<g\\b[^>]*data-strokesvg=["']${key}["'][^>]*>([\\s\\S]*?)<\\/g>`,
-      "i"
-    );
-    const m = reGroup.exec(svgText);
-    return m ? m[1] : null;
-  };
-
-  const strokesGroup = pickGroup("strokes");
-  const target = strokesGroup ?? svgText; // フォーマット違いの保険
   
-  // ✅ 本命：data-strokesvg="stroke" を持つ path だけ抜く（strokesvgの正規データ）
-  // 例: <path data-strokesvg="stroke" d="..."/>
-  const picked = [];
-  const reStrokePath = /<path\b[^>]*data-strokesvg=["']stroke["'][^>]*\sd="([^"]+)"/gi;
-  let sm;
-  while ((sm = reStrokePath.exec(target))) {
-    const d = (sm[1] ?? "").trim();
-    if (d) picked.push(d);
+ // strokesvg(dist) は <g data-strokesvg="strokes"> の中に
+  // style="--i:N"（画番号）で stroke が並ぶ。
+  // ただし 1画の中に複数pathが入ることがあるため、
+  // 「同じ--i内の候補pathから自然な座標のものを1つ選ぶ」方式にする。
+
+  const m = /<g\b[^>]*data-strokesvg=["']strokes["'][^>]*>([\s\S]*?)<\/g>/i.exec(svgText);
+  const target = m ? m[1] : svgText;
+
+  // --i の block: <path style="--i:N" .../>  または <g style="--i:N">...</g>
+  const blocks = [];
+  const reBlock = /<(path|g)\b[^>]*style="[^"]*--i:(\d+)[^"]*"[^>]*>([\s\S]*?)<\/\1>|<path\b[^>]*style="[^"]*--i:(\d+)[^"]*"[^>]*\/>/gi;
+  let bm;
+  while ((bm = reBlock.exec(target))) {
+    const tag = bm[1] || "path";
+    const idx = Number(bm[2] ?? bm[4]);
+    const inner = bm[3] ?? bm[0] ?? "";
+    if (Number.isFinite(idx)) blocks.push({ idx, inner, raw: bm[0] });
   }
-  if (picked.length > 0) return dedupe(picked);
 
-  // ✅ 次善：sub <g> から最初の path（フォーマットが違うSVG用）
-  const reSubG = /<g\b[^>]*>([\s\S]*?)<\/g>/gi;
-  const reFirstPath = /<path\b[^>]*\sd="([^"]+)"/i;
-  const picked2 = [];
-  let gm;
-  while ((gm = reSubG.exec(target))) {
-    const inner = gm[1] ?? "";
-    const pm = reFirstPath.exec(inner);
-    if (pm?.[1]) {
-      const d = pm[1].trim();
-      if (d) picked2.push(d);
+  // もしブロック抽出できない形式なら、従来の fallback
+  if (!blocks.length) {
+    const ds = [];
+    const reAny = /<path\b[^>]*\sd="([^"]+)"/gi;
+    let pm;
+    while ((pm = reAny.exec(target))) {
+      const d = (pm[1] ?? "").trim();
+      if (d) ds.push(d);
     }
+    return dedupe(ds);
   }
-  if (picked2.length > 0) return dedupe(picked2); 
 
+  blocks.sort((a, b) => a.idx - b.idx);
 
-  
-    const out = [];
-    const rePath = /<path\b[^>]*\sd="([^"]+)"/gi;
-    let m;
-    while ((m = rePath.exec(target))) {
-      const d = (m[1] ?? "").trim();
-      if (d) out.push(d);
+  const out = [];
+  for (const b of blocks) {
+    // その block 内の d 候補を全部取る
+    const candidates = [];
+    const reD = /<path\b[^>]*\sd="([^"]+)"/gi;
+    let pm;
+    const src = b.inner || b.raw || "";
+    while ((pm = reD.exec(src))) {
+      const d = (pm[1] ?? "").trim();
+      if (d) candidates.push(d);
     }
-    return dedupe(out);
+
+    if (!candidates.length && b.raw) {
+      // self-closing path の場合（<path ... d="..."/>）
+      const mm = /<path\b[^>]*\sd="([^"]+)"/i.exec(b.raw);
+      if (mm?.[1]) candidates.push(mm[1].trim());
+    }
+
+    if (!candidates.length) continue;
+
+    // ✅ 「最大座標が小さい」ものを採用（1126 みたいな外れを落とす）
+    let best = candidates[0];
+    let bestScore = scorePath(best);
+    for (const d of candidates.slice(1)) {
+      const s = scorePath(d);
+      if (s < bestScore) {
+        best = d;
+        bestScore = s;
+      }
+    }
+    out.push(best);
+  }
+
+  return dedupe(out);
 }
+
+function scorePath(d) {
+    // path文字列から数値を抜く。最大絶対値が大きいほど「外れ」っぽい。
+    const nums = d.match(/-?\d+(\.\d+)?/g) || [];
+    let maxAbs = 0;
+    for (const s of nums) {
+      const v = Number(s);
+      if (Number.isFinite(v)) maxAbs = Math.max(maxAbs, Math.abs(v));
+    }
+    return maxAbs;
+  }
 
 function dedupe(arr) {
     const seen = new Set();
