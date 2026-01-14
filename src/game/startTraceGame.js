@@ -39,7 +39,12 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     switch (contentType) {
       case "hiragana": return new URL("data/hiragana/index_traceable_hiragana.json", BASE_URL).toString();
       case "katakana": return new URL("data/katakana/index_traceable_katakana.json", BASE_URL).toString();
-      case "alphabet": return new URL("data/alphabet/index_traceable_alphabet.json", BASE_URL).toString();
+      case "alphabet":
+                // ✅ upper/lower を分ける（混在すると「大文字を選んだのに小文字が出る」事故になる）
+                if (String(selectedId).includes("upper")) {
+                  return new URL("data/alphabet/index_traceable_alphabet_upper.json", BASE_URL).toString();
+                }
+                return new URL("data/alphabet/index_traceable_alphabet_lower.json", BASE_URL).toString();
       case "romaji":   return new URL("data/romaji/index_traceable_romaji.json", BASE_URL).toString();
       case "kanji":
       default:         return new URL("data/kanji/index_traceable.json", BASE_URL).toString();

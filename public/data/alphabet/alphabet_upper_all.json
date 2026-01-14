@@ -1,5 +1,132 @@
 [
-      { "id": "ALPHA_U_A", "letter": "A", "strokesRef": "strokes/alphabet/upper/ALPHA_U_A.json" },
-      { "id": "ALPHA_U_B", "letter": "B", "strokesRef": "strokes/alphabet/upper/ALPHA_U_B.json" },
-      { "id": "ALPHA_U_C", "letter": "C", "strokesRef": "strokes/alphabet/upper/ALPHA_U_C.json" }
-    ]
+  {
+    "id": "ALPHA_U0041",
+    "letter": "A",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0041.json"
+  },
+  {
+    "id": "ALPHA_U0042",
+    "letter": "B",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0042.json"
+  },
+  {
+    "id": "ALPHA_U0043",
+    "letter": "C",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0043.json"
+  },
+  {
+    "id": "ALPHA_U0044",
+    "letter": "D",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0044.json"
+  },
+  {
+    "id": "ALPHA_U0045",
+    "letter": "E",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0045.json"
+  },
+  {
+    "id": "ALPHA_U0046",
+    "letter": "F",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0046.json"
+  },
+  {
+    "id": "ALPHA_U0047",
+    "letter": "G",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0047.json"
+  },
+  {
+    "id": "ALPHA_U0048",
+    "letter": "H",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0048.json"
+  },
+  {
+    "id": "ALPHA_U0049",
+    "letter": "I",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0049.json"
+  },
+  {
+    "id": "ALPHA_U004A",
+    "letter": "J",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004A.json"
+  },
+  {
+    "id": "ALPHA_U004B",
+    "letter": "K",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004B.json"
+  },
+  {
+    "id": "ALPHA_U004C",
+    "letter": "L",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004C.json"
+  },
+  {
+    "id": "ALPHA_U004D",
+    "letter": "M",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004D.json"
+  },
+  {
+    "id": "ALPHA_U004E",
+    "letter": "N",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004E.json"
+  },
+  {
+    "id": "ALPHA_U004F",
+    "letter": "O",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004F.json"
+  },
+  {
+    "id": "ALPHA_U0050",
+    "letter": "P",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0050.json"
+  },
+  {
+    "id": "ALPHA_U0051",
+    "letter": "Q",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0051.json"
+  },
+  {
+    "id": "ALPHA_U0052",
+    "letter": "R",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0052.json"
+  },
+  {
+    "id": "ALPHA_U0053",
+    "letter": "S",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0053.json"
+  },
+  {
+    "id": "ALPHA_U0054",
+    "letter": "T",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0054.json"
+  },
+  {
+    "id": "ALPHA_U0055",
+    "letter": "U",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0055.json"
+  },
+  {
+    "id": "ALPHA_U0056",
+    "letter": "V",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0056.json"
+  },
+  {
+    "id": "ALPHA_U0057",
+    "letter": "W",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0057.json"
+  },
+  {
+    "id": "ALPHA_U0058",
+    "letter": "X",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0058.json"
+  },
+  {
+    "id": "ALPHA_U0059",
+    "letter": "Y",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0059.json"
+  },
+  {
+    "id": "ALPHA_U005A",
+    "letter": "Z",
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U005A.json"
+  }
+]
