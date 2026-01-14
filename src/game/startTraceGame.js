@@ -23,12 +23,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const NEKO_URL = new URL("assets/characters/neko.png", BASE_URL).toString();
   const CHAR_SIZE = 14;
 
-  // ✅ データセット切替（漢字 / ひらがな…）
-  // まずは hiragana を導入（他カテゴリも同じ要領で増やせる）
-  const rangeId = String(selectedRangeId ?? "kanji_g1");
-  const isHiragana = rangeId === "hiragana";
-  const isKanji = !isHiragana; // いまは kanji or hiragana の2択
-
   // ✅ データセットは CONTENT_MANIFEST から解決する（漢字以外もここで増やせる）
   const selectedId = selectedRangeId ?? "kanji_g1";
   const manifestItem = CONTENT_MANIFEST.find((x) => x.id === selectedId) ?? null;
@@ -50,8 +44,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   })();
   // selectedRangeId から grade を抽出（漢字のときだけ）
   const gradeFromRange = (() => {
-      if (!isKanji) return null;
-      if (contentType !== "kanji") return null;
+    if (contentType !== "kanji") return null;
     const id = selectedId ?? "kanji_g1";
     const m = String(id).match(/kanji_g(\d+)/);
     return m ? Number(m[1]) : null;
@@ -710,9 +703,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   async function loadData() {
     // 1) all
     const resAll = await fetch(ALL_PATH, { cache: "no-store" });
-    if (!resAll.ok) throw new Error(`kanji_all HTTP ${resAll.status}`);
+    if (!resAll.ok) throw new Error(`all.json HTTP ${resAll.status}`);
     const all = await resAll.json();
-    if (!Array.isArray(all)) throw new Error("kanji_all.json は配列である必要があります");
+    if (!Array.isArray(all)) throw new Error("all.json は配列である必要があります");
 
     // 2) traceable ids
     const resTr = await fetch(TRACEABLE_PATH, { cache: "no-store" });
@@ -745,6 +738,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function normalizeStrokesRef(ref, grade, id) {
         if (!ref) return null;
         const r = String(ref);
+        // ✅ 漢字以外は “そのまま” を原則にする（余計な推測で壊さない）
+        // 例: strokes/hiragana/... はそのまま、将来 data/traces/... 形式でもOK
+        if (contentType !== "kanji") return r;
         // すでに "strokes/..." ならそのまま
         if (r.startsWith("strokes/")) return r;
         // 旧形式 "g1/g1-001.json" を "strokes/g1/g1-001.json" に

@@ -1,0 +1,7 @@
+[
+      { "id": "ROM_A", "text": "a", "strokesRef": "strokes/romaji/ROM_A.json" },
+      { "id": "ROM_I", "text": "i", "strokesRef": "strokes/romaji/ROM_I.json" },
+      { "id": "ROM_U", "text": "u", "strokesRef": "strokes/romaji/ROM_U.json" },
+      { "id": "ROM_E", "text": "e", "strokesRef": "strokes/romaji/ROM_E.json" },
+      { "id": "ROM_O", "text": "o", "strokesRef": "strokes/romaji/ROM_O.json" }
+    ]

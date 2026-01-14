@@ -1,0 +1,18 @@
+<svg data-strokesvg="イ" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="30a4c">
+      <use href="#30a4a"/>
+    </clipPath>
+    <clipPath id="30a4d">
+      <use href="#30a4b"/>
+    </clipPath>
+  </defs>
+  <g data-strokesvg="shadows" style="fill:var(--shadow,#ccc)">
+    <path id="30a4a" d="M580 442a1390 1390 0 0 0 200-192q19-24 19-37 0-14-18-27-16-12-36-19-19-8-27-8-9 0-12 5-3 2-3 6 1 5 4 10 3 6 3 14v3q-3 17-30 57-27 39-90 97-63 59-171 133-108 75-271 160-29 15-29 29l1 4q3 4 13 4 12 0 51-14a1207 1207 0 0 0 218-107q67-37 134-85z"/>
+    <path id="30a4b" d="M529 894v3l5 18q4 17 13 31 9 16 24 16l8-1q11-3 17-21 7-18 7-35V798a3970 3970 0 0 0 2-185l1-74v-38q0-27-3-37t-23-22c-48-26-52 11-44 33l2 9v40l-1 68-2 171v102q0 5-4 12z"/>
+  </g>
+  <g data-strokesvg="strokes" style="stroke:var(--stroke,#000);fill:none;stroke-width:128;stroke-linecap:round">
+    <path style="--i:0" d="M721 91c150 270-548 565-548 565" clip-path="url(#30a4c)"/>
+    <path style="--i:1" d="m540 367 32 538" clip-path="url(#30a4d)"/>
+  </g>
+</svg>

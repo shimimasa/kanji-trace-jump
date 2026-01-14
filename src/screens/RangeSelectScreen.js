@@ -8,6 +8,9 @@ const TYPE_LABEL = {
   alphabet: "アルファベット",
 };
 
+// 表示順（カテゴリの導線順に固定）
+const TYPE_ORDER = ["hiragana", "katakana", "alphabet", "romaji", "kanji"];
+
 export function RangeSelectScreen(ctx, nav) {
   return {
     async mount() {
@@ -28,8 +31,15 @@ export function RangeSelectScreen(ctx, nav) {
       `;
 
       const list = el.querySelector("#list");
-      list.innerHTML = Object.keys(grouped).map(type => {
-        const items = grouped[type].map(item => {
+      
+      const types = TYPE_ORDER
+        .filter((t) => Array.isArray(grouped[t]) && grouped[t].length > 0)
+        .concat(Object.keys(grouped).filter((t) => !TYPE_ORDER.includes(t))); // 未知typeも末尾に出す
+
+      list.innerHTML = types.map(type => {
+        const items = [...(grouped[type] ?? [])]
+          .sort((a, b) => String(a?.label ?? "").localeCompare(String(b?.label ?? ""), "ja"))
+          .map(item => {
           const checked = item.id === current ? "checked" : "";
           return `
             <label class="row">

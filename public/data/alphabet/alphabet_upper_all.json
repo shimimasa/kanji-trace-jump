@@ -1,0 +1,5 @@
+[
+      { "id": "ALPHA_U_A", "letter": "A", "strokesRef": "strokes/alphabet/upper/ALPHA_U_A.json" },
+      { "id": "ALPHA_U_B", "letter": "B", "strokesRef": "strokes/alphabet/upper/ALPHA_U_B.json" },
+      { "id": "ALPHA_U_C", "letter": "C", "strokesRef": "strokes/alphabet/upper/ALPHA_U_C.json" }
+    ]

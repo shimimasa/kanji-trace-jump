@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/dist/hiragana/あ.svg" />
+    <link rel="stylesheet" href="index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Preview animatable stroke diagrams for Japanese kana."
+    />
+    <title>StrokeSVG Preview</title>
+  </head>
+  <body class="max-w-screen-md mx-auto my-4 px-4">
+    <main un-cloak class="flex flex-col gap-4">
+      <h1 class="font-bold text-3xl">StrokeSVG Preview</h1>
+      <div class="relative">
+        <input
+          id="searchInput"
+          type="text"
+          class="h-10 w-full rounded-md border border-stone-300 py-2 px-3 ring-offset-white placeholder:text-stone-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
+          placeholder="Search for character..."
+        />
+        <ul
+          id="searchList"
+          class="border border-stone-300 rounded-md flex-col overflow-y-auto max-h-96 w-full z-50 drop-shadow-lg absolute hidden bg-white"
+          role="listbox"
+          onmousedown="event.preventDefault()"
+        ></ul>
+      </div>
+      <div class="flex flex-wrap gap-4">
+        <svg
+          id="previewSvg"
+          class="border border-stone-300 rounded-md min-w-[250px] min-h-[250px] aspect-square flex-1"
+        ></svg>
+        <div class="py-2 flex-1">
+          <h2 id="previewText" class="text-2xl mb-2 text-center">
+            No character selected
+          </h2>
+          <input
+            aria-label="Animation progress"
+            id="progressSlider"
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            value="1"
+            autocomplete="off"
+            class="block cursor-pointer w-full mb-4"
+            disabled
+          />
+          <div id="controls" class="flex gap-4 justify-center">
+            <button
+              aria-label="Previous stroke"
+              disabled
+              class="px-4 py-4 border border-stone-300 rounded-md inline-flex justify-center items-center hover:bg-stone-100 hover:text-stone-900 ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
+            >
+              <div class="i-fluent:rewind-16-regular text-4xl"></div>
+            </button>
+            <button
+              aria-label="Play/Pause stroke"
+              disabled
+              class="px-4 py-4 bg-stone-900 text-stone-50 hover:bg-stone-900/90 rounded-md ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
+            >
+              <div class="i-fluent:video-play-pause-20-filled text-4xl"></div>
+            </button>
+            <button
+              aria-label="Next stroke"
+              disabled
+              class="px-4 py-4 border border-stone-300 rounded-md inline-flex justify-center items-center hover:bg-stone-100 hover:text-stone-900 ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stone-950 focus-visible:ring-offset-2"
+            >
+              <div class="i-fluent:fast-forward-16-regular text-4xl"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-wrap justify-evenly text-2xl">
+        <div>
+          <h3 class="font-bold">Hiragana</h3>
+          <div
+            id="hiraganaBank"
+            class="grid grid-cols-5 gap-2 font-['Klee_One'] font-600"
+          ></div>
+        </div>
+        <div>
+          <h3 class="font-bold">Katakana</h3>
+          <div
+            id="katakanaBank"
+            class="grid grid-cols-5 gap-2 font-['Klee_One'] font-600"
+          ></div>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import { strokeAnimator, svgLoader, kanaChart } from "./index.js";
+
+      function debounce(func, time) {
+        let timeout;
+        return (...args) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), time);
+        };
+      }
+
+      const activeResultClasses = ["bg-stone-100", "text-stone-900"];
+
+      const searchInput = document.getElementById("searchInput");
+      const searchList = document.getElementById("searchList");
+
+      searchInput.addEventListener("input", debounce(showSearchResults, 300));
+      searchInput.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowUp" && e.key !== "ArrowDown" && e.key != "Enter") {
+          return;
+        }
+        e.preventDefault();
+        if (lastActiveIndex == null) return;
+
+        if (e.key === "Enter") {
+          const listItem = searchList.children[lastActiveIndex];
+          setPreview(listItem.id);
+          searchInput.blur();
+        } else if (e.key === "ArrowUp") {
+          setActiveResult(
+            (lastActiveIndex - 1 + searchList.childElementCount) %
+              searchList.childElementCount
+          );
+        } else {
+          setActiveResult((lastActiveIndex + 1) % searchList.childElementCount);
+        }
+      });
+
+      searchInput.addEventListener("focus", () => {
+        searchList.classList.remove("hidden");
+        searchList.classList.add("flex");
+      });
+      searchInput.addEventListener("blur", () => {
+        searchList.classList.add("hidden");
+        searchList.classList.remove("flex");
+      });
+
+      let lastActiveIndex = null;
+      function setActiveResult(index) {
+        if (index === lastActiveIndex) return;
+
+        if (lastActiveIndex != null) {
+          const lastItem = searchList.children[lastActiveIndex];
+          lastItem.setAttribute("aria-selected", "false");
+          lastItem.classList.remove(...activeResultClasses);
+        }
+
+        const listItem = searchList.children[index];
+        searchList.setAttribute("aria-activedescendant", listItem.id);
+        listItem.setAttribute("aria-selected", "true");
+        listItem.classList.add(...activeResultClasses);
+
+        lastActiveIndex = index;
+      }
+
+      function showSearchResults(event) {
+        function getRelevantKana(input) {
+          if (input.length === 0) return [];
+
+          const testRomaji = /[a-zA-Z-]+/.test(input);
+          const testHira = /[ぁ-ゖ]+/.test(input);
+          const testKata = /[ァ-ヶ]+/.test(input);
+
+          const relevant = [];
+          const romajiRelavant = [];
+
+          for (const col of kanaChart) {
+            for (const info of col) {
+              if (!info) continue;
+
+              if (testHira && input.includes(info.hiragana)) {
+                relevant.push(info.hiragana);
+                break;
+              }
+              if (testKata && input.includes(info.katakana)) {
+                relevant.push(info.katakana);
+                break;
+              }
+
+              if (testRomaji) {
+                for (const spelling of info.romaji) {
+                  const match = RegExp(spelling).exec(input);
+                  if (match) {
+                    romajiRelavant.push([info, spelling.length, match.index]);
+                    break;
+                  }
+                }
+              }
+            }
+          }
+          romajiRelavant.sort(([_, l1, p1], [__, l2, p2]) => {
+            if (l1 === l2) return p1 - p2; // then sort by earlier position
+            return l2 - l1; // sort by longest
+          });
+
+          romajiRelavant.forEach(([info]) => {
+            if (info.hiragana) relevant.push(info.hiragana);
+            if (info.katakana) relevant.push(info.katakana);
+          });
+
+          return relevant;
+        }
+
+        const newChildren = [];
+        getRelevantKana(event.target.value).forEach((kana, index) => {
+          if (index > 0) {
+            const divider = document.createElement("li");
+            divider.appendChild(document.createElement("hr"));
+            searchList.append(divider);
+          }
+
+          const listItem = document.createElement("li");
+          const charSpan = document.createElement("span");
+          const infoSpan = document.createElement("span");
+
+          infoSpan.textContent = getUnicodeName(kana);
+          infoSpan.className = "text-stone-500 font-mono";
+
+          charSpan.textContent = kana;
+          charSpan.className = "font-['Klee_One'] font-600 w-20";
+
+          listItem.id = kana;
+          listItem.setAttribute("role", "option");
+          listItem.setAttribute("aria-selected", "false");
+          listItem.setAttribute("data-", "false");
+          listItem.addEventListener("click", () => {
+            setPreview(kana);
+            searchInput.blur();
+          });
+          listItem.addEventListener("pointerenter", () =>
+            setActiveResult(index)
+          );
+          listItem.className =
+            "h-10 px-3 flex justify-between items-center cursor-pointer";
+
+          listItem.append(charSpan, infoSpan);
+          newChildren.push(listItem);
+        });
+
+        searchList.replaceChildren(...newChildren);
+
+        if (newChildren.length) {
+          lastActiveIndex = null;
+          setActiveResult(0);
+        }
+      }
+
+      function getSyllabary(char) {
+        return char.codePointAt(0) < 0x30a0 ? "hiragana" : "katakana";
+      }
+
+      function getUnicodeName(kana) {
+        const syllabary = getSyllabary(kana);
+
+        let romaji;
+
+        kanaChart.some((row) =>
+          row.some((cell) => {
+            if (!cell || cell[syllabary] !== kana) {
+              return false;
+            }
+            romaji = cell.romaji[0];
+            return true;
+          })
+        );
+
+        return `U+${kana
+          .codePointAt(0)
+          .toString(16)} ${syllabary} ${romaji}`.toUpperCase();
+      }
+
+      const previewSvg = document.getElementById("previewSvg");
+      const previewText = document.getElementById("previewText");
+
+      const controls = document.getElementById("controls").children;
+      const progressSlider = document.getElementById("progressSlider");
+
+      let animator;
+
+      controls[0].addEventListener("click", () => animator.prev());
+      controls[1].addEventListener("click", () => animator.toggle());
+      controls[2].addEventListener("click", () => animator.next());
+      progressSlider.addEventListener("input", (e) => {
+        animator.setProgress(parseFloat(e.target.value));
+      });
+
+      const { load } = svgLoader(previewSvg);
+
+      async function setPreview(kana) {
+        const title = `${kana} ${getUnicodeName(kana)}`;
+
+        progressSlider.setAttribute("disabled", "");
+        controls[0].setAttribute("disabled", "");
+        controls[1].setAttribute("disabled", "");
+        controls[2].setAttribute("disabled", "");
+
+        const fileSrc = `./dist/${getSyllabary(kana)}/${kana}.svg`;
+        if (animator) animator.stop();
+        progressSlider.value = 1;
+
+        previewText.textContent = title;
+        try {
+          await load(fileSrc);
+          animator = strokeAnimator(previewSvg, {
+            progressCallback: (t) => (progressSlider.value = t),
+          });
+          progressSlider.removeAttribute("disabled");
+          controls[0].removeAttribute("disabled");
+          controls[1].removeAttribute("disabled");
+          controls[2].removeAttribute("disabled");
+        } catch (e) {
+          previewSvg.replaceChildren();
+          alert(e);
+        }
+      }
+
+      function setupBanks(syllabary, element) {
+        for (const col of kanaChart) {
+          for (const row of col) {
+            const option = document.createElement("span");
+
+            option.className = "border border-stone-300 rounded-md h-12 w-12";
+            if (row && row[syllabary]) {
+              option.textContent = row[syllabary];
+              option.className +=
+                " inline-flex justify-center items-center cursor-pointer hover:bg-stone-100 hover:text-stone-900";
+
+              option.title = getUnicodeName(row[syllabary]);
+            }
+
+            element.appendChild(option);
+          }
+        }
+
+        element.addEventListener("click", (e) => {
+          if (!e.target.textContent || e.target.textContent.length > 1) return;
+          setPreview(e.target.textContent);
+        });
+      }
+
+      const hiraganaBank = document.getElementById("hiraganaBank");
+      const katakanaBank = document.getElementById("katakanaBank");
+      setupBanks("hiragana", hiraganaBank);
+      setupBanks("katakana", katakanaBank);
+    </script>
+  </body>
+</html>
