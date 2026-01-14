@@ -60,55 +60,68 @@ function makeId(kind, ch) {
 }
 
 function extractPathDs(svgText) {
-// ✅ strokesvg(dist) の正しい取り方：
-  // 1) <defs> 内の <path id="..." d="..."> を辞書化
-  // 2) <g data-strokesvg="strokes"> 内の <use href="#id" style="--i:N"> を順番に集め
-  // 3) id -> d を引いて strokes にする
-
-  const defsMap = new Map(); // id -> d
-  const reDefPath = /<path\b[^>]*\bid="([^"]+)"[^>]*\sd="([^"]+)"/gi;
-  let dm;
-  while ((dm = reDefPath.exec(svgText))) {
-    const id = (dm[1] ?? "").trim();
-    const d = (dm[2] ?? "").trim();
-    if (id && d) defsMap.set(id, d);
-  }
+// ✅ strokesvg(dist) の実態に合わせて：
+  // - <g data-strokesvg="strokes"> の中に
+  //   (A) <path style="--i:N" d="...">
+  //   (B) <g style="--i:N"> ... <path d="..."> ... </g>
+  // が混在する。
+  // よって N ごとに候補dを集めて、各Nから1つだけ採用する。
 
   const strokesGroup = extractGroupByAttr(svgText, "g", "data-strokesvg", "strokes");
   const target = strokesGroup ?? svgText;
 
-  // <use href="#3042a" style="--i:0" .../>
-  // xlink:href 版も拾う
-  const uses = [];
-  const reUse = /<use\b[^>]*(?:href|xlink:href)=["']#([^"']+)["'][^>]*\bstyle=["'][^"']*--i:(\d+)[^"']*["'][^>]*\/?>/gi;
-  let um;
-  while ((um = reUse.exec(target))) {
-    const id = (um[1] ?? "").trim();
-    const i = Number(um[2]);
-    if (!id || !Number.isFinite(i)) continue;
-    uses.push({ i, id });
-  }
+  const byI = new Map(); // i -> d candidates[]
+  const pushCand = (i, d) => {
+    if (!Number.isFinite(i) || !d) return;
+    if (!byI.has(i)) byI.set(i, []);
+    byI.get(i).push(d);
+  };
 
-  if (uses.length > 0) {
-    uses.sort((a, b) => a.i - b.i);
-    const out = [];
-    for (const u of uses) {
-      const d = defsMap.get(u.id);
-      if (d) out.push(d);
-    }
-    return dedupe(out);
-  }
-
-  // それ以外のSVG（保険）：従来通り path d を全部拾う
-  const ds = [];
-  const reAny = /<path\b[^>]*\sd="([^"]+)"/gi;
+  // (A) path style="--i:N" d="..."
+  const rePathI = /<path\b[^>]*\bstyle=["'][^"']*--i:(\d+)[^"']*["'][^>]*\sd="([^"]+)"/gi;
   let m;
-  while ((m = reAny.exec(target))) {
-    const d = (m[1] ?? "").trim();
-    if (d) ds.push(d);
+  while ((m = rePathI.exec(target))) {
+    pushCand(Number(m[1]), (m[2] ?? "").trim());
   }
-  return dedupe(ds);
-}
+
+  // (B) g style="--i:N"> ... </g> を “ネスト対応” で抜く
+  //   → 内部の <path d="..."> をすべて候補として追加
+  for (const { i, inner } of extractGroupsByStyleI(target, "g")) {
+    const reInnerPath = /<path\b[^>]*\sd="([^"]+)"/gi;
+    let pm;
+    while ((pm = reInnerPath.exec(inner))) {
+      pushCand(i, (pm[1] ?? "").trim());
+    }
+  }
+
+  // もし --i が取れないSVGなら、最後の保険で全部拾う（ただしdedupe）
+  if (byI.size === 0) {
+    const ds = [];
+    const reAny = /<path\b[^>]*\sd="([^"]+)"/gi;
+    let am;
+    while ((am = reAny.exec(target))) {
+      const d = (am[1] ?? "").trim();
+      if (d) ds.push(d);
+    }
+    return dedupe(ds);
+  }
+  // N昇順で、各Nから「もっとも自然な座標」のdを1つだけ選ぶ
+  const keys = Array.from(byI.keys()).sort((a, b) => a - b);
+  const out = [];
+  for (const i of keys) {
+    const cands = dedupe(byI.get(i));
+    // 外れ（1126みたいな巨大座標）を落とすため、maxAbs最小を採用
+    let best = cands[0];
+    let bestScore = scorePath(best);
+    for (const d of cands.slice(1)) {
+      const s = scorePath(d);
+      if (s < bestScore) { best = d; bestScore = s; }
+    }
+    out.push(best);
+  }
+  return dedupe(out);
+ }
+
 
 function scorePath(d) {
     // path文字列から数値を抜く。最大絶対値が大きいほど「外れ」っぽい。
@@ -158,6 +171,45 @@ function extractGroupByAttr(src, tagName, attrName, attrValue) {
     return null;
   }  
 
+  // ✅ style="--i:N" を持つ <g> をネスト対応で全部抜く（strokesGroup内用）
+function extractGroupsByStyleI(src, tagName = "g") {
+    // <g ... style="...--i:N...">
+    const openRe = new RegExp(`<${tagName}\\b[^>]*style=["'][^"']*--i:(\\d+)[^"']*["'][^>]*>`, "ig");
+    const closeRe = new RegExp(`</${tagName}>`, "ig");
+  
+    const results = [];
+    let m;
+    while ((m = openRe.exec(src))) {
+      const iVal = Number(m[1]);
+      const startIdx = m.index + m[0].length;
+      let depth = 1;
+  
+      // closeRe / openRe の探索開始位置を合わせる
+      openRe.lastIndex = startIdx;
+      closeRe.lastIndex = startIdx;
+  
+      while (true) {
+        const no = openRe.exec(src);
+        const nc = closeRe.exec(src);
+        if (!nc) break;
+        if (no && no.index < nc.index) {
+          depth++;
+          continue;
+        }
+        depth--;
+        if (depth === 0) {
+          const endIdx = nc.index;
+          const inner = src.slice(startIdx, endIdx);
+          results.push({ i: iVal, inner });
+          // 次の検索位置を closeTag の後ろへ
+          openRe.lastIndex = nc.index + nc[0].length;
+          break;
+        }
+      }
+    }
+    return results;
+  }
+  
 
 function dedupe(arr) {
     const seen = new Set();
