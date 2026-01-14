@@ -777,7 +777,55 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (!s?.path) continue;
       out.push(pathDToPolylineBySampling(s.path, 36));
     }
-    return out;
+     // ✅ かなSVGなどは座標系が 0..100 ではないことがあるので正規化して可視化する
+    return normalizePolylinesToViewBox(out, { pad: 6 });
+}
+
+  /**
+   * ポリライン群の座標を viewBox(0..100) に収める正規化
+   * - かな/英字など、元SVGの座標系が大きい(例: 0..1024)場合でも描画できるようにする
+   */
+  function normalizePolylinesToViewBox(polys, { pad = 6 } = {}) {
+    if (!Array.isArray(polys) || polys.length === 0) return polys;
+
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    let any = false;
+
+    for (const poly of polys) {
+      for (const p of poly || []) {
+        if (!p || !Number.isFinite(p.x) || !Number.isFinite(p.y)) continue;
+        any = true;
+        minX = Math.min(minX, p.x);
+        minY = Math.min(minY, p.y);
+        maxX = Math.max(maxX, p.x);
+        maxY = Math.max(maxY, p.y);
+      }
+    }
+    if (!any) return polys;
+
+    const w = Math.max(1e-6, maxX - minX);
+    const h = Math.max(1e-6, maxY - minY);
+
+    const targetMin = pad;
+    const targetMax = 100 - pad;
+    const targetW = Math.max(1e-6, targetMax - targetMin);
+    const targetH = Math.max(1e-6, targetMax - targetMin);
+
+    // アスペクトを保って fit（小さい方に合わせる）
+    const s = Math.min(targetW / w, targetH / h);
+    const cx = (minX + maxX) / 2;
+    const cy = (minY + maxY) / 2;
+    const tcx = 50;
+    const tcy = 50;
+
+    const norm = polys.map((poly) =>
+      (poly || []).map((p) => ({
+        x: (p.x - cx) * s + tcx,
+        y: (p.y - cy) * s + tcy,
+      }))
+    );
+
+    return norm;
   }
 
   function pathDToPolylineBySampling(d, samples = 36) {
