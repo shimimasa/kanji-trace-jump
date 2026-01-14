@@ -60,40 +60,46 @@ function makeId(kind, ch) {
 }
 
 function extractPathDs(svgText) {
-  // ✅ strokesvg(dist) の本命：strokesグループ内の <path style="...--i:N..." d="...">
-  const mg = /<g\b[^>]*data-strokesvg=["']strokes["'][^>]*>([\s\S]*?)<\/g>/i.exec(svgText);
-  const target = mg ? mg[1] : svgText;
+// ✅ strokesvg(dist) の正しい取り方：
+  // 1) <defs> 内の <path id="..." d="..."> を辞書化
+  // 2) <g data-strokesvg="strokes"> 内の <use href="#id" style="--i:N"> を順番に集め
+  // 3) id -> d を引いて strokes にする
 
-  // pathに直接 --i が付くケースを最優先で集める
-  const byI = new Map(); // i -> d candidates[]
-  const rePathI = /<path\b[^>]*style="[^"]*--i:(\d+)[^"]*"[^>]*\sd="([^"]+)"/gi;
-  let pm;
-  while ((pm = rePathI.exec(target))) {
-    const i = Number(pm[1]);
-    const d = (pm[2] ?? "").trim();
-    if (!Number.isFinite(i) || !d) continue;
-    if (!byI.has(i)) byI.set(i, []);
-    byI.get(i).push(d);
+  const defsMap = new Map(); // id -> d
+  const reDefPath = /<path\b[^>]*\bid="([^"]+)"[^>]*\sd="([^"]+)"/gi;
+  let dm;
+  while ((dm = reDefPath.exec(svgText))) {
+    const id = (dm[1] ?? "").trim();
+    const d = (dm[2] ?? "").trim();
+    if (id && d) defsMap.set(id, d);
   }
 
-  if (byI.size > 0) {
+  const strokesGroup = extractGroupByAttr(svgText, "g", "data-strokesvg", "strokes");
+  const target = strokesGroup ?? svgText;
+
+  // <use href="#3042a" style="--i:0" .../>
+  // xlink:href 版も拾う
+  const uses = [];
+  const reUse = /<use\b[^>]*(?:href|xlink:href)=["']#([^"']+)["'][^>]*\bstyle=["'][^"']*--i:(\d+)[^"']*["'][^>]*\/?>/gi;
+  let um;
+  while ((um = reUse.exec(target))) {
+    const id = (um[1] ?? "").trim();
+    const i = Number(um[2]);
+    if (!id || !Number.isFinite(i)) continue;
+    uses.push({ i, id });
+  }
+
+  if (uses.length > 0) {
+    uses.sort((a, b) => a.i - b.i);
     const out = [];
-    const keys = Array.from(byI.keys()).sort((a, b) => a - b);
-    for (const i of keys) {
-      const cands = dedupe(byI.get(i));
-      // 同じiに複数候補があるときだけ外れを落とす
-      let best = cands[0];
-      let bestScore = scorePath(best);
-      for (const d of cands.slice(1)) {
-        const s = scorePath(d);
-        if (s < bestScore) { best = d; bestScore = s; }
-      }
-      out.push(best);
+    for (const u of uses) {
+      const d = defsMap.get(u.id);
+      if (d) out.push(d);
     }
     return dedupe(out);
   }
 
-  // fallback（フォーマット違い用）
+  // それ以外のSVG（保険）：従来通り path d を全部拾う
   const ds = [];
   const reAny = /<path\b[^>]*\sd="([^"]+)"/gi;
   let m;
@@ -114,6 +120,44 @@ function scorePath(d) {
     }
     return maxAbs;
   }
+
+// data-strokesvg="strokes" の <g> を “ネスト対応で” 抜く（正規表現だけだと途中で切れるため）
+function extractGroupByAttr(src, tagName, attrName, attrValue) {
+    const openRe = new RegExp(`<${tagName}\\b[^>]*${attrName}=["']${attrValue}["'][^>]*>`, "i");
+    const m = openRe.exec(src);
+    if (!m) return null;
+    const startIdx = m.index + m[0].length;
+  
+    // ネストした <g> を数える
+    let depth = 1;
+    let i = startIdx;
+    const len = src.length;
+    const openTag = new RegExp(`<${tagName}\\b`, "ig");
+    const closeTag = new RegExp(`</${tagName}>`, "ig");
+    openTag.lastIndex = startIdx;
+    closeTag.lastIndex = startIdx;
+  
+    while (i < len) {
+      const no = openTag.exec(src);
+      const nc = closeTag.exec(src);
+      if (!nc) break;
+      if (no && no.index < nc.index) {
+        depth++;
+        i = no.index + 1;
+        continue;
+      } else {
+        depth--;
+        if (depth === 0) {
+          const endIdx = nc.index;
+          return src.slice(startIdx, endIdx);
+        }
+        i = nc.index + 1;
+        continue;
+      }
+    }
+    return null;
+  }  
+
 
 function dedupe(arr) {
     const seen = new Set();
