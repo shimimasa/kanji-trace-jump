@@ -23,6 +23,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const NEKO_URL = new URL("assets/characters/neko.png", BASE_URL).toString();
   const CHAR_SIZE = 14;
 
+  // strokesRef は "strokes/..." を想定しているので、基準を "data/" にする
+  // 例: new URL("strokes/hiragana/HIRA_....json", STROKES_BASE)
+  const STROKES_BASE = new URL("data/", BASE_URL).toString();
   // ✅ データセットは CONTENT_MANIFEST から解決する（漢字以外もここで増やせる）
   const selectedId = selectedRangeId ?? "kanji_g1";
   const manifestItem = CONTENT_MANIFEST.find((x) => x.id === selectedId) ?? null;
