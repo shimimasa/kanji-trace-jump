@@ -727,6 +727,23 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         if (contentType === "kanji" && gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
         return true;
       })
+      // ✅ 追加：ひらがな/カタカナは「行」選択なら対象文字だけに絞る
+      .filter((it) => {
+          if (contentType !== "hiragana" && contentType !== "katakana") return true;
+          const ch = it?.char ?? it?.text ?? it?.kanji ?? it?.letter ?? it?.symbol;
+          if (!ch) return false;
+  
+          // 行セット（manifestの id に合わせる）
+          const rowMap = {
+            hiragana_row_a: ["あ", "い", "う", "え", "お"],
+            katakana_row_a: ["ア", "イ", "ウ", "エ", "オ"],
+          };
+          const allow = rowMap[selectedId];
+          if (Array.isArray(allow)) return allow.includes(ch);
+  
+          // 行指定が無い（全体セットなど）はそのまま
+          return true;
+        })
       .map((it) => {
         // strokesRef を normalize（旧形式 g1/g1-001.json が来ても対応）
         const ref = normalizeStrokesRef(it.strokesRef, it.grade, it.id);
