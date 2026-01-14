@@ -73,16 +73,48 @@ function extractPathDs(svgText) {
 
   const strokesGroup = pickGroup("strokes");
   const target = strokesGroup ?? svgText; // フォーマット違いの保険
-
-  const out = [];
-  const rePath = /<path\b[^>]*\sd="([^"]+)"/gi;
-  let m;
-  while ((m = rePath.exec(target))) {
-    const d = (m[1] ?? "").trim();
-    if (d) out.push(d);
-  }
-  return out;
+  
+    // ✅ 改善：strokes グループ内の「1画ごとの sub <g>」を走査し、
+    // その中の最初の <path d="..."> だけを採用する。
+    // （見た目用の重複パスやガイドパスの混入を避ける）
+    const reSubG = /<g\b[^>]*>([\s\S]*?)<\/g>/gi;
+    const reFirstPath = /<path\b[^>]*\sd="([^"]+)"/i;
+  
+    const picked = [];
+    let gm;
+    while ((gm = reSubG.exec(target))) {
+      const inner = gm[1] ?? "";
+      const pm = reFirstPath.exec(inner);
+      if (pm?.[1]) {
+        const d = pm[1].trim();
+        if (d) picked.push(d);
+      }
+    }
+  
+    // sub <g> が取れないSVGもあるのでフォールバック（従来方式）
+    if (picked.length > 0) return dedupe(picked);
+  
+    const out = [];
+    const rePath = /<path\b[^>]*\sd="([^"]+)"/gi;
+    let m;
+    while ((m = rePath.exec(target))) {
+      const d = (m[1] ?? "").trim();
+      if (d) out.push(d);
+    }
+    return dedupe(out);
 }
+
+function dedupe(arr) {
+    const seen = new Set();
+    const out = [];
+    for (const s of arr) {
+      if (!seen.has(s)) {
+        seen.add(s);
+        out.push(s);
+      }
+    }
+    return out;
+  }
 
 function writeJson(p, obj) {
   ensureDir(path.dirname(p));
