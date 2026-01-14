@@ -901,6 +901,14 @@ function reorderLatinStrokes(polys) {
       const w = Math.max(1e-6, maxX - minX);
       const h = Math.max(1e-6, maxY - minY);
 
+      // 0) ほぼ閉じた輪郭なら「開始点を回転」して上寄りに固定
+      const loopClose = Math.hypot(b.x - a.x, b.y - a.y) <= Math.max(3, Math.min(w, h) * 0.08);
+      if (loopClose) {
+        // 目標：上寄り（minY）かつ右寄りすぎない位置
+        const target = { x: (minX + maxX) * 0.45, y: minY };
+        return rotatePolylineStart(poly, target);
+      }
+
       const dx = b.x - a.x;
       const dy = b.y - a.y;
 
@@ -925,6 +933,19 @@ function reorderLatinStrokes(polys) {
       return poly;
     });
   }
+
+  function rotatePolylineStart(poly, target) {
+        // poly内でtargetに一番近い点を始点に回転する
+        let bestI = 0;
+        let bestD = Infinity;
+        for (let i = 0; i < poly.length; i++) {
+          const p = poly[i];
+          const d = Math.hypot(p.x - target.x, p.y - target.y);
+          if (d < bestD) { bestD = d; bestI = i; }
+        }
+        // 回転（bestIを先頭へ）
+        return poly.slice(bestI).concat(poly.slice(0, bestI));
+      }
 
   /**
    * ポリライン群の座標を viewBox(0..100) に収める正規化
@@ -1346,11 +1367,12 @@ function reorderLatinStrokes(polys) {
       } catch {}
       lastPointerId = null;
 
+      const effectiveMaster = isMaster && (contentType !== "alphabet") && (contentType !== "romaji");
       const { ok, reason } = judgeAttempt({
                 points,
                 strokes,
                 strokeIndex,
-                isMaster,
+                isMaster: effectiveMaster,
                 failStreak, // ← これで「連続失敗救済」まで旧判定と同等に復活
               });
 
