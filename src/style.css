@@ -2151,4 +2151,21 @@ body.bg-home::after{
       );
     background-attachment: fixed;
   }
+  body.bg-home::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(
+        circle at 20% 15%,
+        rgba(255,255,255,0.6),
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 70% 10%,
+        rgba(255,255,255,0.5),
+        transparent 45%
+      );
+    pointer-events: none;
+  }
   
