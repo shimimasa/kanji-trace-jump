@@ -1318,6 +1318,16 @@ function reorderLatinStrokes(polys) {
 
       const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
       
+      // ✅ alphabet は「どこからでもなぞってOK」
+      // ただし誤タップ防止で “どれかの線の近く” だけ開始OKにする
+      if (contentType === "alphabet") {
+        let best = Infinity;
+        for (let i = 0; i < strokes.length; i++) {
+          best = Math.min(best, distancePointToPolyline(p0, strokes[i]));
+        }
+        // START_TOL を少し広めに使う（厳しすぎると「どこからでも」にならない）
+        if (best > START_TOL * 2.2) return;
+      } else
       // ✅ Master: “どの画でも”開始OK（ただし漢字の線から遠すぎる場合は除外）
       // ✅ Kid: 次の画（strokeIndex）の開始点付近のみ開始OK（従来通り）
       if (isMaster) {
@@ -1347,7 +1357,7 @@ function reorderLatinStrokes(polys) {
 
       // ✅ Masterではスナップしない（“どこをなぞったか推定”の精度を守る）
       // ✅ Kidでは従来通り端点へスナップ
-      if (isMaster) {
+      if (contentType === "alphabet" || isMaster) {
         points = [p0];
       } else {
         const poly = strokes[strokeIndex];
