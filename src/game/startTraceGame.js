@@ -1334,27 +1334,66 @@ function reorderLatinStrokes(polys) {
     if (!Array.isArray(points) || points.length < 10) return false;
     if (!strokePoly || strokePoly.length < 2) return false;
 
-    // 1) 描点が stroke に近い割合（hitRate）
+    // --- helpers ---
+    const polyLen = (poly) => {
+      let len = 0;
+      for (let i = 1; i < (poly?.length ?? 0); i++) {
+        const a = poly[i - 1], b = poly[i];
+        len += Math.hypot(b.x - a.x, b.y - a.y);
+      }
+      return len;
+    };
+
+    // bbox
+   let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const p of strokePoly) {
+      minX = Math.min(minX, p.x); minY = Math.min(minY, p.y);
+      maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y);
+    }
+    const w = Math.max(1e-6, maxX - minX);
+    const h = Math.max(1e-6, maxY - minY);
+    const strokeLen = polyLen(strokePoly);
+
+    // 直線っぽい（縦/横）なら、より甘い判定にする（I, l, t 等が通らない問題対策）
+    const isVertical = h > w * 2.2;
+    const isHorizontal = w > h * 2.2;
+    if (isVertical || isHorizontal) {
+      const tol = START_TOL * 2.6;
+      // 長さが足りているか（ちょん、で通らないように）
+      const drawnLen = polyLen(points);
+      if (drawnLen < strokeLen * 0.55) return false;
+
+      // 線に近い割合だけを見る（カバー率より頑健）
+      let hit = 0;
+      for (const p of points) {
+        if (distancePointToPolyline(p, strokePoly) <= tol) hit++;
+      }
+      const hitRate = hit / points.length;
+      return hitRate >= 0.55;
+    }
+
+    // --- 曲線/輪郭：従来の hit + cover ---
+    const tolHit = START_TOL * 1.8;
+    const tolCover = START_TOL * 2.1;
+
     let hit = 0;
     for (const p of points) {
-      if (distancePointToPolyline(p, strokePoly) <= START_TOL * 1.7) hit++;
+      if (distancePointToPolyline(p, strokePoly) <= tolHit) hit++;
     }
     const hitRate = hit / points.length;
 
-    // 2) stroke 側の点が描線でカバーされている割合（coverRate）
     let samples = 0;
     let cover = 0;
-    const step = Math.max(1, Math.floor(strokePoly.length / 14));
+    const step = Math.max(1, Math.floor(strokePoly.length / 16));
     for (let i = 0; i < strokePoly.length; i += step) {
       const sp = strokePoly[i];
       samples++;
-      if (distancePointToPolyline(sp, points) <= START_TOL * 2.0) cover++;
+      if (distancePointToPolyline(sp, points) <= tolCover) cover++;
     }
     const coverRate = samples ? cover / samples : 0;
 
-    // しきい値（alphabet向けに少しだけ厳しめ）
-    return hitRate >= 0.55 && coverRate >= 0.35;
-  }
+    return hitRate >= 0.55 && coverRate >= 0.28;
+}
 
   function attachTraceHandlers(svgEl, strokes) {
     drawing = false;
