@@ -1305,43 +1305,6 @@ function reorderLatinStrokes(polys) {
     updateStrokeHint();
   }
 
- // ✅ alphabet: 「全体シルエット」判定（開始点/順序を完全に無視）
-   // - 描いた点が “どれかのストローク” に十分近い割合が高い
-   // - かつ、ストローク側の点が “描線” にカバーされている割合もそこそこ
-   function judgeAlphabetFree(points, strokes) {
-     if (!Array.isArray(points) || points.length < 8) return false;
-     if (!Array.isArray(strokes) || strokes.length === 0) return false;
- 
-     // 1) 描点 -> 目標（全ストロークの最近距離）
-     let hit = 0;
-     for (const p of points) {
-       let best = Infinity;
-       for (const poly of strokes) {
-         best = Math.min(best, distancePointToPolyline(p, poly));
-       }
-       if (best <= START_TOL * 1.8) hit++;
-     }
-     const hitRate = hit / points.length;
- 
-     // 2) 目標点サンプル -> 描線カバー（ざっくり）
-     let samples = 0;
-     let cover = 0;
-     for (const poly of strokes) {
-       if (!poly || poly.length < 2) continue;
-       for (let i = 0; i < poly.length; i += Math.max(1, Math.floor(poly.length / 10))) {
-         const sp = poly[i];
-         samples++;
-         if (distancePointToPolyline(sp, points) <= START_TOL * 2.2) cover++;
-       }
-     }
-     const coverRate = samples ? cover / samples : 0;
- 
-     // しきい値（ここはプレイ感で調整しやすい）
-     // hit: 描いた線が目標に沿ってるか
-     // cover: 目標全体をそれなりに触れているか
-     return hitRate >= 0.55 && coverRate >= 0.25;
-   }
-
    // ✅ alphabet: points が最も近い stroke を推定（順序無視）
   function guessClosestStrokeIndex(points, strokes) {
       if (!Array.isArray(points) || points.length < 2) return -1;
@@ -1363,6 +1326,35 @@ function reorderLatinStrokes(polys) {
       }
       return bestI;
     }
+
+    // ✅ alphabet専用：開始点チェックなしの「形」判定
+  // - points がストロークに沿っていればOK（hit/coverで判定）
+  // - 1画だけで全部OKにならないよう “そのストローク自身” を対象にする
+  function judgeAlphabetStroke(points, strokePoly) {
+    if (!Array.isArray(points) || points.length < 10) return false;
+    if (!strokePoly || strokePoly.length < 2) return false;
+
+    // 1) 描点が stroke に近い割合（hitRate）
+    let hit = 0;
+    for (const p of points) {
+      if (distancePointToPolyline(p, strokePoly) <= START_TOL * 1.7) hit++;
+    }
+    const hitRate = hit / points.length;
+
+    // 2) stroke 側の点が描線でカバーされている割合（coverRate）
+    let samples = 0;
+    let cover = 0;
+    const step = Math.max(1, Math.floor(strokePoly.length / 14));
+    for (let i = 0; i < strokePoly.length; i += step) {
+      const sp = strokePoly[i];
+      samples++;
+      if (distancePointToPolyline(sp, points) <= START_TOL * 2.0) cover++;
+    }
+    const coverRate = samples ? cover / samples : 0;
+
+    // しきい値（alphabet向けに少しだけ厳しめ）
+    return hitRate >= 0.55 && coverRate >= 0.35;
+  }
 
   function attachTraceHandlers(svgEl, strokes) {
     drawing = false;
@@ -1465,16 +1457,9 @@ function reorderLatinStrokes(polys) {
             if (contentType === "alphabet") {
               solvedIndex = guessClosestStrokeIndex(points, strokes);
               if (solvedIndex < 0) solvedIndex = strokeIndex;
-              // 推定した画で通常判定（startTolに縛られないよう points[0] スナップ無しのまま）
-              const r = judgeAttempt({
-                points,
-                strokes,
-                strokeIndex: solvedIndex,
-                isMaster: false,     // MASTERでも順序で×にしない
-                failStreak,
-              });
-              ok = !!r.ok;
-              reason = r.reason ?? null;
+              // ✅ 開始点チェック無しの判定（alphabet専用）
+        ok = judgeAlphabetStroke(points, strokes[solvedIndex]);
+        reason = ok ? null : "BAD_SHAPE";
             } else {
               const r = judgeAttempt({
                 points,
