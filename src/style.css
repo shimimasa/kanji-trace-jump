@@ -2043,3 +2043,95 @@ body {
     60%  { transform: translateY(-1px) scale(1.18); opacity: 1; }
     100% { transform: translateY(0) scale(1); opacity: 1; }
   }
+
+  /* ===========================
+   Home Meadow (確実版)
+   - HomeScreenが body.bg-home を付与する前提
+   =========================== */
+body.bg-home{
+  /* ふだんの body 背景を上書き */
+  background:
+    radial-gradient(900px 480px at 25% 8%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 60%),
+    radial-gradient(820px 520px at 80% 18%, rgba(255,255,255,.80) 0%, rgba(255,255,255,0) 62%),
+    linear-gradient(180deg,
+      rgba(232,246,255,.96) 0%,
+      rgba(245,252,255,.78) 24%,
+      rgba(255,255,255,.42) 46%,
+      rgba(236,252,244,.55) 72%,
+      rgba(225,248,234,.82) 100%);
+}
+
+/* 背景の上に「薄い足跡」を散らす */
+body.bg-home{
+  position: relative;
+}
+
+/* もや（空気感） */
+body.bg-home::before{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(700px 360px at 30% 16%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%),
+    radial-gradient(700px 360px at 74% 22%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 72%);
+  filter: blur(0.4px);
+  opacity: .9;
+}
+
+/* 🐾 “肉球っぽい”ドット足跡（CSSだけ） */
+body.bg-home::after{
+  content:"";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+
+  /* 1つの足跡 = 大きい肉球 + 小さい指3つ を radial-gradient で作る
+     それを複数セット並べて散らす */
+  background:
+    /* paw 1 */
+    radial-gradient(circle 7px at 14% 22%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 12.6% 19.9%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 14.2% 18.8%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 15.7% 19.9%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+
+    /* paw 2 */
+    radial-gradient(circle 7px at 22% 38%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 20.6% 35.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 22.2% 34.8%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 23.7% 35.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+
+    /* paw 3 */
+    radial-gradient(circle 7px at 34% 54%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 32.6% 51.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 34.2% 50.8%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 35.7% 51.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+
+    /* paw 4 */
+    radial-gradient(circle 7px at 66% 26%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 64.6% 23.9%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 66.2% 22.8%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 67.7% 23.9%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+
+    /* paw 5 */
+    radial-gradient(circle 7px at 74% 42%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 72.6% 39.9%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 74.2% 38.8%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 75.7% 39.9%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+
+    /* paw 6 */
+    radial-gradient(circle 7px at 60% 74%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 58.6% 71.9%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 60.2% 70.8%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+    radial-gradient(circle 3px at 61.7% 71.9%, rgba(18,38,63,.04) 0 70%, transparent 72%);
+
+  opacity: .85;
+}
+
+/* ホームのカードを背景より前に（疑似要素より上へ） */
+.screen.home{
+  position: relative;
+  z-index: 1;
+}
