@@ -30,7 +30,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const selectedId = selectedRangeId ?? "kanji_g1";
   const manifestItem = CONTENT_MANIFEST.find((x) => x.id === selectedId) ?? null;
   const contentType = manifestItem?.type ?? "kanji";
-
+  // ✅ alphabet は「なぞれればOK」：書き順ガイドを全部OFF
+  const isAlphabet = contentType === "alphabet";
   // all.json は manifest の source を信用する
   const ALL_PATH = new URL(manifestItem?.source ?? "data/kanji/kanji_all.json", BASE_URL).toString();
 
@@ -681,6 +682,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   function setHintText(text) { if (elHint) elHint.textContent = String(text ?? ""); }
   function updateHintText() {
+    // ✅ alphabet は書き順ガイドを出さない
+    if (isAlphabet) { setHintText(""); return; }
     if (isMaster) { setHintText(MASTER_HINT_TEXT); return; }
     if (kanjiCompleted) { setHintText('クリア！「つぎ」で次のもじへ'); return; }
     if (drawing) { setHintText("そのまま、なぞっていこう"); return; }
@@ -1075,7 +1078,7 @@ function reorderLatinStrokes(polys) {
     tracePathEl.dataset.role = "trace";
     strokeLayer.appendChild(tracePathEl);
 
-    // hint
+    // hint（alphabetはガイドOFFなので生成はするが常に非表示にする）
     const hintG = document.createElementNS(ns, "g");
     const hintDotEl = document.createElementNS(ns, "circle");
     hintDotEl.setAttribute("r", "8");
@@ -1090,6 +1093,10 @@ function reorderLatinStrokes(polys) {
 
     hintDot = hintDotEl;
     hintNum = hintTextEl;
+    if (isAlphabet) {
+      hintDot.style.display = "none";
+      hintNum.style.display = "none";
+    }
 
     // ✅ Masterでは猫は最初“漢字外で待機”
     // （Kidでは従来通り 1画目アンカーへ）
@@ -1220,6 +1227,8 @@ function reorderLatinStrokes(polys) {
   // ---------------------------
   function renderStrokeButtons(n) {
     if (!elStrokeButtons) return;
+    // ✅ alphabet は書き順UI（画数ボタン）を出さない
+    if (isAlphabet) { elStrokeButtons.innerHTML = ""; return; }
     elStrokeButtons.innerHTML = "";
     for (let i = 0; i < n; i++) {
       const b = document.createElement("button");
@@ -1235,6 +1244,12 @@ function reorderLatinStrokes(polys) {
 
   function updateStrokeHint() {
     if (!svg || !hintDot || !hintNum || !currentStrokes) return;
+    // ✅ alphabet は始点ドット/番号を出さない
+    if (isAlphabet) {
+        hintDot.style.display = "none";
+        hintNum.style.display = "none";
+        return;
+    }
     const stroke = currentStrokes[strokeIndex];
     if (!stroke || !stroke.length) {
       hintDot.style.display = "none";
