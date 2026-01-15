@@ -1305,6 +1305,43 @@ function reorderLatinStrokes(polys) {
     updateStrokeHint();
   }
 
+ // ✅ alphabet: 「全体シルエット」判定（開始点/順序を完全に無視）
+   // - 描いた点が “どれかのストローク” に十分近い割合が高い
+   // - かつ、ストローク側の点が “描線” にカバーされている割合もそこそこ
+   function judgeAlphabetFree(points, strokes) {
+     if (!Array.isArray(points) || points.length < 8) return false;
+     if (!Array.isArray(strokes) || strokes.length === 0) return false;
+ 
+     // 1) 描点 -> 目標（全ストロークの最近距離）
+     let hit = 0;
+     for (const p of points) {
+       let best = Infinity;
+       for (const poly of strokes) {
+         best = Math.min(best, distancePointToPolyline(p, poly));
+       }
+       if (best <= START_TOL * 1.8) hit++;
+     }
+     const hitRate = hit / points.length;
+ 
+     // 2) 目標点サンプル -> 描線カバー（ざっくり）
+     let samples = 0;
+     let cover = 0;
+     for (const poly of strokes) {
+       if (!poly || poly.length < 2) continue;
+       for (let i = 0; i < poly.length; i += Math.max(1, Math.floor(poly.length / 10))) {
+         const sp = poly[i];
+         samples++;
+         if (distancePointToPolyline(sp, points) <= START_TOL * 2.2) cover++;
+       }
+     }
+     const coverRate = samples ? cover / samples : 0;
+ 
+     // しきい値（ここはプレイ感で調整しやすい）
+     // hit: 描いた線が目標に沿ってるか
+     // cover: 目標全体をそれなりに触れているか
+     return hitRate >= 0.55 && coverRate >= 0.25;
+   }
+
   function attachTraceHandlers(svgEl, strokes) {
     drawing = false;
     points = [];
@@ -1397,21 +1434,24 @@ function reorderLatinStrokes(polys) {
       lastPointerId = null;
 
       const effectiveMaster = isMaster && (contentType !== "alphabet") && (contentType !== "romaji");
-      
-      // ✅ alphabetは「どこからでもOK」：
-      // 開始点や順序に依存しないよう、最も近いストロークを推定して判定する
-      const judgedStrokeIndex =
-        (contentType === "alphabet")
-          ? (guessClosestStrokeIndex(points, strokes) >= 0 ? guessClosestStrokeIndex(points, strokes) : strokeIndex)
-          : strokeIndex;
 
-      const { ok, reason } = judgeAttempt({
-        points,
-        strokes,
-        strokeIndex: judgedStrokeIndex,
-        isMaster: effectiveMaster,
-        failStreak,
-      });
+      // ✅ alphabet: 「どこからでもOK」+「形が合えば1発合格」
+      // 1回のなぞりで全ストロークのシルエットに十分近ければOKにする
+      let ok = false;
+      let reason = null;
+      if (contentType === "alphabet") {
+        ok = judgeAlphabetFree(points, strokes);
+      } else {
+        const r = judgeAttempt({
+          points,
+          strokes,
+          strokeIndex,
+          isMaster: effectiveMaster,
+          failStreak,
+        });
+        ok = !!r.ok;
+        reason = r.reason ?? null;
+      }
 
       if (setRun) setRun.attempts += 1;
 
@@ -1441,22 +1481,16 @@ function reorderLatinStrokes(polys) {
           setRun.comboMax = Math.max(setRun.comboMax ?? 0, setRun.combo);
         }
 
-        // ✅ alphabetは「推定した画」をクリア扱いにする
-        const solvedIndex = (contentType === "alphabet")
-          ? (judgeAttempt ? judgedStrokeIndex : strokeIndex) // safety
-          : strokeIndex;
-
-        done[solvedIndex] = true;
-        failStreak[solvedIndex] = 0;
-
-        // ✅ 次に進める strokeIndex は、alphabetは「次の未クリア」へ飛ばす
         if (contentType === "alphabet") {
-          let next = 0;
-          while (next < strokes.length && done[next]) next++;
-          strokeIndex = next;
-        } else {
-          strokeIndex++;
-       }
+                    // 1発合格：全画クリア扱い
+                    done = new Array(strokes.length).fill(true);
+                    failStreak = new Array(strokes.length).fill(0);
+                    strokeIndex = strokes.length;
+                  } else {
+                    done[strokeIndex] = true;
+                    failStreak[strokeIndex] = 0;
+                    strokeIndex++;
+                  }
 
         const nextAnchor =
           strokeIndex < strokes.length
