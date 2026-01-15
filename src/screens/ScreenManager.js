@@ -15,6 +15,14 @@ export class ScreenManager {
         try { await this.current.cleanup(); } catch {}
       }
       this.rootEl.innerHTML = "";
+
+      // ✅ 全画面で共通の背景（空＋草原）を適用
+      // ここで統一すると、各Screen側で add/remove しなくて済む
+      try {
+        document.body.classList.add("bg-app");
+        // 旧実装の名残があっても邪魔しないように除去
+        document.body.classList.remove("bg-home");
+      } catch {}
   
       const factory = this.screens.get(name);
       if (!factory) throw new Error(`Unknown screen: ${name}`);

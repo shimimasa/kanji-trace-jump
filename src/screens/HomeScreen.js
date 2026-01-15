@@ -6,8 +6,7 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
        const el = document.createElement("div");
        el.className = "screen home";
  
-       // ✅ ホームのときだけ「草原背景」を有効化
-       document.body.classList.add("bg-home");
+       // ✅ 背景は ScreenManager 側で全画面共通（bg-app）に統一
 
        const selected = ctx.selectedRangeId ?? "kanji_g1";
        const range = CONTENT_MANIFEST.find((x) => x.id === selected);
@@ -91,8 +90,7 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
          el,
          cleanup() {
            el.removeEventListener("click", onClick);
-           // ✅ 画面離脱時に戻す
-          document.body.classList.remove("bg-home");
+           // ✅ 背景は ScreenManager 側で全画面共通（bg-app）に統一
          },
        };
      },

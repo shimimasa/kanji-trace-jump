@@ -2005,31 +2005,31 @@ body {
     100% { transform: translateY(0) scale(1); opacity: 1; }
   }
 
-/* ホームのカードを背景より前に（疑似要素より上へ） */
-.screen.home{
-  position: relative;
-  z-index: 1;
+/* =========================
++   App共通 背景（空＋草原）
++   - 全画面で同じ世界観に統一
++   - /public/assets/bg/home-bg.png を使用
++   ========================= */
+body.bg-app,
+body.bg-home { /* bg-home は互換のため残す */
+  background-image: url("/assets/bg/home-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #eef6f8; /* 読み込み前の保険 */
 }
-body.bg-home{
-    /* ✅ Home背景画像（public 配下なので import 不要 / 絶対パスでOK） */
-    background-image: url("/assets/bg/home-bg.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  
-    /* 読み込み前/画像が無い時の保険 */
-    background-color: #eef6f8;
-  }
   
   /* ✅ 背景の上に乗るUIを確実に前面へ */
-  body.bg-home #app{
+  body.bg-app #app,
+body.bg-home #app{
     position: relative;
     z-index: 1;
   }
   
   /* もや（空気感）※既存の雰囲気を維持しつつ、UIより後ろへ */
-  body.bg-home::before{
+  body.bg-app::before,
+body.bg-home::before{
     content:"";
     position: fixed;
     inset: 0;
@@ -2043,7 +2043,9 @@ body.bg-home{
   }
   
   /* 🐾 薄い足跡オーバーレイ（既存のまま）※UIより後ろへ */
-  body.bg-home::after{
+  body.bg-app::after,
+body.bg-home::after
+  {
     content:"";
     position: fixed;
     inset: 0;
