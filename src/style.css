@@ -1863,3 +1863,110 @@ body {
   .screen.game .nav .btn{
     min-width: 110px;
   }
+
+/* ===========================
++   Range Select (ポップUI)
++   =========================== */
+.screen.range .rangeCard{
+    width: min(980px, 94vw);
+    margin: 0 auto;
+  }
+  
+  .screen.range .rangeHeader{
+    display: grid;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .screen.range .rangeTitle{
+    font-weight: 900;
+    letter-spacing: .03em;
+  }
+  
+  .screen.range .rangeNow{
+    padding: 12px 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.60);
+  }
+  
+  .screen.range .rangeNowValue{
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 900;
+  }
+  
+  .screen.range .rangeList{
+    display: grid;
+    gap: 12px;
+  }
+  
+  .screen.range .rangeGroup{
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.55);
+    overflow: hidden;
+  }
+  
+  .screen.range .rangeGroupHead{
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .screen.range .rangeGroupHead::-webkit-details-marker{ display:none; }
+  
+  .screen.range .rangeGroupTitle{
+    font-weight: 900;
+    font-size: 18px;
+  }
+  
+  .screen.range .rangeGrid{
+    padding: 12px 12px 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  
+  /* ラジオは隠して “チップ” を押させる */
+  .screen.range .rangeRadio{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .screen.range .rangeItem{
+    position: relative;
+    display: block;
+  }
+  
+  .screen.range .rangeChip{
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 14px 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(18,38,63,.12);
+    background: rgba(255,255,255,.78);
+    font-weight: 900;
+    cursor: pointer;
+    user-select: none;
+    transition: transform .06s ease, box-shadow .12s ease;
+  }
+  
+  .screen.range .rangeItem:hover .rangeChip{
+    transform: translateY(-1px);
+  }
+  
+  .screen.range .rangeRadio:checked + .rangeChip{
+    border-color: rgba(18,38,63,.28);
+    box-shadow: 0 12px 26px rgba(18,38,63,.12);
+  }
+  
+  .screen.range .rangeFooter{
+    margin-top: 12px;
+  }
