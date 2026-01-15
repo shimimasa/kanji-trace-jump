@@ -10,18 +10,41 @@ export function HomeScreen(ctx, nav) {
       const selected = ctx.selectedRangeId ?? "kanji_g1";
       const range = CONTENT_MANIFEST.find((x) => x.id === selected);
 
-      // ✅ HomeのDOMはここで確実に生成（IDはこの3つを固定）
+      // ✅ HomeのDOMはここで確実に生成（クリック委譲で壊れにくく）
       el.innerHTML = `
-        <div class="card">
-          <h1>ねこなぞり</h1>
-
-        <div class="muted" style="margin-top:6px; text-align:center;">
-          ひらがな・カタカナ・アルファベット・漢字を、ねこでなぞってあそぼう！
-        </div>
-
-          <div style="margin:8px 0;">
-            いまの範囲：<b>${range?.label ?? "未選択"}</b>
+        <div class="card homeCard">
+          <div class="homeHero">
+            <div class="homeTitle">ねこなぞり</div>
+            <div class="homeSubtitle">ねこで なぞって おぼえる</div>
+            <div class="homeKinds muted">ひらがな・カタカナ・アルファベット・漢字</div>
           </div>
+
+          <div class="homePrimary">
+            <button class="btn primary bigBtn" data-action="play" type="button">
+              ▶ はじめる
+            </button>
+          </div>
+
+          <div class="homeRange">
+            <div class="homeRangeLabel muted">いまの範囲</div>
+            <div class="homeRangeRow">
+              <div class="homeRangeName">${range?.label ?? "未選択"}</div>
+              <button class="btn" data-action="range" type="button">えらぶ</button>
+            </div>
+          </div>
+
+          <div class="homeGrid">
+            <button class="btn" data-action="review" type="button">📝 ふくしゅう</button>
+            <button class="btn" data-action="progress" type="button">⭐ きろく</button>
+            <button class="btn" data-action="dex" type="button">📚 ずかん</button>
+            <button class="btn" data-action="titleBook" type="button">🏆 タイトル</button>
+          </div>
+
+          <div class="homeFooter muted">
+            まちがえても だいじょうぶ。ゆっくり なぞろう。
+          </div>
+        </div>
+        
 
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-top:12px;">
             <button id="start" class="btn primary" type="button">スタート</button>
@@ -33,20 +56,38 @@ export function HomeScreen(ctx, nav) {
 
       // ✅ querySelectorして個別にaddEventListenerしない（null事故を根絶）
       const onClick = (e) => {
-        const btn = e.target?.closest?.("button");
+        const btn = e.target.closest("[data-action]");
         if (!btn) return;
+        const action = btn.dataset.action;
 
-        if (btn.id === "start") {
-          nav.go("game", { selectedRangeId: selected });
-          return;
-        }
-        if (btn.id === "range") {
-          nav.go("rangeSelect");
-          return;
-        }
-        if (btn.id === "progress") {
-          nav.go("progress");
-          return;
+        // 共通：選択中の範囲を維持
+        const selectedRangeId = ctx.selectedRangeId ?? selected;
+
+        switch (action) {
+          case "play":
+            nav.go("game", {
+              selectedRangeId,
+              mode: "kid",
+              // 余計な文脈を持ち込まない
+              singleId: null,
+              returnTo: null,
+            });
+            break;
+          case "range":
+            nav.go("rangeSelect", { selectedRangeId });
+            break;
+          case "review":
+            nav.go("reviewStart", { selectedRangeId });
+            break;
+          case "progress":
+            nav.go("progress", { selectedRangeId });
+            break;
+          case "dex":
+            nav.go("dex", { selectedRangeId });
+            break;
+          case "titleBook":
+            nav.go("titleBook", { selectedRangeId });
+            break;
         }
       };
 
