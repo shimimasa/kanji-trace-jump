@@ -34,7 +34,7 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
  
            <div class="homeGrid">
              <button class="btn" data-action="review" type="button">📝 ふくしゅう</button>
-             <button class="btn" data-action="progress" type="button">⭐ きろく</button>
+             <button class="btn" data-action="progress" type="button">🐾 きろく</button>
              <button class="btn" data-action="dex" type="button">📚 ずかん</button>
              <button class="btn" data-action="titleBook" type="button">🏆 タイトル</button>
            </div>

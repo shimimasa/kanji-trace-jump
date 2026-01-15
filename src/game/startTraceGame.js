@@ -632,7 +632,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       for (let i = 0; i < max; i++) {
         const star = document.createElement("span");
         star.className = "star";
-        star.textContent = "★";
+        star.textContent = "🐾";
         elStars.appendChild(star);
       }
     }

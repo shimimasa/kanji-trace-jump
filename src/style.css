@@ -1970,3 +1970,76 @@ body {
   .screen.range .rangeFooter{
     margin-top: 12px;
   }
+
+  /* ===========================
++   Home: Meadow vibe (猫の恩返しっぽい淡い草原)
++   - 画像なし / CSSだけ
++   =========================== */
+.screen.home{
+    position: relative;
+  }
+  
+  /* 空気（空〜もや） */
+  .screen.home::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(900px 480px at 25% 8%, rgba(255,255,255,.95) 0%, rgba(255,255,255,0) 60%),
+      radial-gradient(820px 520px at 80% 18%, rgba(255,255,255,.80) 0%, rgba(255,255,255,0) 62%),
+      linear-gradient(180deg,
+        rgba(232,246,255,.95) 0%,
+        rgba(245,252,255,.75) 22%,
+        rgba(255,255,255,.40) 44%,
+        rgba(236,252,244,.55) 74%,
+        rgba(225,248,234,.78) 100%);
+  }
+  
+  /* 草原の“気配”（下側にうっすら） */
+  .screen.home::after{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(900px 240px at 50% 96%, rgba(163, 227, 186, .22) 0%, rgba(163, 227, 186, 0) 62%),
+      radial-gradient(720px 220px at 30% 92%, rgba(150, 220, 174, .18) 0%, rgba(150, 220, 174, 0) 68%),
+      radial-gradient(720px 220px at 78% 90%, rgba(170, 235, 198, .14) 0%, rgba(170, 235, 198, 0) 70%);
+    filter: blur(0.2px);
+  }
+
+  /* ===========================
++   Paw gauge (★→🐾) 既存.starを流用
++   =========================== */
+.stars{
+    /* 既存の見た目を保ちつつ、足跡は詰め気味が可愛い */
+    gap: 4px;
+  }
+  
+  .star{
+    font-size: 18px;
+    line-height: 1;
+    opacity: .22;
+    transform: translateY(1px) scale(.96);
+    filter: none;
+  }
+  
+  .star.filled{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    /* 黒々しくしない：草原トーンに合わせて“やさしい”影 */
+    filter: drop-shadow(0 10px 16px rgba(18,38,63,.10));
+  }
+  
+  .star.pop{
+    animation: paw-pop 260ms ease-out;
+  }
+  
+  @keyframes paw-pop{
+    0%   { transform: translateY(2px) scale(.70); opacity: .40; }
+    60%  { transform: translateY(-1px) scale(1.18); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
