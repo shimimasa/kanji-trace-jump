@@ -10,6 +10,42 @@ const TYPE_LABEL = {
 // 表示順（カテゴリの導線順に固定）
 const TYPE_ORDER = ["hiragana", "katakana", "alphabet", "kanji"];
 
+// タイル（チップ）用の短縮ラベル
+function compactLabel(item) {
+  const label = String(item?.label ?? "");
+  const type = item?.type;
+
+  // まず「（...）」があれば中身を抽出
+  const m = label.match(/（([^）]+)）/);
+  const inner = m ? m[1].trim() : "";
+
+  // ひらがな/カタカナ：あ行/か行…、小さい つゃゅょ 等は中身だけ
+  if (type === "hiragana" || type === "katakana") {
+    if (!inner) return label;
+    // 「小さい つゃゅょ」→「小つゃゅょ」みたいに少し圧縮
+    return inner
+      .replace(/^小さい\s*/g, "小")
+      .replace(/\s+/g, "");
+  }
+
+  // アルファベット：小文字/大文字
+  if (type === "alphabet") {
+    if (inner) return inner.replace(/\s+/g, "");
+    // 念のため括弧がない場合も短縮
+    if (label.includes("小文字")) return "小文字";
+    if (label.includes("大文字")) return "大文字";
+    return label;
+  }
+
+  // 漢字：小1/小2… 中1… 高校/常用拡張 など → 括弧の中身を優先
+  if (type === "kanji") {
+    if (inner) return inner.replace(/\s+/g, "");
+    return label.replace(/^漢字\s*/g, "").trim();
+  }
+
+  // その他：括弧があれば中身、なければ元のlabel
+  return inner || label;
+}
 export function RangeSelectScreen(ctx, nav) {
   return {
     async mount() {
@@ -52,10 +88,11 @@ export function RangeSelectScreen(ctx, nav) {
           .sort((a, b) => String(a?.label ?? "").localeCompare(String(b?.label ?? ""), "ja"))
           .map(item => {
             const checked = item.id === current ? "checked" : "";
+            const chipText = compactLabel(item);
             return `
               <label class="rangeItem" data-range-item>
                 <input class="rangeRadio" type="radio" name="range" value="${item.id}" ${checked}/>
-                <span class="rangeChip">${item.label}</span>
+                <span class="rangeChip" title="${item.label}">${chipText}</span>
               </label>
             `;
           }).join("");
