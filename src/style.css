@@ -2010,7 +2010,9 @@ body {
 +   - 全画面で同じ世界観に統一
 +   - /public/assets/bg/home-bg.png を使用
 +   ========================= */
+html.bg-app,
 body.bg-app,
+html.bg-home,
 body.bg-home { /* bg-home は互換のため残す */
   background-image: url("/assets/bg/home-bg.png");
   background-size: cover;
@@ -2019,15 +2021,23 @@ body.bg-home { /* bg-home は互換のため残す */
   background-attachment: fixed;
   background-color: #eef6f8; /* 読み込み前の保険 */
 }
+
+/* ✅ #app が背景を塗って body/html の背景を隠さないように固定 */
+#app{
+    background: transparent !important;
+  }
   
   /* ✅ 背景の上に乗るUIを確実に前面へ */
-  body.bg-app #app,
+  html.bg-app #app,
+body.bg-app #app,
+html.bg-home #app,
 body.bg-home #app{
     position: relative;
     z-index: 1;
   }
   
   /* もや（空気感）※既存の雰囲気を維持しつつ、UIより後ろへ */
+  
   body.bg-app::before,
 body.bg-home::before{
     content:"";

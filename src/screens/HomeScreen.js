@@ -5,6 +5,11 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
      async mount() {
        const el = document.createElement("div");
        el.className = "screen home";
+
+       // ✅ 背景は全画面共通（bg-app）に統一
+      // ScreenManager側で付けるが、念のためHomeでも保険で付与
+      document.documentElement.classList.add("bg-app");
+      document.body.classList.add("bg-app");
  
        // ✅ 背景は ScreenManager 側で全画面共通（bg-app）に統一
 

@@ -19,9 +19,14 @@ export class ScreenManager {
       // ✅ 全画面で共通の背景（空＋草原）を適用
       // ここで統一すると、各Screen側で add/remove しなくて済む
       try {
-        document.body.classList.add("bg-app");
-        // 旧実装の名残があっても邪魔しないように除去
-        document.body.classList.remove("bg-home");
+        // body だけだと、画面によっては #app（スクロールコンテナ等）が前面に来て
+      // body 背景が見えないことがある → html にも付与して確実に効かせる
+      document.documentElement.classList.add("bg-app");
+      document.body.classList.add("bg-app");
+
+      // 旧実装の名残があっても邪魔しないように除去
+      document.documentElement.classList.remove("bg-home");
+      document.body.classList.remove("bg-home");
       } catch {}
   
       const factory = this.screens.get(name);
