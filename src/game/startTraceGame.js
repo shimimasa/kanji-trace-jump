@@ -1071,6 +1071,10 @@ function reorderLatinStrokes(polys) {
     active.dataset.role = "active";
     active.setAttribute("d", polyToPathD(strokes[0]));
     strokeLayer.appendChild(active);
+    // ✅ alphabetは「順序ガイドなし」なので、現在ストロークの強調（太線）を消す
+    if (isAlphabet) {
+        active.style.display = "none";
+      }
 
     // trace
     tracePathEl = document.createElementNS(ns, "path");
