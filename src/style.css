@@ -1759,3 +1759,77 @@ body {
   font-size: 18px;
   color: #2b6cff;
 }
+
+/* HOME */
+.homeCard{
+  width: min(720px, 92vw);
+    margin: 0 auto;
+    padding: 18px;
+  }
+  
+  .homeHero{
+    text-align: center;
+    padding: 6px 8px 10px;
+  }
+  
+  .homeTitle{
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: .04em;
+  }
+  
+  .homeSubtitle{
+    margin-top: 4px;
+    font-weight: 800;
+  }
+  
+  .homeKinds{
+    margin-top: 6px;
+    font-weight: 700;
+  }
+  
+  .homePrimary{
+    display: grid;
+    place-items: center;
+    margin: 12px 0 10px;
+  }
+  
+  .bigBtn{
+    width: min(420px, 92%);
+    padding: 14px 18px;
+    font-size: 18px;
+    border-radius: 18px;
+  }
+  
+  .homeRange{
+    margin-top: 6px;
+    padding: 12px;
+    border: 1px solid rgba(18,38,63,.08);
+    border-radius: 18px;
+    background: rgba(255,255,255,.55);
+  }
+  
+  .homeRangeRow{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  
+  .homeRangeName{
+    font-weight: 900;
+  }
+  
+  .homeGrid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  
+  .homeFooter{
+    text-align: center;
+    margin-top: 12px;
+    font-weight: 700;
+  }
