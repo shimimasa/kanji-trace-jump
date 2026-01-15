@@ -1833,3 +1833,21 @@ body {
     margin-top: 12px;
     font-weight: 700;
   }
+   /* ===========================
++     Master toggle (HUD)
++     =========================== */
+  .masterToggle{
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(18,38,63,.18);
+      background: rgba(255,255,255,.82);
+      font-weight: 900;
+      letter-spacing: .04em;
+      cursor: pointer;
+      user-select: none;
+    }
+    .masterToggle[aria-pressed="true"]{
+      border-color: rgba(18,38,63,.35);
+      box-shadow: 0 10px 22px rgba(18,38,63,.10);
+      transform: translateY(-1px);
+    }

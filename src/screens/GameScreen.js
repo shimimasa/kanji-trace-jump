@@ -19,11 +19,14 @@ export function GameScreen(ctx, nav) {
           <div id="stars" class="stars" aria-label="進捗"></div>
           <div class="hud-right">
             <div id="mode" class="mode">もくひょう：5もじ</div>
-            <button id="teacherToggle" class="teacherToggle" type="button" aria-pressed="false">先生</button>
-            <button id="masterToggle" class="teacherToggle" type="button" aria-pressed="${mode === "master" ? "true" : "false"}">MASTER</button>
+            <button id="masterToggle" class="masterToggle" type="button"
+              aria-pressed="${mode === "master" ? "true" : "false"}"
+              title="MASTERモード切替">
+              MASTER
+            </button>
             ${
                               isSinglePractice
-                                ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="図鑑へもどる">📘</button>`
+                                ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
                                 : `<button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠</button>`
                             }
           </div>
