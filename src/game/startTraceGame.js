@@ -1306,13 +1306,14 @@ function reorderLatinStrokes(polys) {
   }
 
    // ✅ alphabet: points が最も近い stroke を推定（順序無視）
-  function guessClosestStrokeIndex(points, strokes) {
+   function guessClosestStrokeIndex(points, strokes, doneArr = null) {
       if (!Array.isArray(points) || points.length < 2) return -1;
       if (!Array.isArray(strokes) || strokes.length === 0) return -1;
       let bestI = -1;
       let best = Infinity;
       const step = Math.max(1, Math.floor(points.length / 10));
       for (let i = 0; i < strokes.length; i++) {
+        if (Array.isArray(doneArr) && doneArr[i]) continue; // ✅ 未クリア優先
         const poly = strokes[i];
         if (!poly || poly.length < 2) continue;
         let sum = 0;
@@ -1344,6 +1345,32 @@ function reorderLatinStrokes(polys) {
       return len;
     };
 
+    const distPointToSeg = (p, a, b) => {
+            const vx = b.x - a.x, vy = b.y - a.y;
+            const wx = p.x - a.x, wy = p.y - a.y;
+            const c1 = vx * wx + vy * wy;
+            if (c1 <= 0) return Math.hypot(p.x - a.x, p.y - a.y);
+            const c2 = vx * vx + vy * vy;
+            if (c2 <= c1) return Math.hypot(p.x - b.x, p.y - b.y);
+            const t = c1 / c2;
+            const px = a.x + t * vx, py = a.y + t * vy;
+            return Math.hypot(p.x - px, p.y - py);
+          };
+          const isStraightLike = (poly) => {
+            const a = poly[0], b = poly[poly.length - 1];
+            const base = Math.hypot(b.x - a.x, b.y - a.y);
+            if (base < 1e-3) return false;
+            let sum = 0;
+            const step = Math.max(1, Math.floor(poly.length / 12));
+            let cnt = 0;
+            for (let i = 0; i < poly.length; i += step) {
+              sum += distPointToSeg(poly[i], a, b);
+              cnt++;
+            }
+            const avg = cnt ? sum / cnt : Infinity;
+            return avg <= 1.8; // 表示座標系(0..100)なのでこのくらいで直線扱い
+          };
+
     // bbox
    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     for (const p of strokePoly) {
@@ -1355,13 +1382,14 @@ function reorderLatinStrokes(polys) {
     const strokeLen = polyLen(strokePoly);
 
     // 直線っぽい（縦/横）なら、より甘い判定にする（I, l, t 等が通らない問題対策）
-    const isVertical = h > w * 2.2;
-    const isHorizontal = w > h * 2.2;
-    if (isVertical || isHorizontal) {
-      const tol = START_TOL * 2.6;
+    const isVertical = h > w * 2.0;
+    const isHorizontal = w > h * 2.0;
+    const straight = isStraightLike(strokePoly);
+    if (straight || isVertical || isHorizontal) {
+      const tol = START_TOL * 3.0;
       // 長さが足りているか（ちょん、で通らないように）
       const drawnLen = polyLen(points);
-      if (drawnLen < strokeLen * 0.55) return false;
+      if (drawnLen < strokeLen * 0.30) return false;
 
       // 線に近い割合だけを見る（カバー率より頑健）
       let hit = 0;
@@ -1369,7 +1397,7 @@ function reorderLatinStrokes(polys) {
         if (distancePointToPolyline(p, strokePoly) <= tol) hit++;
       }
       const hitRate = hit / points.length;
-      return hitRate >= 0.55;
+      return hitRate >= 0.45;
     }
 
     // --- 曲線/輪郭：従来の hit + cover ---
@@ -1494,10 +1522,32 @@ function reorderLatinStrokes(polys) {
             let solvedIndex = strokeIndex;
       
             if (contentType === "alphabet") {
-              solvedIndex = guessClosestStrokeIndex(points, strokes);
-              if (solvedIndex < 0) solvedIndex = strokeIndex;
-              // ✅ 開始点チェック無しの判定（alphabet専用）
-        ok = judgeAlphabetStroke(points, strokes[solvedIndex]);
+              // 未クリアの中で近い候補を最大3つ試す（Iが当たりにくい問題対策）
+        const candidates = [];
+        for (let t = 0; t < strokes.length; t++) {
+          if (done[t]) continue;
+          // 距離評価（軽量）
+          let sum = 0;
+          const step = Math.max(1, Math.floor(points.length / 10));
+          let cnt = 0;
+          for (let k = 0; k < points.length; k += step) {
+            sum += distancePointToPolyline(points[k], strokes[t]);
+            cnt++;
+          }
+          const avg = cnt ? sum / cnt : Infinity;
+          candidates.push({ t, avg });
+        }
+        candidates.sort((a, b) => a.avg - b.avg);
+        const top = candidates.slice(0, 3);
+
+        ok = false;
+        for (const c of top) {
+          if (judgeAlphabetStroke(points, strokes[c.t])) {
+            ok = true;
+            solvedIndex = c.t;
+            break;
+          }
+        }
         reason = ok ? null : "BAD_SHAPE";
             } else {
               const r = judgeAttempt({
