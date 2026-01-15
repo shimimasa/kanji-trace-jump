@@ -2139,17 +2139,18 @@ body.bg-home::after{
    Home専用 背景（空＋草原）
    ========================= */
    body.bg-home {
-    min-height: 100vh;
-    background:
-      linear-gradient(
-        to bottom,
-        #f3f9ff 0%,
-        #eef6ff 25%,
-        #eefaf2 45%,
-        #dff5e6 65%,
-        #cfeedd 100%
-      );
-    background-attachment: fixed;
+     /* 空 → 草原（より空っぽな青空） */
+  background: linear-gradient(
+      to bottom,
+      /* 空 */
+      #eaf6ff 0%,
+      #f3fbff 35%,
+      #ffffff 55%,
+      /* 地平線あたり */
+      #f4fbf6 70%,
+      /* 草原 */
+      #e2f5ea 100%
+    );
   }
   body.bg-home::before {
     content: "";
