@@ -4,12 +4,11 @@ const TYPE_LABEL = {
   kanji: "漢字",
   hiragana: "ひらがな",
   katakana: "カタカナ",
-  romaji: "ローマ字",
   alphabet: "アルファベット",
 };
 
 // 表示順（カテゴリの導線順に固定）
-const TYPE_ORDER = ["hiragana", "katakana", "alphabet", "romaji", "kanji"];
+const TYPE_ORDER = ["hiragana", "katakana", "alphabet", "kanji"];
 
 export function RangeSelectScreen(ctx, nav) {
   return {

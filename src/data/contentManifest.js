@@ -57,8 +57,6 @@ export const CONTENT_MANIFEST = [
   // アルファベット
   { type: "alphabet", id: "alphabet_upper", label: "アルファベット（大文字）", source: "data/alphabet/alphabet_upper_all.json" },
   { type: "alphabet", id: "alphabet_lower", label: "アルファベット（小文字）", source: "data/alphabet/alphabet_lower_all.json" },
-  // ローマ字（※実体は英字だが、導線のためタイプを分ける）
-  { type: "romaji", id: "romaji_vowels", label: "ローマ字（母音）", source: "data/romaji/romaji_all.json" },
   ];
   
   export function groupByType(list) {

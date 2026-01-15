@@ -895,7 +895,7 @@ html, body {
 /* ===========================
 +   UI polish (kids-friendly)
 +   =========================== */
-root{
+:root{
     --bg: #f6f8fb;
     --card: rgba(255,255,255,.92);
     --ink: #1c2430;

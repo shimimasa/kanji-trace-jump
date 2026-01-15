@@ -13,7 +13,11 @@ export function HomeScreen(ctx, nav) {
       // ✅ HomeのDOMはここで確実に生成（IDはこの3つを固定）
       el.innerHTML = `
         <div class="card">
-          <h1>KANJI TRACE JUMP</h1>
+          <h1>ねこなぞり</h1>
+
+        <div class="muted" style="margin-top:6px; text-align:center;">
+          ひらがな・カタカナ・アルファベット・漢字を、ねこでなぞってあそぼう！
+        </div>
 
           <div style="margin:8px 0;">
             いまの範囲：<b>${range?.label ?? "未選択"}</b>
