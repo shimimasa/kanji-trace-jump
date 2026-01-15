@@ -66,6 +66,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const isMaster = mode === "master";
   const modeText = isMaster ? `${baseModeText}（MASTER）` : baseModeText;
 
+  // ✅ Teacherモードは使わない。MASTER時だけ番号オーバーレイを表示する
+  // （CSSの .teacher-overlay をMASTERの補助として流用）
+  document.documentElement.classList.toggle("teacher-mode", isMaster);
   // ===========================
   // Title popup (称号獲得演出)
   // ===========================
@@ -1928,6 +1931,7 @@ function reorderLatinStrokes(polys) {
     document.querySelectorAll(".confetti-layer").forEach((n) => n.remove());
     // 画面遷移でmaster-modeが残らないように
     document.documentElement.classList.remove("master-mode");
+    document.documentElement.classList.remove("teacher-mode");
     // pointer capture残り対策
     try { svg?.releasePointerCapture?.(0); } catch {}
 
