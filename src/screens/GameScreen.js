@@ -48,39 +48,12 @@ export function GameScreen(ctx, nav) {
           <div class="nav">
             <button id="prevBtn" class="btn" type="button">まえ</button>
             <button id="nextBtn" class="btn primary" type="button">つぎ</button>
-            <button id="quitBtn" class="btn" type="button">やめる</button>
           </div>
 
           <p id="hint" class="caption">なぞって、書き順どおりに進めよう。</p>
           <div id="error" class="error" role="status" aria-live="polite"></div>
         </div>
       `;
-
-      const quit = el.querySelector("#quitBtn");
-      if (!quit) {
-        // ここで落とすと「何が足りないか」が分かる
-        console.error("[GameScreen] DOM missing. expected #quitBtn. current HTML:", el.innerHTML);
-        throw new Error("[GameScreen] #quitBtn が見つかりません（DOM生成/ID不一致の可能性）");
-      }
-      const onQuit = () => {
-                // 誤タップ防止：single練習なら図鑑へ、通常ならホームへ
-                const ok = window.confirm(
-                  isSinglePractice
-                    ? "図鑑にもどりますか？\n（プレイ中の進み具合は保存されません）"
-                    : "ホームにもどりますか？\n（プレイ中の進み具合は保存されません）"
-                );
-                if (!ok) return;
-                if (isSinglePractice) {
-                  nav.go("dex", {
-                    selectedRangeId: ctx.selectedRangeId,
-                    focusId: ctx.singleId,
-                    from: ctx.returnFrom ?? "progress",
-                  });
-                } else {
-                  nav.go("home");
-                }
-              };
-      quit.addEventListener("click", onQuit);
 
       const homeBtn = el.querySelector("#homeBtn");
             const dexBackBtn = el.querySelector("#dexBackBtn");
@@ -207,7 +180,6 @@ export function GameScreen(ctx, nav) {
       return {
         el,
         cleanup() {
-          quit.removeEventListener("click", onQuit);
           homeBtn?.removeEventListener("click", onHome);
           dexBackBtn?.removeEventListener("click", onDexBack);
 

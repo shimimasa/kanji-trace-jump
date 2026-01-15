@@ -1851,3 +1851,15 @@ body {
       box-shadow: 0 10px 22px rgba(18,38,63,.10);
       transform: translateY(-1px);
     }
+    /* ===========================
++   Game nav (prev/next only)
++   =========================== */
+.screen.game .nav{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .screen.game .nav .btn{
+    min-width: 110px;
+  }
