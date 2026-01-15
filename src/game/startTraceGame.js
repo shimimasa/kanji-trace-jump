@@ -1397,13 +1397,21 @@ function reorderLatinStrokes(polys) {
       lastPointerId = null;
 
       const effectiveMaster = isMaster && (contentType !== "alphabet") && (contentType !== "romaji");
+      
+      // ✅ alphabetは「どこからでもOK」：
+      // 開始点や順序に依存しないよう、最も近いストロークを推定して判定する
+      const judgedStrokeIndex =
+        (contentType === "alphabet")
+          ? (guessClosestStrokeIndex(points, strokes) >= 0 ? guessClosestStrokeIndex(points, strokes) : strokeIndex)
+          : strokeIndex;
+
       const { ok, reason } = judgeAttempt({
-                points,
-                strokes,
-                strokeIndex,
-                isMaster: effectiveMaster,
-                failStreak, // ← これで「連続失敗救済」まで旧判定と同等に復活
-              });
+        points,
+        strokes,
+        strokeIndex: judgedStrokeIndex,
+        isMaster: effectiveMaster,
+        failStreak,
+      });
 
       if (setRun) setRun.attempts += 1;
 
@@ -1433,11 +1441,22 @@ function reorderLatinStrokes(polys) {
           setRun.comboMax = Math.max(setRun.comboMax ?? 0, setRun.combo);
         }
 
-        done[strokeIndex] = true;
-        failStreak[strokeIndex] = 0;
-        // ✅ 正解した画（直前）の index を保存
-        const solvedIndex = strokeIndex;
-        strokeIndex++;
+        // ✅ alphabetは「推定した画」をクリア扱いにする
+        const solvedIndex = (contentType === "alphabet")
+          ? (judgeAttempt ? judgedStrokeIndex : strokeIndex) // safety
+          : strokeIndex;
+
+        done[solvedIndex] = true;
+        failStreak[solvedIndex] = 0;
+
+        // ✅ 次に進める strokeIndex は、alphabetは「次の未クリア」へ飛ばす
+        if (contentType === "alphabet") {
+          let next = 0;
+          while (next < strokes.length && done[next]) next++;
+          strokeIndex = next;
+        } else {
+          strokeIndex++;
+       }
 
         const nextAnchor =
           strokeIndex < strokes.length

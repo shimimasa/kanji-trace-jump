@@ -31,6 +31,28 @@ export function distancePointToPolyline(p, poly) {
   return best;
 }
 
+// ✅ alphabet: 描いた線(points)が一番近いストロークを推定
+  function guessClosestStrokeIndex(points, strokes) {
+      if (!Array.isArray(points) || points.length === 0) return -1;
+      if (!Array.isArray(strokes) || strokes.length === 0) return -1;
+      let bestI = -1;
+      let best = Infinity;
+      for (let i = 0; i < strokes.length; i++) {
+        const poly = strokes[i];
+        if (!poly || poly.length < 2) continue;
+        // 点群の平均距離（軽量版：数点サンプル）
+        let sum = 0;
+        const step = Math.max(1, Math.floor(points.length / 8));
+        let cnt = 0;
+        for (let k = 0; k < points.length; k += step) {
+          sum += distancePointToPolyline(points[k], poly);
+          cnt++;
+        }
+        const avg = cnt ? sum / cnt : Infinity;
+        if (avg < best) { best = avg; bestI = i; }
+      }
+      return bestI;
+    }
 // ---------------------------
 // 旧判定（高精度）で使う純計算ユーティリティ
 // ---------------------------
