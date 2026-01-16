@@ -151,6 +151,26 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const SET_RESULTS_LS_KEY = "ktj_set_results_v1";
   const SET_PB_LS_KEY = "ktj_set_pb_v1";
 
+  // ===========================
+  // SE: stage clear (happy meow)
+  // ===========================
+  const STAGE_CLEAR_SE_URL = "/assets/se/neko-clear.mp3";
+  const stageClearSe = new Audio(STAGE_CLEAR_SE_URL);
+  stageClearSe.preload = "auto";
+  stageClearSe.volume = 0.9; // 好みで調整
+  let _playedStageClearSe = false; // ✅ 二重鳴り防止（同一ステージ中は1回だけ）
+
+  function playStageClearSe() {
+    if (_playedStageClearSe) return; // ✅ ガード
+    _playedStageClearSe = true;
+    try {
+      stageClearSe.currentTime = 0;
+      const p = stageClearSe.play();
+      // iOS等で弾かれる場合があるので握りつぶす（ユーザー操作後なら大抵OK）
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    } catch (_) {}
+  }
+
   function loadSetPBMap() {
     try {
       const raw = localStorage.getItem(SET_PB_LS_KEY);
@@ -260,6 +280,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   }
 
   function startSetRun(set) {
+    _playedStageClearSe = false; // ✅ ステージ開始ごとにリセット
     setRun = {
       setStart: set.start,
       setLen: set.len,
@@ -591,6 +612,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       }
     
       function showSetClearCelebration(svgEl) {
+        // ✅ ステージクリアSE（嬉しい猫の鳴き声）
+        // showSetClearCelebration が二重に呼ばれても 1回しか鳴らない
+        playStageClearSe();
         showHanamaru(svgEl);
         const p = { x: 50, y: 50 };
         spawnSparks(svgEl, p, 18);
