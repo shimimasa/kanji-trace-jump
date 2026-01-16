@@ -9,7 +9,7 @@ import { GameScreen } from "./screens/GameScreen.js";
 import { ResultScreen } from "./screens/ResultScreen.js";
 import { ProgressScreen } from "./screens/ProgressScreen.js";
 import { TitleBookScreen } from "./screens/TitleBookScreen.js";
-import { KanjiDexScreen } from "./screens/KanjiDexScreen.js";
+import { DexScreen } from "./screens/DexScreen.js";
 import { ReviewStartScreen } from "./screens/ReviewStartScreen.js";
 import { ReviewResultScreen } from "./screens/ReviewResultScreen.js";
 
@@ -27,7 +27,7 @@ nav.register("game", GameScreen);
 nav.register("result", ResultScreen);
 nav.register("progress", ProgressScreen);
 nav.register("titleBook", TitleBookScreen);
-nav.register("dex", KanjiDexScreen);
+nav.register("dex", DexScreen);
 nav.register("reviewStart", ReviewStartScreen);
 nav.register("reviewResult", ReviewResultScreen);
 nav.go("home");

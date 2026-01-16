@@ -1,4 +1,4 @@
-// src/screens/KanjiDexScreen.js
+// src/screens/DexScreen.js
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
 import { makeProgressKey } from "../lib/progressKey.js";
 import { loadRangeItems } from "../lib/rangeItems.js";
@@ -235,7 +235,7 @@ function buildDexNotices({ type, rangeId, it }) {
 }
 
 
-export function KanjiDexScreen(ctx, nav) {
+export function DexScreen(ctx, nav) {
   return {
     async mount() {
       const el = document.createElement("div");
