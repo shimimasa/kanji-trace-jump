@@ -1,6 +1,8 @@
 // src/screens/GameScreen.js
 import { startTraceGame } from "../game/startTraceGame.js";
 import { recordReviewSession, saveProgress } from "../lib/progressStore.js";
+import { getRangeType } from "../lib/rangeItems.js";
+import { makeProgressKey } from "../lib/progressKey.js";
 export function GameScreen(ctx, nav) {
   let game = null;
   // 復習ナビ（single練習終了時に startTraceGame から返ってくる）
@@ -89,9 +91,54 @@ export function GameScreen(ctx, nav) {
 
             // ✅ 復習中の「まえ/つぎ」は review キュー移動にする（未クリア巡回）
             const isReviewActive = !!ctx.review?.active;
+
+            // 復習開始直後（lastReviewNavがまだ無い）でも動くように、ローカルでnext/prevを計算
+            const calcLocalReviewNav = () => {
+                const rv = ctx?.review;
+                if (!rv?.active || !Array.isArray(rv.queue) || rv.queue.length === 0) return null;
+  
+                const q = rv.queue;
+                const n = q.length;
+                const cur = Number.isFinite(rv.index) ? rv.index : 0;
+                const onlyUnc = !!rv.onlyUncleared;
+                const type = getRangeType(ctx.selectedRangeId);
+  
+                const isClearedById = (id) => {
+                  const key = makeProgressKey(type, id);
+                  return !!ctx?.progress?.cleared?.[key];
+                };
+                const accept = (id) => !onlyUnc || !isClearedById(id);
+  
+                const step = (dir) => {
+                  for (let k = 1; k <= n; k++) {
+                    const i = (cur + dir * k + n) % n;
+                    const id = q[i];
+                    if (accept(id)) return { index: i, id };
+                  }
+                  return { index: null, id: null };
+                };
+  
+                const next = step(+1);
+                const prev = step(-1);
+                return {
+                  curIndex: cur,
+                  curId: q[cur],
+                  nextIndex: next.index,
+                  nextId: next.id,
+                  prevIndex: prev.index,
+                  prevId: prev.id,
+                  onlyUncleared: onlyUnc,
+                  done: next.id == null,
+                };
+              };
+  
+              // 初期化（復習に入った瞬間から prev/next を効かせる）
+              if (isReviewActive && !lastReviewNav) {
+                lastReviewNav = calcLocalReviewNav();
+              }
             const onReviewPrev = () => {
               if (!isReviewActive) return;
-              const navInfo = lastReviewNav;
+              const navInfo = lastReviewNav ?? calcLocalReviewNav();
               const review = ctx.review;
               if (!review || !navInfo || !navInfo.prevId || !Number.isFinite(navInfo.prevIndex)) return;
               nav.go("game", {
@@ -105,7 +152,7 @@ export function GameScreen(ctx, nav) {
             };
             const onReviewNext = () => {
               if (!isReviewActive) return;
-              const navInfo = lastReviewNav;
+              const navInfo = lastReviewNav ?? calcLocalReviewNav();
               const review = ctx.review;
               if (!review || !navInfo || !navInfo.nextId || !Number.isFinite(navInfo.nextIndex)) return;
               nav.go("game", {
