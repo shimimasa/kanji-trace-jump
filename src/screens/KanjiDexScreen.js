@@ -253,7 +253,7 @@ export function KanjiDexScreen(ctx, nav) {
                 }
               </div>
               ${
-                hasinfo
+                hasInfo
                   ? `
                     <div class="dexInfo">
                       ${info.rows
