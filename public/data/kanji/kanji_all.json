@@ -3338,6 +3338,27 @@
     "strokesRef": "strokes/g2/g2-075.json"
   },
   {
+    "id": "g2-076",
+    "kanji": "秋",
+    "grade": 2,
+    "strokeCount": 1,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "あき"
+    ],
+    "meaning": "あき。",
+    "exampleSentence": "秋（あき）の 空は、とても 高い。",
+    "stageId": [
+      "tohoku_area3"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g2/g2-076.json"
+  },
+  {
     "id": "g2-077",
     "kanji": "週",
     "grade": 2,
@@ -4575,6 +4596,25 @@
     "originalGrade": null,
     "tags": [],
     "strokesRef": "strokes/g2/g2-134.json"
+  },
+  {
+    "id": "g2-135",
+    "kanji": "番",
+    "grade": 2,
+    "strokeCount": 5,
+    "onyomi": [
+      "バン"
+    ],
+    "kunyomi": [],
+    "meaning": "かずを かぞえること。",
+    "exampleSentence": "番（ばん）号を、言う。",
+    "stageId": [
+      "tohoku_area5"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g2/g2-135.json"
   },
   {
     "id": "g2-136",
@@ -7917,6 +7957,26 @@
     "strokesRef": "strokes/g3/g3-133.json"
   },
   {
+    "id": "g3-134",
+    "kanji": "鉄",
+    "grade": 3,
+    "strokeCount": 1,
+    "onyomi": [
+      "テツ"
+    ],
+    "kunyomi": [],
+    "meaning": "てつ。かたい きんぞく。",
+    "exampleSentence": "鉄（てつ）の 棒を、持つ。",
+    "stageId": [
+      "kanto_area4",
+      "kanto_area7"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g3/g3-134.json"
+  },
+  {
     "id": "g3-135",
     "kanji": "転",
     "grade": 3,
@@ -9748,6 +9808,27 @@
     "strokesRef": "strokes/g4/g4-019.json"
   },
   {
+    "id": "g4-020",
+    "kanji": "改",
+    "grade": 4,
+    "strokeCount": 1,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "あらた"
+    ],
+    "meaning": "あらためる。前のものをやめて、新しくすること。よくすること。",
+    "exampleSentence": "自分のまちがいをみとめ、考えを改（あらた）めることは、とても勇気がいることだ。",
+    "stageId": [
+      "chubu_area1"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g4/g4-020.json"
+  },
+  {
     "id": "g4-021",
     "kanji": "械",
     "grade": 4,
@@ -10416,6 +10497,28 @@
     "originalGrade": null,
     "tags": [],
     "strokesRef": "strokes/g4/g4-053.json"
+  },
+  {
+    "id": "g4-054",
+    "kanji": "群",
+    "grade": 4,
+    "strokeCount": 10,
+    "onyomi": [
+      "グン"
+    ],
+    "kunyomi": [
+      "む",
+      "むら"
+    ],
+    "meaning": "むれ。たくさんの人や動物が、一か所にあつまっているようす。",
+    "exampleSentence": "空を見上げると、たくさんの鳥が群（む）れをなして、南の方へ飛んでいった。",
+    "stageId": [
+      "chubu_area3"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g4/g4-054.json"
   },
   {
     "id": "g4-055",
@@ -11451,6 +11554,27 @@
     "originalGrade": null,
     "tags": [],
     "strokesRef": "strokes/g4/g4-104.json"
+  },
+  {
+    "id": "g4-105",
+    "kanji": "縄",
+    "grade": 4,
+    "strokeCount": 9,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [
+      "なわ"
+    ],
+    "meaning": "しばるもの",
+    "exampleSentence": "縄（なわ）とび大会を開催した。",
+    "stageId": [
+      "chubu_area6"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g4/g4-105.json"
   },
   {
     "id": "g4-106",
@@ -12670,6 +12794,27 @@
     "strokesRef": "strokes/g4/g4-164.json"
   },
   {
+    "id": "g4-165",
+    "kanji": "付",
+    "grade": 4,
+    "strokeCount": 1,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つける。あるものに、別のものを、はなれないようにくっつけること。",
+    "exampleSentence": "お母さんが、手紙にきれいな花の切手を貼（は）り付けて（つけて）くれた。",
+    "stageId": [
+      "chubu_area8"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g4/g4-165.json"
+  },
+  {
     "id": "g4-166",
     "kanji": "府",
     "grade": 4,
@@ -12768,6 +12913,27 @@
     "originalGrade": null,
     "tags": [],
     "strokesRef": "strokes/g4/g4-170.json"
+  },
+  {
+    "id": "g4-171",
+    "kanji": "別",
+    "grade": 4,
+    "strokeCount": 1,
+    "onyomi": [
+      "ベツ"
+    ],
+    "kunyomi": [
+      "わか"
+    ],
+    "meaning": "わかれる。いっしょだったものが、はなればなれになること。ちがうこと。",
+    "exampleSentence": "卒業式で、お世話になった先生や友達と、お別（わか）れするのがさみしかった。",
+    "stageId": [
+      "chubu_area9"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g4/g4-171.json"
   },
   {
     "id": "g4-172",
@@ -22619,6 +22785,27 @@
     "strokesRef": "strokes/g7/g7-070.json"
   },
   {
+    "id": "g7-071",
+    "kanji": "駆",
+    "grade": 7,
+    "strokeCount": 10,
+    "onyomi": [
+      "ク"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かける。馬などを走らせること。",
+    "exampleSentence": "彼は、ゴールを目指して、全速力で駆け（かけ）抜けた。",
+    "stageId": [
+      "Asia_area3"
+    ],
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "tags": [],
+    "strokesRef": "strokes/g7/g7-071.json"
+  },
+  {
     "id": "g7-072",
     "kanji": "屈",
     "grade": 7,
@@ -22740,6 +22927,27 @@
     "originalGrade": 7,
     "tags": [],
     "strokesRef": "strokes/g7/g7-077.json"
+  },
+  {
+    "id": "g7-078",
+    "kanji": "迎",
+    "grade": 7,
+    "strokeCount": 10,
+    "onyomi": [
+      "ゲイ"
+    ],
+    "kunyomi": [
+      "むか"
+    ],
+    "meaning": "むかえる。来る人を、出迎えること。",
+    "exampleSentence": "空港には、海外からのお客様を迎え（むかえる）るために、多くの人が集まっていた。",
+    "stageId": [
+      "Asia_area3"
+    ],
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "tags": [],
+    "strokesRef": "strokes/g7/g7-078.json"
   },
   {
     "id": "g7-079",
@@ -24801,6 +25009,29 @@
     "strokesRef": "strokes/g7/g7-178.json"
   },
   {
+    "id": "g7-179",
+    "kanji": "端",
+    "grade": 7,
+    "strokeCount": 10,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [
+      "はし",
+      "は",
+      "はた"
+    ],
+    "meaning": "はし。物の、いちばん端の部分。",
+    "exampleSentence": "彼は、テーブルの端（はし）に座り、静かに本を読んでいた。",
+    "stageId": [
+      "Asia_area6"
+    ],
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "tags": [],
+    "strokesRef": "strokes/g7/g7-179.json"
+  },
+  {
     "id": "g7-180",
     "kanji": "弾",
     "grade": 7,
@@ -25712,6 +25943,27 @@
     "originalGrade": 7,
     "tags": [],
     "strokesRef": "strokes/g7/g7-223.json"
+  },
+  {
+    "id": "g7-224",
+    "kanji": "追",
+    "grade": 7,
+    "strokeCount": 10,
+    "onyomi": [
+      "ハク"
+    ],
+    "kunyomi": [
+      "せま"
+    ],
+    "meaning": "おいつく。後ろから追いかけること。",
+    "exampleSentence": "彼は、必死に前を走るランナーを追い（おい）かけ、ついに追いついた。",
+    "stageId": [
+      "Asia_area8"
+    ],
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "tags": [],
+    "strokesRef": "strokes/g7/g7-224.json"
   },
   {
     "id": "g7-225",
@@ -27183,6 +27435,27 @@
     "originalGrade": null,
     "tags": [],
     "strokesRef": "strokes/g7/g7-296.json"
+  },
+  {
+    "id": "g7-297",
+    "kanji": "離",
+    "grade": 7,
+    "strokeCount": 18,
+    "onyomi": [
+      "リ"
+    ],
+    "kunyomi": [
+      "はな"
+    ],
+    "meaning": "二つのものを遠くへだてること。はなれる。",
+    "exampleSentence": "駅と家は、少し距（きょ）離（り）がある。",
+    "stageId": [
+      "Asia_area10"
+    ],
+    "continent": "アジア大陸",
+    "originalGrade": 7,
+    "tags": [],
+    "strokesRef": "strokes/g7/g7-297.json"
   },
   {
     "id": "g7-298",
@@ -31617,6 +31890,25 @@
     "strokesRef": "strokes/g8/g8-205.json"
   },
   {
+    "id": "g8-206",
+    "kanji": "娑",
+    "grade": 8,
+    "strokeCount": 11,
+    "onyomi": [
+      "バ"
+    ],
+    "kunyomi": [],
+    "meaning": "うごく。",
+    "exampleSentence": "彼は、娑婆（しゃば）の生活に疲れ、静かな隠居生活を送ることを決めた。",
+    "stageId": [
+      "Europe_area7"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g8/g8-206.json"
+  },
+  {
     "id": "g8-207",
     "kanji": "排",
     "grade": 8,
@@ -34777,6 +35069,25 @@
     "strokesRef": "strokes/g9/g9-082.json"
   },
   {
+    "id": "g9-083",
+    "kanji": "候",
+    "grade": 9,
+    "strokeCount": 9,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。物事の、様子。",
+    "exampleSentence": "彼は、天候（てんこう）の急変に備え、常に最新の気象情報を確認している。",
+    "stageId": [
+      "America_area3"
+    ],
+    "continent": "ヨーロッパ・中東",
+    "originalGrade": 9,
+    "tags": [],
+    "strokesRef": "strokes/g9/g9-083.json"
+  },
+  {
     "id": "g9-084",
     "kanji": "洪",
     "grade": 9,
@@ -35054,6 +35365,25 @@
     "strokesRef": "strokes/g9/g9-097.json"
   },
   {
+    "id": "g9-098",
+    "kanji": "裁",
+    "grade": 9,
+    "strokeCount": 10,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [],
+    "meaning": "たつ。布などを、切って形を作ること。",
+    "exampleSentence": "彼女は、美しい生地を裁ち（たち）、世界に一つだけのドレスを作り上げた。",
+    "stageId": [
+      "America_area4"
+    ],
+    "continent": "ヨーロッパ・中東",
+    "originalGrade": 9,
+    "tags": [],
+    "strokesRef": "strokes/g9/g9-098.json"
+  },
+  {
     "id": "g9-099",
     "kanji": "斎",
     "grade": 9,
@@ -35170,6 +35500,25 @@
     "originalGrade": 9,
     "tags": [],
     "strokesRef": "strokes/g9/g9-104.json"
+  },
+  {
+    "id": "g9-105",
+    "kanji": "嗣",
+    "grade": 9,
+    "strokeCount": 14,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [],
+    "meaning": "し。跡を継ぐこと。",
+    "exampleSentence": "彼は、父の事業を嗣ぎ（つぎ）、会社の発展に尽力した。",
+    "stageId": [
+      "America_area4"
+    ],
+    "continent": "ヨーロッパ・中東",
+    "originalGrade": 9,
+    "tags": [],
+    "strokesRef": "strokes/g9/g9-105.json"
   },
   {
     "id": "g9-106",
@@ -36476,6 +36825,25 @@
     "originalGrade": 9,
     "tags": [],
     "strokesRef": "strokes/g9/g9-171.json"
+  },
+  {
+    "id": "g9-172",
+    "kanji": "析",
+    "grade": 9,
+    "strokeCount": 10,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [],
+    "meaning": "せき。物事を、分析すること。",
+    "exampleSentence": "彼は、複雑なデータを詳細に分析（ぶんせき）し、問題の本質を明らかにした。",
+    "stageId": [
+      "America_area6"
+    ],
+    "continent": "ヨーロッパ・中東",
+    "originalGrade": 9,
+    "tags": [],
+    "strokesRef": "strokes/g9/g9-172.json"
   },
   {
     "id": "g9-173",
@@ -40090,6 +40458,27 @@
     "strokesRef": "strokes/g10/g10-027.json"
   },
   {
+    "id": "g10-028",
+    "kanji": "顎",
+    "grade": 10,
+    "strokeCount": 9,
+    "onyomi": [
+      "ガク"
+    ],
+    "kunyomi": [
+      "あご"
+    ],
+    "meaning": "あご。顔の下の部分。",
+    "exampleSentence": "彼は、顎（あご）を突き出し、自信満々な表情で相手を見据えた。",
+    "stageId": [
+      "Africa_area2"
+    ],
+    "continent": "アフリカ",
+    "originalGrade": 10,
+    "tags": [],
+    "strokesRef": "strokes/g10/g10-028.json"
+  },
+  {
     "id": "g10-029",
     "kanji": "葛",
     "grade": 10,
@@ -41578,6 +41967,27 @@
     "strokesRef": "strokes/g10/g10-103.json"
   },
   {
+    "id": "g10-104",
+    "kanji": "瘦",
+    "grade": 10,
+    "strokeCount": 12,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "や"
+    ],
+    "meaning": "からだの肉がおちる。土地が肥えていないこと。",
+    "exampleSentence": "土地が痩（や）せて作物が育たない。",
+    "stageId": [
+      "Africa_area6"
+    ],
+    "continent": "アフリカ",
+    "originalGrade": 10,
+    "tags": [],
+    "strokesRef": "strokes/g10/g10-104.json"
+  },
+  {
     "id": "g10-105",
     "kanji": "踪",
     "grade": 10,
@@ -41694,6 +42104,25 @@
     "originalGrade": 10,
     "tags": [],
     "strokesRef": "strokes/g10/g10-110.json"
+  },
+  {
+    "id": "g10-111",
+    "kanji": "載",
+    "grade": 10,
+    "strokeCount": 17,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [],
+    "meaning": "のせる。物事を、記録すること。",
+    "exampleSentence": "彼は、新聞に自分の意見を掲載（けいさい）し、多くの人々に訴えかけた。",
+    "stageId": [
+      "Africa_area6"
+    ],
+    "continent": "アフリカ",
+    "originalGrade": 10,
+    "tags": [],
+    "strokesRef": "strokes/g10/g10-111.json"
   },
   {
     "id": "g10-112",
@@ -42548,6 +42977,25 @@
     "strokesRef": "strokes/g10/g10-155.json"
   },
   {
+    "id": "g10-156",
+    "kanji": "頬",
+    "grade": 10,
+    "strokeCount": 16,
+    "onyomi": [],
+    "kunyomi": [
+      "ほお"
+    ],
+    "meaning": "ほお。顔の側面。",
+    "exampleSentence": "彼女は、頬（ほお）を赤らめ、恥ずかしそうに俯いた。",
+    "stageId": [
+      "Africa_area8"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g10/g10-156.json"
+  },
+  {
     "id": "g10-157",
     "kanji": "睦",
     "grade": 10,
@@ -42876,6 +43324,25 @@
     "originalGrade": null,
     "tags": [],
     "strokesRef": "strokes/g10/g10-173.json"
+  },
+  {
+    "id": "g10-174",
+    "kanji": "璃",
+    "grade": 10,
+    "strokeCount": 14,
+    "onyomi": [
+      "リ"
+    ],
+    "kunyomi": [],
+    "meaning": "り。ガラスのこと。",
+    "exampleSentence": "彼は、ステンドグラスの美しい瑠璃（るり）色の輝きに魅了された。",
+    "stageId": [
+      "Africa_area9"
+    ],
+    "continent": null,
+    "originalGrade": null,
+    "tags": [],
+    "strokesRef": "strokes/g10/g10-174.json"
   },
   {
     "id": "g10-175",
