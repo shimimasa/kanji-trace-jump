@@ -1717,11 +1717,56 @@ function reorderLatinStrokes(polys) {
             saveProgress(ctx.progress);
           }
 
+          // ---------------------------
+  // Review navigation helper (single mode)
+  // - onlyUncleared の時は「未クリアだけ」を next/prev で巡回
+  // - ここでは "次に出す singleId" を計算して、GameScreen が遷移に使えるようにする
+  // ---------------------------
+  function isClearedByItemId(itemId) {
+    const key = makeProgressKey(contentType, itemId);
+    return !!ctx?.progress?.cleared?.[key];
+  }
+
+  function calcReviewNav() {
+    const rv = ctx?.review;
+    if (!rv?.active || !Array.isArray(rv.queue) || rv.queue.length === 0) return null;
+
+    const q = rv.queue;
+    const n = q.length;
+    const cur = Number.isFinite(rv.index) ? rv.index : 0;
+    const onlyUnc = !!rv.onlyUncleared;
+
+    const accept = (id) => !onlyUnc || !isClearedByItemId(id);
+
+    const step = (dir) => {
+      for (let k = 1; k <= n; k++) {
+        const i = (cur + dir * k + n) % n;
+        const id = q[i];
+        if (accept(id)) return { index: i, id };
+      }
+      return { index: null, id: null };
+    };
+
+    const next = step(+1);
+    const prev = step(-1);
+    return {
+      curIndex: cur,
+      curId: q[cur],
+      nextIndex: next.index,
+      nextId: next.id,
+      prevIndex: prev.index,
+      prevId: prev.id,
+      onlyUncleared: onlyUnc,
+      done: next.id == null, // 次が無い（= 全部クリア済み等）
+    };
+  }
+
            // ✅ single練習：ここで完了→図鑑へ戻す（Resultには行かない）
           if (isSingleMode) {
                 showSetClearCelebration(svgEl);
                 setTimeout(() => {
                   const result = finalizeSetRun();
+                  const reviewNav = calcReviewNav();
                   onSetFinished?.({
                     mode: "single",
                     singleId,
@@ -1729,6 +1774,7 @@ function reorderLatinStrokes(polys) {
                     set: { start: 0, end: 1, len: 1, pos: 0 },
                     history: loadSetResults(),
                     nextStart: 0,
+                    reviewNav,
                   });
                 }, 900);
                 return;

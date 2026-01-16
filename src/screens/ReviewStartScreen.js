@@ -39,7 +39,7 @@ export function ReviewStartScreen(ctx, nav) {
         const total = items.length;
         let clearedCount = 0;
         for (const it of items) {
-          if (isCleared(ctx.progress, makeItemId(type, it.id))) clearedCount++;
+          if (isCleared(ctx.progress, makeItemKey(type.id, it.id))) clearedCount++;
         }
         return { total, clearedCount, pct: total ? Math.round((clearedCount / total) * 100) : 0 };
       };
@@ -50,12 +50,12 @@ export function ReviewStartScreen(ctx, nav) {
         // 候補フィルタ
         let candidates = arr;
         if (onlyUncleared) {
-          candidates = candidates.filter((it) => !isCleared(ctx.progress, makeItemKey(type.id, it.id)));
+          candidates = candidates.filter((it) => !isCleared(ctx.progress, makeItemKey(type, it.id)));
         }
 
         // スコア関数
-        const weakScore = (it) => getWeakScore(ctx.progress, makeItemKey(type.id, it.id));
-        const lastAttemptAt = (it) => ctx.progress?.items?.[makeItemKey(type.id, it.id)]?.lastAttemptAt ?? 0;
+        const weakScore = (it) => getWeakScore(ctx.progress, makeItemKey(type, it.id));
+        const lastAttemptAt = (it) => ctx.progress?.items?.[makeItemKey(type, it.id)]?.lastAttemptAt ?? 0;
 
         // 優先ポリシー
         let ordered = candidates;
@@ -65,8 +65,8 @@ export function ReviewStartScreen(ctx, nav) {
           ordered = candidates
             .slice()
             .sort((a, b) => {
-              const ac = isCleared(ctx.progress, makeItemKey(type.id, a.id)) ? 1 : 0;
-              const bc = isCleared(ctx.progress, makeItemKey(type.id, b.id)) ? 1 : 0;
+              const ac = isCleared(ctx.progress, makeItemKey(type, a.id)) ? 1 : 0;
+              const bc = isCleared(ctx.progress, makeItemKey(type, b.id)) ? 1 : 0;
               if (ac !== bc) return ac - bc;
               const ws = weakScore(b) - weakScore(a);
               if (ws !== 0) return ws;
