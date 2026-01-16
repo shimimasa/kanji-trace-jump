@@ -455,7 +455,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         anim.onfinish = () => t.remove();
       }
 
-       // ===========================
+      // ===========================
       // Clear stamp (赤い〇) - center
       // ===========================
       function showClearMaruStamp(svgEl) {
@@ -464,7 +464,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
         const g = document.createElementNS(ns, "g");
         g.setAttribute("class", "fx-clear-maru");
-        // viewBox(0..100)想定で中央固定
+        // viewBox(0..100) 前提で中央に固定
         g.setAttribute("transform", "translate(50 50) scale(0)");
         layer.appendChild(g);
 
@@ -474,10 +474,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         c.setAttribute("r", "28");
         g.appendChild(c);
 
-        // “スタンプ感”を出す：ぽん→少し戻る→フェード
         const anim = g.animate(
           [
-            { transform: "translate(50px,50px) scale(0.2)", opacity: 0 },
+            { transform: "translate(50px,50px) scale(0.25)", opacity: 0 },
             { transform: "translate(50px,50px) scale(1.10)", opacity: 1 },
             { transform: "translate(50px,50px) scale(1.00)", opacity: 1 },
             { transform: "translate(50px,50px) scale(1.02)", opacity: 0 },
@@ -1307,10 +1306,19 @@ function reorderLatinStrokes(polys) {
     const p0 = stroke[0];
     hintDot.style.display = "";
     hintNum.style.display = "";
+    
+    // ✅ 見切れ対策：端に寄りすぎる場合は少し内側へ
+    // （viewBox 0..100 前提）
+    const x = clamp(p0.x, 6, 94);
+    const yTop = p0.y - 10;
+    // 上端に近いときは「下に」回す
+    const y = yTop < 10 ? (p0.y + 18) : yTop;
+
     hintDot.setAttribute("cx", String(p0.x));
     hintDot.setAttribute("cy", String(p0.y));
-    hintNum.setAttribute("x", String(p0.x));
-    hintNum.setAttribute("y", String(p0.y - 8));
+    hintNum.setAttribute("x", String(x));
+    hintNum.setAttribute("y", String(y));
+    hintNum.setAttribute("text-anchor", "middle");
     hintNum.textContent = String(strokeIndex + 1);
   }
 
@@ -1697,6 +1705,14 @@ function reorderLatinStrokes(polys) {
         if (strokeIndex >= strokes.length) {
           if (setRun) setRun.kanjiCleared += 1;
           kanjiCompleted = true;
+
+          // ✅ 5文字クリア（セット最終）では花丸が出るので、赤〇スタンプは出さない
+          // （セット途中の1字クリアだけ赤〇を出す）
+          const setInfoForStamp = getSetInfo(idx);
+          const isSetLast = !!setInfoForStamp && (setInfoForStamp.pos >= setInfoForStamp.len - 1);
+          if (!isSetLast && !isSingleMode) {
+            showClearMaruStamp(svgEl);
+          }
 
           // ✅ 1字クリアのたびに「中心へ赤い〇スタンプ」
           showClearMaruStamp(svgEl);

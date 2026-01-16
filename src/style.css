@@ -469,7 +469,7 @@ body {
     fill: #ff7a00;
   }
 
-  /* ===========================
+/* ===========================
 +   Clear stamp (赤い〇)
 +   =========================== */
 .fx-clear-maru{
@@ -481,7 +481,7 @@ body {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    /* 背景に埋もれないように白ふちっぽい効果 */
+    /* 白フチっぽくして背景に埋もれにくくする */
     filter:
       drop-shadow( 1px  0px 0 rgba(255,255,255,.85))
       drop-shadow(-1px  0px 0 rgba(255,255,255,.85))
