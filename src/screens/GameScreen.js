@@ -3,7 +3,8 @@ import { startTraceGame } from "../game/startTraceGame.js";
 import { recordReviewSession, saveProgress } from "../lib/progressStore.js";
 export function GameScreen(ctx, nav) {
   let game = null;
-
+  // 復習ナビ（single練習終了時に startTraceGame から返ってくる）
+  let lastReviewNav = null;
   return {
     async mount() {
       const el = document.createElement("div");
@@ -57,7 +58,9 @@ export function GameScreen(ctx, nav) {
 
       const homeBtn = el.querySelector("#homeBtn");
             const dexBackBtn = el.querySelector("#dexBackBtn");
-      
+            const prevBtn = el.querySelector("#prevBtn");
+    const nextBtn = el.querySelector("#nextBtn");
+
             const onHome = () => {
               const ok = window.confirm("ホームにもどりますか？\n（プレイ中の進み具合は保存されません）");
               if (!ok) return;
@@ -84,6 +87,44 @@ export function GameScreen(ctx, nav) {
       };
       masterToggle?.addEventListener("click", onToggleMaster);
 
+            // ✅ 復習中の「まえ/つぎ」は review キュー移動にする（未クリア巡回）
+            const isReviewActive = !!ctx.review?.active;
+            const onReviewPrev = () => {
+              if (!isReviewActive) return;
+              const navInfo = lastReviewNav;
+              const review = ctx.review;
+              if (!review || !navInfo || !navInfo.prevId || !Number.isFinite(navInfo.prevIndex)) return;
+              nav.go("game", {
+                selectedRangeId: ctx.selectedRangeId,
+                review: { ...review, index: navInfo.prevIndex },
+                singleId: navInfo.prevId,
+                mode: "kid",
+                returnTo: "review",
+                returnFrom: ctx.returnFrom ?? "progress",
+              });
+            };
+            const onReviewNext = () => {
+              if (!isReviewActive) return;
+              const navInfo = lastReviewNav;
+              const review = ctx.review;
+              if (!review || !navInfo || !navInfo.nextId || !Number.isFinite(navInfo.nextIndex)) return;
+              nav.go("game", {
+                selectedRangeId: ctx.selectedRangeId,
+                review: { ...review, index: navInfo.nextIndex },
+                singleId: navInfo.nextId,
+                mode: "kid",
+                returnTo: "review",
+                returnFrom: ctx.returnFrom ?? "progress",
+              });
+            };
+      
+            if (isReviewActive) {
+              // UI文言も復習寄りに（任意・軽量）
+              prevBtn && (prevBtn.textContent = "まえ（復習）");
+              nextBtn && (nextBtn.textContent = "つぎ（復習）");
+              prevBtn?.addEventListener("click", onReviewPrev);
+              nextBtn?.addEventListener("click", onReviewNext);
+            }
 
       game = startTraceGame({
         rootEl: el,
@@ -94,6 +135,8 @@ export function GameScreen(ctx, nav) {
         singleId: ctx.singleId,
         mode: ctx.mode ?? "kid",
         onSetFinished: ({ result, nextStart, history, mode, singleId, reviewNav }) => {
+                              // ✅ 復習ナビを保持（まえ/つぎボタンで使う）
+                              if (reviewNav) lastReviewNav = reviewNav;
                     // ✅ single練習（復習モード）
                     if (mode === "single" && ctx.review?.active) {
                       const review = ctx.review;
@@ -194,6 +237,12 @@ export function GameScreen(ctx, nav) {
         cleanup() {
           homeBtn?.removeEventListener("click", onHome);
           dexBackBtn?.removeEventListener("click", onDexBack);
+          // 復習ボタン解除
+          if (isReviewActive) {
+              prevBtn?.removeEventListener("click", onReviewPrev);
+              nextBtn?.removeEventListener("click", onReviewNext);
+            }
+            lastReviewNav = null;
 
           masterToggle?.removeEventListener("click", onToggleMaster);
           game?.stop?.();
