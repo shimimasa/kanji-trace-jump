@@ -1411,29 +1411,31 @@ html, body {
     .dexInfoValue{
       font-weight: 900;
     }
-    /* ===========================
-+       Dex: tags + notice
-+       =========================== */
-    .dexTags{
-        margin-top: 8px;
-        display:flex;
-        gap: 8px;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-      .dexTag{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        padding: 6px 10px;
-        border-radius: 999px;
-        border: 1px solid rgba(18,38,63,.12);
-        background: rgba(255,255,255,.70);
-        font-weight: 1000;
-        font-size: 12px;
-        letter-spacing: .02em;
-        opacity: .92;
-      }
+
+
+/* ===========================
++   Dex tags (make visible)
++   =========================== */
+.dexTags{
+  margin: 10px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.dexTag{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(18,38,63,.18);
+  background: rgba(255,255,255,.85);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: .02em;
+  box-shadow: 0 6px 18px rgba(18,38,63,.06);
+}
   
       .dexNotice{
         margin-top: 12px;
