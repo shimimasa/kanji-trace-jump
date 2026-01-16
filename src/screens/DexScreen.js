@@ -346,6 +346,7 @@ export function DexScreen(ctx, nav) {
         const exMeta = getExampleBlockMeta(type);
         const tags = buildDexTags({ type, rangeId: range?.id, it });
         const notices = buildDexNotices({ type, rangeId: range?.id, it });
+        const showMaster = type === "kanji";
 
         el.innerHTML = `
           <div class="dexBoard">
@@ -462,8 +463,12 @@ export function DexScreen(ctx, nav) {
               }
 
               <div class="dexActions">
-                <button id="practice" class="btn primary big" type="button">この文字を練習する</button>
-                <button id="practiceMaster" class="btn big" type="button">MASTERで練習</button>
+                <button class="btn primary bigBtn" data-action="practice" type="button">この文字を練習する</button>
+                ${
+                  showMaster
+                    ? `<button class="btn bigBtn" data-action="master" type="button">MASTERで練習</button>`
+                    : ``
+                }
               </div>
 
               <div class="dexNav">
