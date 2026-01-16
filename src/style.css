@@ -1436,6 +1436,18 @@ html, body {
   letter-spacing: .02em;
   box-shadow: 0 6px 18px rgba(18,38,63,.06);
 }
+
+/* Dex actions: 1個でも中央に寄せる */
+.dexActions{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .dexActions .bigBtn{
+    min-width: min(520px, 100%);
+  }
   
       .dexNotice{
         margin-top: 12px;
