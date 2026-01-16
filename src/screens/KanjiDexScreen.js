@@ -2,7 +2,7 @@
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
 import { makeProgressKey } from "../lib/progressKey.js";
 import { loadRangeItems } from "../lib/rangeItems.js";
-
+import { KANA_EXAMPLES } from "../../public/data/examples/kanaExamples.js";
 function makeItemId(type, itemId) {
     return makeProgressKey(type, itemId);
   }
@@ -35,6 +35,29 @@ function getReadingKun(it) {
 function getExample(it) {
   return it?.example ?? it?.exampleSentence ?? it?.reibun ?? it?.sentence ?? it?.ex ?? "";
 }
+
+function pickCharForDex(it) {
+    return it?.char ?? it?.text ?? it?.kana ?? it?.kanji ?? it?.letter ?? it?.symbol ?? "";
+  }
+  
+  function isSmallKanaChar(ch) {
+    return ["ぁ","ぃ","ぅ","ぇ","ぉ","ゃ","ゅ","ょ","っ","ゎ","ァ","ィ","ゥ","ェ","ォ","ャ","ュ","ョ","ッ","ヮ","ー"].includes(ch);
+  }
+  
+  // Dex用：exampleが無い時だけ、かなの「ことば（例）」を補完
+  function getExampleWithFallback(type, it) {
+    const raw = getExample(it);
+    if (raw) return raw;
+  
+    // かなだけ補完（拗音/促音/長音など小書きは触らない）
+    if (type !== "hiragana" && type !== "katakana") return "";
+  
+    const ch = pickCharForDex(it);
+    if (!ch) return "";
+    if (isSmallKanaChar(ch)) return ""; // 方針：小書き/長音はストップ
+  
+    return KANA_EXAMPLES[ch] ?? "";
+  }
 
 function getRomaji(it) {
     return it?.romaji ?? it?.hepburn ?? it?.roman ?? it?.reading ?? it?.pronunciation ?? "";
@@ -315,7 +338,7 @@ export function KanjiDexScreen(ctx, nav) {
           .map(([k, label]) => ({ k, label, v: Number(mm?.[k] ?? 0) }))
           .filter((x) => x.v > 0);
         
-        const ex = getExample(it);
+        const ex = getExampleWithFallback(type, it);
         const info = buildDexInfo(type, it);
         const hasInfo = Array.isArray(info.rows) && info.rows.length > 0;
         const hasExample = !!ex;
