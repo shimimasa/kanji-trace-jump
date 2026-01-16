@@ -392,27 +392,29 @@ export function DexScreen(ctx, nav) {
                 <span>失敗 <b>${fails}</b></span>
                 ${accuracy == null ? "" : `<span>正答率 <b>${accuracy}%</b></span>`}
               </div>
-<div class="dexMasterBox">
-                <div class="dexMasterHead">
-                  <div class="dexMasterTitle">MASTER</div>
-                  ${masterOk ? `<div class="dexMasterBadge ok">✓</div>` : `<div class="dexMasterBadge">—</div>`}
-                </div>
-                <div class="dexMasterStats">
-                  <div class="dexMasterStat"><span>挑戦</span><b>${masterAttempts}</b></div>
-                  <div class="dexMasterStat"><span>合格</span><b>${masterPasses}</b></div>
-                </div>
-                ${
-                  mistakeRows.length
-                    ? `
-                      <div class="dexMasterMist">
-                        ${mistakeRows
-                          .map((m) => `<div class="dexMistPill"><span>${m.label}</span><b>${m.v}</b></div>`)
-                          .join("")}
+              ${
+                showMaster
+                  ? `
+                    <div class="dexMasterBox">
+                      <div class="dexMasterHead">
+                        <div class="dexMasterTitle">MASTER</div>
+                        ${masterOk ? `<div class="dexMasterBadge ok">✓</div>` : `<div class="dexMasterBadge">—</div>`}
                       </div>
-                    `
-                    : `<div class="dexMasterMist muted">（Masterの失敗内訳はまだありません）</div>`
-                }
-              </div>
+                      <div class="dexMasterRow">
+                        <div class="dexMasterStat"><span>挑戦</span><b>${masterAttempts}</b></div>
+                        <div class="dexMasterStat"><span>合格</span><b>${masterPasses}</b></div>
+                      </div>
+                      <div class="dexMasterReason muted">
+                        ${
+                          masterAttempts > 0
+                            ? `（順番× ${mm.WRONG_ORDER ?? 0} / 線× ${mm.BAD_SHAPE ?? 0} / 短× ${mm.TOO_SHORT ?? 0} / 始× ${mm.START_OFF ?? 0} / 外× ${mm.FAR_FROM_STROKE ?? 0}）`
+                            : `（Masterの失敗内訳はまだありません）`
+                        }
+                      </div>
+                    </div>
+                  `
+                  : ""
+              }
               ${
                 hasInfo
                   ? `
