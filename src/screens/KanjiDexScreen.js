@@ -321,6 +321,8 @@ export function KanjiDexScreen(ctx, nav) {
         const hasExample = !!ex;
         const typeLabel = getTypeLabel(type);
         const exMeta = getExampleBlockMeta(type);
+        const tags = buildDexTags({ type, rangeId: range?.id, it });
+        const notices = buildDexNotices({ type, rangeId: range?.id, it });
 
         el.innerHTML = `
           <div class="dexBoard">
@@ -353,6 +355,15 @@ export function KanjiDexScreen(ctx, nav) {
             <div class="dexCard">
               <div class="dexChar">${label}</div>
               <div class="dexStatus">${cleared ? "✓ クリア済み" : "未クリア"}</div>
+              ${
+                                tags.length
+                                  ? `
+                                    <div class="dexTags">
+                                      ${tags.map((t) => `<span class="dexTag">${escapeHtml(t)}</span>`).join("")}
+                                    </div>
+                                  `
+                                  : ""
+                              }
               <div class="dexMiniStats muted" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
                 <span>挑戦 <b>${attempts}</b></span>
                 <span>失敗 <b>${fails}</b></span>
@@ -400,6 +411,18 @@ export function KanjiDexScreen(ctx, nav) {
                   `
               }
 
+              ${
+                                notices.length
+                                  ? `
+                                    <div class="dexNotice">
+                                      <div class="dexNoticeTitle">⚠ ここに注意</div>
+                                      <ul class="dexNoticeList">
+                                        ${notices.map((n) => `<li>${escapeHtml(n)}</li>`).join("")}
+                                      </ul>
+                                    </div>
+                                  `
+                                  : ""
+                              }
               ${
                 hasExample
                   ? `

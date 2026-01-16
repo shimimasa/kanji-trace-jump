@@ -1411,6 +1411,52 @@ html, body {
     .dexInfoValue{
       font-weight: 900;
     }
+    /* ===========================
++       Dex: tags + notice
++       =========================== */
+    .dexTags{
+        margin-top: 8px;
+        display:flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .dexTag{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        padding: 6px 10px;
+        border-radius: 999px;
+        border: 1px solid rgba(18,38,63,.12);
+        background: rgba(255,255,255,.70);
+        font-weight: 1000;
+        font-size: 12px;
+        letter-spacing: .02em;
+        opacity: .92;
+      }
+  
+      .dexNotice{
+        margin-top: 12px;
+        border-radius: 18px;
+        border: 1px dashed rgba(18,38,63,.18);
+        background: rgba(255,255,255,.72);
+        padding: 12px 14px;
+      }
+      .dexNoticeTitle{
+        font-weight: 1000;
+        opacity: .80;
+        margin-bottom: 6px;
+      }
+      .dexNoticeList{
+        margin: 0;
+        padding-left: 18px;
+        font-weight: 800;
+        line-height: 1.6;
+        opacity: .88;
+      }
+      .dexNoticeList li{
+        margin: 4px 0;
+      }
     .dexExample{
       margin-top: 12px;
       border-radius: 18px;
