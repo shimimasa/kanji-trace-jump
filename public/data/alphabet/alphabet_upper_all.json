@@ -2,131 +2,183 @@
   {
     "id": "ALPHA_U0041",
     "letter": "A",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0041.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0041.json",
+    "nameJp": "エー",
+    "exampleWord": "apple"
   },
   {
     "id": "ALPHA_U0042",
     "letter": "B",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0042.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0042.json",
+    "nameJp": "ビー",
+    "exampleWord": "ball"
   },
   {
     "id": "ALPHA_U0043",
     "letter": "C",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0043.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0043.json",
+    "nameJp": "シー",
+    "exampleWord": "cat"
   },
   {
     "id": "ALPHA_U0044",
     "letter": "D",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0044.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0044.json",
+    "nameJp": "ディー",
+    "exampleWord": "dog"
   },
   {
     "id": "ALPHA_U0045",
     "letter": "E",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0045.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0045.json",
+    "nameJp": "イー",
+    "exampleWord": "egg"
   },
   {
     "id": "ALPHA_U0046",
     "letter": "F",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0046.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0046.json",
+    "nameJp": "エフ",
+    "exampleWord": "fish"
   },
   {
     "id": "ALPHA_U0047",
     "letter": "G",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0047.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0047.json",
+    "nameJp": "ジー",
+    "exampleWord": "goat"
   },
   {
     "id": "ALPHA_U0048",
     "letter": "H",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0048.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0048.json",
+    "nameJp": "エイチ",
+    "exampleWord": "hat"
   },
   {
     "id": "ALPHA_U0049",
     "letter": "I",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0049.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0049.json",
+    "nameJp": "アイ",
+    "exampleWord": "ice"
   },
   {
     "id": "ALPHA_U004A",
     "letter": "J",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U004A.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004A.json",
+    "nameJp": "ジェー",
+    "exampleWord": "juice"
   },
   {
     "id": "ALPHA_U004B",
     "letter": "K",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U004B.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004B.json",
+    "nameJp": "ケー",
+    "exampleWord": "key"
   },
   {
     "id": "ALPHA_U004C",
     "letter": "L",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U004C.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004C.json",
+    "nameJp": "エル",
+    "exampleWord": "lion"
   },
   {
     "id": "ALPHA_U004D",
     "letter": "M",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U004D.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004D.json",
+    "nameJp": "エム",
+    "exampleWord": "moon"
   },
   {
     "id": "ALPHA_U004E",
     "letter": "N",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U004E.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004E.json",
+    "nameJp": "エヌ",
+    "exampleWord": "nose"
   },
   {
     "id": "ALPHA_U004F",
     "letter": "O",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U004F.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U004F.json",
+    "nameJp": "オー",
+    "exampleWord": "orange"
   },
   {
     "id": "ALPHA_U0050",
     "letter": "P",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0050.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0050.json",
+    "nameJp": "ピー",
+    "exampleWord": "pen"
   },
   {
     "id": "ALPHA_U0051",
     "letter": "Q",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0051.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0051.json",
+    "nameJp": "キュー",
+    "exampleWord": "queen"
   },
   {
     "id": "ALPHA_U0052",
     "letter": "R",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0052.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0052.json",
+    "nameJp": "アール",
+    "exampleWord": "rain"
   },
   {
     "id": "ALPHA_U0053",
     "letter": "S",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0053.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0053.json",
+    "nameJp": "エス",
+    "exampleWord": "sun"
   },
   {
     "id": "ALPHA_U0054",
     "letter": "T",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0054.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0054.json",
+    "nameJp": "ティー",
+    "exampleWord": "tree"
   },
   {
     "id": "ALPHA_U0055",
     "letter": "U",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0055.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0055.json",
+    "nameJp": "ユー",
+    "exampleWord": "umbrella"
   },
   {
     "id": "ALPHA_U0056",
     "letter": "V",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0056.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0056.json",
+    "nameJp": "ヴィー",
+    "exampleWord": "van"
   },
   {
     "id": "ALPHA_U0057",
     "letter": "W",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0057.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0057.json",
+    "nameJp": "ダブリュー",
+    "exampleWord": "water"
   },
   {
     "id": "ALPHA_U0058",
     "letter": "X",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0058.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0058.json",
+    "nameJp": "エックス",
+    "exampleWord": "xylophone"
   },
   {
     "id": "ALPHA_U0059",
     "letter": "Y",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U0059.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U0059.json",
+    "nameJp": "ワイ",
+    "exampleWord": "yoyo"
   },
   {
     "id": "ALPHA_U005A",
     "letter": "Z",
-    "strokesRef": "strokes/alphabet/upper/ALPHA_U005A.json"
+    "strokesRef": "strokes/alphabet/upper/ALPHA_U005A.json",
+    "nameJp": "ズィー",
+    "exampleWord": "zebra"
   }
 ]
