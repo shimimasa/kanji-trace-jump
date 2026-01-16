@@ -1243,6 +1243,16 @@ function reorderLatinStrokes(polys) {
     }
 
 
+    // kidモードで「猫が次にいる予定の場所」（数字回避に使う）
+  // ※ viewBox 0..100 前提の座標
+  let kidCatTarget = { x: 50, y: 50 };
+  function updateKidCatTarget() {
+    if (!currentStrokes || isMaster) return;
+    const i = Math.min(strokeIndex, currentStrokes.length - 1);
+    kidCatTarget = getStrokeEnd(currentStrokes, i);
+  }
+
+
   function polyToPathD(poly) {
     if (!poly || poly.length === 0) return "";
     const [p0, ...rest] = poly;
@@ -1297,6 +1307,9 @@ function reorderLatinStrokes(polys) {
         hintNum.style.display = "none";
         return;
     }
+    // kidモードでは猫の予定位置を更新（数字を避けるため）
+    updateKidCatTarget();
+    
     const stroke = currentStrokes[strokeIndex];
     if (!stroke || !stroke.length) {
       hintDot.style.display = "none";
@@ -1307,17 +1320,38 @@ function reorderLatinStrokes(polys) {
     hintDot.style.display = "";
     hintNum.style.display = "";
     
-    // ✅ 見切れ対策：端に寄りすぎる場合は少し内側へ
-    // （viewBox 0..100 前提）
-    const x = clamp(p0.x, 6, 94);
-    const yTop = p0.y - 10;
-    // 上端に近いときは「下に」回す
-    const y = yTop < 10 ? (p0.y + 18) : yTop;
-
+    
     hintDot.setAttribute("cx", String(p0.x));
     hintDot.setAttribute("cy", String(p0.y));
-    hintNum.setAttribute("x", String(x));
-    hintNum.setAttribute("y", String(y));
+    // ===========================
+    // 画数(数字)の配置：猫を避ける
+    // ===========================
+    // 候補：上/下/右/左（必要なら増やせる）
+    const clampX = (v) => clamp(v, 10, 90);
+    const clampY = (v) => clamp(v, 12, 96);
+
+    const candidates = [
+      { x: p0.x,     y: p0.y - 12 }, // 上
+      { x: p0.x,     y: p0.y + 20 }, // 下
+      { x: p0.x + 18, y: p0.y + 6 }, // 右下寄り
+      { x: p0.x - 18, y: p0.y + 6 }, // 左下寄り
+    ].map((c) => ({ x: clampX(c.x), y: clampY(c.y) }));
+
+    // 猫が近いときは数字を逃がす（kidのみ）
+    const cat = (!isMaster && kidCatTarget) ? kidCatTarget : null;
+    const avoidR = 16; // ここを大きくするとより避ける（ただし端に寄りやすい）
+    function farFromCat(pt) {
+      if (!cat) return true;
+      const dx = pt.x - cat.x;
+      const dy = pt.y - cat.y;
+      return (dx*dx + dy*dy) > (avoidR*avoidR);
+    }
+
+    // まず「猫から十分遠い」候補を優先、全部近いなら最初の候補で妥協
+    const chosen = candidates.find(farFromCat) || candidates[0];
+
+    hintNum.setAttribute("x", String(chosen.x));
+    hintNum.setAttribute("y", String(chosen.y));
     hintNum.setAttribute("text-anchor", "middle");
     hintNum.textContent = String(strokeIndex + 1);
   }
