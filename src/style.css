@@ -468,6 +468,26 @@ body {
     font-weight: 700;
     fill: #ff7a00;
   }
+
+  /* ===========================
++   Clear stamp (赤い〇)
++   =========================== */
+.fx-clear-maru{
+    pointer-events: none;
+  }
+  .fx-clear-maru circle{
+    stroke: rgba(255, 60, 60, .95);
+    stroke-width: 7;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* 背景に埋もれないように白ふちっぽい効果 */
+    filter:
+      drop-shadow( 1px  0px 0 rgba(255,255,255,.85))
+      drop-shadow(-1px  0px 0 rgba(255,255,255,.85))
+      drop-shadow( 0px  1px 0 rgba(255,255,255,.85))
+      drop-shadow( 0px -1px 0 rgba(255,255,255,.85));
+  }
   
   .final-overlay {
     position: fixed;

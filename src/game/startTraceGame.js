@@ -454,6 +454,38 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         );
         anim.onfinish = () => t.remove();
       }
+
+       // ===========================
+      // Clear stamp (赤い〇) - center
+      // ===========================
+      function showClearMaruStamp(svgEl) {
+        const ns = "http://www.w3.org/2000/svg";
+        const layer = ensureFxLayer(svgEl);
+
+        const g = document.createElementNS(ns, "g");
+        g.setAttribute("class", "fx-clear-maru");
+        // viewBox(0..100)想定で中央固定
+        g.setAttribute("transform", "translate(50 50) scale(0)");
+        layer.appendChild(g);
+
+        const c = document.createElementNS(ns, "circle");
+        c.setAttribute("cx", "0");
+        c.setAttribute("cy", "0");
+        c.setAttribute("r", "28");
+        g.appendChild(c);
+
+        // “スタンプ感”を出す：ぽん→少し戻る→フェード
+        const anim = g.animate(
+          [
+            { transform: "translate(50px,50px) scale(0.2)", opacity: 0 },
+            { transform: "translate(50px,50px) scale(1.10)", opacity: 1 },
+            { transform: "translate(50px,50px) scale(1.00)", opacity: 1 },
+            { transform: "translate(50px,50px) scale(1.02)", opacity: 0 },
+          ],
+          { duration: 620, easing: "ease-out", fill: "forwards" }
+        );
+        anim.onfinish = () => g.remove();
+      }
     
       function showHanamaru(svgEl) {
         const ns = "http://www.w3.org/2000/svg";
@@ -1203,6 +1235,15 @@ function reorderLatinStrokes(polys) {
     return { x: last.x, y: last.y };
   }
 
+// ✅ 次の画の「終点」へ猫を飛ばす（通常＝kidのみで使用）
+  function getStrokeEnd(strokes, i) {
+      const poly = strokes?.[i];
+      if (!poly || poly.length < 1) return { x: 50, y: 50 };
+      const last = poly[poly.length - 1];
+      return { x: last.x, y: last.y };
+    }
+
+
   function polyToPathD(poly) {
     if (!poly || poly.length === 0) return "";
     const [p0, ...rest] = poly;
@@ -1607,15 +1648,22 @@ function reorderLatinStrokes(polys) {
         }
                 
 
+        // 次の画の「基準点」：演出や（kidの）次ガイド用
         const nextAnchor =
           strokeIndex < strokes.length
             ? getStrokeAnchor(strokes, strokeIndex)
             : getStrokeAnchor(strokes, strokes.length - 1);
 
+        // ✅ kidの猫は「次の画の終点」へ
+        const nextEnd =
+          strokeIndex < strokes.length
+            ? getStrokeEnd(strokes, strokeIndex)
+            : getStrokeEnd(strokes, strokes.length - 1);
+
         // ✅ Masterでは猫は「次」ではなく「今の正解（1つ前）」に置く
         const catAnchor = isMaster
           ? getStrokeAnchor(strokes, solvedIndex)
-          : nextAnchor;
+          : nextEnd;
 
         lockInput(JUMP_MS);
         charJumpTo(svgEl, catAnchor);
@@ -1649,6 +1697,9 @@ function reorderLatinStrokes(polys) {
         if (strokeIndex >= strokes.length) {
           if (setRun) setRun.kanjiCleared += 1;
           kanjiCompleted = true;
+
+          // ✅ 1字クリアのたびに「中心へ赤い〇スタンプ」
+          showClearMaruStamp(svgEl);
 
           // ✅ クリア済みを “共通進捗” に保存（Progress画面と繋がる）
           const item = items[idx];
