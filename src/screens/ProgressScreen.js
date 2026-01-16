@@ -1,5 +1,6 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared } from "../lib/progressStore.js";
+import { loadRangeItems } from "../lib/rangeItems.js";
 import { makeKanjiKey } from "../lib/progressKey.js";
 function makeItemId(rangeId, itemId) {
   return makeKanjiKey(itemId);
@@ -12,7 +13,8 @@ export function ProgressScreen(ctx, nav) {
       el.className = "screen progress";
 
       const selected = ctx.selectedRangeId ?? "kanji_g1";
-      const range = CONTENT_MANIFEST.find(x => x.id === selected);
+      // ✅ rangeの母数をゲームと一致させる（行セット/学年/traceable）
+      const { range, items } = await loadRangeItems(selected);
 
       el.innerHTML = `
         <div class="progressBoard">
@@ -47,12 +49,8 @@ export function ProgressScreen(ctx, nav) {
         </div>
       `;
 
-      // 配列JSON対応
-      const base = import.meta.env.BASE_URL ?? "/";
-      const url = new URL(range.source, new URL(base, window.location.href)).toString();
-      const res = await fetch(url);
-      const items = await res.json(); // ← 配列
-
+      // items は loadRangeItems() で確定（母数ズレ防止）
+      
       const grid = el.querySelector("#grid");
       const barFill = el.querySelector("#barFill");
       const barText = el.querySelector("#barText");

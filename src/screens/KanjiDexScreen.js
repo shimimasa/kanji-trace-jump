@@ -2,6 +2,7 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
 import { makeKanjiKey } from "../lib/progressKey.js";
+import { loadRangeItems } from "../lib/rangeItems.js";
 
 function makeItemId(_rangeId, itemId) {
     return makeKanjiKey(itemId);
@@ -31,12 +32,8 @@ export function KanjiDexScreen(ctx, nav) {
       el.className = "screen dex";
 
       const selected = ctx.selectedRangeId ?? "kanji_g1";
-      const range = CONTENT_MANIFEST.find((x) => x.id === selected);
-
-      const base = import.meta.env.BASE_URL ?? "/";
-      const url = new URL(range.source, new URL(base, window.location.href)).toString();
-      const res = await fetch(url);
-      const items = await res.json();
+      // ✅ rangeの母数をゲームと一致させる（行セット/学年/traceable）
+      const { range, items } = await loadRangeItems(selected);
 
       // --- Dex state ---
       let onlyUncleared = false; // 未クリアだけ
