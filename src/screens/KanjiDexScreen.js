@@ -1,5 +1,4 @@
 // src/screens/KanjiDexScreen.js
-import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
 import { makeProgressKey } from "../lib/progressKey.js";
 import { loadRangeItems } from "../lib/rangeItems.js";
@@ -11,6 +10,18 @@ function makeItemId(type, itemId) {
 function getLabel(it) {
   return it?.label ?? it?.kanji ?? it?.kana ?? it?.char ?? it?.text ?? it?.id ?? "？";
 }
+
+function getTypeLabel(type) {
+    switch (type) {
+      case "hiragana": return "ひらがな";
+      case "katakana": return "カタカナ";
+      case "alphabet": return "アルファベット";
+      case "romaji": return "ローマ字";
+      case "kanji":
+      default: return "漢字";
+    }
+  }
+  
 
 function getReadingOn(it) {
   // データが揃ったら即反映されるよう「候補」を広めに
@@ -24,6 +35,56 @@ function getReadingKun(it) {
 function getExample(it) {
   return it?.example ?? it?.exampleSentence ?? it?.reibun ?? it?.sentence ?? it?.ex ?? "";
 }
+
+function getRomaji(it) {
+    return it?.romaji ?? it?.hepburn ?? it?.roman ?? it?.reading ?? it?.pronunciation ?? "";
+  }
+  
+  function getTip(it) {
+    return it?.tip ?? it?.tips ?? it?.note ?? it?.memo ?? it?.hint ?? "";
+  }
+  
+  function getAlphabetNameJp(it) {
+    // 例: "エー", "ビー" など。データが増えたら拾えるよう候補を広めに
+    return it?.nameJp ?? it?.jpName ?? it?.nameJP ?? it?.yomi ?? it?.pronounce ?? it?.kana ?? "";
+  }
+  
+  function getAlphabetWord(it) {
+    // 例: "A = apple" など
+    return it?.word ?? it?.exampleWord ?? it?.example ?? it?.ex ?? "";
+  }
+  
+  function buildDexInfo(type, it) {
+    const rows = [];
+  
+    if (type === "kanji") {
+      const on = getReadingOn(it);
+      const kun = getReadingKun(it);
+      if (on || kun) {
+        rows.push({ label: "音", value: on || "—" });
+        rows.push({ label: "訓", value: kun || "—" });
+      }
+      return { rows, extra: null, emptyText: "（読みデータがまだありません）" };
+    }
+  
+    if (type === "hiragana" || type === "katakana" || type === "romaji") {
+      const romaji = getRomaji(it);
+      const tip = getTip(it);
+      if (romaji) rows.push({ label: "ローマ字", value: romaji });
+      if (tip) rows.push({ label: "ポイント", value: tip });
+      return { rows, extra: null, emptyText: "（ローマ字/ポイントがまだありません）" };
+    }
+  
+    if (type === "alphabet") {
+      const nameJp = getAlphabetNameJp(it);
+      const word = getAlphabetWord(it);
+      if (nameJp) rows.push({ label: "よみ", value: nameJp });
+      if (word) rows.push({ label: "ことば", value: word });
+      return { rows, extra: null, emptyText: "（読み/ことばのデータがまだありません）" };
+    }
+  
+    return { rows: [], extra: null, emptyText: "（情報がまだありません）" };
+  }
 
 export function KanjiDexScreen(ctx, nav) {
   return {
@@ -110,6 +171,10 @@ export function KanjiDexScreen(ctx, nav) {
         const pKey = makeItemId(type, it.id)
 ;
         const pItem = ctx.progress?.items?.[pKey] ?? null;
+        const attempts = pItem?.attempts ?? 0;
+        const fails = pItem?.fails ?? 0;
+        const accuracy = attempts > 0 ? Math.max(0, Math.min(100, Math.round(((attempts - fails) / attempts) * 100))) : null;
+
         const masterAttempts = pItem?.masterAttempts ?? 0;
         const masterPasses = pItem?.masterPasses ?? 0;
         const masterOk = masterPasses > 0;
@@ -123,19 +188,19 @@ export function KanjiDexScreen(ctx, nav) {
         ]
           .map(([k, label]) => ({ k, label, v: Number(mm?.[k] ?? 0) }))
           .filter((x) => x.v > 0);
-        const on = getReadingOn(it);
-        const kun = getReadingKun(it);
+        
         const ex = getExample(it);
-
-        const hasReading = !!(on || kun);
+        const info = buildDexInfo(type, it);
+        const hasInfo = Array.isArray(info.rows) && info.rows.length > 0;
         const hasExample = !!ex;
+        const typeLabel = getTypeLabel(type);
 
         el.innerHTML = `
           <div class="dexBoard">
             <div class="dexHead">
               <div>
                 <div class="dexTitle">図鑑</div>
-                <div class="dexMeta">範囲：<b>${range?.label ?? "未選択"}</b></div>
+                <div class="dexMeta">範囲：<b>${range?.label ?? "未選択"}</b> <span class="muted">/ ${typeLabel}</span></div>
               </div>
               <div class="dexHeadActions">
               <button id="review" class="btn" type="button">復習</button>
@@ -161,6 +226,11 @@ export function KanjiDexScreen(ctx, nav) {
             <div class="dexCard">
               <div class="dexChar">${label}</div>
               <div class="dexStatus">${cleared ? "✓ クリア済み" : "未クリア"}</div>
+              <div class="dexMiniStats muted" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                <span>挑戦 <b>${attempts}</b></span>
+                <span>失敗 <b>${fails}</b></span>
+                ${accuracy == null ? "" : `<span>正答率 <b>${accuracy}%</b></span>`}
+              </div>
 <div class="dexMasterBox">
                 <div class="dexMasterHead">
                   <div class="dexMasterTitle">MASTER</div>
@@ -183,21 +253,23 @@ export function KanjiDexScreen(ctx, nav) {
                 }
               </div>
               ${
-                hasReading
+                hasinfo
                   ? `
                     <div class="dexInfo">
-                      <div class="dexInfoRow">
-                        <div class="dexInfoLabel">音</div>
-                        <div class="dexInfoValue">${on || "—"}</div>
-                      </div>
-                      <div class="dexInfoRow">
-                        <div class="dexInfoLabel">訓</div>
-                        <div class="dexInfoValue">${kun || "—"}</div>
-                      </div>
+                      ${info.rows
+                        .map(
+                          (r) => `
+                            <div class="dexInfoRow">
+                              <div class="dexInfoLabel">${escapeHtml(r.label)}</div>
+                              <div class="dexInfoValue">${escapeHtml(r.value)}</div>
+                            </div>
+                          `
+                        )
+                        .join("")}
                     </div>
                   `
                   : `
-                    <div class="dexInfo muted">（読みデータがまだありません）</div>
+                    <div class="dexInfo muted">${escapeHtml(info.emptyText || "（情報がまだありません）")}</div>
                   `
               }
 
