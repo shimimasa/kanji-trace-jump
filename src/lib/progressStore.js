@@ -1,5 +1,5 @@
 const KEY = "ktj_progress_v1";
-import { normalizeToKanjiKey } from "./progressKey.js";
+import { normalizeToProgressKey } from "./progressKey.js";
 
 export function loadProgress() {
   try {
@@ -26,7 +26,7 @@ function migrateKeysInPlace(progress) {
     // cleared
     const nextCleared = {};
     for (const k in (progress.cleared || {})) {
-      const nk = normalizeToKanjiKey(k);
+      const nk = normalizeToProgressKey(k);
       nextCleared[nk] = progress.cleared[k];
     }
     progress.cleared = nextCleared;
@@ -34,7 +34,7 @@ function migrateKeysInPlace(progress) {
     // items
     const nextItems = {};
     for (const k in (progress.items || {})) {
-      const nk = normalizeToKanjiKey(k);
+      const nk = normalizeToProgressKey(k);
       // 同じ漢字に統合された場合は “より新しい/大きい” 側を優先してマージ
       const cur = progress.items[k];
       const prev = nextItems[nk];

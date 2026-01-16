@@ -1,11 +1,11 @@
 // src/screens/KanjiDexScreen.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
-import { makeKanjiKey } from "../lib/progressKey.js";
+import { makeProgressKey } from "../lib/progressKey.js";
 import { loadRangeItems } from "../lib/rangeItems.js";
 
-function makeItemId(_rangeId, itemId) {
-    return makeKanjiKey(itemId);
+function makeItemId(type, itemId) {
+    return makeProgressKey(type, itemId);
   }
 
 function getLabel(it) {
@@ -43,12 +43,14 @@ export function KanjiDexScreen(ctx, nav) {
 
       const getLastAt = (it) => {
         // 復習ソート用：最後にクリアした時刻（なければ0）
-        const key = makeItemId(range.id, it.id);
+        const key = makeItemId(type, it.id)
+;
         return ctx.progress?.cleared?.[key]?.clearedAt ?? 0;
       };
 
       const getMistScore = (it) => {
-                const key = makeItemId(range.id, it.id);
+                const key = makeItemId(type, it.id)
+;
                 return getWeakScore(ctx.progress, key);
               };
 
@@ -56,7 +58,8 @@ export function KanjiDexScreen(ctx, nav) {
         let arr = items.slice();
 
         if (onlyUncleared) {
-          arr = arr.filter((it) => !isCleared(ctx.progress, makeItemId(range.id, it.id)));
+          arr = arr.filter((it) => !isCleared(ctx.progress, makeItemId(type, it.id)
+));
         }
 
         if (sortMode === "review") {
@@ -101,9 +104,11 @@ export function KanjiDexScreen(ctx, nav) {
         const it = view[index];
         const label = getLabel(it);
 
-        const cleared = isCleared(ctx.progress, makeItemId(range.id, it.id));
+        const cleared = isCleared(ctx.progress, makeItemId(type, it.id)
+);
         
-        const pKey = makeItemId(range.id, it.id);
+        const pKey = makeItemId(type, it.id)
+;
         const pItem = ctx.progress?.items?.[pKey] ?? null;
         const masterAttempts = pItem?.masterAttempts ?? 0;
         const masterPasses = pItem?.masterPasses ?? 0;

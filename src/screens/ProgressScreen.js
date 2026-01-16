@@ -74,7 +74,8 @@ export function ProgressScreen(ctx, nav) {
       const computeRangeProgress = () => {
                 let clearedCount = 0;
                 for (const it of items) {
-                  const key = makeItemId(range.id, it.id);
+                  const key = makeItemId(type, it.id)
+;
                   if (isCleared(ctx.progress, key)) clearedCount++;
                 }
                 const total = items.length || 0;
@@ -118,14 +119,16 @@ export function ProgressScreen(ctx, nav) {
           }
         const html = items
           .filter((it) => {
-            const key = makeItemId(range.id, it.id);
+            const key = makeItemId(type, it.id)
+;
             const cleared = isCleared(ctx.progress, key);
             if (filter === "cleared") return cleared;
             if (filter === "uncleared") return !cleared;
             return true;
           })
           .map((it) => {
-            const itemKey = makeItemId(range.id, it.id);
+            const itemKey = makeItemId(type, it.id)
+;
             const cleared = isCleared(ctx.progress, itemKey);
             const label = getLabel(it);
             return `

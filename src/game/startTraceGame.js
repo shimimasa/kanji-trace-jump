@@ -2,7 +2,7 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { markCleared, recordAttempt, recordMasterAttempt, recordMasterPass, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
-import { makeKanjiKey } from "../lib/progressKey.js";
+import { makeProgressKey } from "../lib/progressKey.js";
 import { judgeAttempt } from "./judge.js";
 import { dist, distancePointToPolyline } from "./strokeMath.js";
 import {
@@ -1570,7 +1570,7 @@ function reorderLatinStrokes(polys) {
        // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
       const curItem = items[idx];
       if (curItem?.id) {
-        const key = makeKanjiKey(curItem.id);
+        const key = makeProgressKey(contentType, curItem.id);
 
         // 通常の試行記録（復習キュー用）
         recordAttempt(ctx.progress, key, { failed: !ok });
@@ -1653,7 +1653,7 @@ function reorderLatinStrokes(polys) {
           // ✅ クリア済みを “共通進捗” に保存（Progress画面と繋がる）
           const item = items[idx];
           if (item?.id) {
-            const key = makeKanjiKey(item.id);
+            const key = makeProgressKey(contentType, item.id);
             markCleared(ctx.progress, key);
             // ✅ Masterの合格記録
             if (isMaster) {
