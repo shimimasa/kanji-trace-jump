@@ -86,6 +86,132 @@ function getRomaji(it) {
     return { rows: [], extra: null, emptyText: "（情報がまだありません）" };
   }
 
+  function getExampleBlockMeta(type) {
+      // Dexの「例」欄の見え方を type ごとに最適化
+      switch (type) {
+        case "alphabet":
+          return { label: "例（単語）", empty: "（例の単語データがまだありません）" };
+        case "hiragana":
+        case "katakana":
+        case "romaji":
+          return { label: "ことば（例）", empty: "（ことば（例）のデータがまだありません）" };
+        case "kanji":
+        default:
+          return { label: "例文", empty: "（例文データがまだありません）" };
+      }
+    }
+
+// ============================
+// Dex tags & notices (type-safe, no yoon/sokuon synthesis)
+// ============================
+
+function pickChar(it) {
+  return it?.char ?? it?.text ?? it?.kana ?? it?.kanji ?? it?.letter ?? it?.symbol ?? "";
+}
+
+function isSmallKana(ch) {
+  return ["ぁ","ぃ","ぅ","ぇ","ぉ","ゃ","ゅ","ょ","っ","ゎ","ァ","ィ","ゥ","ェ","ォ","ャ","ュ","ョ","ッ","ヮ"].includes(ch);
+}
+
+function isYoonSmall(ch) {
+  return ["ゃ","ゅ","ょ","ャ","ュ","ョ"].includes(ch);
+}
+
+function isSokuonSmall(ch) {
+  return ["っ","ッ"].includes(ch);
+}
+
+function isDakutenKana(ch) {
+  return ["が","ぎ","ぐ","げ","ご","ざ","じ","ず","ぜ","ぞ","だ","ぢ","づ","で","ど","ば","び","ぶ","べ","ぼ","ガ","ギ","グ","ゲ","ゴ","ザ","ジ","ズ","ゼ","ゾ","ダ","ヂ","ヅ","デ","ド","バ","ビ","ブ","ベ","ボ","ヴ"].includes(ch);
+}
+
+function isHandakutenKana(ch) {
+  return ["ぱ","ぴ","ぷ","ぺ","ぽ","パ","ピ","プ","ペ","ポ"].includes(ch);
+}
+
+function isChoOn(ch) {
+  return ch === "ー";
+}
+
+function getAlphabetCaseTag(letter) {
+  if (!letter || typeof letter !== "string") return null;
+  const c = letter;
+  if (c.toUpperCase() === c && c.toLowerCase() !== c) return "大文字";
+  if (c.toLowerCase() === c && c.toUpperCase() !== c) return "小文字";
+  return null;
+}
+
+function buildDexTags({ type, rangeId, it }) {
+  const tags = [];
+
+  // 1) type tag (optional)
+  // tags.push(getTypeLabel(type));
+
+  // 2) range-based tags (safe & deterministic)
+  if (type === "hiragana" || type === "katakana") {
+    const rid = String(rangeId || "");
+    if (rid.includes("small")) tags.push("小書き");
+    if (rid.includes("dakuten")) tags.push("濁点");
+    if (rid.includes("handakuten")) tags.push("半濁点");
+    if (rid.includes("_row_")) tags.push("基本");
+  }
+  if (type === "alphabet") {
+    const rid = String(rangeId || "");
+    if (rid.includes("upper")) tags.push("大文字");
+    if (rid.includes("lower")) tags.push("小文字");
+  }
+
+  // 3) char-based tags (fallback / extra)
+  const ch = pickChar(it);
+  if (type === "hiragana" || type === "katakana") {
+    if (isSmallKana(ch) && !tags.includes("小書き")) tags.push("小書き");
+    if (isDakutenKana(ch) && !tags.includes("濁点")) tags.push("濁点");
+    if (isHandakutenKana(ch) && !tags.includes("半濁点")) tags.push("半濁点");
+    if (isChoOn(ch) && !tags.includes("長音")) tags.push("長音");
+  }
+  if (type === "alphabet") {
+    const ctag = getAlphabetCaseTag(ch);
+    if (ctag && !tags.includes(ctag)) tags.push(ctag);
+  }
+
+  // keep stable order
+  const order = ["基本","濁点","半濁点","小書き","長音","大文字","小文字"];
+  tags.sort((a, b) => order.indexOf(a) - order.indexOf(b));
+
+  return tags;
+}
+
+function buildDexNotices({ type, rangeId, it }) {
+  const notices = [];
+  const ch = pickChar(it);
+
+  if (type === "hiragana" || type === "katakana") {
+    if (isYoonSmall(ch)) {
+      notices.push("小さい「ゃ・ゅ・ょ」は、前の文字とくっついて音が変わるよ（例：き＋ゃ＝きゃ）。");
+    }
+    if (isSokuonSmall(ch)) {
+      notices.push("小さい「っ」は、つぎの音がつまるよ（例：がっこう の「っ」）。");
+    }
+    if (isChoOn(ch)) {
+      notices.push("「ー」は、前の音をのばす記号だよ（例：ケーキ の「ー」）。");
+    }
+    // rangeId-based reminder (even if char is not small itself)
+    const rid = String(rangeId || "");
+    if (rid.includes("small") && !isSmallKana(ch)) {
+      notices.push("この範囲は「小書き」の文字だよ。前の文字と組み合わせることが多いよ。");
+    }
+  }
+
+  if (type === "alphabet") {
+    const rid = String(rangeId || "");
+    if (rid.includes("upper")) notices.push("大文字の形をおぼえよう。教科書や見出しでよく使うよ。");
+    if (rid.includes("lower")) notices.push("小文字の形をおぼえよう。英単語の中でよく使うよ。");
+  }
+
+  return notices;
+}
+
+
 export function KanjiDexScreen(ctx, nav) {
   return {
     async mount() {
@@ -194,6 +320,7 @@ export function KanjiDexScreen(ctx, nav) {
         const hasInfo = Array.isArray(info.rows) && info.rows.length > 0;
         const hasExample = !!ex;
         const typeLabel = getTypeLabel(type);
+        const exMeta = getExampleBlockMeta(type);
 
         el.innerHTML = `
           <div class="dexBoard">
@@ -277,12 +404,12 @@ export function KanjiDexScreen(ctx, nav) {
                 hasExample
                   ? `
                     <div class="dexExample">
-                      <div class="dexExampleLabel">例文</div>
+                      <div class="dexExampleLabel">${escapeHtml(exMeta.label)}</div>
                       <div class="dexExampleText">${escapeHtml(ex)}</div>
                     </div>
                   `
                   : `
-                    <div class="dexExample muted">（例文データがまだありません）</div>
+                    <div class="dexExample muted">${escapeHtml(exMeta.empty)}</div>
                   `
               }
 
