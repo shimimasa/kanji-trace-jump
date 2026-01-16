@@ -93,7 +93,7 @@ export function GameScreen(ctx, nav) {
         startFromIdx: ctx.startFromIdx,
         singleId: ctx.singleId,
         mode: ctx.mode ?? "kid",
-        onSetFinished: ({ result, nextStart, history, mode, singleId }) => {
+        onSetFinished: ({ result, nextStart, history, mode, singleId, reviewNav }) => {
                     // ✅ single練習（復習モード）
                     if (mode === "single" && ctx.review?.active) {
                       const review = ctx.review;
@@ -104,8 +104,20 @@ export function GameScreen(ctx, nav) {
                       review.mistakes[id] = (review.mistakes[id] ?? 0) + fails;
                       review.cleared.push(id);
           
-                      const nextIndex = (review.index ?? 0) + 1;
-                      if (nextIndex >= review.queue.length) {
+                       // ✅ 次の遷移先（未クリア巡回に対応）
+                      const onlyUnc = !!review.onlyUncleared;
+                      const hasNav = !!reviewNav && Number.isFinite(reviewNav.nextIndex) && !!reviewNav.nextId;
+                      const nextIndex = onlyUnc && hasNav ? reviewNav.nextIndex : (review.index ?? 0) + 1;
+                      const nextId = onlyUnc && hasNav ? reviewNav.nextId : review.queue?.[nextIndex];
+
+                      // ✅ 終了判定
+                      // - onlyUncleared: 次が無い（done）なら終了
+                      // - 通常: 末尾まで行ったら終了（従来通り）
+                      const shouldFinish =
+                        (onlyUnc && (!!reviewNav?.done || !nextId)) ||
+                        (!onlyUnc && nextIndex >= review.queue.length);
+
+                      if (shouldFinish) {
                         // 終了 → 結果画面
                         const totalFails = Object.values(review.mistakes).reduce((a, b) => a + (b ?? 0), 0);
                         
@@ -139,7 +151,7 @@ export function GameScreen(ctx, nav) {
                       nav.go("game", {
                         selectedRangeId: ctx.selectedRangeId,
                         review: { ...review, index: nextIndex },
-                        singleId: review.queue[nextIndex],
+                        singleId: nextId,
                         returnTo: "review",
                         returnFrom: ctx.returnFrom ?? "progress",
                       });
