@@ -1,9 +1,19 @@
 // src/game/startTraceGame.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
-import { markCleared, recordAttempt, saveProgress } from "../lib/progressStore.js";
+import { markCleared, recordAttempt, recordMasterAttempt, recordMasterPass, saveProgress } from "../lib/progressStore.js";
 import { addTitleToBook, getTitleMeta } from "../lib/titleBookStore.js";
-
-export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, onSetFinished }) {
+import { makeProgressKey } from "../lib/progressKey.js";
+import { judgeAttempt } from "./judge.js";
+import { dist, distancePointToPolyline } from "./strokeMath.js";
+import {
+  SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
+  START_TOL, COMBO_WINDOW_MS,
+  failReasonLabel, MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
+  TITLE_POPUP_MS, CONFETTI_DEFAULTS,
+  TITLE_POPUP_FADE_OUT_MS, MASTER_FAIL_FLASH_MS, MASTER_FAIL_MARK_MS
+} from "./config.js";
+export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
+  
   // ---------------------------
   // ✅ 旧 main.js の “定数” はここへ移植
   // ---------------------------
@@ -13,31 +23,71 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   const NEKO_URL = new URL("assets/characters/neko.png", BASE_URL).toString();
   const CHAR_SIZE = 14;
 
-  const range = CONTENT_MANIFEST.find((x) => x.id === (selectedRangeId ?? "kanji_g1"));
-  const DATA_PATH = new URL(range?.source ?? "data/kanji_g1_proto.json", BASE_URL).toString();
-  const STROKES_BASE = new URL("data/strokes/", BASE_URL).toString();
+  // strokesRef は "strokes/..." を想定しているので、基準を "data/" にする
+  // 例: new URL("strokes/hiragana/HIRA_....json", STROKES_BASE)
+  const STROKES_BASE = new URL("data/", BASE_URL).toString();
+  // ✅ データセットは CONTENT_MANIFEST から解決する（漢字以外もここで増やせる）
+  const selectedId = selectedRangeId ?? "kanji_g1";
+  const manifestItem = CONTENT_MANIFEST.find((x) => x.id === selectedId) ?? null;
+  const contentType = manifestItem?.type ?? "kanji";
+  // ✅ alphabet は「なぞれればOK」：書き順ガイドを全部OFF
+  const isAlphabet = contentType === "alphabet";
+  // all.json は manifest の source を信用する
+  const ALL_PATH = new URL(manifestItem?.source ?? "data/kanji/kanji_all.json", BASE_URL).toString();
 
+  // traceable index は type ごとに固定パス（まずは必要分だけ）
+  const TRACEABLE_PATH = (() => {
+    switch (contentType) {
+      case "hiragana": return new URL("data/hiragana/index_traceable_hiragana.json", BASE_URL).toString();
+      case "katakana": return new URL("data/katakana/index_traceable_katakana.json", BASE_URL).toString();
+      case "alphabet":
+                // ✅ upper/lower を分ける（混在すると「大文字を選んだのに小文字が出る」事故になる）
+                if (String(selectedId).includes("upper")) {
+                  return new URL("data/alphabet/index_traceable_alphabet_upper.json", BASE_URL).toString();
+                }
+                return new URL("data/alphabet/index_traceable_alphabet_lower.json", BASE_URL).toString();
+      case "romaji":   return new URL("data/romaji/index_traceable_romaji.json", BASE_URL).toString();
+      case "kanji":
+      default:         return new URL("data/kanji/index_traceable.json", BASE_URL).toString();
+    }
+  })();
+  // selectedRangeId から grade を抽出（漢字のときだけ）
+  const gradeFromRange = (() => {
+    if (contentType !== "kanji") return null;
+    const id = selectedId ?? "kanji_g1";
+    const m = String(id).match(/kanji_g(\d+)/);
+    return m ? Number(m[1]) : null;
+    })();
   const strokesCache = new Map();
 
-  const SET_SIZE = 5;
-  const AUTO_NEXT_DELAY_MS = 650;
+  
   const isSingleMode = !!singleId;
   const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${SET_SIZE}もじ`;
-  const modeText = baseModeText; // GameScreen側が読む用（固定値）
+  const isMaster = mode === "master";
+  const modeText = isMaster ? `${baseModeText}（MASTER）` : baseModeText;
 
-  // 判定パラメータ（旧コードから）
-  const TOLERANCE = 20;
-  const START_TOL = 34;
-  const MIN_HIT_RATE = 0.45;
-  const MIN_DRAW_LEN_RATE = 0.15;
-  const MIN_COVER_RATE = 0.35;
-  const MIN_POINTS = 3;
-  const MIN_MOVE_EPS = 0.35;
-  const RESAMPLE_STEP = 1.2;
-  const COVER_SAMPLES = 32;
-
-  const JUMP_MS = 520;
-  const FAIL_MS = 520;
+  // ✅ Teacherモードは使わない。MASTER時だけ番号オーバーレイを表示する
+  // （CSSの .teacher-overlay をMASTERの補助として流用）
+  document.documentElement.classList.toggle("teacher-mode", isMaster);
+  // ===========================
+  // Title popup (称号獲得演出)
+  // ===========================
+  function showTitlePopup(title) {
+    const el = document.createElement("div");
+    el.className = "title-popup";
+    el.innerHTML = `
+      <div class="title-popup-inner">
+        <div class="title-popup-head">🎉 称号獲得！</div>
+        <div class="title-popup-title">${title}</div>
+      </div>
+    `;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add("show"));
+    setTimeout(() => {
+      el.classList.remove("show");
+      setTimeout(() => el.remove(), 500);
+    }, TITLE_POPUP_MS);
+  }
 
   // ---------------------------
   // ✅ DOM（document直参照禁止）
@@ -78,7 +128,6 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   // ===========================
   let combo = 0;
   let lastSuccessAt = 0;
-  const COMBO_WINDOW_MS = 1400; // この時間内に成功するとコンボ継続
 
   // Stars sparkle
   let _lastStarFilled = 0;
@@ -317,6 +366,47 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         svgEl.appendChild(layer);
         return layer;
       }
+
+      // ===========================
+  // Master fail FX (visible penalty)
+  // ===========================
+  function showMasterFailFx(svgEl, message = "×") {
+    if (!svgEl) return;
+    const ns = "http://www.w3.org/2000/svg";
+    const layer = ensureFxLayer(svgEl);
+
+    // 1) SVGにクラスを付けて「赤フラッシュ＆シェイク」
+    svgEl.classList.remove("masterFailFlash");
+    svgEl.classList.remove("masterFailShake");
+    void svgEl.getBBox(); // reflow-ish
+    svgEl.classList.add("masterFailFlash");
+    svgEl.classList.add("masterFailShake");
+    setTimeout(() => {
+      svgEl.classList.remove("masterFailFlash");
+      svgEl.classList.remove("masterFailShake");
+    }, MASTER_FAIL_FLASH_MS);
+
+    // 2) 大きい × を一瞬表示（中央固定）
+    const t = document.createElementNS(ns, "text");
+    t.setAttribute("x", String(MASTER_FAIL_MARK_POS.x));
+    t.setAttribute("y", String(MASTER_FAIL_MARK_POS.y));
+    t.setAttribute("text-anchor", "middle");
+    t.setAttribute("class", "masterFailMark");
+    t.textContent = message;
+    layer.appendChild(t);
+    const anim = t.animate(
+      [
+        { transform: "translate(0px, 6px) scale(0.9)", opacity: 0 },
+        { transform: "translate(0px, 0px) scale(1.05)", opacity: 1 },
+        { transform: "translate(0px, -6px) scale(1)", opacity: 0 },
+      ],
+      { duration: MASTER_FAIL_MARK_MS, easing: "ease-out", fill: "forwards" }
+    );
+    anim.onfinish = () => t.remove();
+
+    // 3) バイブ（対応端末）
+    if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
+  }
     
       function spawnSparks(svgEl, p, count = 10) {
         const ns = "http://www.w3.org/2000/svg";
@@ -363,6 +453,38 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           { duration: 520, easing: "ease-out", fill: "forwards" }
         );
         anim.onfinish = () => t.remove();
+      }
+
+       // ===========================
+      // Clear stamp (赤い〇) - center
+      // ===========================
+      function showClearMaruStamp(svgEl) {
+        const ns = "http://www.w3.org/2000/svg";
+        const layer = ensureFxLayer(svgEl);
+
+        const g = document.createElementNS(ns, "g");
+        g.setAttribute("class", "fx-clear-maru");
+        // viewBox(0..100)想定で中央固定
+        g.setAttribute("transform", "translate(50 50) scale(0)");
+        layer.appendChild(g);
+
+        const c = document.createElementNS(ns, "circle");
+        c.setAttribute("cx", "0");
+        c.setAttribute("cy", "0");
+        c.setAttribute("r", "28");
+        g.appendChild(c);
+
+        // “スタンプ感”を出す：ぽん→少し戻る→フェード
+        const anim = g.animate(
+          [
+            { transform: "translate(50px,50px) scale(0.2)", opacity: 0 },
+            { transform: "translate(50px,50px) scale(1.10)", opacity: 1 },
+            { transform: "translate(50px,50px) scale(1.00)", opacity: 1 },
+            { transform: "translate(50px,50px) scale(1.02)", opacity: 0 },
+          ],
+          { duration: 620, easing: "ease-out", fill: "forwards" }
+        );
+        anim.onfinish = () => g.remove();
       }
     
       function showHanamaru(svgEl) {
@@ -475,7 +597,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         spawnSparks(svgEl, p, 18);
         setTimeout(() => spawnSparks(svgEl, p, 14), 120);
         setTimeout(() => spawnSparks(svgEl, p, 10), 240);
-        launchConfetti({ durationMs: 1600, count: 70 });
+        launchConfetti(CONFETTI_DEFAULTS);
         playSetClearFanfare();
       }
     
@@ -542,7 +664,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       for (let i = 0; i < max; i++) {
         const star = document.createElement("span");
         star.className = "star";
-        star.textContent = "★";
+        star.textContent = "🐾";
         elStars.appendChild(star);
       }
     }
@@ -595,6 +717,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   function setHintText(text) { if (elHint) elHint.textContent = String(text ?? ""); }
   function updateHintText() {
+    // ✅ alphabet は書き順ガイドを出さない
+    if (isAlphabet) { setHintText(""); return; }
+    if (isMaster) { setHintText(MASTER_HINT_TEXT); return; }
     if (kanjiCompleted) { setHintText('クリア！「つぎ」で次のもじへ'); return; }
     if (drawing) { setHintText("そのまま、なぞっていこう"); return; }
     const streak = Math.max(0, failStreak?.[strokeIndex] ?? 0);
@@ -622,19 +747,116 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   // データ
   // ---------------------------
   async function loadData() {
-    const res = await fetch(DATA_PATH, { cache: "no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const json = await res.json();
-    if (Array.isArray(json)) {
-      return json.map((it) => {
-        const id = it?.id;
-        const grade = it?.grade ?? 1;
-        const fallbackRef = id ? `g${grade}/${id}.json` : null;
-        return { ...it, strokesRef: it?.strokesRef ?? fallbackRef };
-      });
-    }
-    throw new Error("JSON形式が配列ではありません");
+    // 1) all
+    const resAll = await fetch(ALL_PATH, { cache: "no-store" });
+    if (!resAll.ok) throw new Error(`all.json HTTP ${resAll.status}`);
+    const all = await resAll.json();
+    if (!Array.isArray(all)) throw new Error("all.json は配列である必要があります");
+
+    // 2) traceable ids
+    const resTr = await fetch(TRACEABLE_PATH, { cache: "no-store" });
+    if (!resTr.ok) throw new Error(`index_traceable HTTP ${resTr.status}`);
+    const traceable = await resTr.json();
+    const traceSet = new Set(Array.isArray(traceable) ? traceable : []);
+
+    // 3) grade filter + traceable filter + strokesRef normalize
+    const filtered = all
+      .filter((it) => {
+        // ✅ 漢字以外も許容（kanji / char / letter / symbol など）
+        const ch = it?.kanji ?? it?.char ?? it?.letter ?? it?.symbol ?? it?.text;
+        if (!it?.id || !ch) return false;
+        // ✅ alphabetは all.json を全件採用（indexが未整備でもJ以降へ進めるようにする）
+        if (contentType !== "alphabet") {
+            if (!traceSet.has(it.id)) return false;
+          }
+        // ✅ grade フィルタは漢字のみ
+        if (contentType === "kanji" && gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
+        return true;
+      })
+      // ✅ 追加：ひらがな/カタカナは「行」選択なら対象文字だけに絞る
+      .filter((it) => {
+          if (contentType !== "hiragana" && contentType !== "katakana") return true;
+          const ch = it?.char ?? it?.text ?? it?.kanji ?? it?.letter ?? it?.symbol;
+          if (!ch) return false;
+  
+          // 行セット（manifestの id に合わせる）
+          const rowMap = {
+            // --- ひらがな（基本） ---
+            hiragana_row_a:  ["あ", "い", "う", "え", "お"],
+            hiragana_row_ka: ["か", "き", "く", "け", "こ"],
+            hiragana_row_sa: ["さ", "し", "す", "せ", "そ"],
+            hiragana_row_ta: ["た", "ち", "つ", "て", "と"],
+            hiragana_row_na: ["な", "に", "ぬ", "ね", "の"],
+            hiragana_row_ha: ["は", "ひ", "ふ", "へ", "ほ"],
+            hiragana_row_ma: ["ま", "み", "む", "め", "も"],
+            hiragana_row_ya: ["や", "ゆ", "よ"],
+            hiragana_row_ra: ["ら", "り", "る", "れ", "ろ"],
+            hiragana_row_wa: ["わ", "を", "ん"],
+
+             // --- ひらがな（濁点/半濁点） ---
+            hiragana_dakuten_ga: ["が", "ぎ", "ぐ", "げ", "ご"],
+            hiragana_dakuten_za: ["ざ", "じ", "ず", "ぜ", "ぞ"],
+            hiragana_dakuten_da: ["だ", "ぢ", "づ", "で", "ど"],
+            hiragana_dakuten_ba: ["ば", "び", "ぶ", "べ", "ぼ"],
+            hiragana_handakuten_pa: ["ぱ", "ぴ", "ぷ", "ぺ", "ぽ"],
+
+            // --- ひらがな（小書き） ---
+            hiragana_small_tsu_ya_yu_yo: ["っ", "ゃ", "ゅ", "ょ"],
+            // --- カタカナ（基本） ---
+            katakana_row_a:  ["ア", "イ", "ウ", "エ", "オ"],
+            katakana_row_ka: ["カ", "キ", "ク", "ケ", "コ"],
+            katakana_row_sa: ["サ", "シ", "ス", "セ", "ソ"],
+            katakana_row_ta: ["タ", "チ", "ツ", "テ", "ト"],
+            katakana_row_na: ["ナ", "ニ", "ヌ", "ネ", "ノ"],
+            katakana_row_ha: ["ハ", "ヒ", "フ", "ヘ", "ホ"],
+            katakana_row_ma: ["マ", "ミ", "ム", "メ", "モ"],
+            katakana_row_ya: ["ヤ", "ユ", "ヨ"],
+            katakana_row_ra: ["ラ", "リ", "ル", "レ", "ロ"],
+            katakana_row_wa: ["ワ", "ヲ", "ン"],
+
+            // --- カタカナ（濁点/半濁点） ---
+            katakana_dakuten_ga: ["ガ", "ギ", "グ", "ゲ", "ゴ"],
+            katakana_dakuten_za: ["ザ", "ジ", "ズ", "ゼ", "ゾ"],
+            katakana_dakuten_da: ["ダ", "ヂ", "ヅ", "デ", "ド"],
+            katakana_dakuten_ba: ["バ", "ビ", "ブ", "ベ", "ボ"],
+            katakana_handakuten_pa: ["パ", "ピ", "プ", "ペ", "ポ"],
+
+            // --- カタカナ（小書き） ---
+            katakana_small_tsu_ya_yu_yo: ["ッ", "ャ", "ュ", "ョ"],
+          };
+          const allow = rowMap[selectedId];
+          if (Array.isArray(allow)) return allow.includes(ch);
+  
+          // 行指定が無い（全体セットなど）はそのまま
+          return true;
+        })
+      .map((it) => {
+        // strokesRef を normalize（旧形式 g1/g1-001.json が来ても対応）
+        const ref = normalizeStrokesRef(it.strokesRef, it.grade, it.id);
+        return { ...it, strokesRef: ref };
+      })
+      .filter((it) => !!it.strokesRef);
+
+    return filtered;
   }
+
+
+  function normalizeStrokesRef(ref, grade, id) {
+        if (!ref) return null;
+        const r = String(ref);
+        // ✅ 漢字以外は “そのまま” を原則にする（余計な推測で壊さない）
+        // 例: strokes/hiragana/... はそのまま、将来 data/traces/... 形式でもOK
+        if (contentType !== "kanji") return r;
+        // すでに "strokes/..." ならそのまま
+        if (r.startsWith("strokes/")) return r;
+        // 旧形式 "g1/g1-001.json" を "strokes/g1/g1-001.json" に
+        if (/^g\d+\//.test(r)) return `strokes/${r}`;
+        // 万一 "g1-001.json" だけ来たら grade から補う
+        if (/^g\d+-\d+\.json$/.test(r)) return `strokes/g${grade}/${r}`;
+        // 想定外はそのまま返す（fetchで失敗したら null になる）
+        return r;
+      }
+
 
   async function getStrokesForItem(item) {
     const ref = item?.strokesRef;
@@ -658,7 +880,157 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (!s?.path) continue;
       out.push(pathDToPolylineBySampling(s.path, 36));
     }
-    return out;
+    const isLatin = (contentType === "alphabet") || (contentType === "romaji");
+
+    // 1) まずは順序（点は最後など）
+    const ordered = isLatin ? reorderLatinStrokes(out) : out;
+
+    // 2) 座標正規化（フォント座標系→表示座標系へ。ここでflipYも確定）
+    const flipY = isLatin;
+    const normed = normalizePolylinesToViewBox(ordered, { pad: 6, flipY });
+
+    // 3) ✅ 最後に「表示後の座標」に対して向き補正をかける（これが効く）
+    const oriented = isLatin ? orientLatinStrokes(normed) : normed;
+    return oriented;
+}
+
+function reorderLatinStrokes(polys) {
+      if (!Array.isArray(polys) || polys.length <= 1) return polys;
+      const info = polys.map((poly, idx) => {
+        const p0 = poly?.[0] ?? { x: 0, y: 0 };
+        let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+        let len = 0;
+        for (let i = 1; i < (poly?.length ?? 0); i++) {
+          const a = poly[i - 1], b = poly[i];
+          len += Math.hypot(b.x - a.x, b.y - a.y);
+        }
+        for (const p of poly || []) {
+          minX = Math.min(minX, p.x); minY = Math.min(minY, p.y);
+          maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y);
+        }
+        const w = (maxX - minX), h = (maxY - minY);
+        // 点（i/jのdotなど）っぽい：小さくて短い
+        const isDot = (len < 12) && (w < 6) && (h < 6);
+        return { idx, p0, isDot };
+      });
+      info.sort((a, b) => {
+        if (a.isDot !== b.isDot) return a.isDot ? 1 : -1; // dotは最後
+        if (a.p0.y !== b.p0.y) return a.p0.y - b.p0.y;     // 上→下
+        return a.p0.x - b.p0.x;                            // 左→右
+      });
+      return info.map((x) => polys[x.idx]);
+    }
+
+    // ✅ 各strokeの「向き」を自然側に寄せる（上→下、左→右、点は最後など）
+  // - フォント由来のパスは開始点が不自然になりやすいので、reverseするだけでかなり改善する
+  function orientLatinStrokes(polys) {
+    if (!Array.isArray(polys) || polys.length === 0) return polys;
+    return polys.map((poly) => {
+      if (!Array.isArray(poly) || poly.length < 2) return poly;
+      const a = poly[0];
+      const b = poly[poly.length - 1];
+
+      // bounding box
+      let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      for (const p of poly) {
+        minX = Math.min(minX, p.x); minY = Math.min(minY, p.y);
+        maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y);
+      }
+      const w = Math.max(1e-6, maxX - minX);
+      const h = Math.max(1e-6, maxY - minY);
+
+      // 0) ほぼ閉じた輪郭なら「開始点を回転」して上寄りに固定
+      const loopClose = Math.hypot(b.x - a.x, b.y - a.y) <= Math.max(3, Math.min(w, h) * 0.08);
+      if (loopClose) {
+        // 目標：上寄り（minY）かつ右寄りすぎない位置
+        const target = { x: (minX + maxX) * 0.45, y: minY };
+        return rotatePolylineStart(poly, target);
+      }
+
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+
+      // 1) 縦線っぽい：上→下にする（yが小さい方を始点へ）
+      if (h > w * 1.4) {
+        if (a.y > b.y) return poly.slice().reverse();
+        return poly;
+      }
+
+      // 2) 横線っぽい：左→右にする（xが小さい方を始点へ）
+      if (w > h * 1.4) {
+        if (a.x > b.x) return poly.slice().reverse();
+        return poly;
+      }
+
+      // 3) 曲線/輪郭：開始点を「左上寄り」にしたい
+      //    目標点：左上(=x小, y小) に近いほうを始点に寄せる
+      const target = { x: minX, y: minY };
+      const da = Math.hypot(a.x - target.x, a.y - target.y);
+      const db = Math.hypot(b.x - target.x, b.y - target.y);
+      if (db < da) return poly.slice().reverse();
+      return poly;
+    });
+  }
+
+  function rotatePolylineStart(poly, target) {
+        // poly内でtargetに一番近い点を始点に回転する
+        let bestI = 0;
+        let bestD = Infinity;
+        for (let i = 0; i < poly.length; i++) {
+          const p = poly[i];
+          const d = Math.hypot(p.x - target.x, p.y - target.y);
+          if (d < bestD) { bestD = d; bestI = i; }
+        }
+        // 回転（bestIを先頭へ）
+        return poly.slice(bestI).concat(poly.slice(0, bestI));
+      }
+
+  /**
+   * ポリライン群の座標を viewBox(0..100) に収める正規化
+   * - かな/英字など、元SVGの座標系が大きい(例: 0..1024)場合でも描画できるようにする
+   */
+  function normalizePolylinesToViewBox(polys, { pad = 6, flipY = false } = {}) {
+    if (!Array.isArray(polys) || polys.length === 0) return polys;
+
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    let any = false;
+
+    for (const poly of polys) {
+      for (const p of poly || []) {
+        if (!p || !Number.isFinite(p.x) || !Number.isFinite(p.y)) continue;
+        any = true;
+        minX = Math.min(minX, p.x);
+        minY = Math.min(minY, p.y);
+        maxX = Math.max(maxX, p.x);
+        maxY = Math.max(maxY, p.y);
+      }
+    }
+    if (!any) return polys;
+
+    const w = Math.max(1e-6, maxX - minX);
+    const h = Math.max(1e-6, maxY - minY);
+
+    const targetMin = pad;
+    const targetMax = 100 - pad;
+    const targetW = Math.max(1e-6, targetMax - targetMin);
+    const targetH = Math.max(1e-6, targetMax - targetMin);
+
+    // アスペクトを保って fit（小さい方に合わせる）
+    const s = Math.min(targetW / w, targetH / h);
+    const cx = (minX + maxX) / 2;
+    const cy = (minY + maxY) / 2;
+    const tcx = 50;
+    const tcy = 50;
+
+    const norm = polys.map((poly) =>
+      (poly || []).map((p) => ({
+        x: (p.x - cx) * s + tcx,
+        // ✅ flipY=true のときは上下反転（フォント座標系対策）
+        y: (flipY ? -(p.y - cy) : (p.y - cy)) * s + tcy,
+      }))
+    );
+
+    return norm;
   }
 
   function pathDToPolylineBySampling(d, samples = 36) {
@@ -734,6 +1106,10 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     active.dataset.role = "active";
     active.setAttribute("d", polyToPathD(strokes[0]));
     strokeLayer.appendChild(active);
+    // ✅ alphabetは「順序ガイドなし」なので、現在ストロークの強調（太線）を消す
+    if (isAlphabet) {
+        active.style.display = "none";
+      }
 
     // trace
     tracePathEl = document.createElementNS(ns, "path");
@@ -741,7 +1117,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     tracePathEl.dataset.role = "trace";
     strokeLayer.appendChild(tracePathEl);
 
-    // hint
+    // hint（alphabetはガイドOFFなので生成はするが常に非表示にする）
     const hintG = document.createElementNS(ns, "g");
     const hintDotEl = document.createElementNS(ns, "circle");
     hintDotEl.setAttribute("r", "8");
@@ -756,12 +1132,15 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
     hintDot = hintDotEl;
     hintNum = hintTextEl;
+    if (isAlphabet) {
+      hintDot.style.display = "none";
+      hintNum.style.display = "none";
+    }
 
-    // char
-    ensureChar(s);
-    const p0 = getStrokeAnchor(strokes, 0);
+    // ✅ Masterでは猫は最初“漢字外で待機”
+    // （Kidでは従来通り 1画目アンカーへ）
+    const p0 = isMaster ? CAT_WAIT_POS : getStrokeAnchor(strokes, 0);
     setCharPos(s, p0);
-
     return s;
   }
 
@@ -824,6 +1203,13 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function getStrokeAnchor(strokes, i) {
     const poly = strokes?.[i];
     if (!poly || poly.length < 2) return { x: 50, y: 50 };
+
+    // ✅ alphabet は「始点ドット」を“本当の始点”に置く（漢字のように途中60%にしない）
+    // flipY/並び替え後の poly[0] が「その画の開始点」になる
+    if (contentType === "alphabet") {
+      const p0 = poly[0];
+      return { x: p0.x, y: p0.y };
+    }
     let total = 0;
     const seg = [];
     for (let k = 0; k < poly.length - 1; k++) {
@@ -849,6 +1235,15 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     return { x: last.x, y: last.y };
   }
 
+// ✅ 次の画の「終点」へ猫を飛ばす（通常＝kidのみで使用）
+  function getStrokeEnd(strokes, i) {
+      const poly = strokes?.[i];
+      if (!poly || poly.length < 1) return { x: 50, y: 50 };
+      const last = poly[poly.length - 1];
+      return { x: last.x, y: last.y };
+    }
+
+
   function polyToPathD(poly) {
     if (!poly || poly.length === 0) return "";
     const [p0, ...rest] = poly;
@@ -857,134 +1252,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
 
-  // ---------------------------
-  // 判定（旧main.jsの judgeTrace 周りを必要最低限で移植）
-  // ※ ここも「旧関数を丸ごと貼る」でOK。今回は要点だけ残す
-  // ---------------------------
-  function dist(a, b) { return Math.hypot(a.x - b.x, a.y - b.y); }
-
-  function distancePointToSegment(p, a, b) {
-    const vx = b.x - a.x, vy = b.y - a.y;
-    const wx = p.x - a.x, wy = p.y - a.y;
-    const c1 = vx * wx + vy * wy;
-    if (c1 <= 0) return Math.hypot(p.x - a.x, p.y - a.y);
-    const c2 = vx * vx + vy * vy;
-    if (c2 <= c1) return Math.hypot(p.x - b.x, p.y - b.y);
-    const t = c1 / c2;
-    const px = a.x + t * vx, py = a.y + t * vy;
-    return Math.hypot(p.x - px, p.y - py);
-  }
-  function distancePointToPolyline(p, poly) {
-    let best = Infinity;
-    for (let i = 1; i < poly.length; i++) best = Math.min(best, distancePointToSegment(p, poly[i - 1], poly[i]));
-    return best;
-  }
-  function polyLength(poly) {
-    let len = 0;
-    for (let i = 1; i < poly.length; i++) len += dist(poly[i - 1], poly[i]);
-    return len;
-  }
-  function normalizeDrawnPoints(points, step = RESAMPLE_STEP, minMove = MIN_MOVE_EPS) {
-    if (!Array.isArray(points) || points.length === 0) return [];
-    const compact = [points[0]];
-    for (let i = 1; i < points.length; i++) {
-      const prev = compact[compact.length - 1];
-      const cur = points[i];
-      if (dist(prev, cur) >= minMove) compact.push(cur);
-    }
-    if (compact.length < 2) return compact;
-    return resamplePolyline(compact, step);
-  }
-  function resamplePolyline(poly, step) {
-    const len = polyLength(poly);
-    if (len <= 0) return poly.slice();
-    const out = [];
-    for (let d = 0; d <= len; d += step) out.push(pointAtDistance(poly, d));
-    const last = poly[poly.length - 1];
-    const prev = out[out.length - 1];
-    if (!prev || dist(prev, last) > 0.01) out.push({ x: last.x, y: last.y });
-    return out;
-  }
-  function pointAtDistance(poly, d) {
-    if (poly.length === 1) return { ...poly[0] };
-    let acc = 0;
-    for (let i = 1; i < poly.length; i++) {
-      const a = poly[i - 1], b = poly[i];
-      const seg = dist(a, b);
-      if (acc + seg >= d) {
-        const t = seg === 0 ? 0 : (d - acc) / seg;
-        return { x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t };
-      }
-      acc += seg;
-    }
-    return { ...poly[poly.length - 1] };
-  }
-  function sampleAlongPolyline(poly, n) {
-    const len = polyLength(poly);
-    if (len <= 0) return poly.slice(0, 1);
-    if (n <= 1) return [pointAtDistance(poly, len * 0.5)];
-    const out = [];
-    for (let i = 0; i < n; i++) {
-      const d = (len * i) / (n - 1);
-      out.push(pointAtDistance(poly, d));
-    }
-    return out;
-  }
-
-  function getAdaptiveParams(strokeLen) {
-    const short = 12;
-    const long = 60;
-    const t = Math.max(0, Math.min(1, (strokeLen - short) / (long - short)));
-
-    const tol = TOLERANCE + (1 - t) * 4;
-    const coverTol = tol * 1.15;
-    const minHit = MIN_HIT_RATE + t * 0.08;
-    const minDraw = MIN_DRAW_LEN_RATE + t * 0.07;
-    const minCover = MIN_COVER_RATE + t * 0.15;
-    const startTol = START_TOL - t * 6;
-
-    return { tol, coverTol, minHit, minDraw, minCover, startTol };
-  }
-
-  function judgeTrace(drawnPoints, strokePoly) {
-    if (!Array.isArray(drawnPoints) || drawnPoints.length < MIN_POINTS) return false;
-
-    const dp = normalizeDrawnPoints(drawnPoints, RESAMPLE_STEP, MIN_MOVE_EPS);
-    if (dp.length < 2) return false;
-
-    const strokeLen = polyLength(strokePoly);
-    if (strokeLen <= 0) return false;
-
-    const P = getAdaptiveParams(strokeLen);
-
-    // 連続失敗救済
-    const streak = Math.max(0, Math.min(3, failStreak?.[strokeIndex] ?? 0));
-    if (streak > 0) {
-      P.tol += 3 * streak;
-      P.coverTol = P.tol * 1.15;
-      P.minHit = Math.max(0.28, P.minHit - 0.06 * streak);
-      P.minCover = Math.max(0.18, P.minCover - 0.06 * streak);
-      P.startTol += 3 * streak;
-    }
-
-    const start = dp[0];
-    const s0 = strokePoly[0];
-    if (dist(start, s0) > P.startTol) return false;
-
-    const drawnLen = polyLength(dp);
-    if (drawnLen < strokeLen * P.minDraw) return false;
-
-    let hit = 0;
-    for (const p of dp) if (distancePointToPolyline(p, strokePoly) <= P.tol) hit++;
-    const hitRate = hit / dp.length;
-
-    const samples = sampleAlongPolyline(strokePoly, COVER_SAMPLES);
-    let cover = 0;
-    for (const sp of samples) if (distancePointToPolyline(sp, dp) <= P.coverTol) cover++;
-    const coverRate = cover / samples.length;
-
-    return hitRate >= P.minHit && coverRate >= P.minCover;
-  }
+ // 入力ゲート用の幾何ヘルパは strokeMath.js に移管
 
   function updateTracePath(pts) {
     if (!tracePathEl) return;
@@ -1007,6 +1275,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   // ---------------------------
   function renderStrokeButtons(n) {
     if (!elStrokeButtons) return;
+    // ✅ alphabet は書き順UI（画数ボタン）を出さない
+    if (isAlphabet) { elStrokeButtons.innerHTML = ""; return; }
     elStrokeButtons.innerHTML = "";
     for (let i = 0; i < n; i++) {
       const b = document.createElement("button");
@@ -1022,6 +1292,12 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
   function updateStrokeHint() {
     if (!svg || !hintDot || !hintNum || !currentStrokes) return;
+    // ✅ alphabet は始点ドット/番号を出さない
+    if (isAlphabet) {
+        hintDot.style.display = "none";
+        hintNum.style.display = "none";
+        return;
+    }
     const stroke = currentStrokes[strokeIndex];
     if (!stroke || !stroke.length) {
       hintDot.style.display = "none";
@@ -1073,6 +1349,124 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     updateStrokeHint();
   }
 
+   // ✅ alphabet: points が最も近い stroke を推定（順序無視）
+   function guessClosestStrokeIndex(points, strokes, doneArr = null) {
+      if (!Array.isArray(points) || points.length < 2) return -1;
+      if (!Array.isArray(strokes) || strokes.length === 0) return -1;
+      let bestI = -1;
+      let best = Infinity;
+      const step = Math.max(1, Math.floor(points.length / 10));
+      for (let i = 0; i < strokes.length; i++) {
+        if (Array.isArray(doneArr) && doneArr[i]) continue; // ✅ 未クリア優先
+        const poly = strokes[i];
+        if (!poly || poly.length < 2) continue;
+        let sum = 0;
+        let cnt = 0;
+        for (let k = 0; k < points.length; k += step) {
+          sum += distancePointToPolyline(points[k], poly);
+          cnt++;
+        }
+        const avg = cnt ? sum / cnt : Infinity;
+        if (avg < best) { best = avg; bestI = i; }
+      }
+      return bestI;
+    }
+
+    // ✅ alphabet専用：開始点チェックなしの「形」判定
+  // - points がストロークに沿っていればOK（hit/coverで判定）
+  // - 1画だけで全部OKにならないよう “そのストローク自身” を対象にする
+  function judgeAlphabetStroke(points, strokePoly) {
+    if (!Array.isArray(points) || points.length < 10) return false;
+    if (!strokePoly || strokePoly.length < 2) return false;
+
+    // --- helpers ---
+    const polyLen = (poly) => {
+      let len = 0;
+      for (let i = 1; i < (poly?.length ?? 0); i++) {
+        const a = poly[i - 1], b = poly[i];
+        len += Math.hypot(b.x - a.x, b.y - a.y);
+      }
+      return len;
+    };
+
+    const distPointToSeg = (p, a, b) => {
+            const vx = b.x - a.x, vy = b.y - a.y;
+            const wx = p.x - a.x, wy = p.y - a.y;
+            const c1 = vx * wx + vy * wy;
+            if (c1 <= 0) return Math.hypot(p.x - a.x, p.y - a.y);
+            const c2 = vx * vx + vy * vy;
+            if (c2 <= c1) return Math.hypot(p.x - b.x, p.y - b.y);
+            const t = c1 / c2;
+            const px = a.x + t * vx, py = a.y + t * vy;
+            return Math.hypot(p.x - px, p.y - py);
+          };
+          const isStraightLike = (poly) => {
+            const a = poly[0], b = poly[poly.length - 1];
+            const base = Math.hypot(b.x - a.x, b.y - a.y);
+            if (base < 1e-3) return false;
+            let sum = 0;
+            const step = Math.max(1, Math.floor(poly.length / 12));
+            let cnt = 0;
+            for (let i = 0; i < poly.length; i += step) {
+              sum += distPointToSeg(poly[i], a, b);
+              cnt++;
+            }
+            const avg = cnt ? sum / cnt : Infinity;
+            return avg <= 1.8; // 表示座標系(0..100)なのでこのくらいで直線扱い
+          };
+
+    // bbox
+   let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    for (const p of strokePoly) {
+      minX = Math.min(minX, p.x); minY = Math.min(minY, p.y);
+      maxX = Math.max(maxX, p.x); maxY = Math.max(maxY, p.y);
+    }
+    const w = Math.max(1e-6, maxX - minX);
+    const h = Math.max(1e-6, maxY - minY);
+    const strokeLen = polyLen(strokePoly);
+
+    // 直線っぽい（縦/横）なら、より甘い判定にする（I, l, t 等が通らない問題対策）
+    const isVertical = h > w * 2.0;
+    const isHorizontal = w > h * 2.0;
+    const straight = isStraightLike(strokePoly);
+    if (straight || isVertical || isHorizontal) {
+      const tol = START_TOL * 3.0;
+      // 長さが足りているか（ちょん、で通らないように）
+      const drawnLen = polyLen(points);
+      if (drawnLen < strokeLen * 0.30) return false;
+
+      // 線に近い割合だけを見る（カバー率より頑健）
+      let hit = 0;
+      for (const p of points) {
+        if (distancePointToPolyline(p, strokePoly) <= tol) hit++;
+      }
+      const hitRate = hit / points.length;
+      return hitRate >= 0.45;
+    }
+
+    // --- 曲線/輪郭：従来の hit + cover ---
+    const tolHit = START_TOL * 1.8;
+    const tolCover = START_TOL * 2.1;
+
+    let hit = 0;
+    for (const p of points) {
+      if (distancePointToPolyline(p, strokePoly) <= tolHit) hit++;
+    }
+    const hitRate = hit / points.length;
+
+    let samples = 0;
+    let cover = 0;
+    const step = Math.max(1, Math.floor(strokePoly.length / 16));
+    for (let i = 0; i < strokePoly.length; i += step) {
+      const sp = strokePoly[i];
+      samples++;
+      if (distancePointToPolyline(sp, points) <= tolCover) cover++;
+    }
+    const coverRate = samples ? cover / samples : 0;
+
+    return hitRate >= 0.55 && coverRate >= 0.28;
+}
+
   function attachTraceHandlers(svgEl, strokes) {
     drawing = false;
     points = [];
@@ -1085,23 +1479,57 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       if (e.button != null && e.button !== 0) return;
 
       const p0 = toSvgPoint(svgEl, e.clientX, e.clientY);
-      const poly = strokes[strokeIndex];
-      if (!poly || poly.length < 2) return;
+      
+      // ✅ alphabet は「どこからでもなぞってOK」
+      // ただし誤タップ防止で “どれかの線の近く” だけ開始OKにする
+      if (contentType === "alphabet") {
+        let best = Infinity;
+        for (let i = 0; i < strokes.length; i++) {
+          best = Math.min(best, distancePointToPolyline(p0, strokes[i]));
+        }
+        // START_TOL を少し広めに使う（厳しすぎると「どこからでも」にならない）
+        if (best > START_TOL * 2.2) return;
+      } else
+      // ✅ Master: “どの画でも”開始OK（ただし漢字の線から遠すぎる場合は除外）
+      // ✅ Kid: 次の画（strokeIndex）の開始点付近のみ開始OK（従来通り）
+      if (isMaster) {
+        // どれかのstrokeの線に近いなら開始許可（strokeIndexに依存しない）
+        let best = Infinity;
+        for (let i = 0; i < strokes.length; i++) {
+          best = Math.min(best, distancePointToPolyline(p0, strokes[i]));
+        }
+        // Masterは少し厳しめにして誤タップ開始を減らす（好みで調整可）
+        if (best > START_TOL_MASTER) return;
+      } else {
+        const poly = strokes[strokeIndex];
+        if (!poly || poly.length < 2) return;
 
-      const end0 = poly[0];
-      const end1 = poly[poly.length - 1];
-      const dEnd = Math.min(dist(p0, end0), dist(p0, end1));
-      if (dEnd > START_TOL) return;
+        const end0 = poly[0];
+        const end1 = poly[poly.length - 1];
+        const dEnd = Math.min(dist(p0, end0), dist(p0, end1));
+        if (dEnd > START_TOL) return;
 
-      // 線の近くだけ開始OK
-      const d0 = distancePointToPolyline(p0, strokes[strokeIndex]);
-      if (d0 > START_TOL) return;
+        // 線の近くだけ開始OK
+        const d0 = distancePointToPolyline(p0, poly);
+        if (d0 > START_TOL) return;
+      }
 
       drawing = true;
       updateHintText();
 
-      const snapStart = dist(p0, end0) <= dist(p0, end1) ? end0 : end1;
-      points = [snapStart];
+      // ✅ Masterではスナップしない（“どこをなぞったか推定”の精度を守る）
+      // ✅ Kidでは従来通り端点へスナップ
+      if (contentType === "alphabet" || isMaster) {
+        points = [p0];
+      } else {
+        const poly = strokes[strokeIndex];
+        const end0 = poly[0];
+        const end1 = poly[poly.length - 1];
+        const snapStart = dist(p0, end0) <= dist(p0, end1) ? end0 : end1;
+        points = [snapStart];
+      }
+
+
       updateTracePath(points);
 
       try {
@@ -1130,14 +1558,67 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       } catch {}
       lastPointerId = null;
 
-      const ok = judgeTrace(points, strokes[strokeIndex]);
+      const effectiveMaster = isMaster && (contentType !== "alphabet") && (contentType !== "romaji");
+      
+            // ✅ alphabet: 書き順は無視。ただし「どの画をなぞったか」を推定してその画だけ進める
+            let ok = false;
+            let reason = null;
+            let solvedIndex = strokeIndex;
+      
+            if (contentType === "alphabet") {
+              // 未クリアの中で近い候補を最大3つ試す（Iが当たりにくい問題対策）
+        const candidates = [];
+        for (let t = 0; t < strokes.length; t++) {
+          if (done[t]) continue;
+          // 距離評価（軽量）
+          let sum = 0;
+          const step = Math.max(1, Math.floor(points.length / 10));
+          let cnt = 0;
+          for (let k = 0; k < points.length; k += step) {
+            sum += distancePointToPolyline(points[k], strokes[t]);
+            cnt++;
+          }
+          const avg = cnt ? sum / cnt : Infinity;
+          candidates.push({ t, avg });
+        }
+        candidates.sort((a, b) => a.avg - b.avg);
+        const top = candidates.slice(0, 3);
+
+        ok = false;
+        for (const c of top) {
+          if (judgeAlphabetStroke(points, strokes[c.t])) {
+            ok = true;
+            solvedIndex = c.t;
+            break;
+          }
+        }
+        reason = ok ? null : "BAD_SHAPE";
+            } else {
+              const r = judgeAttempt({
+                points,
+                strokes,
+                strokeIndex,
+                isMaster: effectiveMaster,
+                failStreak,
+              });
+              ok = !!r.ok;
+              reason = r.reason ?? null;
+              solvedIndex = strokeIndex;
+            }
+
       if (setRun) setRun.attempts += 1;
 
        // ✅ 復習キュー用：1ストローク試行として記録（未クリアでも蓄積）
       const curItem = items[idx];
       if (curItem?.id) {
-        const key = `${range.id}::${curItem.id}`;
+        const key = makeProgressKey(contentType, curItem.id);
+
+        // 通常の試行記録（復習キュー用）
         recordAttempt(ctx.progress, key, { failed: !ok });
+        // ✅ Masterの試行記録（理由付き）
+        if (isMaster) {
+          recordMasterAttempt(ctx.progress, key, { ok, reason });
+        }
         saveProgress(ctx.progress);
       }
 
@@ -1153,17 +1634,39 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           setRun.comboMax = Math.max(setRun.comboMax ?? 0, setRun.combo);
         }
 
-        done[strokeIndex] = true;
-        failStreak[strokeIndex] = 0;
-        strokeIndex++;
+        // ✅ solvedIndex の画をクリア扱いにする（alphabetも1画ずつ進む）
+        done[solvedIndex] = true;
+        failStreak[solvedIndex] = 0;
 
+        if (contentType === "alphabet") {
+          // 次の未クリアへ（順序は気にしないので単純に先頭から探す）
+          let next = 0;
+          while (next < strokes.length && done[next]) next++;
+          strokeIndex = next;
+        } else {
+          strokeIndex++;
+        }
+                
+
+        // 次の画の「基準点」：演出や（kidの）次ガイド用
         const nextAnchor =
           strokeIndex < strokes.length
             ? getStrokeAnchor(strokes, strokeIndex)
             : getStrokeAnchor(strokes, strokes.length - 1);
 
+        // ✅ kidの猫は「次の画の終点」へ
+        const nextEnd =
+          strokeIndex < strokes.length
+            ? getStrokeEnd(strokes, strokeIndex)
+            : getStrokeEnd(strokes, strokes.length - 1);
+
+        // ✅ Masterでは猫は「次」ではなく「今の正解（1つ前）」に置く
+        const catAnchor = isMaster
+          ? getStrokeAnchor(strokes, solvedIndex)
+          : nextEnd;
+
         lockInput(JUMP_MS);
-        charJumpTo(svgEl, nextAnchor);
+        charJumpTo(svgEl, catAnchor);
 
          // ✅ 成功演出：コンボ / SFX / スパーク
         const now = Date.now();
@@ -1172,9 +1675,19 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         lastSuccessAt = now;
         const comboLevel = Math.min(5, Math.floor((combo - 1) / 2)); // 0..5
 
-        spawnSparks(svgEl, nextAnchor, 8 + comboLevel * 3);
+        // ✅ Masterでは「次の画」を示す演出は禁止（nextAnchorを使わない）
+        // 猫（catAnchor＝直前正解位置）に演出を寄せる
+        const fxAnchor = isMaster ? catAnchor : nextAnchor;
+        spawnSparks(svgEl, fxAnchor, 8 + comboLevel * 3);
+
+        // SFXはあってOK（位置情報を漏らさない）
         playComboSuccessSfx(comboLevel);
-        if (combo >= 3) showComboPop(svgEl, `コンボ ${combo}!`);
+
+        // コンボ表示はMasterでは固定位置にする（次の画を示さない）
+        if (combo >= 3) {
+          if (isMaster) showComboPop(svgEl, `コンボ ${combo}!`); // 文字は中央固定なのでOK
+          else showComboPop(svgEl, `コンボ ${combo}!`);
+        }
 
         refreshSvgStates(svgEl, strokes);
         renderStrokeButtons(strokes.length);
@@ -1185,18 +1698,126 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
           if (setRun) setRun.kanjiCleared += 1;
           kanjiCompleted = true;
 
+          // ✅ 1字クリアのたびに「中心へ赤い〇スタンプ」
+          showClearMaruStamp(svgEl);
+
           // ✅ クリア済みを “共通進捗” に保存（Progress画面と繋がる）
           const item = items[idx];
           if (item?.id) {
-            markCleared(ctx.progress, `${range.id}::${item.id}`);
+            const key = makeProgressKey(contentType, item.id);
+            markCleared(ctx.progress, key);
+            // ✅ Masterの合格記録
+            if (isMaster) {
+              const pKey = key;
+                              // 直前の合格回数を見て「初合格」を判定
+                              const prevPass = ctx.progress?.items?.[pKey]?.masterPasses ?? 0;
+                              recordMasterPass(ctx.progress, pKey);
+              
+                              // ✅ 初合格の称号（A-5: 称号連動）
+                              if (prevPass === 0) {
+                                const added = addTitleToBook({
+                                     title: "MASTER初合格",
+                                     rank: "MASTER",
+                                     rarity: "R",
+                                     at: Date.now(),
+                                   });
+                                   if (added) showTitlePopup("MASTER初合格");
+                              }
+
+                              // =========================
+                // 追加：Master称号の付与判定
+                // =========================
+                const pItem = ctx.progress?.items?.[pKey];
+                const mm = pItem?.masterMistakes ?? {};
+
+                // 書き順マスター：順番×が一度も出ていない
+                if ((mm.WRONG_ORDER ?? 0) === 0) {
+                  addTitleToBook({
+                    title: "書き順マスター",
+                    rank: "MASTER",
+                    rarity: "SR",
+                    at: Date.now(),
+                  });
+                }
+
+                // 線マスター：線×が一度も出ていない
+                if ((mm.BAD_SHAPE ?? 0) === 0) {
+                  addTitleToBook({
+                    title: "線マスター",
+                    rank: "MASTER",
+                    rarity: "R",
+                    at: Date.now(),
+                  });
+                }
+
+                // MASTER皆伝：Master合格数の累計で判定（全漢字合計）
+                const items = ctx.progress?.items ?? {};
+                let totalMasterPasses = 0;
+                for (const k in items) {
+                  totalMasterPasses += items[k]?.masterPasses ?? 0;
+                }
+                if (totalMasterPasses >= 20) {
+                  addTitleToBook({
+                    title: "MASTER皆伝",
+                    rank: "MASTER",
+                    rarity: "SR",
+                    at: Date.now(),
+                  });
+                }
+              }
             saveProgress(ctx.progress);
           }
+
+          // ---------------------------
+  // Review navigation helper (single mode)
+  // - onlyUncleared の時は「未クリアだけ」を next/prev で巡回
+  // - ここでは "次に出す singleId" を計算して、GameScreen が遷移に使えるようにする
+  // ---------------------------
+  function isClearedByItemId(itemId) {
+    const key = makeProgressKey(contentType, itemId);
+    return !!ctx?.progress?.cleared?.[key];
+  }
+
+  function calcReviewNav() {
+    const rv = ctx?.review;
+    if (!rv?.active || !Array.isArray(rv.queue) || rv.queue.length === 0) return null;
+
+    const q = rv.queue;
+    const n = q.length;
+    const cur = Number.isFinite(rv.index) ? rv.index : 0;
+    const onlyUnc = !!rv.onlyUncleared;
+
+    const accept = (id) => !onlyUnc || !isClearedByItemId(id);
+
+    const step = (dir) => {
+      for (let k = 1; k <= n; k++) {
+        const i = (cur + dir * k + n) % n;
+        const id = q[i];
+        if (accept(id)) return { index: i, id };
+      }
+      return { index: null, id: null };
+    };
+
+    const next = step(+1);
+    const prev = step(-1);
+    return {
+      curIndex: cur,
+      curId: q[cur],
+      nextIndex: next.index,
+      nextId: next.id,
+      prevIndex: prev.index,
+      prevId: prev.id,
+      onlyUncleared: onlyUnc,
+      done: next.id == null, // 次が無い（= 全部クリア済み等）
+    };
+  }
 
            // ✅ single練習：ここで完了→図鑑へ戻す（Resultには行かない）
           if (isSingleMode) {
                 showSetClearCelebration(svgEl);
                 setTimeout(() => {
                   const result = finalizeSetRun();
+                  const reviewNav = calcReviewNav();
                   onSetFinished?.({
                     mode: "single",
                     singleId,
@@ -1204,6 +1825,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
                     set: { start: 0, end: 1, len: 1, pos: 0 },
                     history: loadSetResults(),
                     nextStart: 0,
+                    reviewNav,
                   });
                 }, 900);
                 return;
@@ -1249,6 +1871,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         charFailDrop(svgEl);
         combo = 0;
         playFailSfx();
+        if (isMaster) showMasterFailFx(svgEl, failReasonLabel(reason));
       }
 
       e.preventDefault();
@@ -1288,7 +1911,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     kanjiCompleted = false;
 
     const item = items[idx];
-    const k = item?.kanji ?? "?";
+    const k = item?.kanji ?? item?.char ?? item?.letter ?? item?.symbol ?? item?.text ?? "?";
 
     const set = getSetInfo(idx);
     ensureSetRun(set);
@@ -1328,13 +1951,23 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     currentStrokes = strokes;
 
     refreshSvgStates(svg, strokes);
-    setCharPos(svg, getStrokeAnchor(strokes, 0));
+    
+    // ✅ Masterでは猫は「待機位置」のまま（render()で上書きしない）
+    if (isMaster) {
+              setCharPos(svg, CAT_WAIT_POS);
+            } else {
+        setCharPos(svg, getStrokeAnchor(strokes, 0));
+      }
+  
     updateHintText();
 
     attachTraceHandlers(svg, strokes);
   }
 
   async function boot() {
+
+    // ✅ master-mode クラス（CSSでヒントを完全OFF）
+    document.documentElement.classList.toggle("master-mode", isMaster);
     teacherMode = false;
     applyTeacherMode();
 
@@ -1393,6 +2026,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     clearTimeout(charJumpTimer);
     // confetti残留掃除（念のため）
     document.querySelectorAll(".confetti-layer").forEach((n) => n.remove());
+    // 画面遷移でmaster-modeが残らないように
+    document.documentElement.classList.remove("master-mode");
+    document.documentElement.classList.remove("teacher-mode");
     // pointer capture残り対策
     try { svg?.releasePointerCapture?.(0); } catch {}
 

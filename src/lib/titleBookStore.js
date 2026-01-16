@@ -26,6 +26,12 @@ export const TITLE_CATALOG = [
   { title: "タイムアタック王", rarity: "R", hint: "かなり速い" },
   { title: "連勝王", rarity: "SR", hint: "コンボ高めでクリア" },
   { title: "新記録王", rarity: "R", hint: "じこベスト更新" },
+
+  // --- Master mode titles ---
+  { title: "MASTER初合格", rarity: "R", hint: "Masterモードで初めて合格する" },
+  { title: "書き順マスター", rarity: "SR", hint: "順番×を出さずに合格する" },
+  { title: "線マスター", rarity: "R", hint: "線×を出さずに合格する" },
+  { title: "MASTER皆伝", rarity: "SR", hint: "Master合格をたくさん積み上げる" },
 ];
 
 // ----------------------------

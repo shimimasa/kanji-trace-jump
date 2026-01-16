@@ -1,0 +1,6725 @@
+[
+  {
+    "id": "g7-001",
+    "stageId": ["Asia_area1"],
+    "kanji": "握",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "アク"
+    ],
+    "kunyomi": [
+      "にぎ"
+    ],
+    "meaning": "にぎる。手でしっかりとつかむこと。また、物事の主導権を持つこと。",
+    "exampleSentence": "彼は、困難な状況でも決して諦めず、自らの運命をしっかりと握（にぎ）りしめた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-002",
+    "stageId": ["Asia_area1"],
+    "kanji": "扱",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [],
+    "kunyomi": [
+      "あつか"
+    ],
+    "meaning": "あつかう。物事を処理すること。人に対して接すること。",
+    "exampleSentence": "この繊細な機械は、専門的な知識を持つ人が慎重に扱（あつか）う必要がある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-003",
+    "stageId": ["Asia_area1"],
+    "kanji": "依",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "イ",
+      "エ"
+    ],
+    "kunyomi": [],
+    "meaning": "よる。他のものに頼ること。",
+    "exampleSentence": "この計画は、専門家の意見に依拠（いきょ）して立てられたため、信頼性が高い。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-004",
+    "stageId": ["Asia_area1"],
+    "kanji": "威",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "meaning": "い。人を恐れさせるような、りっぱな力や勢い。",
+    "exampleSentence": "ライオンは、その堂々とした姿と威厳（いげん）で、百獣の王と呼ばれている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-005",
+    "stageId": ["Asia_area1"],
+    "kanji": "為",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "meaning": "ため。ある目的のために行うこと。",
+    "exampleSentence": "私たちは、未来の子供たちのために、地球環境を守る活動を為（な）すべきだ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-006",
+    "stageId": ["Asia_area1"],
+    "kanji": "偉",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "えら"
+    ],
+    "meaning": "えらい。人並みはずれて、すぐれていること。",
+    "exampleSentence": "彼は、貧しい人々を救うために生涯を捧げた、偉大（いだい）な人物として歴史に名を残した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-007",
+    "stageId": ["Asia_area1"],
+    "kanji": "違",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "ちが"
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-008",
+    "stageId": ["Asia_area1"],
+    "kanji": "維",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "meaning": "い。物事を、つなぎとめること。",
+    "exampleSentence": "この橋は、最新の技術によって、強固な構造を維持（いじ）している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-009",
+    "stageId": ["Asia_area1"],
+    "kanji": "緯",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "meaning": "い。横糸。また、地球の横方向の線。",
+    "exampleSentence": "地球儀には、南北方向の経線と、東西方向の緯線（いせん）が描かれている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-010",
+    "stageId": ["Asia_area1"],
+    "kanji": "壱",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "イチ"
+    ],
+    "kunyomi": [],
+    "meaning": "いち。漢数字の「一」の、間違いを防ぐための書き方。",
+    "exampleSentence": "契約書には、金額が壱（いち）万円と、はっきりと記載されていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-011",
+    "stageId": ["Asia_area1"],
+    "kanji": "芋",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [],
+    "kunyomi": [
+      "いも"
+    ],
+    "meaning": "いも。土の中にできる、でんぷんを多く含む植物の根や茎。",
+    "exampleSentence": "秋の収穫祭では、掘りたての新鮮な芋（いも）を使って、美味しい料理を作った。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-012",
+    "stageId": ["Asia_area1"],
+    "kanji": "陰",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [
+      "かげ"
+    ],
+    "meaning": "かげ。光が当たらない部分。また、隠れた部分。",
+    "exampleSentence": "太陽が雲に隠れて、あたり一面が陰（かげ）になり、急に肌寒くなった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-013",
+    "stageId": ["Asia_area1"],
+    "kanji": "隠",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [
+      "かく"
+    ],
+    "meaning": "かくす。見えないようにすること。秘密にすること。",
+    "exampleSentence": "彼は、自分の過去の過ちを、誰にも知られないように隠し（かくし）続けていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-014",
+    "stageId": ["Asia_area1"],
+    "kanji": "影",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "エイ"
+    ],
+    "kunyomi": [
+      "かげ"
+    ],
+    "meaning": "かげ。光によってできる、物の形。また、姿。",
+    "exampleSentence": "夕焼けの空の下、長い影（かげ）が地面に伸びて、幻想的な風景を作り出した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-015",
+    "stageId": ["Asia_area1"],
+    "kanji": "鋭",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "エイ"
+    ],
+    "kunyomi": [
+      "するど"
+    ],
+    "meaning": "するどい。刃物などがよく切れること。感覚が優れていること。",
+    "exampleSentence": "探偵は、鋭い（するどい）洞察力で、事件の真相を瞬時に見抜いた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-016",
+    "stageId": ["Asia_area1"],
+    "kanji": "越",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "エツ"
+    ],
+    "kunyomi": [
+      "こ"
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-017",
+    "stageId": ["Asia_area1"],
+    "kanji": "援",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [],
+    "meaning": "たすける。力を貸すこと。",
+    "exampleSentence": "災害が発生した地域へ、多くのボランティアが救援（きゅうえん）活動のために駆けつけた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-018",
+    "stageId": ["Asia_area1"],
+    "kanji": "煙",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [
+      "けむり",
+      "けむ"
+    ],
+    "meaning": "けむり。物が燃えるときに発生する、気体や微粒子の集まり。",
+    "exampleSentence": "工場から立ち上る煙（けむり）が、空を覆い、大気汚染の原因となっている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-019",
+    "stageId": ["Asia_area1"],
+    "kanji": "鉛",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [
+      "なまり"
+    ],
+    "meaning": "なまり。重くて柔らかい金属。",
+    "exampleSentence": "昔の水道管には鉛（なまり）が使われていたが、健康への影響から現在は使用されていない。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-020",
+    "stageId": ["Asia_area1"],
+    "kanji": "縁",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [
+      "ふち"
+    ],
+    "meaning": "ふち。物の端。また、人と人とのつながり。",
+    "exampleSentence": "この古い茶碗の縁（ふち）は、長年の使用で少し欠けている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-021",
+    "stageId": ["Asia_area1"],
+    "kanji": "汚",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "オ"
+    ],
+    "kunyomi": [
+      "けが",
+      "よご",
+      "きたな"
+    ],
+    "meaning": "よごれる。清潔でなくなること。不正なこと。",
+    "exampleSentence": "環境汚染（おせん）は、私たちの生活に深刻な影響を及ぼす、地球規模の課題だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-022",
+    "stageId": ["Asia_area1"],
+    "kanji": "押",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "オウ"
+    ],
+    "kunyomi": [
+      "お"
+    ],
+    "meaning": "おす。力を加えて、向こうへ動かすこと。また、無理にすること。",
+    "exampleSentence": "彼は、自分の意見を強く主張し、会議の決定を押し（おし）進めた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-023",
+    "stageId": ["Asia_area1"],
+    "kanji": "奥",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "オウ"
+    ],
+    "kunyomi": [
+      "おく"
+    ],
+    "meaning": "おく。物の、いちばん奥まった部分。",
+    "exampleSentence": "森の奥深く（おくふかく）には、まだ誰も足を踏み入れたことのない、神秘的な場所が広がっている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-024",
+    "stageId": ["Asia_area1"],
+    "kanji": "憶",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "オク"
+    ],
+    "kunyomi": [],
+    "meaning": "おく。心に、物事を覚えておくこと。",
+    "exampleSentence": "遠い昔の記憶（きおく）が、ふとした瞬間に鮮明に蘇り、懐かしい気持ちになった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-025",
+    "stageId": ["Asia_area1"],
+    "kanji": "菓",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [],
+    "meaning": "か。果物や、果物から作ったお菓子。",
+    "exampleSentence": "日本の伝統的な和菓子（わがし）は、季節の移ろいを表現する、美しい芸術品だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-026",
+    "stageId": ["Asia_area1"],
+    "kanji": "暇",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [
+      "ひま"
+    ],
+    "meaning": "ひま。仕事や用事がなく、時間があること。",
+    "exampleSentence": "忙しい毎日の中で、たまには何も考えずに、ゆっくりと過ごす暇（ひま）も必要だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-027",
+    "stageId": ["Asia_area1"],
+    "kanji": "箇",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [],
+    "meaning": "か。物事を数えるときに使う言葉。",
+    "exampleSentence": "この報告書には、重要な点がいくつか箇条書き（かじょうがき）でまとめられている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-028",
+    "stageId": ["Asia_area1"],
+    "kanji": "雅",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ガ"
+    ],
+    "kunyomi": [],
+    "meaning": "が。上品で、風流なこと。",
+    "exampleSentence": "日本の伝統芸能である雅楽（ががく）は、千年以上もの歴史を持つ、貴重な文化遺産だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-029",
+    "stageId": ["Asia_area1"],
+    "kanji": "介",
+    "grade": 7,
+    "strokes": 4,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [],
+    "meaning": "かい。間に入って、助けること。",
+    "exampleSentence": "彼は、困っている友達を助けるために、積極的に仲介（ちゅうかい）役を買って出た。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-030",
+    "stageId": ["Asia_area1"],
+    "kanji": "戒",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "いまし"
+    ],
+    "meaning": "いましめる。悪いことをしないように、注意すること。",
+    "exampleSentence": "歴史は、過去の過ちを繰り返さないための、大切な戒め（いましめ）を与えてくれる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-031",
+    "stageId": ["Asia_area2"],
+    "kanji": "皆",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "みな"
+    ],
+    "meaning": "みな。すべての人。",
+    "exampleSentence": "クラスの皆（みな）で協力し、文化祭の準備を成功させることができた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+
+  {
+    "id": "g7-032",
+    "stageId": ["Asia_area2"],
+    "kanji": "壊",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "こわ"
+    ],
+    "meaning": "こわす。物事を、もとの形がなくなるようにすること。",
+    "exampleSentence": "地震によって、多くの建物が壊れ（こわれ）、甚大な被害が出た。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-033",
+    "stageId": ["Asia_area2"]         ,
+    "kanji": "較",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "カク"
+    ],
+    "kunyomi": [],
+    "meaning": "くらべる。物事を、くらべあわせること。",
+    "exampleSentence": "この二つの製品は、性能を比較（ひかく）すると、ほとんど差がない。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-034",
+    "stageId": ["Asia_area2"],
+    "kanji": "獲",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "カク"
+    ],
+    "kunyomi": [
+      "え"
+    ],
+    "meaning": "える。狩りなどで、動物を捕らえること。",
+    "exampleSentence": "彼は、罠を仕掛けて、森の中で獲物（えもの）を獲（え）ることに成功した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-035",
+    "stageId": ["Asia_area2"],
+    "kanji": "刈",
+    "grade": 7,
+    "strokes": 4,
+    "onyomi": [],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かる。草や稲などを、鎌などで切り取ること。",
+    "exampleSentence": "農家の人たちは、秋になると、黄金色に実った稲を刈り（かり）取る作業に追われる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-036",
+    "stageId": ["Asia_area2"],
+    "kanji": "甘",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "あま"
+    ],
+    "meaning": "あまい。砂糖のような味。また、物事がゆるいこと。",
+    "exampleSentence": "彼女は、いつも優しい言葉で、子供たちを甘やかす（あまやかす）傾向がある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-037",
+    "stageId": ["Asia_area2"],
+    "kanji": "汗",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "あせ"
+    ],
+    "meaning": "あせ。運動したり、暑かったりすると、体から出る水分。",
+    "exampleSentence": "夏の暑い日差しの中、彼は額に汗（あせ）をかきながら、練習に励んだ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-038",
+    "stageId": ["Asia_area2"],
+    "kanji": "乾",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "かわ"
+    ],
+    "meaning": "かわく。水気がなくなること。",
+    "exampleSentence": "洗濯物を外に干したら、あっという間に乾い（かわい）た。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-039",
+    "stageId": ["Asia_area2"],
+    "kanji": "勧",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "すす"
+    ],
+    "meaning": "すすめる。あることをするように、人に働きかけること。",
+    "exampleSentence": "店員は、新商品の魅力を熱心に勧め（すすめ）、多くの客が購入した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-040",
+    "stageId": ["Asia_area2"],
+    "kanji": "歓",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "よろこぶ。心から、うれしく思うこと。",
+    "exampleSentence": "オリンピックで自国の選手が金メダルを獲得し、国民は歓喜（かんき）に沸いた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-041",
+    "stageId": ["Asia_area2"],
+    "kanji": "監",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "かん。物事を、上から見ること。",
+    "exampleSentence": "彼は、建設現場の安全管理を監督（かんとく）する重要な役割を担っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-042",
+    "stageId": ["Asia_area2"],
+    "kanji": "環",
+    "grade": 7,
+    "strokes": 17,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "かん。ぐるりと取り囲むこと。輪。",
+    "exampleSentence": "地球温暖化は、地球規模の環境（かんきょう）問題であり、国際的な協力が不可欠だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-043",
+    "stageId": ["Asia_area2"],
+    "kanji": "鑑",
+    "grade": 7,
+    "strokes": 23,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "かんが"
+    ],
+    "meaning": "かがみ。物事の善悪を判断する手本。",
+    "exampleSentence": "この古い書物は、当時の文化や生活を知る上で、貴重な鑑（かがみ）となる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-044",
+    "stageId": ["Asia_area2"],
+    "kanji": "含",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "ガン"
+    ],
+    "kunyomi": [
+      "ふく"
+    ],
+    "meaning": "ふくむ。中に、あるものを持っていること。",
+    "exampleSentence": "この言葉には、深い意味が含（ふく）まれており、何度読んでも新しい発見がある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-045",
+    "stageId": ["Asia_area2"],
+    "kanji": "奇",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。普通とは違っていて、珍しいこと。",
+    "exampleSentence": "彼は、奇妙（きみょう）な行動で、周囲の人々を驚かせることがよくある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-046",
+    "stageId": ["Asia_area2"],
+    "kanji": "祈",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "いの"
+    ],
+    "meaning": "いのる。神仏に、願いを伝えること。",
+    "exampleSentence": "世界平和を祈り（いのり）、人々はそれぞれの場所で静かに手を合わせた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-047",
+    "stageId": ["Asia_area2"],
+    "kanji": "鬼",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "おに"
+    ],
+    "meaning": "おに。日本の伝説に登場する、恐ろしい姿の生き物。",
+    "exampleSentence": "昔話に出てくる鬼（おに）は、恐ろしいけれど、どこか人間らしい一面も持っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-048",
+    "stageId": ["Asia_area2"],
+    "kanji": "幾",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "いく"
+    ],
+    "meaning": "いく。どれくらい。",
+    "exampleSentence": "彼は、幾度（いくど）となく失敗を繰り返しながらも、決して諦めなかった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-049",
+    "stageId": ["Asia_area2"],
+    "kanji": "輝",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "かがや"
+    ],
+    "meaning": "かがやく。光を放って、明るく見えること。",
+    "exampleSentence": "夜空には、無数の星が輝き（かがやき）、美しい天の川を形成している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-050",
+    "stageId": ["Asia_area2"],
+    "kanji": "儀",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "ギ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぎ。物事を行うときの、きまったやり方。",
+    "exampleSentence": "結婚式は、厳粛な雰囲気の中で、伝統的な儀式（ぎしき）が執り行われた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-051",
+    "stageId": ["Asia_area2"],
+    "kanji": "戯",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "ギ"
+    ],
+    "kunyomi": [
+      "たわむ"
+    ],
+    "meaning": "たわむれる。ふざけて遊ぶこと。",
+    "exampleSentence": "子供たちは、公園で無邪気に戯れ（たわむれ）、楽しそうな笑い声が響いていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-052",
+    "stageId": ["Asia_area2"],
+    "kanji": "詰",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "キツ"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つめる。すきまなく、いっぱいに入れること。",
+    "exampleSentence": "彼は、自分の意見を論理的に詰めて（つめて）いき、相手を納得させた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-053",
+    "stageId": ["Asia_area2"],
+    "kanji": "却",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "キャク"
+    ],
+    "kunyomi": [],
+    "meaning": "きゃく。しりぞけること。",
+    "exampleSentence": "彼の提案は、予算の都合により、残念ながら却下（きゃっか）された。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-054",
+    "stageId": ["Asia_area2"],
+    "kanji": "脚",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "キャク",
+      "キャ"
+    ],
+    "kunyomi": [
+      "あし"
+    ],
+    "meaning": "あし。体の、歩くための部分。",
+    "exampleSentence": "彼は、長距離走の練習で、強靭な脚力（きゃくりょく）を身につけた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-055",
+    "stageId": ["Asia_area2"],
+    "kanji": "及",
+    "grade": 7,
+    "strokes": 3,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "およ"
+    ],
+    "meaning": "およぶ。ある範囲に達すること。",
+    "exampleSentence": "この問題は、個人の努力だけでは解決が難しく、社会全体に及ぶ（およぶ）影響がある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-056",
+    "stageId": ["Asia_area2"],
+    "kanji": "丘",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "おか"
+    ],
+    "meaning": "おか。まわりより、少しだけ高くなっている、なだらかな土地。",
+    "exampleSentence": "春になると、丘（おか）一面に菜の花が咲き誇り、美しい景色が広がる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-057",
+    "stageId": ["Asia_area2"],
+    "kanji": "朽",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "く"
+    ],
+    "meaning": "くちる。物が、古くなって、使えなくなること。",
+    "exampleSentence": "この古い木造建築は、長い年月を経て、少しずつ朽ち（くち）てきている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-058",
+    "stageId": ["Asia_area2"],
+    "kanji": "巨",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "キョ"
+    ],
+    "kunyomi": [],
+    "meaning": "きょ。とても大きいこと。",
+    "exampleSentence": "彼は、世界経済に大きな影響を与える、巨大（きょだい）な企業を経営している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-059",
+    "stageId": ["Asia_area2"],
+    "kanji": "拠",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "キョ",
+      "コ"
+    ],
+    "kunyomi": [],
+    "meaning": "よる。あるものを、よりどころとすること。",
+    "exampleSentence": "この研究は、最新の科学的データに根拠（こんきょ）を置いている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-060",
+    "stageId": ["Asia_area2"],
+    "kanji": "距",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "キョ"
+    ],
+    "kunyomi": [],
+    "meaning": "きょ。二つの場所や物との間の、へだたり。",
+    "exampleSentence": "地球から月までの距離（きょり）は、約38万キロメートルもある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-061",
+    "stageId": ["Asia_area3"],
+    "kanji": "御",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ギョ",
+      "ゴ"
+    ],
+    "kunyomi": [
+      "おん"
+    ],
+    "meaning": "おん。相手を敬う気持ちを表す言葉。",
+    "exampleSentence": "お客様を御案内（ごあんない）する際は、丁寧な言葉遣いを心がけましょう。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-062",
+    "stageId": ["Asia_area3"],
+    "kanji": "凶",
+    "grade": 7,
+    "strokes": 4,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "きょう。悪いこと。不吉なこと。",
+    "exampleSentence": "今日の占いでは、凶（きょう）と出ていたので、一日中、慎重に行動した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-062",
+    "stageId": ["Asia_area3"],
+    "kanji": "叫",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "さけ"
+    ],
+    "meaning": "さけぶ。大声で、何かを言うこと。",
+    "exampleSentence": "彼は、絶望的な状況の中で、助けを求めて大声で叫び（さけび）続けた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-064",
+    "stageId": ["Asia_area3"],
+    "kanji": "狂",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "くる"
+    ],
+    "meaning": "くるう。心が、正常でなくなること。",
+    "exampleSentence": "彼は、その美しい絵に魅了され、まるで狂った（くるった）かのように見つめていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-065",
+    "stageId": ["Asia_area3"],
+    "kanji": "況",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "きょう。物事の状況。",
+    "exampleSentence": "現在の経済状況（じょうきょう）は、非常に厳しく、多くの企業が苦境に立たされている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-066",
+    "stageId": ["Asia_area3"],
+    "kanji": "狭",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "せま",
+      "せば"
+    ],
+    "meaning": "せまい。幅が少ないこと。",
+    "exampleSentence": "この道は、車一台がやっと通れるほどの狭い（せまい）道だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-067",
+    "stageId": ["Asia_area3"],
+    "kanji": "恐",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "おそ"
+    ],
+    "meaning": "おそれる。怖いと思うこと。",
+    "exampleSentence": "彼は、失敗を恐れ（おそれ）ずに、新しいことに挑戦する勇気を持っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-068",
+    "stageId": ["Asia_area3"],
+    "kanji": "響",
+    "grade": 7,
+    "strokes": 20,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "ひび"
+    ],
+    "meaning": "ひびく。音や声が、遠くまで伝わること。",
+    "exampleSentence": "彼の歌声は、会場全体に響き渡り（ひびきわたり）、聴衆を感動させた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-069",
+    "stageId": ["Asia_area3"],
+    "kanji": "驚",
+    "grade": 7,
+    "strokes": 22,
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "おどろ"
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-070",
+    "stageId": ["Asia_area3"],
+    "kanji": "仰",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "ギョウ",
+      "コウ"
+    ],
+    "kunyomi": [
+      "あお",
+      "おお"
+    ],
+    "meaning": "あおぐ。上を見上げること。",
+    "exampleSentence": "夜空を仰ぎ（あおぎ）見ると、満月が明るく輝いていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-071",
+    "stageId": ["Asia_area3"],
+    "kanji": "駆",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ク"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かける。馬などを走らせること。",
+    "exampleSentence": "彼は、ゴールを目指して、全速力で駆け（かけ）抜けた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-072",
+    "stageId": ["Asia_area3"],
+    "kanji": "屈",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "クツ"
+    ],
+    "kunyomi": [],
+    "meaning": "くっする。力や権力に、おさえつけられること。",
+    "exampleSentence": "彼は、どんな困難にも屈する（くっする）ことなく、自分の信念を貫き通した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-073",
+    "stageId": ["Asia_area3"],
+    "kanji": "掘",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "クツ"
+    ],
+    "kunyomi": [
+      "ほ"
+    ],
+    "meaning": "ほる。地面などを、道具で掘り起こすこと。",
+    "exampleSentence": "考古学者は、古代遺跡の発掘（はっくつ）調査を行い、貴重な発見をした。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-074",
+    "stageId": ["Asia_area3"],
+    "kanji": "繰",
+    "grade": 7,
+    "strokes": 19,
+    "onyomi": [],
+    "kunyomi": [
+      "く"
+    ],
+    "meaning": "くる。糸などを、巻き取ること。",
+    "exampleSentence": "彼女は、毎日同じ作業を繰り返し（くりかえし）、正確にこなしている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-075",
+    "stageId": ["Asia_area3"],
+    "kanji": "恵",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ケイ",
+      "エ"
+    ],
+    "kunyomi": [
+      "めぐ"
+    ],
+    "meaning": "めぐむ。神や自然が、人々に恩恵を与えること。",
+    "exampleSentence": "この地域は、豊かな自然に恵まれ（めぐまれ）、美しい景色が広がっている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-076",
+    "stageId": ["Asia_area3"],
+    "kanji": "傾",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "かたむ"
+    ],
+    "meaning": "かたむく。ある方向へ、斜めになること。",
+    "exampleSentence": "夕日が西の空に傾き（かたむき）、あたり一面がオレンジ色に染まった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-077",
+    "stageId": ["Asia_area3"],
+    "kanji": "継",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つぐ。前のものを受け継ぐこと。",
+    "exampleSentence": "彼は、父親の事業を継ぎ（つぎ）、会社の発展に尽力した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-078",
+    "stageId": ["Asia_area3"],
+    "kanji": "迎",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ゲイ"
+    ],
+    "kunyomi": [
+      "むか"
+    ],
+    "meaning": "むかえる。来る人を、出迎えること。",
+    "exampleSentence": "空港には、海外からのお客様を迎え（むかえる）るために、多くの人が集まっていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-079",
+    "stageId": ["Asia_area3"],
+    "kanji": "撃",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "ゲキ"
+    ],
+    "kunyomi": [
+      "う"
+    ],
+    "meaning": "うつ。武器などで、相手を攻撃すること。",
+    "exampleSentence": "兵士たちは、敵の攻撃を撃退（げきたい）し、自国を守り抜いた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-080",
+    "stageId": ["Asia_area3"],
+    "kanji": "肩",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "かた"
+    ],
+    "meaning": "かた。体の、首と腹の間の部分。",
+    "exampleSentence": "彼は、重い荷物を肩（かた）に担ぎ、黙々と歩き続けた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-081",
+    "stageId": ["Asia_area3"],
+    "kanji": "兼",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かねる。二つ以上の役割を、同時に持つこと。",
+    "exampleSentence": "彼女は、仕事と育児を兼ねて（かねて）おり、毎日忙しい日々を送っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-082",
+    "stageId": ["Asia_area3"],
+    "kanji": "剣",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "つるぎ"
+    ],
+    "meaning": "つるぎ。両刃の刀。",
+    "exampleSentence": "彼は、古くから伝わる剣術（けんじゅつ）の達人で、その腕前は誰もが認めるものだった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-083",
+    "stageId": ["Asia_area3"],
+    "kanji": "軒",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "のき"
+    ],
+    "meaning": "のき。家の屋根の、壁から突き出た部分。",
+    "exampleSentence": "雨宿りのため、軒先（のきさき）に身を寄せると、雨音がより一層大きく聞こえた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-084",
+    "stageId": ["Asia_area3"],
+    "kanji": "圏",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [],
+    "meaning": "けん。ある範囲。",
+    "exampleSentence": "この地域は、台風の暴風圏（ぼうふうけん）に入っており、厳重な警戒が必要だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-085",
+    "stageId": ["Asia_area3"],
+    "kanji": "堅",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "かた"
+    ],
+    "meaning": "かたい。物が、しっかりしていて、壊れにくいこと。",
+    "exampleSentence": "彼は、どんな誘惑にも負けない、堅固（けんご）な意志を持っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-086",
+    "stageId": ["Asia_area3"],
+    "kanji": "遣",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "つか"
+    ],
+    "meaning": "つかわす。人を、ある目的のために行かせること。",
+    "exampleSentence": "彼は、会社の代表として、海外へ派遣（はけん）されることになった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-087",
+    "stageId": ["Asia_area3"],
+    "kanji": "玄",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "ゲン"
+    ],
+    "kunyomi": [],
+    "meaning": "げん。奥深く、はっきりしないこと。",
+    "exampleSentence": "この寺の門は、玄妙（げんみょう）な雰囲気を醸し出し、訪れる者を魅了する。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-088",
+    "stageId": ["Asia_area3"],
+    "kanji": "枯",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かれる。植物が、水不足などで、しおれてしまうこと。",
+    "exampleSentence": "庭の草木が、夏の強い日差しで枯れ（かれ）てしまい、元気がなくなった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-089",
+    "stageId": ["Asia_area3"],
+    "kanji": "誇",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "ほこ"
+    ],
+    "meaning": "ほこる。自分のことや、自分の属するものを、りっぱだと思うこと。",
+    "exampleSentence": "彼は、自分の故郷の美しい自然を、心から誇り（ほこり）に思っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-090",
+    "stageId": ["Asia_area3"],
+    "kanji": "鼓",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "つづみ"
+    ],
+    "meaning": "つづみ。打楽器の一種。",
+    "exampleSentence": "祭りの会場には、勇壮な太鼓（たいこ）の音が響き渡り、人々の心を高揚させた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-091",
+    "stageId": ["Asia_area4"],
+    "kanji": "互",
+    "grade": 7,
+    "strokes": 4,
+    "onyomi": [
+      "ゴ"
+    ],
+    "kunyomi": [
+      "たが"
+    ],
+    "meaning": "たがい。二人以上のものが、相手に対して、同じようにすること。",
+    "exampleSentence": "私たちは、互い（たがい）に協力し合い、困難な課題を乗り越えることができた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-092",
+    "stageId": ["Asia_area4"],
+    "kanji": "抗",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。相手に逆らって、抵抗すること。",
+    "exampleSentence": "彼は、不正な権力に対して、最後まで抵抗（ていこう）し続けた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-093",
+    "stageId": ["Asia_area4"],
+    "kanji": "攻",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "せ"
+    ],
+    "meaning": "せめる。相手を攻撃すること。",
+    "exampleSentence": "サッカーの試合で、相手チームのゴールを攻め（せめ）続け、ついに得点した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-094",
+    "stageId": ["Asia_area4"],
+    "kanji": "更",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "さら",
+      "ふ"
+    ],
+    "meaning": "さらに。その上。",
+    "exampleSentence": "夜が更け（ふけ）るにつれて、街は静まり返り、星空がより一層輝きを増した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-095",
+    "stageId": ["Asia_area4"],
+    "kanji": "恒",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。いつも変わらないこと。",
+    "exampleSentence": "地球は、太陽の周りを恒常的（こうじょうてき）に公転しており、季節の変化をもたらす。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-096",
+    "stageId": ["Asia_area4"],
+    "kanji": "荒",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "あら",
+      "あ"
+    ],
+    "meaning": "あらい。物事が、乱暴で、激しいこと。",
+    "exampleSentence": "嵐の夜、荒れ狂う（あれる）波が、海岸の岩に激しく打ち付けた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-097",
+    "stageId": ["Asia_area4"],
+    "kanji": "項",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。物事を、いくつかに分けた、その一つ一つ。",
+    "exampleSentence": "契約書には、重要な項目（こうもく）がいくつか記載されており、注意深く確認する必要がある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-098",
+    "stageId": ["Asia_area4"],
+    "kanji": "稿",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。文章の、まだ完成していないもの。",
+    "exampleSentence": "彼は、新しい小説の原稿（げんこう）を、夜遅くまで書き続けている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-099",
+    "stageId": ["Asia_area4"],
+    "kanji": "豪",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "ゴウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ごう。勢いが強く、りっぱなこと。",
+    "exampleSentence": "彼は、どんな困難な状況でも、豪胆（ごうたん）な精神で立ち向かう。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+
+  
+  {
+    "id": "g7-100",
+    "stageId": ["Asia_area4"],
+    "kanji": "込",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [],
+    "kunyomi": [
+      "こ"
+    ],
+    "meaning": "中にはいる。また、ものがたくさん集まること。",
+  "exampleSentence": "夕方の電車はとても込（こ）む。"
+  },
+
+  {
+    "id": "g7-101",
+    "stageId": ["Asia_area4"],
+    "kanji": "婚",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "コン"
+    ],
+    "kunyomi": [],
+    "meaning": "こん。結婚すること。",
+    "exampleSentence": "彼女は、長年の交際を経て、ついに彼と結婚（けっこん）することになった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-102",
+    "stageId": ["Asia_area4"],
+    "kanji": "鎖",
+    "grade": 7,
+    "strokes": 18,
+    "onyomi": [
+      "サ"
+    ],
+    "kunyomi": [
+      "くさり"
+    ],
+    "meaning": "くさり。金属の輪を、いくつもつなげたもの。",
+    "exampleSentence": "彼は、古い宝箱にかけられた、錆びた鎖（くさり）を力ずくで引きちぎった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-103",
+    "stageId": ["Asia_area4"],
+    "kanji": "彩",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [
+      "いろど"
+    ],
+    "meaning": "いろどる。色を付けて、美しく飾ること。",
+    "exampleSentence": "彼女は、絵の具を使って、真っ白なキャンバスを鮮やかな色彩（しきさい）で彩った（いろどった）。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-104",
+    "stageId": ["Asia_area4"],
+    "kanji": "歳",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "サイ",
+      "セイ"
+    ],
+    "kunyomi": [],
+    "meaning": "さい。年の数。",
+    "exampleSentence": "彼は、まだ若い二十歳（はたち）だが、すでに多くの経験を積んでいる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-105",
+    "stageId": ["Asia_area4"],
+    "kanji": "載",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [
+      "の"
+    ],
+    "meaning": "物の上にのせる。書物などにしるすこと。",
+  "exampleSentence": "新聞に自分の写真が載（の）る。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-106",
+    "stageId": ["Asia_area4"],
+    "kanji": "剤",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ザイ"
+    ],
+    "kunyomi": [],
+    "meaning": "ざい。薬や、化学物質のこと。",
+    "exampleSentence": "この洗剤（せんざい）は、環境に優しく、汚れをしっかりと落とすことができる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  
+  {
+    "id": "g7-107",
+    "stageId": ["Asia_area4"],
+    "kanji": "咲",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [],
+    "kunyomi": [
+      "さ"
+    ],
+    "meaning": "花のつぼみがひらくこと。",
+  "exampleSentence": "春になると桜の花が咲（さ）く。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+
+  {
+    "id": "g7-108",
+    "stageId": ["Asia_area4"],
+    "kanji": "惨",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "サン",
+      "ザン"
+    ],
+    "kunyomi": [
+      "みじ"
+    ],
+    "meaning": "みじめ。見るに忍びないほど、ひどいこと。",
+    "exampleSentence": "戦争は、多くの人々の命を奪い、悲惨（ひさん）な状況を生み出す。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+
+  {
+    "id": "g7-109",
+    "stageId": ["Asia_area4"],
+    "kanji": "旨",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "むね"
+    ],
+    "meaning": "中心となる大切なことがら。また、おいしいこと。",
+  "exampleSentence": "会議の要（よう）旨（し）をまとめる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-110",
+    "stageId": ["Asia_area4"],
+    "kanji": "伺",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "うかが"
+    ],
+    "meaning": "「聞く」や「訪ねる」の、へりくだった言い方。",
+  "exampleSentence": "先生のご意見を伺（うかが）う。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-111",
+    "stageId": ["Asia_area4"],
+    "kanji": "刺",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "さ"
+    ],
+  "meaning": "先のするどいもので、つきさすこと。とげ。",
+  "exampleSentence": "指にとげが刺（さ）さった。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-112",
+    "stageId": ["Asia_area4"],
+    "kanji": "脂",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "あぶら"
+    ],
+    "meaning": "あぶら。動物の体や、植物に含まれる、水に溶けない物質。",
+    "exampleSentence": "健康のためには、動物性の脂質（ししつ）の摂取量を控えることが推奨されている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-113",
+    "stageId": ["Asia_area4"],
+    "kanji": "紫",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "むらさき"
+    ],
+    "meaning": "むらさき。赤と青の中間の色。",
+    "exampleSentence": "夕焼けの空が、美しい紫色（むらさきいろ）に染まり、幻想的な景色を作り出した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-114",
+    "stageId": ["Asia_area4"],
+    "kanji": "雌",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "めす",
+      "め"
+    ],
+    "meaning": "めす。動物の、卵を産む性。",
+    "exampleSentence": "動物園では、珍しい鳥の雌（めす）が、卵を温めている姿を見ることができた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-115",
+    "stageId": ["Asia_area4"],
+    "kanji": "執",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "シッ",
+      "シツ",
+      "シュウ"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "meaning": "とる。物事を、しっかりとつかむこと。",
+    "exampleSentence": "彼は、一度決めた目標は、どんな困難があっても、最後まで執念（しゅうねん）を持ってやり遂げる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-116",
+    "stageId": ["Asia_area4"],
+    "kanji": "芝",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [],
+    "kunyomi": [
+      "しば"
+    ],
+    "meaning": "しば。地面を覆う、短い草。",
+    "exampleSentence": "公園の芝生（しばふ）の上で、子供たちが楽しそうに走り回っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-117",
+    "stageId": ["Asia_area4"],
+    "kanji": "斜",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "シャ"
+    ],
+    "kunyomi": [
+      "なな"
+    ],
+    "meaning": "ななめ。まっすぐではなく、傾いていること。",
+    "exampleSentence": "太陽の光が、窓から斜め（ななめ）に差し込み、部屋の中に長い影を作った。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-118",
+    "stageId": ["Asia_area4"],
+    "kanji": "煮",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "シャ"
+    ],
+    "kunyomi": [
+      "に"
+    ],
+    "meaning": "にる。水や調味料と一緒に、火にかけて調理すること。",
+    "exampleSentence": "お母さんが、大根と鶏肉をじっくり煮（に）込んだ、美味しい煮物を作ってくれた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-119",
+    "stageId": ["Asia_area4"],
+    "kanji": "釈",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "シャク"
+    ],
+    "kunyomi": [],
+    "meaning": "しゃく。物事を、わかりやすく説明すること。",
+    "exampleSentence": "彼は、難しい法律の条文を、誰にでも理解できるように、丁寧に解釈（かいしゃく）した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-120",
+    "stageId": ["Asia_area4"],
+    "kanji": "寂",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "ジャク",
+      "セキ"
+    ],
+    "kunyomi": [
+      "さび"
+    ],
+    "meaning": "さびしい。人がいなくて、ひっそりとしていること。",
+    "exampleSentence": "冬の夜、雪が降り積もる中、街は静寂（せいじゃく）に包まれ、寂しさが増した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-121",
+    "stageId": ["Asia_area5"],
+    "kanji": "朱",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "シュ"
+    ],
+    "kunyomi": [],
+    "meaning": "しゅ。鮮やかな赤色。",
+    "exampleSentence": "神社の鳥居は、鮮やかな朱色（しゅいろ）に塗られており、遠くからでもよく目立つ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-122",
+    "stageId": ["Asia_area5"],
+    "kanji": "狩",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "シュ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かる。動物を捕らえること。",
+    "exampleSentence": "昔の人々は、森で狩り（かり）をして、食料を得ていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-123",
+    "stageId": ["Asia_area5"],
+    "kanji": "趣",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "シュ"
+    ],
+    "kunyomi": [
+      "おもむき"
+    ],
+    "meaning": "おもむき。物事の、特別な味わいや、風情。",
+    "exampleSentence": "この古い庭園は、四季折々の趣（おもむき）があり、訪れる人々を魅了する。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-124",
+    "stageId": ["Asia_area5"],
+    "kanji": "需",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "ジュ"
+    ],
+    "kunyomi": [],
+    "meaning": "じゅ。必要とすること。",
+    "exampleSentence": "現代社会では、人々の多様なニーズに応えるため、様々な商品が供給（きょうきゅう）されている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-125",
+    "stageId": ["Asia_area5"],
+    "kanji": "舟",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "ふね",
+      "ふな"
+    ],
+    "meaning": "ふね。水の上を進むための乗り物。",
+    "exampleSentence": "小さな舟（ふね）に乗って、湖の真ん中まで漕ぎ出し、静かな時間を過ごした。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-126",
+    "stageId": ["Asia_area5"],
+    "kanji": "秀",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "ひい"
+    ],
+    "meaning": "ひいでる。他のものより、特に優れていること。",
+    "exampleSentence": "彼は、学業だけでなく、スポーツでも秀で（ひいで）ており、クラスの模範となっている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-127",
+    "stageId": ["Asia_area5"],
+    "kanji": "襲",
+    "grade": 7,
+    "strokes": 22,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "おそ"
+    ],
+    "meaning": "おそう。突然、相手に攻撃を仕掛けること。",
+    "exampleSentence": "夜道で、突然、見知らぬ男に襲われ（おそわれ）、恐怖を感じた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-128",
+    "stageId": ["Asia_area5"],
+    "kanji": "柔",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ジュウ",
+      "ニュウ"
+    ],
+    "kunyomi": [
+      "やわ"
+    ],
+    "meaning": "やわらかい。力が加わっても、形が変わりやすいこと。",
+    "exampleSentence": "赤ちゃんの手は、とても柔らかく（やわらかく）、触れると心が和む。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-129",
+    "stageId": ["Asia_area5"],
+    "kanji": "獣",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ジュウ"
+    ],
+    "kunyomi": [
+      "けもの"
+    ],
+    "meaning": "けもの。人間以外の、四つ足の動物。",
+    "exampleSentence": "森の奥深くには、まだ人間が足を踏み入れたことのない、珍しい獣（けもの）が生息している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-130",
+    "stageId": ["Asia_area5"],
+    "kanji": "瞬",
+    "grade": 7,
+    "strokes": 18,
+    "onyomi": [
+      "シュン"
+    ],
+    "kunyomi": [
+      "またた"
+    ],
+    "meaning": "またたく。ごく短い時間。",
+    "exampleSentence": "彼は、瞬く（またたく）間に問題を解決し、周囲の人々を驚かせた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-131",
+    "stageId": ["Asia_area5"],
+    "kanji": "旬",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "ジュン",
+      "シュン"
+    ],
+    "kunyomi": [],
+    "meaning": "しゅん。その季節に、最も美味しくなる時期。",
+    "exampleSentence": "この魚は、冬が旬（しゅん）なので、今が一番美味しく食べられる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-132",
+    "stageId": ["Asia_area5"],
+    "kanji": "巡",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "ジュン"
+    ],
+    "kunyomi": [
+      "めぐ"
+    ],
+    "meaning": "めぐる。ある場所を、ぐるりと回ること。",
+    "exampleSentence": "彼は、世界中の美術館を巡り（めぐり）、様々な芸術作品に触れる旅をしている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-133",
+    "stageId": ["Asia_area5"],
+    "kanji": "盾",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ジュン"
+    ],
+    "kunyomi": [
+      "たて"
+    ],
+    "meaning": "たて。身を守るための道具。",
+    "exampleSentence": "彼は、どんな批判にも屈せず、自分の信念を盾（たて）として、堂々と意見を述べた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-134",
+    "stageId": ["Asia_area5"],
+    "kanji": "召",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "め"
+    ],
+    "meaning": "めす。人を呼び寄せること。",
+    "exampleSentence": "王様は、家来を召し（めし）て、重要な命令を下した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-135",
+    "stageId": ["Asia_area5"],
+    "kanji": "床",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "とこ",
+      "ゆか"
+    ],
+    "meaning": "いえのゆか。また、ねるためのとこ。",
+  "exampleSentence": "部屋の床（ゆか）をぞうきんでふく。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+      "id": "g7-136",
+    "stageId": ["Asia_area5"],
+    "kanji": "沼",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "ぬま"
+    ],
+    "meaning": "ぬま。水がたまって、草が生い茂った場所。",
+    "exampleSentence": "この沼（ぬま）には、珍しい水生植物や、魚がたくさん生息している。",
+    "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-137",
+    "stageId": ["Asia_area5"],
+    "kanji": "称",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [],
+    "meaning": "となえる。名前を呼ぶこと。",
+    "exampleSentence": "彼は、世界チャンピオンの栄誉を称え（たたえ）、多くの人々から祝福された。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-138",
+    "stageId": ["Asia_area5"],
+    "kanji": "紹",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [],
+    "meaning": "",
+    "exampleSentence": "",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-139",
+    "stageId": ["Asia_area5"],
+    "kanji": "詳",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "くわ"
+    ],
+    "meaning": "くわしい。物事の細部まで、よく知っていること。",
+    "exampleSentence": "この事件の詳しい（くわしい）状況は、まだ警察によって調査中だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-140",
+    "stageId": ["Asia_area5"],
+    "kanji": "丈",
+    "grade": 7,
+    "strokes": 3,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [
+      "たけ"
+    ],
+    "meaning": "たけ。物の長さ。",
+    "exampleSentence": "彼は、身長がとても高く、バスケットボールの選手として活躍している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-141",
+    "stageId": ["Asia_area5"],
+    "kanji": "畳",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ジョウ"
+    ],
+    "kunyomi": [
+      "たたみ",
+      "たた"
+    ],
+    "meaning": "たたみ。い草で編んだ、日本の伝統的な敷物。",
+    "exampleSentence": "和室には、畳（たたみ）が敷かれており、独特の香りが漂っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-142",
+    "stageId": ["Asia_area5"],
+    "kanji": "殖",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ショク"
+    ],
+    "kunyomi": [
+      "ふ"
+    ],
+    "meaning": "ふえる。数や量が増えること。",
+    "exampleSentence": "この会社は、新しい技術を開発し、資産を増殖（ぞうしょく）させている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-143",
+    "stageId": ["Asia_area5"],
+    "kanji": "飾",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ショク"
+    ],
+    "kunyomi": [
+      "かざ"
+    ],
+    "meaning": "美しくみせるためにつけるもの。かざる。",
+  "exampleSentence": "クリスマスツリーに飾（かざ）りをつける。"
+  },
+  {
+    "id": "g7-144",
+    "stageId": ["Asia_area5"],
+    "kanji": "触",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ショク"
+    ],
+    "kunyomi": [
+      "ふ",
+      "さわ"
+    ],
+    "meaning": "さわること。ふれること。",
+  "exampleSentence": "展示品に手で触（ふ）れないでください。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-145",
+    "stageId": ["Asia_area5"],
+    "kanji": "侵",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "おか"
+    ],
+    "meaning": "他人の領分に無理やり入りこむこと。",
+  "exampleSentence": "プライバシーを侵（しん）害する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-146",
+    "stageId": ["Asia_area5"],
+    "kanji": "振",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "ふ"
+    ],
+    "meaning": "ふるう。手や体を、勢いよく動かすこと。",
+    "exampleSentence": "彼は、試合の終盤で、バットを大きく振り（ふり）、逆転ホームランを放った。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-147",
+    "stageId": ["Asia_area5"],
+    "kanji": "浸",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "ひた"
+    ],
+    "meaning": "ひたす。液体の中に、物を漬けること。",
+    "exampleSentence": "パンを牛乳に浸し（ひたし）てから焼くと、ふんわりとしたフレンチトーストになる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-148",
+    "stageId": ["Asia_area5"],
+    "kanji": "寝",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "ね"
+    ],
+    "meaning": "ねる。横になって、体を休めること。",
+    "exampleSentence": "彼は、疲れていたので、ベッドに入るとすぐに寝て（ねて）しまった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  
+  {
+    "id": "g7-149",
+    "stageId": ["Asia_area5"],
+    "kanji": "慎",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "つつし"
+    ],
+    "meaning": "つつしむ。言動を、控えめにすること。",
+    "exampleSentence": "公の場では、言葉遣いや態度を慎む（つつしむ）ことが、社会人としてのマナーだ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-150",
+    "stageId": ["Asia_area5"],
+    "kanji": "震",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "ふる"
+    ],
+    "meaning": "ふるえる。体が、小刻みに揺れること。",
+    "exampleSentence": "地震の揺れで、建物全体が大きく震え（ふるえ）、恐怖を感じた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-151",
+    "stageId": ["Asia_area6"],
+    "kanji": "薪",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "たきぎ"
+    ],
+    "meaning": "燃料にするための木。たきぎ。",
+  "exampleSentence": "お風呂をわかすために薪（まき）をわる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  
+  {
+    "id": "g7-152",
+    "stageId": ["Asia_area6"],
+    "kanji": "尽",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "ジン"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つくす。自分の力を、すべて出し切ること。",
+    "exampleSentence": "彼は、病気の母のために、献身的に尽くし（つくし）、看病を続けた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-153",
+    "stageId": ["Asia_area6"],
+    "kanji": "陣",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ジン"
+    ],
+    "kunyomi": [],
+    "meaning": "じん。軍隊が、戦いのために、配置につくこと。",
+    "exampleSentence": "敵の攻撃に備え、兵士たちは、それぞれの陣地（じんち）に身を潜めた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-154",
+    "stageId": ["Asia_area6"],
+    "kanji": "尋",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ジン"
+    ],
+    "kunyomi": [
+      "たず"
+    ],
+    "meaning": "たずねる。知らないことを、人に聞くこと。",
+    "exampleSentence": "彼は、道に迷ったので、近くにいた人に道を尋ね（たずね）た。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-155",
+    "stageId": ["Asia_area6"],
+    "kanji": "吹",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "スイ"
+    ],
+    "kunyomi": [
+      "ふ"
+    ],
+    "meaning": "ふく。口から息を出すこと。",
+    "exampleSentence": "風が強く吹き（ふき）、木の葉が舞い上がった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-156",
+    "stageId": ["Asia_area6"],
+    "kanji": "是",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ゼ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぜ。正しいこと。",
+    "exampleSentence": "彼は、常に是々非々（ぜぜひひ）の態度で物事に臨み、公平な判断を下す。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-157",
+    "stageId": ["Asia_area6"],
+    "kanji": "姓",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "セイ",
+      "ショウ"
+    ],
+    "kunyomi": [],
+    "meaning": "せい。家族の、代々受け継がれる名前。",
+    "exampleSentence": "彼の姓（せい）は田中だが、下の名前は知らない。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-158",
+    "stageId": ["Asia_area6"],
+    "kanji": "征",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "セイ"
+    ],
+    "kunyomi": [],
+    "meaning": "せい。敵を攻め滅ぼすこと。",
+    "exampleSentence": "歴史の教科書には、昔の将軍が、遠くの国を征服（せいふく）した話が載っている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-159",
+    "stageId": ["Asia_area6"],
+    "kanji": "跡",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [
+      "あと"
+    ],
+    "meaning": "あと。物が通ったしるし。",
+    "exampleSentence": "雪の上に残された足跡（あしあと）をたどると、森の奥へと続いていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-160",
+    "stageId": ["Asia_area6"],
+    "kanji": "占",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "し",
+      "うらな"
+    ],
+    "meaning": "しめる。ある場所を、自分のものにすること。",
+    "exampleSentence": "彼は、会議の場で、常に主導権を占め（しめ）、議論をリードする。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-161",
+    "stageId": ["Asia_area6"],
+    "kanji": "扇",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "おうぎ"
+    ],
+    "meaning": "おうぎ。風を起こすための道具。",
+    "exampleSentence": "夏の暑い日には、扇子（せんす）を使って、涼しい風を送る。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-162",
+    "stageId": ["Asia_area6"],
+    "kanji": "鮮",
+    "grade": 7,
+    "strokes": 17,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "あざ"
+    ],
+    "meaning": "あざやか。色が、はっきりしていて、美しいこと。",
+    "exampleSentence": "彼女が描いた絵は、鮮やか（あざやか）な色彩で、見る人を魅了する。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-163",
+    "stageId": ["Asia_area6"],
+    "kanji": "訴",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ソ"
+    ],
+    "kunyomi": [
+      "うった"
+    ],
+    "meaning": "うったえる。自分の意見や、苦しみを、人に伝えること。",
+    "exampleSentence": "彼は、不正な行為に対して、勇気を持って裁判所に訴え（うったえ）た。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-164",
+    "stageId": ["Asia_area6"],
+    "kanji": "僧",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [],
+    "meaning": "そう。仏教の教えを学び、修行する人。",
+    "exampleSentence": "お寺には、毎日、多くの僧侶（そうりょ）が修行に励んでいる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-165",
+    "stageId": ["Asia_area6"],
+    "kanji": "燥",
+    "grade": 7,
+    "strokes": 17,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [],
+    "meaning": "かわく。水気がなくなること。",
+    "exampleSentence": "冬の乾燥（かんそう）した季節は、肌が荒れやすいので、保湿ケアが大切だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-166",
+    "stageId": ["Asia_area6"],
+    "kanji": "騒",
+    "grade": 7,
+    "strokes": 18,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "さわ"
+    ],
+    "meaning": "さわぐ。声を出して、にぎやかにすること。",
+    "exampleSentence": "夜遅くまで騒いで（さわいで）いると、近所迷惑になるので注意しよう。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-167",
+    "stageId": ["Asia_area6"],
+    "kanji": "贈",
+    "grade": 7,
+    "strokes": 18,
+    "onyomi": [
+      "ゾウ",
+      "ソウ"
+    ],
+    "kunyomi": [
+      "おく"
+    ],
+    "meaning": "おくる。人に、物や気持ちを差し出すこと。",
+    "exampleSentence": "誕生日に、友達から素敵なプレゼントを贈られ（おくら）て、とても嬉しかった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-168",
+    "stageId": ["Asia_area6"],
+    "kanji": "即",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "ソク"
+    ],
+    "kunyomi": [],
+    "meaning": "すぐ。時間をおかずに、すぐに。",
+    "exampleSentence": "彼は、問題が発生すると、即座（そくざ）に解決策を見つけ、実行する。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-169",
+    "stageId": ["Asia_area6"],
+    "kanji": "俗",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ゾク"
+    ],
+    "kunyomi": [],
+    "meaning": "ぞく。世間一般の、ありふれたこと。",
+    "exampleSentence": "この絵は、芸術的な価値は低いが、大衆に人気のある俗悪（ぞくあく）な作品だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-170",
+    "stageId": ["Asia_area6"],
+    "kanji": "耐",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "た"
+    ],
+    "meaning": "たえる。苦しみや困難に、じっと我慢すること。",
+    "exampleSentence": "彼は、どんな厳しい訓練にも耐え（たえ）、ついに目標を達成した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-171",
+    "stageId": ["Asia_area6"],
+    "kanji": "替",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かえる。古いものと、新しいものを交換すること。",
+    "exampleSentence": "電車の中で、席を替えて（かえて）もらい、窓際の席に座った。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-172",
+    "stageId": ["Asia_area6"],
+    "kanji": "沢",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "タク"
+    ],
+    "kunyomi": [
+      "さわ"
+    ],
+    "meaning": "さわ。山の中の、水が流れる場所。",
+    "exampleSentence": "夏の暑い日には、沢（さわ）の冷たい水に足を浸すと、とても気持ちがいい。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-173",
+    "stageId": ["Asia_area6"],
+    "kanji": "拓",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "タク"
+    ],
+    "kunyomi": [],
+    "meaning": "ひらく。新しい土地を切り開くこと。",
+    "exampleSentence": "彼は、未開の地を拓き（ひらき）、新しい文明を築いた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-174",
+    "stageId": ["Asia_area6"],
+    "kanji": "濁",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ダク"
+    ],
+    "kunyomi": [
+      "にご"
+    ],
+    "meaning": "にごる。水などが、澄んでいないこと。",
+    "exampleSentence": "大雨の後、川の水が濁り（にごり）、魚の姿が見えなくなった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-175",
+    "stageId": ["Asia_area6"],
+    "kanji": "脱",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "ダツ"
+    ],
+    "kunyomi": [
+      "ぬ"
+    ],
+    "meaning": "ぬぐ。身につけているものを、取り去ること。",
+    "exampleSentence": "彼は、疲れていたので、服を脱ぐ（ぬぐ）とすぐにベッドに横になった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-176",
+    "stageId": ["Asia_area6"],
+    "kanji": "丹",
+    "grade": 7,
+    "strokes": 4,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [],
+    "meaning": "たん。赤色の顔料。",
+    "exampleSentence": "この絵は、丹念（たんねん）に描かれており、作者の情熱が伝わってくる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-177",
+    "stageId": ["Asia_area6"],
+    "kanji": "淡",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [
+      "あわ"
+    ],
+    "meaning": "あわい。色が薄いこと。味が薄いこと。",
+    "exampleSentence": "彼女は、淡い（あわい）ピンク色のドレスを身につけ、パーティー会場に現れた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-178",
+    "stageId": ["Asia_area6"],
+    "kanji": "嘆",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [
+      "なげ"
+    ],
+    "meaning": "なげく。悲しみや、残念な気持ちを表すこと。",
+    "exampleSentence": "彼は、自分の不甲斐なさに、深く嘆き（なげき）、涙を流した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-179",
+    "stageId": ["Asia_area6"],
+    "kanji": "端",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [
+      "はし",
+      "は",
+      "はた"
+    ],
+    "meaning": "はし。物の、いちばん端の部分。",
+    "exampleSentence": "彼は、テーブルの端（はし）に座り、静かに本を読んでいた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-180",
+    "stageId": ["Asia_area7"],
+    "kanji": "弾",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ダン"
+    ],
+    "kunyomi": [
+      "ひ",
+      "はず",
+      "たま"
+    ],
+    "meaning": "ひく。弦楽器を演奏すること。",
+    "exampleSentence": "彼は、ギターを弾き（ひき）ながら、美しい歌声を披露した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-181",
+    "stageId": ["Asia_area7"],
+    "kanji": "恥",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "チ"
+    ],
+    "kunyomi": [
+      "は"
+    ],
+    "meaning": "はじる。自分の行いが、人に知られて、きまりが悪いこと。",
+    "exampleSentence": "彼は、自分の失敗を恥じ（はじる）て、顔を赤くした。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-182",
+    "stageId": ["Asia_area7"],
+    "kanji": "致",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "チ"
+    ],
+    "kunyomi": [
+      "いた"
+    ],
+    "meaning": "いたす。ある状態に、到達させること。",
+    "exampleSentence": "彼は、目標達成のために、全力を尽くし、ついに目的を達成した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-183",
+    "stageId": ["Asia_area7"],
+    "kanji": "遅",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "チ"
+    ],
+    "kunyomi": [
+      "おく",
+      "おそ"
+    ],
+    "meaning": "おくれる。時間が、予定より遅れること。",
+    "exampleSentence": "電車が遅れ（おくれ）てしまい、約束の時間に間に合わなかった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-184",
+    "stageId": ["Asia_area7"],
+    "kanji": "蓄",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "チク"
+    ],
+    "kunyomi": [
+      "たくわ"
+    ],
+    "meaning": "たくわえる。物を、ためておくこと。",
+    "exampleSentence": "彼は、将来のために、少しずつお金を蓄え（たくわえ）ている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-185",
+    "stageId": ["Asia_area7"],
+    "kanji": "跳",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "は",
+      "と"
+    ],
+    "meaning": "はねる。地面から、勢いよく飛び上がること。",
+    "exampleSentence": "彼は、ハードルを軽々と跳び（とび）越え、観客を沸かせた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-186",
+    "stageId": ["Asia_area7"],
+    "kanji": "徴",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ちょう。物事の、しるし。",
+    "exampleSentence": "この現象は、地球温暖化の明確な兆候（ちょうこう）であると、科学者は指摘している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-187",
+    "stageId": ["Asia_area7"],
+    "kanji": "澄",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "す"
+    ],
+    "meaning": "すむ。水などが、にごりがなく、きれいなこと。",
+    "exampleSentence": "湖の水は、驚くほど澄んで（すんで）おり、底まで見通すことができた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-188",
+    "stageId": ["Asia_area7"],
+    "kanji": "沈",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "チン"
+    ],
+    "kunyomi": [
+      "しず"
+    ],
+    "meaning": "しずむ。水の中に、物が沈むこと。",
+    "exampleSentence": "夕日が水平線に沈み（しずみ）、あたりは茜色に染まった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-189",
+    "stageId": ["Asia_area7"],
+    "kanji": "珍",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "チン"
+    ],
+    "kunyomi": [
+      "めずら"
+    ],
+    "meaning": "めずらしい。普通では、あまり見かけないこと。",
+    "exampleSentence": "彼は、世界中を旅して、珍しい（めずらしい）切手を集めている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-190",
+    "stageId": ["Asia_area7"],
+    "kanji": "抵",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [],
+    "meaning": "てい。物事に、さからうこと。",
+    "exampleSentence": "彼は、どんな困難にも抵抗（ていこう）することなく、自分の信念を貫き通した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-191",
+    "stageId": ["Asia_area7"],
+    "kanji": "堤",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [
+      "つつみ"
+    ],
+    "meaning": "つつみ。水があふれないように、土を盛り上げたもの。",
+    "exampleSentence": "大雨で川の水位が上昇し、堤防（ていぼう）が決壊する危険性がある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-192",
+    "stageId": ["Asia_area7"],
+    "kanji": "摘",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "テキ"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つむ。草花などを、手で摘み取ること。",
+    "exampleSentence": "彼女は、庭で摘んだ（つんだ）ばかりのバラの花を、花瓶に飾った。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-193",
+    "stageId": ["Asia_area7"],
+    "kanji": "滴",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "テキ"
+    ],
+    "kunyomi": [
+      "しずく",
+      "したた"
+    ],
+    "meaning": "しずく。液体が、ぽたぽたと落ちる様子。",
+    "exampleSentence": "雨上がりの葉っぱには、たくさんの水滴（すいてき）が輝いていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-194",
+    "stageId": ["Asia_area7"],
+    "kanji": "添",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "テン"
+    ],
+    "kunyomi": [
+      "そ"
+    ],
+    "meaning": "そえる。あるものに、別のものを付け加えること。",
+    "exampleSentence": "彼は、手紙に感謝の気持ちを添え（そえ）て、先生に渡した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-195",
+    "stageId": ["Asia_area7"],
+    "kanji": "殿",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "デン",
+      "テン"
+    ],
+    "kunyomi": [
+      "との",
+      "どの"
+    ],
+    "meaning": "との。昔の、身分の高い人の敬称。",
+    "exampleSentence": "この城は、昔、殿様（とのさま）が住んでいた場所として知られている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-196",
+    "stageId": ["Asia_area7"],
+    "kanji": "吐",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [
+      "は"
+    ],
+    "meaning": "はく。口から、息や物を出すこと。",
+    "exampleSentence": "彼は、緊張のあまり、思わず深いため息を吐い（はき）出した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-197",
+    "stageId": ["Asia_area7"],
+    "kanji": "途",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [],
+    "meaning": "と。道。物事の途中。",
+    "exampleSentence": "彼は、目標達成のために、どんな困難な道のりでも、途中で諦めない。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-198",
+    "stageId": ["Asia_area7"],
+    "kanji": "渡",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [
+      "わた"
+    ],
+    "meaning": "わたる。ある場所から、別の場所へ移動すること。",
+    "exampleSentence": "彼は、危険な川を無事に渡り（わたり）、対岸にたどり着いた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-199",
+    "stageId": ["Asia_area7"],
+    "kanji": "奴",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "ド"
+    ],
+    "kunyomi": [],
+    "meaning": "やっこ。昔の、身分の低い男。",
+    "exampleSentence": "彼は、自分の意見を持たず、他人の言いなりになる奴隷（どれい）のような存在だった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-200",
+    "stageId": ["Asia_area7"],
+    "kanji": "怒",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ド"
+    ],
+    "kunyomi": [
+      "いか",
+      "おこ"
+    ],
+    "meaning": "いかる。腹を立てること。",
+    "exampleSentence": "彼は、不正な行為に対して、激しい怒り（いかり）を露わにした。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-201",
+    "stageId": ["Asia_area7"],
+    "kanji": "到",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [],
+    "meaning": "いたる。ある場所や状態に、たどり着くこと。",
+    "exampleSentence": "彼は、どんな困難な状況でも、目標達成のために最後まで努力し、ついに到達（とうたつ）した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-202",
+    "stageId": ["Asia_area7"],
+    "kanji": "逃",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "に",
+      "のが"
+    ],
+    "meaning": "にげる。危険な場所から、離れること。",
+    "exampleSentence": "彼は、追っ手から逃れる（のがれる）ために、森の奥深くへと姿を消した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-203",
+    "stageId": ["Asia_area7"],
+    "kanji": "倒",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "たお"
+    ],
+    "meaning": "たおれる。立っていたものが、横になること。",
+    "exampleSentence": "彼は、疲労困憊で、その場に倒れ（たおれ）込んでしまった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-204",
+    "stageId": ["Asia_area7"],
+    "kanji": "唐",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "から"
+    ],
+    "meaning": "から。中国のこと。",
+    "exampleSentence": "昔の日本は、唐（から）から多くの文化や技術を取り入れていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-205",
+    "stageId": ["Asia_area7"],
+    "kanji": "桃",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "もも"
+    ],
+    "meaning": "もも。春にピンク色の花を咲かせ、夏に甘い実をつける木。",
+    "exampleSentence": "桃（もも）の節句には、女の子の健やかな成長を願って、桃の花を飾る。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-206",
+    "stageId": ["Asia_area7"],
+    "kanji": "透",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "す"
+    ],
+    "meaning": "すきとおる。向こう側が、はっきりと見えること。",
+    "exampleSentence": "彼女の肌は、透き通る（すきとおる）ように白く、とても美しかった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-207",
+    "stageId": ["Asia_area7"],
+    "kanji": "盗",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "ぬす"
+    ],
+    "meaning": "ぬすむ。人のものを、こっそり取ること。",
+    "exampleSentence": "彼は、他人のアイデアを盗み（ぬすみ）、自分のものとして発表した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-208",
+    "stageId": ["Asia_area7"],
+    "kanji": "塔",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [],
+    "meaning": "とう。高くそびえる建物。",
+    "exampleSentence": "この町には、昔から人々に親しまれている、美しい五重の塔（とう）がある。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-209",
+    "stageId": ["Asia_area7"],
+    "kanji": "稲",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "いね",
+      "いな"
+    ],
+    "meaning": "いね。米のなる植物。",
+    "exampleSentence": "秋になると、黄金色に実った稲穂（いなほ）が、風に揺れる美しい景色が広がる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-210",
+    "stageId": ["Asia_area7"]       ,
+    "kanji": "踏",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "ふ"
+    ],
+    "meaning": "ふむ。足で、物を踏みつけること。",
+    "exampleSentence": "彼は、一歩一歩、大地をしっかりと踏みしめ（ふみしめ）ながら、山頂を目指した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-211",
+    "stageId": ["Asia_area8"],
+    "kanji": "闘",
+    "grade": 7,
+    "strokes": 18,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "たたか"
+    ],
+    "meaning": "たたかう。相手と、力や技を競い合うこと。",
+    "exampleSentence": "彼は、病気と闘い（たたかい）ながらも、決して希望を捨てなかった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-212",
+    "stageId": ["Asia_area8"],
+    "kanji": "胴",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ドウ"
+    ],
+    "kunyomi": [],
+    "meaning": "どう。体の、頭と手足を除いた部分。",
+    "exampleSentence": "彼は、柔道の試合で、相手の胴（どう）を狙って、見事な一本背負いを決めた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-213",
+    "stageId": ["Asia_area8"],
+    "kanji": "峠",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [],
+    "kunyomi": [
+      "とうげ"
+    ],
+    "meaning": "とうげ。山道の、いちばん高い場所。",
+    "exampleSentence": "彼は、いくつもの困難な峠（とうげ）を越え、ついに目標を達成した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-214",
+    "stageId": ["Asia_area8"],
+    "kanji": "突",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "トツ"
+    ],
+    "kunyomi": [
+      "つ"
+    ],
+    "meaning": "つく。とがったもので、勢いよく突き刺すこと。",
+    "exampleSentence": "彼は、突然の質問に、思わず言葉に詰まり、沈黙が続いた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-215",
+    "stageId": ["Asia_area8"],
+    "kanji": "鈍",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ドン"
+    ],
+    "kunyomi": [
+      "にぶ"
+    ],
+    "meaning": "にぶい。切れ味が悪いこと。反応が遅いこと。",
+    "exampleSentence": "彼は、鈍い（にぶい）音を立てて、地面に倒れ込んだ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-216",
+    "stageId": ["Asia_area8"],
+    "kanji": "曇",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ドン"
+    ],
+    "kunyomi": [
+      "くも"
+    ],
+    "meaning": "",
+    "exampleSentence": "",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-217",
+    "stageId": ["Asia_area8"],
+    "kanji": "弐",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "ニ"
+    ],
+    "kunyomi": [],
+    "meaning": "に。漢数字の「二」の、間違いを防ぐための書き方。",
+    "exampleSentence": "契約書には、金額が弐（に）百万円と、はっきりと記載されていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-218",
+    "stageId": ["Asia_area8"],
+    "kanji": "悩",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ノウ"
+    ],
+    "kunyomi": [
+      "なや"
+    ],
+    "meaning": "なやむ。どうしていいか分からず、苦しむこと。",
+    "exampleSentence": "彼は、将来の進路について、深く悩み（なやみ）、なかなか答えが出せないでいる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-219",
+    "stageId": ["Asia_area8"],
+    "kanji": "濃",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ノウ"
+    ],
+    "kunyomi": [
+      "こ"
+    ],
+    "meaning": "こい。色や味が、はっきりしていること。",
+    "exampleSentence": "彼女は、濃い（こい）コーヒーを飲みながら、夜遅くまで勉強を続けた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-220",
+    "stageId": ["Asia_area8"],
+    "kanji": "杯",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ハイ"
+    ],
+    "kunyomi": [
+      "さかずき"
+    ],
+    "meaning": "さかずき。酒を飲むための小さな器。",
+    "exampleSentence": "彼は、勝利を祝って、仲間と杯（さかずき）を交わした。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-221",
+    "stageId": ["Asia_area8"],
+    "kanji": "輩",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "ハイ"
+    ],
+    "kunyomi": [],
+    "meaning": "はい。同じ仲間。",
+    "exampleSentence": "彼は、先輩（せんぱい）から多くのことを学び、尊敬している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-222",
+    "stageId": ["Asia_area8"],
+    "kanji": "拍",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ハク",
+      "ヒョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "はく。手を打つこと。",
+    "exampleSentence": "観客は、彼の素晴らしい演奏に、惜しみない拍手（はくしゅ）を送った。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-223",
+    "stageId": ["Asia_area8"],
+    "kanji": "泊",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ハク"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "meaning": "とまる。旅の途中で、宿に泊まること。",
+    "exampleSentence": "彼は、出張で、一週間ホテルに泊まる（とまる）予定だ。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-224",
+    "stageId": ["Asia_area8"],
+    "kanji": "追",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ハク"
+    ],
+    "kunyomi": [
+      "せま"
+    ],
+    "meaning": "おいつく。後ろから追いかけること。",
+    "exampleSentence": "彼は、必死に前を走るランナーを追い（おい）かけ、ついに追いついた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-225",
+    "stageId": ["Asia_area8"],
+    "kanji": "薄",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ハク"
+    ],
+    "kunyomi": [
+      "うす"
+    ],
+    "meaning": "うすい。厚さが少ないこと。",
+    "exampleSentence": "彼女は、薄い（うすい）化粧で、自然な美しさを引き出している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-226",
+    "stageId": ["Asia_area8"],
+    "kanji": "爆",
+    "grade": 7,
+    "strokes": 19,
+    "onyomi": [
+      "バク"
+    ],
+    "kunyomi": [],
+    "meaning": "ばく。物が、勢いよく破裂すること。",
+    "exampleSentence": "工場で、ガス爆発（ばくはつ）が発生し、大きな被害が出た。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-227",
+    "stageId": ["Asia_area8"],
+    "kanji": "髪",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "ハツ"
+    ],
+    "kunyomi": [
+      "かみ"
+    ],
+    "meaning": "かみ。頭に生えている毛。",
+    "exampleSentence": "彼女は、長い髪（かみ）をなびかせながら、颯爽と歩いていった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-228",
+    "stageId": ["Asia_area8"],
+    "kanji": "抜",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "バツ"
+    ],
+    "kunyomi": [
+      "ぬ"
+    ],
+    "meaning": "ぬく。引き抜くこと。",
+    "exampleSentence": "彼は、歯医者で虫歯を抜い（ぬい）てもらい、痛みがなくなった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-229",
+    "stageId": ["Asia_area8"],
+    "kanji": "罰",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "バツ",
+      "バチ"
+    ],
+    "kunyomi": [],
+    "meaning": "ばつ。悪い行いに対して、与えられるもの。",
+    "exampleSentence": "彼は、交通ルールを破ったため、罰金（ばっきん）を支払うことになった。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-230",
+    "stageId": ["Asia_area8"],
+    "kanji": "般",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。一般的なこと。",
+    "exampleSentence": "この問題は、一般（いっぱん）的な知識があれば、誰でも解ける。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+
+  {
+    "id": "g7-231",
+    "stageId": ["Asia_area8"],
+    "kanji": "販",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。物を売ること。",
+    "exampleSentence": "彼は、インターネットを使って、自分の作った商品を販売（はんばい）している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-232",
+    "stageId": ["Asia_area8"],
+    "kanji": "搬",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。物を運ぶこと。",
+    "exampleSentence": "引越し業者に、重い家具の運搬（うんぱん）を依頼した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-233",
+    "stageId": ["Asia_area8"],
+    "kanji": "範",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。手本となること。",
+    "exampleSentence": "彼は、常に模範（もはん）的な行動を心がけ、後輩たちの手本となっている。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-234",
+    "stageId": ["Asia_area8"],
+    "kanji": "繁",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "しげる。草木が、たくさん生い茂ること。",
+    "exampleSentence": "この森は、手入れがされていないため、雑草が繁茂（はんも）している。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-235",
+    "stageId": ["Asia_area8"]       ,
+    "kanji": "盤",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "バン"
+    ],
+    "kunyomi": [],
+    "meaning": "ばん。平らな板。",
+    "exampleSentence": "彼は、将棋盤（しょうぎばん）に向かい、真剣な表情で次の手を考えていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-236",
+    "stageId": ["Asia_area8"],
+    "kanji": "彼",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ヒ"
+    ],
+    "kunyomi": [
+      "かれ",
+      "かの"
+    ],
+    "meaning": "かれ。あの人。",
+    "exampleSentence": "彼は、いつも冷静沈着で、どんな状況でも慌てない。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-237",
+    "stageId": ["Asia_area8"],
+    "kanji": "疲",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ヒ"
+    ],
+    "kunyomi": [
+      "つか"
+    ],
+    "meaning": "つかれる。体や心が、活動によって、力を失うこと。",
+    "exampleSentence": "彼は、一日中働き詰めだったので、とても疲れ（つかれ）ていた。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-238",
+    "stageId": ["Asia_area8"],
+    "kanji": "被",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ヒ"
+    ],
+    "kunyomi": [
+      "こうむ"
+    ],
+    "meaning": "こうむる。ある物事を、身に受けること。",
+    "exampleSentence": "この地域は、台風によって甚大な被害（ひがい）を被った（こうむった）。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-239",
+    "stageId": ["Asia_area8"],
+    "kanji": "避",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ヒ"
+    ],
+    "kunyomi": [
+      "さ"
+    ],
+    "meaning": "さける。危険なものから、遠ざかること。",
+    "exampleSentence": "彼は、人との争いを避け（さけ）、常に平和的な解決を望んでいる。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-240",
+    "stageId": ["Asia_area8"],
+    "kanji": "尾",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "ビ"
+    ],
+    "kunyomi": [
+      "お"
+    ],
+    "meaning": "お。動物の体の、後ろに伸びた部分。",
+    "exampleSentence": "犬は、嬉しいときに、しっぽを振って、感情を表現する。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-241",
+    "stageId": ["Asia_area9"],
+    "kanji": "微",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ビ"
+    ],
+    "kunyomi": [],
+    "meaning": "かすか。わずかなこと。",
+    "exampleSentence": "彼は、遠くから聞こえる微（かすか）な音にも、敏感に反応した。",
+    "continent": "アメリカ大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-242",
+    "stageId": ["Asia_area9"],
+    "kanji": "匹",
+    "grade": 7,
+    "strokes": 4,
+    "onyomi": [
+      "ヒツ"
+    ],
+    "kunyomi": [
+      "ひき"
+    ],
+    "meaning": "動物などをかぞえる語。",
+  "exampleSentence": "犬が三匹（さんぴき）いる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-243",
+    "stageId": ["Asia_area9"],
+    "kanji": "描",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "ビョウ"
+    ],
+    "kunyomi": [
+      "えが",
+      "か"
+    ],
+    "meaning": "絵や図をかく。心に思い浮かべること。",
+  "exampleSentence": "夢に描（えが）いた通りの家。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-244",
+    "stageId": ["Asia_area9"],
+    "kanji": "浜",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ヒン"
+    ],
+    "kunyomi": [
+      "はま"
+    ],
+    "meaning": "海や湖の、岸べの平らな所。",
+  "exampleSentence": "浜（はま）辺で貝がらを拾った。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-245",
+    "stageId": ["Asia_area9"],
+    "kanji": "敏",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ビン"
+    ],
+    "kunyomi": [],
+    "meaning": "頭の働きや動作がはやいこと。さとい。",
+  "exampleSentence": "猫は敏（びん）捷な動きで獲物を捕る。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-246",
+    "stageId": ["Asia_area9"],
+    "kanji": "怖",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [
+      "こわ"
+    ],
+    "meaning": "おそろしいと感じること。こわい。",
+  "exampleSentence": "夜中の一人歩きは怖（こわ）い。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-247",
+    "stageId": ["Asia_area9"],
+    "kanji": "浮",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [
+      "う"
+    ],
+    "meaning": "水面などにうかぶ。心に思いあがること。",
+  "exampleSentence": "良い考えが心に浮（う）かんだ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-248",
+    "stageId": ["Asia_area9"],
+    "kanji": "普",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [],
+    "meaning": "ひろくゆきわたること。ありふれていること。",
+  "exampleSentence": "休みの日は普（ふ）通に家で過ごす。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-249",
+    "stageId": ["Asia_area9"],
+    "kanji": "腐",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [
+      "くさ"
+    ],
+    "meaning": "物がくさること。いたんでだめになること。",
+  "exampleSentence": "夏の生ごみは腐（くさ）りやすい。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-250",
+    "stageId": ["Asia_area9"],
+    "kanji": "敷",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [
+      "し"
+    ],
+    "meaning": "一面にひろげること。ひろくゆきわたらせる。",
+  "exampleSentence": "客のために布（ふ）団を敷（し）く。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-251",
+    "stageId": ["Asia_area9"],
+    "kanji": "膚",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [],
+    "meaning": "からだをおおうかわ。はだ。",
+  "exampleSentence": "冬は皮（ひ）膚（ふ）が乾燥しやすい。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-252",
+    "stageId": ["Asia_area9"],
+    "kanji": "賦",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [],
+    "meaning": "割り当てること。年貢などを取り立てること。",
+  "exampleSentence": "生まれつきの天（てん）賦（ぷ）の才。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-253",
+    "stageId": ["Asia_area9"],
+    "kanji": "舞",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "ブ"
+    ],
+    "kunyomi": [
+      "まい",
+      "ま"
+    ],
+    "meaning": "おどること。くるくる回るように飛ぶこと。",
+  "exampleSentence": "舞（ぶ）台の上でバレエをおどる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-254",
+    "stageId": ["Asia_area9"],
+    "kanji": "幅",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "フク"
+    ],
+    "kunyomi": [
+      "はば"
+    ],
+    "meaning": "横の長さ。はば。物事のひろがり。",
+  "exampleSentence": "値上げの幅（はば）が大きい。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-255",
+    "stageId": ["Asia_area9"],
+    "kanji": "払",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "フツ"
+    ],
+    "kunyomi": [
+      "はら"
+    ],
+    "meaning": "お金をわたすこと。また、手ではらってのけること。",
+  "exampleSentence": "お店で食事代を払（はら）う。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-256",
+    "stageId": ["Asia_area9"],
+    "kanji": "噴",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "フン"
+    ],
+    "kunyomi": [
+      "ふ"
+    ],
+    "meaning": "内部からいきおいよくふきだすこと。",
+  "exampleSentence": "公園の噴（ふん）水の前で待ち合わせる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-257",
+    "stageId": ["Asia_area9"],
+    "kanji": "柄",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ヘイ"
+    ],
+    "kunyomi": [
+      "がら",
+      "え"
+    ],
+    "meaning": "布などのもよう。道具の、手でにぎる部分。",
+  "exampleSentence": "花（はな）柄（がら）のワンピースを着る。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-258",
+    "stageId": ["Asia_area9"],
+    "kanji": "壁",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ヘキ"
+    ],
+    "kunyomi": [
+      "かべ"
+    ],
+    "meaning": "へやなどをしきるかべ。行く手をはばむもの。",
+  "exampleSentence": "困難の壁（かべ）を乗りこえる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-259",
+    "stageId": ["Asia_area9"],
+    "kanji": "捕",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ホ"
+    ],
+    "kunyomi": [
+      "と",
+      "つか"
+    ],
+    "meaning": "つかまえること。とらえること。",
+  "exampleSentence": "虫捕り網で蝶（ちょう）を捕（つか）まえる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-260",
+    "stageId": ["Asia_area9"],
+    "kanji": "舗",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "ホ"
+    ],
+    "kunyomi": [],
+    "meaning": "みせ。また、道にしきつめること。",
+  "exampleSentence": "新しい道路を舗（ほ）装する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-261",
+    "stageId": ["Asia_area9"],
+    "kanji": "抱",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "だ",
+      "いだ",
+      "かか"
+    ],
+    "meaning": "うででかかえること。心にもつこと。",
+  "exampleSentence": "大きな夢を胸に抱（いだ）く。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-262",
+    "stageId": ["Asia_area9"],
+    "kanji": "峰",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "みね"
+    ],
+    "meaning": "山のいちばん高い所。みね。",
+  "exampleSentence": "富士山の最（さい）高（こう）峰（ほう）に立つ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-263",
+    "stageId": ["Asia_area9"],
+    "kanji": "砲",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [],
+    "meaning": "大きな弾を撃ち出す武器。大砲。",
+  "exampleSentence": "野球で鉄（てっ）砲（ぽう）肩の選手が活躍する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-264",
+    "stageId": ["Asia_area9"],
+    "kanji": "忙",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [
+      "いそが"
+    ],
+    "meaning": "することが多くてひまがない。いそがしい。",
+  "exampleSentence": "毎日、宿題や部活で忙（いそが）しい。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-265",
+    "stageId": ["Asia_area9"],
+    "kanji": "坊",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "ボウ",
+      "ボッ"
+    ],
+    "kunyomi": [],
+    "meaning": "男の子。また、僧の住む所。",
+  "exampleSentence": "休みの日に朝寝（ね）坊（ぼう）する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-266",
+    "stageId": ["Asia_area9"],
+    "kanji": "肪",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [],
+    "meaning": "動物のからだにあるあぶら。",
+  "exampleSentence": "運動して体脂（しん）肪（ぼう）を燃やす。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-267",
+    "stageId": ["Asia_area9"],
+    "kanji": "冒",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [
+      "おか"
+    ],
+    "meaning": "危険を気にせず、思いきって行うこと。",
+  "exampleSentence": "仲間と未知の世界を冒（ぼう）険する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-268",
+    "stageId": ["Asia_area9"],
+    "kanji": "傍",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [
+      "かたわ"
+    ],
+    "meaning": "すぐ近く。そば。わき。",
+  "exampleSentence": "話の傍（ぼう）線部を要約する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-269",
+    "stageId": ["Asia_area9"],
+    "kanji": "帽",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [],
+    "meaning": "頭にかぶるもの。ぼうし。",
+  "exampleSentence": "日差しが強いので帽（ぼう）子をかぶる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-270",
+    "stageId": ["Asia_area9"],
+    "kanji": "凡",
+    "grade": 7,
+    "strokes": 3,
+    "onyomi": [
+      "ボン",
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "なみなみ。すぐれても劣ってもいないこと。",
+  "exampleSentence": "試合で凡（ぼん）ミスをしてしまった。"
+  },
+  {
+    "id": "g7-271",
+    "stageId": ["Asia_area10"],
+    "kanji": "盆",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ボン"
+    ],
+    "kunyomi": [],
+    "meaning": "平たくて浅い器。先祖の霊をまつる行事。",
+  "exampleSentence": "お盆（ぼん）には、田舎に帰省する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-272",
+    "stageId": ["Asia_area10"],
+    "kanji": "慢",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "マン"
+    ],
+    "kunyomi": [],
+    "meaning": "おこたること。いばること。あなどること。",
+  "exampleSentence": "自分の知識を自（じ）慢（まん）する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-273",
+    "stageId": ["Asia_area10"],
+    "kanji": "漫",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "マン"
+    ],
+    "kunyomi": [],
+    "meaning": "しまりがないこと。とりとめがないこと。",
+  "exampleSentence": "休みの日は一日中、漫（まん）画を読んでいた。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-274",
+    "stageId": ["Asia_area10"],
+    "kanji": "妙",
+    "grade": 7,
+    "strokes": 7,
+    "onyomi": [
+      "ミョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "何とも言えずすぐれていること。不思議なこと。",
+  "exampleSentence": "絶（ぜつ）妙（みょう）なタイミングで助けが来た。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-275",
+    "stageId": ["Asia_area10"],
+    "kanji": "眠",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ミン"
+    ],
+    "kunyomi": [
+      "ねむ"
+    ],
+    "meaning": "ねむること。ねむいこと。",
+  "exampleSentence": "授業中に眠（ねむ）くなってしまった。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-276",
+    "stageId": ["Asia_area10"],
+    "kanji": "矛",
+    "grade": 7,
+    "strokes": 5,
+    "onyomi": [
+      "ム"
+    ],
+    "kunyomi": [
+      "ほこ"
+    ],
+    "meaning": "長い柄の先に刃をつけた武器。ほこ。",
+  "exampleSentence": "彼の話は、矛（む）盾（じゅん）している。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-277",
+    "stageId": ["Asia_area10"],
+    "kanji": "霧",
+    "grade": 7,
+    "strokes": 19,
+    "onyomi": [
+      "ム"
+    ],
+    "kunyomi": [
+      "きり"
+    ],
+    "meaning": "地表近くに、こまかい水てきがただよう現象。",
+  "exampleSentence": "朝、深い霧（きり）で周りがよく見えない。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+
+
+  },
+  {
+    "id": "g7-278",
+    "stageId": ["Asia_area10"],
+    "kanji": "娘",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [],
+    "kunyomi": [
+      "むすめ"
+    ],
+    "meaning": "自分の女の子ども。むすめ。",
+  "exampleSentence": "一人（ひとり）娘（むすめ）を大切に育てる。",
+      "continent": "アジア大陸",
+        "originalGrade": 7,
+        "correctCount": 0,
+        "incorrectCount": 0,
+        "lastReviewDate": null,
+        "masteryLevel": 0,
+        "tags": []
+  },
+  {
+    "id": "g7-279",
+    "stageId": ["Asia_area10"],
+    "kanji": "茂",
+    "grade": 7,
+    "strokes": 8,
+    "onyomi": [
+      "モ"
+    ],
+    "kunyomi": [
+      "しげ"
+    ],
+    "meaning": "草や木がたくさん生えて、おいしげること。",
+  "exampleSentence": "夏の野山は、草木が青々と茂（しげ）っている。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-280",
+    "stageId": ["Asia_area10"],
+    "kanji": "猛",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "モウ"
+    ],
+    "kunyomi": [],
+    "meaning": "たけく、あらあらしいこと。勢いがはげしい。",
+  "exampleSentence": "夏休みに水泳の猛（もう）練習をする。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-281",
+    "stageId": ["Asia_area10"],
+    "kanji": "網",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "モウ"
+    ],
+    "kunyomi": [
+      "あみ"
+    ],
+    "meaning": "糸などを格子状に編んだもの。あみ。",
+  "exampleSentence": "日本中に通信（つうしん）網（もう）が広がっている。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-282",
+    "stageId": ["Asia_area10"],
+    "kanji": "黙",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "モク"
+    ],
+    "kunyomi": [
+      "だま"
+    ],
+    "meaning": "何も言わないこと。だまること。",
+  "exampleSentence": "全員で一分間の黙（もく）とうをささげる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-283",
+    "stageId": ["Asia_area10"],
+    "kanji": "紋",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "モン"
+    ],
+    "kunyomi": [],
+    "meaning": "いえいえに伝わるしるし。もよう。",
+  "exampleSentence": "犯人の指（し）紋（もん）を採取する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-284",
+    "stageId": ["Asia_area10"],
+    "kanji": "躍",
+    "grade": 7,
+    "strokes": 21,
+    "onyomi": [
+      "ヤク"
+    ],
+    "kunyomi": [
+      "おど"
+    ],
+    "meaning": "おどりあがること。いきいきと活動すること。",
+  "exampleSentence": "若者が世界を舞台に活（かつ）躍（やく）する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-285",
+    "stageId": ["Asia_area10"],
+    "kanji": "雄",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ユウ"
+    ],
+    "kunyomi": [
+      "お",
+      "おす"
+    ],
+    "meaning": "おす。また、いさましく、すぐれていること。",
+  "exampleSentence": "彼は、戦国の英（えい）雄（ゆう）として有名だ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-286",
+    "stageId": ["Asia_area10"],
+    "kanji": "与",
+    "grade": 7,
+    "strokes": 3,
+    "onyomi": [
+      "ヨ"
+    ],
+    "kunyomi": [
+      "あた"
+    ],
+    "meaning": "相手にものをあたえること。",
+  "exampleSentence": "動物にえさを与（あた）える。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-287",
+    "stageId": ["Asia_area10"],
+    "kanji": "誉",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ヨ"
+    ],
+    "kunyomi": [
+      "ほま"
+    ],
+    "meaning": "ほめたたえられること。よい評判。ほまれ。",
+  "exampleSentence": "一位になったことを、名（めい）誉（よ）に思う。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-288",
+    "stageId": ["Asia_area10"],
+    "kanji": "溶",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "meaning": "液体の中に、他のものがまじり合う。とける。",
+  "exampleSentence": "砂糖は、お湯に入れるとすぐに溶（と）ける。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-289",
+    "stageId": ["Asia_area10"],
+    "kanji": "腰",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "こし"
+    ],
+    "meaning": "からだの、あばら骨とつき骨の間の部分。",
+  "exampleSentence": "彼はとても腰（こし）が低い人だ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-290",
+    "stageId": ["Asia_area10"],
+    "kanji": "踊",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "おど"
+    ],
+    "meaning": "音楽などに合わせて、体を動かすこと。",
+  "exampleSentence": "お祭りで、盆（ぼん）踊（おど）りを踊（おど）る。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-291",
+    "stageId": ["Asia_area10"],
+    "kanji": "謡",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "うたい",
+      "うた"
+    ],
+    "meaning": "節をつけてうたう歌。特に、能の文句。",
+  "exampleSentence": "昔から伝わる民（みん）謡（よう）を歌う。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-292",
+    "stageId": ["Asia_area10"],
+    "kanji": "翼",
+    "grade": 7,
+    "strokes": 17,
+    "onyomi": [
+      "ヨク"
+    ],
+    "kunyomi": [
+      "つばさ"
+    ],
+    "meaning": "鳥や飛行機が、空を飛ぶための部分。つばさ。",
+  "exampleSentence": "鳥が大きな翼（つばさ）を広げて、空を飛ぶ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-293",
+    "stageId": ["Asia_area10"],
+    "kanji": "雷",
+    "grade": 7,
+    "strokes": 13,
+    "onyomi": [
+      "ライ"
+    ],
+    "kunyomi": [
+      "かみなり"
+    ],
+    "meaning": "空の電気。ゴロゴロとなる音や、光るいなずま。",
+  "exampleSentence": "遠くで雷（かみなり）の音が聞こえる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-294",
+    "stageId": ["Asia_area10"],
+    "kanji": "頼",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "ライ"
+    ],
+    "kunyomi": [
+      "たよ",
+      "たの"
+    ],
+    "meaning": "人に何かをしてくれるように願う。あてにする。",
+  "exampleSentence": "彼は、とても頼（たよ）りになる人だ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-295",
+    "stageId": ["Asia_area10"],
+    "kanji": "絡",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ラク"
+    ],
+    "kunyomi": [
+      "から"
+    ],
+    "meaning": "からみつくこと。また、つながりをつけること。",
+  "exampleSentence": "友達に、こまめに連（れん）絡（らく）をとる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-296",
+    "stageId": ["Asia_area10"],
+    "kanji": "欄",
+    "grade": 7,
+    "strokes": 20,
+    "onyomi": [
+      "ラン"
+    ],
+    "kunyomi": [],
+    "meaning": "わくでかこんだ部分。てすり。",
+  "exampleSentence": "書類の空（くう）欄（らん）に、名前を記入する。"
+  },
+  {
+    "id": "g7-297",
+    "stageId": ["Asia_area10"],
+    "kanji": "離",
+    "grade": 7,
+    "strokes": 18,
+    "onyomi": [
+      "リ"
+    ],
+    "kunyomi": [
+      "はな"
+    ],
+    "meaning": "二つのものを遠くへだてること。はなれる。",
+  "exampleSentence": "駅と家は、少し距（きょ）離（り）がある。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-298",
+    "stageId": ["Asia_area10"],
+    "kanji": "粒",
+    "grade": 7,
+    "strokes": 11,
+    "onyomi": [
+      "リュウ"
+    ],
+    "kunyomi": [
+      "つぶ"
+        ],
+    "meaning": "まるくて小さいもの。つぶ。",
+  "exampleSentence": "お米を、一（ひと）粒（つぶ）も残さず食べる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-299",
+    "stageId": ["Asia_area10"],
+    "kanji": "慮",
+    "grade": 7,
+    "strokes": 15,
+    "onyomi": [
+      "リョ"
+    ],
+    "kunyomi": [],
+    "meaning": "よく考えをめぐらすこと。おもんぱかり。",
+  "exampleSentence": "遠（えん）慮（りょ）なく、何でも質問してください。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-300",
+    "stageId": ["Asia_area10"],
+    "kanji": "療",
+    "grade": 7,
+    "strokes": 17,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "病気やけがをなおすこと。",
+  "exampleSentence": "病院で、病気の治（ち）療（りょう）を受ける。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-301",
+    "stageId": ["Asia_area10"],
+    "kanji": "隣",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "リン"
+    ],
+    "kunyomi": [
+      "とな",
+      "となり"
+    ],
+    "meaning": "すぐそば。となり。",
+  "exampleSentence": "私の席の隣（となり）は、佐藤さんです。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-302",
+    "stageId": ["Asia_area10"],
+    "kanji": "涙",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "ルイ"
+    ],
+    "kunyomi": [
+      "なみだ"
+    ],
+    "meaning": "悲しい時やうれしい時に、目から出るしずく。",
+  "exampleSentence": "悔し涙（なみだ）をこらえて、前を向く。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-303",
+    "stageId": ["Asia_area10"],
+    "kanji": "隷",
+    "grade": 7,
+    "strokes": 16,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [],
+    "meaning": "支配されて、自由をうばわれた人。しもべ。",
+  "exampleSentence": "歴史の授業で、奴（ど）隷（れい）の制度を学ぶ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-304",
+    "stageId": ["Asia_area10"],
+    "kanji": "齢",
+    "grade": 7,
+    "strokes": 17,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [],
+    "meaning": "生まれてからの年数。年齢。",
+  "exampleSentence": "対象年（ねん）齢（れい）が、十歳以上のゲーム。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-305",
+    "stageId": ["Asia_area10"],
+    "kanji": "麗",
+    "grade": 7,
+    "strokes": 19,
+    "onyomi": [
+      "レイ"
+    ],
+    "kunyomi": [
+      "うるわ"
+    ],
+    "meaning": "形がととのっていて、うつくしいこと。",
+  "exampleSentence": "麗（うら）らかな春の日に、散歩する。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-306",
+    "stageId": ["Asia_area10"],
+    "kanji": "暦",
+    "grade": 7,
+    "strokes": 14,
+    "onyomi": [
+      "レキ"
+    ],
+    "kunyomi": [
+      "こよみ"
+    ],
+    "meaning": "一年間の月日や季節などを記したもの。こよみ。",
+  "exampleSentence": "日本の今の暦（こよみ）は、西（せい）暦（れき）だ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-307",
+    "stageId": ["Asia_area10"],
+    "kanji": "劣",
+    "grade": 7,
+    "strokes": 6,
+    "onyomi": [
+      "レツ"
+    ],
+    "kunyomi": [
+      "おと"
+    ],
+    "meaning": "他と比べて、質や能力が下であること。",
+  "exampleSentence": "彼は、体力では誰にも劣（おと）らない。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-308",
+    "stageId": ["Asia_area10"],
+    "kanji": "烈",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "レツ"
+    ],
+    "kunyomi": [],
+    "meaning": "勢いがはげしいこと。きびしいこと。",
+  "exampleSentence": "夏の強（きょう）烈（れつ）な日差しを、帽子でさける。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-309",
+    "stageId": ["Asia_area10"],
+    "kanji": "恋",
+    "grade": 7,
+    "strokes": 10,
+    "onyomi": [
+      "レン"
+    ],
+    "kunyomi": [
+      "こい",
+      "こ"
+    ],
+    "meaning": "特定の人を好きになり、会いたいと思う気持ち。",
+  "exampleSentence": "初めて恋（こい）をしたのは、小学生の時だ。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-310",
+    "stageId": ["Asia_area10"],
+    "kanji": "露",
+    "grade": 7,
+    "strokes": 21,
+    "onyomi": [
+      "ロ",
+      "ロウ"
+    ],
+    "kunyomi": [
+      "つゆ"
+    ],
+    "meaning": "草の葉などにつく水てき。外にあらわれること。",
+  "exampleSentence": "朝、葉の上にきれいな露（つゆ）が光る。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-311",
+    "stageId": ["Asia_area10"],
+    "kanji": "郎",
+    "grade": 7,
+    "strokes": 9,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [],
+    "meaning": "おとこの人。また、おとこの人の名前に使う。",
+  "exampleSentence": "私の名前は、山田太（た）郎（ろう）です。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-312",
+    "stageId": ["Asia_area10"],
+    "kanji": "惑",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ワク"
+    ],
+    "kunyomi": [
+      "まど"
+    ],
+    "meaning": "どうしたらよいか、判断にまようこと。",
+  "exampleSentence": "うわさ話に、人々が惑（まど）わされる。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  },
+  {
+    "id": "g7-313",
+    "stageId": ["Asia_area10"],
+    "kanji": "腕",
+    "grade": 7,
+    "strokes": 12,
+    "onyomi": [
+      "ワン"
+    ],
+    "kunyomi": [
+      "うで"
+    ],
+    "meaning": "かたから手首までの部分。また、うでまえや能力。",
+  "exampleSentence": "彼は、料理の腕（うで）をみがいている。",
+  "continent": "アジア大陸",
+    "originalGrade": 7,
+    "correctCount": 0,
+    "incorrectCount": 0,
+    "lastReviewDate": null,
+    "masteryLevel": 0,
+    "tags": []
+  }
+]

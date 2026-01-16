@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="m" format="2">
+  <advance width="941"/>
+  <unicode hex="006D"/>
+  <outline>
+    <contour>
+      <point x="140" y="555" type="move"/>
+      <point x="140" y="0" type="line"/>
+    </contour>
+    <component base="_module_n" xOffset="140" identifier="3CA74B05"/>
+    <component base="_module_n" xOffset="473" identifier="663FB257"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.lastChange</key>
+      <string>2021-03-17 07:33:32 +0000</string>
+      <key>com.schriftgestaltung.Glyphs.leftMetricsKey</key>
+      <string>n</string>
+      <key>com.schriftgestaltung.Glyphs.rightMetricsKey</key>
+      <string>n</string>
+      <key>public.objectLibs</key>
+      <dict>
+        <key>3CA74B05</key>
+        <dict>
+          <key>com.schriftgestaltung.alignment</key>
+          <integer>-1</integer>
+        </dict>
+        <key>663FB257</key>
+        <dict>
+          <key>com.schriftgestaltung.alignment</key>
+          <integer>-1</integer>
+        </dict>
+      </dict>
+    </dict>
+  </lib>
+</glyph>

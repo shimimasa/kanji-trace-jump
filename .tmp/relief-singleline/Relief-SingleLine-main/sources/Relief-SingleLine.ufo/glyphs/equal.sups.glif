@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="equal.sups" format="2">
+  <advance width="317"/>
+  <outline>
+    <component base="equal" xScale="0.5" yScale="0.5" xOffset="20" yOffset="405" identifier="EE23782A"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.leftMetricsKey</key>
+      <string>equal.dnom</string>
+      <key>com.schriftgestaltung.Glyphs.rightMetricsKey</key>
+      <string>equal.dnom</string>
+      <key>public.objectLibs</key>
+      <dict>
+        <key>EE23782A</key>
+        <dict>
+          <key>com.schriftgestaltung.alignment</key>
+          <integer>-1</integer>
+        </dict>
+      </dict>
+    </dict>
+  </lib>
+</glyph>

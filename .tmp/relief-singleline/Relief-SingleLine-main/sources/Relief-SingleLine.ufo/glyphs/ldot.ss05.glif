@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<glyph name="ldot.ss05" format="2">
+  <advance width="371"/>
+  <outline>
+    <component base="l" identifier="C9F6F446"/>
+    <component base="period.ss05" xOffset="172" yOffset="285"/>
+  </outline>
+  <lib>
+    <dict>
+      <key>com.schriftgestaltung.Glyphs.leftMetricsKey</key>
+      <string>=|n</string>
+      <key>public.objectLibs</key>
+      <dict>
+        <key>C9F6F446</key>
+        <dict>
+          <key>com.schriftgestaltung.alignment</key>
+          <integer>-1</integer>
+        </dict>
+      </dict>
+    </dict>
+  </lib>
+</glyph>

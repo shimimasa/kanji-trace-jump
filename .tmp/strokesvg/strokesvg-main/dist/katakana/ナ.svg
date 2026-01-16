@@ -1,0 +1,18 @@
+<svg data-strokesvg="ナ" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="30cac">
+      <use href="#30caa"/>
+    </clipPath>
+    <clipPath id="30cad">
+      <use href="#30cab"/>
+    </clipPath>
+  </defs>
+  <g data-strokesvg="shadows" style="fill:var(--shadow,#ccc)">
+    <path id="30caa" d="M910 424v-4q0-7-11-17-9-9-21-16t-21-7h-3l-16 2-17 3q-59 2-122 7a14293 14293 0 0 0-495 52h-15a64 64 0 0 1-23-5l-14-3q-11 1-11 7l5 16q7 14 18 29a45 45 0 0 0 38 19h11l13-2a5320 5320 0 0 1 650-58q34 0 34-23"/>
+    <path id="30cab" d="M578 356v-48l-1-85q-1-27-9-36-6-9-21-12-25-6-43-6-19 0-22 9v2q0 8 6 15 7 4 13 16l4 37q3 33 3 78c0 97-11 220-52 321q-32 77-85 138-53 62-128 117-25 16-25 28l2 5q3 5 12 5 13 0 33-11 99-57 162-124 64-68 97-152c52-124 54-277 54-297"/>
+  </g>
+  <g data-strokesvg="strokes" style="stroke:var(--stroke,#000);fill:none;stroke-width:128;stroke-linecap:round">
+    <path style="--i:0" d="m75 447 778-7" clip-path="url(#30cac)"/>
+    <path style="--i:1" d="M486 105c215 544-215 802-215 802" clip-path="url(#30cad)"/>
+  </g>
+</svg>

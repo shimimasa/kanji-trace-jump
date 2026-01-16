@@ -1,0 +1,2785 @@
+[
+  
+  {
+    "id": "g10-001",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "挨",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "アイ"
+    ],
+    "kunyomi": [],
+    "meaning": "あい。近づくこと。",
+    "exampleSentence": "彼は、隣人との挨拶（あいさつ）を欠かさず、良好な関係を築いている。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-002",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "曖",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [
+      "アイ"
+    ],
+    "kunyomi": [],
+    "meaning": "あい。はっきりしないこと。",
+    "exampleSentence": "夜空には、曖昧（あいまい）な光を放つ星が瞬き、幻想的な世界を作り出していた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-003",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "宛",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [],
+    "kunyomi": [
+      "あ"
+    ],
+    "meaning": "あてる。物事を、ある場所へ向けること。",
+    "exampleSentence": "彼は、遠く離れた故郷の友人に、手紙を宛て（あて）、近況を報告した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-004",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "嵐",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [],
+    "kunyomi": [
+      "あらし"
+    ],
+    "meaning": "あらし。風が強く吹き荒れること。",
+    "exampleSentence": "彼は、荒れ狂う嵐（あらし）の中、船を操り、無事に港へとたどり着いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-005",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "畏",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "おそ"
+    ],
+    "meaning": "おそれる。恐れ敬うこと。",
+    "exampleSentence": "彼は、自然の偉大さに畏敬（いけい）の念を抱き、その美しさに深く感動した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-006",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "萎",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "な"
+    ],
+    "meaning": "なえる。植物が、しおれること。",
+    "exampleSentence": "彼は、長年の苦労で、心身ともに萎え（なえ）てしまい、気力を失っていた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-007",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "椅",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "meaning": "い。椅子（いす）のこと。",
+    "exampleSentence": "彼は、疲れていたので、椅子（いす）に深く腰掛け、一息ついた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-008",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "彙",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "meaning": "い。多くのものが、集まること。",
+    "exampleSentence": "彼は、様々な分野の知識を彙集（いしゅう）し、独自の理論を構築した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-009",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "咽",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [],
+    "meaning": "いん。のど。",
+    "exampleSentence": "彼は、緊張のあまり、唾を飲み込むのも困難になり、咽喉（いんこう）が渇いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-010",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "淫",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [
+      "みだ"
+    ],
+    "meaning": "みだら。風紀が乱れていること。",
+    "exampleSentence": "彼は、淫靡（いんび）な雰囲気に誘惑され、道を踏み外してしまった。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-011",
+    "stageId": ["Africa_area1","Africa_area10"]   ,
+    "kanji": "唄",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [],
+    "kunyomi": [
+      "うた"
+    ],
+    "meaning": "うた。歌のこと。",
+    "exampleSentence": "彼は、酒場で、昔懐かしい流行歌を唄い（うたい）、客たちを魅了した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-012",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "鬱",
+    "grade": 10,
+    "strokes": 29,
+    "onyomi": [
+      "ウツ"
+    ],
+    "kunyomi": [],
+    "meaning": "うつ。気分がふさぎ込むこと。",
+    "exampleSentence": "彼は、長引く不況の影響で、鬱屈（うっくつ）した感情を抱え、希望を見失っていた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-013",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "怨",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "エン",
+      "オン"
+    ],
+    "kunyomi": [],
+    "meaning": "うらむ。恨むこと。",
+    "exampleSentence": "彼は、過去の怨恨（えんこん）にとらわれ、復讐の念を抱き続けていた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-014",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "艶",
+    "grade": 10,
+    "strokes": 19,
+    "onyomi": [
+      "エン"
+    ],
+    "kunyomi": [
+      "つや"
+    ],
+    "meaning": "つや。光沢があること。",
+    "exampleSentence": "彼女は、艶やか（つややか）な着物を身につけ、パーティー会場でひときわ輝いていた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-015",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "旺",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "オウ"
+    ],
+    "kunyomi": [],
+    "meaning": "おう。勢いが盛んなこと。",
+    "exampleSentence": "彼は、旺盛（おうせい）な好奇心で、未知の分野に次々と挑戦している。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-016",
+    "stageId": ["Africa_area1","Africa_area10"],
+    "kanji": "臆",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [
+      "オク"
+    ],
+    "kunyomi": [],
+    "meaning": "おく。臆病なこと。",
+    "exampleSentence": "彼は、臆病（おくびょう）な性格で、新しいことに挑戦することを恐れていた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-017",
+    "stageId": ["Africa_area1"],
+    "kanji": "俺",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [],
+    "kunyomi": [
+      "おれ"
+    ],
+    "meaning": "おれ。男性の、一人称。",
+    "exampleSentence": "俺（おれ）は、自分の信念を貫き通すためなら、どんな困難にも立ち向かう覚悟だ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-018",
+    "stageId": ["Africa_area1"],
+    "kanji": "苛",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [],
+    "meaning": "いじめる。厳しく責めること。",
+    "exampleSentence": "彼は、部下を苛め（いじめ）、精神的に追い詰めるような行為を繰り返していた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-019",
+    "stageId": ["Africa_area1"],
+    "kanji": "牙",
+    "grade": 10,
+    "strokes": 4,
+    "onyomi": [
+      "ガ",
+      "ゲ"
+    ],
+    "kunyomi": [
+      "きば"
+    ],
+    "meaning": "きば。動物の、鋭い歯。",
+    "exampleSentence": "彼は、敵の牙城（がじょう）を崩すため、綿密な作戦を立てた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-020",
+    "stageId": ["Africa_area1"],
+    "kanji": "瓦",
+    "grade": 10,
+    "strokes": 5,
+    "onyomi": [
+      "ガ"
+    ],
+    "kunyomi": [
+      "かわら"
+    ],
+    "meaning": "かわら。屋根を覆うための焼き物。",
+    "exampleSentence": "彼は、古い瓦（かわら）屋根の家を修繕し、昔ながらの風情を保った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-021",
+    "stageId": ["Africa_area2"],
+    "kanji": "楷",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [],
+    "meaning": "かい。書道の書体の一つ。",
+    "exampleSentence": "彼は、楷書（かいしょ）で丁寧に文字を書き、その美しさに周囲は感嘆した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-022",
+    "stageId": ["Africa_area2"],
+    "kanji": "潰",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "つぶ"
+    ],
+    "meaning": "かい。物事が、つぶれること。",
+    "exampleSentence": "彼は、長年の努力が水の泡となり、計画が潰れ（つぶれ）てしまったことに深く落胆した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-023",
+    "stageId": ["Africa_area2"],
+    "kanji": "諧",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [],
+    "meaning": "かい。物事が、調和すること。",
+    "exampleSentence": "彼は、諧謔（かいぎゃく）を交えながら、場の雰囲気を和ませるのが得意だ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-024",
+    "stageId": ["Africa_area2"],
+    "kanji": "崖",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ガイ"
+    ],
+    "kunyomi": [
+      "がけ"
+    ],
+    "meaning": "がけ。切り立った崖。",
+    "exampleSentence": "彼は、危険な崖（がけ）を登り、頂上からの絶景を堪能した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-025",
+    "stageId": ["Africa_area2"],
+    "kanji": "蓋",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ガイ"
+    ],
+    "kunyomi": [
+      "ふた"
+    ],
+    "meaning": "ふた。物を覆うためのもの。",
+    "exampleSentence": "彼は、鍋の蓋（ふた）を開け、湯気とともに立ち上る香りを嗅いだ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-026",
+    "stageId": ["Africa_area2"],
+    "kanji": "骸",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "ガイ"
+    ],
+    "kunyomi": [],
+    "meaning": "がい。骨。",
+    "exampleSentence": "彼は、古代遺跡で発見された人骨の骸（むくろ）を調査し、当時の生活を解明した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-027",
+    "stageId": ["Africa_area2"],
+    "kanji": "柿",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [],
+    "kunyomi": [
+      "かき"
+    ],
+    "meaning": "かき。秋に実る果物。",
+    "exampleSentence": "彼は、庭に実った柿（かき）を収穫し、秋の味覚を楽しんだ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-028",
+    "stageId": ["Africa_area2"],
+    "kanji": "顎",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "ガク"
+    ],
+    "kunyomi": [
+      "あご"
+    ],
+    "meaning": "あご。顔の下の部分。",
+    "exampleSentence": "彼は、顎（あご）を突き出し、自信満々な表情で相手を見据えた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-029",
+    "stageId": ["Africa_area2"],
+    "kanji": "葛",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "カツ"
+    ],
+    "kunyomi": [
+      "くず"
+    ],
+    "meaning": "くず。マメ科の植物。",
+    "exampleSentence": "彼は、葛（くず）の根から作った葛粉（くずこ）を使って、美味しい和菓子を作った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-030",
+    "stageId": ["Africa_area2"],
+    "kanji": "釜",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [],
+    "kunyomi": [
+      "かま"
+    ],
+    "meaning": "かま。物を煮るための道具。",
+    "exampleSentence": "彼は、釜（かま）でご飯を炊き、炊きたてのご飯の香りを嗅いだ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-031",
+    "stageId": ["Africa_area2"],
+    "kanji": "鎌",
+    "grade": 10,
+    "strokes": 18,
+    "onyomi": [],
+    "kunyomi": [
+      "かま"
+    ],
+    "meaning": "かま。草などを刈るための道具。",
+    "exampleSentence": "彼は、鎌（かま）を手に、雑草が生い茂る畑を黙々と耕した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-032",
+    "stageId": ["Africa_area2"],
+    "kanji": "韓",
+    "grade": 10,
+    "strokes": 18,
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "meaning": "かん。朝鮮半島のこと。",
+    "exampleSentence": "彼は、韓国（かんこく）の歴史と文化について深く学び、両国の友好関係の発展に貢献した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-033",
+    "stageId": ["Africa_area2"],
+    "kanji": "玩",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "ガン"
+    ],
+    "kunyomi": [],
+    "meaning": "がん。おもちゃ。",
+    "exampleSentence": "彼は、幼い頃から玩具（がんぐ）を収集するのが趣味で、今では貴重なコレクションを所有している。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-034",
+    "stageId": ["Africa_area2"],
+    "kanji": "伎",
+    "grade": 10,
+    "strokes": 6,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。技芸のこと。",
+    "exampleSentence": "彼は、歌舞伎（かぶき）の舞台で、見事な伎芸（ぎげい）を披露し、観客を魅了した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-035",
+    "stageId": ["Africa_area2"],
+    "kanji": "亀",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "かめ"
+    ],
+    "meaning": "かめ。爬虫類の一種。",
+    "exampleSentence": "彼は、長寿の象徴である亀（かめ）を飼い、その穏やかな姿に癒されている。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-036",
+    "stageId": ["Africa_area2"],
+    "kanji": "毀",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。物事を、壊すこと。",
+    "exampleSentence": "彼は、過去の過ちを悔い、自らの名誉を毀損（きそん）したことを深く反省した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-037",
+    "stageId": ["Africa_area2"],
+    "kanji": "畿",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [],
+    "meaning": "き。都の周辺地域。",
+    "exampleSentence": "彼は、畿内（きない）の歴史的建造物を巡り、日本の伝統文化に触れた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-038",
+    "stageId": ["Africa_area2"],
+    "kanji": "臼",
+    "grade": 10,
+    "strokes": 6,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "うす"
+    ],
+    "meaning": "うす。穀物を挽くための道具。",
+    "exampleSentence": "彼は、石臼（いしうす）で蕎麦粉を挽き、手打ち蕎麦を作った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-039",
+    "stageId": ["Africa_area2"],
+    "kanji": "嗅",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "か。鼻で物の匂いを嗅ぐこと。",
+    "exampleSentence": "彼は、鼻で匂いを嗅（か）ぎ、美味しい匂いを見つけ出した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-040",
+    "stageId": ["Africa_area2"],
+    "kanji": "巾",
+    "grade": 10,
+    "strokes": 3,
+    "onyomi": [
+      "キン"
+    ],
+    "kunyomi": [],
+    "meaning": "きん。布のこと。",
+    "exampleSentence": "彼は、手巾（しゅきん）で汗を拭い、再び仕事に戻った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-041",
+    "stageId": ["Africa_area3"],
+    "kanji": "僅",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "キン"
+    ],
+    "kunyomi": [
+      "わず"
+    ],
+    "meaning": "わずか。少しだけ。",
+    "exampleSentence": "彼は、僅か（わずか）な時間で、複雑な問題を解決し、周囲を驚かせた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-042",
+    "stageId": ["Africa_area3"],
+    "kanji": "錦",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "キン"
+    ],
+    "kunyomi": [
+      "にしき"
+    ],
+    "meaning": "にしき。美しい模様の織物。",
+    "exampleSentence": "彼は、錦（にしき）の御旗を掲げ、天下統一を目指した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-043",
+    "stageId": ["Africa_area3"],
+    "kanji": "惧",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "グ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぐ。恐れること。",
+    "exampleSentence": "彼は、未知の病原体に対する惧れ（おそれ）を抱きながらも、研究を続けた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-044",
+    "stageId": ["Africa_area3"]               ,
+    "kanji": "串",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [],
+    "kunyomi": [
+      "くし"
+    ],
+    "meaning": "くし。物を刺すための棒。",
+    "exampleSentence": "彼は、焼き鳥を串（くし）に刺し、香ばしい匂いを漂わせた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-045",
+    "stageId": ["Africa_area3"],
+    "kanji": "窟",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "クツ"
+    ],
+    "kunyomi": [],
+    "meaning": "くつ。洞窟のこと。",
+    "exampleSentence": "彼は、深い窟（くつ）の奥へと進み、未知の生物を発見した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-046",
+    "stageId": ["Africa_area3"],
+    "kanji": "詣",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "もう"
+    ],
+    "meaning": "もうでる。神社仏閣に参拝すること。",
+    "exampleSentence": "彼は、病気の回復を願い、毎日神社に詣で（もうで）た。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-047",
+    "stageId": ["Africa_area3"],
+    "kanji": "憬",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [],
+    "meaning": "けい。憧れること。",
+    "exampleSentence": "彼は、遠い異国の文化に憧憬（しょうけい）の念を抱き、いつか訪れることを夢見ている。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-048",
+    "stageId": ["Africa_area3"],
+    "kanji": "稽",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [],
+    "meaning": "けい。物事を、考えること。",
+    "exampleSentence": "彼は、稽古（けいこ）を重ね、武道の腕を磨いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-049",
+    "stageId": ["Africa_area3"],
+    "kanji": "隙",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ゲキ"
+    ],
+    "kunyomi": [
+      "すき"
+    ],
+    "meaning": "すき。物と物の間の、わずかな空間。",
+    "exampleSentence": "彼は、敵の隙（すき）を突き、一気に攻め込んだ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-050",
+    "stageId": ["Africa_area3"],
+    "kanji": "桁",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [],
+    "kunyomi": [
+      "けた"
+    ],
+    "meaning": "けた。物の、横の棒。",
+    "exampleSentence": "彼は、桁外れ（けたはずれ）の才能を持ち、周囲の人々を驚かせた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-051",
+    "stageId": ["Africa_area3"],
+    "kanji": "挙",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "こぶし"
+    ],
+    "meaning": "こぶし。手の指を握り締めたもの。",
+    "exampleSentence": "彼は、怒りのあまり、思わず拳（こぶし）を握り締めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-052",
+    "stageId": ["Africa_area3"],
+    "kanji": "鍵",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "かぎ"
+    ],
+    "meaning": "かぎ。扉などを開閉するための道具。",
+    "exampleSentence": "彼は、大切な鍵（かぎ）を失くしてしまい、家に入ることができなくなった。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-053",
+    "stageId": ["Africa_area3"],
+    "kanji": "舷",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ゲン"
+    ],
+    "kunyomi": [],
+    "meaning": "げん。船の側面。",
+    "exampleSentence": "彼は、船の舷側（げんそく）に立ち、広大な海原を眺めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-054",
+    "stageId": ["Africa_area3"],
+    "kanji": "股",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "また"
+    ],
+    "meaning": "また。足の付け根の部分。",
+    "exampleSentence": "彼は、股（また）を広げ、安定した姿勢でボールを投げた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-055",
+    "stageId": ["Africa_area3"]                 ,
+    "kanji": "虎",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "とら"
+    ],
+    "meaning": "とら。ネコ科の動物。",
+    "exampleSentence": "彼は、虎（とら）の威を借る狐（きつね）のように、強い者の後ろ盾を得て威張っていた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-056",
+    "stageId": ["Africa_area3"],
+    "kanji": "錮",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [],
+    "meaning": "こ。金属で、物を固定すること。",
+    "exampleSentence": "彼は、犯罪者を監禁（かんきん）し、その自由を錮（こ）した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-057",
+    "stageId": ["Africa_area3"],
+    "kanji": "勾",
+    "grade": 10,
+    "strokes": 4,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。曲がっていること。",
+    "exampleSentence": "彼は、勾配（こうばい）の急な坂道を、自転車で駆け上がった。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-058",
+    "stageId": ["Africa_area3"],
+    "kanji": "梗",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [],
+    "meaning": "こう。物事の、おおよそ。",
+    "exampleSentence": "彼は、事件の梗概（こうがい）を簡潔に説明し、聴衆を納得させた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-059",
+    "stageId": ["Africa_area3"],
+    "kanji": "喉",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "のど"
+    ],
+    "meaning": "のど。首の内側。",
+    "exampleSentence": "彼は、喉（のど）が渇き、水を求めてさまよった。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-060",
+    "stageId": ["Africa_area3"],
+    "kanji": "乞",
+    "grade": 10,
+    "strokes": 3,
+    "onyomi": [],
+    "kunyomi": [
+      "こ"
+    ],
+    "meaning": "こい。物事を、請い願うこと。",
+    "exampleSentence": "彼は、貧しい人々に施しを乞い（こい）、生活の糧を得ていた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-061",
+    "stageId": ["Africa_area4"],
+    "kanji": "傲",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ゴウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ごう。おごり高ぶること。",
+    "exampleSentence": "彼は、傲慢（ごうまん）な態度で、周囲の人々を不快にさせた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-062",
+    "stageId": ["Africa_area4"],
+    "kanji": "駒",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [],
+    "kunyomi": [
+      "こま"
+    ],
+    "meaning": "こま。将棋の駒。",
+    "exampleSentence": "彼は、将棋の駒（こま）を動かし、相手の王将を追い詰めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-063",
+    "stageId": ["Africa_area4"],
+    "kanji": "頃",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [],
+    "kunyomi": [
+      "ころ"
+    ],
+    "meaning": "ころ。時間のこと。",
+    "exampleSentence": "彼は、頃日（けいじつ）中に、新しいプロジェクトを開始する予定だ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-064",
+    "stageId": ["Africa_area4"],
+    "kanji": "痕",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "コン"
+    ],
+    "kunyomi": [
+      "あと"
+    ],
+    "meaning": "あと。物事が、残したしるし。",
+    "exampleSentence": "彼は、過去の過ちの痕跡（こんせき）を消すため、必死に努力した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-065",
+    "stageId": ["Africa_area4"]       ,
+    "kanji": "沙",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "サ"
+    ],
+    "kunyomi": [],
+    "meaning": "さ。砂のこと。",
+    "exampleSentence": "彼は、砂漠の広大な沙丘（さきゅう）を眺めながら、旅の疲れを癒した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-066",
+    "stageId": ["Africa_area4"],
+    "kanji": "挫",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "ザ"
+    ],
+    "kunyomi": [],
+    "meaning": "ざ。物事を、くじくこと。",
+    "exampleSentence": "彼は、挫折（ざせつ）を経験したが、決して諦めずに再起を誓った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-067",
+    "stageId": ["Africa_area4"],
+    "kanji": "采",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [],
+    "meaning": "さい。物事を、選び取ること。",
+    "exampleSentence": "彼は、采配（さいはい）を振るい、チームを勝利に導いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-068",
+    "stageId": ["Africa_area4"],
+    "kanji": "塞",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "サイ",
+      "ソク"
+    ],
+    "kunyomi": [
+      "ふさ"
+    ],
+    "meaning": "ふさぐ。物事を、塞ぐこと。",
+    "exampleSentence": "彼は、穴を塞ぎ（ふさぎ）、水漏れを防いだ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-069",
+    "stageId": ["Africa_area4"],
+    "kanji": "柵",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "サク"
+    ],
+    "kunyomi": [],
+    "meaning": "さく。木や竹などで作った囲い。",
+    "exampleSentence": "彼は、牧場の柵（さく）を修理し、動物たちが逃げ出さないようにした。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-070",
+    "stageId": ["Africa_area4"],
+    "kanji": "刹",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "セツ",
+      "サツ"
+    ],
+    "kunyomi": [],
+    "meaning": "せつ。仏教の寺。",
+    "exampleSentence": "彼は、刹那（せつな）の瞬間に、永遠の真理を見出した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-071",
+    "stageId": ["Africa_area4"],
+    "kanji": "拶",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "サツ"
+    ],
+    "kunyomi": [],
+    "meaning": "さつ。物事を、押し迫ること。",
+    "exampleSentence": "彼は、質問に窮し、進退窮まる（きゅうまる）状況に陥った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-072",
+    "stageId": ["Africa_area4"],
+    "kanji": "斬",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ザン"
+    ],
+    "kunyomi": [
+      "き"
+    ],
+    "meaning": "きる。刀で、物を切ること。",
+    "exampleSentence": "彼は、悪を斬り（きり）、正義を貫いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-073",
+    "stageId": ["Africa_area4"],
+    "kanji": "恣",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [],
+    "meaning": "ほしいまま。自分の思い通りにすること。",
+    "exampleSentence": "彼は、恣意（しい）的な判断で、多くの人々を苦しめた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-074",
+    "stageId": ["Africa_area4"],
+    "kanji": "摯",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [],
+    "meaning": "し。まごころ。",
+    "exampleSentence": "彼は、摯実（しじつ）な態度で、どんな仕事にも真剣に取り組む。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-075",
+    "stageId": ["Africa_area4"]       ,
+    "kanji": "餌",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "ジ"
+    ],
+    "kunyomi": [
+      "えさ",
+      "え"
+    ],
+    "meaning": "えさ。動物の食べ物。",
+    "exampleSentence": "彼は、鳥に餌（えさ）を与え、その可愛らしい姿を眺めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-076",
+    "stageId": ["Africa_area4"],
+    "kanji": "𠮟",
+    "grade": 10,
+    "strokes": 5,
+    "onyomi": [
+      "シツ"
+    ],
+    "kunyomi": [
+      "しか"
+    ],
+    "meaning": "大声で相手の非をとがめること。",
+  "exampleSentence": "先生に大声で叱（しか）られた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-077",
+    "stageId": ["Africa_area4"],
+    "kanji": "嫉",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "シツ"
+    ],
+    "kunyomi": [],
+    "meaning": "",
+    "exampleSentence": "",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-078",
+    "stageId": ["Africa_area4"],
+    "kanji": "腫",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "シュ"
+    ],
+    "kunyomi": [
+      "は"
+    ],
+    "meaning": "はれる。体が、膨らむこと。",
+    "exampleSentence": "彼は、転んで膝を強く打ち、大きく腫れ（はれ）上がってしまった。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-079",
+    "stageId": ["Africa_area4"],
+    "kanji": "呪",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "ジュ"
+    ],
+    "kunyomi": [
+      "のろ"
+    ],
+    "meaning": "のろう。人に、不幸が訪れるように願うこと。",
+    "exampleSentence": "彼は、呪文（じゅもん）を唱え、悪霊を退散させた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-080",
+    "stageId": ["Africa_area4"],
+    "kanji": "袖",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "そで"
+    ],
+    "meaning": "そで。服の、腕を通す部分。",
+    "exampleSentence": "彼は、袖（そで）をまくり、仕事に取り掛かった。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-081",
+    "stageId": ["Africa_area5"],
+    "kanji": "羞",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [],
+    "meaning": "はずかしい。恥ずかしいこと。",
+    "exampleSentence": "彼は、人前で失敗し、羞恥心（しゅうちしん）に苛まれた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-082",
+    "stageId": ["Africa_area5"],
+    "kanji": "蹴",
+    "grade": 10,
+    "strokes": 19,
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "け"
+    ],
+    "meaning": "ける。足で、物を打つこと。",
+    "exampleSentence": "彼は、サッカーボールを力強く蹴り（けり）、ゴールを決めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-083",
+    "stageId": ["Africa_area5"],
+    "kanji": "憧",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "あこが"
+    ],
+    "meaning": "あこがれる。物事に、強く惹かれること。",
+    "exampleSentence": "彼女は、幼い頃からバレリーナに憧れ（あこがれ）、毎日練習に励んでいる。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-084",
+    "stageId": ["Africa_area5"]       ,
+    "kanji": "拭",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "ショク"
+    ],
+    "kunyomi": [
+      "ふ",
+      "ぬぐ"
+    ],
+    "meaning": "ふく。布などで、物を拭くこと。",
+    "exampleSentence": "彼は、窓ガラスを丁寧に拭き（ふき）、きれいにした。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-085",
+    "stageId": ["Africa_area5"],
+    "kanji": "尻",
+    "grade": 10,
+    "strokes": 5,
+    "onyomi": [],
+    "kunyomi": [
+      "しり"
+    ],
+    "meaning": "しり。体の、お尻の部分。",
+    "exampleSentence": "彼は、椅子に深く腰掛け、尻（しり）を落ち着かせた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-086",
+    "stageId": ["Africa_area5"],
+    "kanji": "芯",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [],
+    "meaning": "しん。物の中心。",
+    "exampleSentence": "彼は、鉛筆の芯（しん）を削り、文字を書いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-087",
+    "stageId": ["Africa_area5"],
+    "kanji": "腎",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ジン"
+    ],
+    "kunyomi": [],
+    "meaning": "じん。腎臓のこと。",
+    "exampleSentence": "彼は、腎臓（じんぞう）の病気を患い、透析治療を受けている。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-088",
+    "stageId": ["Africa_area5"],
+    "kanji": "須",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "ス"
+    ],
+    "kunyomi": [],
+    "meaning": "す。物事を、必要とすること。",
+    "exampleSentence": "彼は、成功のためには、弛まぬ努力が必須（ひっす）であると力説した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-089",
+    "stageId": ["Africa_area5"],
+    "kanji": "裾",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [],
+    "kunyomi": [
+      "すそ"
+    ],
+    "meaning": "すそ。服の、いちばん下の部分。",
+    "exampleSentence": "彼女は、長いスカートの裾（すそ）を翻し、優雅に舞台を去った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-090",
+    "stageId": ["Africa_area5"],
+    "kanji": "凄",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "セイ"
+    ],
+    "kunyomi": [],
+    "meaning": "せい。物事が、ひどいこと。",
+    "exampleSentence": "彼は、凄絶（せいぜつ）な戦いを生き延び、多くの犠牲の上に現在の平和があることを語った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-091",
+    "stageId": ["Africa_area5"],
+    "kanji": "醒",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "セイ"
+    ],
+    "kunyomi": [],
+    "meaning": "せい。目が覚めること。",
+    "exampleSentence": "彼は、悪夢から覚醒（かくせい）し、現実の世界へと引き戻された。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-092",
+    "stageId": ["Africa_area5"],
+    "kanji": "脊",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [],
+    "meaning": "せき。背骨のこと。",
+    "exampleSentence": "彼は、脊髄（せきずい）を損傷し、下半身不随となった。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-093",
+    "stageId": ["Africa_area5"],
+    "kanji": "戚",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [],
+    "meaning": "せき。親戚のこと。",
+    "exampleSentence": "彼は、遠い親戚（しんせき）の家を訪ね、久しぶりに再会した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-094",
+    "stageId": ["Africa_area5"],
+    "kanji": "煎",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "い"
+    ],
+    "meaning": "いり。物を、炒ること。",
+    "exampleSentence": "彼は、煎り（いり）たてのコーヒー豆を挽き、香ばしい香りを漂わせた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-095",
+    "stageId": ["Africa_area5"],
+    "kanji": "羨",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "うらや"
+    ],
+    "meaning": "うらやむ。他人の幸福を、羨ましく思うこと。",
+    "exampleSentence": "彼は、友人の成功を心から羨み（うらやみ）、自分も努力することを誓った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-096",
+    "stageId": ["Africa_area5"],
+    "kanji": "腺",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [],
+    "meaning": "せん。体の中の、分泌物を出す器官。",
+    "exampleSentence": "彼は、唾液腺（だえきせん）の病気を患い、食事に苦労している。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-097",
+    "stageId": ["Africa_area5"],
+    "kanji": "詮",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [],
+    "meaning": "せん。物事の、すべて。",
+    "exampleSentence": "彼は、詮索（せんさく）好きで、他人のプライバシーにまで踏み込む傾向がある。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-098",
+    "stageId": ["Africa_area5"],
+    "kanji": "箋",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [],
+    "meaning": "せん。手紙のこと。",
+    "exampleSentence": "彼は、便箋（びんせん）に美しい文字で手紙を書き、遠く離れた恋人に送った。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-099",
+    "stageId": ["Africa_area5"],
+    "kanji": "膳",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "ゼン"
+    ],
+    "kunyomi": [],
+    "meaning": "ぜん。食事を乗せる台。",
+    "exampleSentence": "彼は、膳（ぜん）を並べ、家族みんなで食卓を囲んだ。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-100",
+    "stageId": ["Africa_area5"],
+    "kanji": "狙",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "ソ"
+    ],
+    "kunyomi": [
+      "ねら"
+    ],
+    "meaning": "ねらう。物事を、目標とすること。",
+    "exampleSentence": "彼は、獲物を狙い（ねらい）、静かに身を潜めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-101",
+    "stageId": ["Africa_area6"],
+    "kanji": "遡",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ソ"
+    ],
+    "kunyomi": [
+      "さかのぼ"
+    ],
+    "meaning": "さかのぼる。物事を、過去に遡ること。",
+    "exampleSentence": "彼は、歴史を遡り（さかのぼり）、古代文明の謎を解き明かそうとした。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-102",
+    "stageId": ["Africa_area6"],
+    "kanji": "曽",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ソウ",
+      "ゾ"
+    ],
+    "kunyomi": [],
+    "meaning": "そう。昔のこと。",
+    "exampleSentence": "彼は、曾祖父（そうそふ）の遺品を整理し、家族の歴史に触れた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-103",
+    "stageId": ["Africa_area6"],
+    "kanji": "爽",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "さわ"
+    ],
+    "meaning": "さわやか。気持ちが良いこと。",
+    "exampleSentence": "彼は、爽やか（さわやか）な笑顔で、周囲の人々を魅了した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-104",
+    "stageId": ["Africa_area6"],
+    "kanji": "瘦",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "や"
+    ],
+    "meaning": "からだの肉がおちる。土地が肥えていないこと。",
+  "exampleSentence": "土地が痩（や）せて作物が育たない。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-105",
+    "stageId": ["Africa_area6"],
+    "kanji": "踪",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [],
+    "meaning": "そう。足跡のこと。",
+    "exampleSentence": "彼は、犯人の足跡を追跡（ついせき）し、その行方を突き止めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-106",
+    "stageId": ["Africa_area6"],
+    "kanji": "捉",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "ソク"
+    ],
+    "kunyomi": [
+      "とら"
+    ],
+    "meaning": "とらえる。物事を、捕らえること。",
+    "exampleSentence": "彼は、事件の核心を捉え（とらえ）、真相解明に近づいた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-107",
+    "stageId": ["Africa_area6"],
+    "kanji": "遜",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ソン"
+    ],
+    "kunyomi": [],
+    "meaning": "そん。へりくだること。",
+    "exampleSentence": "彼は、どんなに成功しても、常に謙遜（けんそん）な態度を崩さない。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-108",
+    "stageId": ["Africa_area6"],
+    "kanji": "汰",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "タ"
+    ],
+    "kunyomi": [],
+    "meaning": "た。物事を、選び出すこと。",
+    "exampleSentence": "彼は、多くの情報の中から、必要なものだけを淘汰（とうた）し、効率的に作業を進めた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-109",
+    "stageId": ["Africa_area6"],
+    "kanji": "唾",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ダ"
+    ],
+    "kunyomi": [
+      "つば"
+    ],
+    "meaning": "つば。口から出る液体。",
+    "exampleSentence": "彼は、怒りのあまり、相手に唾（つば）を吐きかけた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-110",
+    "stageId": ["Africa_area6"],
+    "kanji": "堆",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [],
+    "meaning": "たい。土を積み上げたもの。",
+    "exampleSentence": "彼は、堆積（たいせき）した土砂を運び出し、道を整備した。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-111",
+    "stageId": ["Africa_area6"],
+    "kanji": "載",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [
+      "サイ"
+    ],
+    "kunyomi": [],
+    "meaning": "のせる。物事を、記録すること。",
+    "exampleSentence": "彼は、新聞に自分の意見を掲載（けいさい）し、多くの人々に訴えかけた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-112",
+    "stageId": ["Africa_area6"],
+    "kanji": "誰",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [],
+    "kunyomi": [
+      "だれ"
+    ],
+    "meaning": "だれ。人を尋ねる言葉。",
+    "exampleSentence": "彼は、誰（だれ）にも言えない秘密を抱え、苦しんでいた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-113",
+    "stageId": ["Africa_area6"],
+    "kanji": "旦",
+    "grade": 10,
+    "strokes": 5,
+    "onyomi": [
+      "タン",
+      "ダン"
+    ],
+    "kunyomi": [],
+    "meaning": "たん。夜明けのこと。",
+    "exampleSentence": "彼は、旦那（だんな）様として、家族を支え、幸せな家庭を築いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-114",
+    "stageId": ["Africa_area6"],
+    "kanji": "綻",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "タン"
+    ],
+    "kunyomi": [
+      "ほころ"
+    ],
+    "meaning": "ほころびる。物が、破れること。",
+    "exampleSentence": "彼は、綻び（ほころび）た服を繕い、大切に使い続けた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-115",
+    "stageId": ["Africa_area6"],
+    "kanji": "緻",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "チ"
+    ],
+    "kunyomi": [],
+    "meaning": "ち。物事が、細かいこと。",
+    "exampleSentence": "彼は、緻密（ちみつ）な計画を立て、プロジェクトを成功に導いた。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-116",
+    "stageId": ["Africa_area6"],
+    "kanji": "酎",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ちゅう。焼酎のこと。",
+    "exampleSentence": "彼は、焼酎（しょうちゅう）を飲みながら、静かに夜を過ごした。",
+    "continent": "アフリカ",
+    "originalGrade": 10
+  },
+  {
+    "id": "g10-117",
+    "stageId": ["Africa_area6"],
+    "kanji": "貼",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "は"
+    ],
+    "meaning": "はる。物を、貼り付けること。",
+    "exampleSentence": "彼は、壁にポスターを貼り（はり）、部屋を飾った。"
+  },
+  {
+    "id": "g10-118",
+    "stageId": ["Africa_area6"],
+    "kanji": "嘲",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "あざけ"
+    ],
+    "meaning": "あざけり。人を、馬鹿にすること。",
+    "exampleSentence": "彼は、嘲笑（ちょうしょう）を浴びながらも、自分の信念を貫き通した。"
+  },
+  {
+    "id": "g10-119",
+    "stageId": ["Africa_area6"],
+    "kanji": "捗",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "チョク"
+    ],
+    "kunyomi": [],
+    "meaning": "はかどる。物事が、順調に進むこと。",
+    "exampleSentence": "彼は、仕事が捗り（はかどり）、予定よりも早く終わらせることができた。"
+  },
+  {
+    "id": "g10-120",
+    "stageId": ["Africa_area6"],
+    "kanji": "椎",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "ツイ"
+    ],
+    "kunyomi": [],
+    "meaning": "つい。背骨のこと。",
+    "exampleSentence": "彼は、椎間板（ついかんばん）ヘルニアを患い、腰の痛みに苦しんでいる。"
+  },
+  {
+    "id": "g10-121",
+    "stageId": ["Africa_area7"],
+    "kanji": "爪",
+    "grade": 10,
+    "strokes": 4,
+    "onyomi": [],
+    "kunyomi": [
+      "つめ",
+      "つま"
+    ],
+    "meaning": "つめ。指の先端にある硬い部分。",
+    "exampleSentence": "彼は、爪（つめ）を切り、身だしなみを整えた。"
+  },
+  {
+    "id": "g10-121",
+    "stageId": ["Africa_area7"],
+    "kanji": "鶴",
+    "grade": 10,
+    "strokes": 21,
+    "onyomi": [],
+    "kunyomi": [
+      "つる"
+    ],
+    "meaning": "つる。鳥の一種。",
+    "exampleSentence": "彼は、千羽鶴（せんばづる）を折り、病気の友人の回復を願った。"
+  },
+  {
+    "id": "g10-123",
+    "stageId": ["Africa_area7"],
+    "kanji": "諦",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [
+      "あきら"
+    ],
+    "meaning": "あきらめる。物事を、諦めること。",
+    "exampleSentence": "彼は、どんな困難な状況でも、決して諦め（あきらめ）ずに努力を続けた。"
+  },
+  {
+    "id": "g10-124",
+    "stageId": ["Africa_area7"],
+    "kanji": "溺",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "デキ"
+    ],
+    "kunyomi": [
+      "おぼ"
+    ],
+    "meaning": "おぼれる。水の中に、沈むこと。",
+    "exampleSentence": "彼は、酒に溺れ（おぼれ）、自堕落な生活を送っていた。"
+  },
+  {
+    "id": "g10-125",
+    "stageId": ["Africa_area7"],
+    "kanji": "填",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "テン"
+    ],
+    "kunyomi": [],
+    "meaning": "てん。物事を、埋めること。",
+    "exampleSentence": "彼は、空いた時間を有効に活用し、知識を補充（ほじゅう）した。"
+  },
+  {
+    "id": "g10-126",
+    "stageId": ["Africa_area7"],
+    "kanji": "妬",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [
+      "ねた"
+    ],
+    "meaning": "ねたむ。他人の幸福を、羨ましく思うこと。",
+    "exampleSentence": "彼女は、友人の成功を妬み（ねたみ）、陰口を叩いた。"
+  },
+  {
+    "id": "g10-127",
+    "stageId": ["Africa_area7"],
+    "kanji": "賭",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "ト"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "meaning": "かける。物事を、賭けること。",
+    "exampleSentence": "彼は、人生を賭け（かけ）、新しい挑戦に臨んだ。"
+  },
+  {
+    "id": "g10-128",
+    "stageId": ["Africa_area7"],
+    "kanji": "藤",
+    "grade": 10,
+    "strokes": 18,
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "ふじ"
+    ],
+    "meaning": "ふじ。植物の一種。",
+    "exampleSentence": "彼は、藤棚（ふじだな）の下で、美しい藤の花を眺めた。"
+  },
+  {
+    "id": "g10-129",
+    "stageId": ["Africa_area7"],
+    "kanji": "瞳",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [
+      "ドウ"
+    ],
+    "kunyomi": [
+      "ひとみ"
+    ],
+    "meaning": "ひとみ。目の、黒い部分。",
+    "exampleSentence": "彼女は、澄んだ瞳（ひとみ）で、彼の心を射抜いた。"
+  },
+  {
+    "id": "g10-130",
+    "stageId": ["Africa_area7"],
+    "kanji": "頓",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "トン"
+    ],
+    "kunyomi": [],
+    "meaning": "とん。物事が、急に起こること。",
+    "exampleSentence": "彼は、頓挫（とんざ）した計画を立て直し、再出発を誓った。"
+  },
+  {
+    "id": "g10-131",
+    "stageId": ["Africa_area7"],
+    "kanji": "貪",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ドン"
+    ],
+    "kunyomi": [
+      "むさぼ"
+    ],
+    "meaning": "むさぼる。物事を、欲しがること。",
+    "exampleSentence": "彼は、知識を貪欲（どんよく）に吸収し、自己成長に努めた。"
+  },
+  {
+    "id": "g10-132",
+    "stageId": ["Africa_area7"],
+    "kanji": "丼",
+    "grade": 10,
+    "strokes": 5,
+    "onyomi": [],
+    "kunyomi": [
+      "どんぶり",
+      "どん"
+    ],
+    "meaning": "どんぶり。大きな器。",
+    "exampleSentence": "彼は、熱々の牛丼（ぎゅうどん）をかき込み、空腹を満たした。"
+  },
+  {
+    "id": "g10-133",
+    "stageId": ["Africa_area7"],
+    "kanji": "那",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "ナ"
+    ],
+    "kunyomi": [],
+    "meaning": "な。物事を、疑問に思うこと。",
+    "exampleSentence": "彼は、那辺（なへん）に真実があるのか、深く考えた。"
+  },
+  {
+    "id": "g10-134",
+    "stageId": ["Africa_area7"],
+    "kanji": "謎",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [],
+    "kunyomi": [
+      "なぞ"
+    ],
+    "meaning": "なぞ。物事が、分からないこと。",
+    "exampleSentence": "彼は、未解決の謎（なぞ）を解き明かすため、探偵になった。"
+  },
+  {
+    "id": "g10-135",
+    "stageId": ["Africa_area7"],
+    "kanji": "鍋",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [],
+    "kunyomi": [
+      "なべ"
+    ],
+    "meaning": "なべ。物を煮るための道具。",
+    "exampleSentence": "彼は、鍋（なべ）料理を囲んで、家族団らんの時間を過ごした。"
+  },
+  {
+    "id": "g10-136",
+    "stageId": ["Africa_area7"],
+    "kanji": "匂",
+    "grade": 10,
+    "strokes": 4,
+    "onyomi": [],
+    "kunyomi": [
+      "にお"
+    ],
+    "meaning": "におう。香りがすること。",
+    "exampleSentence": "彼は、花の匂い（におい）を嗅ぎ、春の訪れを感じた。"
+  },
+  {
+    "id": "g10-137",
+    "stageId": ["Africa_area7"],
+    "kanji": "虹",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [],
+    "kunyomi": [
+      "にじ"
+    ],
+    "meaning": "にじ。空に架かる、七色の光の帯。",
+    "exampleSentence": "彼は、雨上がりの空に架かる虹（にじ）を見て、感動した。"
+  },
+  {
+    "id": "g10-138",
+    "stageId": ["Africa_area7"],
+    "kanji": "捻",
+    "grade": 10,
+    "strokes": 11,
+    "onyomi": [
+      "ネン"
+    ],
+    "kunyomi": [],
+    "meaning": "ねじる。物を、ひねり回すこと。",
+    "exampleSentence": "彼は、捻挫（ねんざ）した足首を庇いながら、ゆっくりと歩いた。"
+  },
+  {
+    "id": "g10-139",
+    "stageId": ["Africa_area7"],
+    "kanji": "罵",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "バ"
+    ],
+    "kunyomi": [
+      "ののし"
+    ],
+    "meaning": "ののしる。人を、悪く言うこと。",
+    "exampleSentence": "彼は、罵詈雑言（ばりぞうごん）を浴びせられながらも、冷静に対応した。"
+  },
+  {
+    "id": "g10-140",
+    "stageId": ["Africa_area7"],
+    "kanji": "剝",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "ハク"
+    ],
+    "kunyomi": [
+      "は"
+    ],
+    "meaning": "おおいをとりのぞく。むきとる。",
+  "exampleSentence": "りんごの皮をナイフで剥（む）く。"
+  },
+  {
+    "id": "g10-141",
+    "stageId": ["Africa_area8"],
+    "kanji": "箸",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [],
+    "kunyomi": [
+      "はし"
+    ],
+    "meaning": "はし。食べ物を挟むための道具。",
+    "exampleSentence": "彼は、箸（はし）を器用に使い、寿司を食べた。"
+  },
+  {
+    "id": "g10-142",
+    "stageId": ["Africa_area8"],
+    "kanji": "氾",
+    "grade": 10,
+    "strokes": 5,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。水が、あふれること。",
+    "exampleSentence": "彼は、氾濫（はんらん）した川の様子を見て、危険を感じた。"
+  },
+  {
+    "id": "g10-143",
+    "stageId": ["Africa_area8"],
+    "kanji": "汎",
+    "grade": 10,
+    "strokes": 6,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。広く行き渡ること。",
+    "exampleSentence": "彼は、汎用性（はんようせい）の高い技術を開発し、多くの分野で活用されている。"
+  },
+  {
+    "id": "g10-144",
+    "stageId": ["Africa_area8"],
+    "kanji": "斑",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [],
+    "meaning": "はん。模様のこと。",
+    "exampleSentence": "彼は、斑点（はんてん）のある犬を飼っており、その可愛らしい姿に癒されている。"
+  },
+  {
+    "id": "g10-145",
+    "stageId": ["Africa_area8"],
+    "kanji": "眉",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "ビ",
+      "ミ"
+    ],
+    "kunyomi": [
+      "まゆ"
+    ],
+    "meaning": "まゆ。目の上にある毛。",
+    "exampleSentence": "彼女は、眉（まゆ）をひそめ、不満そうな表情を見せた。"
+  },
+  {
+    "id": "g10-146",
+    "stageId": ["Africa_area8"],
+    "kanji": "膝",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [],
+    "kunyomi": [
+      "ひざ"
+    ],
+    "meaning": "ひざ。足の関節。",
+    "exampleSentence": "彼は、膝（ひざ）を抱え、静かに座っていた。"
+  },
+  {
+    "id": "g10-147",
+    "stageId": ["Africa_area8"]   ,
+    "kanji": "肘",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [],
+    "kunyomi": [
+      "ひじ"
+    ],
+    "meaning": "ひじ。腕の関節。",
+    "exampleSentence": "彼は、肘（ひじ）をついて、考え事をしていた。"
+  },
+  {
+    "id": "g10-148",
+    "stageId": ["Africa_area8"],
+    "kanji": "訃",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "フ"
+    ],
+    "kunyomi": [],
+    "meaning": "ふ。人の死を知らせること。",
+    "exampleSentence": "彼は、友人の訃報（ふほう）に接し、深い悲しみに暮れた。"
+  },
+  {
+    "id": "g10-149",
+    "stageId": ["Africa_area8"],
+    "kanji": "蔽",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "ヘイ"
+    ],
+    "kunyomi": [],
+    "meaning": "へい。物事を、覆い隠すこと。",
+    "exampleSentence": "彼は、真実を隠蔽（いんぺい）しようとしたが、結局は明らかになった。"
+  },
+  {
+    "id": "g10-150",
+    "stageId": ["Africa_area8"],
+    "kanji": "餅",
+    "grade": 10,
+    "strokes": 15,
+    "onyomi": [
+      "ヘイ"
+    ],
+    "kunyomi": [
+      "もち"
+    ],
+    "meaning": "もち。米を蒸して、ついた食べ物。",
+    "exampleSentence": "彼は、お餅（もち）を焼いて、醤油をつけて食べた。"
+  },
+  {
+    "id": "g10-151",
+    "stageId": ["Africa_area8"],
+    "kanji": "璧",
+    "grade": 10,
+    "strokes": 18,
+    "onyomi": [
+      "ヘキ"
+    ],
+    "kunyomi": [],
+    "meaning": "へき。美しい玉。",
+    "exampleSentence": "彼は、完璧（かんぺき）な演技で、観客を魅了した。"
+  },
+  {
+    "id": "g10-152",
+    "stageId": ["Africa_area8"],
+    "kanji": "蔑",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ベツ"
+    ],
+    "kunyomi": [
+      "さげす"
+    ],
+    "meaning": "さげすむ。人を、見下すこと。",
+    "exampleSentence": "彼は、貧しい人々を蔑み（さげすみ）、差別的な言動を繰り返した。"
+  },
+  {
+    "id": "g10-153",
+    "stageId": ["Africa_area8"],
+    "kanji": "哺",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "ホ"
+    ],
+    "kunyomi": [],
+    "meaning": "ほ。動物が、子に乳を与えること。",
+    "exampleSentence": "彼は、哺乳類（ほにゅうるい）の生態を研究するため、動物園を訪れた。"
+  },
+  {
+    "id": "g10-154",
+    "stageId": ["Africa_area8"],
+    "kanji": "蜂",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "はち"
+    ],
+    "meaning": "はち。昆虫の一種。",
+    "exampleSentence": "彼は、蜂（はち）の巣を刺激し、集団で襲われた。"
+  },
+  {
+    "id": "g10-155",
+    "stageId": ["Africa_area8"],
+    "kanji": "貌",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ボウ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぼう。顔つき。",
+    "exampleSentence": "彼は、容貌（ようぼう）が優れており、多くの人々を魅了した。"
+  },
+  {
+    "id": "g10-156",
+    "stageId": ["Africa_area8"],
+    "kanji": "頬",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [],
+    "kunyomi": [
+      "ほお"
+    ],
+    "meaning": "ほお。顔の側面。",
+    "exampleSentence": "彼女は、頬（ほお）を赤らめ、恥ずかしそうに俯いた。"
+  },
+  {
+    "id": "g10-157",
+    "stageId": ["Africa_area8"],
+    "kanji": "睦",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ボク"
+    ],
+    "kunyomi": [],
+    "meaning": "むつむ。仲良くすること。",
+    "exampleSentence": "彼は、家族と睦まじく（むつまじく）暮らし、幸せな家庭を築いている。"
+  },
+  {
+    "id": "g10-158",
+    "stageId": ["Africa_area8"]     ,
+    "kanji": "勃",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "ボツ"
+    ],
+    "kunyomi": [],
+    "meaning": "ぼつ。物事が、急に起こること。",
+    "exampleSentence": "彼は、勃発（ぼっぱつ）した紛争を解決するため、国際社会に協力を求めた。"
+  },
+  {
+    "id": "g10-159",
+    "stageId": ["Africa_area8"],
+    "kanji": "昧",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "マイ"
+    ],
+    "kunyomi": [],
+    "meaning": "まい。物事が、はっきりしないこと。",
+    "exampleSentence": "彼は、曖昧（あいまい）な態度で、相手を困惑させた。"
+  },
+  {
+    "id": "g10-160",
+    "stageId": ["Africa_area8"],
+    "kanji": "枕",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      ""
+    ],
+    "kunyomi": [
+      "まくら"
+    ],
+    "meaning": "まくら。頭の下に置く物。",
+    "exampleSentence": "彼は、枕（まくら）を使って、頭を支えながら、眠りについた。"
+  },
+  {
+    "id": "g10-161",
+    "stageId": ["Africa_area9"],
+    "kanji": "蜜",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ミツ"
+    ],
+    "kunyomi": [],
+    "meaning": "みつ。花の蜜。",
+    "exampleSentence": "彼は、蜜蜂（みつばち）が蜜（みつ）を集める様子を観察し、自然の神秘に触れた。"
+  },
+  {
+    "id": "g10-162",
+    "stageId": ["Africa_area9"],
+    "kanji": "冥",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [
+      "メイ",
+      "ミョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "めい。暗いこと。",
+    "exampleSentence": "彼は、冥福（めいふく）を祈り、故人の冥界での安寧を願った。"
+  },
+  {
+    "id": "g10-163",
+    "stageId": ["Africa_area9"],
+    "kanji": "麺",
+    "grade": 10,
+    "strokes": 16,
+    "onyomi": [
+      "メン"
+    ],
+    "kunyomi": [],
+    "meaning": "めん。小麦粉を練って作った食べ物。",
+    "exampleSentence": "彼は、ラーメンの麺（めん）をすすり、熱々のスープを味わった。"
+  },
+  {
+    "id": "g10-164",
+    "stageId": ["Africa_area9"],
+    "kanji": "冶",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "ヤ"
+    ],
+    "kunyomi": [],
+    "meaning": "や。金属を溶かすこと。",
+    "exampleSentence": "彼は、冶金（やきん）技術を研究し、新しい合金の開発に貢献した。"
+  },
+  {
+    "id": "g10-165",
+    "stageId": ["Africa_area9"],
+    "kanji": "弥",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [],
+    "kunyomi": [
+      "や"
+    ],
+    "meaning": "や。物事が、ますます。",
+    "exampleSentence": "彼は、弥生（やよい）時代から続く、日本の歴史について深く学んだ。"
+  },
+  {
+    "id": "g10-166",
+    "stageId": ["Africa_area9"],
+    "kanji": "闇",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [],
+    "kunyomi": [
+      "やみ"
+    ],
+    "meaning": "やみ。光がないこと。",
+    "exampleSentence": "彼は、闇（やみ）に包まれた森の中を、一人で歩き続けた。"
+  },
+  {
+    "id": "g10-165",
+    "stageId": ["Africa_area9"],
+    "kanji": "喩",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "ユ"
+    ],
+    "kunyomi": [],
+    "meaning": "ゆ。物事を、例えること。",
+    "exampleSentence": "彼は、複雑な概念を、分かりやすい比喩（ひゆ）で説明した。"
+  },
+  {
+    "id": "g10-167",
+    "stageId": ["Africa_area9"],
+    "kanji": "湧",
+    "grade": 10,
+    "strokes": 12,
+    "onyomi": [
+      "ユウ"
+    ],
+    "kunyomi": [
+      "わ"
+    ],
+    "meaning": "わく。水が、わき出ること。",
+    "exampleSentence": "彼は、温泉が湧き（わき）出る場所を訪れ、旅の疲れを癒した。"
+  },
+  {
+    "id": "g10-168",
+    "stageId": ["Africa_area9"],
+    "kanji": "妖",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "あや"
+    ],
+    "meaning": "よう。怪しいこと。",
+    "exampleSentence": "彼は、妖艶（ようえん）な魅力で、多くの人々を惑わせた。"
+  },
+  {
+    "id": "g10-169",
+    "stageId": ["Africa_area9"],
+    "kanji": "瘍",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [],
+    "meaning": "よう。できもの。",
+    "exampleSentence": "彼は、皮膚にできた悪性腫瘍（しゅよう）の治療を受けた。"
+  },
+  {
+    "id": "g10-170",
+    "stageId": ["Africa_area9"],
+    "kanji": "沃",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "ヨク"
+    ],
+    "kunyomi": [],
+    "meaning": "よく。肥沃なこと。",
+    "exampleSentence": "彼は、沃野（よくや）に広がる田園風景を眺めながら、豊かな自然に感謝した。"
+  },
+  {
+    "id": "g10-171",
+    "stageId": ["Africa_area9"],
+    "kanji": "拉",
+    "grade": 10,
+    "strokes": 8,
+    "onyomi": [
+      "ラ"
+    ],
+    "kunyomi": [],
+    "meaning": "ら。物事を、引き裂くこと。",
+    "exampleSentence": "彼は、拉致（らち）された友人を救うため、危険な任務に挑んだ。"
+  },
+  {
+    "id": "g10-172",
+    "stageId": ["Africa_area9"],
+    "kanji": "辣",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ラツ"
+    ],
+    "kunyomi": [],
+    "meaning": "らつ。辛いこと。",
+    "exampleSentence": "彼は、辣腕（らつわん）な経営者として、会社を大きく成長させた。"
+  },
+  {
+    "id": "g10-173",
+    "stageId": ["Africa_area9"],
+    "kanji": "藍",
+    "grade": 10,
+    "strokes": 18,
+    "onyomi": [
+      "ラン"
+    ],
+    "kunyomi": [
+      "あい"
+    ],
+    "meaning": "あい。青色の染料。",
+    "exampleSentence": "彼は、藍色（あいいろ）の美しい着物を身につけ、茶会に参加した。"
+  },
+  {
+    "id": "g10-174",
+    "stageId": ["Africa_area9"],
+    "kanji": "璃",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "リ"
+    ],
+    "kunyomi": [],
+    "meaning": "り。ガラスのこと。",
+    "exampleSentence": "彼は、ステンドグラスの美しい瑠璃（るり）色の輝きに魅了された。"
+  },
+  {
+    "id": "g10-175",
+    "stageId": ["Africa_area9"],
+    "kanji": "慄",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "リツ"
+    ],
+    "kunyomi": [],
+    "meaning": "りつ。恐れること。",
+    "exampleSentence": "彼は、恐怖に慄え（おののき）、身動きが取れなくなった。"
+  },
+  {
+    "id": "g10-176",
+    "stageId": ["Africa_area9"],
+    "kanji": "侶",
+    "grade": 10,
+    "strokes": 9,
+    "onyomi": [
+      "リョ"
+    ],
+    "kunyomi": [],
+    "meaning": "りょ。仲間。",
+    "exampleSentence": "彼は、旅の侶（とも）として、共に困難を乗り越えた。"
+  },
+  {
+    "id": "g10-177",
+    "stageId": ["Africa_area9"],
+    "kanji": "瞭",
+    "grade": 10,
+    "strokes": 17,
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [],
+    "meaning": "りょう。物事が、はっきりしていること。",
+    "exampleSentence": "彼は、明瞭（めいりょう）な発音で、聴衆に語りかけた。"
+  },
+  {
+    "id": "g10-178",
+    "stageId": ["Africa_area9"],
+    "kanji": "瑠",
+    "grade": 10,
+    "strokes": 14,
+    "onyomi": [
+      "ル"
+    ],
+    "kunyomi": [],
+    "meaning": "るり。宝石の一種。",
+    "exampleSentence": "彼は、瑠璃（るり）色の美しい花瓶を手に取り、その輝きに魅了された。"
+  },
+  {
+    "id": "g10-179",
+    "stageId": ["Africa_area9"],
+    "kanji": "呂",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "ロ"
+    ],
+    "kunyomi": [],
+    "meaning": "ろ。背骨のこと。",
+    "exampleSentence": "彼は、風呂（ふろ）に入り、一日の疲れを癒した。"
+  },
+  {
+    "id": "g10-180",
+    "stageId": ["Africa_area9"],
+    "kanji": "賂",
+    "grade": 10,
+    "strokes": 13,
+    "onyomi": [
+      "ロ"
+    ],
+    "kunyomi": [],
+    "meaning": "ろ。賄賂のこと。",
+    "exampleSentence": "彼は、賄賂（わいろ）を受け取り、不正な取引を行った。"
+  },
+  {
+    "id": "g10-181",
+    "stageId": ["Africa_area10"],
+    "kanji": "弄",
+    "grade": 10,
+    "strokes": 7,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [
+      "もてあそ"
+    ],
+    "meaning": "もてあそぶ。物事を、手でいじること。",
+    "exampleSentence": "彼は、人の心を弄び（もてあそび）、自分の欲望を満たした。"
+  },
+  {
+    "id": "g10-182",
+    "stageId": ["Africa_area10"],
+    "kanji": "籠",
+    "grade": 10,
+    "strokes": 22,
+    "onyomi": [
+      "ロウ"
+    ],
+    "kunyomi": [
+      "かご",
+      "こ"
+    ],
+    "meaning": "かご。物を入れるための道具。",
+    "exampleSentence": "彼は、鳥籠（とりかご）の中で、美しい鳥を飼っている。"
+  },
+  {
+    "id": "g10-183",
+    "stageId": ["Africa_area10"],
+    "kanji": "麓",
+    "grade": 10,
+    "strokes": 19,
+    "onyomi": [
+      "ロク"
+    ],
+    "kunyomi": [
+      "ふもと"
+    ],
+    "meaning": "ふもと。山の、いちばん下の部分。",
+    "exampleSentence": "彼は、山の麓（ふもと）に広がる村で、静かに暮らしている。"
+  },
+  {
+    "id": "g10-184",
+    "stageId": ["Africa_area10"] ,
+    "kanji": "脇",
+    "grade": 10,
+    "strokes": 10,
+    "onyomi": [],
+    "kunyomi": [
+      "わき"
+    ],
+    "meaning": "わき。体の、腕の付け根の部分。",
+    "exampleSentence": "彼は、脇（わき）の下に汗をかき、緊張している様子だった。"
+  }
+  
+  
+]

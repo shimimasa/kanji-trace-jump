@@ -1,10 +1,13 @@
 // src/screens/ReviewStartScreen.js
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared, getWeakScore } from "../lib/progressStore.js";
+import { makeProgressKey } from "../lib/progressKey.js";
+import { loadRangeItems } from "../lib/rangeItems.js";
 
-function makeItemKey(rangeId, itemId) {
-  return `${rangeId}::${itemId}`;
-}
+
+function makeItemKey(type, itemId) {
+    return makeProgressKey(type, itemId);
+  }
 
 export function ReviewStartScreen(ctx, nav) {
   return {
@@ -13,13 +16,19 @@ export function ReviewStartScreen(ctx, nav) {
       el.className = "screen review";
 
       const selected = ctx.selectedRangeId ?? "kanji_g1";
-      const range = CONTENT_MANIFEST.find((x) => x.id === selected);
+       // ✅ rangeの母数をゲームと一致させる（行セット/学年/traceable）
+      const { range, type, items } = await loadRangeItems(selected);
 
-      // データロード
-      const base = import.meta.env.BASE_URL ?? "/";
-      const url = new URL(range.source, new URL(base, window.location.href)).toString();
-      const res = await fetch(url);
-      const items = await res.json();
+
+      const getLabel = (it) => (
+                it?.label ??
+                it?.kanji ??
+                it?.kana ??
+                it?.char ??
+                it?.text ??
+                it?.id ??
+                "？"
+              );
 
       // 設定（デフォルト）
       let count = 10; // 5/10/15
@@ -30,7 +39,7 @@ export function ReviewStartScreen(ctx, nav) {
         const total = items.length;
         let clearedCount = 0;
         for (const it of items) {
-          if (isCleared(ctx.progress, makeItemKey(range.id, it.id))) clearedCount++;
+          if (isCleared(ctx.progress, makeItemKey(type, it.id))) clearedCount++;
         }
         return { total, clearedCount, pct: total ? Math.round((clearedCount / total) * 100) : 0 };
       };
@@ -41,12 +50,12 @@ export function ReviewStartScreen(ctx, nav) {
         // 候補フィルタ
         let candidates = arr;
         if (onlyUncleared) {
-          candidates = candidates.filter((it) => !isCleared(ctx.progress, makeItemKey(range.id, it.id)));
+          candidates = candidates.filter((it) => !isCleared(ctx.progress, makeItemKey(type, it.id)));
         }
 
         // スコア関数
-        const weakScore = (it) => getWeakScore(ctx.progress, makeItemKey(range.id, it.id));
-        const lastAttemptAt = (it) => ctx.progress?.items?.[makeItemKey(range.id, it.id)]?.lastAttemptAt ?? 0;
+        const weakScore = (it) => getWeakScore(ctx.progress, makeItemKey(type, it.id));
+        const lastAttemptAt = (it) => ctx.progress?.items?.[makeItemKey(type, it.id)]?.lastAttemptAt ?? 0;
 
         // 優先ポリシー
         let ordered = candidates;
@@ -56,8 +65,8 @@ export function ReviewStartScreen(ctx, nav) {
           ordered = candidates
             .slice()
             .sort((a, b) => {
-              const ac = isCleared(ctx.progress, makeItemKey(range.id, a.id)) ? 1 : 0;
-              const bc = isCleared(ctx.progress, makeItemKey(range.id, b.id)) ? 1 : 0;
+              const ac = isCleared(ctx.progress, makeItemKey(type, a.id)) ? 1 : 0;
+              const bc = isCleared(ctx.progress, makeItemKey(type, b.id)) ? 1 : 0;
               if (ac !== bc) return ac - bc;
               const ws = weakScore(b) - weakScore(a);
               if (ws !== 0) return ws;
@@ -77,8 +86,8 @@ export function ReviewStartScreen(ctx, nav) {
           ordered = candidates
             .slice()
             .sort((a, b) => {
-              const ac = isCleared(ctx.progress, makeItemKey(range.id, a.id)) ? 1 : 0;
-              const bc = isCleared(ctx.progress, makeItemKey(range.id, b.id)) ? 1 : 0;
+              const ac = isCleared(ctx.progress, makeItemKey(type, a.id)) ? 1 : 0;
+              const bc = isCleared(ctx.progress, makeItemKey(type, b.id)) ? 1 : 0;
               if (ac !== bc) return ac - bc; // 未クリア先
               // ミス多い順を少し
               const ws = weakScore(b) - weakScore(a);
@@ -186,6 +195,12 @@ export function ReviewStartScreen(ctx, nav) {
             return;
           }
 
+          // ✅ 今回の出題分だけ id→label を作る（Resultで文字表示するため）
+          const labelMap = {};
+          for (const it of items) {
+            if (queue.includes(it.id)) labelMap[it.id] = getLabel(it);
+          }
+
           // 復習セッションをctxに載せてゲームへ
           nav.go("game", {
             selectedRangeId: selected,
@@ -197,6 +212,10 @@ export function ReviewStartScreen(ctx, nav) {
               startedAt: Date.now(),
               mistakes: {}, // itemId -> fail count
               cleared: [],  // itemId[]
+              labels: labelMap,
+              rangeId: range.id,
+              policy,
+              onlyUncleared,
             },
             // まず1問目へ
             singleId: queue[0],

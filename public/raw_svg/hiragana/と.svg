@@ -1,0 +1,18 @@
+<svg data-strokesvg="と" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="3068c">
+      <use href="#3068a"/>
+    </clipPath>
+    <clipPath id="3068d">
+      <use href="#3068b"/>
+    </clipPath>
+  </defs>
+  <g data-strokesvg="shadows" style="fill:var(--shadow,#ccc)">
+    <path id="3068a" d="M511 470q-18-34-35-83a3602 3602 0 0 1-62-197q-5-19-17-22a125 125 0 0 0-59-1q-13 2-16 10l-1 2v1q0 6 7 9 6 3 11 9l14 21 30 93q15 51 33 100 17 48 38 91c14 30 74 5 57-33"/>
+    <path id="3068b" d="m762 806-14 3q-23 9-65 15a1095 1095 0 0 1-163 10h-19l-15-1q-73-6-120-27t-50-67v-2q0-36 29-71 29-38 77-71a874 874 0 0 1 209-113 980 980 0 0 1 132-46q9-6 9-21 0-10-5-27-4-16-12-30-7-13-16-13h-2q-8 4-12 16-3 13-14 18l-103 43q-45 20-97 48l-57 33q-55 31-101 70-45 40-74 82-28 42-28 86v3q2 58 39 93 37 33 102 49 66 15 154 15a1897 1897 0 0 0 172-10q41-6 64-11 36-10 36-30 0-18-16-31t-40-13"/>
+  </g>
+  <g data-strokesvg="strokes" style="stroke:var(--stroke,#000);fill:none;stroke-width:128;stroke-linecap:round">
+    <path style="--i:0" d="M282 122c101 69 201 332 201 332" clip-path="url(#3068c)"/>
+    <path style="--i:1" d="M758 281c18 256-433 228-457 436-21 188 459 147 459 147" clip-path="url(#3068d)"/>
+  </g>
+</svg>

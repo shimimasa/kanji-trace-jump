@@ -468,6 +468,26 @@ body {
     font-weight: 700;
     fill: #ff7a00;
   }
+
+  /* ===========================
++   Clear stamp (赤い〇)
++   =========================== */
+.fx-clear-maru{
+    pointer-events: none;
+  }
+  .fx-clear-maru circle{
+    stroke: rgba(255, 60, 60, .95);
+    stroke-width: 7;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    /* 背景に埋もれないように白ふちっぽい効果 */
+    filter:
+      drop-shadow( 1px  0px 0 rgba(255,255,255,.85))
+      drop-shadow(-1px  0px 0 rgba(255,255,255,.85))
+      drop-shadow( 0px  1px 0 rgba(255,255,255,.85))
+      drop-shadow( 0px -1px 0 rgba(255,255,255,.85));
+  }
   
   .final-overlay {
     position: fixed;
@@ -895,7 +915,7 @@ html, body {
 /* ===========================
 +   UI polish (kids-friendly)
 +   =========================== */
-root{
+:root{
     --bg: #f6f8fb;
     --card: rgba(255,255,255,.92);
     --ink: #1c2430;
@@ -1411,6 +1431,66 @@ root{
     .dexInfoValue{
       font-weight: 900;
     }
+
+
+/* ===========================
++   Dex tags (make visible)
++   =========================== */
+.dexTags{
+  margin: 10px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.dexTag{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(18,38,63,.18);
+  background: rgba(255,255,255,.85);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: .02em;
+  box-shadow: 0 6px 18px rgba(18,38,63,.06);
+}
+
+/* Dex actions: 1個でも中央に寄せる */
+.dexActions{
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .dexActions .bigBtn{
+    min-width: min(520px, 100%);
+  }
+  
+      .dexNotice{
+        margin-top: 12px;
+        border-radius: 18px;
+        border: 1px dashed rgba(18,38,63,.18);
+        background: rgba(255,255,255,.72);
+        padding: 12px 14px;
+      }
+      .dexNoticeTitle{
+        font-weight: 1000;
+        opacity: .80;
+        margin-bottom: 6px;
+      }
+      .dexNoticeList{
+        margin: 0;
+        padding-left: 18px;
+        font-weight: 800;
+        line-height: 1.6;
+        opacity: .88;
+      }
+      .dexNoticeList li{
+        margin: 4px 0;
+      }
     .dexExample{
       margin-top: 12px;
       border-radius: 18px;
@@ -1466,3 +1546,639 @@ body {
 .card {
   padding-bottom: calc(16px + env(safe-area-inset-bottom));
 }
+
+/* ===========================
+   Review screens
+   =========================== */
+   .reviewBoard{
+    max-width: 980px;
+    margin: 0 auto;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(18,38,63,.08);
+    border-radius: 24px;
+    box-shadow: 0 16px 48px rgba(18,38,63,.10);
+    padding: 18px;
+  }
+  .reviewHead{
+    display:flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    gap: 12px;
+  }
+  .reviewTitle{ font-size: 28px; font-weight: 1000; }
+  .reviewMeta{ margin-top: 6px; opacity:.72; font-weight: 700; }
+  .reviewHeadActions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+  
+  .reviewCard{
+    margin-top: 14px;
+    border-radius: 22px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(246,248,251,.85);
+    padding: 18px;
+    box-shadow: 0 12px 30px rgba(18,38,63,.08);
+  }
+  .reviewSection{ margin-top: 14px; }
+  .reviewLabel{ font-weight: 1000; opacity:.75; margin-bottom: 8px; }
+  .reviewChips{ display:flex; gap:10px; flex-wrap:wrap; }
+  .chipBtn{
+    border-radius: 999px;
+    padding: 10px 14px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.9);
+    font-weight: 1000;
+  }
+  .chipBtn.active{
+    border:none;
+    background: rgba(56,117,255,.14);
+    box-shadow: 0 12px 26px rgba(56,117,255,.16);
+  }
+  .reviewToggle{ display:flex; gap:10px; align-items:center; font-weight: 900; opacity:.85; }
+  
+  .reviewActions{ margin-top: 16px; }
+  .reviewNote{ margin-top: 10px; }
+  
+  .reviewSummary{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .sumBox{
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(255,255,255,.78);
+    padding: 12px 14px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+  }
+  .sumBox span{ opacity:.7; font-weight: 900; }
+  .sumBox b{ font-weight: 1000; }
+  .reviewList .reviewRow{
+    padding: 8px 0;
+    border-top: 1px dashed rgba(18,38,63,.12);
+  }
+  .reviewList .reviewRow:first-child{ border-top:none; }
+  
+  @media (max-width: 720px){
+    .reviewSummary{ grid-template-columns: 1fr; }
+  }
+  /* ===========================
+   Recent review summary (Progress)
+   =========================== */
+.reviewSummaryCard{
+  margin-top: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(18,38,63,.08);
+  background: rgba(255,255,255,.78);
+  padding: 12px 14px;
+}
+
+.reviewSummaryTitle{
+  font-weight: 1000;
+  opacity: .78;
+  margin-bottom: 8px;
+}
+
+.reviewSummaryList{
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reviewRowLine{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(18,38,63,.12);
+}
+.reviewRowLine:first-child{
+  border-top: none;
+  padding-top: 0;
+}
+
+.reviewRowMain{
+  font-weight: 900;
+}
+.reviewRowSub{
+  margin-top: 4px;
+  font-weight: 800;
+}
+
+.reviewRowTag{
+  font-size: 12px;
+  font-weight: 1000;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(56,117,255,.10);
+  border: 1px solid rgba(56,117,255,.18);
+  white-space: nowrap;
+}
+
+
+/* ===========================
++   MASTER mode: hide hints
++   =========================== */
+.master-mode .stroke-active{
+  opacity: 0 !important;
+}
+.master-mode .stroke-hint-dot,
+.master-mode .stroke-hint-num{
+  display: none !important;
+}
+
+/* Masterでは teacher UI を見せない（先生モードで確認する場合は別途調整） */
+.master-mode .stroke-ui,
+.master-mode .nav{
+  display: none !important;
+}
+
+/* ===========================
++   Master fail FX
++   =========================== */
+.masterFailMark{
+    font-size: 34px;
+    font-weight: 1000;
+    fill: rgba(255, 60, 60, .95);
+    stroke: rgba(255,255,255,.85);
+    stroke-width: 2px;
+    paint-order: stroke;
+  }
+  
+  .kanjiSvg.masterFailFlash{
+    filter: drop-shadow(0 0 18px rgba(255, 60, 60, .45));
+  }
+  
+  .kanjiSvg.masterFailShake{
+    animation: masterShake 0.22s ease-out;
+  }
+  
+  @keyframes masterShake{
+    0%{ transform: translateX(0px); }
+    25%{ transform: translateX(-2px); }
+    50%{ transform: translateX(2px); }
+    75%{ transform: translateX(-1px); }
+    100%{ transform: translateX(0px); }
+  }
+  .dexMasterBox{
+    margin-top: 12px;
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(255,255,255,.78);
+    padding: 12px 14px;
+  }
+  .dexMasterHead{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .dexMasterTitle{
+    font-weight: 1000;
+    opacity: .8;
+  }
+  .dexMasterBadge{
+    font-weight: 1000;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(246,248,251,.85);
+  }
+  .dexMasterBadge.ok{
+    border: 1px solid rgba(56,117,255,.25);
+    background: rgba(56,117,255,.12);
+  }
+  .dexMasterStats{
+    margin-top: 10px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .dexMasterStat{
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    border-radius: 14px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(246,248,251,.85);
+    padding: 8px 10px;
+  }
+  .dexMasterStat span{ opacity:.7; font-weight: 900; }
+  .dexMasterStat b{ font-weight: 1000; }
+  .dexMasterMist{
+    margin-top: 10px;
+    display:flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dexMistPill{
+    display:flex;
+    align-items:center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.9);
+    font-weight: 900;
+  }
+  .dexMistPill span{ opacity:.75; }
+  .dexMistPill b{ font-weight: 1000; }
+  
+  /* Dex: master practice button */
+#practiceMaster.btn.big{
+  border: 1px solid rgba(18,38,63,.12);
+  background: rgba(246,248,251,.9);
+}
+#practiceMaster.btn.big:active{
+  transform: translateY(1px);
+}
+/* =========================
+   Title Popup
+========================= */
+.title-popup{
+  position: fixed;
+  /* 中央を避ける：右上に固定（漢字に被りにくい） */
+  top: calc(env(safe-area-inset-top, 0px) + 10px);
+  right: calc(env(safe-area-inset-right, 0px) + 10px);
+  left: auto;
+  bottom: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.title-popup.show{
+  opacity: 1;
+}
+.title-popup-inner{
+  background: linear-gradient(180deg, #fff, #f6f8fb);
+  border-radius: 24px;
+  /* 目立ちすぎないよう少しコンパクトに */
+  padding: 14px 16px;
+  min-width: auto;
+  max-width: min(320px, calc(100vw - 24px));
+  box-shadow: 0 20px 60px rgba(0,0,0,.18);
+  text-align: left;
+  transform: translateY(-6px) scale(.98);
+  transition: transform .25s ease;
+}
+.title-popup.show .title-popup-inner{
+  transform: translateY(0) scale(1);
+}
+.title-popup-head{
+  font-weight: 900;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.title-popup-title{
+  font-weight: 1000;
+  font-size: 18px;
+  color: #2b6cff;
+}
+
+/* HOME */
+.homeCard{
+  width: min(720px, 92vw);
+    margin: 0 auto;
+    padding: 18px;
+  }
+  
+  .homeHero{
+    text-align: center;
+    padding: 6px 8px 10px;
+  }
+  
+  .homeTitle{
+    font-size: 34px;
+    font-weight: 900;
+    letter-spacing: .04em;
+  }
+  
+  .homeSubtitle{
+    margin-top: 4px;
+    font-weight: 800;
+  }
+  
+  .homeKinds{
+    margin-top: 6px;
+    font-weight: 700;
+  }
+  
+  .homePrimary{
+    display: grid;
+    place-items: center;
+    margin: 12px 0 10px;
+  }
+  
+  .bigBtn{
+    width: min(420px, 92%);
+    padding: 14px 18px;
+    font-size: 18px;
+    border-radius: 18px;
+  }
+  
+  .homeRange{
+    margin-top: 6px;
+    padding: 12px;
+    border: 1px solid rgba(18,38,63,.08);
+    border-radius: 18px;
+    background: rgba(255,255,255,.55);
+  }
+  
+  .homeRangeRow{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 6px;
+  }
+  
+  .homeRangeName{
+    font-weight: 900;
+  }
+  
+  .homeGrid{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+  
+  .homeFooter{
+    text-align: center;
+    margin-top: 12px;
+    font-weight: 700;
+  }
+   /* ===========================
++     Master toggle (HUD)
++     =========================== */
+  .masterToggle{
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(18,38,63,.18);
+      background: rgba(255,255,255,.82);
+      font-weight: 900;
+      letter-spacing: .04em;
+      cursor: pointer;
+      user-select: none;
+    }
+    .masterToggle[aria-pressed="true"]{
+      border-color: rgba(18,38,63,.35);
+      box-shadow: 0 10px 22px rgba(18,38,63,.10);
+      transform: translateY(-1px);
+    }
+    /* ===========================
++   Game nav (prev/next only)
++   =========================== */
+.screen.game .nav{
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  
+  .screen.game .nav .btn{
+    min-width: 110px;
+  }
+
+/* ===========================
++   Range Select (ポップUI)
++   =========================== */
+.screen.range .rangeCard{
+    width: min(980px, 94vw);
+    margin: 0 auto;
+  }
+  
+  .screen.range .rangeHeader{
+    display: grid;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .screen.range .rangeTitle{
+    font-weight: 900;
+    letter-spacing: .03em;
+  }
+  
+  .screen.range .rangeNow{
+    padding: 12px 14px;
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.60);
+  }
+  
+  .screen.range .rangeNowValue{
+    margin-top: 4px;
+    font-size: 18px;
+    font-weight: 900;
+  }
+  
+  .screen.range .rangeList{
+    display: grid;
+    gap: 12px;
+  }
+  
+  .screen.range .rangeGroup{
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.55);
+    overflow: hidden;
+  }
+  
+  .screen.range .rangeGroupHead{
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    padding: 14px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .screen.range .rangeGroupHead::-webkit-details-marker{ display:none; }
+  
+  .screen.range .rangeGroupTitle{
+    font-weight: 900;
+    font-size: 18px;
+  }
+  
+  .screen.range .rangeGrid{
+    padding: 12px 12px 14px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  
+  /* ラジオは隠して “チップ” を押させる */
+  .screen.range .rangeRadio{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .screen.range .rangeItem{
+    position: relative;
+    display: block;
+  }
+  
+  .screen.range .rangeChip{
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 14px 12px;
+    border-radius: 16px;
+    border: 1px solid rgba(18,38,63,.12);
+    background: rgba(255,255,255,.78);
+    font-weight: 900;
+    cursor: pointer;
+    user-select: none;
+    transition: transform .06s ease, box-shadow .12s ease;
+  }
+  
+  .screen.range .rangeItem:hover .rangeChip{
+    transform: translateY(-1px);
+  }
+  
+  .screen.range .rangeRadio:checked + .rangeChip{
+    border-color: rgba(18,38,63,.28);
+    box-shadow: 0 12px 26px rgba(18,38,63,.12);
+  }
+  
+  .screen.range .rangeFooter{
+    margin-top: 12px;
+  }
+
+
+  /* ===========================
++   Paw gauge (★→🐾) 既存.starを流用
++   =========================== */
+.stars{
+    /* 既存の見た目を保ちつつ、足跡は詰め気味が可愛い */
+    gap: 4px;
+  }
+  
+  .star{
+    font-size: 18px;
+    line-height: 1;
+    opacity: .22;
+    transform: translateY(1px) scale(.96);
+    filter: none;
+  }
+  
+  .star.filled{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    /* 黒々しくしない：草原トーンに合わせて“やさしい”影 */
+    filter: drop-shadow(0 10px 16px rgba(18,38,63,.10));
+  }
+  
+  .star.pop{
+    animation: paw-pop 260ms ease-out;
+  }
+  
+  @keyframes paw-pop{
+    0%   { transform: translateY(2px) scale(.70); opacity: .40; }
+    60%  { transform: translateY(-1px) scale(1.18); opacity: 1; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+  }
+
+/* =========================
++   App共通 背景（空＋草原）
++   - 全画面で同じ世界観に統一
++   - /public/assets/bg/home-bg.png を使用
++   ========================= */
+html.bg-app,
+body.bg-app,
+html.bg-home,
+body.bg-home { /* bg-home は互換のため残す */
+  background-image: url("/assets/bg/home-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #eef6f8; /* 読み込み前の保険 */
+}
+
+/* ✅ #app が背景を塗って body/html の背景を隠さないように固定 */
+#app{
+    background: transparent !important;
+  }
+  
+  /* ✅ 背景の上に乗るUIを確実に前面へ */
+  html.bg-app #app,
+body.bg-app #app,
+html.bg-home #app,
+body.bg-home #app{
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* もや（空気感）※既存の雰囲気を維持しつつ、UIより後ろへ */
+  
+  body.bg-app::before,
+body.bg-home::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0; /* #app(1) より後ろ */
+    background:
+      radial-gradient(700px 360px at 30% 16%, rgba(255,255,255,.55) 0%, rgba(255,255,255,0) 70%),
+      radial-gradient(700px 360px at 74% 22%, rgba(255,255,255,.45) 0%, rgba(255,255,255,0) 72%);
+    filter: blur(0.4px);
+    opacity: .85;
+  }
+  
+  /* 🐾 薄い足跡オーバーレイ（既存のまま）※UIより後ろへ */
+  body.bg-app::after,
+body.bg-home::after
+  {
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0; /* #app(1) より後ろ */
+    opacity: .55; /* ✅ 画像背景と合わせて少し薄めに */
+  
+    /* 1つの足跡 = 大きい肉球 + 小さい指3つ を radial-gradient で作る
+       それを複数セット並べて散らす */
+    background:
+      /* paw 1 */
+      radial-gradient(circle 7px at 14% 22%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 12.6% 19.9%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 14.2% 18.8%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 15.7% 19.9%, rgba(18,38,63,.06) 0 70%, transparent 72%),
+  
+      /* paw 2 */
+      radial-gradient(circle 7px at 22% 38%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 20.6% 35.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 22.2% 34.8%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 23.7% 35.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+  
+      /* paw 3 */
+      radial-gradient(circle 7px at 34% 54%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 32.6% 51.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 34.2% 50.8%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 35.7% 51.9%, rgba(18,38,63,.05) 0 70%, transparent 72%),
+  
+      /* paw 4 */
+      radial-gradient(circle 7px at 66% 26%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 64.6% 23.9%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 66.2% 22.8%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 67.7% 23.9%, rgba(18,38,63,.045) 0 70%, transparent 72%),
+  
+      /* paw 5 */
+      radial-gradient(circle 7px at 74% 42%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 72.6% 39.9%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 74.2% 38.8%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 75.7% 39.9%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+  
+      /* paw 6 */
+      radial-gradient(circle 7px at 60% 74%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 58.6% 71.9%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 60.2% 70.8%, rgba(18,38,63,.04) 0 70%, transparent 72%),
+      radial-gradient(circle 3px at 61.7% 71.9%, rgba(18,38,63,.04) 0 70%, transparent 72%);
+  }
