@@ -494,12 +494,13 @@ export function DexScreen(ctx, nav) {
           return;
         }
 
-        if (t.closest("#practice")) {
+        if (t.closest('[data-action="practice"]')) {
           const it = view[index];
           // ✅ その1文字だけ練習（クリア後に図鑑へ戻る）
           nav.go("game", {
                 selectedRangeId: selected,
                 singleId: it.id,
+                mode: "kid",
                 returnTo: "dex",
                 returnFrom: ctx.from ?? "progress",
               });
@@ -507,7 +508,7 @@ export function DexScreen(ctx, nav) {
         }
 
          // ✅ 図鑑から Master モードで single 練習
-        if (t.closest("#practiceMaster")) {
+        if (t.closest('[data-action="master"]')) {
             const it = view[index];
             nav.go("game", {
               selectedRangeId: selected,
