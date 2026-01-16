@@ -1,9 +1,9 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 import { isCleared } from "../lib/progressStore.js";
 import { loadRangeItems } from "../lib/rangeItems.js";
-import { makeKanjiKey } from "../lib/progressKey.js";
-function makeItemId(rangeId, itemId) {
-  return makeKanjiKey(itemId);
+import { makeProgressKey } from "../lib/progressKey.js";
+function makeItemId(type, itemId) {
+  return makeProgressKey(type, itemId);
 }
 
 export function ProgressScreen(ctx, nav) {
@@ -14,7 +14,7 @@ export function ProgressScreen(ctx, nav) {
 
       const selected = ctx.selectedRangeId ?? "kanji_g1";
       // ✅ rangeの母数をゲームと一致させる（行セット/学年/traceable）
-      const { range, items } = await loadRangeItems(selected);
+      const { range, type,items } = await loadRangeItems(selected);
 
       el.innerHTML = `
         <div class="progressBoard">

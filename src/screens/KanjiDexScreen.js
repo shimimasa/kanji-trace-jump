@@ -33,7 +33,7 @@ export function KanjiDexScreen(ctx, nav) {
 
       const selected = ctx.selectedRangeId ?? "kanji_g1";
       // ✅ rangeの母数をゲームと一致させる（行セット/学年/traceable）
-      const { range, items } = await loadRangeItems(selected);
+      const { range, type, items } = await loadRangeItems(selected);
 
       // --- Dex state ---
       let onlyUncleared = false; // 未クリアだけ
