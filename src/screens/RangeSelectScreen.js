@@ -109,6 +109,20 @@ export function RangeSelectScreen(ctx, nav) {
         `;
       }).join("");
 
+      // ✅ Accordion: 同時に開けるのは1つだけ（縦伸び防止）
+      const onToggle = (e) => {
+          const target = e.target;
+          if (!(target instanceof HTMLDetailsElement)) return;
+          if (!target.classList.contains("rangeGroup")) return;
+          // 開いた時だけ、他を閉じる
+          if (target.open) {
+            const all = el.querySelectorAll("details.rangeGroup");
+            all.forEach((d) => {
+              if (d !== target) d.open = false;
+            });
+          }
+        };
+
       const onChange = (e) => {
         const v = e.target?.value;
         if (!v) return;
@@ -122,12 +136,14 @@ export function RangeSelectScreen(ctx, nav) {
       const onBack = () => nav.go("home");
 
       el.addEventListener("change", onChange);
+      el.addEventListener("toggle", onToggle);
       el.querySelector("#back").addEventListener("click", onBack);
 
       return {
         el,
         cleanup() {
           el.removeEventListener("change", onChange);
+          el.removeEventListener("toggle", onToggle);
           el.querySelector("#back").removeEventListener("click", onBack);
         }
       };
