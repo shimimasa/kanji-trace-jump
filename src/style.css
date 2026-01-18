@@ -992,6 +992,44 @@ html, body {
     cursor:pointer;
   }
   .iconBtn:active{ transform: translateY(1px); }
+
+  /* ===========================
++     HUD action buttons (Save / Home)
++     - 子ども向け：アイコン＋文字を1行で表示（縦折り返し防止）
++     =========================== */
+  .hudActionBtn{
+      height: 44px;
+      min-width: 96px;                 /* ← これで「ホームへ」が1行で入りやすい */
+      padding: 0 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(18,38,63,.10);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 6px 16px rgba(18,38,63,.10);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;             /* ← 縦書きっぽい折返しを根絶 */
+    }
+    .hudActionBtn:active{ transform: translateY(1px); }
+    .hudActionIcon{
+      font-size: 18px;
+      line-height: 1;
+    }
+    .hudActionText{
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: .02em;
+    }
+  
+    /* iPad/狭い高さで少しだけ圧縮（任意） */
+    @media (max-height: 820px){
+      .hudActionBtn{ min-width: 90px; padding: 0 10px; }
+      .hudActionText{ font-size: 13px; }
+    }
   
   /* Game main：中央に視線が集まる */
   .main{

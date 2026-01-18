@@ -31,11 +31,17 @@ export function GameScreen(ctx, nav) {
               MASTER
             </button>
             ${
-                              isSinglePractice
-                                ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
-                                : `<button id="saveBtn" class="iconBtn" type="button" aria-label="せーぶ">💾せーぶする</button>
-                                   <button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠ホームへ</button>`
-                            }
+                            isSinglePractice
+                              ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
+                              : `<button id="saveBtn" class="hudActionBtn" type="button" aria-label="せーぶ">
+                                   <span class="hudActionIcon" aria-hidden="true">💾</span>
+                                   <span class="hudActionText">せーぶ</span>
+                                 </button>
+                                 <button id="homeBtn" class="hudActionBtn" type="button" aria-label="ホームへ">
+                                   <span class="hudActionIcon" aria-hidden="true">🏠</span>
+                                   <span class="hudActionText">ホームへ</span>
+                                 </button>`
+                          }
           </div>
         </div>
         <div id="saveToast" class="saveToast saveToastGame" aria-live="polite" role="status"></div>
