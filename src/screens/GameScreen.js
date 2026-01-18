@@ -33,8 +33,8 @@ export function GameScreen(ctx, nav) {
             ${
                               isSinglePractice
                                 ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
-                                : `<button id="saveBtn" class="iconBtn" type="button" aria-label="せーぶ">💾</button>
-                                   <button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠</button>`
+                                : `<button id="saveBtn" class="iconBtn" type="button" aria-label="せーぶ">💾せーぶする</button>
+                                   <button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠ホームへ</button>`
                             }
           </div>
         </div>
