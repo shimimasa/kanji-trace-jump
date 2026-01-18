@@ -17,11 +17,13 @@ export function GameScreen(ctx, nav) {
       const isSinglePractice = !!ctx.singleId && ctx.returnTo === "dex";
 
       // 旧 index.html のDOMをここで生成（あなたの既存CSSを活かす）
+      const setSize = Math.max(1, Math.min(20, Number(ctx?.playSettings?.setSize ?? 5)));
+      const goalText = isSinglePractice ? "もくひょう：1もじ" : `もくひょう：${setSize}もじ`;
       el.innerHTML = `
         <div class="hud">
           <div id="stars" class="stars" aria-label="進捗"></div>
           <div class="hud-right">
-            <div id="mode" class="mode">もくひょう：5もじ</div>
+            <div id="mode" class="mode">${goalText}</div>
             <button id="masterToggle" class="masterToggle" type="button"
               aria-pressed="${mode === "master" ? "true" : "false"}"
               title="MASTERモード切替">

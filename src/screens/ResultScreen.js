@@ -62,8 +62,8 @@ export function ResultScreen(ctx, nav) {
               </div>
             ` : ""}
 
-            <div class="resultActions">
-              <button id="next" class="btn primary big">つぎの5もじ</button>
+           <div class="resultActions">
+              <button id="next" class="btn primary big">つぎの${r?.setLen ?? 5}もじ</button>
               <div class="resultActionsSub">
                 <button id="replay" class="btn">もういちど</button>
                 <button id="progress" class="btn">クリアしたもの</button>
@@ -78,17 +78,25 @@ export function ResultScreen(ctx, nav) {
         const onReplay = () => {
           // 同じセット先頭に戻したいなら setStart を使う
           const setStart = Number.isFinite(r?.setStart) ? r.setStart : null;
-          nav.go("game", { startFromIdx: setStart ?? null, startFromId: null });
+          nav.go("game", {
+                        selectedRangeId: ctx.selectedRangeId,
+                        startFromIdx: setStart ?? null,
+                        startFromId: null,
+                      });
         };
   
         const onNext = () => {
           const nextStart = Number.isFinite(ctx.nextStart) ? ctx.nextStart : 0;
-          nav.go("game", { startFromIdx: nextStart, startFromId: null });
+          nav.go("game", {
+                        selectedRangeId: ctx.selectedRangeId,
+                        startFromIdx: nextStart,
+                        startFromId: null,
+                      });
         };
   
-        const onProgress = () => nav.go("progress");
+        const onProgress = () => nav.go("progress", { selectedRangeId: ctx.selectedRangeId });
         const onTitleBook = () => nav.go("titleBook", { from: "result" });
-        const onHome = () => nav.go("home");
+        const onHome = () => nav.go("home", { selectedRangeId: ctx.selectedRangeId });
   
         const replayBtn = el.querySelector("#replay");
         const nextBtn = el.querySelector("#next");

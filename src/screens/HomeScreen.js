@@ -16,6 +16,12 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
        const selected = ctx.selectedRangeId ?? "kanji_g1";
        const range = CONTENT_MANIFEST.find((x) => x.id === selected);
  
+
+       // play settings（全画面共通）
+       const ps = (ctx.playSettings ||= { setSize: 5, order: "fixed" });
+       const curSetSize = Number.isFinite(Number(ps.setSize)) ? Number(ps.setSize) : 5;
+       const curOrder = (ps.order === "random") ? "random" : "fixed";
+
        // ✅ HomeのDOMはここで確実に生成（クリック委譲で壊れにくく）
        el.innerHTML = `
          <div class="card homeCard">
@@ -36,6 +42,30 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
              <div class="homeRangeRow">
                <div class="homeRangeName">${range?.label ?? "未選択"}</div>
                <button class="btn" data-action="range" type="button">えらぶ</button>
+             </div>
+           </div>
+
+           <div class="homeRange" style="margin-top:12px;">
+             <div class="homeRangeLabel muted">あそびかた</div>
+             <div class="homeRangeRow" style="align-items:flex-start;">
+               <div style="flex:1; display:grid; gap:10px;">
+                 <label style="display:flex; justify-content:space-between; gap:10px; align-items:center; font-weight:900;">
+                   <span>1セットの もじ数</span>
+                   <select id="setSize" class="btn" style="min-width:140px; height:44px; font-size:16px;">
+                     ${[1,3,5,10,15].map(n => `<option value="${n}" ${n===curSetSize?"selected":""}>${n}もじ</option>`).join("")}
+                   </select>
+                 </label>
+                 <label style="display:flex; justify-content:space-between; gap:10px; align-items:center; font-weight:900;">
+                   <span>ならびかえ</span>
+                   <select id="orderPolicy" class="btn" style="min-width:140px; height:44px; font-size:16px;">
+                     <option value="fixed" ${curOrder==="fixed"?"selected":""}>いつもどおり</option>
+                     <option value="random" ${curOrder==="random"?"selected":""}>ランダム</option>
+                   </select>
+                 </label>
+                 <div class="muted" style="font-weight:800; font-size:12px; line-height:1.4;">
+                   ランダムは、同じ学年（範囲）の中から毎回ちがう順番で出ます。
+                 </div>
+               </div>
              </div>
            </div>
  
@@ -63,6 +93,12 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
  
          switch (action) {
            case "play":
+            // ✅ ランダム順の「同一セッション内固定」を実現するため、開始時にセッションを切る
+             if ((ctx.playSettings?.order ?? "fixed") === "random") {
+                 ctx.playSession = { id: Date.now(), rangeId: selectedRangeId, order: "random", ids: null };
+               } else {
+                 ctx.playSession = null;
+               }
              nav.go("game", {
                selectedRangeId,
                mode: "kid",
@@ -90,11 +126,26 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
        };
  
        el.addEventListener("click", onClick);
+
+       // ✅ 設定UI（select）の変更はここで吸う
+       const setSizeEl = el.querySelector("#setSize");
+       const orderEl = el.querySelector("#orderPolicy");
+       const onSettingsChange = () => {
+         const nextSet = Math.max(1, Math.min(20, Number(setSizeEl?.value ?? curSetSize)));
+         const nextOrder = (orderEl?.value === "random") ? "random" : "fixed";
+         ctx.playSettings = { ...(ctx.playSettings ?? {}), setSize: nextSet, order: nextOrder };
+         // 設定を変えたらセッションは破棄（結果→次へ で順序がズレるのを防ぐ）
+         ctx.playSession = null;
+       };
+       setSizeEl?.addEventListener("change", onSettingsChange);
+       orderEl?.addEventListener("change", onSettingsChange);
  
        return {
          el,
          cleanup() {
            el.removeEventListener("click", onClick);
+           setSizeEl?.removeEventListener("change", onSettingsChange);
+           orderEl?.removeEventListener("change", onSettingsChange);
            // ✅ 背景は ScreenManager 側で全画面共通（bg-app）に統一
          },
        };

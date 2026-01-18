@@ -19,6 +19,12 @@ if (!root) throw new Error("#app が見つかりません");
 const nav = new ScreenManager(root, {
   progress: loadProgress(),
   selectedRangeId: "kanji_g1",
+  // Play settings (global)
+  // - setSize: 1セットの文字数
+  // - order: "fixed" | "random"
+  playSettings: { setSize: 5, order: "fixed" },
+  // Play session (random order persistence)
+  playSession: null,
 });
 
 nav.register("home", HomeScreen);
