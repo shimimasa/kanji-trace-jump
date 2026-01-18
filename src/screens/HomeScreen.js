@@ -177,7 +177,7 @@ export function HomeScreen(ctx, nav) {
                                         break;
                                       }    
            case "range":
-             nav.go("rangeSelect", { selectedRangeId });
+            nav.go("rangeSelect", { selectedRangeId, returnTo: "home" });
              break;
            case "review":
              nav.go("reviewStart", { selectedRangeId });

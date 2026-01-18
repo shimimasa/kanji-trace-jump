@@ -113,6 +113,7 @@ export function ReviewStartScreen(ctx, nav) {
                 <div class="reviewMeta">範囲：<b>${range?.label ?? "未選択"}</b> / 達成率 <b>${s.pct}%</b>（${s.clearedCount}/${s.total}）</div>
               </div>
               <div class="reviewHeadActions">
+              <button id="range" class="btn" type="button">もじをえらぶ</button>
                 <button id="back" class="btn" type="button">もどる</button>
               </div>
             </div>
@@ -159,6 +160,11 @@ export function ReviewStartScreen(ctx, nav) {
 
       const onClick = (e) => {
         const t = e.target;
+
+        if (t.closest("#range")) {
+                    nav.go("rangeSelect", { selectedRangeId: selected, returnTo: "reviewStart" });
+                    return;
+                  }
 
         if (t.closest("#back")) {
           // どこから来たかで戻す

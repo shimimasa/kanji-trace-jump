@@ -24,6 +24,7 @@ export function ProgressScreen(ctx, nav) {
               <div class="progressMeta">範囲：<b>${range?.label ?? "未選択"}</b></div>
             </div>
             <div class="progressHeadActions">
+            <button id="range" class="btn" type="button">もじをえらぶ</button>
             <button id="reviewStart" class="btn" type="button">復習</button>
               <button id="titlebook" class="btn" type="button">称号ずかん</button>
               <button id="back" class="btn" type="button">もどる</button>
@@ -189,6 +190,8 @@ export function ProgressScreen(ctx, nav) {
                   }
                 }
                 // 上部ボタン
+                const rangeBtn = e.target.closest("#range");
+                if (rangeBtn) { nav.go("rangeSelect", { selectedRangeId: selected, returnTo: "progress" }); return; }
                 const backBtn = e.target.closest("#back");
                 if (backBtn) { nav.go("home"); return; }
                 const tbBtn = e.target.closest("#titlebook");
