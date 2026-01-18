@@ -6,14 +6,25 @@ import { makeProgressKey } from "../lib/progressKey.js";
 import { judgeAttempt } from "./judge.js";
 import { dist, distancePointToPolyline } from "./strokeMath.js";
 import {
-  SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
+  DEFAULT_SET_SIZE, SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
   START_TOL, COMBO_WINDOW_MS,
   failReasonLabel, MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
   TITLE_POPUP_MS, CONFETTI_DEFAULTS,
   TITLE_POPUP_FADE_OUT_MS, MASTER_FAIL_FLASH_MS, MASTER_FAIL_MARK_MS
 } from "./config.js";
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
-  
+
+
+  // ---------------------------
+  // Helpers
+  // ---------------------------
+  function shuffleInPlace(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
   // ---------------------------
   // ✅ 旧 main.js の “定数” はここへ移植
   // ---------------------------
@@ -60,9 +71,18 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     })();
   const strokesCache = new Map();
 
+
+  // ---------------------------
+  // ✅ Home設定（ctx.playSettings）をゲーム側で採用する
+  // - setSize: 1セットの文字数（星の数/ResultのsetLen/自動次へに影響）
+  // - order: "fixed" | "random"
+  // ---------------------------
+  const ps = ctx?.playSettings ?? {};
+  const setSize = Math.max(1, Math.min(20, Number(ps.setSize ?? DEFAULT_SET_SIZE)));
+  const orderPolicy = (ps.order === "random") ? "random" : "fixed";
   
   const isSingleMode = !!singleId;
-  const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${SET_SIZE}もじ`;
+  const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${setSize}もじ`;
   const isMaster = mode === "master";
   const modeText = isMaster ? `${baseModeText}（MASTER）` : baseModeText;
 
@@ -272,8 +292,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     if (isSingleMode) {
               return { start: 0, end: 1, len: 1, pos: 0 };
             }
-    const start = Math.floor(i / SET_SIZE) * SET_SIZE;
-    const end = Math.min(start + SET_SIZE, items.length);
+            const start = Math.floor(i / setSize) * setSize;
+            const end = Math.min(start + setSize, items.length);
     const len = end - start;
     const pos = i - start;
     return { start, end, len, pos };
@@ -679,7 +699,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function renderStars(posInSet, setLen) {
     if (!elStars) return;
     // ✅ single練習は常に★1個固定
-    const max = isSingleMode ? 1 : clamp(setLen, 1, SET_SIZE);
+    const max = isSingleMode ? 1 : clamp(setLen, 1, setSize);
     const filled = isSingleMode ? 1 : clamp(posInSet + 1, 1, max);
 
     if (elStars.children.length !== max) {
@@ -2070,6 +2090,44 @@ function reorderLatinStrokes(polys) {
     }
 
     if (!items.length) throw new Error("データなし");
+
+    // ---------------------------
+    // ✅ ならびかえ（random）を反映（セッション内で順序固定）
+    // - HomeScreen は ctx.playSession を切っているが、ゲーム側が実際に並べ替える必要がある
+    // ---------------------------
+    if (!isSingleMode && orderPolicy === "random") {
+      const rangeId = selectedRangeId ?? "kanji_g1";
+      const session = ctx?.playSession ?? null;
+      const canReuse = !!session
+        && session.order === "random"
+        && session.rangeId === rangeId
+        && Array.isArray(session.ids)
+        && session.ids.length > 0;
+
+      if (canReuse) {
+        // 保存済みids順に並べ替え（欠けているidは末尾へ）
+        const map = new Map(items.map((it) => [it.id, it]));
+        const ordered = [];
+        for (const id of session.ids) {
+          const it = map.get(id);
+          if (it) { ordered.push(it); map.delete(id); }
+        }
+        for (const it of map.values()) ordered.push(it);
+        items = ordered;
+      } else {
+        const copy = items.slice();
+        shuffleInPlace(copy);
+        items = copy;
+        if (ctx) {
+          ctx.playSession = {
+            id: session?.id ?? Date.now(),
+            rangeId,
+            order: "random",
+            ids: items.map((x) => x.id),
+          };
+        }
+      }
+    }
 
     // ✅ single練習：その1文字だけに絞る
     if (isSingleMode) {

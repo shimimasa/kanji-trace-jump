@@ -68,7 +68,7 @@ export function GameScreen(ctx, nav) {
             const onHome = () => {
               const ok = window.confirm("ホームにもどりますか？\n（プレイ中の進み具合は保存されません）");
               if (!ok) return;
-              nav.go("home");
+              nav.go("home", { selectedRangeId: ctx.selectedRangeId });
             };
             const onDexBack = () => {
               const ok = window.confirm("図鑑にもどりますか？\n（プレイ中の進み具合は保存されません）");
