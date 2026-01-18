@@ -33,10 +33,12 @@ export function GameScreen(ctx, nav) {
             ${
                               isSinglePractice
                                 ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
-                                : `<button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠</button>`
+                                : `<button id="saveBtn" class="iconBtn" type="button" aria-label="せーぶ">💾</button>
+                                   <button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠</button>`
                             }
           </div>
         </div>
+        <div id="saveToast" class="saveToast saveToastGame" aria-live="polite" role="status"></div>
 
         <div class="main">
           <div class="topline">
@@ -62,6 +64,7 @@ export function GameScreen(ctx, nav) {
       `;
 
       const homeBtn = el.querySelector("#homeBtn");
+      const saveBtn = el.querySelector("#saveBtn");
             const dexBackBtn = el.querySelector("#dexBackBtn");
             const prevBtn = el.querySelector("#prevBtn");
     const nextBtn = el.querySelector("#nextBtn");
@@ -83,6 +86,35 @@ export function GameScreen(ctx, nav) {
       
             homeBtn?.addEventListener("click", onHome);
             dexBackBtn?.addEventListener("click", onDexBack);
+
+            // ✅ いつでもセーブ（子どもが“一発でセーブできた”を認識できる）
+            const onSave = () => {
+                try {
+                  if (!game?.getState) return;
+                  const st = game.getState();
+                  if (!st?.resumable) return;
+                  saveResumeState({
+                    selectedRangeId: st.selectedRangeId,
+                    mode: st.mode,
+                    idx: st.idx,
+                    strokeIndex: st.strokeIndex,
+                    done: st.done,
+                    failStreak: st.failStreak,
+                    playSettings: st.playSettings,
+                    playSession: st.playSession,
+                  });
+                  const toast = el.querySelector("#saveToast");
+                  if (toast) {
+                    toast.textContent = "✅ せーぶしたよ";
+                    toast.classList.remove("show");
+                    void toast.offsetWidth;
+                    toast.classList.add("show");
+                    setTimeout(() => toast.classList.remove("show"), 1200);
+                  }
+                  if (navigator.vibrate) navigator.vibrate(25);
+                } catch {}
+              };
+              saveBtn?.addEventListener("click", onSave);
 
             // ✅ MASTER切替：画面を再マウントして startTraceGame を作り直す（事故が少ない）
       const masterToggle = el.querySelector("#masterToggle");
@@ -291,6 +323,7 @@ export function GameScreen(ctx, nav) {
         el,
         cleanup() {
           homeBtn?.removeEventListener("click", onHome);
+          saveBtn?.removeEventListener("click", onSave);
           dexBackBtn?.removeEventListener("click", onDexBack);
           // 復習ボタン解除
           if (isReviewActive) {

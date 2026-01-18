@@ -1,5 +1,5 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
-import { loadResumeState, clearResumeState } from "../lib/progressStore.js"; 
+import { loadResumeState, saveResumeState, clearResumeState } from "../lib/progressStore.js"; 
  
 export function HomeScreen(ctx, nav) {
    return {
@@ -43,11 +43,13 @@ export function HomeScreen(ctx, nav) {
              ${
                              hasResume
                                ? `<button class="btn bigBtn" data-action="resume" type="button">▶ つづきから</button>
+                               <button class="btn bigBtn saveBtn" data-action="save" type="button">💾 せーぶ</button>
                                   <div class="muted" style="margin-top:6px; font-weight:900; font-size:12px; opacity:.75;">
                                     ✅ せーぶ されてるよ
                                   </div>`
                                : ``
                            }
+                           <div id="saveToast" class="saveToast" aria-live="polite" role="status"></div>
              <div class="homePlayMeta muted">
               いまは：<b>${rangeLabel}</b> ・ <b>${curSetSize}もじ</b> ・ <b>${curOrder === "random" ? "ランダム" : "そのまま"}</b>
            </div>
@@ -148,7 +150,22 @@ export function HomeScreen(ctx, nav) {
                              returnTo: null,
                            });
                            break;
-                         }  
+                         }
+                         case "save": {
+                                       if (!hasResume) return;
+                                       // ✅ 既存の途中セーブを「今の時刻で更新」して、子どもに“セーブした”を見せる
+                                       try { saveResumeState(resume); } catch {}
+                                       const toast = el.querySelector("#saveToast");
+                                       if (toast) {
+                                         toast.textContent = "✅ せーぶしたよ";
+                                         toast.classList.remove("show");
+                                         void toast.offsetWidth;
+                                         toast.classList.add("show");
+                                         setTimeout(() => toast.classList.remove("show"), 1200);
+                                       }
+                                       if (navigator.vibrate) navigator.vibrate(25);
+                                       break;
+                                     }  
            case "range":
              nav.go("rangeSelect", { selectedRangeId });
              break;
