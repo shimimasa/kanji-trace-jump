@@ -1,6 +1,7 @@
 import { CONTENT_MANIFEST } from "../data/contentManifest.js";
+import { loadResumeState, clearResumeState } from "../lib/progressStore.js"; 
  
- export function HomeScreen(ctx, nav) {
+export function HomeScreen(ctx, nav) {
    return {
      async mount() {
        const el = document.createElement("div");
@@ -16,6 +17,10 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
        const selected = ctx.selectedRangeId ?? "kanji_g1";
        const range = CONTENT_MANIFEST.find((x) => x.id === selected);
        const rangeLabel = range?.label ?? "えらんでね";
+
+       // ✅ つづき（途中セーブ）を読む
+       const resume = loadResumeState();
+       const hasResume = !!resume && resume.selectedRangeId === (ctx.selectedRangeId ?? selected);
 
        // play settings（全画面共通）
        const ps = (ctx.playSettings ||= { setSize: 5, order: "fixed" });
@@ -35,6 +40,14 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
              <button class="btn primary bigBtn" data-action="play" type="button">
                ▶ はじめる
              </button>
+             ${
+                             hasResume
+                               ? `<button class="btn bigBtn" data-action="resume" type="button">▶ つづきから</button>
+                                  <div class="muted" style="margin-top:6px; font-weight:900; font-size:12px; opacity:.75;">
+                                    ✅ せーぶ されてるよ
+                                  </div>`
+                               : ``
+                           }
              <div class="homePlayMeta muted">
               いまは：<b>${rangeLabel}</b> ・ <b>${curSetSize}もじ</b> ・ <b>${curOrder === "random" ? "ランダム" : "そのまま"}</b>
            </div>
@@ -98,6 +111,9 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
  
          switch (action) {
            case "play":
+            // ✅ 新しくはじめる：途中セーブは消す
+             clearResumeState();
+             ctx.resumeCandidate = null;
             // ✅ ランダム順の「同一セッション内固定」を実現するため、開始時にセッションを切る
              if ((ctx.playSettings?.order ?? "fixed") === "random") {
                  ctx.playSession = { id: Date.now(), rangeId: selectedRangeId, order: "random", ids: null };
@@ -115,6 +131,24 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
                returnTo: null,
              });
              break;
+             case "resume": {
+                           if (!hasResume) return;
+                           // ✅ 復元候補を ctx に積む（startTraceGame が render() 内で適用する）
+                           ctx.resumeCandidate = resume;
+                           // ランダム順の順序も維持したいので playSession を復元
+                           if (resume.playSession) ctx.playSession = resume.playSession;
+                           if (resume.playSettings) ctx.playSettings = resume.playSettings;
+              
+                           nav.go("game", {
+                             selectedRangeId,
+                             mode: resume.mode ?? "kid",
+                             startFromIdx: Number.isFinite(resume.idx) ? resume.idx : null,
+                             startFromId: null,
+                             singleId: null,
+                             returnTo: null,
+                           });
+                           break;
+                         }  
            case "range":
              nav.go("rangeSelect", { selectedRangeId });
              break;

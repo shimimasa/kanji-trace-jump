@@ -1,10 +1,11 @@
 // src/screens/GameScreen.js
 import { startTraceGame } from "../game/startTraceGame.js";
-import { recordReviewSession, saveProgress } from "../lib/progressStore.js";
+import { recordReviewSession, saveProgress, saveResumeState, clearResumeState } from "../lib/progressStore.js";
 import { getRangeType } from "../lib/rangeItems.js";
 import { makeProgressKey } from "../lib/progressKey.js";
 export function GameScreen(ctx, nav) {
   let game = null;
+  let allowResumeSave = true; // Resultへ行く時などは false にして保存しない
   // 復習ナビ（single練習終了時に startTraceGame から返ってくる）
   let lastReviewNav = null;
   return {
@@ -66,12 +67,12 @@ export function GameScreen(ctx, nav) {
     const nextBtn = el.querySelector("#nextBtn");
 
             const onHome = () => {
-              const ok = window.confirm("ホームにもどりますか？\n（プレイ中の進み具合は保存されません）");
+              const ok = window.confirm("ホームにもどりますか？\n（つづきは せーぶ されます）");
               if (!ok) return;
               nav.go("home", { selectedRangeId: ctx.selectedRangeId });
             };
             const onDexBack = () => {
-              const ok = window.confirm("図鑑にもどりますか？\n（プレイ中の進み具合は保存されません）");
+              const ok = window.confirm("図鑑にもどりますか？\n（つづきは せーぶ されます）");
               if (!ok) return;
               nav.go("dex", {
                 selectedRangeId: ctx.selectedRangeId,
@@ -263,12 +264,10 @@ export function GameScreen(ctx, nav) {
                     // 通常はResult画面へ
                     // ✅ ScreenManagerがctxを置換する実装でも、
                     // Result側で selectedRangeId / nextStart が欠けないように明示的に渡す
-                    nav.go("result", {
-                      selectedRangeId: ctx.selectedRangeId,
-                      lastResult: result,
-                      nextStart,
-                      history,
-                    });
+                    // 通常はResult画面へ（＝セット完了。途中再開は不要）
+                    allowResumeSave = false;
+                    clearResumeState();
+                    nav.go("result", { lastResult: result, nextStart, history });
                   },
       });
 
@@ -301,7 +300,26 @@ export function GameScreen(ctx, nav) {
             lastReviewNav = null;
 
           masterToggle?.removeEventListener("click", onToggleMaster);
-          game?.stop?.();
+          // ✅ 途中セーブ（通常プレイのみ）
+          try {
+              if (allowResumeSave && game?.getState) {
+                const st = game.getState();
+                if (st?.resumable) {
+                  saveResumeState({
+                    selectedRangeId: st.selectedRangeId,
+                    mode: st.mode,
+                    idx: st.idx,
+                    strokeIndex: st.strokeIndex,
+                    done: st.done,
+                    failStreak: st.failStreak,
+                    playSettings: st.playSettings,
+                    playSession: st.playSession,
+                  });
+                }
+              }
+            } catch {}
+  
+            game?.stop?.();
           game = null;
         }
       };

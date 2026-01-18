@@ -2031,9 +2031,28 @@ function reorderLatinStrokes(polys) {
       return;
     }
 
+    // 初期化（通常）
     done = new Array(strokes.length).fill(false);
     strokeIndex = 0;
     failStreak = new Array(strokes.length).fill(0);
+
+    // ---------------------------
+    // ✅ Resume復元（通常プレイのみ）
+    // - ctx.resumeCandidate があれば、現在の item (idx) に対してだけ復元する
+    // ---------------------------
+    const rc = ctx?.resumeCandidate ?? null;
+    if (!isSingleMode && !ctx?.review?.active && rc && rc.selectedRangeId === selectedRangeId) {
+      // idx一致の時だけ復元（別文字に誤適用しない）
+      if (Number.isFinite(rc.idx) && rc.idx === idx) {
+        if (Array.isArray(rc.done) && rc.done.length === strokes.length) done = rc.done.slice();
+        if (Array.isArray(rc.failStreak) && rc.failStreak.length === strokes.length) failStreak = rc.failStreak.slice();
+        if (Number.isFinite(rc.strokeIndex)) strokeIndex = clamp(rc.strokeIndex, 0, strokes.length);
+      }
+      // 1回復元したら、二重適用しない
+      try { ctx.resumeCandidate = null; } catch {}
+    }
+
+
 
     if (elStrokeButtons) renderStrokeButtons(strokes.length);
 
@@ -2176,5 +2195,25 @@ function reorderLatinStrokes(polys) {
     ready: bootPromise, // or ready
     stop,
     modeText,
+    // ✅ GameScreenが「途中セーブ」に使う
+    getState() {
+        const curItem = items?.[idx] ?? null;
+        return {
+          // どの範囲・どのモードか
+          selectedRangeId,
+          mode: isMaster ? "master" : "kid",
+          // 途中再開対象か（single/reviewは除外）
+          resumable: !isSingleMode && !ctx?.review?.active,
+          // 現在地
+          idx,
+          itemId: curItem?.id ?? null,
+          strokeIndex,
+          done: Array.isArray(done) ? done.slice() : [],
+          failStreak: Array.isArray(failStreak) ? failStreak.slice() : [],
+          // 設定（見せる用）
+          playSettings: ctx?.playSettings ?? null,
+          playSession: ctx?.playSession ?? null,
+        };
+      },
   };
 }

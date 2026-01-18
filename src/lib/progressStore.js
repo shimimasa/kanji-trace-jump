@@ -1,4 +1,5 @@
 const KEY = "ktj_progress_v1";
+const RESUME_KEY = "ktj_resume_v1";
 import { normalizeToProgressKey } from "./progressKey.js";
 
 export function loadProgress() {
@@ -20,6 +21,46 @@ export function loadProgress() {
 
 export function saveProgress(progress) {
   localStorage.setItem(KEY, JSON.stringify(progress));
+}
+
+// ===========================
+// Resume state persistence (途中再開)
+// ===========================
+// resume = {
+//   at: number,
+//   selectedRangeId: string,
+//   mode: "kid"|"master",
+//   idx: number,
+//   strokeIndex: number,
+//   done: boolean[],
+//   failStreak: number[],
+//   playSettings?: { setSize: number, order: "fixed"|"random" },
+//   playSession?: { id: number, rangeId: string, order: "random", ids: string[]|null }
+// }
+
+export function loadResumeState() {
+  try {
+    const raw = localStorage.getItem(RESUME_KEY);
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (!obj || typeof obj !== "object") return null;
+    // 最低限
+    if (!obj.selectedRangeId) return null;
+    return obj;
+  } catch {
+    return null;
+  }
+}
+
+export function saveResumeState(resume) {
+  try {
+    if (!resume) return;
+    localStorage.setItem(RESUME_KEY, JSON.stringify({ at: Date.now(), ...resume }));
+  } catch {}
+}
+
+export function clearResumeState() {
+  try { localStorage.removeItem(RESUME_KEY); } catch {}
 }
 
 function migrateKeysInPlace(progress) {
