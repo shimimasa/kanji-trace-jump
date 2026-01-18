@@ -214,9 +214,8 @@ export function TitleBookScreen(ctx, nav) {
         const sort = btn.dataset.sort;
 
         if (action === "back") {
-          if (ctx.from === "result") nav.go("result");
-          else if (ctx.from === "progress") nav.go("progress");
-          else nav.go("home");
+          // ✅ もどるは常にホームへ
+          nav.go("home", { selectedRangeId: ctx.selectedRangeId ?? null });
           return;
         }
 

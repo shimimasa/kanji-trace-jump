@@ -496,8 +496,9 @@ export function DexScreen(ctx, nav) {
                   }
 
         if (t.closest("#back")) {
-          goBack();
-          return;
+          // ✅ もどるは常にホームへ
+        nav.go("home", { selectedRangeId: selected });
+        return;
         }
 
         if (t.closest('[data-action="practice"]')) {

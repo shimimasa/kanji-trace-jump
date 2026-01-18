@@ -167,9 +167,8 @@ export function ReviewStartScreen(ctx, nav) {
                   }
 
         if (t.closest("#back")) {
-          // どこから来たかで戻す
-          if (ctx.from === "dex") nav.go("dex", { selectedRangeId: selected, from: "progress" });
-          else nav.go("progress");
+          // ✅ もどるは常にホームへ
+          nav.go("home", { selectedRangeId: selected });
           return;
         }
 
