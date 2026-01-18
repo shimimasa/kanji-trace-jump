@@ -1873,6 +1873,34 @@ body {
     place-items: center;
     margin: 12px 0 10px;
   }
+
+  .homePlayMeta{
+      margin-top: 8px;
+      font-weight: 800;
+      font-size: 12px;
+      text-align: center;
+      opacity: .75;
+    }
+    
+    .homeRangeActions{
+      margin-top: 10px;
+      display:flex;
+      justify-content: flex-end;
+    }
+    
+    .btn.small{
+      min-width: 0;
+      height: 44px;
+      padding: 0 14px;
+      font-size: 16px;
+      border-radius: 14px;
+    }
+    
+    .btn.ghost{
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(18,38,63,.12);
+      box-shadow: 0 6px 16px rgba(18,38,63,.06);
+    }
   
   .bigBtn{
     width: min(420px, 92%);

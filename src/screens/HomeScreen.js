@@ -35,13 +35,20 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
              <button class="btn primary bigBtn" data-action="play" type="button">
                ▶ はじめる
              </button>
+             <div class="homePlayMeta muted">
+               いま：<b>${range?.label ?? "未選択"}</b> ・ <b>${curSetSize}もじ</b> ・ <b>${curOrder === "random" ? "ランダム" : "いつもどおり"}</b>
+             </div>
            </div>
  
            <div class="homeRange">
              <div class="homeRangeLabel muted">いまの範囲</div>
              <div class="homeRangeRow">
                <div class="homeRangeName">${range?.label ?? "未選択"}</div>
-               <button class="btn" data-action="range" type="button">えらぶ</button>
+             </div>
+             <div class="homeRangeActions">
+               <button class="btn small ghost" data-action="range" type="button" aria-label="範囲を変更">
+                 範囲を変更
+               </button>
              </div>
            </div>
 
