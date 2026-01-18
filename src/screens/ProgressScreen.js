@@ -27,7 +27,7 @@ export function ProgressScreen(ctx, nav) {
             <button id="range" class="btn" type="button">もじをえらぶ</button>
             <button id="reviewStart" class="btn" type="button">復習</button>
               <button id="titlebook" class="btn" type="button">称号ずかん</button>
-              <button id="back" class="btn" type="button">もどる</button>
+              <button id="back" class="btn" type="button">ホームへ</button>
             </div>
           </div>
 

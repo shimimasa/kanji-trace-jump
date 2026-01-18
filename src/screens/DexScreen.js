@@ -358,7 +358,7 @@ export function DexScreen(ctx, nav) {
               <div class="dexHeadActions">
               <button id="range" class="btn" type="button">もじをえらぶ</button>
               <button id="review" class="btn" type="button">復習</button>
-                <button id="back" class="btn" type="button">もどる</button>
+                <button id="back" class="btn" type="button">ホームへ</button>
               </div>
             </div>
 

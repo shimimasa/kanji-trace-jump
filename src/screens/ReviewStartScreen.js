@@ -114,7 +114,7 @@ export function ReviewStartScreen(ctx, nav) {
               </div>
               <div class="reviewHeadActions">
               <button id="range" class="btn" type="button">もじをえらぶ</button>
-                <button id="back" class="btn" type="button">もどる</button>
+                <button id="back" class="btn" type="button">ホームへ</button>
               </div>
             </div>
 

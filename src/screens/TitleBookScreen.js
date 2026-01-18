@@ -168,7 +168,7 @@ export function TitleBookScreen(ctx, nav) {
             <div class="tb-head-actions">
               <button type="button" class="btn danger" data-action="resetProgress">進捗リセット</button>
               <button type="button" class="btn danger ghost" data-action="resetAll">全部リセット</button>
-              <button type="button" class="btn" data-action="back">もどる</button>
+              <button type="button" class="btn" data-action="back">ホームへ</button>
             </div>
           </div>
 
@@ -198,7 +198,7 @@ export function TitleBookScreen(ctx, nav) {
           <div class="tb-body">${rows}</div>
 
           <div class="tb-foot">
-            <button type="button" class="btn" data-action="back">もどる</button>
+            <button type="button" class="btn" data-action="back">ホームへ</button>
             <button type="button" class="btn danger" data-action="resetProgress">進捗リセット</button>
           </div>
         </div>
