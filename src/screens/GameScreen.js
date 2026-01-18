@@ -261,7 +261,14 @@ export function GameScreen(ctx, nav) {
                     }
           
                     // 通常はResult画面へ
-                    nav.go("result", { lastResult: result, nextStart, history });
+                    // ✅ ScreenManagerがctxを置換する実装でも、
+                    // Result側で selectedRangeId / nextStart が欠けないように明示的に渡す
+                    nav.go("result", {
+                      selectedRangeId: ctx.selectedRangeId,
+                      lastResult: result,
+                      nextStart,
+                      history,
+                    });
                   },
       });
 

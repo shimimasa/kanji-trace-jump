@@ -102,6 +102,9 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
              nav.go("game", {
                selectedRangeId,
                mode: "kid",
+                // ✅ Homeからの開始は「前回のResult由来の開始位置」を持ち込まない
+               startFromIdx: null,
+               startFromId: null,
                // 余計な文脈を持ち込まない
                singleId: null,
                returnTo: null,
