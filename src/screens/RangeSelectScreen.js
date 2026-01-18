@@ -102,7 +102,7 @@ export function RangeSelectScreen(ctx, nav) {
           <details class="rangeGroup" ${openAttr}>
             <summary class="rangeGroupHead">
               <span class="rangeGroupTitle">${TYPE_LABEL[type] ?? type}</span>
-              <span class="rangeGroupHint muted">タップしてひらく</span>
+              <span class="rangeGroupHint" aria-hidden="true">▶</span>
             </summary>
             <div class="rangeGrid">${items}</div>
           </details>

@@ -2085,14 +2085,14 @@ body {
   }
   
   .screen.range .rangeNow{
-    padding: 12px 14px;
+    padding: 10px 12px;
     border-radius: 18px;
     border: 1px solid rgba(18,38,63,.10);
     background: rgba(255,255,255,.60);
   }
   
   .screen.range .rangeNowValue{
-    margin-top: 4px;
+    margin-top: 2px;
     font-size: 18px;
     font-weight: 900;
   }
@@ -2125,6 +2125,18 @@ body {
     font-weight: 900;
     font-size: 18px;
   }
+
+  .screen.range .rangeGroupHint{
+      font-weight: 1000;
+      font-size: 16px;
+      opacity: .55;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    /* open時は下向きに */
+    .screen.range details[open] .rangeGroupHint{
+      transform: rotate(90deg);
+      opacity: .80;
+    }
   
   .screen.range .rangeGrid{
     padding: 12px 12px 14px;
@@ -2164,14 +2176,34 @@ body {
   }
   
   .screen.range .rangeRadio:checked + .rangeChip{
-    border-color: rgba(18,38,63,.28);
-    box-shadow: 0 12px 26px rgba(18,38,63,.12);
+    border-color: rgba(56,117,255,.45);
+  background: rgba(56,117,255,.10);
+  box-shadow: 0 14px 28px rgba(56,117,255,.16);
+  transform: translateY(-1px);
   }
   
   .screen.range .rangeFooter{
     margin-top: 12px;
   }
 
+  /* Footer: 戻るを主役にしない（右寄せ・少し小さく） */
+.screen.range .rangeFooter{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .screen.range #back.btn{
+    min-width: 160px;
+    height: 56px;
+    font-size: 20px;
+  }
+  
+  /* iPad高さ対策：rangeも少しだけ圧縮 */
+  @media (max-height: 900px){
+    .screen.range .rangeCard{ padding: 14px; }
+    .screen.range .rangeGroupHead{ padding: 12px 12px; }
+    .screen.range .rangeGrid{ padding: 10px 10px 12px; gap: 8px; }
+    .screen.range .rangeChip{ padding: 12px 10px; }
+  }
 
   /* ===========================
 +   Paw gauge (★→🐾) 既存.starを流用
