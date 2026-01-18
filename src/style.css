@@ -1909,6 +1909,16 @@ body {
     border-radius: 18px;
   }
   
+  .homeSubActions{
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .homeFooter{
+      margin-top: 12px;
+    }
 
   /* HOME: save button (secondary but obvious) */
 .saveBtn{

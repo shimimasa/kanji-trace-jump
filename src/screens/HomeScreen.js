@@ -40,12 +40,10 @@ export function HomeScreen(ctx, nav) {
              <button class="btn primary bigBtn" data-action="play" type="button">
                ▶ はじめる
              </button>
-             ${hasResume
-                             ? `<button class="btn bigBtn" data-action="resume" type="button">▶ つづきから</button>`
-                             : ``}
-              
-                           <!-- ✅ せーぶは常に表示（出たり消えたりしない） -->
-                           <button class="btn bigBtn saveBtn" data-action="save" type="button">💾 せーぶ</button>
+             <div class="homeSubActions">
+              ${hasResume ? `<button class="btn bigBtn" data-action="resume" type="button">▶ つづきから</button>` : ``}
+              <button class="btn bigBtn saveBtn" data-action="save" type="button">💾 せーぶ</button>
+            </div>
               
                            ${
                              hasResume
@@ -58,24 +56,16 @@ export function HomeScreen(ctx, nav) {
                            }
               
                            <div id="saveToast" class="saveToast" aria-live="polite" role="status"></div>
-             <div class="homePlayMeta muted">
-              いまは：<b>${rangeLabel}</b> ・ <b>${curSetSize}もじ</b> ・ <b>${curOrder === "random" ? "ランダム" : "そのまま"}</b>
-           </div>
- 
-           <div class="homeRange">
-             <div class="homeRangeLabel muted">いまのもじ</div>
-             <div class="homeRangeRow">
-               <div class="homeRangeName">${rangeLabel}</div>
-             </div>
-             <div class="homeRangeActions">
-               <button class="btn small ghost" data-action="range" type="button" aria-label="もじをえらぶ">
-                 もじを えらぶ
-               </button>
-             </div>
-           </div>
-
-           <div class="homeRange" style="margin-top:12px;">
-             <div class="homeRangeLabel muted">あそびかた</div>
+             
+                           <div class="homeRange">
+            <div class="homeRangeLabel muted">じゅんび</div>
+            <div class="homeRangeRow">
+              <div class="homeRangeName">いまのもじ：${rangeLabel}</div>
+              <button class="btn small ghost" data-action="range" type="button">
+                もじを えらぶ
+              </button>
+            </div>
+           
              <div class="homeRangeRow" style="align-items:flex-start;">
                <div style="flex:1; display:grid; gap:10px;">
                  <label style="display:flex; justify-content:space-between; gap:10px; align-items:center; font-weight:900;">
