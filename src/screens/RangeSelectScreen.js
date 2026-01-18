@@ -111,17 +111,19 @@ export function RangeSelectScreen(ctx, nav) {
 
       // ✅ Accordion: 同時に開けるのは1つだけ（縦伸び防止）
       const onToggle = (e) => {
-          const target = e.target;
-          if (!(target instanceof HTMLDetailsElement)) return;
-          if (!target.classList.contains("rangeGroup")) return;
-          // 開いた時だけ、他を閉じる
-          if (target.open) {
-            const all = el.querySelectorAll("details.rangeGroup");
-            all.forEach((d) => {
-              if (d !== target) d.open = false;
-            });
-          }
-        };
+        const target = e.target;
+                // toggle は details から飛んでくる想定
+                if (!target || target.tagName !== "DETAILS") return;
+                if (!target.classList.contains("rangeGroup")) return;
+        
+                // 開いた時だけ、他を閉じる
+                if (target.open) {
+                  const all = el.querySelectorAll("details.rangeGroup");
+                  all.forEach((d) => {
+                    if (d !== target) d.open = false;
+                  });
+                }
+              };
 
       const onChange = (e) => {
         const v = e.target?.value;
@@ -136,14 +138,15 @@ export function RangeSelectScreen(ctx, nav) {
       const onBack = () => nav.go("home");
 
       el.addEventListener("change", onChange);
-      el.addEventListener("toggle", onToggle);
+      // ✅ toggle はバブリングしないことがあるため capture で拾う
+      el.addEventListener("toggle", onToggle, true);
       el.querySelector("#back").addEventListener("click", onBack);
 
       return {
         el,
         cleanup() {
           el.removeEventListener("change", onChange);
-          el.removeEventListener("toggle", onToggle);
+          el.removeEventListener("toggle", onToggle, true);
           el.querySelector("#back").removeEventListener("click", onBack);
         }
       };
