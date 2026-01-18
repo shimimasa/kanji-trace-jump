@@ -356,8 +356,9 @@ export function DexScreen(ctx, nav) {
                 <div class="dexMeta">範囲：<b>${range?.label ?? "未選択"}</b> <span class="muted">/ ${typeLabel}</span></div>
               </div>
               <div class="dexHeadActions">
+              <button id="range" class="btn" type="button">もじをえらぶ</button>
               <button id="review" class="btn" type="button">復習</button>
-                <button id="back" class="btn" type="button">もどる</button>
+                <button id="back" class="btn" type="button">ホームへ</button>
               </div>
             </div>
 
@@ -489,9 +490,15 @@ export function DexScreen(ctx, nav) {
       const onClick = (e) => {
         const t = e.target;
 
+        if (t.closest("#range")) {
+                    nav.go("rangeSelect", { selectedRangeId: selected, returnTo: "dex" });
+                    return;
+                  }
+
         if (t.closest("#back")) {
-          goBack();
-          return;
+          // ✅ もどるは常にホームへ
+        nav.go("home", { selectedRangeId: selected });
+        return;
         }
 
         if (t.closest('[data-action="practice"]')) {

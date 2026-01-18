@@ -469,7 +469,7 @@ body {
     fill: #ff7a00;
   }
 
-  /* ===========================
+/* ===========================
 +   Clear stamp (赤い〇)
 +   =========================== */
 .fx-clear-maru{
@@ -481,7 +481,7 @@ body {
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
-    /* 背景に埋もれないように白ふちっぽい効果 */
+    /* 白フチっぽくして背景に埋もれにくくする */
     filter:
       drop-shadow( 1px  0px 0 rgba(255,255,255,.85))
       drop-shadow(-1px  0px 0 rgba(255,255,255,.85))
@@ -992,6 +992,44 @@ html, body {
     cursor:pointer;
   }
   .iconBtn:active{ transform: translateY(1px); }
+
+  /* ===========================
++     HUD action buttons (Save / Home)
++     - 子ども向け：アイコン＋文字を1行で表示（縦折り返し防止）
++     =========================== */
+  .hudActionBtn{
+      height: 44px;
+      min-width: 96px;                 /* ← これで「ホームへ」が1行で入りやすい */
+      padding: 0 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(18,38,63,.10);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 6px 16px rgba(18,38,63,.10);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;             /* ← 縦書きっぽい折返しを根絶 */
+    }
+    .hudActionBtn:active{ transform: translateY(1px); }
+    .hudActionIcon{
+      font-size: 18px;
+      line-height: 1;
+    }
+    .hudActionText{
+      font-weight: 900;
+      font-size: 14px;
+      line-height: 1;
+      letter-spacing: .02em;
+    }
+  
+    /* iPad/狭い高さで少しだけ圧縮（任意） */
+    @media (max-height: 820px){
+      .hudActionBtn{ min-width: 90px; padding: 0 10px; }
+      .hudActionText{ font-size: 13px; }
+    }
   
   /* Game main：中央に視線が集まる */
   .main{
@@ -1873,6 +1911,34 @@ body {
     place-items: center;
     margin: 12px 0 10px;
   }
+
+  .homePlayMeta{
+      margin-top: 8px;
+      font-weight: 800;
+      font-size: 12px;
+      text-align: center;
+      opacity: .75;
+    }
+    
+    .homeRangeActions{
+      margin-top: 10px;
+      display:flex;
+      justify-content: flex-end;
+    }
+    
+    .btn.small{
+      min-width: 0;
+      height: 44px;
+      padding: 0 14px;
+      font-size: 16px;
+      border-radius: 14px;
+    }
+    
+    .btn.ghost{
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(18,38,63,.12);
+      box-shadow: 0 6px 16px rgba(18,38,63,.06);
+    }
   
   .bigBtn{
     width: min(420px, 92%);
@@ -1881,6 +1947,53 @@ body {
     border-radius: 18px;
   }
   
+  .homeSubActions{
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .homeFooter{
+      margin-top: 12px;
+    }
+
+  /* HOME: save button (secondary but obvious) */
+.saveBtn{
+    background: rgba(255,255,255,.82);
+    border: 1px solid rgba(18,38,63,.12);
+  }
+  
+  /* Toast (save feedback) */
+  .saveToast{
+    margin-top: 8px;
+    font-weight: 1000;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .18s ease, transform .18s ease;
+    user-select: none;
+  }
+  .saveToast.show{
+    opacity: .95;
+    transform: translateY(0);
+  }
+  
+  /* Game: fixed-like toast under HUD */
+  .saveToastGame{
+    position: sticky;
+    top: 62px;
+    z-index: 20;
+    width: fit-content;
+    margin: 6px auto 0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.88);
+    border: 1px solid rgba(18,38,63,.10);
+    box-shadow: 0 10px 26px rgba(18,38,63,.10);
+  }
+
+
   .homeRange{
     margin-top: 6px;
     padding: 12px;
@@ -1906,6 +2019,52 @@ body {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
     margin-top: 12px;
+  }
+
+  /* ===========================
++   Home compact (iPad: no-scroll)
++   - 画面高さが足りない時だけ圧縮
++   =========================== */
+@media (max-height: 900px){
+    .screen.home{ padding: 12px; }
+    .homeCard{ padding: 14px; }
+  
+    .homeHero{ padding: 2px 6px 6px; }
+    .homeTitle{ font-size: 30px; }
+    .homeSubtitle{ margin-top: 2px; font-size: 14px; }
+    .homeKinds{ margin-top: 4px; font-size: 12px; }
+  
+    .homePrimary{ margin: 8px 0 6px; gap: 6px; }
+  
+    /* big buttons: 少しだけ薄く（高さ削減） */
+    .bigBtn{
+      padding: 11px 16px;
+      font-size: 17px;
+      border-radius: 16px;
+    }
+  
+    .homeSubActions{ gap: 8px; }
+    .saveToast{ margin-top: 4px; font-size: 13px; }
+  
+    .homeRange{
+      margin-top: 6px;
+      padding: 10px;
+      border-radius: 16px;
+    }
+    .homeRangeRow{ margin-top: 4px; gap: 8px; }
+  
+    /* 準備カード内の label などの行間を詰める */
+    .screen.home .homeRange label{ gap: 8px !important; }
+    .screen.home .homeRange [style*="gap:10px"]{ gap: 8px !important; }
+  
+    /* セレクトや小ボタンを少し低く */
+    .btn.small{ height: 40px; border-radius: 14px; }
+    .screen.home select.btn{ height: 40px !important; font-size: 15px !important; }
+  
+    .homeGrid{ margin-top: 10px; gap: 8px; }
+    .homeGrid .btn{ height: 56px; font-size: 20px; }
+  
+    .homeFooter{ margin-top: 10px; font-size: 13px; }
   }
   
   .homeFooter{
@@ -1964,14 +2123,14 @@ body {
   }
   
   .screen.range .rangeNow{
-    padding: 12px 14px;
+    padding: 10px 12px;
     border-radius: 18px;
     border: 1px solid rgba(18,38,63,.10);
     background: rgba(255,255,255,.60);
   }
   
   .screen.range .rangeNowValue{
-    margin-top: 4px;
+    margin-top: 2px;
     font-size: 18px;
     font-weight: 900;
   }
@@ -2004,6 +2163,18 @@ body {
     font-weight: 900;
     font-size: 18px;
   }
+
+  .screen.range .rangeGroupHint{
+      font-weight: 1000;
+      font-size: 16px;
+      opacity: .55;
+      transition: transform .12s ease, opacity .12s ease;
+    }
+    /* open時は下向きに */
+    .screen.range details[open] .rangeGroupHint{
+      transform: rotate(90deg);
+      opacity: .80;
+    }
   
   .screen.range .rangeGrid{
     padding: 12px 12px 14px;
@@ -2043,14 +2214,34 @@ body {
   }
   
   .screen.range .rangeRadio:checked + .rangeChip{
-    border-color: rgba(18,38,63,.28);
-    box-shadow: 0 12px 26px rgba(18,38,63,.12);
+    border-color: rgba(56,117,255,.45);
+  background: rgba(56,117,255,.10);
+  box-shadow: 0 14px 28px rgba(56,117,255,.16);
+  transform: translateY(-1px);
   }
   
   .screen.range .rangeFooter{
     margin-top: 12px;
   }
 
+  /* Footer: 戻るを主役にしない（右寄せ・少し小さく） */
+.screen.range .rangeFooter{
+    display: flex;
+    justify-content: flex-end;
+  }
+  .screen.range #back.btn{
+    min-width: 160px;
+    height: 56px;
+    font-size: 20px;
+  }
+  
+  /* iPad高さ対策：rangeも少しだけ圧縮 */
+  @media (max-height: 900px){
+    .screen.range .rangeCard{ padding: 14px; }
+    .screen.range .rangeGroupHead{ padding: 12px 12px; }
+    .screen.range .rangeGrid{ padding: 10px 10px 12px; gap: 8px; }
+    .screen.range .rangeChip{ padding: 12px 10px; }
+  }
 
   /* ===========================
 +   Paw gauge (★→🐾) 既存.starを流用

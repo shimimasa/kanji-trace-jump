@@ -6,14 +6,25 @@ import { makeProgressKey } from "../lib/progressKey.js";
 import { judgeAttempt } from "./judge.js";
 import { dist, distancePointToPolyline } from "./strokeMath.js";
 import {
-  SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
+  DEFAULT_SET_SIZE, SET_SIZE, AUTO_NEXT_DELAY_MS, JUMP_MS, FAIL_MS,
   START_TOL, COMBO_WINDOW_MS,
   failReasonLabel, MASTER_HINT_TEXT, START_TOL_MASTER, CAT_WAIT_POS, MASTER_FAIL_MARK_POS,
   TITLE_POPUP_MS, CONFETTI_DEFAULTS,
   TITLE_POPUP_FADE_OUT_MS, MASTER_FAIL_FLASH_MS, MASTER_FAIL_MARK_MS
 } from "./config.js";
 export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, startFromIdx, singleId, mode = "kid", onSetFinished }) {
-  
+
+
+  // ---------------------------
+  // Helpers
+  // ---------------------------
+  function shuffleInPlace(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
   // ---------------------------
   // ✅ 旧 main.js の “定数” はここへ移植
   // ---------------------------
@@ -60,9 +71,18 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     })();
   const strokesCache = new Map();
 
+
+  // ---------------------------
+  // ✅ Home設定（ctx.playSettings）をゲーム側で採用する
+  // - setSize: 1セットの文字数（星の数/ResultのsetLen/自動次へに影響）
+  // - order: "fixed" | "random"
+  // ---------------------------
+  const ps = ctx?.playSettings ?? {};
+  const setSize = Math.max(1, Math.min(20, Number(ps.setSize ?? DEFAULT_SET_SIZE)));
+  const orderPolicy = (ps.order === "random") ? "random" : "fixed";
   
   const isSingleMode = !!singleId;
-  const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${SET_SIZE}もじ`;
+  const baseModeText = isSingleMode ? "もくひょう：1もじ" : `もくひょう：${setSize}もじ`;
   const isMaster = mode === "master";
   const modeText = isMaster ? `${baseModeText}（MASTER）` : baseModeText;
 
@@ -150,6 +170,26 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
    // --- Phase3: Set results / PB (old-main.js移植) ---
   const SET_RESULTS_LS_KEY = "ktj_set_results_v1";
   const SET_PB_LS_KEY = "ktj_set_pb_v1";
+
+  // ===========================
+  // SE: stage clear (happy meow)
+  // ===========================
+  const STAGE_CLEAR_SE_URL = "/assets/se/neko-clear.mp3";
+  const stageClearSe = new Audio(STAGE_CLEAR_SE_URL);
+  stageClearSe.preload = "auto";
+  stageClearSe.volume = 0.9; // 好みで調整
+  let _playedStageClearSe = false; // ✅ 二重鳴り防止（同一ステージ中は1回だけ）
+
+  function playStageClearSe() {
+    if (_playedStageClearSe) return; // ✅ ガード
+    _playedStageClearSe = true;
+    try {
+      stageClearSe.currentTime = 0;
+      const p = stageClearSe.play();
+      // iOS等で弾かれる場合があるので握りつぶす（ユーザー操作後なら大抵OK）
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    } catch (_) {}
+  }
 
   function loadSetPBMap() {
     try {
@@ -252,14 +292,15 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     if (isSingleMode) {
               return { start: 0, end: 1, len: 1, pos: 0 };
             }
-    const start = Math.floor(i / SET_SIZE) * SET_SIZE;
-    const end = Math.min(start + SET_SIZE, items.length);
+            const start = Math.floor(i / setSize) * setSize;
+            const end = Math.min(start + setSize, items.length);
     const len = end - start;
     const pos = i - start;
     return { start, end, len, pos };
   }
 
   function startSetRun(set) {
+    _playedStageClearSe = false; // ✅ ステージ開始ごとにリセット
     setRun = {
       setStart: set.start,
       setLen: set.len,
@@ -455,7 +496,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         anim.onfinish = () => t.remove();
       }
 
-       // ===========================
+      // ===========================
       // Clear stamp (赤い〇) - center
       // ===========================
       function showClearMaruStamp(svgEl) {
@@ -464,7 +505,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
 
         const g = document.createElementNS(ns, "g");
         g.setAttribute("class", "fx-clear-maru");
-        // viewBox(0..100)想定で中央固定
+        // viewBox(0..100) 前提で中央に固定
         g.setAttribute("transform", "translate(50 50) scale(0)");
         layer.appendChild(g);
 
@@ -474,10 +515,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         c.setAttribute("r", "28");
         g.appendChild(c);
 
-        // “スタンプ感”を出す：ぽん→少し戻る→フェード
         const anim = g.animate(
           [
-            { transform: "translate(50px,50px) scale(0.2)", opacity: 0 },
+            { transform: "translate(50px,50px) scale(0.25)", opacity: 0 },
             { transform: "translate(50px,50px) scale(1.10)", opacity: 1 },
             { transform: "translate(50px,50px) scale(1.00)", opacity: 1 },
             { transform: "translate(50px,50px) scale(1.02)", opacity: 0 },
@@ -592,6 +632,9 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
       }
     
       function showSetClearCelebration(svgEl) {
+        // ✅ ステージクリアSE（嬉しい猫の鳴き声）
+        // showSetClearCelebration が二重に呼ばれても 1回しか鳴らない
+        playStageClearSe();
         showHanamaru(svgEl);
         const p = { x: 50, y: 50 };
         spawnSparks(svgEl, p, 18);
@@ -656,7 +699,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function renderStars(posInSet, setLen) {
     if (!elStars) return;
     // ✅ single練習は常に★1個固定
-    const max = isSingleMode ? 1 : clamp(setLen, 1, SET_SIZE);
+    const max = isSingleMode ? 1 : clamp(setLen, 1, setSize);
     const filled = isSingleMode ? 1 : clamp(posInSet + 1, 1, max);
 
     if (elStars.children.length !== max) {
@@ -1244,6 +1287,16 @@ function reorderLatinStrokes(polys) {
     }
 
 
+    // kidモードで「猫が次にいる予定の場所」（数字回避に使う）
+  // ※ viewBox 0..100 前提の座標
+  let kidCatTarget = { x: 50, y: 50 };
+  function updateKidCatTarget() {
+    if (!currentStrokes || isMaster) return;
+    const i = Math.min(strokeIndex, currentStrokes.length - 1);
+    kidCatTarget = getStrokeEnd(currentStrokes, i);
+  }
+
+
   function polyToPathD(poly) {
     if (!poly || poly.length === 0) return "";
     const [p0, ...rest] = poly;
@@ -1298,6 +1351,9 @@ function reorderLatinStrokes(polys) {
         hintNum.style.display = "none";
         return;
     }
+    // kidモードでは猫の予定位置を更新（数字を避けるため）
+    updateKidCatTarget();
+    
     const stroke = currentStrokes[strokeIndex];
     if (!stroke || !stroke.length) {
       hintDot.style.display = "none";
@@ -1307,10 +1363,40 @@ function reorderLatinStrokes(polys) {
     const p0 = stroke[0];
     hintDot.style.display = "";
     hintNum.style.display = "";
+    
+    
     hintDot.setAttribute("cx", String(p0.x));
     hintDot.setAttribute("cy", String(p0.y));
-    hintNum.setAttribute("x", String(p0.x));
-    hintNum.setAttribute("y", String(p0.y - 8));
+    // ===========================
+    // 画数(数字)の配置：猫を避ける
+    // ===========================
+    // 候補：上/下/右/左（必要なら増やせる）
+    const clampX = (v) => clamp(v, 10, 90);
+    const clampY = (v) => clamp(v, 12, 96);
+
+    const candidates = [
+      { x: p0.x,     y: p0.y - 12 }, // 上
+      { x: p0.x,     y: p0.y + 20 }, // 下
+      { x: p0.x + 18, y: p0.y + 6 }, // 右下寄り
+      { x: p0.x - 18, y: p0.y + 6 }, // 左下寄り
+    ].map((c) => ({ x: clampX(c.x), y: clampY(c.y) }));
+
+    // 猫が近いときは数字を逃がす（kidのみ）
+    const cat = (!isMaster && kidCatTarget) ? kidCatTarget : null;
+    const avoidR = 16; // ここを大きくするとより避ける（ただし端に寄りやすい）
+    function farFromCat(pt) {
+      if (!cat) return true;
+      const dx = pt.x - cat.x;
+      const dy = pt.y - cat.y;
+      return (dx*dx + dy*dy) > (avoidR*avoidR);
+    }
+
+    // まず「猫から十分遠い」候補を優先、全部近いなら最初の候補で妥協
+    const chosen = candidates.find(farFromCat) || candidates[0];
+
+    hintNum.setAttribute("x", String(chosen.x));
+    hintNum.setAttribute("y", String(chosen.y));
+    hintNum.setAttribute("text-anchor", "middle");
     hintNum.textContent = String(strokeIndex + 1);
   }
 
@@ -1698,6 +1784,14 @@ function reorderLatinStrokes(polys) {
           if (setRun) setRun.kanjiCleared += 1;
           kanjiCompleted = true;
 
+          // ✅ 5文字クリア（セット最終）では花丸が出るので、赤〇スタンプは出さない
+          // （セット途中の1字クリアだけ赤〇を出す）
+          const setInfoForStamp = getSetInfo(idx);
+          const isSetLast = !!setInfoForStamp && (setInfoForStamp.pos >= setInfoForStamp.len - 1);
+          if (!isSetLast && !isSingleMode) {
+            showClearMaruStamp(svgEl);
+          }
+
           // ✅ 1字クリアのたびに「中心へ赤い〇スタンプ」
           showClearMaruStamp(svgEl);
 
@@ -1937,9 +2031,28 @@ function reorderLatinStrokes(polys) {
       return;
     }
 
+    // 初期化（通常）
     done = new Array(strokes.length).fill(false);
     strokeIndex = 0;
     failStreak = new Array(strokes.length).fill(0);
+
+    // ---------------------------
+    // ✅ Resume復元（通常プレイのみ）
+    // - ctx.resumeCandidate があれば、現在の item (idx) に対してだけ復元する
+    // ---------------------------
+    const rc = ctx?.resumeCandidate ?? null;
+    if (!isSingleMode && !ctx?.review?.active && rc && rc.selectedRangeId === selectedRangeId) {
+      // idx一致の時だけ復元（別文字に誤適用しない）
+      if (Number.isFinite(rc.idx) && rc.idx === idx) {
+        if (Array.isArray(rc.done) && rc.done.length === strokes.length) done = rc.done.slice();
+        if (Array.isArray(rc.failStreak) && rc.failStreak.length === strokes.length) failStreak = rc.failStreak.slice();
+        if (Number.isFinite(rc.strokeIndex)) strokeIndex = clamp(rc.strokeIndex, 0, strokes.length);
+      }
+      // 1回復元したら、二重適用しない
+      try { ctx.resumeCandidate = null; } catch {}
+    }
+
+
 
     if (elStrokeButtons) renderStrokeButtons(strokes.length);
 
@@ -1997,6 +2110,44 @@ function reorderLatinStrokes(polys) {
 
     if (!items.length) throw new Error("データなし");
 
+    // ---------------------------
+    // ✅ ならびかえ（random）を反映（セッション内で順序固定）
+    // - HomeScreen は ctx.playSession を切っているが、ゲーム側が実際に並べ替える必要がある
+    // ---------------------------
+    if (!isSingleMode && orderPolicy === "random") {
+      const rangeId = selectedRangeId ?? "kanji_g1";
+      const session = ctx?.playSession ?? null;
+      const canReuse = !!session
+        && session.order === "random"
+        && session.rangeId === rangeId
+        && Array.isArray(session.ids)
+        && session.ids.length > 0;
+
+      if (canReuse) {
+        // 保存済みids順に並べ替え（欠けているidは末尾へ）
+        const map = new Map(items.map((it) => [it.id, it]));
+        const ordered = [];
+        for (const id of session.ids) {
+          const it = map.get(id);
+          if (it) { ordered.push(it); map.delete(id); }
+        }
+        for (const it of map.values()) ordered.push(it);
+        items = ordered;
+      } else {
+        const copy = items.slice();
+        shuffleInPlace(copy);
+        items = copy;
+        if (ctx) {
+          ctx.playSession = {
+            id: session?.id ?? Date.now(),
+            rangeId,
+            order: "random",
+            ids: items.map((x) => x.id),
+          };
+        }
+      }
+    }
+
     // ✅ single練習：その1文字だけに絞る
     if (isSingleMode) {
           const one = items.find((x) => x?.id === singleId);
@@ -2044,5 +2195,25 @@ function reorderLatinStrokes(polys) {
     ready: bootPromise, // or ready
     stop,
     modeText,
+    // ✅ GameScreenが「途中セーブ」に使う
+    getState() {
+        const curItem = items?.[idx] ?? null;
+        return {
+          // どの範囲・どのモードか
+          selectedRangeId,
+          mode: isMaster ? "master" : "kid",
+          // 途中再開対象か（single/reviewは除外）
+          resumable: !isSingleMode && !ctx?.review?.active,
+          // 現在地
+          idx,
+          itemId: curItem?.id ?? null,
+          strokeIndex,
+          done: Array.isArray(done) ? done.slice() : [],
+          failStreak: Array.isArray(failStreak) ? failStreak.slice() : [],
+          // 設定（見せる用）
+          playSettings: ctx?.playSettings ?? null,
+          playSession: ctx?.playSession ?? null,
+        };
+      },
   };
 }

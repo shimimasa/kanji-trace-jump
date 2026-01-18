@@ -52,6 +52,19 @@ export function RangeSelectScreen(ctx, nav) {
       const el = document.createElement("div");
       el.className = "screen range";
 
+      // ✅ どこから来たか（元画面）表示用ラベル
+      const returnTo = String(ctx?.returnTo ?? "home");
+      const backLabel = (() => {
+        switch (returnTo) {
+          case "progress": return "きろく";
+          case "dex": return "ずかん";
+          case "reviewStart":
+          case "review": return "ふくしゅう";
+          case "home":
+          default: return "ホーム";
+        }
+      })();
+
       const grouped = groupByType(CONTENT_MANIFEST);
       const current = ctx.selectedRangeId ?? "kanji_g1";
       const currentItem = CONTENT_MANIFEST.find(x => x.id === current);
@@ -60,6 +73,9 @@ export function RangeSelectScreen(ctx, nav) {
         <div class="card rangeCard">
           <div class="rangeHeader">
             <h1 class="rangeTitle">範囲をえらぶ</h1>
+            <div class="muted" style="font-weight:900; margin-top:6px;">
+              えらんだら <b>${backLabel}</b> に もどるよ
+            </div>
             <div class="rangeNow">
               <div class="muted rangeNowLabel">いまの範囲</div>
               <div class="rangeNowValue">${currentItem?.label ?? "未選択"}</div>
@@ -69,7 +85,7 @@ export function RangeSelectScreen(ctx, nav) {
           <div id="list" class="rangeList"></div>
 
           <div class="rangeFooter">
-            <button id="back" class="btn">もどる</button>
+            <button id="back" class="btn" type="button">${backLabel} に もどる</button>
           </div>
         </div>
       `;
@@ -102,32 +118,75 @@ export function RangeSelectScreen(ctx, nav) {
           <details class="rangeGroup" ${openAttr}>
             <summary class="rangeGroupHead">
               <span class="rangeGroupTitle">${TYPE_LABEL[type] ?? type}</span>
-              <span class="rangeGroupHint muted">タップしてひらく</span>
+              <span class="rangeGroupHint" aria-hidden="true">▶</span>
             </summary>
             <div class="rangeGrid">${items}</div>
           </details>
         `;
       }).join("");
 
+      // ✅ Accordion: 同時に開けるのは1つだけ（縦伸び防止）
+      const onToggle = (e) => {
+        const target = e.target;
+                // toggle は details から飛んでくる想定
+                if (!target || target.tagName !== "DETAILS") return;
+                if (!target.classList.contains("rangeGroup")) return;
+        
+                // 開いた時だけ、他を閉じる
+                if (target.open) {
+                  const all = el.querySelectorAll("details.rangeGroup");
+                  all.forEach((d) => {
+                    if (d !== target) d.open = false;
+                  });
+                }
+              };
+
+       // ✅ どこから来たか（元画面）に戻す
+
+      const goBack = () => {
+        const selectedRangeId = nav?.ctx?.selectedRangeId ?? ctx?.selectedRangeId ?? null;
+        switch (returnTo) {
+          case "progress":
+            nav.go("progress", { selectedRangeId });
+            return;
+          case "dex":
+            // 範囲が変わると focusId が無効になる可能性があるのでクリア
+            nav.go("dex", { selectedRangeId, focusId: null });
+            return;
+          case "reviewStart":
+          case "review":
+            nav.go("reviewStart", { selectedRangeId });
+            return;
+          case "home":
+          default:
+            nav.go("home", { selectedRangeId });
+            return;
+        }
+      };
+
+
+ 
       const onChange = (e) => {
         const v = e.target?.value;
         if (!v) return;
+        // ✅ 範囲を更新
         nav.ctx.selectedRangeId = v;
-
-        // 画面上部の「いまの範囲」を即更新（体感が良くなる）
-        const picked = CONTENT_MANIFEST.find(x => x.id === v);
-        const now = el.querySelector(".rangeNowValue");
-        if (now) now.textContent = picked?.label ?? v;
+        // ✅ 選んだら即戻る
+        goBack();
       };
-      const onBack = () => nav.go("home");
+
+              const onBack = () => goBack();
 
       el.addEventListener("change", onChange);
+      // ✅ toggle はバブリングしないことがあるため capture で拾う
+      el.addEventListener("toggle", onToggle, true);
       el.querySelector("#back").addEventListener("click", onBack);
 
       return {
         el,
         cleanup() {
           el.removeEventListener("change", onChange);
+          el.removeEventListener("toggle", onToggle, true);
           el.querySelector("#back").removeEventListener("click", onBack);
         }
       };

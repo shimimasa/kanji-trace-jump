@@ -1,10 +1,11 @@
 // src/screens/GameScreen.js
 import { startTraceGame } from "../game/startTraceGame.js";
-import { recordReviewSession, saveProgress } from "../lib/progressStore.js";
+import { recordReviewSession, saveProgress, saveResumeState, clearResumeState } from "../lib/progressStore.js";
 import { getRangeType } from "../lib/rangeItems.js";
 import { makeProgressKey } from "../lib/progressKey.js";
 export function GameScreen(ctx, nav) {
   let game = null;
+  let allowResumeSave = true; // Resultへ行く時などは false にして保存しない
   // 復習ナビ（single練習終了時に startTraceGame から返ってくる）
   let lastReviewNav = null;
   return {
@@ -17,23 +18,33 @@ export function GameScreen(ctx, nav) {
       const isSinglePractice = !!ctx.singleId && ctx.returnTo === "dex";
 
       // 旧 index.html のDOMをここで生成（あなたの既存CSSを活かす）
+      const setSize = Math.max(1, Math.min(20, Number(ctx?.playSettings?.setSize ?? 5)));
+      const goalText = isSinglePractice ? "もくひょう：1もじ" : `もくひょう：${setSize}もじ`;
       el.innerHTML = `
         <div class="hud">
           <div id="stars" class="stars" aria-label="進捗"></div>
           <div class="hud-right">
-            <div id="mode" class="mode">もくひょう：5もじ</div>
+            <div id="mode" class="mode">${goalText}</div>
             <button id="masterToggle" class="masterToggle" type="button"
               aria-pressed="${mode === "master" ? "true" : "false"}"
               title="MASTERモード切替">
               MASTER
             </button>
             ${
-                              isSinglePractice
-                                ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
-                                : `<button id="homeBtn" class="iconBtn" type="button" aria-label="ホームへ">🏠</button>`
-                            }
+                            isSinglePractice
+                              ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
+                              : `<button id="saveBtn" class="hudActionBtn" type="button" aria-label="せーぶ">
+                                   <span class="hudActionIcon" aria-hidden="true">💾</span>
+                                   <span class="hudActionText">せーぶ</span>
+                                 </button>
+                                 <button id="homeBtn" class="hudActionBtn" type="button" aria-label="ホームへ">
+                                   <span class="hudActionIcon" aria-hidden="true">🏠</span>
+                                   <span class="hudActionText">ホームへ</span>
+                                 </button>`
+                          }
           </div>
         </div>
+        <div id="saveToast" class="saveToast saveToastGame" aria-live="polite" role="status"></div>
 
         <div class="main">
           <div class="topline">
@@ -59,17 +70,18 @@ export function GameScreen(ctx, nav) {
       `;
 
       const homeBtn = el.querySelector("#homeBtn");
+      const saveBtn = el.querySelector("#saveBtn");
             const dexBackBtn = el.querySelector("#dexBackBtn");
             const prevBtn = el.querySelector("#prevBtn");
     const nextBtn = el.querySelector("#nextBtn");
 
             const onHome = () => {
-              const ok = window.confirm("ホームにもどりますか？\n（プレイ中の進み具合は保存されません）");
+              const ok = window.confirm("ホームにもどりますか？\n（つづきは せーぶ されます）");
               if (!ok) return;
-              nav.go("home");
+              nav.go("home", { selectedRangeId: ctx.selectedRangeId });
             };
             const onDexBack = () => {
-              const ok = window.confirm("図鑑にもどりますか？\n（プレイ中の進み具合は保存されません）");
+              const ok = window.confirm("図鑑にもどりますか？\n（つづきは せーぶ されます）");
               if (!ok) return;
               nav.go("dex", {
                 selectedRangeId: ctx.selectedRangeId,
@@ -80,6 +92,35 @@ export function GameScreen(ctx, nav) {
       
             homeBtn?.addEventListener("click", onHome);
             dexBackBtn?.addEventListener("click", onDexBack);
+
+            // ✅ いつでもセーブ（子どもが“一発でセーブできた”を認識できる）
+            const onSave = () => {
+                try {
+                  if (!game?.getState) return;
+                  const st = game.getState();
+                  if (!st?.resumable) return;
+                  saveResumeState({
+                    selectedRangeId: st.selectedRangeId,
+                    mode: st.mode,
+                    idx: st.idx,
+                    strokeIndex: st.strokeIndex,
+                    done: st.done,
+                    failStreak: st.failStreak,
+                    playSettings: st.playSettings,
+                    playSession: st.playSession,
+                  });
+                  const toast = el.querySelector("#saveToast");
+                  if (toast) {
+                    toast.textContent = "✅ せーぶしたよ";
+                    toast.classList.remove("show");
+                    void toast.offsetWidth;
+                    toast.classList.add("show");
+                    setTimeout(() => toast.classList.remove("show"), 1200);
+                  }
+                  if (navigator.vibrate) navigator.vibrate(25);
+                } catch {}
+              };
+              saveBtn?.addEventListener("click", onSave);
 
             // ✅ MASTER切替：画面を再マウントして startTraceGame を作り直す（事故が少ない）
       const masterToggle = el.querySelector("#masterToggle");
@@ -259,6 +300,11 @@ export function GameScreen(ctx, nav) {
                     }
           
                     // 通常はResult画面へ
+                    // ✅ ScreenManagerがctxを置換する実装でも、
+                    // Result側で selectedRangeId / nextStart が欠けないように明示的に渡す
+                    // 通常はResult画面へ（＝セット完了。途中再開は不要）
+                    allowResumeSave = false;
+                    clearResumeState();
                     nav.go("result", { lastResult: result, nextStart, history });
                   },
       });
@@ -283,6 +329,7 @@ export function GameScreen(ctx, nav) {
         el,
         cleanup() {
           homeBtn?.removeEventListener("click", onHome);
+          saveBtn?.removeEventListener("click", onSave);
           dexBackBtn?.removeEventListener("click", onDexBack);
           // 復習ボタン解除
           if (isReviewActive) {
@@ -292,7 +339,26 @@ export function GameScreen(ctx, nav) {
             lastReviewNav = null;
 
           masterToggle?.removeEventListener("click", onToggleMaster);
-          game?.stop?.();
+          // ✅ 途中セーブ（通常プレイのみ）
+          try {
+              if (allowResumeSave && game?.getState) {
+                const st = game.getState();
+                if (st?.resumable) {
+                  saveResumeState({
+                    selectedRangeId: st.selectedRangeId,
+                    mode: st.mode,
+                    idx: st.idx,
+                    strokeIndex: st.strokeIndex,
+                    done: st.done,
+                    failStreak: st.failStreak,
+                    playSettings: st.playSettings,
+                    playSession: st.playSession,
+                  });
+                }
+              }
+            } catch {}
+  
+            game?.stop?.();
           game = null;
         }
       };

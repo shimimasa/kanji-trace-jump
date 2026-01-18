@@ -1,5 +1,11 @@
-// src/game/config.js
-export const SET_SIZE = 5;
+// ===========================
+// Gameplay options (defaults)
+// ===========================
+// 1セットの文字数（UIの「もくひょう：○もじ」や結果の setLen に影響）
+export const DEFAULT_SET_SIZE = 5;
+
+// 互換：既存コードが SET_SIZE を参照しているので残す
+export const SET_SIZE = DEFAULT_SET_SIZE;
 export const AUTO_NEXT_DELAY_MS = 650;
 
 export const JUMP_MS = 520;
