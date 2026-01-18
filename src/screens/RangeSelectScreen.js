@@ -125,17 +125,40 @@ export function RangeSelectScreen(ctx, nav) {
                 }
               };
 
-      const onChange = (e) => {
-        const v = e.target?.value;
-        if (!v) return;
-        nav.ctx.selectedRangeId = v;
-
-        // 画面上部の「いまの範囲」を即更新（体感が良くなる）
-        const picked = CONTENT_MANIFEST.find(x => x.id === v);
-        const now = el.querySelector(".rangeNowValue");
-        if (now) now.textContent = picked?.label ?? v;
+       // ✅ どこから来たか（元画面）に戻す
+      const returnTo = String(ctx?.returnTo ?? "home");
+      const goBack = () => {
+        const selectedRangeId = nav?.ctx?.selectedRangeId ?? ctx?.selectedRangeId ?? null;
+        switch (returnTo) {
+          case "progress":
+            nav.go("progress", { selectedRangeId });
+            return;
+          case "dex":
+            // 範囲が変わると focusId が無効になる可能性があるのでクリア
+            nav.go("dex", { selectedRangeId, focusId: null });
+            return;
+          case "reviewStart":
+          case "review":
+            nav.go("reviewStart", { selectedRangeId });
+            return;
+          case "home":
+          default:
+            nav.go("home", { selectedRangeId });
+            return;
+        }
       };
-      const onBack = () => nav.go("home");
+
+
+      const onChange = (e) => {
+                const v = e.target?.value;
+                if (!v) return;
+                // ✅ 範囲を更新
+                nav.ctx.selectedRangeId = v;
+                // ✅ 選んだら即戻る
+                goBack();
+              };
+
+              const onBack = () => goBack();
 
       el.addEventListener("change", onChange);
       // ✅ toggle はバブリングしないことがあるため capture で拾う
