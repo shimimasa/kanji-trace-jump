@@ -15,7 +15,7 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
 
        const selected = ctx.selectedRangeId ?? "kanji_g1";
        const range = CONTENT_MANIFEST.find((x) => x.id === selected);
- 
+       const rangeLabel = range?.label ?? "えらんでね";
 
        // play settings（全画面共通）
        const ps = (ctx.playSettings ||= { setSize: 5, order: "fixed" });
@@ -36,18 +36,17 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
                ▶ はじめる
              </button>
              <div class="homePlayMeta muted">
-               いま：<b>${range?.label ?? "未選択"}</b> ・ <b>${curSetSize}もじ</b> ・ <b>${curOrder === "random" ? "ランダム" : "いつもどおり"}</b>
-             </div>
+              いまは：<b>${rangeLabel}</b> ・ <b>${curSetSize}もじ</b> ・ <b>${curOrder === "random" ? "ランダム" : "そのまま"}</b>
            </div>
  
            <div class="homeRange">
-             <div class="homeRangeLabel muted">いまの範囲</div>
+             <div class="homeRangeLabel muted">いまのもじ</div>
              <div class="homeRangeRow">
-               <div class="homeRangeName">${range?.label ?? "未選択"}</div>
+               <div class="homeRangeName">${rangeLabel}</div>
              </div>
              <div class="homeRangeActions">
-               <button class="btn small ghost" data-action="range" type="button" aria-label="範囲を変更">
-                 範囲を変更
+               <button class="btn small ghost" data-action="range" type="button" aria-label="もじをえらぶ">
+                 もじを えらぶ
                </button>
              </div>
            </div>
@@ -65,13 +64,12 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
                  <label style="display:flex; justify-content:space-between; gap:10px; align-items:center; font-weight:900;">
                    <span>ならびかえ</span>
                    <select id="orderPolicy" class="btn" style="min-width:140px; height:44px; font-size:16px;">
-                     <option value="fixed" ${curOrder==="fixed"?"selected":""}>いつもどおり</option>
+                     <option value="fixed" ${curOrder==="fixed"?"selected":""}>そのまま</option>
                      <option value="random" ${curOrder==="random"?"selected":""}>ランダム</option>
                    </select>
                  </label>
                  <div class="muted" style="font-weight:800; font-size:12px; line-height:1.4;">
-                   ランダムは、同じ学年（範囲）の中から毎回ちがう順番で出ます。
-                 </div>
+                   ランダムは、この中から まいかい ちがう じゅんばんで でます。
                </div>
              </div>
            </div>
@@ -80,7 +78,7 @@ import { CONTENT_MANIFEST } from "../data/contentManifest.js";
              <button class="btn" data-action="review" type="button">📝 ふくしゅう</button>
              <button class="btn" data-action="progress" type="button">🐾 きろく</button>
              <button class="btn" data-action="dex" type="button">📚 ずかん</button>
-             <button class="btn" data-action="titleBook" type="button">🏆 タイトル</button>
+             <button class="btn" data-action="titleBook" type="button">🏆 しょうごう</button>
            </div>
  
            <div class="homeFooter muted">
