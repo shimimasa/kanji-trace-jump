@@ -21,6 +21,7 @@ export function HomeScreen(ctx, nav) {
        // ✅ つづき（途中セーブ）を読む
        const resume = loadResumeState();
        const hasResume = !!resume && resume.selectedRangeId === (ctx.selectedRangeId ?? selected);
+       const playLabel = hasResume ? "▶ つづきで あそぶ" : "▶ はじめる";
 
        // play settings（全画面共通）
        const ps = (ctx.playSettings ||= { setSize: 5, order: "fixed" });
@@ -38,10 +39,9 @@ export function HomeScreen(ctx, nav) {
  
            <div class="homePrimary">
              <button class="btn primary bigBtn" data-action="play" type="button">
-               ▶ はじめる
+               ${playLabel}
              </button>
              <div class="homeSubActions">
-              ${hasResume ? `<button class="btn bigBtn" data-action="resume" type="button">▶ つづきから</button>` : ``}
               <button class="btn bigBtn saveBtn" data-action="save" type="button">💾 せーぶ</button>
             </div>
               
@@ -111,44 +111,44 @@ export function HomeScreen(ctx, nav) {
  
          switch (action) {
            case "play":
-            // ✅ 新しくはじめる：途中セーブは消す
-             clearResumeState();
-             ctx.resumeCandidate = null;
-            // ✅ ランダム順の「同一セッション内固定」を実現するため、開始時にセッションを切る
-             if ((ctx.playSettings?.order ?? "fixed") === "random") {
-                 ctx.playSession = { id: Date.now(), rangeId: selectedRangeId, order: "random", ids: null };
-               } else {
-                 ctx.playSession = null;
-               }
-             nav.go("game", {
-               selectedRangeId,
-               mode: "kid",
-                // ✅ Homeからの開始は「前回のResult由来の開始位置」を持ち込まない
-               startFromIdx: null,
-               startFromId: null,
-               // 余計な文脈を持ち込まない
-               singleId: null,
-               returnTo: null,
-             });
-             break;
-             case "resume": {
-                           if (!hasResume) return;
-                           // ✅ 復元候補を ctx に積む（startTraceGame が render() 内で適用する）
-                           ctx.resumeCandidate = resume;
-                           // ランダム順の順序も維持したいので playSession を復元
-                           if (resume.playSession) ctx.playSession = resume.playSession;
-                           if (resume.playSettings) ctx.playSettings = resume.playSettings;
-              
-                           nav.go("game", {
-                             selectedRangeId,
-                             mode: resume.mode ?? "kid",
-                             startFromIdx: Number.isFinite(resume.idx) ? resume.idx : null,
-                             startFromId: null,
-                             singleId: null,
-                             returnTo: null,
-                           });
-                           break;
-                         }
+            // ✅ つづきがあるなら「はじめる」で再開（ボタンは1つ）
+            if (hasResume) {
+                // ✅ 復元候補を ctx に積む（startTraceGame が render() 内で適用する）
+                ctx.resumeCandidate = resume;
+                // ランダム順の順序も維持したいので playSession を復元
+                if (resume.playSession) ctx.playSession = resume.playSession;
+                if (resume.playSettings) ctx.playSettings = resume.playSettings;
+  
+                nav.go("game", {
+                  selectedRangeId,
+                  mode: resume.mode ?? "kid",
+                  startFromIdx: Number.isFinite(resume.idx) ? resume.idx : null,
+                  startFromId: null,
+                  singleId: null,
+                  returnTo: null,
+                });
+                break;
+              }
+  
+              // ✅ つづきが無いときは新規開始
+              clearResumeState();
+              ctx.resumeCandidate = null;
+              // ✅ ランダム順の「同一セッション内固定」を実現するため、開始時にセッションを切る
+              if ((ctx.playSettings?.order ?? "fixed") === "random") {
+                ctx.playSession = { id: Date.now(), rangeId: selectedRangeId, order: "random", ids: null };
+              } else {
+                ctx.playSession = null;
+              }
+              nav.go("game", {
+                selectedRangeId,
+                mode: "kid",
+                startFromIdx: null,
+                startFromId: null,
+                singleId: null,
+                returnTo: null,
+              });
+              break;
+                           n
                          case "save": {
                           const toast = el.querySelector("#saveToast");
                                        // ✅ せーぶ対象がない場合も、押した結果がわかるように返す
