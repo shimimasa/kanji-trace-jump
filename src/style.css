@@ -1909,6 +1909,43 @@ body {
     border-radius: 18px;
   }
   
+
+  /* HOME: save button (secondary but obvious) */
+.saveBtn{
+    background: rgba(255,255,255,.82);
+    border: 1px solid rgba(18,38,63,.12);
+  }
+  
+  /* Toast (save feedback) */
+  .saveToast{
+    margin-top: 8px;
+    font-weight: 1000;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .18s ease, transform .18s ease;
+    user-select: none;
+  }
+  .saveToast.show{
+    opacity: .95;
+    transform: translateY(0);
+  }
+  
+  /* Game: fixed-like toast under HUD */
+  .saveToastGame{
+    position: sticky;
+    top: 62px;
+    z-index: 20;
+    width: fit-content;
+    margin: 6px auto 0;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.88);
+    border: 1px solid rgba(18,38,63,.10);
+    box-shadow: 0 10px 26px rgba(18,38,63,.10);
+  }
+
+
   .homeRange{
     margin-top: 6px;
     padding: 12px;
