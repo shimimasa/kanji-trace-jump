@@ -40,15 +40,23 @@ export function HomeScreen(ctx, nav) {
              <button class="btn primary bigBtn" data-action="play" type="button">
                ▶ はじめる
              </button>
-             ${
+             ${hasResume
+                             ? `<button class="btn bigBtn" data-action="resume" type="button">▶ つづきから</button>`
+                             : ``}
+              
+                           <!-- ✅ せーぶは常に表示（出たり消えたりしない） -->
+                           <button class="btn bigBtn saveBtn" data-action="save" type="button">💾 せーぶ</button>
+              
+                           ${
                              hasResume
-                               ? `<button class="btn bigBtn" data-action="resume" type="button">▶ つづきから</button>
-                               <button class="btn bigBtn saveBtn" data-action="save" type="button">💾 せーぶ</button>
-                                  <div class="muted" style="margin-top:6px; font-weight:900; font-size:12px; opacity:.75;">
+                               ? `<div class="muted" style="margin-top:6px; font-weight:900; font-size:12px; opacity:.75;">
                                     ✅ せーぶ されてるよ
                                   </div>`
-                               : ``
+                               : `<div class="muted" style="margin-top:6px; font-weight:900; font-size:12px; opacity:.65;">
+                                    まだ せーぶは ありません
+                                  </div>`
                            }
+              
                            <div id="saveToast" class="saveToast" aria-live="polite" role="status"></div>
              <div class="homePlayMeta muted">
               いまは：<b>${rangeLabel}</b> ・ <b>${curSetSize}もじ</b> ・ <b>${curOrder === "random" ? "ランダム" : "そのまま"}</b>
@@ -152,20 +160,32 @@ export function HomeScreen(ctx, nav) {
                            break;
                          }
                          case "save": {
-                                       if (!hasResume) return;
+                          const toast = el.querySelector("#saveToast");
+                                       // ✅ せーぶ対象がない場合も、押した結果がわかるように返す
+                                       if (!hasResume) {
+                                         if (toast) {
+                                           toast.textContent = "まだ せーぶ するものがないよ";
+                                           toast.classList.remove("show");
+                                           void toast.offsetWidth;
+                                           toast.classList.add("show");
+                                           setTimeout(() => toast.classList.remove("show"), 1400);
+                                         }
+                                         if (navigator.vibrate) navigator.vibrate(15);
+                                         break;
+                                       }
+
                                        // ✅ 既存の途中セーブを「今の時刻で更新」して、子どもに“セーブした”を見せる
                                        try { saveResumeState(resume); } catch {}
-                                       const toast = el.querySelector("#saveToast");
-                                       if (toast) {
-                                         toast.textContent = "✅ せーぶしたよ";
-                                         toast.classList.remove("show");
-                                         void toast.offsetWidth;
-                                         toast.classList.add("show");
-                                         setTimeout(() => toast.classList.remove("show"), 1200);
-                                       }
-                                       if (navigator.vibrate) navigator.vibrate(25);
-                                       break;
-                                     }  
+                                        if (toast) {
+                                          toast.textContent = "✅ せーぶしたよ";
+                                          toast.classList.remove("show");
+                                          void toast.offsetWidth;
+                                          toast.classList.add("show");
+                                          setTimeout(() => toast.classList.remove("show"), 1200);
+                                        }
+                                        if (navigator.vibrate) navigator.vibrate(25);
+                                        break;
+                                      }    
            case "range":
              nav.go("rangeSelect", { selectedRangeId });
              break;
