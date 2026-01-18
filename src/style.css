@@ -1982,6 +1982,52 @@ body {
     gap: 10px;
     margin-top: 12px;
   }
+
+  /* ===========================
++   Home compact (iPad: no-scroll)
++   - 画面高さが足りない時だけ圧縮
++   =========================== */
+@media (max-height: 900px){
+    .screen.home{ padding: 12px; }
+    .homeCard{ padding: 14px; }
+  
+    .homeHero{ padding: 2px 6px 6px; }
+    .homeTitle{ font-size: 30px; }
+    .homeSubtitle{ margin-top: 2px; font-size: 14px; }
+    .homeKinds{ margin-top: 4px; font-size: 12px; }
+  
+    .homePrimary{ margin: 8px 0 6px; gap: 6px; }
+  
+    /* big buttons: 少しだけ薄く（高さ削減） */
+    .bigBtn{
+      padding: 11px 16px;
+      font-size: 17px;
+      border-radius: 16px;
+    }
+  
+    .homeSubActions{ gap: 8px; }
+    .saveToast{ margin-top: 4px; font-size: 13px; }
+  
+    .homeRange{
+      margin-top: 6px;
+      padding: 10px;
+      border-radius: 16px;
+    }
+    .homeRangeRow{ margin-top: 4px; gap: 8px; }
+  
+    /* 準備カード内の label などの行間を詰める */
+    .screen.home .homeRange label{ gap: 8px !important; }
+    .screen.home .homeRange [style*="gap:10px"]{ gap: 8px !important; }
+  
+    /* セレクトや小ボタンを少し低く */
+    .btn.small{ height: 40px; border-radius: 14px; }
+    .screen.home select.btn{ height: 40px !important; font-size: 15px !important; }
+  
+    .homeGrid{ margin-top: 10px; gap: 8px; }
+    .homeGrid .btn{ height: 56px; font-size: 20px; }
+  
+    .homeFooter{ margin-top: 10px; font-size: 13px; }
+  }
   
   .homeFooter{
     text-align: center;
