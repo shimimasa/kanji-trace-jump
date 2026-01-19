@@ -41,6 +41,7 @@ export function HomeScreen(ctx, nav) {
              <button class="btn primary bigBtn" data-action="play" type="button">
                ${playLabel}
              </button>
+            <div class="homeGuide muted">${hasResume ? "つづきは ここ！" : "まずは ここ！"}</div>
              <div class="homeSubActions">
               <button class="btn bigBtn saveBtn" data-action="save" type="button">💾 せーぶ</button>
             </div>

@@ -63,7 +63,9 @@ export function ResultScreen(ctx, nav) {
             ` : ""}
 
            <div class="resultActions">
+              <div class="resultNextHint muted">つづけるなら ここ</div>
               <button id="next" class="btn primary big">つぎの${r?.setLen ?? 5}もじ</button>
+              <div class="resultSubHint muted">ほかのことをする</div>
               <div class="resultActionsSub">
                 <button id="replay" class="btn">もういちど</button>
                 <button id="progress" class="btn">クリアしたもの</button>

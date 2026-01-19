@@ -899,8 +899,22 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   }
 
   function setHintText(text) { if (elHint) elHint.textContent = String(text ?? ""); }
+  function updateNavCta() {
+    if (!elNext) return;
+    if (ctx?.review?.active) return; // 復習モードの文言は維持
+    if (kanjiCompleted) {
+      elNext.textContent = "つぎへ";
+      elNext.classList.add("cta");
+      elNext.classList.remove("cta-wait");
+      return;
+    }
+    elNext.textContent = "つぎ（あと）";
+    elNext.classList.remove("cta");
+    elNext.classList.add("cta-wait");
+  }
   function updateHintText() {
     // ✅ alphabet は書き順ガイドを出さない
+    updateNavCta();
     if (isAlphabet) { setHintText(""); return; }
     if (isMaster) { setHintText(MASTER_HINT_TEXT); return; }
     if (kanjiCompleted) { setHintText('クリア！「つぎ」で次のもじへ'); return; }
@@ -911,7 +925,11 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     const next = strokeIndex + 1;
     const circled = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳";
     const mark = next >= 1 && next <= circled.length ? circled[next - 1] : String(next);
-    setHintText(`${mark}のところから、なぞろう`);
+    const total = currentStrokes?.length ?? null;
+    const remain = Number.isFinite(total) ? Math.max(0, total - strokeIndex) : null;
+    const remainText = Number.isFinite(remain) ? `あと${remain}画。` : "";
+    setHintText(`${remainText}${mark}のところから、なぞろう`);
+    updateNavCta();
   }
 
   function applyTeacherMode() {
