@@ -1008,9 +1008,34 @@ body {
   .tb-goals{
     margin: 8px 0 12px;
   }
+
+  /* ===== TitleBook unified top layout (no "split") ===== */
+  .tb-top{
+      margin: 8px 0 12px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .tb-top-left,
+    .tb-top-right{
+      border-radius: 18px;
+      border: 1px solid rgba(18,38,63,.08);
+      background: rgba(255,255,255,.55);
+      padding: 12px;
+    }
+    .tb-top-right .tb-filter{
+      margin-top: 0;
+    }
+    .tb-top-right .tb-sort{
+      margin-top: 10px;
+    }
+    .tb-top-right .tb-search{
+      margin-top: 10px;
+    }
   .tb-goal-grid{
     display:grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1fr; /* ✅ PCでも縦3枚で統一（上下分断感を減らす） */
     gap: 10px;
   }
   .tb-goal-card{
@@ -1112,7 +1137,8 @@ body {
   }
 
   @media (max-width: 720px){
-    .tb-goal-grid{ grid-template-columns: 1fr; }
+    .tb-top{ grid-template-columns: 1fr; }
+   .tb-goal-grid{ grid-template-columns: 1fr; }
   }
 
 .btn.danger{

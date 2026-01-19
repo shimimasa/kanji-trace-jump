@@ -452,37 +452,40 @@ export function TitleBookScreen(ctx, nav) {
             </div>
           </div>
 
-          <div class="tb-goals">
-            <div class="tb-section-title">つぎの目標</div>
-            <div class="tb-goal-grid">${nextGoalsHtml}</div>
-          </div>
+          <div class="tb-top">
+            <div class="tb-top-left">
+              <div class="tb-section-title">つぎの目標</div>
+              <div class="tb-goal-grid">${nextGoalsHtml}</div>
+            </div>
+            <div class="tb-top-right">
+              <div class="tb-filter">
+                <button type="button" class="tb-filter-btn ${filterMode === "all" ? "active" : ""}" data-filter="all">ぜんぶ <span class="tb-count">${total}</span></button>
+                <button type="button" class="tb-filter-btn ${filterMode === "performance" ? "active" : ""}" data-filter="performance">あそび <span class="tb-count">${countsByCategory.performance ?? 0}</span></button>
+                <button type="button" class="tb-filter-btn ${filterMode === "master" ? "active" : ""}" data-filter="master">たつじん <span class="tb-count">${countsByCategory.master ?? 0}</span></button>
+                <button type="button" class="tb-filter-btn ${filterMode === "script" ? "active" : ""}" data-filter="script">もじ <span class="tb-count">${countsByCategory.script ?? 0}</span></button>
+                <button type="button" class="tb-filter-btn ${filterMode === "grade" ? "active" : ""}" data-filter="grade">学年 <span class="tb-count">${countsByCategory.grade ?? 0}</span></button>
+                <button type="button" class="tb-filter-btn ${filterMode === "milestone" ? "active" : ""}" data-filter="milestone">とくべつ <span class="tb-count">${countsByCategory.milestone ?? 0}</span></button>
+              </div>
 
-          <div class="tb-filter">
-            <button type="button" class="tb-filter-btn ${filterMode === "all" ? "active" : ""}" data-filter="all">ぜんぶ <span class="tb-count">${total}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "performance" ? "active" : ""}" data-filter="performance">あそび <span class="tb-count">${countsByCategory.performance ?? 0}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "master" ? "active" : ""}" data-filter="master">たつじん <span class="tb-count">${countsByCategory.master ?? 0}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "script" ? "active" : ""}" data-filter="script">もじ <span class="tb-count">${countsByCategory.script ?? 0}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "grade" ? "active" : ""}" data-filter="grade">学年 <span class="tb-count">${countsByCategory.grade ?? 0}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "milestone" ? "active" : ""}" data-filter="milestone">とくべつ <span class="tb-count">${countsByCategory.milestone ?? 0}</span></button>
-          </div>
+              <div class="tb-sort">
+                <button type="button" class="tb-sort-btn ${sortMode === "recommend" ? "active" : ""}" data-sort="recommend">おすすめ</button>
+                <button type="button" class="tb-sort-btn ${sortMode === "rarity" ? "active" : ""}" data-sort="rarity">レア順</button>
+                <button type="button" class="tb-sort-btn ${sortMode === "recent" ? "active" : ""}" data-sort="recent">取得順</button>
+                <button type="button" class="tb-sort-btn ${sortMode === "name" ? "active" : ""}" data-sort="name">名前順</button>
+              </div>
 
-          <div class="tb-sort">
-            <button type="button" class="tb-sort-btn ${sortMode === "recommend" ? "active" : ""}" data-sort="recommend">おすすめ</button>
-            <button type="button" class="tb-sort-btn ${sortMode === "rarity" ? "active" : ""}" data-sort="rarity">レア順</button>
-            <button type="button" class="tb-sort-btn ${sortMode === "recent" ? "active" : ""}" data-sort="recent">取得順</button>
-            <button type="button" class="tb-sort-btn ${sortMode === "name" ? "active" : ""}" data-sort="name">名前順</button>
-          </div>
-
-          <div class="tb-search">
-            <input
-              class="tb-search-input"
-              type="text"
-              inputmode="search"
-              placeholder="称号を検索（例：王）"
-              value="${escapeAttr(searchQuery)}"
-              aria-label="称号検索"
-            />
-            <button type="button" class="tb-search-clear" data-action="clearSearch" aria-label="検索をクリア">×</button>
+              <div class="tb-search">
+                <input
+                  class="tb-search-input"
+                  type="text"
+                  inputmode="search"
+                  placeholder="称号を検索（例：王）"
+                  value="${escapeAttr(searchQuery)}"
+                  aria-label="称号検索"
+                />
+                <button type="button" class="tb-search-clear" data-action="clearSearch" aria-label="検索をクリア">×</button>
+              </div>
+            </div>
           </div>
 
           <div class="tb-section">
