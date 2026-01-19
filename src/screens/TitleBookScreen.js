@@ -19,6 +19,25 @@ function rarityWeight(r) {
   return 0;
 }
 
+function rarityLabel(r) {
+    if (r === "SR") return "でんせつ";
+    if (r === "R") return "すごい";
+    if (r === "N") return "ふつう";
+    return "";
+  }
+  
+  function labelFromSelectedRangeId(id) {
+    const s = String(id ?? "");
+    // 例: kanji_g1 ... kanji_g10（あなたの規約）
+    const m = s.match(/kanji_g(\d+)/);
+    if (!m) return s || "未選択";
+    const n = Number(m[1]);
+    if (n >= 1 && n <= 6) return `いま：小${n}`;
+    if (n >= 7 && n <= 9) return `いま：中${n - 6}`;
+    if (n === 10) return "いま：高1";
+    return s || "未選択";
+  }
+
 function loadTitleBookSort() {
   try {
     return localStorage.getItem(TITLE_BOOK_SORT_LS_KEY) || "rarity";
@@ -168,6 +187,39 @@ export function TitleBookScreen(ctx, nav) {
         return acc;
       }, {});
 
+
+      // ✅ つぎの目標：未取得の中から「取りやすい順（N→R→SR）」で最大3つ
+      const nextGoals = [...lockedList]
+        .sort((a, b) => {
+          const aw = rarityWeight(a.rarity);
+          const bw = rarityWeight(b.rarity);
+          if (aw !== bw) return aw - bw;
+          return String(a.title).localeCompare(String(b.title), "ja");
+        })
+        .slice(0, 3);
+
+      const nextGoalsHtml =
+        nextGoals.length === 0
+          ? `<div class="tb-empty">このカテゴリの称号は、ぜんぶ手に入れたよ。</div>`
+          : nextGoals
+              .map((it) => {
+                const meta = it.meta || {};
+                const rr = meta.rarity ? `<span class="tb-rarity tb-r-${meta.rarity}">${meta.rarity}</span>` : "";
+                const rrL = rarityLabel(meta.rarity);
+                const hint = meta.hint ? meta.hint : "ヒント：？？？";
+                return `
+                  <div class="tb-goal-card">
+                    <div class="tb-goal-top">
+                      <div class="tb-goal-title">？？？ ${rr}</div>
+                      ${rrL ? `<div class="tb-goal-rlabel">${rrL}</div>` : ``}
+                    </div>
+                    <div class="tb-goal-hint">ヒント：${escapeAttr(hint)}</div>
+                  </div>
+                `;
+              })
+              .join("");
+
+
       const renderRow = (item) => {
                 const meta = item.meta;
                 const owned = item.owned;
@@ -222,6 +274,16 @@ export function TitleBookScreen(ctx, nav) {
           <div class="tb-progress">
             <div class="tb-bar"><div class="tb-bar-fill" style="width:${pct}%"></div></div>
             <div class="tb-progress-sub">達成率 ${pct}%（のこり ${remain}）</div>
+          </div>
+
+          <div class="tb-now">
+            <div class="tb-now-chip">${escapeAttr(labelFromSelectedRangeId(ctx?.selectedRangeId))}</div>
+            <div class="tb-now-sub">「つぎの目標」を3つ出すよ。</div>
+          </div>
+
+          <div class="tb-goals">
+            <div class="tb-section-title">つぎの目標</div>
+            <div class="tb-goal-grid">${nextGoalsHtml}</div>
           </div>
 
           <div class="tb-filter">

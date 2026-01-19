@@ -978,6 +978,78 @@ body {
     gap: 10px;
     flex-wrap: wrap;
   }
+
+  /* ===== Title Book: "Next goals" (kid guidance) ===== */
+.tb-now{
+    margin: 10px 0 8px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tb-now-chip{
+   display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(18,38,63,.12);
+    background: rgba(255,255,255,.70);
+    font-weight: 1000;
+  }
+  .tb-now-sub{
+    font-weight: 900;
+    opacity: .70;
+    font-size: 12px;
+  }
+  
+  .tb-goals{
+    margin: 8px 0 12px;
+  }
+  .tb-goal-grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .tb-goal-card{
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.78);
+    box-shadow: 0 10px 24px rgba(18,38,63,.08);
+    padding: 12px 12px;
+    min-height: 78px;
+  }
+  .tb-goal-top{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .tb-goal-title{
+    font-weight: 1000;
+  }
+  .tb-goal-rlabel{
+    font-weight: 1000;
+    font-size: 11px;
+    opacity: .72;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+    white-space: nowrap;
+  }
+  .tb-goal-hint{
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 900;
+    opacity: .78;
+    line-height: 1.35;
+  }
+  
+  @media (max-width: 720px){
+    .tb-goal-grid{ grid-template-columns: 1fr; }
+  }
+
 .btn.danger{
   background: rgba(220, 0, 0, 0.10);
   font-weight: 900;
