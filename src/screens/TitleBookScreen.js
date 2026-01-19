@@ -348,6 +348,7 @@ export function TitleBookScreen(ctx, nav) {
                   rangeInfo.total > 0;
 
                 let remainText = "";
+                let barHtml = "";
                 if (canShowRemain) {
                   const goal = goalTargetFromTitle(meta.title, rangeInfo.total);
                   if (goal) {
@@ -357,6 +358,15 @@ export function TitleBookScreen(ctx, nav) {
                     } else {
                       remainText = need <= 0 ? "もう達成！" : `あと ${need}${goal.unit}`;
                     }
+                    // ✅ 進行度バー（Step5）
+                    const cur = Math.min(goal.target, Math.max(0, rangeInfo.cleared ?? 0));
+                    const pct = goal.target > 0 ? Math.round((cur / goal.target) * 100) : 0;
+                    barHtml = `
+                      <div class="tb-goal-bar">
+                        <div class="tb-goal-bar-fill" style="width:${pct}%"></div>
+                      </div>
+                      <div class="tb-goal-bar-text">${cur}/${goal.target}</div>
+                    `;
                   }
                 }
                 return `
@@ -372,7 +382,7 @@ export function TitleBookScreen(ctx, nav) {
                     </div>
                     <div class="tb-goal-hint">ヒント：${escapeAttr(hint)}</div>
                     ${remainText ? `<div class="tb-goal-remain">${escapeAttr(remainText)}</div>` : ``}
-                   </div>
+                    ${barHtml ? `<div class="tb-goal-progress">${barHtml}</div>` : ``}</div>
                   </button>
                 `;
               })
@@ -449,11 +459,11 @@ export function TitleBookScreen(ctx, nav) {
 
           <div class="tb-filter">
             <button type="button" class="tb-filter-btn ${filterMode === "all" ? "active" : ""}" data-filter="all">ぜんぶ <span class="tb-count">${total}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "performance" ? "active" : ""}" data-filter="performance">プレイ <span class="tb-count">${countsByCategory.performance ?? 0}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "master" ? "active" : ""}" data-filter="master">マスター <span class="tb-count">${countsByCategory.master ?? 0}</span></button>
+            <button type="button" class="tb-filter-btn ${filterMode === "performance" ? "active" : ""}" data-filter="performance">あそび <span class="tb-count">${countsByCategory.performance ?? 0}</span></button>
+            <button type="button" class="tb-filter-btn ${filterMode === "master" ? "active" : ""}" data-filter="master">たつじん <span class="tb-count">${countsByCategory.master ?? 0}</span></button>
             <button type="button" class="tb-filter-btn ${filterMode === "script" ? "active" : ""}" data-filter="script">もじ <span class="tb-count">${countsByCategory.script ?? 0}</span></button>
             <button type="button" class="tb-filter-btn ${filterMode === "grade" ? "active" : ""}" data-filter="grade">学年 <span class="tb-count">${countsByCategory.grade ?? 0}</span></button>
-            <button type="button" class="tb-filter-btn ${filterMode === "milestone" ? "active" : ""}" data-filter="milestone">横断 <span class="tb-count">${countsByCategory.milestone ?? 0}</span></button>
+            <button type="button" class="tb-filter-btn ${filterMode === "milestone" ? "active" : ""}" data-filter="milestone">とくべつ <span class="tb-count">${countsByCategory.milestone ?? 0}</span></button>
           </div>
 
           <div class="tb-sort">
@@ -482,7 +492,7 @@ export function TitleBookScreen(ctx, nav) {
 
           <details class="tb-locked" ${got === 0 ? "" : ""}>
             <summary class="tb-locked-sum">
-              まだの称号（${lockedList.length}）
+              まだの称号（あと${lockedList.length}こ）
               <span class="tb-locked-hint">（タップしてひらく）</span>
             </summary>
             <div class="tb-body tb-body-locked">${lockedRows}</div>
@@ -554,15 +564,14 @@ export function TitleBookScreen(ctx, nav) {
                     rerender();
                     return;
                   }
-      };
 
-      // =========================
-        // v2 Step4: 目標カードの導線
+                  // =========================
+        // v2 Step4: 目標カードの導線（✅ onClick の中で処理する）
         // =========================
         if (goalTitle) {
-          // 1) 学年・文字マイルストーン → 学習へ
+          // 1) 学年・文字マイルストーン → 学習へ（そのままホームへ戻して開始）
           if (goalCategory === "grade" || goalCategory === "script") {
-            nav.go("home", { selectedRangeId: ctx.selectedRangeId ?? null });
+            nav.go("home", { selectedRangeId: selectedRangeId ?? ctx.selectedRangeId ?? null });
             return;
           }
 
@@ -574,11 +583,12 @@ export function TitleBookScreen(ctx, nav) {
             return;
           }
 
-          // 3) その他 → おすすめ順で表示
+          // 3) その他 → おすすめ順
           saveTitleBookSort("recommend");
           rerender();
           return;
         }
+      };
 
       const onInput = (e) => {
         const input = e.target?.closest?.(".tb-search-input");

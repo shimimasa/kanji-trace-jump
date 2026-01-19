@@ -937,6 +937,7 @@ body {
     align-items:center;
     justify-content: space-between;
     gap: 10px;
+    opacity: .90; /* ✅ “重さ”を少し軽く */
   }
   .tb-locked-sum::-webkit-details-marker{ display:none; }
   .tb-locked-hint{
@@ -1058,7 +1059,7 @@ body {
     margin-top: 8px;
     font-size: 12px;
     font-weight: 900;
-    opacity: .78;
+    opacity: .62;
     line-height: 1.35;
   }
 
@@ -1076,6 +1077,40 @@ body {
       width: fit-content;
     }
   
+    /* Step5: Goal progress bar */
+.tb-goal-progress{
+    margin-top: 10px;
+  }
+  .tb-goal-bar{
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(18,38,63,.08);
+    overflow: hidden;
+  }
+  .tb-goal-bar-fill{
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: rgba(56,117,255,.38);
+    transition: width .25s ease;
+  }
+  .tb-goal-bar-text{
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 1000;
+    opacity: .72;
+  }
+
+  /* ✅ Step5磨き：数値(0/1, 40/80)は基本は見せない（必要ならhoverで） */
+.tb-goal-bar-text{
+    display: none;
+  }
+  @media (hover: hover) and (pointer: fine){
+    .tb-goal-card:hover .tb-goal-bar-text{
+      display: block;
+    }
+  }
+
   @media (max-width: 720px){
     .tb-goal-grid{ grid-template-columns: 1fr; }
   }
@@ -2092,6 +2127,53 @@ body {
   font-size: 18px;
   color: #2b6cff;
 }
+
+/* =========================
++   Step6: Title Book glow (図鑑が光る)
++   ========================= */
+.titlebook-glow{
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 64px);
+    right: calc(env(safe-area-inset-right, 0px) + 10px);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-6px) scale(.96);
+    transition: opacity .18s ease, transform .22s ease;
+  }
+  .titlebook-glow.show{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .titlebook-glow-inner{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(56,117,255,.22);
+    box-shadow:
+      0 14px 34px rgba(56,117,255,.18),
+      0 8px 22px rgba(18,38,63,.12);
+  }
+  .titlebook-glow-icon{
+    font-size: 20px;
+    line-height: 1;
+    filter: drop-shadow(0 10px 18px rgba(56,117,255,.24));
+    animation: tbGlowPop 420ms ease-out;
+  }
+  .titlebook-glow-text{
+    font-weight: 1000;
+    font-size: 12px;
+    opacity: .78;
+    white-space: nowrap;
+  }
+  @keyframes tbGlowPop{
+    0%   { transform: scale(.75); opacity: .55; }
+    60%  { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
 
 /* HOME */
 .homeCard{

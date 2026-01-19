@@ -110,6 +110,49 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   }
 
   // ===========================
+  // Title Book glow (Step6)
+  // - 称号獲得時に「図鑑が光る」演出を出す
+  // ===========================
+  function showTitleBookGlow() {
+    const el = document.createElement("div");
+    el.className = "titlebook-glow";
+    el.innerHTML = `
+      <div class="titlebook-glow-inner" aria-hidden="true">
+        <div class="titlebook-glow-icon">📘</div>
+        <div class="titlebook-glow-text">ずかんが光った！</div>
+      </div>
+    `;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add("show"));
+    setTimeout(() => {
+      el.classList.remove("show");
+      setTimeout(() => el.remove(), 500);
+    }, 900);
+  }
+
+  // ===========================
+  // Title Book glow (Step6)
+  // - 称号獲得時に「図鑑が光る」演出を出す
+  // ===========================
+  function showTitleBookGlow() {
+    const el = document.createElement("div");
+    el.className = "titlebook-glow";
+    el.innerHTML = `
+      <div class="titlebook-glow-inner" aria-hidden="true">
+        <div class="titlebook-glow-icon">📘</div>
+        <div class="titlebook-glow-text">ずかんが光った！</div>
+      </div>
+    `;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add("show"));
+    setTimeout(() => {
+      el.classList.remove("show");
+      setTimeout(() => el.remove(), 500);
+    }, 900);
+  }
+
+
+  // ===========================
   // Title helpers (milestones)
   // ===========================
   function addTitleAndMaybePopup(title, { rank = null, rarity = null, at = Date.now() } = {}) {
@@ -122,6 +165,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     // 初回獲得だけポップアップ
     if (added && (added.count ?? 0) === 1) {
       showTitlePopup(title);
+      // ✅ Step6: 図鑑が光る
+      showTitleBookGlow();
     }
     return added;
   }
