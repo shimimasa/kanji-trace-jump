@@ -148,8 +148,7 @@ export function HomeScreen(ctx, nav) {
                 returnTo: null,
               });
               break;
-                           n
-                         case "save": {
+           case "save": {
                           const toast = el.querySelector("#saveToast");
                                        // ✅ せーぶ対象がない場合も、押した結果がわかるように返す
                                        if (!hasResume) {

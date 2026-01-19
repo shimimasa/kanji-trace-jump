@@ -20,7 +20,9 @@ export function loadProgress() {
 }
 
 export function saveProgress(progress) {
-  localStorage.setItem(KEY, JSON.stringify(progress));
+  try {
+    localStorage.setItem(KEY, JSON.stringify(progress));
+  } catch {}
 }
 
 // ===========================
