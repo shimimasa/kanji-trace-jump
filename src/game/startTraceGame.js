@@ -336,7 +336,7 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   // ===========================
   // SE: stage clear (happy meow)
   // ===========================
-  const STAGE_CLEAR_SE_URL = "/assets/se/neko-clear.mp3";
+  const STAGE_CLEAR_SE_URL = new URL("assets/se/neko-clear.mp3", BASE_URL).toString();
   const stageClearSe = new Audio(STAGE_CLEAR_SE_URL);
   stageClearSe.preload = "auto";
   stageClearSe.volume = 0.9; // 好みで調整
@@ -959,10 +959,19 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     if (!Array.isArray(all)) throw new Error("all.json は配列である必要があります");
 
     // 2) traceable ids
-    const resTr = await fetch(TRACEABLE_PATH, { cache: "no-store" });
-    if (!resTr.ok) throw new Error(`index_traceable HTTP ${resTr.status}`);
-    const traceable = await resTr.json();
-    const traceSet = new Set(Array.isArray(traceable) ? traceable : []);
+    // - alphabet は index が無くても進める（欠損で落ちないようにする）
+    let traceSet = null;
+    if (contentType !== "alphabet") {
+      try {
+        const resTr = await fetch(TRACEABLE_PATH, { cache: "no-store" });
+        if (!resTr.ok) throw new Error(`index_traceable HTTP ${resTr.status}`);
+        const traceable = await resTr.json();
+        traceSet = new Set(Array.isArray(traceable) ? traceable : []);
+      } catch (e) {
+        console.warn("[startTraceGame] traceable index failed:", TRACEABLE_PATH, e);
+        traceSet = null; // フォールバック：全件を通す
+      }
+    }
 
     // 3) grade filter + traceable filter + strokesRef normalize
     const filtered = all
@@ -972,8 +981,8 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
         if (!it?.id || !ch) return false;
         // ✅ alphabetは all.json を全件採用（indexが未整備でもJ以降へ進めるようにする）
         if (contentType !== "alphabet") {
-            if (!traceSet.has(it.id)) return false;
-          }
+          if (traceSet && !traceSet.has(it.id)) return false;
+        }
         // ✅ grade フィルタは漢字のみ
         if (contentType === "kanji" && gradeFromRange != null && Number(it.grade) !== gradeFromRange) return false;
         return true;
@@ -1950,12 +1959,9 @@ function reorderLatinStrokes(polys) {
           // （セット途中の1字クリアだけ赤〇を出す）
           const setInfoForStamp = getSetInfo(idx);
           const isSetLast = !!setInfoForStamp && (setInfoForStamp.pos >= setInfoForStamp.len - 1);
-          if (!isSetLast && !isSingleMode) {
+          if (!isSetLast) {
             showClearMaruStamp(svgEl);
           }
-
-          // ✅ 1字クリアのたびに「中心へ赤い〇スタンプ」
-          showClearMaruStamp(svgEl);
 
           // ✅ クリア済みを “共通進捗” に保存（Progress画面と繋がる）
           const item = items[idx];
