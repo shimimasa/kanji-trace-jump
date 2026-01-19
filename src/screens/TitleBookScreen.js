@@ -49,7 +49,16 @@ function rarityLabel(r) {
       const id = String(selectedRangeId ?? "");
       if (type === "kanji") {
         const m = id.match(/kanji_g(\d+)/);
-        return m ? `g${Number(m[1])}` : null; // g1..g10
+        if (!m) return null;
+    const n = Number(m[1]);
+    // ✅ TitleBook 側の rangeId は g/j/h 表記（catalogに合わせる）
+    // - g1..g6 : 小1..小6
+    // - g7..g9 : 中1..中3 => j1..j3
+    // - g10    : 高1      => h1
+    if (n >= 1 && n <= 6) return `g${n}`;
+    if (n >= 7 && n <= 9) return `j${n - 6}`;
+    if (n === 10) return "h1";
+    return null;
       }
       if (type === "hiragana") return "hira";
       if (type === "katakana") return "kata";
@@ -71,6 +80,40 @@ function rarityLabel(r) {
       if (t === "ABCマスター") return { kind: "half", target: ceilHalf(total), unit: "こ" };
       return null;
     }
+
+    function labelFromKanjiSelectedRangeId(selectedRangeId) {
+        const s = String(selectedRangeId ?? "");
+        const m = s.match(/kanji_g(\d+)/);
+        if (!m) return null;
+        const n = Number(m[1]);
+        if (n >= 1 && n <= 6) return `小${n}`;
+        if (n >= 7 && n <= 9) return `中${n - 6}`;
+        if (n === 10) return "高1";
+        return null;
+      }
+      
+      function milestoneTitlesForCurrentRange(selectedRangeId, type) {
+        if (type === "kanji") {
+          const label = labelFromKanjiSelectedRangeId(selectedRangeId);
+          if (!label) return [];
+          return [`${label}のはじまり`, `${label}の半分`, `${label}コンプリート`];
+        }
+        if (type === "hiragana") return ["ひらがなデビュー", "ひらがな名人", "ひらがな皆伝"];
+        if (type === "katakana") return ["カタカナデビュー", "カタカナ名人", "カタカナ皆伝"];
+        if (type === "alphabet") return ["ABCデビュー", "ABCマスター", "ABC皆伝"];
+        return [];
+      }
+      
+      function pickEasiestUnowned(list, limit = 1) {
+        return [...list]
+          .sort((a, b) => {
+            const aw = rarityWeight(a.rarity);
+            const bw = rarityWeight(b.rarity);
+            if (aw !== bw) return aw - bw; // N→R→SR
+            return String(a.title).localeCompare(String(b.title), "ja");
+          })
+          .slice(0, limit);
+      }
 
 function loadTitleBookSort() {
   try {
@@ -240,15 +283,46 @@ export function TitleBookScreen(ctx, nav) {
       }, {});
 
 
-      // ✅ つぎの目標：未取得の中から「取りやすい順（N→R→SR）」で最大3つ
-      const nextGoals = [...lockedList]
-        .sort((a, b) => {
-          const aw = rarityWeight(a.rarity);
-          const bw = rarityWeight(b.rarity);
-          if (aw !== bw) return aw - bw;
-          return String(a.title).localeCompare(String(b.title), "ja");
-        })
-        .slice(0, 3);
+     // ✅ つぎの目標（v2 Step3）
+      // 1) いまの範囲のマイルストーン（未取得）を最優先
+      // 2) 次にプレイ系（performance）の“取りやすい未取得”を1つ
+      // 3) 残りは「現在のフィルタカテゴリ」を尊重しつつ、取りやすい未取得で埋める
+      const nextGoals = [];
+      const pushUnique = (it) => {
+        if (!it) return;
+        if (nextGoals.some((x) => x.title === it.title)) return;
+        nextGoals.push(it);
+      };
+
+      const allDisplay = display; // フィルタ前の全体
+      const allLocked = allDisplay.filter((x) => !x.isOwned);
+
+      // 1) 現在範囲のマイルストーン
+      const milestoneTitles = milestoneTitlesForCurrentRange(selectedRangeId, rangeInfo.type);
+      for (const t of milestoneTitles) {
+        const it = allLocked.find((x) => x.title === t);
+        pushUnique(it);
+        if (nextGoals.length >= 3) break;
+      }
+
+      // 2) プレイ系から1つ（未取得）
+      if (nextGoals.length < 3) {
+        const perfLocked = allLocked.filter((x) => (x.category ?? "other") === "performance");
+        const [pick] = pickEasiestUnowned(perfLocked, 1);
+        pushUnique(pick);
+      }
+
+      // 3) 残り：フィルタに寄せる（ただしフィルタがallなら全体）
+      if (nextGoals.length < 3) {
+        const pool =
+          filterMode && filterMode !== "all"
+            ? allLocked.filter((x) => (x.category ?? "other") === filterMode)
+            : allLocked;
+        for (const it of pickEasiestUnowned(pool, 6)) {
+          pushUnique(it);
+          if (nextGoals.length >= 3) break;
+        }
+      }
 
         const rangeShort = rangeShortFromSelectedId(selectedRangeId, rangeInfo.type);
 
