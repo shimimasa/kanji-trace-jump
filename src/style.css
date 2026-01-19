@@ -1021,7 +1021,8 @@ body {
     .tb-top-right{
       border-radius: 18px;
       border: 1px solid rgba(18,38,63,.08);
-      background: rgba(255,255,255,.55);
+      /* ✅ 透けすぎを抑えて上下の“紙面”を統一 */
+      background: rgba(255,255,255,.88);
       padding: 12px;
     }
     .tb-top-right .tb-filter{
