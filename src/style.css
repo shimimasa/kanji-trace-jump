@@ -1019,7 +1019,23 @@ body {
     box-shadow: 0 10px 24px rgba(18,38,63,.08);
     padding: 12px 12px;
     min-height: 78px;
+    width: 100%;
+      text-align: left;
+      cursor: pointer;
   }
+
+  .tb-goal-card:hover{
+      box-shadow: 0 14px 30px rgba(18,38,63,.12);
+    }
+    
+    .tb-goal-card:active{
+      transform: translateY(1px);
+    }
+    
+    .tb-goal-card:focus{
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(56,117,255,.25);
+    }
   .tb-goal-top{
     display:flex;
     align-items:center;

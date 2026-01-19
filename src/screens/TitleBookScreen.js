@@ -360,7 +360,12 @@ export function TitleBookScreen(ctx, nav) {
                   }
                 }
                 return `
-                  <div class="tb-goal-card">
+                  <button
+                    type="button"
+                    class="tb-goal-card"
+                    data-goal-title="${escapeAttr(meta.title)}"
+                    data-goal-category="${escapeAttr(meta.category ?? "")}"
+                  >
                     <div class="tb-goal-top">
                       <div class="tb-goal-title">？？？ ${rr}</div>
                       ${rrL ? `<div class="tb-goal-rlabel">${rrL}</div>` : ``}
@@ -368,7 +373,7 @@ export function TitleBookScreen(ctx, nav) {
                     <div class="tb-goal-hint">ヒント：${escapeAttr(hint)}</div>
                     ${remainText ? `<div class="tb-goal-remain">${escapeAttr(remainText)}</div>` : ``}
                    </div>
-                  </div>
+                  </button>
                 `;
               })
               .join("");
@@ -508,6 +513,9 @@ export function TitleBookScreen(ctx, nav) {
         const action = btn.dataset.action;
         const sort = btn.dataset.sort;
         const filter = btn.dataset.filter;
+        const goalTitle = btn.dataset.goalTitle;
+        const goalCategory = btn.dataset.goalCategory;
+ 
 
         if (action === "back") {
           // ✅ もどるは常にホームへ
@@ -547,6 +555,30 @@ export function TitleBookScreen(ctx, nav) {
                     return;
                   }
       };
+
+      // =========================
+        // v2 Step4: 目標カードの導線
+        // =========================
+        if (goalTitle) {
+          // 1) 学年・文字マイルストーン → 学習へ
+          if (goalCategory === "grade" || goalCategory === "script") {
+            nav.go("home", { selectedRangeId: ctx.selectedRangeId ?? null });
+            return;
+          }
+
+          // 2) プレイ系 → 図鑑内フィルタ
+          if (goalCategory === "performance") {
+            saveTitleBookFilter("performance");
+            saveTitleBookSort("recommend");
+            rerender();
+            return;
+          }
+
+          // 3) その他 → おすすめ順で表示
+          saveTitleBookSort("recommend");
+          rerender();
+          return;
+        }
 
       const onInput = (e) => {
         const input = e.target?.closest?.(".tb-search-input");
