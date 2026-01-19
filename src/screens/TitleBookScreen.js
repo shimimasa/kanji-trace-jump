@@ -381,8 +381,7 @@ export function TitleBookScreen(ctx, nav) {
                       ${rrL ? `<div class="tb-goal-rlabel">${rrL}</div>` : ``}
                     </div>
                     <div class="tb-goal-hint">ヒント：${escapeAttr(hint)}</div>
-                    ${remainText ? `<div class="tb-goal-remain">${escapeAttr(remainText)}</div>` : ``}
-                    ${barHtml ? `<div class="tb-goal-progress">${barHtml}</div>` : ``}</div>
+                    ${barHtml ? `<div class="tb-goal-progress">${barHtml}</div>` : ``}
                   </button>
                 `;
               })

@@ -880,6 +880,13 @@ body {
   .tb-section{
     margin-top: 10px;
   }
+
+  /* ✅ 下側（一覧/折りたたみ）も同じ紙質に寄せる */
+  .screen.titlebook .tb-section,
+  .screen.titlebook .tb-locked,
+  .screen.titlebook .tb-admin{
+    background: rgba(255,255,255,.98);
+  }
   .tb-section-title{
     font-weight: 1000;
     opacity: .78;
@@ -1017,6 +1024,14 @@ body {
       gap: 12px;
       align-items: start;
     }
+
+    /* ✅ tb-top 自体を“1枚の板”にする（内側の紙を廃止） */
+    .screen.titlebook .tb-top{
+        /* ✅ 二重パネルをやめる：tb-top の板の上に“素の中身”を置く */
+      border: none;
+      background: transparent;
+      padding: 0;
+      }
     .tb-top-left,
     .tb-top-right{
       border-radius: 18px;
@@ -1217,7 +1232,27 @@ html, body {
     box-shadow: var(--shadow);
     backdrop-filter: blur(8px);
   }
+
+  /* ===========================
++     TitleBook: remove "split" look
++     - 透けと二重パネルを抑えて「1枚の紙」に統一
++     =========================== */
+  .screen.titlebook .card{
+      background: rgba(255,255,255,.98);
+      backdrop-filter: none;
+    }
   
+
+  /* ===========================
++     TitleBook: remove "split" look
++     - 透けと二重パネルを抑えて「1枚の紙」に統一
++     =========================== */
+  .screen.titlebook .card{
+      background: rgba(255,255,255,.98);
+      backdrop-filter: none;
+    }
+
+
   /* Buttons: primaryを“1つだけ強い”設計に */
   .btn{
     border-radius: 16px;
