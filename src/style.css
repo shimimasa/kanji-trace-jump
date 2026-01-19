@@ -865,6 +865,298 @@ body {
   font-weight: 900;
   cursor: pointer;
 }
+
+/* ===== Title Book v1.1 UI polish ===== */
+.screen.titlebook .tb-head-actions .btn{
+    min-width: 0;
+  }
+  .screen.titlebook .btn.small{
+    height: 44px;
+    padding: 0 14px;
+    font-size: 16px;
+    border-radius: 14px;
+  }
+  
+  .tb-section{
+    margin-top: 10px;
+  }
+
+  /* ✅ 下側（一覧/折りたたみ）も同じ紙質に寄せる */
+  .screen.titlebook .tb-section,
+  .screen.titlebook .tb-locked,
+  .screen.titlebook .tb-admin{
+    background: rgba(255,255,255,.98);
+  }
+  .tb-section-title{
+    font-weight: 1000;
+    opacity: .78;
+    margin: 4px 0 8px;
+  }
+  
+  .tb-filter{
+    display:flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 10px 0 10px;
+  }
+  .tb-filter-btn{
+    border: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+    font-weight: 1000;
+    font-size: 12px;
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
+  }
+  .tb-filter-btn.active{
+    background: rgba(56,117,255,.14);
+    box-shadow: 0 12px 26px rgba(56,117,255,.10);
+  }
+  .tb-count{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.08);
+    font-size: 11px;
+    font-weight: 1000;
+    opacity: .85;
+  }
+  
+  .tb-locked{
+    margin-top: 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(246,248,251,.55);
+    overflow: hidden;
+  }
+  .tb-locked-sum{
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 14px;
+    font-weight: 1000;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+    opacity: .90; /* ✅ “重さ”を少し軽く */
+  }
+  .tb-locked-sum::-webkit-details-marker{ display:none; }
+  .tb-locked-hint{
+    font-weight: 900;
+    opacity: .65;
+    font-size: 12px;
+  }
+  .tb-body-locked{
+    padding-top: 0;
+  }
+  
+  .tb-admin{
+    margin-top: 12px;
+    border-radius: 16px;
+    border: 1px dashed rgba(18,38,63,.18);
+    background: rgba(255,255,255,.55);
+    overflow: hidden;
+  }
+  .tb-admin-sum{
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 14px;
+    font-weight: 1000;
+    opacity: .78;
+  }
+  .tb-admin-sum::-webkit-details-marker{ display:none; }
+  .tb-admin-body{
+    padding: 12px 14px 14px;
+  }
+  .tb-admin-note{
+    font-size: 12px;
+    font-weight: 900;
+    opacity: .72;
+    margin-bottom: 10px;
+  }
+  .tb-admin-actions{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  /* ===== Title Book: "Next goals" (kid guidance) ===== */
+.tb-now{
+    margin: 10px 0 8px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .tb-now-chip{
+   display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(18,38,63,.12);
+    background: rgba(255,255,255,.70);
+    font-weight: 1000;
+  }
+  .tb-now-sub{
+    font-weight: 900;
+    opacity: .70;
+    font-size: 12px;
+  }
+  
+  .tb-goals{
+    margin: 8px 0 12px;
+  }
+
+  /* ===== TitleBook unified top layout (no "split") ===== */
+  .tb-top{
+      margin: 8px 0 12px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    /* ✅ tb-top 自体を“1枚の板”にする（内側の紙を廃止） */
+    .screen.titlebook .tb-top{
+        /* ✅ 二重パネルをやめる：tb-top の板の上に“素の中身”を置く */
+      border: none;
+      background: transparent;
+      padding: 0;
+      }
+    .tb-top-left,
+    .tb-top-right{
+      border-radius: 18px;
+      border: 1px solid rgba(18,38,63,.08);
+      /* ✅ 透けすぎを抑えて上下の“紙面”を統一 */
+      background: rgba(255,255,255,.88);
+      padding: 12px;
+    }
+    .tb-top-right .tb-filter{
+      margin-top: 0;
+    }
+    .tb-top-right .tb-sort{
+      margin-top: 10px;
+    }
+    .tb-top-right .tb-search{
+      margin-top: 10px;
+    }
+  .tb-goal-grid{
+    display:grid;
+    grid-template-columns: 1fr; /* ✅ PCでも縦3枚で統一（上下分断感を減らす） */
+    gap: 10px;
+  }
+  .tb-goal-card{
+    border-radius: 18px;
+    border: 1px solid rgba(18,38,63,.10);
+    background: rgba(255,255,255,.78);
+    box-shadow: 0 10px 24px rgba(18,38,63,.08);
+    padding: 12px 12px;
+    min-height: 78px;
+    width: 100%;
+      text-align: left;
+      cursor: pointer;
+  }
+
+  .tb-goal-card:hover{
+      box-shadow: 0 14px 30px rgba(18,38,63,.12);
+    }
+    
+    .tb-goal-card:active{
+      transform: translateY(1px);
+    }
+    
+    .tb-goal-card:focus{
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(56,117,255,.25);
+    }
+  .tb-goal-top{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .tb-goal-title{
+    font-weight: 1000;
+  }
+  .tb-goal-rlabel{
+    font-weight: 1000;
+    font-size: 11px;
+    opacity: .72;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+    white-space: nowrap;
+  }
+  .tb-goal-hint{
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 900;
+    opacity: .62;
+    line-height: 1.35;
+  }
+
+  .tb-goal-remain{
+      margin-top: 10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56,117,255,.18);
+      background: rgba(56,117,255,.10);
+      font-weight: 1000;
+      font-size: 12px;
+      width: fit-content;
+    }
+  
+    /* Step5: Goal progress bar */
+.tb-goal-progress{
+    margin-top: 10px;
+  }
+  .tb-goal-bar{
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(18,38,63,.08);
+    overflow: hidden;
+  }
+  .tb-goal-bar-fill{
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: rgba(56,117,255,.38);
+    transition: width .25s ease;
+  }
+  .tb-goal-bar-text{
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 1000;
+    opacity: .72;
+  }
+
+  /* ✅ Step5磨き：数値(0/1, 40/80)は基本は見せない（必要ならhoverで） */
+.tb-goal-bar-text{
+    display: none;
+  }
+  @media (hover: hover) and (pointer: fine){
+    .tb-goal-card:hover .tb-goal-bar-text{
+      display: block;
+    }
+  }
+
+  @media (max-width: 720px){
+    .tb-top{ grid-template-columns: 1fr; }
+   .tb-goal-grid{ grid-template-columns: 1fr; }
+  }
+
 .btn.danger{
   background: rgba(220, 0, 0, 0.10);
   font-weight: 900;
@@ -940,7 +1232,27 @@ html, body {
     box-shadow: var(--shadow);
     backdrop-filter: blur(8px);
   }
+
+  /* ===========================
++     TitleBook: remove "split" look
++     - 透けと二重パネルを抑えて「1枚の紙」に統一
++     =========================== */
+  .screen.titlebook .card{
+      background: rgba(255,255,255,.98);
+      backdrop-filter: none;
+    }
   
+
+  /* ===========================
++     TitleBook: remove "split" look
++     - 透けと二重パネルを抑えて「1枚の紙」に統一
++     =========================== */
+  .screen.titlebook .card{
+      background: rgba(255,255,255,.98);
+      backdrop-filter: none;
+    }
+
+
   /* Buttons: primaryを“1つだけ強い”設計に */
   .btn{
     border-radius: 16px;
@@ -1877,6 +2189,53 @@ body {
   font-size: 18px;
   color: #2b6cff;
 }
+
+/* =========================
++   Step6: Title Book glow (図鑑が光る)
++   ========================= */
+.titlebook-glow{
+    position: fixed;
+    top: calc(env(safe-area-inset-top, 0px) + 64px);
+    right: calc(env(safe-area-inset-right, 0px) + 10px);
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-6px) scale(.96);
+    transition: opacity .18s ease, transform .22s ease;
+  }
+  .titlebook-glow.show{
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  .titlebook-glow-inner{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.92);
+    border: 1px solid rgba(56,117,255,.22);
+    box-shadow:
+      0 14px 34px rgba(56,117,255,.18),
+      0 8px 22px rgba(18,38,63,.12);
+  }
+  .titlebook-glow-icon{
+    font-size: 20px;
+    line-height: 1;
+    filter: drop-shadow(0 10px 18px rgba(56,117,255,.24));
+    animation: tbGlowPop 420ms ease-out;
+  }
+  .titlebook-glow-text{
+    font-weight: 1000;
+    font-size: 12px;
+    opacity: .78;
+    white-space: nowrap;
+  }
+  @keyframes tbGlowPop{
+    0%   { transform: scale(.75); opacity: .55; }
+    60%  { transform: scale(1.12); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
 
 /* HOME */
 .homeCard{

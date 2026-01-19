@@ -109,6 +109,168 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
     }, TITLE_POPUP_MS);
   }
 
+  // ===========================
+  // Title Book glow (Step6)
+  // - 称号獲得時に「図鑑が光る」演出を出す
+  // ===========================
+  function showTitleBookGlow() {
+    const el = document.createElement("div");
+    el.className = "titlebook-glow";
+    el.innerHTML = `
+      <div class="titlebook-glow-inner" aria-hidden="true">
+        <div class="titlebook-glow-icon">📘</div>
+        <div class="titlebook-glow-text">ずかんが光った！</div>
+      </div>
+    `;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add("show"));
+    setTimeout(() => {
+      el.classList.remove("show");
+      setTimeout(() => el.remove(), 500);
+    }, 900);
+  }
+
+  // ===========================
+  // Title Book glow (Step6)
+  // - 称号獲得時に「図鑑が光る」演出を出す
+  // ===========================
+  function showTitleBookGlow() {
+    const el = document.createElement("div");
+    el.className = "titlebook-glow";
+    el.innerHTML = `
+      <div class="titlebook-glow-inner" aria-hidden="true">
+        <div class="titlebook-glow-icon">📘</div>
+        <div class="titlebook-glow-text">ずかんが光った！</div>
+      </div>
+    `;
+    document.body.appendChild(el);
+    requestAnimationFrame(() => el.classList.add("show"));
+    setTimeout(() => {
+      el.classList.remove("show");
+      setTimeout(() => el.remove(), 500);
+    }, 900);
+  }
+
+
+  // ===========================
+  // Title helpers (milestones)
+  // ===========================
+  function addTitleAndMaybePopup(title, { rank = null, rarity = null, at = Date.now() } = {}) {
+    const added = addTitleToBook({
+      title,
+      rank,
+      rarity: rarity ?? getTitleMeta(title)?.rarity ?? null,
+      at,
+    });
+    // 初回獲得だけポップアップ
+    if (added && (added.count ?? 0) === 1) {
+      showTitlePopup(title);
+      // ✅ Step6: 図鑑が光る
+      showTitleBookGlow();
+    }
+    return added;
+  }
+
+  function ceilHalf(n) {
+    const x = Math.max(0, Number(n) || 0);
+    return Math.ceil(x / 2);
+  }
+
+  function getKanjiRangeMilestoneTitles(rangeId) {
+    // rangeId: kanji_g1 / kanji_g2 / ... / kanji_g6 / kanji_j1.. / kanji_h1 .. などを想定
+    const id = String(rangeId || "");
+    
+     // ✅ あなたの命名規約：kanji_g1〜kanji_g10
+    // - g1〜g6 : 小1〜小6
+    // - g7〜g9 : 中1〜中3
+    // - g10    : 高1
+    const m = id.match(/kanji_g(\d+)/);
+    if (m) {
+      const n = Number(m[1]);
+      if (n >= 1 && n <= 6) {
+        return {
+          debut: `小${n}のはじまり`,
+          half: `小${n}の半分`,
+          complete: `小${n}コンプリート`,
+        };
+      }
+      if (n >= 7 && n <= 9) {
+        const j = n - 6; // g7->中1, g8->中2, g9->中3
+        return {
+          debut: `中${j}のはじまり`,
+          half: `中${j}の半分`,
+          complete: `中${j}コンプリート`,
+        };
+      }
+      if (n === 10) {
+        return {
+          debut: "高1のはじまり",
+          half: "高1の半分",
+          complete: "高1コンプリート",
+        };
+      }
+    }
+     return null;
+   }
+
+  function getScriptMilestoneTitles(type) {
+    // type: hiragana / katakana / alphabet
+    if (type === "hiragana") {
+      return { debut: "ひらがなデビュー", half: "ひらがな名人", complete: "ひらがな皆伝" };
+    }
+    if (type === "katakana") {
+      return { debut: "カタカナデビュー", half: "カタカナ名人", complete: "カタカナ皆伝" };
+    }
+    if (type === "alphabet") {
+      return { debut: "ABCデビュー", half: "ABCマスター", complete: "ABC皆伝" };
+    }
+    return null;
+  }
+
+  function countClearedInCurrentRange() {
+    // 今の selectedRange の items を母集団として、progress.cleared を照合する。
+    // これにより「範囲が増えても」データ追加だけで称号判定が動く。
+    const list = Array.isArray(items) ? items : [];
+    const total = list.length;
+    let clearedCount = 0;
+    for (const it of list) {
+      const id = it?.id;
+      if (!id) continue;
+      const key = makeProgressKey(contentType, id);
+      if (ctx?.progress?.cleared?.[key]) clearedCount++;
+    }
+    return { total, clearedCount };
+  }
+
+  function awardRangeMilestoneTitlesIfNeeded() {
+    // 途中再開・単体練習でも「クリアが増えた瞬間」なら称号が付くようにする。
+    // ただし、items が未ロードのタイミングでは何もしない。
+    if (!Array.isArray(items) || items.length === 0) return;
+
+    const { total, clearedCount } = countClearedInCurrentRange();
+    if (total <= 0) return;
+
+    // 1) タイプごとの称号セットを決める
+    let titles = null;
+    if (contentType === "kanji") {
+      titles = getKanjiRangeMilestoneTitles(selectedId);
+    } else if (contentType === "hiragana" || contentType === "katakana" || contentType === "alphabet") {
+      titles = getScriptMilestoneTitles(contentType);
+    }
+    if (!titles) return;
+
+    // 2) 閾値
+    const half = ceilHalf(total);
+
+    // 3) 付与（初回だけポップアップ）
+    // debut: 1以上
+    if (clearedCount >= 1) addTitleAndMaybePopup(titles.debut);
+    // half: 半分以上
+    if (clearedCount >= half) addTitleAndMaybePopup(titles.half);
+    // complete: 全部
+    if (clearedCount >= total) addTitleAndMaybePopup(titles.complete);
+  }
+
   // ---------------------------
   // ✅ DOM（document直参照禁止）
   // ---------------------------
@@ -1861,6 +2023,10 @@ function reorderLatinStrokes(polys) {
               }
             saveProgress(ctx.progress);
           }
+
+          // ✅ 範囲別マイルストーン称号（小1〜高1 / ひらがな / カタカナ / アルファベット）
+          // - クリアした直後の progress を元に、現在選択範囲の達成状況で称号を付与
+          awardRangeMilestoneTitlesIfNeeded();
 
           // ---------------------------
   // Review navigation helper (single mode)
