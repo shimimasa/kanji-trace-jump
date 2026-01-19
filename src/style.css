@@ -1045,6 +1045,20 @@ body {
     opacity: .78;
     line-height: 1.35;
   }
+
+  .tb-goal-remain{
+      margin-top: 10px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(56,117,255,.18);
+      background: rgba(56,117,255,.10);
+      font-weight: 1000;
+      font-size: 12px;
+      width: fit-content;
+    }
   
   @media (max-width: 720px){
     .tb-goal-grid{ grid-template-columns: 1fr; }

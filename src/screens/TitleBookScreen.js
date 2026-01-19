@@ -1,5 +1,7 @@
 // src/screens/TitleBookScreen.js
 import { TITLE_CATALOG, loadTitleBook } from "../lib/titleBookStore.js";
+import { loadRangeItems, getRangeType } from "../lib/rangeItems.js";
+import { makeProgressKey } from "../lib/progressKey.js";
 
 const TITLE_BOOK_SORT_LS_KEY = "ktj_title_book_sort_v1";
 const TITLE_BOOK_SEARCH_LS_KEY = "ktj_title_book_search_v1";
@@ -37,6 +39,38 @@ function rarityLabel(r) {
     if (n === 10) return "いま：高1";
     return s || "未選択";
   }
+
+  function ceilHalf(n) {
+      const x = Math.max(0, Number(n) || 0);
+      return Math.ceil(x / 2);
+    }
+    
+    function rangeShortFromSelectedId(selectedRangeId, type) {
+      const id = String(selectedRangeId ?? "");
+      if (type === "kanji") {
+        const m = id.match(/kanji_g(\d+)/);
+        return m ? `g${Number(m[1])}` : null; // g1..g10
+      }
+      if (type === "hiragana") return "hira";
+      if (type === "katakana") return "kata";
+      if (type === "alphabet") return "abc";
+      return null;
+    }
+    
+    function goalTargetFromTitle(title, total) {
+      const t = String(title ?? "");
+      if (!t) return null;
+      // 学年
+      if (t.endsWith("のはじまり")) return { kind: "first", target: 1, unit: "回" };
+      if (t.endsWith("の半分")) return { kind: "half", target: ceilHalf(total), unit: "こ" };
+      if (t.endsWith("コンプリート")) return { kind: "complete", target: total, unit: "こ" };
+      // かな/英字
+      if (t.endsWith("デビュー")) return { kind: "first", target: 1, unit: "回" };
+      if (t.endsWith("名人")) return { kind: "half", target: ceilHalf(total), unit: "こ" };
+      if (t.endsWith("皆伝")) return { kind: "complete", target: total, unit: "こ" };
+      if (t === "ABCマスター") return { kind: "half", target: ceilHalf(total), unit: "こ" };
+      return null;
+    }
 
 function loadTitleBookSort() {
   try {
@@ -116,6 +150,24 @@ export function TitleBookScreen(ctx, nav) {
 
       const book = loadTitleBook();
       const ownedMap = book.items || {};
+
+      // ✅ 現在範囲の「母数」と「クリア数」を取得（rangeItemsに寄せて母数ズレを防止）
+      const selectedRangeId = ctx?.selectedRangeId ?? "kanji_g1";
+      let rangeInfo = { type: getRangeType(selectedRangeId), total: 0, cleared: 0 };
+      try {
+        const { type, items } = await loadRangeItems(selectedRangeId);
+        const total = Array.isArray(items) ? items.length : 0;
+        let cleared = 0;
+        for (const it of items || []) {
+          const id = it?.id;
+          if (!id) continue;
+          const key = makeProgressKey(type, id);
+          if (ctx?.progress?.cleared?.[key]) cleared++;
+        }
+        rangeInfo = { type, total, cleared };
+      } catch {
+        // 取得できない場合は表示だけ続行（カードはヒント表示のみになる）
+      }
 
       const total = TITLE_CATALOG.length;
       const got = Object.keys(ownedMap).length;
@@ -198,6 +250,9 @@ export function TitleBookScreen(ctx, nav) {
         })
         .slice(0, 3);
 
+        const rangeShort = rangeShortFromSelectedId(selectedRangeId, rangeInfo.type);
+
+
       const nextGoalsHtml =
         nextGoals.length === 0
           ? `<div class="tb-empty">このカテゴリの称号は、ぜんぶ手に入れたよ。</div>`
@@ -207,6 +262,29 @@ export function TitleBookScreen(ctx, nav) {
                 const rr = meta.rarity ? `<span class="tb-rarity tb-r-${meta.rarity}">${meta.rarity}</span>` : "";
                 const rrL = rarityLabel(meta.rarity);
                 const hint = meta.hint ? meta.hint : "ヒント：？？？";
+
+                // ✅ 「いまの範囲」に関係するマイルストーンだけ、残り表示を出す
+                // - grade: rangeId が g1..g10
+                // - script: rangeId が hira/kata/abc
+                const canShowRemain =
+                  !!rangeShort &&
+                  (meta.category === "grade" || meta.category === "script") &&
+                  String(meta.rangeId ?? "") === String(rangeShort) &&
+                  Number.isFinite(rangeInfo.total) &&
+                  rangeInfo.total > 0;
+
+                let remainText = "";
+                if (canShowRemain) {
+                  const goal = goalTargetFromTitle(meta.title, rangeInfo.total);
+                  if (goal) {
+                    const need = Math.max(0, goal.target - (rangeInfo.cleared ?? 0));
+                    if (goal.kind === "first") {
+                      remainText = need <= 0 ? "もう達成！" : "あと1回クリア";
+                    } else {
+                      remainText = need <= 0 ? "もう達成！" : `あと ${need}${goal.unit}`;
+                    }
+                  }
+                }
                 return `
                   <div class="tb-goal-card">
                     <div class="tb-goal-top">
@@ -214,6 +292,8 @@ export function TitleBookScreen(ctx, nav) {
                       ${rrL ? `<div class="tb-goal-rlabel">${rrL}</div>` : ``}
                     </div>
                     <div class="tb-goal-hint">ヒント：${escapeAttr(hint)}</div>
+                    ${remainText ? `<div class="tb-goal-remain">${escapeAttr(remainText)}</div>` : ``}
+                   </div>
                   </div>
                 `;
               })
@@ -277,8 +357,10 @@ export function TitleBookScreen(ctx, nav) {
           </div>
 
           <div class="tb-now">
-            <div class="tb-now-chip">${escapeAttr(labelFromSelectedRangeId(ctx?.selectedRangeId))}</div>
-            <div class="tb-now-sub">「つぎの目標」を3つ出すよ。</div>
+            <div class="tb-now-chip">${escapeAttr(labelFromSelectedRangeId(selectedRangeId))}</div>
+            <div class="tb-now-sub">
+              ${rangeInfo.total > 0 ? `この範囲：${rangeInfo.cleared}/${rangeInfo.total} クリア` : "「つぎの目標」を3つ出すよ。"}
+            </div>
           </div>
 
           <div class="tb-goals">
