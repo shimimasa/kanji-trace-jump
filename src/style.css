@@ -1292,8 +1292,8 @@ html, body {
   }
   
   .iconBtn{
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
     border-radius: 14px;
     border: 1px solid rgba(18,38,63,.10);
     background: rgba(255,255,255,.9);
@@ -1310,7 +1310,7 @@ html, body {
 +     - 子ども向け：アイコン＋文字を1行で表示（縦折り返し防止）
 +     =========================== */
   .hudActionBtn{
-      height: 44px;
+      height: 48px;
       min-width: 96px;                 /* ← これで「ホームへ」が1行で入りやすい */
       padding: 0 12px;
       border-radius: 14px;
@@ -1325,7 +1325,15 @@ html, body {
       user-select: none;
       white-space: nowrap;             /* ← 縦書きっぽい折返しを根絶 */
     }
-    .hudActionBtn:active{ transform: translateY(1px); }
+  .hudActionBtn:active{ transform: translateY(1px); }
+  .hud-danger{
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-left: 6px;
+      padding-left: 10px;
+      border-left: 1px dashed rgba(18,38,63,.16);
+    }
     .hudActionIcon{
       font-size: 18px;
       line-height: 1;

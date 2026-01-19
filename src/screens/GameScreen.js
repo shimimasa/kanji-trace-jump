@@ -33,14 +33,16 @@ export function GameScreen(ctx, nav) {
             ${
                             isSinglePractice
                               ? `<button id="dexBackBtn" class="iconBtn" type="button" aria-label="もどる">↩</button>`
-                              : `<button id="saveBtn" class="hudActionBtn" type="button" aria-label="せーぶ">
-                                   <span class="hudActionIcon" aria-hidden="true">💾</span>
-                                   <span class="hudActionText">せーぶ</span>
-                                 </button>
-                                 <button id="homeBtn" class="hudActionBtn" type="button" aria-label="ホームへ">
-                                   <span class="hudActionIcon" aria-hidden="true">🏠</span>
-                                   <span class="hudActionText">ホームへ</span>
-                                 </button>`
+                              : `<div class="hud-danger" aria-label="安全ゾーン">
+                                   <button id="saveBtn" class="hudActionBtn" type="button" aria-label="せーぶ">
+                                     <span class="hudActionIcon" aria-hidden="true">💾</span>
+                                     <span class="hudActionText">せーぶ</span>
+                                   </button>
+                                   <button id="homeBtn" class="hudActionBtn" type="button" aria-label="ホームへ">
+                                     <span class="hudActionIcon" aria-hidden="true">🏠</span>
+                                     <span class="hudActionText">ホームへ</span>
+                                   </button>
+                                 </div>`
                           }
           </div>
         </div>
@@ -75,9 +77,16 @@ export function GameScreen(ctx, nav) {
             const prevBtn = el.querySelector("#prevBtn");
     const nextBtn = el.querySelector("#nextBtn");
 
+            const showGameToast = (msg, ms = 900) => {
+              const toast = el.querySelector("#saveToast");
+              if (!toast) return;
+              toast.textContent = msg;
+              toast.classList.remove("show");
+              void toast.offsetWidth;
+              toast.classList.add("show");
+              setTimeout(() => toast.classList.remove("show"), ms);
+            };
             const onHome = () => {
-              const ok = window.confirm("ホームにもどりますか？\n（つづきは せーぶ されます）");
-              if (!ok) return;
               nav.go("home", { selectedRangeId: ctx.selectedRangeId });
             };
             const onDexBack = () => {
@@ -90,7 +99,6 @@ export function GameScreen(ctx, nav) {
               });
             };
       
-            homeBtn?.addEventListener("click", onHome);
             dexBackBtn?.addEventListener("click", onDexBack);
 
             // ✅ いつでもセーブ（子どもが“一発でセーブできた”を認識できる）
@@ -109,18 +117,44 @@ export function GameScreen(ctx, nav) {
                     playSettings: st.playSettings,
                     playSession: st.playSession,
                   });
-                  const toast = el.querySelector("#saveToast");
-                  if (toast) {
-                    toast.textContent = "✅ せーぶしたよ";
-                    toast.classList.remove("show");
-                    void toast.offsetWidth;
-                    toast.classList.add("show");
-                    setTimeout(() => toast.classList.remove("show"), 1200);
-                  }
+                  showGameToast("✅ せーぶしたよ", 1200);
                   if (navigator.vibrate) navigator.vibrate(25);
                 } catch {}
               };
-              saveBtn?.addEventListener("click", onSave);
+              const holdHandlers = [];
+              const attachHold = (btn, action, hintText) => {
+                if (!btn) return;
+                let timer = null;
+                let fired = false;
+                const start = (e) => {
+                  if (e.button != null && e.button !== 0) return;
+                  fired = false;
+                  clearTimeout(timer);
+                  timer = setTimeout(() => {
+                    fired = true;
+                    action();
+                    if (navigator.vibrate) navigator.vibrate(15);
+                  }, 700);
+                };
+                const cancel = () => {
+                  if (!timer) return;
+                  clearTimeout(timer);
+                  timer = null;
+                  if (!fired && hintText) showGameToast(hintText, 900);
+                };
+                btn.addEventListener("pointerdown", start);
+                btn.addEventListener("pointerup", cancel);
+                btn.addEventListener("pointercancel", cancel);
+                btn.addEventListener("pointerleave", cancel);
+                holdHandlers.push(() => {
+                  btn.removeEventListener("pointerdown", start);
+                  btn.removeEventListener("pointerup", cancel);
+                  btn.removeEventListener("pointercancel", cancel);
+                  btn.removeEventListener("pointerleave", cancel);
+                });
+              };
+              attachHold(saveBtn, onSave, "ながおしで せーぶ");
+              attachHold(homeBtn, onHome, "ながおしで ホーム");
 
             // ✅ MASTER切替：画面を再マウントして startTraceGame を作り直す（事故が少ない）
       const masterToggle = el.querySelector("#masterToggle");
@@ -328,9 +362,10 @@ export function GameScreen(ctx, nav) {
       return {
         el,
         cleanup() {
-          homeBtn?.removeEventListener("click", onHome);
-          saveBtn?.removeEventListener("click", onSave);
           dexBackBtn?.removeEventListener("click", onDexBack);
+          for (const off of holdHandlers.splice(0)) {
+            try { off(); } catch {}
+          }
           // 復習ボタン解除
           if (isReviewActive) {
               prevBtn?.removeEventListener("click", onReviewPrev);
