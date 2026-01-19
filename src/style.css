@@ -865,6 +865,119 @@ body {
   font-weight: 900;
   cursor: pointer;
 }
+
+/* ===== Title Book v1.1 UI polish ===== */
+.screen.titlebook .tb-head-actions .btn{
+    min-width: 0;
+  }
+  .screen.titlebook .btn.small{
+    height: 44px;
+    padding: 0 14px;
+    font-size: 16px;
+    border-radius: 14px;
+  }
+  
+  .tb-section{
+    margin-top: 10px;
+  }
+  .tb-section-title{
+    font-weight: 1000;
+    opacity: .78;
+    margin: 4px 0 8px;
+  }
+  
+  .tb-filter{
+    display:flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 10px 0 10px;
+  }
+  .tb-filter-btn{
+    border: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.06);
+    font-weight: 1000;
+    font-size: 12px;
+    display:inline-flex;
+    align-items:center;
+    gap: 6px;
+  }
+  .tb-filter-btn.active{
+    background: rgba(56,117,255,.14);
+    box-shadow: 0 12px 26px rgba(56,117,255,.10);
+  }
+  .tb-count{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.08);
+    font-size: 11px;
+    font-weight: 1000;
+    opacity: .85;
+  }
+  
+  .tb-locked{
+    margin-top: 10px;
+    border-radius: 16px;
+    border: 1px solid rgba(18,38,63,.08);
+    background: rgba(246,248,251,.55);
+    overflow: hidden;
+  }
+  .tb-locked-sum{
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 14px;
+    font-weight: 1000;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .tb-locked-sum::-webkit-details-marker{ display:none; }
+  .tb-locked-hint{
+    font-weight: 900;
+    opacity: .65;
+    font-size: 12px;
+  }
+  .tb-body-locked{
+    padding-top: 0;
+  }
+  
+  .tb-admin{
+    margin-top: 12px;
+    border-radius: 16px;
+    border: 1px dashed rgba(18,38,63,.18);
+    background: rgba(255,255,255,.55);
+    overflow: hidden;
+  }
+  .tb-admin-sum{
+    list-style: none;
+    cursor: pointer;
+    user-select: none;
+    padding: 12px 14px;
+    font-weight: 1000;
+    opacity: .78;
+  }
+  .tb-admin-sum::-webkit-details-marker{ display:none; }
+  .tb-admin-body{
+    padding: 12px 14px 14px;
+  }
+  .tb-admin-note{
+    font-size: 12px;
+    font-weight: 900;
+    opacity: .72;
+    margin-bottom: 10px;
+  }
+  .tb-admin-actions{
+    display:flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
 .btn.danger{
   background: rgba(220, 0, 0, 0.10);
   font-weight: 900;

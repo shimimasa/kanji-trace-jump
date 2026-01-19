@@ -1599,7 +1599,7 @@ function showTitleBook() {
     const remain = Math.max(0, total - got);
 
     // ✅ 並び替えモード
-  const sortMode = loadTitleBookSort(); // "rarity" | "recent" | "name"
+  const sortMode = loadTitleBookSort(); // "rarity" | "recent" | "name" | "recommend" | "recommend"
   const searchQuery = loadTitleBookSearch();
   const qn = normalizeJa(searchQuery);
 

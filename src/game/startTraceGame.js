@@ -134,40 +134,39 @@ export function startTraceGame({ rootEl, ctx, selectedRangeId, startFromId, star
   function getKanjiRangeMilestoneTitles(rangeId) {
     // rangeId: kanji_g1 / kanji_g2 / ... / kanji_g6 / kanji_j1.. / kanji_h1 .. などを想定
     const id = String(rangeId || "");
-    // 小学校
-    let m = id.match(/kanji_g(\d+)/);
+    
+     // ✅ あなたの命名規約：kanji_g1〜kanji_g10
+    // - g1〜g6 : 小1〜小6
+    // - g7〜g9 : 中1〜中3
+    // - g10    : 高1
+    const m = id.match(/kanji_g(\d+)/);
     if (m) {
-      const g = Number(m[1]);
-      if (g >= 1 && g <= 6) {
+      const n = Number(m[1]);
+      if (n >= 1 && n <= 6) {
         return {
-          debut: `小${g}のはじまり`,
-          half: `小${g}の半分`,
-          complete: `小${g}コンプリート`,
+          debut: `小${n}のはじまり`,
+          half: `小${n}の半分`,
+          complete: `小${n}コンプリート`,
+        };
+      }
+      if (n >= 7 && n <= 9) {
+        const j = n - 6; // g7->中1, g8->中2, g9->中3
+        return {
+          debut: `中${j}のはじまり`,
+          half: `中${j}の半分`,
+          complete: `中${j}コンプリート`,
+        };
+      }
+      if (n === 10) {
+        return {
+          debut: "高1のはじまり",
+          half: "高1の半分",
+          complete: "高1コンプリート",
         };
       }
     }
-    // 中学（あなたのmanifest側が kanji_j1 のような命名で来る場合に対応）
-    m = id.match(/kanji_j(\d+)/);
-    if (m) {
-      const g = Number(m[1]);
-      if (g >= 1 && g <= 3) {
-        return {
-          debut: `中${g}のはじまり`,
-          half: `中${g}の半分`,
-          complete: `中${g}コンプリート`,
-        };
-      }
-    }
-    // 高校（高1のみ）
-    if (/kanji_h1/.test(id)) {
-      return {
-        debut: "高1のはじまり",
-        half: "高1の半分",
-        complete: "高1コンプリート",
-      };
-    }
-    return null;
-  }
+     return null;
+   }
 
   function getScriptMilestoneTitles(type) {
     // type: hiragana / katakana / alphabet
